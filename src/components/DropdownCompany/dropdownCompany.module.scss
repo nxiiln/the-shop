@@ -1,0 +1,29 @@
+.dropdown {
+  width: 83px;
+  height: 36px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: start;
+  font-family: Nunito;
+  font-size: 10px;
+  line-height: 1.2;
+  font-weight: 300;
+  text-transform: uppercase;
+  color: #aaa;
+  user-select: none;
+  &:hover {
+    width: 83px;
+    height: 129px;
+    background-color: #333;
+    cursor: pointer;
+  }
+}
+
+.item {
+  margin-left: 10px;
+  &:hover {
+    color: #fff;
+  }
+}

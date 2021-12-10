@@ -1,12 +1,14 @@
 import React from 'react';
+import DropdownCompany from '../DropdownCompany/DropdownCompany';
 import styles from './header.module.scss';
 
 
 const Header = () => {
   return(
     <header>
-      <div className={styles.top}>
-      </div>
+      <nav className={styles.top}>
+        <DropdownCompany />
+      </nav>
     </header>
   );
 }
