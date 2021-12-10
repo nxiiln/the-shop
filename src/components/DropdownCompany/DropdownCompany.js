@@ -8,7 +8,7 @@ const DropdownCompany = () => {
   const handleMouseLeave = () => setIsOpen(false);
 
   const renderDropdown = () => {
-    const list = ['company', 'about us', 'contact', 'store location'];
+    const list = ['about us', 'contact', 'store location'];
     return list.map(item => {
       return(
         <div key={item} className={styles.item}>
@@ -24,7 +24,7 @@ const DropdownCompany = () => {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      {!isOpen && <div className={styles.item}>company</div>}
+      <div className={styles.itemMain}>company &#9660;</div>
       {isOpen && renderDropdown()}
     </div>
   );

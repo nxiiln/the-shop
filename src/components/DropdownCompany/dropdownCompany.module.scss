@@ -3,10 +3,6 @@
   height: 36px;
   margin-left: 25vw;
   box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: start;
   font-family: Nunito;
   font-size: 10px;
   line-height: 1.2;
@@ -22,8 +18,15 @@
   }
 }
 
+.itemMain {
+  padding: 12px 0 20px 10px;
+  &:hover {
+    color: #fff;
+  }
+}
+
 .item {
-  margin-left: 10px;
+  padding: 0 0 10px 10px;
   &:hover {
     color: #fff;
   }
