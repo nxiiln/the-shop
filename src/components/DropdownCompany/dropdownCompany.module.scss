@@ -9,16 +9,18 @@
   text-transform: uppercase;
   color: #aaa;
   user-select: none;
-  &:hover {
-    width: 83px;
-    height: 129px;
-    background-color: #333;
-    cursor: pointer;
-  }
+}
+
+.isOpen {
+  width: 83px;
+  height: 129px;
+  background-color: #333;
+  cursor: pointer;
 }
 
 .itemMain {
-  padding: 12px 0 20px 10px;
+  margin-bottom: 20px;
+  padding: 12px 0 0 10px;
   &:hover {
     color: #fff;
   }

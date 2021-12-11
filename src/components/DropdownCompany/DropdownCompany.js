@@ -6,13 +6,18 @@ const DropdownCompany = () => {
   const [isOpen, setIsOpen] = useState(false);
   const list = ['about us', 'contact', 'store location'];
 
+  let style = styles.dropdown;
+  isOpen && (style += ` ${styles.isOpen}`)
+
   return(
     <div
-      className={styles.dropdown}
-      onMouseEnter={() => setIsOpen(true)}
+      className={style}
       onMouseLeave={() => setIsOpen(false)}
     >
-      <div className={styles.itemMain}>
+      <div
+        className={styles.itemMain}
+        onMouseEnter={() => setIsOpen(true)}
+      >
         company &#9660;
       </div>
 
