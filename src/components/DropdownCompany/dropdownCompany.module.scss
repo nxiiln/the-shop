@@ -1,34 +1,43 @@
 .dropdown {
   width: 83px;
   height: 36px;
-  box-sizing: border-box;
-  font-family: Nunito;
-  font-size: 10px;
-  line-height: 1.2;
-  font-weight: 300;
-  text-transform: uppercase;
-  color: #aaa;
-  user-select: none;
 }
 
-.isOpen {
-  width: 83px;
+.dropdownOpen {
   height: 129px;
   background-color: #333;
   cursor: pointer;
 }
 
-.itemMain {
-  margin-bottom: 20px;
-  padding: 12px 0 0 10px;
+@mixin button {
+  width: 54px;
+  height: 12px;
+  padding: 0;
+  font-family: Nunito;
+  font-size: 10px;
+  text-transform: uppercase;
+  text-align: start;
+  vertical-align: baseline;
+  color: #aaa;
+  background-color: #000;
+  border: none;
+  cursor: pointer;
   &:hover {
     color: #fff;
   }
 }
 
-.item {
-  padding: 0 0 10px 10px;
-  &:hover {
-    color: #fff;
-  }
+.buttonMain {
+  @include button;
+  width: 67px;
+  margin: 12px 0 20px 14px;
+}
+
+.button {
+  @include button;
+  margin: 0 0 6px 14px;
+}
+
+.buttonOpen {
+  background-color: #333;
 }

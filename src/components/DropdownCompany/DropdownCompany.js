@@ -3,29 +3,40 @@ import styles from './dropdownCompany.module.scss';
 
 
 const DropdownCompany = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const list = ['about us', 'contact', 'store location'];
 
-  let style = styles.dropdown;
-  isOpen && (style += ` ${styles.isOpen}`);
+  let dropdown = styles.dropdown;
+  dropdownOpen && (dropdown += ` ${styles.dropdownOpen}`);
+
+  let buttonMain = styles.buttonMain;
+  dropdownOpen && (buttonMain += ` ${styles.buttonOpen}`);
+
+  let button = styles.button;
+  dropdownOpen && (button += ` ${styles.buttonOpen}`);
 
   return(
     <div
-      className={style}
-      onMouseLeave={() => setIsOpen(false)}
+      className={dropdown}
+      onMouseLeave={() => setDropdownOpen(false)}
     >
-      <div
-        className={styles.itemMain}
-        onMouseEnter={() => setIsOpen(true)}
+      <button
+        className={buttonMain}
+        type='button'
+        onMouseEnter={() => setDropdownOpen(true)}
       >
         company &#9660;
-      </div>
+      </button>
 
-      {isOpen && list.map(item => {
+      {dropdownOpen && list.map(item => {
         return(
-          <div key={item} className={styles.item}>
+          <button
+            className={button}
+            type='button'
+            key={item}
+          >
             {item}
-          </div>
+          </button>
         );
       })}
     </div>

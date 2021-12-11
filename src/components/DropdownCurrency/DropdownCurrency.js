@@ -3,31 +3,41 @@ import styles from './dropdownCurrency.module.scss';
 
 
 const DropdownCurrency = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const [isUsd, setIsUsd] = useState(true);
 
-  let style = styles.dropdown;
-  isOpen && (style += ` ${styles.isOpen}`);
+  let dropdown = styles.dropdown;
+  dropdownOpen && (dropdown += ` ${styles.dropdownOpen}`);
+
+  let buttonMain = styles.buttonMain;
+  dropdownOpen && (buttonMain += ` ${styles.buttonOpen}`);
+
+  let button = styles.button;
+  dropdownOpen && (button += ` ${styles.buttonOpen}`);
 
   return(
     <div
-      className={style}
-      onClick={() => setIsOpen(false)}
-      onMouseLeave={() => setIsOpen(false)}
+      className={dropdown}
+      onClick={() => setDropdownOpen(false)}
+      onMouseLeave={() => setDropdownOpen(false)}
     >
-      <div
-        className={styles.itemMain}
-        onMouseEnter={() => setIsOpen(true)}
+      <button
+        className={buttonMain}
+        type='button'
+        onMouseEnter={() => setDropdownOpen(true)}
       >
         {isUsd ? 'usd' : 'eur'} &#9660;
-      </div>
+      </button>
 
-      <div
-        className={styles.item}
-        onClick={() => setIsUsd(!isUsd)}
-      >
-        {isOpen && (isUsd ? 'eur' : 'usd')}
-      </div>
+      {dropdownOpen &&
+        <button
+          className={button}
+          type='button'
+          onClick={() => setIsUsd(!isUsd)}
+        >
+          {isUsd ? 'eur' : 'usd'}
+        </button>
+      }
     </div>
   );
 }

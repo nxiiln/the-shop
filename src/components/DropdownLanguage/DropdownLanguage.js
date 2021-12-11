@@ -13,7 +13,7 @@ const DropdownLanguage = () => {
   dropdownOpen && (buttonMain += ` ${styles.buttonOpen}`);
 
   let button = styles.button;
-  dropdownOpen && (button += ` ${styles.buttonOpen}`)
+  dropdownOpen && (button += ` ${styles.buttonOpen}`);
 
   return(
     <div

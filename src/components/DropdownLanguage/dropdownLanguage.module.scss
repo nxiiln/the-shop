@@ -1,7 +1,6 @@
 .dropdown {
   width: 83px;
   height: 36px;
-  background-color: #000;
 }
 
 .dropdownOpen {
@@ -11,12 +10,14 @@
 }
 
 @mixin button {
-  width: 44px;
+  width: 46px;
   height: 12px;
   padding: 0;
   font-family: Nunito;
   font-size: 10px;
   text-transform: uppercase;
+  text-align: start;
+  vertical-align: baseline;
   color: #aaa;
   background-color: #000;
   border: none;
@@ -28,13 +29,13 @@
 
 .buttonMain {
   @include button;
-  width: 58px;
-  margin: 12px 0 0 15px;
+  width: 60px;
+  margin: 12px 0 0 14px;
 }
 
 .button {
   @include button;
-  margin: 22px 0 0 15px;
+  margin: 20px 0 0 14px;
 }
 
 .buttonOpen {
