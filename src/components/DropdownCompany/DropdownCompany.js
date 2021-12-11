@@ -7,7 +7,7 @@ const DropdownCompany = () => {
   const list = ['about us', 'contact', 'store location'];
 
   let style = styles.dropdown;
-  isOpen && (style += ` ${styles.isOpen}`)
+  isOpen && (style += ` ${styles.isOpen}`);
 
   return(
     <div
