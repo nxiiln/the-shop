@@ -23,6 +23,7 @@ const DropdownLanguage = () => {
     >
       <button
         className={buttonMain}
+        type='button'
         onMouseEnter={() => setDropdownOpen(true)}
       >
         {isEnglish ? 'english' : 'spanish'} &#9660;
@@ -31,6 +32,7 @@ const DropdownLanguage = () => {
       {dropdownOpen && 
         <button
           className={button}
+          type='button'
           onClick={() => setIsEnglish(!isEnglish)}
         >
           {isEnglish ? 'spanish' : 'english'}
