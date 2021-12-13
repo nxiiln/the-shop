@@ -1,6 +1,9 @@
 .top {
   width: 100vw;
   height: 36px;
+  display: flex;
+  justify-content: start;
+  padding-left: 25vw;
   background-color: #000;
 }
 
@@ -9,5 +12,12 @@
   height: 36px;
   display: flex;
   justify-content: space-between;
-  margin-left: 25vw;
+}
+
+.groupCenter {
+  margin-top: 12px;
+  font-family: Nunito;
+  font-size: 10px;
+  text-transform: uppercase;
+  color: #ffffff;
 }

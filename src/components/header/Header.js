@@ -14,6 +14,10 @@ const Header = () => {
           <DropdownCurrency />
           <DropdownLanguage />
         </div>
+
+        <div className={styles.groupCenter}>
+          free shipping on orders above 50$
+        </div>
       </nav>
     </header>
   );
