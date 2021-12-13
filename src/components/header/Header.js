@@ -18,6 +18,42 @@ const Header = () => {
         <div className={styles.groupCenter}>
           free shipping on orders above 50$
         </div>
+
+        <div className={styles.groupRight}>
+          <button
+            className={styles.buttonMyAccount}
+            type='button'
+          >
+            my account
+          </button>
+
+          <div className={styles.line}></div>
+
+          <button
+            className={styles.buttonWishList}
+            type='button'
+          >
+            wish list
+          </button>
+
+          <div className={styles.line}></div>
+
+          <button
+            className={styles.buttonCheckout}
+            type='button'
+          >
+            checkout
+          </button>
+
+          <div className={styles.line}></div>
+
+          <button
+            className={styles.buttonLogIn}
+            type='button'
+          >
+            log in
+          </button>
+        </div>
       </nav>
     </header>
   );
