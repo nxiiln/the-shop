@@ -1,0 +1,73 @@
+.top {
+  width: 100vw;
+  height: 36px;
+  display: flex;
+  justify-content: space-evenly;
+  background-color: #000;
+}
+
+.groupLeft {
+  width: 223px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.groupCenter {
+  padding-top: 12px;
+  font-family: Nunito;
+  font-size: 10px;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.groupRight {
+  width: 295px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin button {
+  height: 12px;
+  display: block;
+  padding: 0;
+  font-family: Nunito;
+  font-size: 10px;
+  text-transform: uppercase;
+  text-align: start;
+  line-height: 0;
+  color: #aaa;
+  background-color: #000;
+  border: none;
+  &:hover {
+    color: #fff;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}
+
+.buttonMyAccount {
+  @include button;
+  width: 72px;
+}
+
+.buttonWishList {
+  @include button;
+  width: 54px;
+}
+
+.buttonCheckout {
+  @include button;
+  width: 58px;
+}
+
+.buttonLogIn {
+  @include button;
+  width: 38px;
+}
+
+.line {
+  width: 1px;
+  height: 8px;
+  background-color: #4f4f4f;
+}
