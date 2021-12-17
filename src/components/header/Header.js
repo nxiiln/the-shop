@@ -1,6 +1,7 @@
 import React from 'react';
 import Top from '../Top/Top';
 import Search from '../Search/Search';
+import Cart from '../Cart/Cart';
 import styles from './header.module.scss';
 
 
@@ -10,6 +11,7 @@ const Header = () => {
       <Top />
       <h1 className={styles.theShop}>THE SHOP</h1>
       <Search />
+      <Cart />
     </header>
   );
 }

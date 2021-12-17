@@ -4,10 +4,21 @@
 }
 
 @font-face {
+  font-family: Nunito Bold;
+  src: url("/fonts/Nunito/Nunito-Bold.ttf");
+}
+
+@font-face {
   font-family: Playfair Display SC;
-  src: url("/fonts/Playfair-Display/PlayfairDisplay-Regular.ttf")
+  src: url("/fonts/Playfair-Display/PlayfairDisplay-Regular.ttf");
+}
+
+@font-face {
+  font-family: Playfair Display SC Bold;
+  src: url("/fonts/Playfair-Display/PlayfairDisplay-Bold.ttf");
 }
 
 body {
   margin: 0;
+  box-sizing: border-box;
 }

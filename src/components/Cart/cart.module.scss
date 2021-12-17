@@ -1,0 +1,212 @@
+.cart {
+  width: 90px;
+  position: absolute;
+  top: 70px;
+  left: 82.5vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.cartOpen {
+  padding-bottom: 13px;
+}
+
+.line {
+  width: 1px;
+  height: 27px;
+  background-color: #4f4f4f;
+}
+
+.circle {
+  width: 25px;
+  height: 25px;
+  background-color: #000;
+  border-radius: 50%;
+}
+
+.square {
+  border-radius: 0;
+}
+
+.cartSymbol {
+  margin: 5.5px 0 0 7.5px;
+}
+
+.text {
+  width: 50px;
+  height: 12px;
+  font-family: Nunito;
+  font-size: 11px;
+  line-height: 1.2;
+  font-weight: 300;
+  text-transform: uppercase;
+  color: #282828;
+}
+
+.textOpen {
+  font-family: Nunito Bold;
+}
+
+.dropdown {
+  width: 172px;
+  //height: 376px;
+  position: absolute;
+  top: 40px;
+  left: -65px;
+  border: 1px solid #e4e2e1;
+}
+
+.triangleOuter {
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  top: -20px;
+  left: 75px;
+  background-color: transparent;
+  border-top: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #e4e2e1;
+  border-left: 10px solid transparent;
+}
+
+.triangleInner {
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  top: -6.5px;
+  left: -8px;
+  background-color: transparent;
+  border-top: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid white;
+  border-left: 8px solid transparent;
+}
+
+.product {
+  width: 172px;
+  height: 94px;
+  border-bottom: 1px solid #e4e2e1;
+}
+
+.product1Image {
+  margin: 6px 0 0 6px;  
+}
+
+.description {
+  font-family: Playfair Display SC;
+  width: 90px;
+  height: 26px;
+  position: relative;
+  top: -72px;
+  left: 77px;
+  font-size: 11px;
+  line-height: 1.2;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #000;
+}
+
+.price {
+  width: 44px;
+  height: 12px;
+  position: relative;
+  top: -58px;
+  left: 78px;
+  font-family: Nunito;
+  font-size: 11px;
+  line-height: 1.2;
+  font-weight: 300;
+  color: #000;
+}
+
+.close {
+  width: 9px;
+  height: 9px;
+  position: relative;
+  top: -122px;
+  left: 158px;
+  padding: 0;
+  color: #e4e2e1;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  &:hover {
+    color: #000;
+  }
+}
+
+.x {
+  width: 7px;
+  height: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+  transform: rotate(45deg);
+}
+
+.result {
+  width: 172px;
+  height: 91px;
+  background-color: #f7f7f7;
+}
+
+.total {
+  width: 48px;
+  height: 15px;
+  position: relative;
+  top: 18px;
+  left: 17px;
+  font-family: Playfair Display SC Bold;
+  font-size: 14px;
+  line-height: 1.2;
+  font-weight: 400;
+  color: #000;
+}
+
+.totalPrice {
+  width: 60px;
+  position: relative;
+  top: 5.5px;
+  left: 80px;
+  font-family: Nunito;
+  font-size: 11px;
+  line-height: 1.2;
+  font-weight: 700;
+  color: #000;
+}
+
+.viewCart {
+  width: 74px;
+  height: 30px;
+  position: relative;
+  top: 18px;
+  left: 10px;
+  font-family: Nunito;
+  font-size: 10px;
+  line-height: 1.2;
+  font-weight: 300;
+  text-transform: uppercase;
+  background-color: white;
+  border: 1px solid #e4e2e1;
+  cursor: pointer;
+}
+
+.checkout {
+  width: 74px;
+  height: 30px;
+  position: relative;
+  top: 18px;
+  left: 16px;
+  font-family: Nunito;
+  font-size: 10px;
+  line-height: 1.2;
+  font-weight: 300;
+  text-transform: uppercase;
+  color: white;
+  background-color: black;
+  border: none;
+  cursor: pointer;
+}
