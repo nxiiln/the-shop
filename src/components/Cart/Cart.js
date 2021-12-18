@@ -7,24 +7,39 @@ import imageProductC from '../../images/imageProductC.png';
 
 
 const Cart = () => {
+  let productList = [
+    {
+      id: 'productA',
+      image: imageProductA,
+      description: 'detailed swing dress',
+      price: 275,
+      status: true
+    },
+    {
+      id: 'productB',
+      image: imageProductB,
+      description: 'maxararzy frilled dress',
+      price: 1875,
+      status: true
+    },
+    {
+      id: 'productC',
+      image: imageProductC,
+      description: 'detailed swing dress',
+      price: 159,
+      status: true
+    }
+  ];
+
   const [open, setOpen] = useState(false);
-  const [productA, setProductA] = useState(true);
-  const [productB, setProductB] = useState(true);
-  const [productC, setProductC] = useState(true);
+  const [products, setProducts] = useState(productList);
 
-  const productList = [productA, productB, productC];
-  let productValue = productList.filter(product => product).length;
-
-  const price = {
-    productA: productA && 275,
-    productB: productB && 1875,
-    productC: productC && 159
-  };
-
-  let totalPrice = 0;
-  for (let key in price) {
-    totalPrice += price[key];
-  }
+  let productNumber = products.filter(product => product.status).length;
+  let totalPrice = products.reduce((prev, curr) => {
+    return(
+      curr.status && prev + curr.price
+    );
+  }, 0);
 
   let cart = styles.cart;
   let circle = styles.circle;
@@ -35,7 +50,6 @@ const Cart = () => {
     circle += ` ${styles.square}`;
     text += ` ${styles.textOpen}`;
   }
-
 
   return(
     <div
@@ -51,8 +65,7 @@ const Cart = () => {
           alt='cart'
         />
       </div>
-      <div className={text}>cart ({productValue})</div>
-
+      <div className={text}>cart ({productNumber})</div>
 
       {open &&
         <div className={styles.dropdown}>
@@ -60,85 +73,42 @@ const Cart = () => {
             <div className={styles.triangleInner}></div>
           </div>
 
-
-          {productA &&
-            <div className={styles.product}>
+        {products.map(product => {
+          return(product.status &&
+            <div
+              className={styles.product}
+              key={product.id}
+            >
               <img
-                src={imageProductA}
-                className={styles.product1Image}
+                src={product.image}
+                className={styles.productImage}
                 alt='productPreview'
               />
               <div className={styles.description}>
-                detailed swing dress
+                {product.description}
               </div>
               <div className={styles.price}>
-                ${price.productA}
+                ${product.price}
               </div>
               <button 
                 className={styles.close}
                 type='button'
-                onClick={() => setProductA(false)}
+                onClick={() => {
+                  setProducts([...products], product.status = false);
+                }}
               >
                 <div className={styles.x}>+</div>
               </button>
             </div>
-          }
-
-
-          {productB &&
-            <div className={styles.product}>
-              <img
-                src={imageProductB}
-                className={styles.product1Image}
-                alt='productPreview'
-              />
-              <div className={styles.description}>
-                maxararzy frilled dress
-              </div>
-              <div className={styles.price}>
-                ${price.productB}
-              </div>
-              <button 
-                className={styles.close}
-                type='button'
-                onClick={() => setProductB(false)}
-              >
-                <div className={styles.x}>+</div>
-              </button>
-            </div>
-          }
-
-
-          {productC && 
-            <div className={styles.product}>
-              <img
-                src={imageProductC}
-                className={styles.product1Image}
-                alt='productPreview'
-              />
-              <div className={styles.description}>
-                detailed frilled dress
-              </div>
-              <div className={styles.price}>
-                ${price.productC}
-              </div>
-              <button 
-                className={styles.close}
-                type='button'
-                onClick={() => setProductC(false)}
-              >
-                <div className={styles.x}>+</div>
-              </button>
-            </div>
-          }
-
+          );
+        })}
 
           <div className={styles.result}>
             <div className={styles.total}>
               TOTAL:
             </div>
             <div className={styles.totalPrice}>
-              ${totalPrice}
+              ${totalPrice ? totalPrice : 0}
             </div>
             <button
               className={styles.viewCart}

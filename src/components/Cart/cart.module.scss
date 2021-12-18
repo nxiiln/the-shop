@@ -10,7 +10,7 @@
 }
 
 .cartOpen {
-  padding-bottom: 13px;
+  padding: 0 18px 13px 0;
 }
 
 .line {
@@ -51,7 +51,6 @@
 
 .dropdown {
   width: 172px;
-  //height: 376px;
   position: absolute;
   top: 40px;
   left: -65px;
@@ -90,17 +89,17 @@
   border-bottom: 1px solid #e4e2e1;
 }
 
-.product1Image {
-  margin: 6px 0 0 6px;  
+.productImage {
+  margin: 6px 0 0 6px;
 }
 
 .description {
-  font-family: Playfair Display SC;
   width: 90px;
   height: 26px;
   position: relative;
   top: -72px;
   left: 77px;
+  font-family: Playfair Display SC;
   font-size: 11px;
   line-height: 1.2;
   font-weight: 400;
