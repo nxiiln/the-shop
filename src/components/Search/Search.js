@@ -17,6 +17,7 @@ const Search = () => {
       <div className={styles.line}></div>
       <img
         src={searchSymbol}
+        alt='searchSymbol'
       />
       <input
         className={search}
