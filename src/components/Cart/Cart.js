@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import styles from './cart.module.scss';
 import cartSymbol from '../../images/cartSymbol.png';
-import product1 from '../../images/product1.png';
-import product2 from '../../images/product2.png';
-import product3 from '../../images/product3.png';
+import imageProductA from '../../images/imageProductA.png';
+import imageProductB from '../../images/imageProductB.png';
+import imageProductC from '../../images/imageProductC.png';
 
 
 const Cart = () => {
@@ -64,9 +64,9 @@ const Cart = () => {
           {productA &&
             <div className={styles.product}>
               <img
-                src={product1}
+                src={imageProductA}
                 className={styles.product1Image}
-                alt={product1}
+                alt='productPreview'
               />
               <div className={styles.description}>
                 detailed swing dress
@@ -88,9 +88,9 @@ const Cart = () => {
           {productB &&
             <div className={styles.product}>
               <img
-                src={product2}
+                src={imageProductB}
                 className={styles.product1Image}
-                alt={product2}
+                alt='productPreview'
               />
               <div className={styles.description}>
                 maxararzy frilled dress
@@ -112,9 +112,9 @@ const Cart = () => {
           {productC && 
             <div className={styles.product}>
               <img
-                src={product3}
+                src={imageProductC}
                 className={styles.product1Image}
-                alt={product3}
+                alt='productPreview'
               />
               <div className={styles.description}>
                 detailed frilled dress
