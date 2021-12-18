@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
-import styles from './dropdownLanguage.module.scss';
+import styles from './company.module.scss';
 
 
-const DropdownLanguage = () => {
+const Company = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [isEnglish, setIsEnglish] = useState(true);
+  const list = ['about us', 'contact', 'store location'];
 
   let dropdown = styles.dropdown;
   dropdownOpen && (dropdown += ` ${styles.dropdownOpen}`);
@@ -19,28 +19,29 @@ const DropdownLanguage = () => {
     <div
       className={dropdown}
       onMouseLeave={() => setDropdownOpen(false)}
-      onClick={() => setDropdownOpen(false)}
     >
       <button
         className={buttonMain}
         type='button'
         onMouseEnter={() => setDropdownOpen(true)}
       >
-        {isEnglish ? 'english' : 'spanish'} &#9660;
+        company &#9660;
       </button>
 
-      {dropdownOpen && 
-        <button
-          className={button}
-          type='button'
-          onClick={() => setIsEnglish(!isEnglish)}
-        >
-          {isEnglish ? 'spanish' : 'english'}
-        </button>
-      }
+      {dropdownOpen && list.map(item => {
+        return(
+          <button
+            className={button}
+            type='button'
+            key={item}
+          >
+            {item}
+          </button>
+        );
+      })}
     </div>
   );
 }
 
 
-export default DropdownLanguage;
+export default Company;

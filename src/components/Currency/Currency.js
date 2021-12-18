@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import styles from './dropdownCurrency.module.scss';
+import styles from './currency.module.scss';
 
 
-const DropdownCurrency = () => {
+const Currency = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [isUsd, setIsUsd] = useState(true);
 
@@ -43,4 +43,4 @@ const DropdownCurrency = () => {
 }
 
 
-export default DropdownCurrency;
+export default Currency;

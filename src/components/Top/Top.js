@@ -1,7 +1,7 @@
 import React from 'react';
-import DropdownCompany from '../DropdownCompany/DropdownCompany';
-import DropdownCurrency from '../DropdownCurrency/DropdownCurrency';
-import DropdownLanguage from '../DropdownLanguage/DropdownLanguage';
+import Company from '../Company/Company';
+import Currency from '../Currency/Currency';
+import Language from '../Language/Language';
 import styles from './top.module.scss';
 
 
@@ -9,9 +9,9 @@ const Top = () => {
   return(
     <nav className={styles.top}>
       <div className={styles.groupLeft}>
-        <DropdownCompany />
-        <DropdownCurrency />
-        <DropdownLanguage />
+        <Company />
+        <Currency />
+        <Language />
       </div>
 
       <div className={styles.groupCenter}>
