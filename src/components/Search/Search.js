@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import styles from './search.module.scss';
-import searchSymbol from '../../images/searchSymbol.jpg';
+import searchSymbol from '../../images/searchSymbol.png';
 
 
 const Search = () => {
