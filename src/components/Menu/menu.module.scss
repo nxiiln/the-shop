@@ -1,0 +1,109 @@
+.menu {
+  width: 100vw;
+  height: 260px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  cursor: default;
+}
+
+.mainMenu {
+  width: 76vw;
+  height: 36px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+.mainMenuOpen {
+  border-bottom: 1px solid #aaa;
+}
+
+.mainMenu > li {
+  padding: 0 20px 34px 20px;
+  display: inline-block;
+  font-family: Nunito;
+  font-size: 13px;
+  line-height: 1.2;
+  font-weight: 300;
+  text-transform: uppercase;
+  color: #282828;
+}
+
+.mainMenuOpen > li:first-child {
+  color: #000;
+  border-bottom: 2px solid #000;
+  cursor: default;
+}
+
+.menuOpen {
+  width: 76vw;
+  padding-top: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menuInnerWrapper {
+  width: 44vw;
+  display: flex;
+  justify-content: space-between;
+}
+
+.menuInner {
+  width: 110px;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.menuInner > li {
+  height: 30px;
+  display: inline-block;
+  font-family: Nunito;
+  font-size: 14px;
+  line-height: 28px;
+  font-weight: 300;
+  color: #aaa;
+}
+
+.menuInner > li:first-child {
+  font-family: Nunito;
+  font-size: 13px;
+  line-height: 1.2;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #000;
+}
+
+.imageWrapper {
+  position: relative;
+}
+
+.message {
+  width: 165px;
+  height: 97px;
+  position: absolute;
+  top: 20px;
+  left: 160px;
+  background-color: #fff;
+  border: 1px solid #000;
+}
+
+.text {
+  width: 115px;
+  margin: 25px;
+  text-align: center;
+  font-family: 'Playfair Display SC';
+  font-size: 18px;
+  line-height: 18px;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #000;
+}
