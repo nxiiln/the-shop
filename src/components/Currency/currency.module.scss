@@ -1,12 +1,12 @@
 .dropdown {
   width: 53px;
   height: 36px;
+  position: relative;
 }
 
 .dropdownOpen {
   height: 68px;
   background-color: #333;
-  cursor: pointer;
 }
 
 @mixin button {
@@ -30,14 +30,25 @@
 .buttonMain {
   @include button;
   width: 38px;
-  margin: 12px 0 0 14px;
+  margin: 12px 0 12px 14px;
 }
 
 .button {
   @include button;
-  margin: 20px 0 0 14px;
+  margin-left: 14px;
 }
 
 .buttonOpen {
   background-color: #333;
+}
+
+.triangle {
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: 17px;
+  left: 41px;
+  border-top: 4px solid #aaa;
+  border-right: 3px solid transparent;
+  border-left: 3px solid transparent;
 }

@@ -7,13 +7,14 @@ const Company = () => {
   const list = ['about us', 'contact', 'store location'];
 
   let dropdown = styles.dropdown;
-  dropdownOpen && (dropdown += ` ${styles.dropdownOpen}`);
-
   let buttonMain = styles.buttonMain;
-  dropdownOpen && (buttonMain += ` ${styles.buttonOpen}`);
-
   let button = styles.button;
-  dropdownOpen && (button += ` ${styles.buttonOpen}`);
+  
+  if (dropdownOpen) {
+    dropdown += ` ${styles.dropdownOpen}`;
+    buttonMain += ` ${styles.buttonOpen}`;
+    button += ` ${styles.buttonOpen}`;
+  }
 
   return(
     <div
@@ -25,8 +26,9 @@ const Company = () => {
         type='button'
         onMouseEnter={() => setDropdownOpen(true)}
       >
-        company &#9660;
+        company
       </button>
+      <div className={styles.triangle}></div>
 
       {dropdownOpen && list.map(item => {
         return(
