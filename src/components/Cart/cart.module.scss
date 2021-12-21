@@ -45,16 +45,13 @@
   color: #282828;
 }
 
-.textOpen {
-  font-family: Nunito Bold;
-}
-
 .dropdown {
   width: 172px;
   position: absolute;
   top: 40px;
   left: -65px;
   border: 1px solid #e4e2e1;
+  z-index: 2;
 }
 
 .triangleOuter {
@@ -86,6 +83,7 @@
 .product {
   width: 172px;
   height: 94px;
+  background-color: #fff;
   border-bottom: 1px solid #e4e2e1;
 }
 
@@ -150,6 +148,7 @@
   width: 172px;
   height: 91px;
   background-color: #f7f7f7;
+  cursor: default;
 }
 
 .total {
@@ -158,7 +157,7 @@
   position: relative;
   top: 18px;
   left: 17px;
-  font-family: Playfair Display SC Bold;
+  font-family: Playfair Display SC;
   font-size: 14px;
   line-height: 1.2;
   font-weight: 400;

@@ -7,7 +7,7 @@ import imageProductC from '../../images/imageProductC.png';
 
 
 const Cart = () => {
-  let productList = [
+  const productList = [
     {
       id: 'productA',
       image: imageProductA,
@@ -34,21 +34,18 @@ const Cart = () => {
   const [open, setOpen] = useState(false);
   const [products, setProducts] = useState(productList);
 
-  let productNumber = products.filter(product => product.status).length;
-  let totalPrice = products.reduce((prev, curr) => {
-    return(
-      curr.status && prev + curr.price
-    );
-  }, 0);
+  const productsNumber = products.filter(product => product.status).length;
+  
+  const totalPrice = products
+    .map(product => product.status && product.price)
+    .reduce((prev, curr) => prev + curr);
 
   let cart = styles.cart;
   let circle = styles.circle;
-  let text = styles.text;
 
   if (open) {
     cart += ` ${styles.cartOpen}`;
     circle += ` ${styles.square}`;
-    text += ` ${styles.textOpen}`;
   }
 
   return(
@@ -65,7 +62,7 @@ const Cart = () => {
           alt='cart'
         />
       </div>
-      <div className={text}>cart ({productNumber})</div>
+      <div className={styles.text}>cart ({productsNumber})</div>
 
       {open &&
         <div className={styles.dropdown}>
@@ -108,7 +105,7 @@ const Cart = () => {
               TOTAL:
             </div>
             <div className={styles.totalPrice}>
-              ${totalPrice ? totalPrice : 0}
+              ${totalPrice}
             </div>
             <button
               className={styles.viewCart}
