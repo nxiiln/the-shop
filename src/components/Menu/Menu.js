@@ -6,18 +6,23 @@ import imageMenuInner from '../../images/imageMenuInner.png';
 const Menu = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
+  let menu = styles.menu;
   let mainMenu = styles.mainMenu;
-  menuOpen && (mainMenu += ` ${styles.mainMenuOpen}`);
+
+  if (menuOpen) {
+    menu += ` ${styles.menuHover}`;
+    mainMenu += ` ${styles.mainMenuOpen}`;
+  }
 
   return(
     <div
-      className={styles.menu}
+      className={menu}
+      onMouseLeave={() => setMenuOpen(false)}
     >
       <nav>
         <ul className={mainMenu}>
           <li
             onMouseEnter={() => setMenuOpen(true)}
-            onMouseLeave={() => setMenuOpen(false)}
           >
             women
           </li>
@@ -34,8 +39,6 @@ const Menu = () => {
       {menuOpen &&
         <div
           className={styles.menuOpen}
-          onMouseEnter={() => setMenuOpen(true)}
-          onMouseLeave={() => setMenuOpen(false)}
         >
           <div className={styles.menuInnerWrapper}>
             <ul className={styles.menuInner}>

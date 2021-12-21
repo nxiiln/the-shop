@@ -1,12 +1,18 @@
 .menu {
   width: 100vw;
   height: 260px;
+  position: relative;
   box-sizing: border-box;
   display: flex;
   justify-content: center;
   align-content: flex-start;
   flex-wrap: wrap;
+  background-color: #fff;
   cursor: default;
+}
+
+.menuHover {
+  z-index: 2;
 }
 
 .mainMenu {
@@ -17,10 +23,6 @@
   justify-content: center;
   margin: 0;
   padding: 0;
-}
-
-.mainMenuOpen {
-  border-bottom: 1px solid #aaa;
 }
 
 .mainMenu > li {
@@ -34,10 +36,14 @@
   color: #282828;
 }
 
+.mainMenuOpen {
+  border-bottom: 1px solid #aaa;
+}
+
 .mainMenuOpen > li:first-child {
   color: #000;
   border-bottom: 2px solid #000;
-  cursor: default;
+  cursor: pointer;
 }
 
 .menuOpen {
@@ -71,6 +77,10 @@
   line-height: 28px;
   font-weight: 300;
   color: #aaa;
+  cursor: pointer;
+  &:hover {
+    color: #282828;
+  }
 }
 
 .menuInner > li:first-child {
