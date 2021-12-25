@@ -3,6 +3,7 @@ import Top from '../Top/Top';
 import Search from '../Search/Search';
 import Cart from '../Cart/Cart';
 import Menu from '../Menu/Menu';
+import Banner from '../Banner/Banner';
 import styles from './header.module.scss';
 
 
@@ -14,6 +15,7 @@ const Header = () => {
       <Search />
       <Cart />
       <Menu />
+      <Banner />
     </header>
   );
 }
