@@ -4,11 +4,10 @@
   position: absolute;
   top: 160px;
   box-sizing: border-box;
-  border: 1px solid orange;
 }
 
 
-//bannerA
+//slideA
 .bannerA {
   width: 100%;
   height: 100%;
@@ -21,19 +20,16 @@
   width: 37%;
   height: 31%;
   position: absolute;
+  top: 33%;
+  left: 45%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  top: 33%;
-  left: 45%;
   z-index: 1;
-  //border: 1px solid orange;
 }
 
 .descriptionA {
-  margin: 0;
-  display: inline-block;
   font-family: Nunito;
   font-size: 16px;
   line-height: 1.2;
@@ -66,7 +62,7 @@
   font-size: 60px;
 }
 
-.button {
+.buttonBannerA {
   width: 249px;
   height: 30px;
   margin: 0;
@@ -83,15 +79,32 @@
 }
 
 
-//bannerB
+//slideB
+.wrapperSlideB {
+  display: flex;
+  justify-content: center;
+}
+
 .wrapperBannerB {
+  position: relative;
   display: flex;
   justify-content: center;
 }
 
 .bannerB {
-  //width: 100%;
-  height: 100%;
+  width: 675px;
+  height: 496px;
+}
+
+.textBlockB {
+  width: 350px;
+  height: 80px;
+  position: absolute;
+  top: 205px;
+  left: 28%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .descriptionB {
@@ -103,6 +116,98 @@
   color: #fff;
 }
 
+.springCollection {
+  font-family: Nunito;
+  font-size: 14px;
+  line-height: 1.2;
+  font-weight: 300;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.wrapperBannerC {
+  min-width: 275px;
+  min-height: 496px;
+  margin-left: 10px;
+  position: relative;
+  border: 1px solid #e4e2e1;
+}
+
+.bannerC {
+  width: 275px;
+  position: absolute;
+  top: 172px;
+}
+
+.useCode {
+  width: 166px;
+  height: 28px;
+  position: absolute;
+  top: 164px;
+  left: 55px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Nunito;
+  font-size: 11px;
+  line-height: 1.2;
+  font-weight: 700;
+  text-transform: uppercase;
+  white-space: pre;
+  background-color: #fff;
+  z-index: 1;
+}
+
+.useCode > span:first-child {
+  color: #aaa;
+}
+
+.useCode > span:last-child {
+  color: #000;
+}
+
+.textBlockC {
+  width: 100px;
+  height: 70px;
+  position: absolute;
+  top: 25px;
+  left: 85px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  line-height: 1.2;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #000;
+}
+
+.textBlockC > span:first-child {
+  font-family: 'Playfair Display SC';
+  font-size: 36px;
+}
+
+.textBlockC > span:last-child {
+  font-family: Nunito;
+  font-size: 18px;
+}
+
+.shopNow {
+  width: 96px;
+  height: 30px;
+  position: absolute;
+  top: 110px;
+  left: 85px;
+  font-family: Nunito;
+  font-size: 10px;
+  line-height: 1.2;
+  font-weight: 300;
+  text-transform: uppercase;
+  color: #fff;
+  background-color: #000;
+  border: none;
+  cursor: pointer;
+}
 
 //indicators
 @mixin indicator {

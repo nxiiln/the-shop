@@ -6,12 +6,12 @@ import bannerC from '../../images/bannerC.png';
 
 
 const Banner = () => {
-  const [banner, setBanner] = useState(1);
+  const [slide, setSlide] = useState(1);
 
   let indicatorA = styles.indicatorA;
   let indicatorB = styles.indicatorB;
 
-  if (banner === 1) {
+  if (slide === 1) {
     indicatorA += ` ${styles.indicatorActive}`;
     indicatorB += ` ${styles.indicatorNotActive}`;
   } else {
@@ -21,58 +21,89 @@ const Banner = () => {
 
   return(
     <div className={styles.banner}>
-      {banner === 1 && 
-      <div>
-        <img 
-          src={bannerA}
-          className={styles.bannerA}
-          alt='women with accessories'
-        />
-        <div className={styles.textBlockA}>
-          <p
-            className={styles.descriptionA}
-          >
-            new accessories collection
-          </p>
-          <div
-            className={styles.springEssentials}
-          >
-            <span className={styles.word}>
-              <span className={styles.letter}>S</span>PRING
-            </span>
-            <span className={styles.word}>
-              <span className={styles.letter}> E</span>SSENTIALS
-            </span>
-          </div>
-          <button
-            className={styles.button}
-            type='button'
-          >
-            shop women’s accessories
-          </button>
-        </div>
-      </div>
-      }
-      {banner === 2 &&
-        <div className={styles.wrapperBannerB}>
-          <img
-            src={bannerB}
-            className={styles.bannerB}
-            alt='women on sand'
+      {slide === 1 && 
+        <div  className={styles.wrapperSlideA}>
+          <img 
+            src={bannerA}
+            className={styles.bannerA}
+            alt='woman with accessories'
           />
-          <div className={styles.descriptionB}>
-            desert lover
+          <div className={styles.textBlockA}>
+            <span
+              className={styles.descriptionA}
+            >
+              new accessories collection
+            </span>
+            <div
+              className={styles.springEssentials}
+            >
+              <span className={styles.word}>
+                <span className={styles.letter}>S</span>PRING
+              </span>
+              <span className={styles.word}>
+                <span className={styles.letter}> E</span>SSENTIALS
+              </span>
+            </div>
+            <button
+              className={styles.buttonBannerA}
+              type='button'
+            >
+              shop women’s accessories
+            </button>
           </div>
         </div>
       }
+
+      {slide === 2 &&
+        <div className={styles.wrapperSlideB}>
+          <div className={styles.wrapperBannerB}>
+            <img
+              src={bannerB}
+              className={styles.bannerB}
+              alt='woman on sand'
+            />
+            <div className={styles.textBlockB}>
+              <div className={styles.descriptionB}>
+                desert lover
+              </div>
+              <div className={styles.springCollection}>
+                spring collection 2022
+              </div>
+            </div>
+          </div>
+
+          <div className={styles.wrapperBannerC}>
+            <div className={styles.textBlockC}>
+              <span>sale</span>
+              <span>up to 70%</span>
+            </div>
+            <button 
+              className={styles.shopNow}
+              type='button'
+            >
+              shop now
+            </button>
+            <div className={styles.useCode}>
+              <span>use code: </span>
+              <span>sweetsale</span>
+            </div>
+            <img
+              src={bannerC}
+              className={styles.bannerC}
+              alt='smiling woman'
+            />
+          </div>
+        </div>
+      }
+
       <div
         className={indicatorA}
-        onClick={() => setBanner(1)}
+        onClick={() => setSlide(1)}
       >
       </div>
       <div
         className={indicatorB}
-        onClick={() => setBanner(2)}
+        onClick={() => setSlide(2)}
       >
       </div>
     </div>
