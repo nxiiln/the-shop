@@ -8,6 +8,15 @@ import bannerC from '../../images/bannerC.png';
 const Banner = () => {
   const [slide, setSlide] = useState(1);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (slide === 1) setSlide(2);
+      if (slide === 2) setSlide(1);
+    }, 8000);
+
+    return () => clearInterval(interval);
+  }, [slide]);
+
   let indicatorA = styles.indicatorA;
   let indicatorB = styles.indicatorB;
 
