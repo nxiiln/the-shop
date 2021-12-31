@@ -15,7 +15,6 @@ const Header = () => {
       <Search />
       <Cart />
       <Menu />
-      <Banner />
     </header>
   );
 }
