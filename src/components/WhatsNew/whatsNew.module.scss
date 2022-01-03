@@ -1,1 +1,62 @@
+.wrapper {
+  position: relative;
+  top: 290px;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-content: space-between;
+}
 
+.whatsNew {
+  width: 960px;
+  height: 396px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.line {
+  width: 357px;
+  height: 1px;
+  margin-top: 15px;
+  background-color: #aaa;
+}
+
+.mainText {
+  height: 25px;
+  font-family: 'Playfair Display SC';
+  font-size: 24px;
+  line-height: 1.2;
+  font-weight: 400;
+  color: #000;
+}
+
+.img {
+  width: 312px;
+  height: 307px;
+}
+
+.wrapperDescription {
+  height: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.springCollection {
+  font-family: Nunito;
+  font-size: 10px;
+  line-height: 1.2;
+  font-weight: 300;
+  text-transform: uppercase;
+  color: #000;
+}
+
+.wrapperText {
+  width: 80%;
+  height: 30px;
+  margin-left: 10%;
+  display: flex;
+  justify-content: space-between;
+}
