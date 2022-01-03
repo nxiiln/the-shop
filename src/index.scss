@@ -21,14 +21,17 @@
 body {
   margin: 0;
   box-sizing: border-box;
-  overflow-x: auto;
+  overflow-x: hidden;
   overflow-y: auto;
   &::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 10px;
+    height: 10px;
     background-color: #fff;
   }
   &::-webkit-scrollbar-thumb {
-    background-color: #aaa;
+    background-color: #e4e2e1;
+    &:hover {
+      background-color: #aaa;
+    }
   }
 }
