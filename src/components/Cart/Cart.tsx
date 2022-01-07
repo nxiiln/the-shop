@@ -6,8 +6,16 @@ import imageProductB from '../../images/imageProductB.png';
 import imageProductC from '../../images/imageProductC.png';
 
 
-const Cart = () => {
-  const productList = [
+const Cart = (): JSX.Element => {
+  interface Product {
+    id: string,
+    image: string,
+    description: string,
+    price: number,
+    status: boolean
+  }
+
+  const productList: Product[] = [
     {
       id: 'productA',
       image: imageProductA,
@@ -31,28 +39,30 @@ const Cart = () => {
     }
   ];
 
-  const [open, setOpen] = useState(false);
-  const [products, setProducts] = useState(productList);
+  const [open, setOpen] = useState<boolean>(false);
+  const [products, setProducts] = useState<Product[]>(productList);
 
-  const productsNumber = products.filter(product => product.status).length;
+  const productsNumber: number = products
+    .filter((product: Product): boolean => product.status).length;
   
-  const totalPrice = products
-    .map(product => product.status && product.price)
-    .reduce((prev, curr) => prev + curr);
+  const totalPrice: number = products
+    .map((product: Product): number => +product.status && product.price)
+    .reduce((prev: number, curr: number): number => prev + curr);
 
-  let cart = styles.cart;
-  let circle = styles.circle;
+  let cart: string = styles.cart;
+  let circle: string = styles.circle;
 
   if (open) {
     cart += ` ${styles.cartOpen}`;
     circle += ` ${styles.square}`;
   }
 
+
   return(
     <div
       className={cart}
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
+      onMouseEnter={(): void => setOpen(true)}
+      onMouseLeave={(): void => setOpen(false)}
     >
       <div className={styles.line}></div>
       <div className={circle}>
@@ -70,7 +80,7 @@ const Cart = () => {
             <div className={styles.triangleInner}></div>
           </div>
 
-        {products.map(product => {
+        {products.map((product: Product): false | JSX.Element => {
           return(product.status &&
             <div
               className={styles.product}
@@ -90,9 +100,16 @@ const Cart = () => {
               <button 
                 className={styles.close}
                 type='button'
-                onClick={() => {
-                  setProducts([...products], product.status = false);
-                }}
+                onClick={(): void =>
+                  //Error: duplicates the product, but must remove
+                  setProducts([...products, {
+                    id: product.id,
+                    image: product.image,
+                    description: product.description,
+                    price: product.price,
+                    status: false
+                  }])
+                }
               >
                 <div className={styles.x}>+</div>
               </button>
