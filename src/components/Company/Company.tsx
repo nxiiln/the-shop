@@ -2,13 +2,13 @@ import React, {useState} from 'react';
 import styles from './company.module.scss';
 
 
-const Company = () => {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const list = ['about us', 'contact', 'store location'];
+const Company = (): JSX.Element => {
+  const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
+  const list: string[] = ['about us', 'contact', 'store location'];
 
-  let dropdown = styles.dropdown;
-  let buttonMain = styles.buttonMain;
-  let button = styles.button;
+  let dropdown: string = styles.dropdown;
+  let buttonMain: string = styles.buttonMain;
+  let button: string = styles.button;
   
   if (dropdownOpen) {
     dropdown += ` ${styles.dropdownOpen}`;
@@ -19,18 +19,18 @@ const Company = () => {
   return(
     <div
       className={dropdown}
-      onMouseLeave={() => setDropdownOpen(false)}
+      onMouseLeave={(): void => setDropdownOpen(false)}
     >
       <button
         className={buttonMain}
         type='button'
-        onMouseEnter={() => setDropdownOpen(true)}
+        onMouseEnter={(): void => setDropdownOpen(true)}
       >
         company
       </button>
       <div className={styles.triangle}></div>
 
-      {dropdownOpen && list.map(item => {
+      {dropdownOpen && list.map((item: string): JSX.Element => {
         return(
           <button
             className={button}
