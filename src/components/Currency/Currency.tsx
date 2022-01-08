@@ -2,16 +2,16 @@ import React, {useState} from 'react';
 import styles from './currency.module.scss';
 
 
-const Currency = () => {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [isUsd, setIsUsd] = useState(true);
+const Currency = (): JSX.Element => {
+  const [open, setOpen] = useState<boolean>(false);
+  const [isUsd, setIsUsd] = useState<boolean>(true);
 
-  let dropdown = styles.dropdown;
-  let buttonMain = styles.buttonMain;
-  let button = styles.button;
+  let dropdown: string = styles.dropdown;
+  let buttonMain: string = styles.buttonMain;
+  let button: string = styles.button;
   
-  if (dropdownOpen) {
-    dropdown += ` ${styles.dropdownOpen}`;
+  if (open) {
+    dropdown += ` ${styles.open}`;
     buttonMain += ` ${styles.buttonOpen}`;
     button += ` ${styles.buttonOpen}`;
   }
@@ -19,23 +19,23 @@ const Currency = () => {
   return(
     <div
       className={dropdown}
-      onClick={() => setDropdownOpen(false)}
-      onMouseLeave={() => setDropdownOpen(false)}
+      onClick={(): void => setOpen(false)}
+      onMouseLeave={(): void => setOpen(false)}
     >
       <button
         className={buttonMain}
         type='button'
-        onMouseEnter={() => setDropdownOpen(true)}
+        onMouseEnter={(): void => setOpen(true)}
       >
         {isUsd ? 'usd' : 'eur'}
       </button>
       <div className={styles.triangle}></div>
 
-      {dropdownOpen &&
+      {open &&
         <button
           className={button}
           type='button'
-          onClick={() => setIsUsd(!isUsd)}
+          onClick={(): void => setIsUsd(!isUsd)}
         >
           {isUsd ? 'eur' : 'usd'}
         </button>
