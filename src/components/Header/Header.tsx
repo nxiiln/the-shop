@@ -7,7 +7,7 @@ import Banner from '../Banner/Banner';
 import styles from './header.module.scss';
 
 
-const Header = () => {
+const Header = (): JSX.Element => {
   return(
     <header>
       <Top />
