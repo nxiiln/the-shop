@@ -1,29 +1,136 @@
 import React, {useState} from 'react';
-import styles from './menu.module.scss';
+import styled from 'styled-components';
 import imageMenuInner from '../../images/imageMenuInner.png';
 
 
-const Menu = (): JSX.Element => {
-  const [menuOpen, setMenuOpen] = useState<boolean>(false);
+type Open = {open: boolean};
 
-  let menu: string = styles.menu;
-  let mainMenu: string = styles.mainMenu;
+const MenuWrapper = styled.div<Open>`
+  width: 100vw;
+  height: 260px;
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  background-color: #fff;
+  cursor: default;
+  ${props => props.open && `
+    z-index: 2;
+  `}
+`;
 
-  if (menuOpen) {
-    menu += ` ${styles.menuHover}`;
-    mainMenu += ` ${styles.mainMenuOpen}`;
+const MainMenu = styled.ul<Open>`
+  width: 76vw;
+  height: 36px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  > li {
+    padding: 0 20px 34px 20px;
+    display: inline-block;
+    font-family: Nunito;
+    font-size: 13px;
+    line-height: 1.2;
+    font-weight: 300;
+    text-transform: uppercase;
+    color: #282828;
   }
+  ${props => props.open && `
+    border-bottom: 1px solid #aaa;
+    > li:first-child {
+      color: #000;
+      border-bottom: 2px solid #000;
+      cursor: pointer;
+    }
+  `}
+`;
+
+const MenuOpen = styled.div`
+  width: 76vw;
+  padding-top: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const MenuInnerWrapper = styled.div`
+  width: 44vw;
+  display: flex;
+  justify-content: space-between;
+`;
+
+const MenuInner = styled.ul`
+  width: 110px;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  > li:first-child {
+    font-family: Nunito;
+    font-size: 13px;
+    line-height: 1.2;
+    font-weight: 400;
+    text-transform: uppercase;
+    color: #000;
+  }
+  > li {
+    height: 30px;
+    display: inline-block;
+    font-family: Nunito;
+    font-size: 14px;
+    line-height: 28px;
+    font-weight: 300;
+    color: #aaa;
+    cursor: pointer;
+    &:hover {
+      color: #282828;
+    }
+  }
+`;
+
+const ImageWrapper = styled.div`
+  position: relative;
+`;
+
+const Message = styled.div`
+  width: 165px;
+  height: 97px;
+  position: absolute;
+  top: 20px;
+  left: 160px;
+  background-color: #fff;
+  border: 1px solid #000;
+`;
+
+const Text = styled.p`
+  width: 115px;
+  margin: 25px;
+  text-align: center;
+  font-family: 'Playfair Display SC';
+  font-size: 18px;
+  line-height: 18px;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #000;
+`;
+
+
+const Menu = (): JSX.Element => {
+  const [open, setOpen] = useState<boolean>(false);
 
   return(
-    <div
-      className={menu}
-      onMouseLeave={(): void => setMenuOpen(false)}
+    <MenuWrapper
+      open={open}
+      onMouseLeave={(): void => setOpen(false)}
     >
       <nav>
-        <ul className={mainMenu}>
-          <li
-            onMouseEnter={(): void => setMenuOpen(true)}
-          >
+        <MainMenu open={open}>
+          <li onMouseEnter={(): void => setOpen(true)}>
             women
           </li>
           <li>men</li>
@@ -33,61 +140,58 @@ const Menu = (): JSX.Element => {
           <li>brands</li>
           <li>sale</li>
           <li>blog</li>
-        </ul>
+        </MainMenu>
       </nav>
 
-      {menuOpen &&
-        <div
-          className={styles.menuOpen}
-        >
-          <div className={styles.menuInnerWrapper}>
-            <ul className={styles.menuInner}>
+      {open &&
+        <MenuOpen>
+          <MenuInnerWrapper>
+            <MenuInner>
               <li>bottoms</li>
               <li>Jeans</li>
               <li>Pants</li>
               <li>Shorts</li>
               <li>Skirts</li>
               <li>Dresses</li>
-            </ul>
-            <ul className={styles.menuInner}>
+            </MenuInner>
+            <MenuInner>
               <li>tops</li>
               <li>Jackets & Coats</li>
               <li>Shirts</li>
               <li>T-shirts</li>
               <li>Knitwear</li>
               <li>Sweats</li>
-            </ul>
-            <ul className={styles.menuInner}>
+            </MenuInner>
+            <MenuInner>
               <li>shoes & more</li>
               <li>Shoes</li>
               <li>Underwear</li>
               <li>Accessories</li>
               <li>Collectables</li>
               <li>Eyewear</li>
-            </ul>
-            <ul className={styles.menuInner}>
+            </MenuInner>
+            <MenuInner>
               <li>collections</li>
               <li>New arrivals</li>
               <li>Urban Style</li>
               <li>Raw Correct</li>
-            </ul>
-          </div>
+            </MenuInner>
+          </MenuInnerWrapper>
 
-          <div className={styles.imageWrapper}>
+          <ImageWrapper>
             <img
               src={imageMenuInner}
-              className={styles.imageMenuInner}
               alt='women in denim'
             />
-            <div className={styles.message}>
-              <p className={styles.text}>
+            <Message>
+              <Text>
                 new denim collection now
-              </p>
-            </div>
-          </div>
-        </div>
+              </Text>
+            </Message>
+          </ImageWrapper>
+        </MenuOpen>
       }
-    </div>
+    </MenuWrapper>
   )
 }
 
