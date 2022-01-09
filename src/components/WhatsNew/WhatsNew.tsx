@@ -5,7 +5,7 @@ import imgB from '../../images/whatsNewB.png';
 import imgC from '../../images/whatsNewC.png';
 
 
-const WhatsNew = () => {
+const WhatsNew = (): JSX.Element => {
   return(
     <div className={styles.wrapper}>
       <div className={styles.whatsNew}>
