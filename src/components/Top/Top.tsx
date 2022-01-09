@@ -5,7 +5,7 @@ import Language from '../Language/Language';
 import styles from './top.module.scss';
 
 
-const Top = () => {
+const Top = (): JSX.Element => {
   return(
     <nav className={styles.top}>
       <div className={styles.groupLeft}>
