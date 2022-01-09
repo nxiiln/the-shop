@@ -3,11 +3,11 @@ import styles from './menu.module.scss';
 import imageMenuInner from '../../images/imageMenuInner.png';
 
 
-const Menu = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
+const Menu = (): JSX.Element => {
+  const [menuOpen, setMenuOpen] = useState<boolean>(false);
 
-  let menu = styles.menu;
-  let mainMenu = styles.mainMenu;
+  let menu: string = styles.menu;
+  let mainMenu: string = styles.mainMenu;
 
   if (menuOpen) {
     menu += ` ${styles.menuHover}`;
@@ -17,12 +17,12 @@ const Menu = () => {
   return(
     <div
       className={menu}
-      onMouseLeave={() => setMenuOpen(false)}
+      onMouseLeave={(): void => setMenuOpen(false)}
     >
       <nav>
         <ul className={mainMenu}>
           <li
-            onMouseEnter={() => setMenuOpen(true)}
+            onMouseEnter={(): void => setMenuOpen(true)}
           >
             women
           </li>
