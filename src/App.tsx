@@ -1,10 +1,9 @@
 import React from 'react';
 import Header from './components/Header/Header';
 import Home from './components/Home/Home';
-import './app.scss';
 
 
-const App = () => {
+const App = (): JSX.Element => {
   return(
     <div>
       <Header />
