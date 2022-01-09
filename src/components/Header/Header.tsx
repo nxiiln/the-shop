@@ -4,14 +4,22 @@ import Search from '../Search/Search';
 import Cart from '../Cart/Cart';
 import Menu from '../Menu/Menu';
 import Banner from '../Banner/Banner';
-import styles from './header.module.scss';
+import styled from 'styled-components';
 
+const TheShop = styled.h1`
+  font-family: Playfair Display SC;
+  font-size: 36px;
+  line-height: 1.2;
+  font-weight: 400;
+  text-align: center;
+  color: #000;
+`;
 
 const Header = (): JSX.Element => {
   return(
     <header>
       <Top />
-      <h1 className={styles.theShop}>THE SHOP</h1>
+      <TheShop>THE SHOP</TheShop>
       <Search />
       <Cart />
       <Menu />
