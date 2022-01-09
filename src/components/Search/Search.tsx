@@ -3,13 +3,13 @@ import styles from './search.module.scss';
 import searchSymbol from '../../images/searchSymbol.png';
 
 
-const Search = () => {
-  const [focus, setFocus] = useState(false);
+const Search = (): JSX.Element => {
+  const [focus, setFocus] = useState<boolean>(false);
 
-  let searchGroup = styles.searchGroup;
+  let searchGroup: string = styles.searchGroup;
   focus && (searchGroup += ` ${styles.searchGroupOnFocus}`);
 
-  let search = styles.search;
+  let search: string = styles.search;
   focus && (search += ` ${styles.searchOnFocus}`);
   
   return(
@@ -23,8 +23,8 @@ const Search = () => {
         className={search}
         type='search'
         placeholder='SEARCH'
-        onFocus={() => setFocus(true)}
-        onBlur={() => setFocus(false)}
+        onFocus={(): void => setFocus(true)}
+        onBlur={(): void => setFocus(false)}
       >
       </input>
     </div>
