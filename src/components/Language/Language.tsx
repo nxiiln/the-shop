@@ -2,36 +2,36 @@ import React, {useState} from 'react';
 import styles from './language.module.scss';
 
 
-const Language = () => {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [isEnglish, setIsEnglish] = useState(true);
+const Language = (): JSX.Element => {
+  const [open, setOpen] = useState<boolean>(false);
+  const [isEnglish, setIsEnglish] = useState<boolean>(true);
 
-  let dropdown = styles.dropdown;
-  let buttonMain = styles.buttonMain;
-  let button = styles.button;
+  let dropdown: string = styles.dropdown;
+  let buttonMain: string = styles.buttonMain;
+  let button: string = styles.button;
   
-  if (dropdownOpen) {
-    dropdown += ` ${styles.dropdownOpen}`
-    buttonMain += ` ${styles.buttonOpen}`
-    button += ` ${styles.buttonOpen}`
+  if (open) {
+    dropdown += ` ${styles.open}`;
+    buttonMain += ` ${styles.buttonOpen}`;
+    button += ` ${styles.buttonOpen}`;
   }
 
   return(
     <div
       className={dropdown}
-      onMouseLeave={() => setDropdownOpen(false)}
-      onClick={() => setDropdownOpen(false)}
+      onMouseLeave={() => setOpen(false)}
+      onClick={() => setOpen(false)}
     >
       <button
         className={buttonMain}
         type='button'
-        onMouseEnter={() => setDropdownOpen(true)}
+        onMouseEnter={() => setOpen(true)}
       >
         {isEnglish ? 'english' : 'spanish'}
       </button>
       <div className={styles.triangle}></div>
 
-      {dropdownOpen && 
+      {open && 
         <button
           className={button}
           type='button'
