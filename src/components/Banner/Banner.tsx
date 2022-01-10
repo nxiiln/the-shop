@@ -5,20 +5,20 @@ import bannerB from '../../images/bannerB.png';
 import bannerC from '../../images/bannerC.png';
 
 
-const Banner = () => {
-  const [slide, setSlide] = useState(1);
+const Banner = (): JSX.Element => {
+  const [slide, setSlide] = useState<number>(1);
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    const interval = setInterval((): void => {
       if (slide === 1) setSlide(2);
       if (slide === 2) setSlide(1);
     }, 8000);
 
-    return () => clearInterval(interval);
+    return (): void => clearInterval(interval);
   }, [slide]);
 
-  let indicatorA = styles.indicatorA;
-  let indicatorB = styles.indicatorB;
+  let indicatorA: string = styles.indicatorA;
+  let indicatorB: string = styles.indicatorB;
 
   if (slide === 1) {
     indicatorA += ` ${styles.indicatorActive}`;
@@ -107,12 +107,12 @@ const Banner = () => {
 
       <div
         className={indicatorA}
-        onClick={() => setSlide(1)}
+        onClick={(): void => setSlide(1)}
       >
       </div>
       <div
         className={indicatorB}
-        onClick={() => setSlide(2)}
+        onClick={(): void => setSlide(2)}
       >
       </div>
     </div>
