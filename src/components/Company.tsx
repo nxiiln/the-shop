@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
-import styles from './company.module.scss';
 
 
 type Open = {open: boolean};

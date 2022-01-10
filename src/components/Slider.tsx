@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
-import bannerA from '../../images/bannerA.png';
-import bannerB from '../../images/bannerB.png';
-import bannerC from '../../images/bannerC.png';
+import bannerA from '../images/bannerA.png';
+import bannerB from '../images/bannerB.png';
+import bannerC from '../images/bannerC.png';
 
 
 const SliderWrapper = styled.div`

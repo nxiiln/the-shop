@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
-import imgA from '../../images/whatsNewA.png';
-import imgB from '../../images/whatsNewB.png';
-import imgC from '../../images/whatsNewC.png';
+import imgA from '../images/whatsNewA.png';
+import imgB from '../images/whatsNewB.png';
+import imgC from '../images/whatsNewC.png';
 
 
 const Wrapper = styled.div`

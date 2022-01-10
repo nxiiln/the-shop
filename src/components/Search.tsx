@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
-import searchSymbol from '../../images/searchSymbol.png';
+import searchSymbol from '../images/searchSymbol.png';
 
 
 type Focus = {focus: boolean};

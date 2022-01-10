@@ -1,8 +1,8 @@
 import React from 'react';
-import Top from '../Top/Top';
-import Search from '../Search/Search';
-import Cart from '../Cart/Cart';
-import Menu from '../Menu/Menu';
+import Top from './Top';
+import Search from './Search';
+import Cart from './Cart';
+import Menu from './Menu';
 import styled from 'styled-components';
 
 

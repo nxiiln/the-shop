@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
-import imageMenuInner from '../../images/imageMenuInner.png';
+import imageMenuInner from '../images/imageMenuInner.png';
 
 
 type Open = {open: boolean};

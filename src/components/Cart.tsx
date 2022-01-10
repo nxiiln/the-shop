@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
-import cartSymbol from '../../images/cartSymbol.png';
-import imageProductA from '../../images/imageProductA.png';
-import imageProductB from '../../images/imageProductB.png';
-import imageProductC from '../../images/imageProductC.png';
+import cartSymbol from '../images/cartSymbol.png';
+import imageProductA from '../images/imageProductA.png';
+import imageProductB from '../images/imageProductB.png';
+import imageProductC from '../images/imageProductC.png';
 
 
 

@@ -1,7 +1,7 @@
 import React from 'react';
-import Company from '../Company/Company';
-import Currency from '../Currency/Currency';
-import Language from '../Language/Language';
+import Company from './Company';
+import Currency from './Currency';
+import Language from './Language';
 import styled from 'styled-components';
 
 
