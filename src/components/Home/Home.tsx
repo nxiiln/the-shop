@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
-import Banner from '../Banner/Banner';
+import Slider from '../Slider/Slider';
 import WhatsNew from '../WhatsNew/WhatsNew';
 
 
 const Home = (): JSX.Element => {
   return(
     <div>
-      <Banner />
+      <Slider />
       <WhatsNew />
     </div>
   );

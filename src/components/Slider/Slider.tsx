@@ -5,7 +5,7 @@ import bannerB from '../../images/bannerB.png';
 import bannerC from '../../images/bannerC.png';
 
 
-const Banner = (): JSX.Element => {
+const Slider = (): JSX.Element => {
   const [slide, setSlide] = useState<number>(1);
 
   useEffect(() => {
@@ -120,4 +120,4 @@ const Banner = (): JSX.Element => {
 }
 
 
-export default Banner;
+export default Slider;

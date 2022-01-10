@@ -3,8 +3,8 @@ import Top from '../Top/Top';
 import Search from '../Search/Search';
 import Cart from '../Cart/Cart';
 import Menu from '../Menu/Menu';
-import Banner from '../Banner/Banner';
 import styled from 'styled-components';
+
 
 const TheShop = styled.h1`
   font-family: Playfair Display SC;
@@ -14,6 +14,7 @@ const TheShop = styled.h1`
   text-align: center;
   color: #000;
 `;
+
 
 const Header = (): JSX.Element => {
   return(
