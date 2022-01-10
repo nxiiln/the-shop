@@ -1,8 +1,242 @@
 import React, {useState, useEffect} from 'react';
-import styles from './banner.module.scss';
+import styled from 'styled-components';
 import bannerA from '../../images/bannerA.png';
 import bannerB from '../../images/bannerB.png';
 import bannerC from '../../images/bannerC.png';
+
+
+const SliderWrapper = styled.div`
+  width: 100vw;
+  height: 496px;
+  position: absolute;
+  top: 160px;
+  box-sizing: border-box;
+`;
+
+const BannerA = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  z-index: 1;
+`;
+
+const TextBlockA = styled.div`
+  width: 37%;
+  height: 31%;
+  position: absolute;
+  top: 33%;
+  left: 45%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1;
+`;
+
+const DescriptionA = styled.span`
+  font-family: Nunito;
+  font-size: 16px;
+  line-height: 1.2;
+  font-weight: 300;
+  text-transform: uppercase;
+  color: #000;
+`;
+
+const SpringEssentials = styled.div`
+  width: 100%;
+  height: 38%;
+  margin-top: -4%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Playfair Display SC';
+  line-height: 1.2;
+  font-weight: 400;
+  color: #000;
+`;
+
+const Word = styled.span`
+  display: inline-flex;
+  align-items: flex-end;
+  font-size: 55px;
+  white-space: pre;
+`;
+
+const Letter = styled.span`
+  font-size: 60px;
+`;
+
+const ButtonBannerA = styled.button`
+  width: 249px;
+  height: 30px;
+  margin: 0;
+  display: inline-block;
+  font-family: Nunito;
+  font-size: 14px;
+  line-height: 1.2;
+  font-weight: 300;
+  text-transform: uppercase;
+  color: #fff;
+  border: none;
+  background-color: #000;
+  cursor: pointer;
+`;
+
+const WrapperSlideB = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+const WrapperBannerB = styled.div`
+  position: relative;
+  display: flex;
+  justify-content: center;
+`;
+
+const BannerB = styled.img`
+  width: 675px;
+  height: 496px;
+`;
+
+const TextBlockB = styled.div`
+  width: 350px;
+  height: 80px;
+  position: absolute;
+  top: 205px;
+  left: 28%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const DescriptionB = styled.div`
+  font-family: 'Playfair Display SC';
+  font-size: 48px;
+  line-height: 1.2;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #fff;
+`;
+
+const SpringCollection = styled.div`
+  font-family: Nunito;
+  font-size: 14px;
+  line-height: 1.2;
+  font-weight: 300;
+  text-transform: uppercase;
+  color: #fff;
+`;
+
+const WrapperBannerC = styled.div`
+  min-width: 275px;
+  min-height: 496px;
+  margin-left: 10px;
+  position: relative;
+  border: 1px solid #e4e2e1;
+`;
+
+const TextBlockC = styled.div`
+  width: 100px;
+  height: 70px;
+  position: absolute;
+  top: 25px;
+  left: 85px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  line-height: 1.2;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #000;
+  > span:first-child {
+    font-family: 'Playfair Display SC';
+    font-size: 36px;
+  }
+  > span:last-child {
+    font-family: Nunito;
+    font-size: 18px;
+  }
+`;
+
+const ShopNow = styled.button`
+  width: 96px;
+  height: 30px;
+  position: absolute;
+  top: 110px;
+  left: 85px;
+  font-family: Nunito;
+  font-size: 10px;
+  line-height: 1.2;
+  font-weight: 300;
+  text-transform: uppercase;
+  color: #fff;
+  background-color: #000;
+  border: none;
+  cursor: pointer;
+`;
+
+const UseCode = styled.div`
+  width: 166px;
+  height: 28px;
+  position: absolute;
+  top: 164px;
+  left: 55px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Nunito;
+  font-size: 11px;
+  line-height: 1.2;
+  font-weight: 700;
+  text-transform: uppercase;
+  white-space: pre;
+  background-color: #fff;
+  z-index: 1;
+  > span:first-child {
+    color: #aaa;
+  }
+  > span:last-child {
+    color: #000;
+  }
+`;
+
+const BannerC = styled.img`
+  width: 275px;
+  position: absolute;
+  top: 172px;
+`;
+
+const Indicator = styled.div`
+  width: 17px;
+  height: 8px;
+  position: absolute;
+  top: 90%;
+  box-sizing: border-box;
+  z-index: 1;
+  cursor: pointer;
+`;
+
+type Slide = {slide: number};
+
+const IndicatorA = styled(Indicator)<Slide>`
+  left: 48%;
+  ${props => props.slide === 1 ? 
+    `background-color: #d7d5d4;` :
+    `background-color: #fff;
+     border: 1px solid #d7d5d4;`
+  }
+`;
+
+const IndicatorB = styled(Indicator)<Slide>`
+  left: calc(48% + 20px);
+  ${props => props.slide === 2 ? 
+    `background-color: #d7d5d4;` :
+    `background-color: #fff;
+     border: 1px solid #d7d5d4;`
+  }
+`;
 
 
 const Slider = (): JSX.Element => {
@@ -17,105 +251,75 @@ const Slider = (): JSX.Element => {
     return (): void => clearInterval(interval);
   }, [slide]);
 
-  let indicatorA: string = styles.indicatorA;
-  let indicatorB: string = styles.indicatorB;
-
-  if (slide === 1) {
-    indicatorA += ` ${styles.indicatorActive}`;
-    indicatorB += ` ${styles.indicatorNotActive}`;
-  } else {
-    indicatorA += ` ${styles.indicatorNotActive}`;
-    indicatorB += ` ${styles.indicatorActive}`;
-  }
-
   return(
-    <div className={styles.banner}>
+    <SliderWrapper>
       {slide === 1 && 
-        <div  className={styles.wrapperSlideA}>
-          <img 
+        <div>
+          <BannerA 
             src={bannerA}
-            className={styles.bannerA}
             alt='woman with accessories'
           />
-          <div className={styles.textBlockA}>
-            <span
-              className={styles.descriptionA}
-            >
+          <TextBlockA>
+            <DescriptionA>
               new accessories collection
-            </span>
-            <div
-              className={styles.springEssentials}
-            >
-              <span className={styles.word}>
-                <span className={styles.letter}>S</span>PRING
-              </span>
-              <span className={styles.word}>
-                <span className={styles.letter}> E</span>SSENTIALS
-              </span>
-            </div>
-            <button
-              className={styles.buttonBannerA}
-              type='button'
-            >
+            </DescriptionA>
+            <SpringEssentials>
+              <Word><Letter>S</Letter>PRING</Word>
+              <Word><Letter> E</Letter>SSENTIALS</Word>
+            </SpringEssentials>
+            <ButtonBannerA type='button'>
               shop women’s accessories
-            </button>
-          </div>
+            </ButtonBannerA>
+          </TextBlockA>
         </div>
       }
 
       {slide === 2 &&
-        <div className={styles.wrapperSlideB}>
-          <div className={styles.wrapperBannerB}>
-            <img
+        <WrapperSlideB>
+          <WrapperBannerB>
+            <BannerB
               src={bannerB}
-              className={styles.bannerB}
               alt='woman on sand'
             />
-            <div className={styles.textBlockB}>
-              <div className={styles.descriptionB}>
+            <TextBlockB>
+              <DescriptionB>
                 desert lover
-              </div>
-              <div className={styles.springCollection}>
+              </DescriptionB>
+              <SpringCollection>
                 spring collection 2022
-              </div>
-            </div>
-          </div>
+              </SpringCollection>
+            </TextBlockB>
+          </WrapperBannerB>
 
-          <div className={styles.wrapperBannerC}>
-            <div className={styles.textBlockC}>
+          <WrapperBannerC>
+            <TextBlockC>
               <span>sale</span>
               <span>up to 70%</span>
-            </div>
-            <button 
-              className={styles.shopNow}
-              type='button'
-            >
-              shop now
-            </button>
-            <div className={styles.useCode}>
+            </TextBlockC>
+            <ShopNow type='button'>shop now</ShopNow>
+            <UseCode>
               <span>use code: </span>
               <span>sweetsale</span>
-            </div>
-            <img
+            </UseCode>
+            <BannerC
               src={bannerC}
-              className={styles.bannerC}
               alt='smiling woman'
             />
-          </div>
-        </div>
+          </WrapperBannerC>
+        </WrapperSlideB>
       }
 
-      <div
-        className={indicatorA}
+      <IndicatorA
+        slide={slide}
         onClick={(): void => setSlide(1)}
       >
-      </div>
-      <div
-        className={indicatorB}
+      </IndicatorA>
+      <IndicatorB
+        slide={slide}
         onClick={(): void => setSlide(2)}
       >
-      </div>
-    </div>
+      </IndicatorB>
+    </SliderWrapper>
   );
 }
 
