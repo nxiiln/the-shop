@@ -14,6 +14,9 @@ export default createGlobalStyle`
     src: url(${PlayfairDisplaySC});
   }
 
+  * {
+    box-sizing: border-box;
+  }
   
   body {
     margin: 0;
