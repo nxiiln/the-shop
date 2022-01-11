@@ -1,6 +1,7 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Slider from './Slider';
 import WhatsNew from './WhatsNew';
+import MostPopular from './MostPopular';
 
 
 const Home = (): JSX.Element => {
@@ -8,6 +9,7 @@ const Home = (): JSX.Element => {
     <div>
       <Slider />
       <WhatsNew />
+      <MostPopular />
     </div>
   );
 }
