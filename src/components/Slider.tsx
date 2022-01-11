@@ -243,7 +243,7 @@ const Slider = (): JSX.Element => {
   const [slide, setSlide] = useState<number>(1);
 
   useEffect(() => {
-    const interval = setInterval((): void => {
+    const interval: NodeJS.Timer = setInterval((): void => {
       if (slide === 1) setSlide(2);
       if (slide === 2) setSlide(1);
     }, 8000);
