@@ -254,7 +254,7 @@ const Slider = (): JSX.Element => {
   return(
     <SliderWrapper>
       {slide === 1 && 
-        <div>
+        <>
           <BannerA 
             src={bannerA}
             alt='woman with accessories'
@@ -271,7 +271,7 @@ const Slider = (): JSX.Element => {
               shop women’s accessories
             </ButtonBannerA>
           </TextBlockA>
-        </div>
+        </>
       }
 
       {slide === 2 &&

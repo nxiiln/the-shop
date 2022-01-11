@@ -6,11 +6,11 @@ import GlobalStyles from '../globalStyles';
 
 const App = (): JSX.Element => {
   return(
-    <div>
+    <>
       <GlobalStyles />
       <Header />
       <Home />
-    </div>
+    </>
   );
 }
 
