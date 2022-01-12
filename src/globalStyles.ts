@@ -20,7 +20,6 @@ export default createGlobalStyle`
   
   body {
     margin: 0;
-    box-sizing: border-box;
     overflow-x: hidden;
     overflow-y: auto;
     &::-webkit-scrollbar {
