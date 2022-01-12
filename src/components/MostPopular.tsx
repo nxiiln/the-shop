@@ -153,7 +153,6 @@ const AddToBag = styled.button`
   }
 `;
 
-
 const AddToBagText = styled.p`
   width: 80px;
   margin: 0;
@@ -245,6 +244,7 @@ const MostPopular = (): JSX.Element => {
         COMPARE
       </Compare>
     </Purchase>;
+
 
   return(
     <MostPopularWrapper>
