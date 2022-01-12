@@ -15,6 +15,7 @@ const CartWrapper = styled.div<Open>`
   position: absolute;
   top: 70px;
   left: 82.5vw;
+  box-sizing: content-box;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -57,6 +58,7 @@ const Dropdown = styled.div`
   position: absolute;
   top: 40px;
   left: -65px;
+  box-sizing: content-box;
   border: 1px solid #e4e2e1;
   z-index: 2;
 `;
