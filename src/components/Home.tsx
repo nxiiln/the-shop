@@ -6,11 +6,11 @@ import MostPopular from './MostPopular';
 
 const Home = (): JSX.Element => {
   return(
-    <div>
+    <main>
       <Slider />
       <WhatsNew />
       <MostPopular />
-    </div>
+    </main>
   );
 }
 

@@ -5,7 +5,7 @@ import imgB from '../images/whatsNewB.png';
 import imgC from '../images/whatsNewC.png';
 
 
-const Wrapper = styled.div`
+const Wrapper = styled.section`
   position: relative;
   top: 290px;
   left: 0;

@@ -8,7 +8,7 @@ import wishList from '../images/wishList.png';
 import compare from '../images/compare.png';
 
 
-const MostPopularWrapper = styled.div`
+const MostPopularWrapper = styled.section`
   width: 650px;
   height: 440px;
   position: relative;

@@ -5,7 +5,7 @@ import bannerB from '../images/bannerB.png';
 import bannerC from '../images/bannerC.png';
 
 
-const SliderWrapper = styled.div`
+const SliderWrapper = styled.section`
   width: 100vw;
   height: 496px;
   position: absolute;
