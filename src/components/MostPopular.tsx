@@ -8,15 +8,12 @@ import wishList from '../images/wishList.png';
 import compare from '../images/compare.png';
 
 
-const MostPopularWrapper = styled.section`
+const MostPopularWrapper = styled.article`
   width: 650px;
   height: 440px;
-  position: relative;
-  top: 325px;
-  left: 16vw;
 `;
 
-const MainText = styled.div`
+const MainText = styled.h2`
   font-family: 'Playfair Display SC';
   font-size: 24px;
   line-height: 1.2;
@@ -132,7 +129,7 @@ const QuickShopText = styled.p<Status>`
 `;
 
 const Purchase = styled.div`
-  height: 58px;
+  height: 57px;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;

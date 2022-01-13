@@ -14,7 +14,7 @@ const Wrapper = styled.section`
   align-content: space-between;
 `;
 
-const WrapperInner = styled.div`
+const WrapperInner = styled.article`
   width: 960px;
   height: 396px;
   display: flex;
@@ -29,8 +29,8 @@ const Line = styled.div`
   background-color: #aaa;
 `;
 
-const MainText = styled.div`
-  height: 25px;
+const MainText = styled.h2`
+  margin: 0;
   font-family: 'Playfair Display SC';
   font-size: 24px;
   line-height: 1.2;

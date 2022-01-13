@@ -5,7 +5,7 @@ import imageMenuInner from '../images/imageMenuInner.png';
 
 type Open = {open: boolean};
 
-const MenuWrapper = styled.div<Open>`
+const MenuWrapper = styled.section<Open>`
   width: 100vw;
   height: 260px;
   position: relative;
