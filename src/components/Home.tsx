@@ -1,7 +1,7 @@
 import React from 'react';
 import Slider from './Slider';
 import WhatsNew from './WhatsNew';
-import MostPopular from './MostPopular';
+import HomeBottom from './HomeBottom';
 
 
 const Home = (): JSX.Element => {
@@ -9,7 +9,7 @@ const Home = (): JSX.Element => {
     <main>
       <Slider />
       <WhatsNew />
-      <MostPopular />
+      <HomeBottom />
     </main>
   );
 }
