@@ -1,7 +1,7 @@
 import React from 'react';
 import Top from './Top';
 import Search from './Search';
-import Cart from './Cart';
+import CartPreview from './CartPreview';
 import Menu from './Menu';
 import styled from 'styled-components';
 
@@ -22,7 +22,7 @@ const Header = (): JSX.Element => {
       <Top />
       <TheShop>THE SHOP</TheShop>
       <Search />
-      <Cart />
+      <CartPreview />
       <Menu />
     </header>
   );

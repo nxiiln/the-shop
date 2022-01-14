@@ -221,7 +221,7 @@ const Checkout = styled.button`
 
 
 
-const Cart = (): JSX.Element => {
+const CartPreview = (): JSX.Element => {
   interface Product {
     id: string;
     image: string;
@@ -325,4 +325,4 @@ const Cart = (): JSX.Element => {
 }
 
 
-export default Cart;
+export default CartPreview;
