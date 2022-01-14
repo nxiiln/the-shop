@@ -114,6 +114,7 @@ const Instagram = styled.div`
 const MiddleBlock = styled.div`
   width: 965px;
   height: 70px;
+  margin-top: 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -220,8 +221,8 @@ const Footer = (): JSX.Element => {
             <MainText>SHOPPING GUIDE</MainText>
             <Button>ABOUT G-STAR ROW</Button>
             <Button>CORPORATE RESPONSIBILITY</Button>
-            <Button>PRESS ROOM</Button>
-            <Button>CAREERS</Button>
+            <Button>PRESS ROOM</Button><br />
+            <Button>CAREERS</Button><br />
             <Button>G-START RETAILERS</Button>
             <Button>OPEN A G-STAR STORE</Button>
           </ShoppingGuide>
