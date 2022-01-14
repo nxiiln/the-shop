@@ -6,9 +6,7 @@ import styled from 'styled-components';
 
 const Wrapper = styled.section`
   width: 100vw;
-  position: relative;
-  top: 320px;
-  left: 0px;
+  margin-top: 40px;
   display: flex;
   justify-content: center;
 `;

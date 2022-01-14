@@ -7,24 +7,20 @@ type Open = {open: boolean};
 
 const MenuWrapper = styled.section<Open>`
   width: 100vw;
-  height: 260px;
+  height: 38px;
   position: relative;
-  box-sizing: border-box;
   display: flex;
   justify-content: center;
   align-content: flex-start;
   flex-wrap: wrap;
   background-color: #fff;
   cursor: default;
-  ${props => props.open && `
-    z-index: 2;
-  `}
+  ${props => props.open && 'z-index: 2;'}
 `;
 
 const MainMenu = styled.ul<Open>`
   width: 76vw;
   height: 36px;
-  box-sizing: border-box;
   display: flex;
   justify-content: center;
   margin: 0;
@@ -49,9 +45,16 @@ const MainMenu = styled.ul<Open>`
   `}
 `;
 
+const MenuOpenWrapper = styled.div`
+  width: 100vw;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+`;
+
 const MenuOpen = styled.div`
   width: 76vw;
-  padding-top: 25px;
+  padding: 25px 0 25px 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -144,6 +147,7 @@ const Menu = (): JSX.Element => {
       </nav>
 
       {open &&
+        <MenuOpenWrapper>
         <MenuOpen>
           <MenuInnerWrapper>
             <MenuInner>
@@ -190,6 +194,7 @@ const Menu = (): JSX.Element => {
             </Message>
           </ImageWrapper>
         </MenuOpen>
+        </MenuOpenWrapper>
       }
     </MenuWrapper>
   )

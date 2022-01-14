@@ -8,9 +8,7 @@ import bannerC from '../images/bannerC.png';
 const SliderWrapper = styled.section`
   width: 100vw;
   height: 496px;
-  position: absolute;
-  top: 160px;
-  box-sizing: border-box;
+  position: relative;
 `;
 
 const BannerA = styled.img`
@@ -18,7 +16,6 @@ const BannerA = styled.img`
   height: 100%;
   object-fit: cover;
   position: absolute;
-  z-index: 1;
 `;
 
 const TextBlockA = styled.div`
@@ -31,7 +28,6 @@ const TextBlockA = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  z-index: 1;
 `;
 
 const DescriptionA = styled.span`
@@ -214,7 +210,6 @@ const Indicator = styled.div`
   position: absolute;
   top: 90%;
   box-sizing: border-box;
-  z-index: 1;
   cursor: pointer;
 `;
 

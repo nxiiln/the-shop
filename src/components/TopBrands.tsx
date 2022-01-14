@@ -8,9 +8,7 @@ import baldinini from '../images/baldinini.png';
 
 const WrapperOuter = styled.div`
   width: 100vw;
-  position: relative;
-  top: 340px;
-  left: 0px;
+  margin-top: 10px;
   display: flex;
   justify-content: center;
 `;

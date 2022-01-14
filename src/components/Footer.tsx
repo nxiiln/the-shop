@@ -15,9 +15,6 @@ import paymentSystems from '../images/paymentSystems.png';
 const WrapperOuter = styled.footer`
   width: 100vw;
   height: 480px;
-  position: relative;
-  top: 360px;
-  left: 0px;
   display: flex;
   justify-content: center;
   align-items: center;

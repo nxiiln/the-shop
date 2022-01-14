@@ -4,9 +4,7 @@ import styled from 'styled-components';
 
 const WrapperOuter = styled.div`
   width: 100vw;
-  position: relative;
-  top: 360px;
-  left: 0;
+  margin-top: 20px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;

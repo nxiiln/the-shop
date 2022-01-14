@@ -6,9 +6,7 @@ import imgC from '../images/whatsNewC.png';
 
 
 const Wrapper = styled.section`
-  position: relative;
-  top: 290px;
-  left: 0;
+  margin-top: 20px;
   display: flex;
   justify-content: center;
   align-content: space-between;
