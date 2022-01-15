@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 
-const WrapperOuter = styled.div`
+const WrapperOuter = styled.section`
   width: 100vw;
   margin-top: 20px;
   display: flex;

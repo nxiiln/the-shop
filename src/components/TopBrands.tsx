@@ -6,7 +6,7 @@ import dkny from '../images/dkny.png';
 import baldinini from '../images/baldinini.png';
 
 
-const WrapperOuter = styled.div`
+const WrapperOuter = styled.section`
   width: 100vw;
   margin-top: 10px;
   display: flex;
