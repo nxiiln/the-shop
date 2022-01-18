@@ -295,16 +295,12 @@ const CartPreview = (): JSX.Element => {
               <Price>${product.price}</Price>
               <Remove
                 type='button'
-                onClick={(): void =>
-                  //Error: duplicates the product, but must remove
-                  setProducts([...products, {
-                    id: product.id,
-                    image: product.image,
-                    description: product.description,
-                    price: product.price,
-                    status: false
-                  }])
-                }
+                onClick={(): void => {
+                  const newProducts: Product[] = [...products];
+                  const currIndex: number = products.indexOf(product);
+                  newProducts[currIndex].status = false;
+                  setProducts(newProducts);
+                }}
               >
                 <X>+</X>
               </Remove>
