@@ -145,7 +145,7 @@ const Product = styled.div`
   button:nth-child(5) {grid-area: edi;}
   button:nth-child(6) {grid-area: x;}
   span:nth-child(7) {grid-area: prc;}
-  input {grid-area: qnt;}
+  div {grid-area: qnt;}
   button:nth-child(9) {grid-area: pls;}
   button:nth-child(10) {grid-area: mns;}
   button:nth-child(11) {grid-area: upd;}
@@ -198,9 +198,12 @@ const X = styled.button`
   cursor: pointer;
 `;
 
-const Quantity = styled.input`
+const Quantity = styled.div`
   width: 50px;
   height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
   font-family: Nunito;
   font-size: 10px;
@@ -209,11 +212,6 @@ const Quantity = styled.input`
   color: #000;
   background: #fff;
   border: 1px solid #e4e2e1;
-  :focus {
-    outline: none;
-  }
-  ::-webkit-inner-spin-button {
-    -webkit-appearance: none;
 }
 `;
 
@@ -501,29 +499,6 @@ const Cart = (): JSX.Element => {
     .reduce((prev: number, curr: number): number => prev + curr);
 
 
-  const renderCountries = (): JSX.Element[] => {
-    return regions.map((region: Region): JSX.Element => {
-      return(
-        <option key={region.country} value={region.country}>
-          {region.country}
-        </option>
-      )
-    })
-  }
-
-
-  const renderCities = (): JSX.Element[] => {
-    let currCities: string[] = [];
-    regions.forEach((region: Region): void => {
-      if (region.country === country) currCities = region.cities;
-    });
-
-    return currCities.map((city: string): JSX.Element => {
-      return <option key={city} value={city}>{city}</option>
-    });
-  }
-
-
   return(
     <WrapperOuter>
       <WrapperInner>
@@ -570,17 +545,9 @@ const Cart = (): JSX.Element => {
                     +
                   </X>
                   <span>${product.price}</span>
-                  <Quantity
-                    type='number'
-                    min='0'
-                    value={product.quantity}
-                    onChange={(e): void => {
-                      const newProducts: Product[] = [...products];
-                      const currIndex: number = products.indexOf(product);
-                      newProducts[currIndex].quantity = +e.target.value;
-                      setProducts(newProducts);
-                    }}
-                  />
+                  <Quantity>
+                    <span>{product.quantity}</span>
+                  </Quantity>
                   <PlusMinus
                     type='button'
                     onClick={(): void => {
@@ -597,7 +564,7 @@ const Cart = (): JSX.Element => {
                     onClick={(): void => {
                       const newProducts: Product[] = [...products];
                       const currIndex: number = products.indexOf(product);
-                      if (newProducts[currIndex].quantity > 0) {
+                      if (newProducts[currIndex].quantity > 1) {
                         newProducts[currIndex].quantity -= 1;
                       } 
                       setProducts(newProducts);
@@ -625,11 +592,23 @@ const Cart = (): JSX.Element => {
               onChange={(e): void => setCountry(e.target.value)}
             >
               <option value='default' disabled>select country</option>
-              {renderCountries()}
+              {regions.map((region: Region): JSX.Element => {
+                return(
+                 <option key={region.country} value={region.country}>
+                   {region.country}
+                 </option>
+                )
+              })}
             </Select>
             <Select defaultValue='default'>
               <option value='default' disabled>select region, state or province</option>
-              {country !== 'default' && renderCities()}
+              {country !== 'default' &&
+                regions
+                  .filter((region: Region): boolean => region.country === country)[0].cities
+                  .map((city: string): JSX.Element => {
+                    return <option key={city} value={city}>{city}</option>
+                  })
+              }
             </Select>
             <Postcode type='text' placeholder='Postcode/Zip'/>
             <GetAQuote type='button'>GET A QUOTE</GetAQuote>
