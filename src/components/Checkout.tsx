@@ -1,5 +1,8 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
+import alsoLove1 from '../images/alsoLove1.png';
+import alsoLove2 from '../images/alsoLove2.png';
+import alsoLove3 from '../images/alsoLove3.png';
 
 
 const WrapperOuter = styled.div`
@@ -53,7 +56,7 @@ const BreadCrumbsRight = styled(BreadCrumbs)`
 `;
 
 const AlsoLove = styled.div`
-  width: 961px;
+  width: 960px;
   height: 296px;
   grid-area: 3 / 1 / 4 / 3;
   background-color: #f7f7f7;
@@ -68,7 +71,7 @@ const Step1 = styled.div`
 `;
 
 const Cart = styled.div`
-  width: 276px;
+  width: 275px;
   height: 478px;
   grid-area: 4 / 2 / 5 / 3;
   border: 1px solid #e4e2e1;
