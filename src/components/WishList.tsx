@@ -196,7 +196,7 @@ const AddToBag = styled.button`
 
 
 
-const Cart = (): JSX.Element => {
+const WishList = (): JSX.Element => {
   interface Product {
     id: number;
     status: boolean;
@@ -293,4 +293,4 @@ const Cart = (): JSX.Element => {
 
 
 
-export default Cart;
+export default WishList;
