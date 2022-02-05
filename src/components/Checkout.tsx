@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import QuickView from './QuickView';
 import styled from 'styled-components';
 import alsoLove1 from '../images/alsoLove1.png';
 import alsoLove2 from '../images/alsoLove2.png';
@@ -9,6 +10,8 @@ import visaIcon from '../images/visaIcon.png';
 import masterCardIcon from '../images/masterCardIcon.png';
 import discoverIcon from '../images/discoverIcon.png';
 import americanExpressIcon from '../images/americanExpressIcon.png';
+
+
 
 
 const WrapperOuter = styled.main`
@@ -153,7 +156,7 @@ const ProductAlso = styled.div`
   }
 `;
 
-const QuickView = styled.button`
+const ButtonQuickView = styled.button`
   width: 107px;
   height: 30px;
   margin-left: 10px;
@@ -745,6 +748,7 @@ const Checkout = (): JSX.Element => {
 
 
   const [alsoLove, setAlsoLove] = useState<boolean>(true);
+  const [quickView, setQuickView] = useState<boolean>(false);
   const [products, setProducts] = useState<Product[]>(initialProducts);
   const [step, setStep] = useState<number>(1);
 
@@ -785,11 +789,17 @@ const Checkout = (): JSX.Element => {
                     <span>
                       ${product.price.toString().replace(/(.+)(...)$/, '$1,$2')}
                     </span>
-                    <QuickView>QUICKVIEW</QuickView>
+                    <ButtonQuickView
+                      type='button'
+                      onClick={(): void => setQuickView(true)}
+                    >
+                      QUICKVIEW
+                    </ButtonQuickView>
                   </ProductAlso>
                 )
               })}
             </ProductAlsoWrapper>
+            {quickView && <QuickView />}
           </AlsoLove>
         }
 
