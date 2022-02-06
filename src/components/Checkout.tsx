@@ -170,120 +170,6 @@ const ButtonQuickView = styled.button`
 //-----------------------------------------------
 
 
-//Cart-------------------------------------------
-const Cart = styled.article`
-  width: 275px;
-  height: min-content;
-  border: 1px solid #e4e2e1;
-  > span {
-    width: 100%;
-    height: 50px;
-    padding: 7px 0 0 17px;
-    display: inline-block;
-    font-family: 'Playfair Display SC';
-    font-size: 24px;
-    font-weight: 400;
-    color: #000;
-  }
-`;
-
-const ProductWrapper = styled.div`
-  width: 100%;
-  height: 135px;
-  margin-bottom: 11px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #f7f7f7;
-`;
-
-const Product = styled.div`
-  width: 240px;
-  height: 110px;
-  display: grid;
-  grid-template-columns: 92px 99px 35px 1fr;
-  grid-template-rows: repeat(12, 9.167px);
-  span {
-    font-family: Nunito;
-    font-size: 10px;
-    line-height: 12px;
-    font-weight: 400;
-    text-transform: uppercase;
-    color: #000;
-  }
-  img:nth-child(1) {
-    height: 100%;
-    grid-area: 1 / 1 / 13 / 2;
-  }
-  span:nth-child(2) {grid-area: 1 / 2 / 3 / 3;}
-  span:nth-child(3) {grid-area: 4 / 2 / 5 / 3;}
-  span:nth-child(4) {grid-area: 6 / 2 / 7 / 3;}
-  span:nth-child(5) {grid-area: 8 / 2 / 9 / 3;}
-  button:nth-child(6) {grid-area: 11 / 2 / 12 / 3;}
-  button:nth-child(7) {grid-area: 1 / 4 / 2 / 5;}
-  span:nth-child(8) {
-    grid-area: 11 / 3 / 12 / 4;
-    font-size: 12px;
-  }
-`;
-
-const X = styled.button`
-  width: 15px;
-  height: 15px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 25px;
-  background: transparent;
-  border: none;
-  transform: rotate(45deg);
-  cursor: pointer;
-`;
-
-const TotalWrapper = styled.div`
-  width: 100%;
-  height: 135px;
-  margin-top: -6px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const Total = styled.div`
-  width: 245px;
-  height: 100px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: repeat(10, 10px);
-  span {
-    font-family: Nunito;
-    font-size: 12px;
-    line-height: 1.2;
-    font-weight: 300;
-    text-transform: uppercase;
-    color: #000;
-  }
-  span:nth-child(even) {justify-self: end;}
-  span:nth-child(3) {grid-area: 3 / 1 / 4 / 2;}
-  span:nth-child(4) {grid-area: 3 / 2 / 4 / 3;}
-  span:nth-child(5) {grid-area: 5 / 1 / 6 / 2;}
-  span:nth-child(6) {grid-area: 5 / 2 / 6 / 3;}
-  span:nth-child(7) {
-    grid-area: 9 / 1 / 11 / 2;
-    align-self: end;
-    font-size: 13px;
-    font-weight: 700;
-  }
-  span:nth-child(8) {
-    grid-area: 9 / 2 / 11 / 3;
-    align-self: end;
-    font-size: 13px;
-    font-weight: 700;
-  }
-`;
-//-----------------------------------------------
-
-
 //Steps------------------------------------------
 const Steps = styled.article`
   width: 675px;
@@ -672,6 +558,120 @@ const Step5 = styled.div`
 
 const OrderNow = styled(ButtonBlack)`
   width: 291px;
+`;
+//-----------------------------------------------
+
+
+//Cart-------------------------------------------
+const Cart = styled.article`
+  width: 275px;
+  height: min-content;
+  border: 1px solid #e4e2e1;
+  > span {
+    width: 100%;
+    height: 50px;
+    padding: 7px 0 0 17px;
+    display: inline-block;
+    font-family: 'Playfair Display SC';
+    font-size: 24px;
+    font-weight: 400;
+    color: #000;
+  }
+`;
+
+const ProductWrapper = styled.div`
+  width: 100%;
+  height: 135px;
+  margin-bottom: 11px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f7f7f7;
+`;
+
+const Product = styled.div`
+  width: 240px;
+  height: 110px;
+  display: grid;
+  grid-template-columns: 92px 99px 35px 1fr;
+  grid-template-rows: repeat(12, 9.167px);
+  span {
+    font-family: Nunito;
+    font-size: 10px;
+    line-height: 12px;
+    font-weight: 400;
+    text-transform: uppercase;
+    color: #000;
+  }
+  img:nth-child(1) {
+    height: 100%;
+    grid-area: 1 / 1 / 13 / 2;
+  }
+  span:nth-child(2) {grid-area: 1 / 2 / 3 / 3;}
+  span:nth-child(3) {grid-area: 4 / 2 / 5 / 3;}
+  span:nth-child(4) {grid-area: 6 / 2 / 7 / 3;}
+  span:nth-child(5) {grid-area: 8 / 2 / 9 / 3;}
+  button:nth-child(6) {grid-area: 11 / 2 / 12 / 3;}
+  button:nth-child(7) {grid-area: 1 / 4 / 2 / 5;}
+  span:nth-child(8) {
+    grid-area: 11 / 3 / 12 / 4;
+    font-size: 12px;
+  }
+`;
+
+const X = styled.button`
+  width: 15px;
+  height: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+  background: transparent;
+  border: none;
+  transform: rotate(45deg);
+  cursor: pointer;
+`;
+
+const TotalWrapper = styled.div`
+  width: 100%;
+  height: 135px;
+  margin-top: -6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Total = styled.div`
+  width: 245px;
+  height: 100px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(10, 10px);
+  span {
+    font-family: Nunito;
+    font-size: 12px;
+    line-height: 1.2;
+    font-weight: 300;
+    text-transform: uppercase;
+    color: #000;
+  }
+  span:nth-child(even) {justify-self: end;}
+  span:nth-child(3) {grid-area: 3 / 1 / 4 / 2;}
+  span:nth-child(4) {grid-area: 3 / 2 / 4 / 3;}
+  span:nth-child(5) {grid-area: 5 / 1 / 6 / 2;}
+  span:nth-child(6) {grid-area: 5 / 2 / 6 / 3;}
+  span:nth-child(7) {
+    grid-area: 9 / 1 / 11 / 2;
+    align-self: end;
+    font-size: 13px;
+    font-weight: 700;
+  }
+  span:nth-child(8) {
+    grid-area: 9 / 2 / 11 / 3;
+    align-self: end;
+    font-size: 13px;
+    font-weight: 700;
+  }
 `;
 //-----------------------------------------------
 
