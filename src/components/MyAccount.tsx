@@ -115,6 +115,9 @@ const MyAccountBody = styled.div`
   justify-content: center;
   border: 1px solid #e4e2e1;
   border-top: none;
+  > form {
+    margin-top: 48px;
+  }
 `;
 
 const Label = styled.label`
@@ -178,23 +181,11 @@ const Required = styled.span`
   color: #000;
 `;
 
-const MyPersonalInfo = styled.form`
-  width: 257px;
-  height: 450px;
-  margin-top: 48px;
-`;
-
-const MyAddresses = styled.form`
-`;
-
-const OrderHistory = styled.div`
-`;
-
 
 
 
 const MyAccount = (): JSX.Element => {
-  const [tab, setTab] = useState<string>('myPersonalInfo');
+  const [tab, setTab] = useState<string>('myAddresses');
 
 
   return(
@@ -242,7 +233,7 @@ const MyAccount = (): JSX.Element => {
 
           <MyAccountBody>
             {tab === 'myPersonalInfo' &&
-              <MyPersonalInfo
+              <form
                 onSubmit={(e: React.FormEvent<HTMLFormElement>): void => e.preventDefault()}
               >
                 <LabelText>
@@ -282,19 +273,76 @@ const MyAccount = (): JSX.Element => {
 
                 <ButtonUpdate>UPDATE</ButtonUpdate>
                 <Required>*Required</Required>
-              </MyPersonalInfo>
+              </form>
             }
 
 
             {tab === 'myAddresses' &&
-              <MyAddresses>
-              </MyAddresses>
+              <form>
+                <LabelText>
+                  FIRST NAME*
+                  <input type='text' required />
+                </LabelText>
+  
+                <LabelText>
+                  LAST NAME*
+                  <input type='text' required />
+                </LabelText>
+
+                <LabelText>
+                  COMPANY
+                  <input type='text' />
+                </LabelText>
+
+                <LabelText>
+                  ADDRESS 1
+                  <input type='text' />
+                </LabelText>
+
+                <LabelText>
+                  ADDRESS 2
+                  <input type='text' />
+                </LabelText>
+
+                <LabelText>
+                  COUNTRY
+                  <input list='country' />
+                </LabelText>
+                <datalist id='country'>
+                  <option value='Russia' />
+                  <option value='UK' />
+                  <option value='USA' />
+                </datalist>
+
+                <LabelText>
+                  CITY
+                  <input type='text' />
+                </LabelText>
+  
+                <LabelText>
+                  STATE
+                  <input type='text' />
+                </LabelText>
+
+                <LabelText>
+                  ZIP / POSTAL CODE*
+                  <input type='text' required />
+                </LabelText>
+
+                <LabelText>
+                  PHONE
+                  <input type='text' />
+                </LabelText>
+
+                <ButtonUpdate>UPDATE</ButtonUpdate>
+                <Required>*Required</Required>
+              </form>
             }
 
 
             {tab === 'orderHistory' &&
-              <OrderHistory>
-              </OrderHistory>
+              <div>
+              </div>
             }
           </MyAccountBody>
         </MyAccountWrapper>
