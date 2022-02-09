@@ -51,8 +51,6 @@ const BreadCrumbsRight = styled(BreadCrumbs)`
   height: 10px;
 `;
 
-
-//MyAccount--------------------------------------
 const MyAccountWrapper = styled.div`
   width: 960px;
   height: 890px;
@@ -73,22 +71,15 @@ const Title = styled.h2`
   color: #000;
 `;
 
-const MyAccountBody = styled.div`
-  width: 961px;
-  height: 855px;
-  border: 1px solid #e4e2e1;
-`;
-
 const Tabs = styled.div`
   width: 100%;
   height: 51px;
   display: flex;
-  border-bottom: 1px solid #e4e2e1;
 `;
 
 const Tab = styled.div`
   width: 321px;
-  height: 100%;
+  height: 51px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -96,21 +87,116 @@ const Tab = styled.div`
   font-size: 13px;
   font-weight: 300;
   color: #000;
-  border-right: 1px solid #e4e2e1;
+  border: 1px solid #e4e2e1;
+  cursor: default;
+  user-select: none;
 `;
 
-const MyPersonalInfoTab = styled(Tab)``;
-
-const MyAddressInfoTab = styled(Tab)``;
-
-const OrderHistoryTab = styled(Tab)`
+const MyPersonalInfoTab = styled(Tab)<{currTab: string}>`
   border-right: none;
+  ${props => props.currTab === 'myPersonalInfo' && 'border: 1px solid #000;'}
+`;
+
+const MyAddressesTab = styled(Tab)<{currTab: string}>`
+  border-right: none;
+  ${props => props.currTab === 'myAddresses' && 'border: 1px solid #000;'}
+  ${props => props.currTab === 'myPersonalInfo' && 'border-left: none;'}
+`;
+
+const OrderHistoryTab = styled(Tab)<{currTab: string}>`
+  ${props => props.currTab === 'orderHistory' && 'border: 1px solid #000;'}
+  ${props => props.currTab === 'myAddresses' && 'border-left: none;'}
+`;
+
+const MyAccountBody = styled.div`
+  width: 100%;
+  height: 855px;
+  display: flex;
+  justify-content: center;
+  border: 1px solid #e4e2e1;
+  border-top: none;
+`;
+
+const Label = styled.label`
+  font-family: Nunito;
+  font-size: 10px;
+  line-height: 1.2;
+  font-weight: 300;
+  color: #000;
+`;
+
+const LabelText = styled(Label)`
+  height: 45px;
+  margin-bottom: 17px;
+  display: grid;
+  align-content: space-between;
+  > input {
+    width: 254px;
+    height: 30px;
+    border: 1px solid #e4e2e1;
+    :focus {
+      outline: 1px solid #000;
+    }
+  }
+`;
+
+const LabelCheckbox = styled(Label)`
+  height: 18px;
+  display: flex;
+  margin-top: 22px;
+  align-items: center;
+  font-weight: 400;
+  > input {
+    margin: 0 10px 0 0;
+    accent-color: #000;
+  }
+`;
+
+const ButtonBlack = styled.button`
+  width: 144px;
+  height: 30px;
+  font-family: Nunito;
+  font-size: 10px;
+  font-weight: 300;
+  color: #fff;
+  background: #000;
+  border: none;
+  cursor: pointer;
+`;
+
+const ButtonUpdate = styled(ButtonBlack)`
+  width: 144px;
+  height: 30px;
+  margin-top: 30px;
+`;
+
+const Required = styled.span`
+  margin-left: 12px;
+  font-family: Arial;
+  font-size: 11px;
+  font-weight: 400;
+  color: #000;
+`;
+
+const MyPersonalInfo = styled.form`
+  width: 257px;
+  height: 450px;
+  margin-top: 48px;
+`;
+
+const MyAddresses = styled.form`
+`;
+
+const OrderHistory = styled.div`
 `;
 
 
 
 
 const MyAccount = (): JSX.Element => {
+  const [tab, setTab] = useState<string>('myPersonalInfo');
+
+
   return(
     <WrapperOuter>
       <WrapperInner>
@@ -130,20 +216,86 @@ const MyAccount = (): JSX.Element => {
             <Title>MY ACCOUNT</Title>
           </TitleWrapper>
 
-          <MyAccountBody>
-            <Tabs>
-              <MyPersonalInfoTab>
+          <Tabs>
+              <MyPersonalInfoTab
+                currTab={tab}
+                onClick={(): void => setTab('myPersonalInfo')}
+              >
                 MY PERSONAL INFO
               </MyPersonalInfoTab>
 
-              <MyAddressInfoTab>
-                MY ADDRESS
-              </MyAddressInfoTab>
+              <MyAddressesTab
+                currTab={tab}
+                onClick={(): void => setTab('myAddresses')}
+              >
+                MY ADDRESSES
+              </MyAddressesTab>
 
-              <OrderHistoryTab>
+              <OrderHistoryTab
+                currTab={tab}
+                onClick={(): void => setTab('orderHistory')}
+              >
                 ORDER HISTORY
               </OrderHistoryTab>
             </Tabs>
+
+
+          <MyAccountBody>
+            {tab === 'myPersonalInfo' &&
+              <MyPersonalInfo
+                onSubmit={(e: React.FormEvent<HTMLFormElement>): void => e.preventDefault()}
+              >
+                <LabelText>
+                  FIRST NAME*
+                  <input type='text' required />
+                </LabelText>
+  
+                <LabelText>
+                  LAST NAME*
+                  <input type='text' required />
+                </LabelText>
+  
+                <LabelText>
+                  E-MAIL*
+                  <input type='email' required />
+                </LabelText>
+  
+                <LabelText>
+                  CURRENT PASSWORD*
+                  <input type='password' required />
+                </LabelText>
+
+                <LabelText>
+                  NEW PASSWORD
+                  <input type='password' />
+                </LabelText>
+
+                <LabelText>
+                  CONFIRMATION
+                  <input type='password' />
+                </LabelText>
+  
+                <LabelCheckbox>
+                  <input type='checkbox' name='subscribe' defaultChecked />
+                  I WANT TO SUBSCRIBE TO THE NEWSLETTER
+                </LabelCheckbox>
+
+                <ButtonUpdate>UPDATE</ButtonUpdate>
+                <Required>*Required</Required>
+              </MyPersonalInfo>
+            }
+
+
+            {tab === 'myAddresses' &&
+              <MyAddresses>
+              </MyAddresses>
+            }
+
+
+            {tab === 'orderHistory' &&
+              <OrderHistory>
+              </OrderHistory>
+            }
           </MyAccountBody>
         </MyAccountWrapper>
       </WrapperInner>
