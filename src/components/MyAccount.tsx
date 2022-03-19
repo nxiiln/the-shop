@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 
 
 
@@ -182,10 +182,263 @@ const Required = styled.span`
 `;
 
 
+//OrderHystory-----------------------------------
+const OrderHistory = styled.div`
+  width: 674px;
+  height: 645px;
+  margin-top: 48px;
+`;
+
+const OrderHistoryHeader = styled.div`
+  width: 100%;
+  height: 25px;
+  display: grid;
+  grid-template-columns: 33px 205px 137px 130px 1fr;
+  span {
+    font-family: Nunito;
+    font-size: 12px;
+    line-height: 1.2;
+    font-weight: 300;
+    color: #000;
+  }
+  span:nth-child(1) {grid-area: 1 / 2 / 1 / 3}
+  span:nth-child(2) {grid-area: 1 / 3 / 1 / 4}
+  span:nth-child(3) {grid-area: 1 / 4 / 1 / 5}
+  span:nth-child(4) {grid-area: 1 / 5 / 1 / 6}
+`;
+
+const OrderWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+`;
+
+const Order = styled.div`
+  height: 32px;
+  margin-bottom: 9px;
+  display: grid;
+  grid-template-columns: 33px 205px 137px 130px 106px 1fr;
+  align-items: center;
+  text-transform: uppercase;
+  background: #f7f7f7;
+  span {
+    font-family: Nunito;
+    font-size: 10px;
+    line-height: 14px;
+    font-weight: 400;
+    color: #000;
+  }
+  span:nth-child(1) {grid-area: 1 / 2 / 1 / 3}
+  span:nth-child(2) {grid-area: 1 / 3 / 1 / 4}
+  span:nth-child(3) {grid-area: 1 / 4 / 1 / 5}
+  span:nth-child(4) {grid-area: 1 / 5 / 1 / 6}
+  button:nth-child(5) {grid-area: 1 / 6 / 1 / 7}
+`;
+
+const ButtonDetails = styled(ButtonBlack)<{status: boolean}>`
+  width: 66px;
+  span {
+    font-family: Nunito;
+    font-size: 10px;
+    font-weight: 300;
+    color: #fff;
+    ${props => props.status && `
+      display: inline-block;
+      font-size: 25px;
+      font-weight: 400;
+      transform: rotate(45deg);
+    `}
+  }
+`;
+//-----------------------------------------------
+
+
+//OrderDetails-----------------------------------
+const OrderDetails = styled.div`
+  width: 505px;
+  height: 320px;
+  margin: 48px 0 60px 0;
+  border: 1px solid aqua;
+`;
+
+const OrderDetailsHeader = styled.div`
+  height: 22px;
+  display: grid;
+  grid-template-columns: 200px 125px 125px 1fr;
+  align-items: center;
+  border-bottom: 1px solid #e4e2e1;
+  span {
+    Text: product;
+    font-family: Nunito;
+    font-size: 12px;
+    line-height: 1.2;
+    font-weight: 300;
+    text-transform: uppercase;
+    color: #000000;
+  }
+`;
+
+const OrderDetailsBody = styled.div`
+  height: 40px;
+  display: grid;
+  grid-template-columns: 200px 125px 125px 1fr;
+  align-items: center;
+  border-bottom: 1px solid #e4e2e1;
+  span {
+    font-family: Nunito;
+    font-size: 10px;
+    line-height: 14px;
+    font-weight: 400;
+    text-transform: uppercase;
+    color: #000000;
+  }
+`;
+
+const TotalBlockWrapper = styled.div`
+  height: 140px;
+  border-bottom: 1px solid #e4e2e1;
+`;
+
+const TotalBlock = styled.div`
+  width: 190px;
+  height: 87px;
+  margin: 20px 0 0 312px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 1px solid pink;
+
+  span {
+    font-family: Nunito;
+    font-size: 10px;
+    line-height: 1.2;
+    font-weight: 300;
+    color: #000;
+  }
+
+  span:nth-child(2n) {
+    justify-self: end;
+  }
+
+  span:nth-child(n+7) {
+    font-size: 12px;
+    font-weight: 700;
+    align-self: end;
+  }
+`;
+
+const TotalBlockLine = styled(Line)`
+  margin: 0;
+`;
+//-----------------------------------------------
+
+
 
 
 const MyAccount = (): JSX.Element => {
-  const [tab, setTab] = useState<string>('myAddresses');
+  interface order {
+    view: boolean;
+    number: string;
+    name: string;
+    datePurchased: string;
+    dateDespathed: string;
+    addressDelivery: string;
+    addressBilling: string;
+    status: string;
+    price: number;
+    qty: number;
+    amount(): number;
+    deliveryCosts: number;
+    giftVoucher: number;
+    total(): number;
+  }
+
+  const initialOrders: order[] = [
+    {
+      view: false,
+      number: 'FN9136137',
+      name: 'DETAILED SWING DRESS',
+      datePurchased: '02/02/2022',
+      dateDespathed: '04/02/2022',
+      addressDelivery: 'User User, Street1, City9, USA 10014',
+      addressBilling: 'User User, Street1, City9, USA 10014',
+      status: 'despatched',
+      price: 275,
+      qty: 1,
+      amount() {return this.price * this.qty},
+      deliveryCosts: 35,
+      giftVoucher: 5,
+      total() {return this.amount() + this.deliveryCosts - this.giftVoucher},
+    },
+    {
+      view: false,
+      number: 'FN9135142',
+      name: 'DETAILED SWING DRESS',
+      datePurchased: '16/01/2022',
+      dateDespathed: '18/01/2022',
+      addressDelivery: 'User User, Street1, City9, USA 10014',
+      addressBilling: 'User User, Street1, City9, USA 10014',
+      status: 'despatched',
+      price: 325,
+      qty: 1,
+      amount() {return this.price * this.qty},
+      deliveryCosts: 35,
+      giftVoucher: 5,
+      total() {return this.amount() + this.deliveryCosts - this.giftVoucher},
+    },
+    {
+      view: false,
+      number: 'FN9135132',
+      name: 'DETAILED SWING DRESS',
+      datePurchased: '08/01/2021',
+      dateDespathed: '10/01/2021',
+      addressDelivery: 'User User, Street1, City9, USA 10014',
+      addressBilling: 'User User, Street1, City9, USA 10014',
+      status: 'despatched',
+      price: 275,
+      qty: 2,
+      amount() {return this.price * this.qty},
+      deliveryCosts: 35,
+      giftVoucher: 5,
+      total() {return this.amount() + this.deliveryCosts - this.giftVoucher},
+    },
+    {
+      view: false,
+      number: 'FN9132142',
+      name: 'DETAILED SWING DRESS',
+      datePurchased: '04/01/2021',
+      dateDespathed: '06/01/2021',
+      addressDelivery: 'User User, Street1, City9, USA 10014',
+      addressBilling: 'User User, Street1, City9, USA 10014',
+      status: 'despatched',
+      price: 275,
+      qty: 3,
+      amount() {return this.price * this.qty},
+      deliveryCosts: 35,
+      giftVoucher: 5,
+      total() {return this.amount() + this.deliveryCosts - this.giftVoucher},
+    },
+    {
+      view: false,
+      number: 'FN9132138',
+      name: 'DETAILED SWING DRESS',
+      datePurchased: '02/01/2021',
+      dateDespathed: '04/01/2021',
+      addressDelivery: 'User User, Street1, City9, USA 10014',
+      addressBilling: 'User User, Street1, City9, USA 10014',
+      status: 'despatched',
+      price: 380,
+      qty: 1,
+      amount() {return this.price * this.qty},
+      deliveryCosts: 35,
+      giftVoucher: 5,
+      total() {return this.amount() + this.deliveryCosts - this.giftVoucher},
+    },
+  ];
+
+
+  const [tab, setTab] = useState<string>('orderHistory');
+  const [orders, setOrders] = useState<order[]>(initialOrders);
+  const [currOrder, setCurrOrder] = useState<string>('');
 
 
   return(
@@ -208,27 +461,27 @@ const MyAccount = (): JSX.Element => {
           </TitleWrapper>
 
           <Tabs>
-              <MyPersonalInfoTab
-                currTab={tab}
-                onClick={(): void => setTab('myPersonalInfo')}
-              >
-                MY PERSONAL INFO
-              </MyPersonalInfoTab>
+            <MyPersonalInfoTab
+              currTab={tab}
+              onClick={(): void => setTab('myPersonalInfo')}
+            >
+              MY PERSONAL INFO
+            </MyPersonalInfoTab>
 
-              <MyAddressesTab
-                currTab={tab}
-                onClick={(): void => setTab('myAddresses')}
-              >
-                MY ADDRESSES
-              </MyAddressesTab>
+            <MyAddressesTab
+              currTab={tab}
+              onClick={(): void => setTab('myAddresses')}
+            >
+              MY ADDRESSES
+            </MyAddressesTab>
 
-              <OrderHistoryTab
-                currTab={tab}
-                onClick={(): void => setTab('orderHistory')}
-              >
-                ORDER HISTORY
-              </OrderHistoryTab>
-            </Tabs>
+            <OrderHistoryTab
+              currTab={tab}
+              onClick={(): void => setTab('orderHistory')}
+            >
+              ORDER HISTORY
+            </OrderHistoryTab>
+          </Tabs>
 
 
           <MyAccountBody>
@@ -341,8 +594,76 @@ const MyAccount = (): JSX.Element => {
 
 
             {tab === 'orderHistory' &&
-              <div>
-              </div>
+              <OrderHistory>
+                <OrderHistoryHeader>
+                  <span>ORDER NUMBER</span>
+                  <span>DATE</span>
+                  <span>STATUS</span>
+                  <span>TOTAL</span>
+                </OrderHistoryHeader>
+
+                {orders.map((order: order): JSX.Element => {
+                  return(
+                    <OrderWrapper key={order.number}>
+                      <Order>
+                        <span>{order.number}</span>
+                        <span>
+                          {order.status === 'despatched' ?
+                          order.dateDespathed : order.datePurchased}
+                        </span>
+                        <span>{order.status}</span>
+                        <span>${order.total()}</span>
+                        <ButtonDetails
+                          type='button'
+                          status={order.number === currOrder}
+                          onClick={(): void => {
+                            order.number === currOrder ?
+                            setCurrOrder('') : setCurrOrder(order.number);
+                          }}
+                        >
+                          <span>{order.number === currOrder ? '+' : 'DETAILS'}</span>
+                        </ButtonDetails>
+                      </Order>
+
+                      {order.number === currOrder && 
+                        <OrderDetails>
+                          <OrderDetailsHeader>
+                            <span>PRODUCT</span>
+                            <span>PRICE</span>
+                            <span>Q-TY</span>
+                            <span>AMOUNT</span>
+                          </OrderDetailsHeader>
+
+                          <OrderDetailsBody>
+                            <span>{order.name}</span>
+                            <span>${order.price}</span>
+                            <span>{order.qty}</span>
+                            <span>{order.amount()}</span>
+                          </OrderDetailsBody>
+
+                          <TotalBlockWrapper>
+                            <TotalBlock>
+                              <span>SUBTOTAL</span>
+                              <span>${order.amount()}</span>
+
+                              <span>DELIVERY COSTS</span>
+                              <span>${order.deliveryCosts}</span>
+
+                              <span>GIFT VOUCHER</span>
+                              <span>${order.giftVoucher}</span>
+
+                              {/*<TotalBlockLine />*/}
+
+                              <span>TOTAL</span>
+                              <span>${order.total()}</span>
+                            </TotalBlock>
+                          </TotalBlockWrapper>
+                        </OrderDetails>
+                      }
+                    </OrderWrapper>
+                  )
+                })}
+              </OrderHistory>
             }
           </MyAccountBody>
         </MyAccountWrapper>
