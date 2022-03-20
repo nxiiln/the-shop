@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 import emporioArmani from '../images/emporioArmani.png';
 import calvinKlein from '../images/calvinKlein.png';
 import dkny from '../images/dkny.png';

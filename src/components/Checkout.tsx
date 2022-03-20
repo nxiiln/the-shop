@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 import AlsoLove from './AlsoLove';
 import CartCheckout from './CartCheckout';
 import visaIcon from '../images/visaIcon.png';

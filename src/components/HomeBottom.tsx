@@ -1,7 +1,7 @@
 import React from 'react';
 import MostPopular from './MostPopular';
 import FromOurBlog from './FromOurBlog';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 
 
 const Wrapper = styled.section`

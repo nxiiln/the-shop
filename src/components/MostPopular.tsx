@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 import mostPopularA from '../images/mostPopularA.png';
 import mostPopularB from '../images/mostPopularB.png';
 import mostPopularC from '../images/mostPopularC.png';

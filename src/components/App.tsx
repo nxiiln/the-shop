@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './Header';
-import Home from './Home';
+import MyAccount from './MyAccount';
+import PurchasesInfo from './PurchasesInfo';
 import Footer from './Footer';
 
 
@@ -8,7 +9,8 @@ const App = (): JSX.Element => {
   return(
     <>
       <Header />
-      <Home />
+      <MyAccount />
+      <PurchasesInfo />
       <Footer />
     </>
   );

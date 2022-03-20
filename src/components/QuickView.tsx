@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 import quickViewImage from '../images/quickViewImage.png'
 import wishList from '../images/wishList.png'
 import compare from '../images/compare.png'

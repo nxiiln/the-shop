@@ -3,7 +3,7 @@ import Top from './Top';
 import Search from './Search';
 import CartPreview from './CartPreview';
 import Menu from './Menu';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 
 
 const TheShop = styled.h1`

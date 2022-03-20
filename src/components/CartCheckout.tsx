@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 import cartProductA from '../images/cartProductA.png';
 import cartProductB from '../images/cartProductB.png';
 

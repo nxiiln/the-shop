@@ -258,7 +258,6 @@ const OrderDetails = styled.div`
   width: 505px;
   height: 320px;
   margin: 48px 0 60px 0;
-  border: 1px solid aqua;
 `;
 
 const OrderDetailsHeader = styled.div`
@@ -289,9 +288,9 @@ const OrderDetailsBody = styled.div`
     font-size: 10px;
     line-height: 14px;
     font-weight: 400;
-    text-transform: uppercase;
-    color: #000000;
+    color: #000;
   }
+  span:last-child {justify-self: end;}
 `;
 
 const TotalBlockWrapper = styled.div`
@@ -303,9 +302,9 @@ const TotalBlock = styled.div`
   width: 190px;
   height: 87px;
   margin: 20px 0 0 312px;
+  position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  border: 1px solid pink;
 
   span {
     font-family: Nunito;
@@ -323,11 +322,18 @@ const TotalBlock = styled.div`
     font-size: 12px;
     font-weight: 700;
     align-self: end;
+    justify-self: start;
+  }
+
+  span:nth-child(9) {
+    justify-self: end;
   }
 `;
 
 const TotalBlockLine = styled(Line)`
   margin: 0;
+  position: absolute;
+  top: 62px;
 `;
 //-----------------------------------------------
 
@@ -638,7 +644,7 @@ const MyAccount = (): JSX.Element => {
                             <span>{order.name}</span>
                             <span>${order.price}</span>
                             <span>{order.qty}</span>
-                            <span>{order.amount()}</span>
+                            <span>${order.amount()}</span>
                           </OrderDetailsBody>
 
                           <TotalBlockWrapper>
@@ -652,7 +658,7 @@ const MyAccount = (): JSX.Element => {
                               <span>GIFT VOUCHER</span>
                               <span>${order.giftVoucher}</span>
 
-                              {/*<TotalBlockLine />*/}
+                              <TotalBlockLine />
 
                               <span>TOTAL</span>
                               <span>${order.total()}</span>

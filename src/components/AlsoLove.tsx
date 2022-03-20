@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 import QuickView from './QuickView';
 import alsoLove1 from '../images/alsoLove1.png';
 import alsoLove2 from '../images/alsoLove2.png';

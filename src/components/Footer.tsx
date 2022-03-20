@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 import storeLocation from '../images/storeLocation.png';
 import twitter from '../images/twitter.png';
 import pinterest from '../images/pinterest.png';
