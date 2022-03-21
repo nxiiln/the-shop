@@ -110,7 +110,7 @@ const OrderHistoryTab = styled(Tab)<{currTab: string}>`
 
 const MyAccountBody = styled.div`
   width: 100%;
-  height: 855px;
+  height: 865px;
   display: flex;
   justify-content: center;
   border: 1px solid #e4e2e1;
@@ -272,8 +272,7 @@ const OrderDetailsHeader = styled.div`
     font-size: 12px;
     line-height: 1.2;
     font-weight: 300;
-    text-transform: uppercase;
-    color: #000000;
+    color: #000;
   }
 `;
 
@@ -283,6 +282,7 @@ const OrderDetailsBody = styled.div`
   grid-template-columns: 200px 125px 125px 1fr;
   align-items: center;
   border-bottom: 1px solid #e4e2e1;
+
   span {
     font-family: Nunito;
     font-size: 10px;
@@ -290,6 +290,7 @@ const OrderDetailsBody = styled.div`
     font-weight: 400;
     color: #000;
   }
+
   span:last-child {justify-self: end;}
 `;
 
@@ -333,7 +334,20 @@ const TotalBlock = styled.div`
 const TotalBlockLine = styled(Line)`
   margin: 0;
   position: absolute;
-  top: 62px;
+  top: 61px;
+`;
+
+const DescriptionBlock = styled.div`
+  span {
+    font-family: Arial;
+    font-size: 11px;
+    color: #000;
+    font-weight: 400;
+  }
+
+  span:nth-child(3n+1) {
+    font-weight: 700;
+  }
 `;
 //-----------------------------------------------
 
@@ -664,6 +678,23 @@ const MyAccount = (): JSX.Element => {
                               <span>${order.total()}</span>
                             </TotalBlock>
                           </TotalBlockWrapper>
+
+                          <DescriptionBlock>
+                            <span>Purchased on: </span>
+                            <span>{order.datePurchased}</span><br />
+
+                            <span>Order status: </span>
+                            <span>
+                              {order.status}{' '}
+                              {order.status === 'despatched' && order.dateDespathed}
+                            </span><br />
+
+                            <span>Delivery Address: </span>
+                            <span>{order.addressDelivery}</span><br />
+
+                            <span>Billing Address: </span>
+                            <span>{order.addressBilling}</span>
+                          </DescriptionBlock>
                         </OrderDetails>
                       }
                     </OrderWrapper>
