@@ -3,6 +3,8 @@ import styled from 'styled-components/macro';
 import blogPost1 from '../images/blogPost1.png';
 import blogPost2 from '../images/blogPost2.png';
 import blogPost3 from '../images/blogPost3.png';
+import BlogCategories from './BlogCategories';
+import BlogLabels from './BlogLabels';
 
 
 
@@ -15,8 +17,8 @@ const WrapperOuter = styled.main`
 
 const WrapperInner = styled.div`
   width: 960px;
-  height: 1965px;
-  border: 1px solid orange;
+  height: 2000px;
+  position: relative;
 `;
 
 const Line = styled.div`
@@ -64,7 +66,7 @@ const PostWrapper = styled.article`
   flex-direction: column;
 `;
 
-const PostHeader = styled.span`
+const PostHeader = styled.h2`
   width: 480px;
   margin-bottom: 22px;
   display: inline-block;
@@ -177,6 +179,9 @@ const Blog = (): JSX.Element => {
         })}
 
         <OlderPosts>OLDER POSTS {'>'}</OlderPosts>
+
+        <BlogCategories />
+        <BlogLabels />
   	  </WrapperInner>
   	</WrapperOuter>
   )
