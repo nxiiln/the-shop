@@ -3,9 +3,7 @@ import styled from 'styled-components/macro';
 import storeLocation from '../images/storeLocation.png';
 import twitter from '../images/twitter.png';
 import pinterest from '../images/pinterest.png';
-import facebook from '../images/facebook.png';
 import youtube from '../images/youtube.png';
-import instagram from '../images/instagram.png';
 import google from '../images/google.png';
 import paymentSystems from '../images/paymentSystems.png';
 
@@ -90,8 +88,8 @@ const Description = styled.div`
 //-----------------------------------------------
 
 
-//Instagram -------------------------------------
-const Instagram = styled.div`
+//Telegram -------------------------------------
+const Telegram = styled.div`
   width: 265px;
   height: 282px;
   display: flex;
@@ -261,9 +259,9 @@ const Footer = (): JSX.Element => {
         </TopBlock>
 
 
-        <Instagram>
-          <p>Instagram</p>
-        </Instagram>
+        <Telegram>
+          <p>Telegram</p>
+        </Telegram>
 
 
         <MiddleBlock>
@@ -276,9 +274,7 @@ const Footer = (): JSX.Element => {
             <MainText>CONNECT US</MainText>
             <img src={twitter} alt='twitter' />
             <img src={pinterest} alt='pinterest' />
-            <img src={facebook} alt='facebook' />
             <img src={youtube} alt='youtube' />
-            <img src={instagram} alt='instagram' />
             <img src={google} alt='google' />
           </ConnectUs>
         </MiddleBlock>
