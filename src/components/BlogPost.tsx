@@ -119,7 +119,7 @@ const Review = styled.div`
   background: #f7f7f7;
 `;
 
-const ReviewAuthor = styled.span`
+const Reviewname = styled.span`
   font-family: Arial;
   font-size: 11px;
   line-height: 14px;
@@ -219,7 +219,7 @@ const SubmitReview = styled.button`
 const BlogPost = (): JSX.Element => {
   interface Review {
     id: number;
-    author: string;
+    name: string;
     text: string;
     date: string;
   }
@@ -227,19 +227,19 @@ const BlogPost = (): JSX.Element => {
   const reviewsList: Review[] = [
     {
       id: 1,
-      author: 'Ami Legge',
+      name: 'Ami Legge',
       text: 'Curabitur justo elit, accumsan non interdum a, facilisis vel odio. Pellentesque commodo vulputate nisi id suscipit. Proin dapibus turpis vel rhoncus cursus. Aliquam sit amet gravida sem.',
       date: '25 Marth 2022'
     },
     {
       id: 2,
-      author: 'Lisa Beck',
+      name: 'Lisa Beck',
       text: 'Mauris sollicitudin vestibulum nisi, at dignissim quam volutpat in. Nulla id quam velit.',
       date: '2 April 2022'
     },
     {
       id: 3,
-      author: 'Stefanie Broadhurst',
+      name: 'Stefanie Broadhurst',
       text: 'Vivamus tristique tellus id sapien egestas, id pellentesque felis volutpat. Sed et convallis leo. Donec vitae eros rhoncus, blandit odio ut, bibendum metus.',
       date: '3 April 2022'
     }
@@ -247,6 +247,8 @@ const BlogPost = (): JSX.Element => {
 
 
   const [reviews, setReviews] = useState<Review []>(reviewsList);
+  const [name, setName] = useState<string>('');
+  const [text, setText] = useState<string>('');
 
 
   return(
@@ -318,7 +320,7 @@ const BlogPost = (): JSX.Element => {
           {reviews.map((review: Review) => {
             return(
               <Review key={review.id}>
-                <ReviewAuthor>{review.author}</ReviewAuthor>
+                <Reviewname>{review.name}</Reviewname>
                 <ReviewText>{review.text}</ReviewText>
                 <ReviewDate>{review.date}</ReviewDate>
                 <ReviewReplay type='button'>Replay</ReviewReplay>
@@ -326,17 +328,36 @@ const BlogPost = (): JSX.Element => {
             );
           })}
 
-          <WriteReview>
+          <WriteReview onSubmit={(e: React.FormEvent<HTMLFormElement>): void => {
+            e.preventDefault();
+            const newReviews: Review[] = [...reviews];
+            const date: Date = new Date();
+            const newReview: Review = {
+              id: reviews[reviews.length-1].id + 1,
+              name: name,
+              text: text,
+              date: `${date.getDate()} ${date.getMonth()} ${date.getFullYear()}`
+            };
+            newReviews.push(newReview);
+            setReviews(newReviews);
+          }}>
             <WriteReviewHeader>WRITE REVIEW</WriteReviewHeader>
             <Label>
               NAME
-              <InputText type='text' />
+              <InputText
+                type='text'
+                value={name}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>): void => setName(e.target.value)}
+              />
             </Label>
             <Label>
               REVIEW TEXT
-              <InputTextArea></InputTextArea>
+              <InputTextArea
+                value={text}
+                onChange={(e: React.ChangeEvent<HTMLTextAreaElement>): void => setText(e.target.value)}
+              />
             </Label>
-            <SubmitReview>SUBMIT REVIEW</SubmitReview>
+            <SubmitReview type='submit'>SUBMIT REVIEW</SubmitReview>
           </WriteReview>
         </ReviewsWrapper>
 
