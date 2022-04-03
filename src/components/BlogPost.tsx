@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components/macro';
 import blogPost2 from '../images/blogPost2.png';
 import BlogCategories from './BlogCategories';
@@ -15,7 +15,7 @@ const WrapperOuter = styled.main`
 
 const WrapperInner = styled.div`
   width: 960px;
-  height: 2075px;
+  margin-bottom: 90px;
   position: relative;
 `;
 
@@ -58,8 +58,7 @@ const BreadCrumbsRight = styled(BreadCrumbs)`
 //Post-------------------------------------------
 const PostWrapper = styled.article`
   width: 647px;
-  height: 590px;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
   display: flex;
   flex-direction: column;
 `;
@@ -88,7 +87,6 @@ const PostDate = styled.span`
 
 const PostDescription = styled.div`
   margin-top: 18px;
-  margin-bottom: 55px;
   font-family: Nunito;
   font-size: 14px;
   line-height: 22px;
@@ -96,11 +94,161 @@ const PostDescription = styled.div`
   color: #aaa;
   p {margin: 0 0 30px 0;}
 `;
+//-----------------------------------------------
+
+
+//Reviews----------------------------------------
+const ReviewsWrapper = styled.article`
+  width: 650px;
+`;
+
+const ReviewsNumber = styled.h2`
+  margin: 0 0 12px 0;
+  font-family: 'Playfair Display SC';
+  font-size: 24px;
+  line-height: 1.2;
+  font-weight: 400;
+  color: #000;
+`;
+
+const Review = styled.div`
+  width: 646px;
+  margin-bottom: 8px;
+  padding: 20px 35px 15px 30px;
+  position: relative;
+  background: #f7f7f7;
+`;
+
+const ReviewAuthor = styled.span`
+  font-family: Arial;
+  font-size: 11px;
+  line-height: 14px;
+  font-weight: 700;
+  color: #000;
+`;
+
+const ReviewText = styled.p`
+  margin: 10px 0 10px 0;
+  font-family: Arial;
+  font-size: 12px;
+  line-height: 14px;
+  font-weight: 400;
+  color: #aaa;
+`;
+
+const ReviewDate = styled.span`
+  font-family: Arial;
+  font-size: 11px;
+  line-height: 14px;
+  font-weight: 400;
+  color: #aaa;
+`;
+
+const ReviewReplay = styled.button`
+  position: absolute;
+  left: 570px;
+  font-family: Arial;
+  font-size: 11px;
+  line-height: 1.2;
+  font-weight: 400;
+  color: #000;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+`;
+//-----------------------------------------------
+
+
+//WriteReview------------------------------------
+const WriteReview = styled.form`
+  width: 645px;
+  margin-top: 30px;
+  padding: 35px 25px 25px 30px;
+  border: 1px solid #e4e2e1;
+`;
+
+const WriteReviewHeader = styled.h2`
+  margin: 0 0 20px 0;
+  font-family: 'Playfair Display SC';
+  font-size: 18px;
+  line-height: 1.2;
+  font-weight: 400;
+  color: #000;
+`;
+
+const Label = styled.label`
+  display: block;
+  margin-bottom: 20px;
+  font-family: Nunito;
+  font-size: 10px;
+  line-height: 30px;
+  font-weight: 400;
+  color: #000;
+`;
+
+const InputText = styled.input`
+  width: 579px;
+  height: 34px;
+  border: 1px solid #e4e2e1;
+`;
+
+const InputTextArea = styled.textarea`
+  width: 579px;
+  height: 76px;
+  border: 1px solid #e4e2e1;
+`;
+
+const SubmitReview = styled.button`
+  width: 103px;
+  height: 30px;
+  position: relative;
+  left: 475px;
+  font-family: Nunito;
+  font-size: 10px;
+  font-weight: 300;
+  color: #fff;
+  background: #000;
+  border: none;
+  cursor: pointer;
+`;
+//-----------------------------------------------
 
 
 
 
 const BlogPost = (): JSX.Element => {
+  interface Review {
+    id: number;
+    author: string;
+    text: string;
+    date: string;
+  }
+
+  const reviewsList: Review[] = [
+    {
+      id: 1,
+      author: 'Ami Legge',
+      text: 'Curabitur justo elit, accumsan non interdum a, facilisis vel odio. Pellentesque commodo vulputate nisi id suscipit. Proin dapibus turpis vel rhoncus cursus. Aliquam sit amet gravida sem.',
+      date: '25 Marth 2022'
+    },
+    {
+      id: 2,
+      author: 'Lisa Beck',
+      text: 'Mauris sollicitudin vestibulum nisi, at dignissim quam volutpat in. Nulla id quam velit.',
+      date: '2 April 2022'
+    },
+    {
+      id: 3,
+      author: 'Stefanie Broadhurst',
+      text: 'Vivamus tristique tellus id sapien egestas, id pellentesque felis volutpat. Sed et convallis leo. Donec vitae eros rhoncus, blandit odio ut, bibendum metus.',
+      date: '3 April 2022'
+    }
+  ];
+
+
+  const [reviews, setReviews] = useState<Review []>(reviewsList);
+
+
   return(
     <WrapperOuter>
       <WrapperInner>
@@ -162,6 +310,35 @@ const BlogPost = (): JSX.Element => {
             </p>
           </PostDescription>
         </PostWrapper>
+
+        <ReviewsWrapper>
+          <ReviewsNumber>
+            3 REVIEWS
+          </ReviewsNumber>
+          {reviews.map((review: Review) => {
+            return(
+              <Review key={review.id}>
+                <ReviewAuthor>{review.author}</ReviewAuthor>
+                <ReviewText>{review.text}</ReviewText>
+                <ReviewDate>{review.date}</ReviewDate>
+                <ReviewReplay type='button'>Replay</ReviewReplay>
+              </Review>
+            );
+          })}
+
+          <WriteReview>
+            <WriteReviewHeader>WRITE REVIEW</WriteReviewHeader>
+            <Label>
+              NAME
+              <InputText type='text' />
+            </Label>
+            <Label>
+              REVIEW TEXT
+              <InputTextArea></InputTextArea>
+            </Label>
+            <SubmitReview>SUBMIT REVIEW</SubmitReview>
+          </WriteReview>
+        </ReviewsWrapper>
 
         <BlogCategories />
         <BlogLabels />
