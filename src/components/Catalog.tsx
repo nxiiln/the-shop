@@ -36,7 +36,7 @@ const Line = styled.div`
 
 const BreadCrumbsWrapper = styled.article`
   width: 100%;
-  margin-bottom: 35px;
+  margin-bottom: 22px;
   display: flex;
   justify-content: space-between;
 `;
@@ -63,9 +63,88 @@ const BreadCrumbsRight = styled(BreadCrumbs)`
 `;
 
 
+//Dropdown---------------------------------------
+const Dropdown = styled.div<{hover: boolean, open: boolean}>`
+  width: 195px;
+  margin-bottom: 5px;
+  padding: 0 10px 0 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  font-family: Nunito;
+  font-size: 11px;
+  font-weight: 300;
+  color: #000;
+  background: #f7f7f7;
+  border: 1px solid #e4e2e1;
+  border-radius: 20px;
+  span:nth-child(2) {transform: rotate(90deg);}
+  ${props => props.hover && `
+    background: #fff;
+    border-radius: 0;
+  `}
+  ${props => props.open && `
+    background: #fff;
+    border-radius: 0;
+    span:nth-child(2) {
+      transform: rotate(-90deg);
+    }
+  `}
+`;
+
+const DropdownHeader = styled.div`
+  width: 100%;
+  height: 29px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+`;
+
+const ButtonFilter = styled.button`
+  margin-left: 4px;
+  font-family: Nunito;
+  font-size: 10px;
+  line-height: 24px;
+  font-weight: 400;
+  color: #000;
+  background: #fff;
+  border: none;
+  cursor: pointer;
+`;
+
+const ResetFilter = styled.button`
+  margin: 24px 0 8px 0;
+  font-family: Arial;
+  font-size: 10px;
+  line-height: 1.2;
+  font-weight: 400;
+  color: #aaa;
+  background: none;
+  border: none;
+`;
+
+const ButtonFilterBold = styled(ButtonFilter)`
+  font-weight: 700;
+`;
+
+const ButtonFilterSecond = styled(ButtonFilter)`
+  margin-left: 12px;
+`;
+
+
 
 
 const Catalog = (): JSX.Element => {
+  const [hover, setHover] = useState<string>('');
+  const [women, setWomen] = useState<boolean>(false);
+  const [category, setCategory] = useState<boolean>(false);
+  const [size, setSize] = useState<boolean>(false);
+  const [priceRange, setPriceRange] = useState<boolean>(false);
+  const [color, setColor] = useState<boolean>(false);
+  const [brand, setBrand] = useState<boolean>(false);
+
+
   return(
     <WrapperOuter>
       <WrapperInner>
@@ -78,11 +157,36 @@ const Catalog = (): JSX.Element => {
             {'<'} Return to Previous Page
           </BreadCrumbsRight>
         </BreadCrumbsWrapper>
+
+
+        <Dropdown
+          hover={hover === 'women'}
+          open={women}
+          onMouseEnter={(): void => setHover('women')}
+          onMouseLeave={(): void => setHover('')}
+        >
+          <DropdownHeader onClick={(): void =>
+            women ? setWomen(false) : setWomen(true)
+          }>
+            <span>WOMEN</span>
+            <span>&#10095;</span>
+          </DropdownHeader>
+          {women &&
+            <>
+              <ButtonFilter>BOTTOMS</ButtonFilter>
+              <ButtonFilter>TOPS</ButtonFilter>
+              <ButtonFilter>SHOES & MORE</ButtonFilter>
+              <ButtonFilter>COLLECTION</ButtonFilter>
+            </>
+          }
+        </Dropdown>
+
+
+        <ResetFilter>Reset Filter</ResetFilter>
       </WrapperInner>
     </WrapperOuter>
   );
 }
-
 
 
 
