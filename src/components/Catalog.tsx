@@ -183,6 +183,35 @@ const Catalog = (): JSX.Element => {
 
 
         <ResetFilter>Reset Filter</ResetFilter>
+
+        
+        <Dropdown
+          hover={hover === 'category'}
+          open={category}
+          onMouseEnter={(): void => setHover('category')}
+          onMouseLeave={(): void => setHover('')}
+        >
+          <DropdownHeader onClick={(): void =>
+            category ? setCategory(false) : setCategory(true)
+          }>
+            <span>CATEGORY</span>
+            <span>&#10095;</span>
+          </DropdownHeader>
+          {category &&
+            <>
+              <ButtonFilterBold>BOTTOMS</ButtonFilterBold>
+              <ButtonFilterSecond>TOPS</ButtonFilterSecond>
+              <ButtonFilterSecond>SHOES & MORE</ButtonFilterSecond>
+              <ButtonFilterSecond>COLLECTION</ButtonFilterSecond>
+              <ButtonFilterBold>TOPS</ButtonFilterBold>
+              <ButtonFilterSecond>JACKETS & COATS</ButtonFilterSecond>
+              <ButtonFilterSecond>SHIRTS</ButtonFilterSecond>
+              <ButtonFilterSecond>T-SHIRTS</ButtonFilterSecond>
+              <ButtonFilterSecond>KNITWEAR</ButtonFilterSecond>
+              <ButtonFilterSecond>SWEATS</ButtonFilterSecond>
+            </>
+          }
+        </Dropdown>
       </WrapperInner>
     </WrapperOuter>
   );
