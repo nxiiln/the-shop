@@ -86,9 +86,7 @@ const Dropdown = styled.div<{hover: boolean, open: boolean}>`
   ${props => props.open && `
     background: #fff;
     border-radius: 0;
-    span:nth-child(2) {
-      transform: rotate(-90deg);
-    }
+    span:nth-child(2) {transform: rotate(-90deg);}
   `}
 `;
 
@@ -111,6 +109,7 @@ const ButtonFilter = styled.button`
   background: #fff;
   border: none;
   cursor: pointer;
+  :hover {text-decoration: underline;}
 `;
 
 const ResetFilter = styled.button`
@@ -122,6 +121,8 @@ const ResetFilter = styled.button`
   color: #aaa;
   background: none;
   border: none;
+  cursor: pointer;
+  :hover {text-decoration: underline;}
 `;
 
 const ButtonFilterBold = styled(ButtonFilter)`
@@ -130,6 +131,32 @@ const ButtonFilterBold = styled(ButtonFilter)`
 
 const ButtonFilterSecond = styled(ButtonFilter)`
   margin-left: 12px;
+`;
+
+const Checkbox = styled.label`
+  margin-bottom: 12px;
+  font-family: Nunito;
+  font-size: 10px;
+  font-weight: 400;
+  color: #000;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  :hover {text-decoration: underline;}
+  > input {
+    margin: 0 7px 0 0;
+    accent-color: #000;
+  }
+`;
+
+const CheckboxWrapper = styled.div`
+  width: 160px;
+  height: 90px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: space-between;
 `;
 
 
@@ -165,9 +192,9 @@ const Catalog = (): JSX.Element => {
           onMouseEnter={(): void => setHover('women')}
           onMouseLeave={(): void => setHover('')}
         >
-          <DropdownHeader onClick={(): void =>
+          <DropdownHeader onClick={(): void => {
             women ? setWomen(false) : setWomen(true)
-          }>
+          }}>
             <span>WOMEN</span>
             <span>&#10095;</span>
           </DropdownHeader>
@@ -184,16 +211,16 @@ const Catalog = (): JSX.Element => {
 
         <ResetFilter>Reset Filter</ResetFilter>
 
-        
+
         <Dropdown
           hover={hover === 'category'}
           open={category}
           onMouseEnter={(): void => setHover('category')}
           onMouseLeave={(): void => setHover('')}
         >
-          <DropdownHeader onClick={(): void =>
+          <DropdownHeader onClick={(): void => {
             category ? setCategory(false) : setCategory(true)
-          }>
+          }}>
             <span>CATEGORY</span>
             <span>&#10095;</span>
           </DropdownHeader>
@@ -210,6 +237,54 @@ const Catalog = (): JSX.Element => {
               <ButtonFilterSecond>KNITWEAR</ButtonFilterSecond>
               <ButtonFilterSecond>SWEATS</ButtonFilterSecond>
             </>
+          }
+        </Dropdown>
+
+
+        <Dropdown
+          hover={hover === 'size'}
+          open={size}
+          onMouseEnter={(): void => setHover('size')}
+          onMouseLeave={(): void => setHover('')}
+        >
+          <DropdownHeader onClick={(): void => {
+            size ? setSize(false) : setSize(true)
+          }}>
+            <span>SIZE</span>
+            <span>&#10095;</span>
+          </DropdownHeader>
+          {size &&
+            <CheckboxWrapper>
+              <Checkbox>
+                <input type='checkbox' name='xs'/>
+                XS (34)
+              </Checkbox>
+
+              <Checkbox>
+                <input type='checkbox' name='s'/>
+                S (36)
+              </Checkbox>
+
+              <Checkbox>
+                <input type='checkbox' name='m' />
+                M (38)
+              </Checkbox>
+
+              <Checkbox>
+                <input type='checkbox' name='l' />
+                L (42)
+              </Checkbox>
+
+              <Checkbox>
+                <input type='checkbox' name='xl' />
+                XL (46)
+              </Checkbox>
+
+              <Checkbox>
+                <input type='checkbox' name='xxl' />
+                XXL (52)
+              </Checkbox>
+            </CheckboxWrapper>
           }
         </Dropdown>
       </WrapperInner>
