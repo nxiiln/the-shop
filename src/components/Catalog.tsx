@@ -63,10 +63,10 @@ const BreadCrumbsRight = styled(BreadCrumbs)`
 `;
 
 
-//Dropdown---------------------------------------
+//Dropdowns--------------------------------------
 const Dropdown = styled.div<{hover: boolean, open: boolean}>`
   width: 195px;
-  margin-bottom: 5px;
+  margin-bottom: 7px;
   padding: 0 10px 0 10px;
   display: flex;
   flex-direction: column;
@@ -152,11 +152,20 @@ const Checkbox = styled.label`
 
 const CheckboxWrapper = styled.div`
   width: 160px;
-  height: 90px;
+  height: 180px;
+  margin-left: 2px;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   align-content: space-between;
+`;
+
+const CheckboxSizeWrapper = styled(CheckboxWrapper)`
+  height: 90px;
+`;
+
+const CheckboxColorWrapper = styled(CheckboxWrapper)`
+  width: 164px;
 `;
 
 
@@ -198,6 +207,7 @@ const Catalog = (): JSX.Element => {
             <span>WOMEN</span>
             <span>&#10095;</span>
           </DropdownHeader>
+
           {women &&
             <>
               <ButtonFilter>BOTTOMS</ButtonFilter>
@@ -224,6 +234,7 @@ const Catalog = (): JSX.Element => {
             <span>CATEGORY</span>
             <span>&#10095;</span>
           </DropdownHeader>
+
           {category &&
             <>
               <ButtonFilterBold>BOTTOMS</ButtonFilterBold>
@@ -253,8 +264,9 @@ const Catalog = (): JSX.Element => {
             <span>SIZE</span>
             <span>&#10095;</span>
           </DropdownHeader>
+
           {size &&
-            <CheckboxWrapper>
+            <CheckboxSizeWrapper>
               <Checkbox>
                 <input type='checkbox' name='xs'/>
                 XS (34)
@@ -284,7 +296,86 @@ const Catalog = (): JSX.Element => {
                 <input type='checkbox' name='xxl' />
                 XXL (52)
               </Checkbox>
-            </CheckboxWrapper>
+            </CheckboxSizeWrapper>
+          }
+        </Dropdown>
+
+
+        <Dropdown
+          hover={hover === 'color'}
+          open={color}
+          onMouseEnter={(): void => setHover('color')}
+          onMouseLeave={(): void => setHover('')}
+        >
+          <DropdownHeader onClick={(): void => {
+            color ? setColor(false) : setColor(true)
+          }}>
+            <span>COLOR</span>
+            <span>&#10095;</span>
+          </DropdownHeader>
+
+          {color &&
+            <CheckboxColorWrapper>
+              <Checkbox>
+                <input type='checkbox' name='beige'/>
+                BEIGE
+              </Checkbox>
+
+              <Checkbox>
+                <input type='checkbox' name='black'/>
+                BLACK
+              </Checkbox>
+
+              <Checkbox>
+                <input type='checkbox' name='blue'/>
+                BLUE
+              </Checkbox>
+
+              <Checkbox>
+                <input type='checkbox' name='brown'/>
+                BROWN
+              </Checkbox>
+
+              <Checkbox>
+                <input type='checkbox' name='cream'/>
+                CREAM
+              </Checkbox>
+
+              <Checkbox>
+                <input type='checkbox' name='gold'/>
+                GOLD
+              </Checkbox>
+
+              <Checkbox>
+                <input type='checkbox' name='green'/>
+                GREEN
+              </Checkbox>
+
+              <Checkbox>
+                <input type='checkbox' name='grey'/>
+                GREY
+              </Checkbox>
+
+              <Checkbox>
+                <input type='checkbox' name='navy'/>
+                NAVY
+              </Checkbox>
+
+              <Checkbox>
+                <input type='checkbox' name='orange'/>
+                ORANGE
+              </Checkbox>
+
+              <Checkbox>
+                <input type='checkbox' name='pink'/>
+                PINK
+              </Checkbox>
+
+              <Checkbox>
+                <input type='checkbox' name='purple'/>
+                PURPLE
+              </Checkbox>
+            </CheckboxColorWrapper>
           }
         </Dropdown>
       </WrapperInner>
