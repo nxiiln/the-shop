@@ -93,6 +93,7 @@ const Dropdown = styled.div<{hover: boolean, open: boolean}>`
 const DropdownHeader = styled.div`
   width: 100%;
   height: 29px;
+  margin-bottom: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -376,6 +377,55 @@ const Catalog = (): JSX.Element => {
                 PURPLE
               </Checkbox>
             </CheckboxColorWrapper>
+          }
+        </Dropdown>
+
+   
+        <Dropdown
+          hover={hover === 'brand'}
+          open={brand}
+          onMouseEnter={(): void => setHover('brand')}
+          onMouseLeave={(): void => setHover('')}
+        >
+          <DropdownHeader onClick={(): void => {
+            brand ? setBrand(false) : setBrand(true)
+          }}>
+            <span>BRAND</span>
+            <span>&#10095;</span>
+          </DropdownHeader>
+
+          {brand &&
+            <CheckboxWrapper>
+              <Checkbox>
+                <input type='checkbox' name='armany'/>
+                ARMANY
+              </Checkbox>
+
+              <Checkbox>
+                <input type='checkbox' name='burberry'/>
+                BURBERRY
+              </Checkbox>
+
+              <Checkbox>
+                <input type='checkbox' name='chanel'/>
+                CHANEL
+              </Checkbox>
+
+              <Checkbox>
+                <input type='checkbox' name='dolce&gabbana'/>
+                DOLCE&GABBANA
+              </Checkbox>
+
+              <Checkbox>
+                <input type='checkbox' name='escada'/>
+                ESCADA
+              </Checkbox>
+
+              <Checkbox>
+                <input type='checkbox' name='fendi'/>
+                FENDI
+              </Checkbox>
+            </CheckboxWrapper>
           }
         </Dropdown>
       </WrapperInner>
