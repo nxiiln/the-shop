@@ -64,7 +64,7 @@ const BreadCrumbsRight = styled(BreadCrumbs)`
 
 
 //Dropdowns--------------------------------------
-const Dropdown = styled.div<{hover: boolean, open: boolean}>`
+const Dropdown = styled.div<{open: boolean}>`
   width: 195px;
   margin-bottom: 7px;
   padding: 0 10px 0 10px;
@@ -79,10 +79,12 @@ const Dropdown = styled.div<{hover: boolean, open: boolean}>`
   border: 1px solid #e4e2e1;
   border-radius: 20px;
   span:nth-child(2) {transform: rotate(90deg);}
-  ${props => props.hover && `
+
+  :hover {
     background: #fff;
     border-radius: 0;
-  `}
+  }
+  
   ${props => props.open && `
     background: #fff;
     border-radius: 0;
@@ -245,7 +247,6 @@ const RangeValue = styled.div`
 
 
 const Catalog = (): JSX.Element => {
-  const [hover, setHover] = useState<string>('');
   const [women, setWomen] = useState<boolean>(false);
   const [category, setCategory] = useState<boolean>(false);
   const [size, setSize] = useState<boolean>(false);
@@ -271,12 +272,7 @@ const Catalog = (): JSX.Element => {
         </BreadCrumbsWrapper>
 
 
-        <Dropdown
-          hover={hover === 'women'}
-          open={women}
-          onMouseEnter={(): void => setHover('women')}
-          onMouseLeave={(): void => setHover('')}
-        >
+        <Dropdown open={women}>
           <DropdownHeader onClick={(): void => {
             women ? setWomen(false) : setWomen(true)
           }}>
@@ -298,12 +294,7 @@ const Catalog = (): JSX.Element => {
         <ResetFilter>Reset Filter</ResetFilter>
 
 
-        <Dropdown
-          hover={hover === 'category'}
-          open={category}
-          onMouseEnter={(): void => setHover('category')}
-          onMouseLeave={(): void => setHover('')}
-        >
+        <Dropdown open={category}>
           <DropdownHeader onClick={(): void => {
             category ? setCategory(false) : setCategory(true)
           }}>
@@ -328,12 +319,7 @@ const Catalog = (): JSX.Element => {
         </Dropdown>
 
 
-        <Dropdown
-          hover={hover === 'size'}
-          open={size}
-          onMouseEnter={(): void => setHover('size')}
-          onMouseLeave={(): void => setHover('')}
-        >
+        <Dropdown open={size}>
           <DropdownHeader onClick={(): void => {
             size ? setSize(false) : setSize(true)
           }}>
@@ -377,12 +363,7 @@ const Catalog = (): JSX.Element => {
         </Dropdown>
 
 
-        <Dropdown
-          hover={hover === 'priceRange'}
-          open={priceRange}
-          onMouseEnter={(): void => setHover('priceRange')}
-          onMouseLeave={(): void => setHover('')}
-        >
+        <Dropdown open={priceRange}>
           <DropdownHeader onClick={(): void => {
             priceRange ? setPriceRange(false) : setPriceRange(true)
           }}>
@@ -419,12 +400,7 @@ const Catalog = (): JSX.Element => {
         </Dropdown>
 
 
-        <Dropdown
-          hover={hover === 'color'}
-          open={color}
-          onMouseEnter={(): void => setHover('color')}
-          onMouseLeave={(): void => setHover('')}
-        >
+        <Dropdown open={color}>
           <DropdownHeader onClick={(): void => {
             color ? setColor(false) : setColor(true)
           }}>
@@ -498,12 +474,7 @@ const Catalog = (): JSX.Element => {
         </Dropdown>
 
    
-        <Dropdown
-          hover={hover === 'brand'}
-          open={brand}
-          onMouseEnter={(): void => setHover('brand')}
-          onMouseLeave={(): void => setHover('')}
-        >
+        <Dropdown open={brand}>
           <DropdownHeader onClick={(): void => {
             brand ? setBrand(false) : setBrand(true)
           }}>
