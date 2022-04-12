@@ -84,7 +84,7 @@ const Dropdown = styled.div<{open: boolean}>`
     background: #fff;
     border-radius: 0;
   }
-  
+
   ${props => props.open && `
     background: #fff;
     border-radius: 0;
@@ -240,6 +240,42 @@ const RangeValue = styled.div`
   height: 20px;
   margin-top: 20px;
   border: 1px solid #aaa;
+`;
+//-----------------------------------------------
+
+
+//BannerSmall------------------------------------
+const BannerSmall = styled.div`
+  width: 195px;
+  height: 312px;
+  margin-top: 50px;
+  position: relative;
+
+  div {
+    width: 119px;
+    height: 57px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #fff;
+    position: absolute;
+    top: 255px;
+    left: 0px;
+    font-family: Nunito;
+    line-height: 14px;
+    font-weight: 300;
+
+    span:first-child {
+      font-size: 14px;
+      color: #000;
+      margin-bottom: 2px;
+    }
+
+    span:last-child {
+      font-size: 11px;
+      color: #aaa;
+    }
+  }
 `;
 //-----------------------------------------------
 
@@ -516,6 +552,15 @@ const Catalog = (): JSX.Element => {
             </CheckboxWrapper>
           }
         </Dropdown>
+
+
+        <BannerSmall>
+          <img src={bannerSmall} alt='bannerSmall' />
+          <div>
+            <span>MICHAEL KORS</span>
+            <span>SPRING 2022</span>
+          </div>
+        </BannerSmall>
       </WrapperInner>
     </WrapperOuter>
   );
