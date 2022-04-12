@@ -93,13 +93,14 @@ const Dropdown = styled.div<{hover: boolean, open: boolean}>`
 const DropdownHeader = styled.div`
   width: 100%;
   height: 29px;
-  margin-bottom: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
 `;
 
+
+//Buttons----------------------------------------
 const ButtonFilter = styled.button`
   margin-left: 4px;
   font-family: Nunito;
@@ -111,6 +112,11 @@ const ButtonFilter = styled.button`
   border: none;
   cursor: pointer;
   :hover {text-decoration: underline;}
+`;
+
+const ButtonWomenWrapper = styled.div`
+  width: 107px;
+  margin-top: 2px;
 `;
 
 const ResetFilter = styled.button`
@@ -126,6 +132,11 @@ const ResetFilter = styled.button`
   :hover {text-decoration: underline;}
 `;
 
+const ButtonCategoryWrapper = styled.div`
+  width: 115px;
+  margin-top: 2px;
+`;
+
 const ButtonFilterBold = styled(ButtonFilter)`
   font-weight: 700;
 `;
@@ -133,7 +144,10 @@ const ButtonFilterBold = styled(ButtonFilter)`
 const ButtonFilterSecond = styled(ButtonFilter)`
   margin-left: 12px;
 `;
+//-----------------------------------------------
 
+
+//Checkboxes-------------------------------------
 const Checkbox = styled.label`
   margin-bottom: 12px;
   font-family: Nunito;
@@ -154,7 +168,7 @@ const Checkbox = styled.label`
 const CheckboxWrapper = styled.div`
   width: 160px;
   height: 180px;
-  margin-left: 2px;
+  margin: 10px 0 0 2px;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -168,6 +182,64 @@ const CheckboxSizeWrapper = styled(CheckboxWrapper)`
 const CheckboxColorWrapper = styled(CheckboxWrapper)`
   width: 164px;
 `;
+//-----------------------------------------------
+
+
+//Range------------------------------------------
+const RangeWrapper = styled.div`
+  width: 160px;
+  height: 10px;
+  margin-bottom: 80px;
+  position: relative;
+  background: #e4e2e1;
+
+  input[type='range'] {
+    &::-webkit-slider-runnable-track, 
+    &::-webkit-slider-thumb, & {
+      -webkit-appearance: none;
+    }
+
+    width: 100%;
+    margin: 0;
+    background: none;
+    pointer-events: none;
+
+    &::-webkit-slider-runnable-track {
+      width: 100%;
+      height: 100%;
+      background: none;
+      border: none;
+    }
+
+    &::-webkit-slider-thumb {
+      width: 20px;
+      height: 20px;
+      border-radius: 10px;
+      background: #000;
+      pointer-events: auto;
+    }
+  }
+`;
+
+const Range1 = styled.input`
+  position: absolute;
+  left: 0px;
+  top: 0px;
+`;
+
+const Range2 = styled.input`
+  position: absolute;
+  left: 0px;
+  top: 0px;
+`;
+
+const RangeValue = styled.div`
+  width: 20px;
+  height: 20px;
+  margin-top: 20px;
+  border: 1px solid #aaa;
+`;
+//-----------------------------------------------
 
 
 
@@ -180,6 +252,9 @@ const Catalog = (): JSX.Element => {
   const [priceRange, setPriceRange] = useState<boolean>(false);
   const [color, setColor] = useState<boolean>(false);
   const [brand, setBrand] = useState<boolean>(false);
+
+  const [range1, setRange1] = useState<number>(30);
+  const [range2, setRange2] = useState<number>(70);
 
 
   return(
@@ -210,12 +285,12 @@ const Catalog = (): JSX.Element => {
           </DropdownHeader>
 
           {women &&
-            <>
+            <ButtonWomenWrapper>
               <ButtonFilter>BOTTOMS</ButtonFilter>
               <ButtonFilter>TOPS</ButtonFilter>
               <ButtonFilter>SHOES & MORE</ButtonFilter>
               <ButtonFilter>COLLECTION</ButtonFilter>
-            </>
+            </ButtonWomenWrapper>
           }
         </Dropdown>
 
@@ -237,7 +312,7 @@ const Catalog = (): JSX.Element => {
           </DropdownHeader>
 
           {category &&
-            <>
+            <ButtonCategoryWrapper>
               <ButtonFilterBold>BOTTOMS</ButtonFilterBold>
               <ButtonFilterSecond>TOPS</ButtonFilterSecond>
               <ButtonFilterSecond>SHOES & MORE</ButtonFilterSecond>
@@ -248,7 +323,7 @@ const Catalog = (): JSX.Element => {
               <ButtonFilterSecond>T-SHIRTS</ButtonFilterSecond>
               <ButtonFilterSecond>KNITWEAR</ButtonFilterSecond>
               <ButtonFilterSecond>SWEATS</ButtonFilterSecond>
-            </>
+            </ButtonCategoryWrapper>
           }
         </Dropdown>
 
@@ -298,6 +373,48 @@ const Catalog = (): JSX.Element => {
                 XXL (52)
               </Checkbox>
             </CheckboxSizeWrapper>
+          }
+        </Dropdown>
+
+
+        <Dropdown
+          hover={hover === 'priceRange'}
+          open={priceRange}
+          onMouseEnter={(): void => setHover('priceRange')}
+          onMouseLeave={(): void => setHover('')}
+        >
+          <DropdownHeader onClick={(): void => {
+            priceRange ? setPriceRange(false) : setPriceRange(true)
+          }}>
+            <span>PRICE RANGE</span>
+            <span>&#10095;</span>
+          </DropdownHeader>
+
+          {priceRange && 
+            <RangeWrapper>
+              <Range1
+                type='range'
+                min='0'
+                value={range1}
+                max='100'
+                onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
+                  setRange1(+e.target.value);
+                }}
+              />
+              
+              <Range2
+                type='range'
+                min='0'
+                value={range2}
+                max='100'
+                onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
+                  setRange2(+e.target.value);
+                }}
+              />
+
+              <RangeValue>{range1}</RangeValue>
+              <RangeValue>{range2}</RangeValue>
+            </RangeWrapper>
           }
         </Dropdown>
 
