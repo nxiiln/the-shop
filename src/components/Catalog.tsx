@@ -62,6 +62,11 @@ const BreadCrumbsRight = styled(BreadCrumbs)`
   height: 10px;
 `;
 
+const Groups = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
 
 //Dropdowns--------------------------------------
 const Dropdown = styled.div<{open: boolean}>`
@@ -308,259 +313,269 @@ const Catalog = (): JSX.Element => {
         </BreadCrumbsWrapper>
 
 
-        <Dropdown open={women}>
-          <DropdownHeader onClick={(): void => {
-            women ? setWomen(false) : setWomen(true)
-          }}>
-            <span>WOMEN</span>
-            <span>&#10095;</span>
-          </DropdownHeader>
+        <Groups>
+          <div>
+            <Dropdown open={women}>
+              <DropdownHeader onClick={(): void => {
+                women ? setWomen(false) : setWomen(true)
+              }}>
+                <span>WOMEN</span>
+                <span>&#10095;</span>
+              </DropdownHeader>
 
-          {women &&
-            <ButtonWomenWrapper>
-              <ButtonFilter>BOTTOMS</ButtonFilter>
-              <ButtonFilter>TOPS</ButtonFilter>
-              <ButtonFilter>SHOES & MORE</ButtonFilter>
-              <ButtonFilter>COLLECTION</ButtonFilter>
-            </ButtonWomenWrapper>
-          }
-        </Dropdown>
-
-
-        <ResetFilter>Reset Filter</ResetFilter>
-
-
-        <Dropdown open={category}>
-          <DropdownHeader onClick={(): void => {
-            category ? setCategory(false) : setCategory(true)
-          }}>
-            <span>CATEGORY</span>
-            <span>&#10095;</span>
-          </DropdownHeader>
-
-          {category &&
-            <ButtonCategoryWrapper>
-              <ButtonFilterBold>BOTTOMS</ButtonFilterBold>
-              <ButtonFilterSecond>TOPS</ButtonFilterSecond>
-              <ButtonFilterSecond>SHOES & MORE</ButtonFilterSecond>
-              <ButtonFilterSecond>COLLECTION</ButtonFilterSecond>
-              <ButtonFilterBold>TOPS</ButtonFilterBold>
-              <ButtonFilterSecond>JACKETS & COATS</ButtonFilterSecond>
-              <ButtonFilterSecond>SHIRTS</ButtonFilterSecond>
-              <ButtonFilterSecond>T-SHIRTS</ButtonFilterSecond>
-              <ButtonFilterSecond>KNITWEAR</ButtonFilterSecond>
-              <ButtonFilterSecond>SWEATS</ButtonFilterSecond>
-            </ButtonCategoryWrapper>
-          }
-        </Dropdown>
+              {women &&
+                <ButtonWomenWrapper>
+                  <ButtonFilter>BOTTOMS</ButtonFilter>
+                  <ButtonFilter>TOPS</ButtonFilter>
+                  <ButtonFilter>SHOES & MORE</ButtonFilter>
+                  <ButtonFilter>COLLECTION</ButtonFilter>
+                </ButtonWomenWrapper>
+              }
+            </Dropdown>
 
 
-        <Dropdown open={size}>
-          <DropdownHeader onClick={(): void => {
-            size ? setSize(false) : setSize(true)
-          }}>
-            <span>SIZE</span>
-            <span>&#10095;</span>
-          </DropdownHeader>
-
-          {size &&
-            <CheckboxSizeWrapper>
-              <Checkbox>
-                <input type='checkbox' name='xs'/>
-                XS (34)
-              </Checkbox>
-
-              <Checkbox>
-                <input type='checkbox' name='s'/>
-                S (36)
-              </Checkbox>
-
-              <Checkbox>
-                <input type='checkbox' name='m' />
-                M (38)
-              </Checkbox>
-
-              <Checkbox>
-                <input type='checkbox' name='l' />
-                L (42)
-              </Checkbox>
-
-              <Checkbox>
-                <input type='checkbox' name='xl' />
-                XL (46)
-              </Checkbox>
-
-              <Checkbox>
-                <input type='checkbox' name='xxl' />
-                XXL (52)
-              </Checkbox>
-            </CheckboxSizeWrapper>
-          }
-        </Dropdown>
+            <ResetFilter>Reset Filter</ResetFilter>
 
 
-        <Dropdown open={priceRange}>
-          <DropdownHeader onClick={(): void => {
-            priceRange ? setPriceRange(false) : setPriceRange(true)
-          }}>
-            <span>PRICE RANGE</span>
-            <span>&#10095;</span>
-          </DropdownHeader>
+            <Dropdown open={category}>
+              <DropdownHeader onClick={(): void => {
+                category ? setCategory(false) : setCategory(true)
+              }}>
+                <span>CATEGORY</span>
+                <span>&#10095;</span>
+              </DropdownHeader>
 
-          {priceRange && 
-            <RangeWrapper>
-              <Range1
-                type='range'
-                min='0'
-                value={range1}
-                max='100'
-                onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
-                  setRange1(+e.target.value);
-                }}
-              />
+              {category &&
+                <ButtonCategoryWrapper>
+                  <ButtonFilterBold>BOTTOMS</ButtonFilterBold>
+                  <ButtonFilterSecond>TOPS</ButtonFilterSecond>
+                  <ButtonFilterSecond>SHOES & MORE</ButtonFilterSecond>
+                  <ButtonFilterSecond>COLLECTION</ButtonFilterSecond>
+                  <ButtonFilterBold>TOPS</ButtonFilterBold>
+                  <ButtonFilterSecond>JACKETS & COATS</ButtonFilterSecond>
+                  <ButtonFilterSecond>SHIRTS</ButtonFilterSecond>
+                  <ButtonFilterSecond>T-SHIRTS</ButtonFilterSecond>
+                  <ButtonFilterSecond>KNITWEAR</ButtonFilterSecond>
+                  <ButtonFilterSecond>SWEATS</ButtonFilterSecond>
+                </ButtonCategoryWrapper>
+              }
+            </Dropdown>
+
+
+            <Dropdown open={size}>
+              <DropdownHeader onClick={(): void => {
+                size ? setSize(false) : setSize(true)
+              }}>
+                <span>SIZE</span>
+                <span>&#10095;</span>
+              </DropdownHeader>
+
+              {size &&
+                <CheckboxSizeWrapper>
+                  <Checkbox>
+                    <input type='checkbox' name='xs'/>
+                    XS (34)
+                  </Checkbox>
+
+                  <Checkbox>
+                    <input type='checkbox' name='s'/>
+                    S (36)
+                  </Checkbox>
+
+                  <Checkbox>
+                    <input type='checkbox' name='m' />
+                    M (38)
+                  </Checkbox>
+
+                  <Checkbox>
+                    <input type='checkbox' name='l' />
+                    L (42)
+                  </Checkbox>
+
+                  <Checkbox>
+                    <input type='checkbox' name='xl' />
+                    XL (46)
+                  </Checkbox>
+
+                  <Checkbox>
+                    <input type='checkbox' name='xxl' />
+                    XXL (52)
+                  </Checkbox>
+                </CheckboxSizeWrapper>
+              }
+            </Dropdown>
+
+
+            <Dropdown open={priceRange}>
+              <DropdownHeader onClick={(): void => {
+                priceRange ? setPriceRange(false) : setPriceRange(true)
+              }}>
+                <span>PRICE RANGE</span>
+                <span>&#10095;</span>
+              </DropdownHeader>
+
+              {priceRange && 
+                <RangeWrapper>
+                  <Range1
+                    type='range'
+                    min='0'
+                    value={range1}
+                    max='100'
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
+                      setRange1(+e.target.value);
+                    }}
+                  />
               
-              <Range2
-                type='range'
-                min='0'
-                value={range2}
-                max='100'
-                onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
-                  setRange2(+e.target.value);
-                }}
-              />
+                  <Range2
+                    type='range'
+                    min='0'
+                    value={range2}
+                    max='100'
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
+                      setRange2(+e.target.value);
+                    }}
+                  />
 
-              <RangeValue>{range1}</RangeValue>
-              <RangeValue>{range2}</RangeValue>
-            </RangeWrapper>
-          }
-        </Dropdown>
+                  <RangeValue>{range1}</RangeValue>
+                  <RangeValue>{range2}</RangeValue>
+                </RangeWrapper>
+              }
+            </Dropdown>
 
 
-        <Dropdown open={color}>
-          <DropdownHeader onClick={(): void => {
-            color ? setColor(false) : setColor(true)
-          }}>
-            <span>COLOR</span>
-            <span>&#10095;</span>
-          </DropdownHeader>
+            <Dropdown open={color}>
+              <DropdownHeader onClick={(): void => {
+                color ? setColor(false) : setColor(true)
+              }}>
+                <span>COLOR</span>
+                <span>&#10095;</span>
+              </DropdownHeader>
 
-          {color &&
-            <CheckboxColorWrapper>
-              <Checkbox>
-                <input type='checkbox' name='beige'/>
-                BEIGE
-              </Checkbox>
+              {color &&
+                <CheckboxColorWrapper>
+                  <Checkbox>
+                    <input type='checkbox' name='beige'/>
+                    BEIGE
+                  </Checkbox>
 
-              <Checkbox>
-                <input type='checkbox' name='black'/>
-                BLACK
-              </Checkbox>
+                  <Checkbox>
+                    <input type='checkbox' name='black'/>
+                    BLACK
+                  </Checkbox>
 
-              <Checkbox>
-                <input type='checkbox' name='blue'/>
-                BLUE
-              </Checkbox>
+                  <Checkbox>
+                    <input type='checkbox' name='blue'/>
+                    BLUE
+                  </Checkbox>
 
-              <Checkbox>
-                <input type='checkbox' name='brown'/>
-                BROWN
-              </Checkbox>
+                  <Checkbox>
+                    <input type='checkbox' name='brown'/>
+                    BROWN
+                  </Checkbox>
 
-              <Checkbox>
-                <input type='checkbox' name='cream'/>
-                CREAM
-              </Checkbox>
+                  <Checkbox>
+                    <input type='checkbox' name='cream'/>
+                    CREAM
+                  </Checkbox>
 
-              <Checkbox>
-                <input type='checkbox' name='gold'/>
-                GOLD
-              </Checkbox>
+                  <Checkbox>
+                    <input type='checkbox' name='gold'/>
+                    GOLD
+                  </Checkbox>
 
-              <Checkbox>
-                <input type='checkbox' name='green'/>
-                GREEN
-              </Checkbox>
+                  <Checkbox>
+                    <input type='checkbox' name='green'/>
+                    GREEN
+                  </Checkbox>
 
-              <Checkbox>
-                <input type='checkbox' name='grey'/>
-                GREY
-              </Checkbox>
+                  <Checkbox>
+                    <input type='checkbox' name='grey'/>
+                    GREY
+                  </Checkbox>
 
-              <Checkbox>
-                <input type='checkbox' name='navy'/>
-                NAVY
-              </Checkbox>
+                  <Checkbox>
+                    <input type='checkbox' name='navy'/>
+                    NAVY
+                  </Checkbox>
 
-              <Checkbox>
-                <input type='checkbox' name='orange'/>
-                ORANGE
-              </Checkbox>
+                  <Checkbox>
+                    <input type='checkbox' name='orange'/>
+                    ORANGE
+                  </Checkbox>
 
-              <Checkbox>
-                <input type='checkbox' name='pink'/>
-                PINK
-              </Checkbox>
+                  <Checkbox>
+                    <input type='checkbox' name='pink'/>
+                    PINK
+                  </Checkbox>
 
-              <Checkbox>
-                <input type='checkbox' name='purple'/>
-                PURPLE
-              </Checkbox>
-            </CheckboxColorWrapper>
-          }
-        </Dropdown>
+                  <Checkbox>
+                    <input type='checkbox' name='purple'/>
+                    PURPLE
+                  </Checkbox>
+                </CheckboxColorWrapper>
+              }
+            </Dropdown>
 
    
-        <Dropdown open={brand}>
-          <DropdownHeader onClick={(): void => {
-            brand ? setBrand(false) : setBrand(true)
-          }}>
-            <span>BRAND</span>
-            <span>&#10095;</span>
-          </DropdownHeader>
+            <Dropdown open={brand}>
+              <DropdownHeader onClick={(): void => {
+                brand ? setBrand(false) : setBrand(true)
+              }}>
+                <span>BRAND</span>
+                <span>&#10095;</span>
+              </DropdownHeader>
 
-          {brand &&
-            <CheckboxWrapper>
-              <Checkbox>
-                <input type='checkbox' name='armany'/>
-                ARMANY
-              </Checkbox>
+              {brand &&
+                <CheckboxWrapper>
+                  <Checkbox>
+                    <input type='checkbox' name='armany'/>
+                    ARMANY
+                  </Checkbox>
 
-              <Checkbox>
-                <input type='checkbox' name='burberry'/>
-                BURBERRY
-              </Checkbox>
+                  <Checkbox>
+                    <input type='checkbox' name='burberry'/>
+                    BURBERRY
+                  </Checkbox>
 
-              <Checkbox>
-                <input type='checkbox' name='chanel'/>
-                CHANEL
-              </Checkbox>
+                  <Checkbox>
+                    <input type='checkbox' name='chanel'/>
+                    CHANEL
+                  </Checkbox>
 
-              <Checkbox>
-                <input type='checkbox' name='dolce&gabbana'/>
-                DOLCE&GABBANA
-              </Checkbox>
+                  <Checkbox>
+                    <input type='checkbox' name='dolce&gabbana'/>
+                    DOLCE&GABBANA
+                  </Checkbox>
 
-              <Checkbox>
-                <input type='checkbox' name='escada'/>
-                ESCADA
-              </Checkbox>
+                  <Checkbox>
+                    <input type='checkbox' name='escada'/>
+                    ESCADA
+                  </Checkbox>
 
-              <Checkbox>
-                <input type='checkbox' name='fendi'/>
-                FENDI
-              </Checkbox>
-            </CheckboxWrapper>
-          }
-        </Dropdown>
+                  <Checkbox>
+                    <input type='checkbox' name='fendi'/>
+                    FENDI
+                  </Checkbox>
+                </CheckboxWrapper>
+              }
+            </Dropdown>
 
 
-        <BannerSmall>
-          <img src={bannerSmall} alt='bannerSmall' />
-          <div>
-            <span>MICHAEL KORS</span>
-            <span>SPRING 2022</span>
+            <BannerSmall>
+              <img src={bannerSmall} alt='bannerSmall' />
+              <div>
+                <span>MICHAEL KORS</span>
+                <span>SPRING 2022</span>
+              </div>
+            </BannerSmall>
           </div>
-        </BannerSmall>
+
+
+
+
+          <div>
+          </div>
+        </Groups>
       </WrapperInner>
     </WrapperOuter>
   );
