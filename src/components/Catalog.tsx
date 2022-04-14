@@ -285,6 +285,36 @@ const BannerSmall = styled.div`
 //-----------------------------------------------
 
 
+//HeaderWrapper----------------------------------
+const HeaderWrapper = styled.div`
+  width: 725px;
+  height: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  h2 {
+    font-family: 'Playfair Display SC';
+    font-size: 24px;
+    font-weight: 400;
+    color: #000;
+  }
+
+  div {
+    width: 550px;
+    margin: 0;
+  }
+
+  span {
+    font-family: Arial;
+    font-size: 10px;
+    font-weight: 400;
+    color: #aaa;
+  }
+`;
+//-----------------------------------------------
+
+
 
 
 const Catalog = (): JSX.Element => {
@@ -574,6 +604,11 @@ const Catalog = (): JSX.Element => {
 
 
           <div>
+            <HeaderWrapper>
+              <h2>WOMEN</h2>
+              <Line />
+              <span>557 items</span>
+            </HeaderWrapper>
           </div>
         </Groups>
       </WrapperInner>
