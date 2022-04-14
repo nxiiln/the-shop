@@ -343,6 +343,82 @@ const Banner = styled.div`
 //-----------------------------------------------
 
 
+//Sorting----------------------------------------
+const Sorting = styled.div`
+  width: 175px;
+  height: 32px;
+  margin-top: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  > span:nth-child(1) {
+    font-family: Nunito;
+    font-size: 10px;
+    font-weight: 300;
+    color: #000;
+  }
+
+  > span:nth-child(3) {
+    font-size: 10px;
+    color: #bebebe;
+  }
+`;
+
+const DropdownSorting = styled.div<{open: boolean}>`
+  width: 104px;
+  height: ${props => props.open ? '106px' : '30px'};
+  align-self: start;
+  border: 1px solid #e4e2e1;
+`;
+
+const SortHeader = styled.div`
+  height: 30px;
+  padding-left: 12px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  position: relative;
+  font-family: Arial;
+  font-size: 11px;
+  font-weight: 400;
+  color: #aaa;
+`;
+
+const Triangle = styled.div`
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: 12px;
+  left: 90px;
+  border-top: 4px solid #000;
+  border-right: 3px solid transparent;
+  border-left: 3px solid transparent;
+`;
+
+const SortBody = styled.div`
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+`;
+
+const SortMode = styled.button`
+  margin: 0 0 8px 7px;
+  display: flex;
+  font-family: Arial;
+  font-size: 11px;
+  font-weight: 400;
+  color: #aaa;
+  background: transparent;
+  border: none;
+  :hover {
+    color: #000;
+    cursor: pointer;
+  }
+`;
+//-----------------------------------------------
+
+
 
 
 const Catalog = (): JSX.Element => {
@@ -355,6 +431,9 @@ const Catalog = (): JSX.Element => {
 
   const [range1, setRange1] = useState<number>(30);
   const [range2, setRange2] = useState<number>(70);
+
+  const [sortingOpen, setSortingOpen] = useState<boolean>(false);
+  const [sortingMode, setSortingMode] = useState<string>('Position');
 
 
   return(
@@ -629,8 +708,6 @@ const Catalog = (): JSX.Element => {
           </div>
 
 
-
-
           <div>
             <HeaderWrapper>
               <h2>WOMEN</h2>
@@ -638,11 +715,54 @@ const Catalog = (): JSX.Element => {
               <span>557 items</span>
             </HeaderWrapper>
 
+
             <Banner>
               <img src={banner} alt='banner' />
               <span>LOVE SUNHAT</span>
               <span>NEW SUMMER HAT COLLECTION 2022</span>
             </Banner>
+
+
+            <Sorting
+              onMouseEnter={(): void => setSortingOpen(true)}
+              onMouseLeave={(): void => setSortingOpen(false)}
+              onClick={(): void => setSortingOpen(false)}
+            >
+              <span>SORT BY</span>
+              <DropdownSorting open={sortingOpen}>
+                <SortHeader>
+                  {sortingMode}
+                  <Triangle />
+                </SortHeader>
+
+                {sortingOpen &&
+                  <SortBody>
+                    <SortMode
+                      type='button'
+                      onClick={(): void => setSortingMode('Position')}
+                    >
+                      Position
+                    </SortMode>
+
+                    <SortMode
+                      type='button'
+                      onClick={(): void => setSortingMode('Price')}
+                    >
+                      Price
+                    </SortMode>
+
+                    <SortMode
+                      type='button'
+                      onClick={(): void => setSortingMode('Name')}
+                    >
+                      Name
+                    </SortMode>
+
+                  </SortBody>
+                }
+              </DropdownSorting>
+              <span>&#8595;</span>
+            </Sorting>
           </div>
         </Groups>
       </WrapperInner>
