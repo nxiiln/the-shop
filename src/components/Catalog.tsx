@@ -315,6 +315,34 @@ const HeaderWrapper = styled.div`
 //-----------------------------------------------
 
 
+//Banner-----------------------------------------
+const Banner = styled.div`
+  margin-top: 15px;
+  position: relative;
+
+  span:nth-child(2) {
+    position: absolute;
+    top: 155px;
+    left: 35px;
+    font-family: 'Playfair Display SC';
+    font-size: 48px;
+    font-weight: 400;
+    color: #000;
+  }
+
+  span:nth-child(3) {
+    position: absolute;
+    top: 220px;
+    left: 35px;
+    font-family: Nunito;
+    font-size: 12px;
+    font-weight: 300;
+    color: #282828;
+  }
+`;
+//-----------------------------------------------
+
+
 
 
 const Catalog = (): JSX.Element => {
@@ -609,6 +637,12 @@ const Catalog = (): JSX.Element => {
               <Line />
               <span>557 items</span>
             </HeaderWrapper>
+
+            <Banner>
+              <img src={banner} alt='banner' />
+              <span>LOVE SUNHAT</span>
+              <span>NEW SUMMER HAT COLLECTION 2022</span>
+            </Banner>
           </div>
         </Groups>
       </WrapperInner>
