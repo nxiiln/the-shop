@@ -337,19 +337,23 @@ const Banner = styled.div`
 `;
 
 
-//WrapperSortShowPagination----------------------
-const WrapperSortShowPagination = styled.div`
+//WrapperDropdownsSmallPagination----------------
+const WrapperDropdownsSmallPagination = styled.div`
   width: 100%;
   height: 30px;
+  margin-top: 6px;
   display: flex;
 `;
 
 
-//Sorting----------------------------------------
-const Sorting = styled.div`
-  width: 175px;
+//DropdownSmall---------------------------------
+const DropdownSmallWrapper = styled.div<{type: string}>`
+  ${props => props.type === 'sort' ? 'width: 175px;' : `
+    width: 100px;
+    margin-left: 30px;
+  `}
+
   height: 32px;
-  margin-top: 6px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -367,14 +371,14 @@ const Sorting = styled.div`
   }
 `;
 
-const DropdownSorting = styled.div<{open: boolean}>`
-  width: 104px;
+const DropdownSmall = styled.div<{type: string; open: boolean}>`
+  width: ${props => props.type === 'sort' ? '104px' : '61px'};
   height: ${props => props.open ? '106px' : '30px'};
   align-self: start;
   border: 1px solid #e4e2e1;
 `;
 
-const SortHeader = styled.div`
+const DropdownSmallHeader = styled.div`
   height: 30px;
   padding-left: 12px;
   display: flex;
@@ -387,24 +391,22 @@ const SortHeader = styled.div`
   color: #aaa;
 `;
 
-const Triangle = styled.div`
-  width: 0;
-  height: 0;
+const Triangle = styled.div<{type: string}>`
   position: absolute;
   top: 12px;
-  left: 90px;
+  left: ${props => props.type === 'sort' ? '90px' : '48px'};
   border-top: 4px solid #000;
   border-right: 3px solid transparent;
   border-left: 3px solid transparent;
 `;
 
-const SortBody = styled.div`
+const DropdownSmallBody = styled.div`
   margin-top: 8px;
   display: flex;
   flex-direction: column;
 `;
 
-const SortMode = styled.button`
+const DropdownSmallMode = styled.button`
   margin: 0 0 8px 7px;
   display: flex;
   font-family: Arial;
@@ -435,6 +437,9 @@ const Catalog = (): JSX.Element => {
 
   const [sortingOpen, setSortingOpen] = useState<boolean>(false);
   const [sortingMode, setSortingMode] = useState<string>('Position');
+
+  const [showOpen, setShowOpen] = useState<boolean>(false);
+  const [showMode, setShowMode] = useState<number>(9);
 
 
   return(
@@ -724,48 +729,90 @@ const Catalog = (): JSX.Element => {
             </Banner>
 
             
-            <WrapperSortShowPagination>
-              <Sorting
+            <WrapperDropdownsSmallPagination>
+              <DropdownSmallWrapper
+                type='sort'
                 onMouseEnter={(): void => setSortingOpen(true)}
                 onMouseLeave={(): void => setSortingOpen(false)}
                 onClick={(): void => setSortingOpen(false)}
               >
                 <span>SORT BY</span>
-                <DropdownSorting open={sortingOpen}>
-                  <SortHeader>
+                <DropdownSmall type='sort' open={sortingOpen}>
+                  <DropdownSmallHeader>
                     {sortingMode}
-                    <Triangle />
-                  </SortHeader>
+                    <Triangle type='sort' />
+                  </DropdownSmallHeader>
 
                   {sortingOpen &&
-                    <SortBody>
-                      <SortMode
+                    <DropdownSmallBody>
+                      <DropdownSmallMode
                         type='button'
                         onClick={(): void => setSortingMode('Position')}
                       >
                         Position
-                      </SortMode>
+                      </DropdownSmallMode>
 
-                      <SortMode
+                      <DropdownSmallMode
                         type='button'
                         onClick={(): void => setSortingMode('Price')}
                       >
                         Price
-                      </SortMode>
+                      </DropdownSmallMode>
 
-                      <SortMode
+                      <DropdownSmallMode
                         type='button'
                         onClick={(): void => setSortingMode('Name')}
                       >
                         Name
-                      </SortMode>
-                    </SortBody>
+                      </DropdownSmallMode>
+                    </DropdownSmallBody>
                   }
-                </DropdownSorting>
-                
+                </DropdownSmall>
+
                 <span>&#8595;</span>
-              </Sorting>
-            </WrapperSortShowPagination>
+              </DropdownSmallWrapper>
+
+
+              <DropdownSmallWrapper
+                type='show'
+                onMouseEnter={(): void => setShowOpen(true)}
+                onMouseLeave={(): void => setShowOpen(false)}
+                onClick={(): void => setShowOpen(false)}
+              >
+                <span>SHOW</span>
+                <DropdownSmall type='show' open={showOpen}>
+                  <DropdownSmallHeader>
+                    {showMode}
+                    <Triangle type='show' />
+                  </DropdownSmallHeader>
+
+                  {showOpen &&
+                    <DropdownSmallBody>
+                      <DropdownSmallMode
+                        type='button'
+                        onClick={(): void => setShowMode(12)}
+                      >
+                        12
+                      </DropdownSmallMode>
+
+                      <DropdownSmallMode
+                        type='button'
+                        onClick={(): void => setShowMode(9)}
+                      >
+                        9
+                      </DropdownSmallMode>
+
+                      <DropdownSmallMode
+                        type='button'
+                        onClick={(): void => setShowMode(6)}
+                      >
+                        6
+                      </DropdownSmallMode>
+                    </DropdownSmallBody>
+                  }
+                </DropdownSmall>                
+              </DropdownSmallWrapper>
+            </WrapperDropdownsSmallPagination>
           </div>
         </Groups>
       </WrapperInner>
