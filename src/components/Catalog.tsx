@@ -151,7 +151,6 @@ const ButtonFilterBold = styled(ButtonFilter)`
 const ButtonFilterSecond = styled(ButtonFilter)`
   margin-left: 12px;
 `;
-//-----------------------------------------------
 
 
 //Checkboxes-------------------------------------
@@ -189,7 +188,6 @@ const CheckboxSizeWrapper = styled(CheckboxWrapper)`
 const CheckboxColorWrapper = styled(CheckboxWrapper)`
   width: 164px;
 `;
-//-----------------------------------------------
 
 
 //Range------------------------------------------
@@ -246,7 +244,6 @@ const RangeValue = styled.div`
   margin-top: 20px;
   border: 1px solid #aaa;
 `;
-//-----------------------------------------------
 
 
 //BannerSmall------------------------------------
@@ -282,7 +279,6 @@ const BannerSmall = styled.div`
     }
   }
 `;
-//-----------------------------------------------
 
 
 //HeaderWrapper----------------------------------
@@ -312,7 +308,6 @@ const HeaderWrapper = styled.div`
     color: #aaa;
   }
 `;
-//-----------------------------------------------
 
 
 //Banner-----------------------------------------
@@ -340,7 +335,14 @@ const Banner = styled.div`
     color: #282828;
   }
 `;
-//-----------------------------------------------
+
+
+//WrapperSortShowPagination----------------------
+const WrapperSortShowPagination = styled.div`
+  width: 100%;
+  height: 30px;
+  display: flex;
+`;
 
 
 //Sorting----------------------------------------
@@ -416,7 +418,6 @@ const SortMode = styled.button`
     cursor: pointer;
   }
 `;
-//-----------------------------------------------
 
 
 
@@ -722,47 +723,49 @@ const Catalog = (): JSX.Element => {
               <span>NEW SUMMER HAT COLLECTION 2022</span>
             </Banner>
 
+            
+            <WrapperSortShowPagination>
+              <Sorting
+                onMouseEnter={(): void => setSortingOpen(true)}
+                onMouseLeave={(): void => setSortingOpen(false)}
+                onClick={(): void => setSortingOpen(false)}
+              >
+                <span>SORT BY</span>
+                <DropdownSorting open={sortingOpen}>
+                  <SortHeader>
+                    {sortingMode}
+                    <Triangle />
+                  </SortHeader>
 
-            <Sorting
-              onMouseEnter={(): void => setSortingOpen(true)}
-              onMouseLeave={(): void => setSortingOpen(false)}
-              onClick={(): void => setSortingOpen(false)}
-            >
-              <span>SORT BY</span>
-              <DropdownSorting open={sortingOpen}>
-                <SortHeader>
-                  {sortingMode}
-                  <Triangle />
-                </SortHeader>
+                  {sortingOpen &&
+                    <SortBody>
+                      <SortMode
+                        type='button'
+                        onClick={(): void => setSortingMode('Position')}
+                      >
+                        Position
+                      </SortMode>
 
-                {sortingOpen &&
-                  <SortBody>
-                    <SortMode
-                      type='button'
-                      onClick={(): void => setSortingMode('Position')}
-                    >
-                      Position
-                    </SortMode>
+                      <SortMode
+                        type='button'
+                        onClick={(): void => setSortingMode('Price')}
+                      >
+                        Price
+                      </SortMode>
 
-                    <SortMode
-                      type='button'
-                      onClick={(): void => setSortingMode('Price')}
-                    >
-                      Price
-                    </SortMode>
-
-                    <SortMode
-                      type='button'
-                      onClick={(): void => setSortingMode('Name')}
-                    >
-                      Name
-                    </SortMode>
-
-                  </SortBody>
-                }
-              </DropdownSorting>
-              <span>&#8595;</span>
-            </Sorting>
+                      <SortMode
+                        type='button'
+                        onClick={(): void => setSortingMode('Name')}
+                      >
+                        Name
+                      </SortMode>
+                    </SortBody>
+                  }
+                </DropdownSorting>
+                
+                <span>&#8595;</span>
+              </Sorting>
+            </WrapperSortShowPagination>
           </div>
         </Groups>
       </WrapperInner>
