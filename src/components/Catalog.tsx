@@ -68,7 +68,7 @@ const Groups = styled.div`
 `;
 
 
-//Dropdowns--------------------------------------
+//Dropdown---------------------------------------
 const Dropdown = styled.div<{open: boolean}>`
   width: 195px;
   margin-bottom: 7px;
@@ -107,7 +107,7 @@ const DropdownHeader = styled.div`
 `;
 
 
-//Buttons----------------------------------------
+//Button-----------------------------------------
 const ButtonFilter = styled.button`
   margin-left: 4px;
   font-family: Nunito;
@@ -153,7 +153,7 @@ const ButtonFilterSecond = styled(ButtonFilter)`
 `;
 
 
-//Checkboxes-------------------------------------
+//Checkbox---------------------------------------
 const Checkbox = styled.label`
   margin-bottom: 12px;
   font-family: Nunito;
