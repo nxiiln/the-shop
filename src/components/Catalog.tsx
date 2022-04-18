@@ -356,6 +356,7 @@ const DropdownSmallWrapper = styled.div<{type: string}>`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: 2;
 
   > span:nth-child(1) {
     font-family: Nunito;
@@ -403,6 +404,7 @@ const DropdownSmallBody = styled.div`
   margin-top: 8px;
   display: flex;
   flex-direction: column;
+  background: #fff;
 `;
 
 const DropdownSmallMode = styled.button`
