@@ -24,7 +24,6 @@ const WrapperOuter = styled.article`
 const WrapperInner = styled.div`
   width: 960px;
   height: 1860px;
-  border: 1px solid aqua;
 `;
 
 const Line = styled.div`
@@ -422,9 +421,145 @@ const DropdownSmallMode = styled.button`
 `;
 
 
+//Products---------------------------------------
+const Products = styled.div`
+  width: 725px;
+  height: 1220px;
+  margin-top: 22px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-content: space-between;
+`;
+
+const Product = styled.div`
+  width: auto;
+  height: 360px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  color: #000;
+  text-transform: uppercase;
+`;
+
+const ProductName = styled.span`
+  font-family: 'Playfair Display SC';
+  font-size: 14px;
+  font-weight: 400;
+`;
+
+const ProductPrice = styled.span`
+  font-family: Nunito;
+  font-size: 11px;
+  font-weight: 300;
+`;
+
+const ProductTriangle = styled.div<{attr: string}>`
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: -5px;
+  left: -22px;
+  border-right: 35px solid transparent;
+  border-bottom: ${props => props.attr === 'new' ?
+    '35px solid #000' : '35px solid #c50e20'
+  };
+  border-left: 35px solid transparent;
+  transform: rotate(-45deg);
+`;
+
+const ProductTriangleDescription = styled.span`
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  font-family: 'Playfair Display SC';
+  font-size: 11px;
+  line-height: 1.2;
+  font-weight: 700;
+  color: #fff;
+`;
+
+
 
 
 const Catalog = (): JSX.Element => {
+  interface Product {
+    id: number;
+    image: string;
+    name: string;
+    price: number;
+    triangle: string;
+  }
+
+  const products: Product[] = [
+    {
+      id: 1,
+      image: product1,
+      name: 'detailed swing dress',
+      price: 1875,
+      triangle: 'new',
+    },
+    {
+      id: 2,
+      image: product2,
+      name: 'maxararzy frilled dress',
+      price: 1875,
+      triangle: 'sale',
+    },
+    {
+      id: 3,
+      image: product3,
+      name: 'detailed swing dress',
+      price: 1875,
+      triangle: '',
+    },
+    {
+      id: 4,
+      image: product4,
+      name: 'maxararzy frilled dress',
+      price: 1875,
+      triangle: '',
+    },
+    {
+      id: 5,
+      image: product5,
+      name: 'detailed swing dress',
+      price: 1875,
+      triangle: '',
+    },
+    {
+      id: 6,
+      image: product6,
+      name: 'maxararzy frilled dress',
+      price: 1875,
+      triangle: 'sale',
+    },
+    {
+      id: 7,
+      image: product7,
+      name: 'detailed swing dress',
+      price: 1875,
+      triangle: '',
+    },
+    {
+      id: 8,
+      image: product8,
+      name: 'maxararzy frilled dress',
+      price: 1875,
+      triangle: '',
+    },
+    {
+      id: 9,
+      image: product9,
+      name: 'detailed swing dress',
+      price: 1875,
+      triangle: '',
+    },
+  ];
+
+
   const [women, setWomen] = useState<boolean>(false);
   const [category, setCategory] = useState<boolean>(false);
   const [size, setSize] = useState<boolean>(false);
@@ -813,6 +948,29 @@ const Catalog = (): JSX.Element => {
                 </DropdownSmall>                
               </DropdownSmallWrapper>
             </WrapperDropdownsSmallPagination>
+
+
+            <Products>
+              {products.map((product: Product): JSX.Element => {
+                return(
+                  <Product>
+                    <img src={product.image} alt={product.name} />
+                    {(product.triangle === 'new' || product.triangle === 'sale') &&
+                      <>
+                        <ProductTriangle
+                          attr={product.triangle === 'new' ? 'new' : 'sale'}
+                        />
+                        <ProductTriangleDescription>
+                          {product.triangle === 'new' ? 'new' : 'sale'}
+                        </ProductTriangleDescription>
+                      </>
+                    }
+                    <ProductName>{product.name}</ProductName>
+                    <ProductPrice>${product.price}</ProductPrice>
+                  </Product>
+                );
+              })}
+            </Products>
           </div>
         </Groups>
       </WrapperInner>
