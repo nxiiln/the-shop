@@ -26,7 +26,7 @@ const WrapperOuter = styled.article`
 
 const WrapperInner = styled.div`
   width: 960px;
-  height: 1900px;
+  height: 1950px;
 `;
 
 const Line = styled.div`
@@ -345,6 +345,7 @@ const WrapperDropdownsSmallPagination = styled.div`
   height: 30px;
   margin-top: 6px;
   display: flex;
+  align-items: center;
 `;
 
 
@@ -430,7 +431,7 @@ const DropdownSmallMode = styled.button`
 const Products = styled.div`
   width: 725px;
   height: 1220px;
-  margin-top: 22px;
+  margin: 22px 0 80px 0;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -593,6 +594,47 @@ const Compare = styled.button`
 `;
 
 
+//Pagination-------------------------------------
+const Pagination = styled.div`
+  width: 120px;
+  height: 20px;
+  margin-left: 300px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const Navigation = styled.button`
+  padding: 0;
+  font-size: 14px;
+  background: #fff;
+  border: none;
+  cursor: pointer;
+`;
+
+const Page = styled.button<{curr: boolean}>`
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial;
+  font-size: 11px;
+  line-height: 1.2;
+  font-weight: 400;
+  text-transform: uppercase;
+  background: #fff;
+  cursor: pointer;
+
+  ${props => props.curr ?
+    `color: #000;
+     border: 1px solid #000;` :
+    `color: #e4e2e1;
+     border: 1px solid #e4e2e1;`
+  }
+`;
+
+
 
 
 const Catalog = (): JSX.Element => {
@@ -688,6 +730,28 @@ const Catalog = (): JSX.Element => {
   const [showMode, setShowMode] = useState<number>(9);
 
   const [productOpen, setProductOpen] = useState<number>(0);
+
+  const [currPage, setCurrPage] = useState<number>(1);
+
+
+  const renderPages = (): JSX.Element[] => {
+    let pages: JSX.Element[] = [];
+
+    for (let i: number = 1; i <= 4; i++) {
+      pages.push(
+        <Page
+          key={i}
+          type='button'
+          curr={i === currPage}
+          onClick={(): void => setCurrPage(i)}
+        >
+          {i}
+        </Page>
+      );
+    }
+
+    return pages;
+  }
 
 
   return(
@@ -1124,6 +1188,115 @@ const Catalog = (): JSX.Element => {
                 );
               })}
             </Products>
+
+
+            <WrapperDropdownsSmallPagination>
+              <DropdownSmallWrapper
+                type='sort'
+                onMouseEnter={(): void => setSortingOpen(true)}
+                onMouseLeave={(): void => setSortingOpen(false)}
+                onClick={(): void => setSortingOpen(false)}
+              >
+                <span>SORT BY</span>
+                <DropdownSmall type='sort' open={sortingOpen}>
+                  <DropdownSmallHeader>
+                    {sortingMode}
+                    <Triangle type='sort' />
+                  </DropdownSmallHeader>
+
+                  {sortingOpen &&
+                    <DropdownSmallBody>
+                      <DropdownSmallMode
+                        type='button'
+                        onClick={(): void => setSortingMode('Position')}
+                      >
+                        Position
+                      </DropdownSmallMode>
+
+                      <DropdownSmallMode
+                        type='button'
+                        onClick={(): void => setSortingMode('Price')}
+                      >
+                        Price
+                      </DropdownSmallMode>
+
+                      <DropdownSmallMode
+                        type='button'
+                        onClick={(): void => setSortingMode('Name')}
+                      >
+                        Name
+                      </DropdownSmallMode>
+                    </DropdownSmallBody>
+                  }
+                </DropdownSmall>
+
+                <span>&#8595;</span>
+              </DropdownSmallWrapper>
+
+
+              <DropdownSmallWrapper
+                type='show'
+                onMouseEnter={(): void => setShowOpen(true)}
+                onMouseLeave={(): void => setShowOpen(false)}
+                onClick={(): void => setShowOpen(false)}
+              >
+                <span>SHOW</span>
+                <DropdownSmall type='show' open={showOpen}>
+                  <DropdownSmallHeader>
+                    {showMode}
+                    <Triangle type='show' />
+                  </DropdownSmallHeader>
+
+                  {showOpen &&
+                    <DropdownSmallBody>
+                      <DropdownSmallMode
+                        type='button'
+                        onClick={(): void => setShowMode(12)}
+                      >
+                        12
+                      </DropdownSmallMode>
+
+                      <DropdownSmallMode
+                        type='button'
+                        onClick={(): void => setShowMode(9)}
+                      >
+                        9
+                      </DropdownSmallMode>
+
+                      <DropdownSmallMode
+                        type='button'
+                        onClick={(): void => setShowMode(6)}
+                      >
+                        6
+                      </DropdownSmallMode>
+                    </DropdownSmallBody>
+                  }
+                </DropdownSmall>                
+              </DropdownSmallWrapper>
+
+
+              <Pagination>
+                <Navigation
+                  type='button'
+                  onClick={(): void => {
+                    if (currPage === 1) return;
+                    setCurrPage((prevCurrPage: number): number => prevCurrPage - 1);
+                }}>
+                  &#10094;
+                </Navigation>
+
+                {renderPages()}
+
+                <Navigation
+                  type='button'
+                  onClick={(): void => {
+                    if (currPage === 3) return;
+                    setCurrPage((prevCurrPage: number): number => prevCurrPage + 1);
+                }}>
+                  &#10095;
+                </Navigation>
+              </Pagination>
+            </WrapperDropdownsSmallPagination>
           </div>
         </Groups>
       </WrapperInner>
