@@ -1,5 +1,19 @@
 import React, {useState} from 'react';
 import styled from 'styled-components/macro';
+import productMain from '../images/productMain.png';
+import productSecond1 from '../images/productSecond1.png';
+import productSecond2 from '../images/productSecond2.png';
+import productSecond3 from '../images/productSecond3.png';
+import productSecond4 from '../images/productSecond4.png';
+import twitterBlack from '../images/twitterBlack.png';
+import pinterestBlack from '../images/pinterestBlack.png';
+import googleBlack from '../images/googleBlack.png';
+import productRelated1 from '../images/productRelated1.png';
+import productRelated2 from '../images/productRelated2.png';
+import productRelated3 from '../images/productRelated3.png';
+import productRelated4 from '../images/productRelated4.png';
+
+
 
 
 const WrapperOuter = styled.article`
