@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import styled from 'styled-components/macro';
+import BreadCrumbs from './BreadCrumbs';
 import cartProductA from '../images/cartProductA.png';
 import cartProductB from '../images/cartProductB.png';
 
@@ -19,44 +20,6 @@ const WrapperInner = styled.div`
   grid-template-columns: minmax(328px, 1fr) 23px 208px minmax(295px, 1fr);
   grid-template-rows: 10px 30px 1fr 135px 106px 30px;
 `;
-
-const Line = styled.div`
-  width: 100%;
-  height: 1px;
-  grid-area: 1 / 1 / 2 / 5;
-  background: #aaa;
-`;
-
-
-//Bread Crumbs-----------------------------------
-const BreadCrumbsWrapper = styled.div`
-  width: 100%;
-  grid-area: 2 / 1 / 3 / 5;
-  display: flex;
-  justify-content: space-between;
-`;
-
-const BreadCrumbs = styled.button`
-  font-family: Arial;
-  font-size: 10px;
-  line-height: 1.2;
-  font-weight: 400;
-  color: #aaa;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-`;
-
-const BreadCrumbsLeft = styled(BreadCrumbs)`
-  width: 68px;
-  height: 10px;
-`;
-
-const BreadCrumbsRight = styled(BreadCrumbs)`
-  width: 130px;
-  height: 10px;
-`;
-//-----------------------------------------------
 
 
 //Cart-------------------------------------------
@@ -502,15 +465,18 @@ const Cart = (): JSX.Element => {
   return(
     <WrapperOuter>
       <WrapperInner>
-        <Line />
-        <BreadCrumbsWrapper>
-          <BreadCrumbsLeft type='button'>
-            Home / Cart
-          </BreadCrumbsLeft>
-          <BreadCrumbsRight type='button'>
-            {'<'} Return to Previous Page
-          </BreadCrumbsRight>
-        </BreadCrumbsWrapper>
+        <BreadCrumbs
+          link={
+            <>
+              <a href='#'>Home</a>
+              <span>/</span>
+              <span>Cart</span>
+            </>
+          }
+          return='#'
+          marginBottom=''
+          gridArea='1 / 1 / 3 / 5'
+        />
 
 
         <CartWrapper>
