@@ -48,6 +48,10 @@ const BreadCrumbsRight = styled(BreadCrumbsLeft)`
   :hover {
     text-decoration: underline;
   }
+
+  a {
+    margin: 0;
+  }
 `;
 
 
