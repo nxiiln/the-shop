@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import styled from 'styled-components/macro';
+import BreadCrumbs from './BreadCrumbs';
 import banner from '../images/banner.png';
 import bannerSmall from '../images/bannerSmall.png';
 import product1 from '../images/product1.png';
@@ -34,34 +35,6 @@ const Line = styled.div`
   height: 1px;
   margin-bottom: 10px;
   background: #aaa;
-`;
-
-const BreadCrumbsWrapper = styled.article`
-  width: 100%;
-  margin-bottom: 22px;
-  display: flex;
-  justify-content: space-between;
-`;
-
-const BreadCrumbs = styled.button`
-  font-family: Arial;
-  font-size: 10px;
-  line-height: 1.2;
-  font-weight: 400;
-  color: #aaa;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-`;
-
-const BreadCrumbsLeft = styled(BreadCrumbs)`
-  width: 82px;
-  height: 10px;
-`;
-
-const BreadCrumbsRight = styled(BreadCrumbs)`
-  width: 130px;
-  height: 10px;
 `;
 
 const Groups = styled.div`
@@ -757,15 +730,18 @@ const Catalog = (): JSX.Element => {
   return(
     <WrapperOuter>
       <WrapperInner>
-        <Line />
-        <BreadCrumbsWrapper>
-          <BreadCrumbsLeft type='button'>
-            Home / Women  
-          </BreadCrumbsLeft>
-          <BreadCrumbsRight type='button'>
-            {'<'} Return to Previous Page
-          </BreadCrumbsRight>
-        </BreadCrumbsWrapper>
+        <BreadCrumbs
+          link={
+            <>
+              <a href='#'>Home</a>
+              <span>/</span>
+              <span>Women</span>
+            </>
+          }
+          return='#'
+          marginBottom='20px'
+          gridArea=''
+        />
 
 
         <Groups>
