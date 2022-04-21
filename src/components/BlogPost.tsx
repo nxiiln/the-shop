@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import styled from 'styled-components/macro';
+import BreadCrumbs from './BreadCrumbs';
 import blogPost2 from '../images/blogPost2.png';
 import BlogCategories from './BlogCategories';
 import BlogLabels from './BlogLabels';
@@ -17,41 +18,6 @@ const WrapperInner = styled.div`
   width: 960px;
   margin-bottom: 90px;
   position: relative;
-`;
-
-const Line = styled.div`
-  width: 100%;
-  height: 1px;
-  margin-bottom: 10px;
-  background: #aaa;
-`;
-
-const BreadCrumbsWrapper = styled.article`
-  width: 100%;
-  margin-bottom: 35px;
-  display: flex;
-  justify-content: space-between;
-`;
-
-const BreadCrumbs = styled.button`
-  font-family: Arial;
-  font-size: 10px;
-  line-height: 1.2;
-  font-weight: 400;
-  color: #aaa;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-`;
-
-const BreadCrumbsLeft = styled(BreadCrumbs)`
-  width: 68px;
-  height: 10px;
-`;
-
-const BreadCrumbsRight = styled(BreadCrumbs)`
-  width: 130px;
-  height: 10px;
 `;
 
 
@@ -254,15 +220,18 @@ const BlogPost = (): JSX.Element => {
   return(
     <WrapperOuter>
       <WrapperInner>
-        <Line />
-        <BreadCrumbsWrapper>
-          <BreadCrumbsLeft type='button'>
-            Home / Blog
-          </BreadCrumbsLeft>
-          <BreadCrumbsRight type='button'>
-            {'<'} Return to Previous Page
-          </BreadCrumbsRight>
-        </BreadCrumbsWrapper>
+        <BreadCrumbs
+          link={
+            <>
+              <a href='#'>Home</a>
+              <span>/</span>
+              <span>Do you realy love a trench coat?</span>
+            </>
+          }
+          return='#'
+          marginBottom='20px'
+          gridArea=''
+        />
 
         <PostWrapper>
           <PostHeader>do you realy love a trench coat?</PostHeader>
