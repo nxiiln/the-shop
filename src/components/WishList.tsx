@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import styled from 'styled-components/macro';
+import BreadCrumbs from './BreadCrumbs';
 import cartProductA from '../images/cartProductA.png';
 import cartProductB from '../images/cartProductB.png';
 
@@ -18,41 +19,6 @@ const WrapperInner = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 10px 30px 1fr;
-`;
-
-const Line = styled.div`
-  width: 100%;
-  height: 1px;
-  grid-area: 1 / 1 / 2 / 1;
-  background: #aaa;
-`;
-
-const BreadCrumbsWrapper = styled.div`
-  width: 100%;
-  grid-area: 2 / 1 / 3 / 1;
-  display: flex;
-  justify-content: space-between;
-`;
-
-const BreadCrumbs = styled.button`
-  font-family: Arial;
-  font-size: 10px;
-  line-height: 1.2;
-  font-weight: 400;
-  color: #aaa;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-`;
-
-const BreadCrumbsLeft = styled(BreadCrumbs)`
-  width: 90px;
-  height: 10px;
-`;
-
-const BreadCrumbsRight = styled(BreadCrumbs)`
-  width: 130px;
-  height: 10px;
 `;
 
 const CartWrapper = styled.div`
@@ -237,15 +203,18 @@ const WishList = (): JSX.Element => {
   return(
     <WrapperOuter>
       <WrapperInner>
-        <Line />
-        <BreadCrumbsWrapper>
-          <BreadCrumbsLeft type='button'>
-            Home / Wish List
-          </BreadCrumbsLeft>
-          <BreadCrumbsRight type='button'>
-            {'<'} Return to Previous Page
-          </BreadCrumbsRight>
-        </BreadCrumbsWrapper>
+        <BreadCrumbs
+          link={
+            <>
+              <a href='#'>Home</a>
+              <span>/</span>
+              <span>Create An Account</span>
+            </>
+          }
+          return='#'
+          marginBottom='20px'
+          gridArea=''
+        />
 
         <CartWrapper>
           <HeaderWrapper>
