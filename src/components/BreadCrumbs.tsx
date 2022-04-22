@@ -18,6 +18,7 @@ const BreadCrumbsWrapper = styled.div<{marginBottom: string}>`
   margin-bottom: ${props => props.marginBottom};
   display: flex;
   justify-content: space-between;
+  align-items: end;
 `;
 
 const BreadCrumbsLeft = styled.div`
@@ -51,6 +52,12 @@ const BreadCrumbsRight = styled(BreadCrumbsLeft)`
 
   a {
     margin: 0;
+  }
+
+  span {
+    :hover {
+      cursor: pointer;
+    }
   }
 `;
 
