@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import styled from 'styled-components/macro';
+import BreadCrumbs from './BreadCrumbs';
 import AlsoLove from './AlsoLove';
 import CartCheckout from './CartCheckout';
 import visaIcon from '../images/visaIcon.png';
@@ -23,41 +24,10 @@ const WrapperInner = styled.div`
   flex-wrap: wrap;
   justify-content: space-between;
   align-content: start;
-`;
 
-const Line = styled.div`
-  width: 100%;
-  height: 1px;
-  margin-bottom: 10px;
-  background: #aaa;
-`;
-
-const BreadCrumbsWrapper = styled.div`
-  width: 100%;
-  margin-bottom: 30px;
-  display: flex;
-  justify-content: space-between;
-`;
-
-const BreadCrumbs = styled.button`
-  font-family: Arial;
-  font-size: 10px;
-  line-height: 1.2;
-  font-weight: 400;
-  color: #aaa;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-`;
-
-const BreadCrumbsLeft = styled(BreadCrumbs)`
-  width: 68px;
-  height: 10px;
-`;
-
-const BreadCrumbsRight = styled(BreadCrumbs)`
-  width: 130px;
-  height: 10px;
+  article:first-child {
+    width: 960px;
+  }
 `;
 
 const ButtonUnderline = styled.button`
@@ -477,15 +447,18 @@ const Checkout = (): JSX.Element => {
   return(
     <WrapperOuter>
       <WrapperInner>
-        <Line />
-        <BreadCrumbsWrapper>
-          <BreadCrumbsLeft type='button'>
-            Home / Cart
-          </BreadCrumbsLeft>
-          <BreadCrumbsRight type='button'>
-            {'<'} Return to Previous Page
-          </BreadCrumbsRight>
-        </BreadCrumbsWrapper>
+        <BreadCrumbs
+          link={
+            <>
+              <a href='#'>Home</a>
+              <span>/</span>
+              <span>Checkout</span>
+            </>
+          }
+          return='#'
+          marginBottom='20px'
+          gridArea=''
+        />
 
 
         <AlsoLove />
