@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import styled from 'styled-components/macro';
+import BreadCrumbs from './BreadCrumbs';
 
 
 
@@ -14,41 +15,6 @@ const WrapperInner = styled.div`
   width: 960px;
   height: 100%;
   margin-bottom: 55px;
-`;
-
-const Line = styled.div`
-  width: 100%;
-  height: 1px;
-  margin-bottom: 10px;
-  background: #aaa;
-`;
-
-const BreadCrumbsWrapper = styled.div`
-  width: 100%;
-  margin-bottom: 10px;
-  display: flex;
-  justify-content: space-between;
-`;
-
-const BreadCrumbs = styled.button`
-  font-family: Arial;
-  font-size: 10px;
-  line-height: 1.2;
-  font-weight: 400;
-  color: #aaa;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-`;
-
-const BreadCrumbsLeft = styled(BreadCrumbs)`
-  width: 100px;
-  height: 10px;
-`;
-
-const BreadCrumbsRight = styled(BreadCrumbs)`
-  width: 130px;
-  height: 10px;
 `;
 
 const MyAccountWrapper = styled.div`
@@ -331,10 +297,13 @@ const TotalBlock = styled.div`
   }
 `;
 
-const TotalBlockLine = styled(Line)`
+const TotalBlockLine = styled.div`
+  width: 100%;
+  height: 1px;
   margin: 0;
   position: absolute;
   top: 61px;
+  background: #aaa;
 `;
 
 const DescriptionBlock = styled.div`
@@ -464,15 +433,18 @@ const MyAccount = (): JSX.Element => {
   return(
     <WrapperOuter>
       <WrapperInner>
-        <Line />
-        <BreadCrumbsWrapper>
-          <BreadCrumbsLeft type='button'>
-            Home / My Account
-          </BreadCrumbsLeft>
-          <BreadCrumbsRight type='button'>
-            {'<'} Return to Previous Page
-          </BreadCrumbsRight>
-        </BreadCrumbsWrapper>
+        <BreadCrumbs
+          link={
+            <>
+              <a href='#'>Home</a>
+              <span>/</span>
+              <span>Create An Account</span>
+            </>
+          }
+          return='#'
+          marginBottom='20px'
+          gridArea=''
+        />
 
 
         <MyAccountWrapper>
