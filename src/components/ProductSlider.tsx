@@ -57,7 +57,7 @@ const ImageSecond = styled.img<{curr: boolean}>`
   width: 80px;
   height: 112px;
   margin-bottom: 10px;
-  ${props => props.curr && 'border: 1px solid #e4e2e1;'}
+  ${props => props.curr && 'border: 1px solid var(--color-border);'}
 `;
 
 const ButtonIncrease = styled.button`
@@ -81,7 +81,7 @@ const ProductTriangle = styled.div`
   position: absolute;
   top: -6px;
   left: -26px;
-  border-bottom: 40px solid #000;
+  border-bottom: 40px solid var(--color-triangle-new);
   border-right: 40px solid transparent;
   border-left: 40px solid transparent;
   transform: rotate(-45deg);
@@ -95,7 +95,7 @@ const ProductTriangleDescription = styled.span`
   font-size: 14px;
   line-height: 1.2;
   font-weight: 700;
-  color: #fff;
+  color: var(--color-text-second);
 `;
 
 
