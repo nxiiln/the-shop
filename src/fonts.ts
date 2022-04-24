@@ -14,7 +14,7 @@ const fonts: string = `
   }
 
   html {
-    --font-main: NunitoPlayfair Display SC;
+    --font-main: Playfair Display SC;
     --font-second: Nunito;
   }
 `;
