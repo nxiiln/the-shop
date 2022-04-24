@@ -16,6 +16,7 @@ const fonts: string = `
   html {
     --font-main: Playfair Display SC;
     --font-second: Nunito;
+    --font-regular: Arial;
   }
 `;
 
