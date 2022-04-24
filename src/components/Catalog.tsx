@@ -51,7 +51,7 @@ const Dropdown = styled.div<{open: boolean}>`
   display: flex;
   flex-direction: column;
   align-items: start;
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 11px;
   font-weight: 300;
   color: #000;
@@ -85,7 +85,7 @@ const DropdownHeader = styled.div`
 //Button-----------------------------------------
 const ButtonFilter = styled.button`
   margin-left: 4px;
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 10px;
   line-height: 24px;
   font-weight: 400;
@@ -131,7 +131,7 @@ const ButtonFilterSecond = styled(ButtonFilter)`
 //Checkbox---------------------------------------
 const Checkbox = styled.label`
   margin-bottom: 12px;
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 10px;
   font-weight: 400;
   color: #000;
@@ -238,7 +238,7 @@ const BannerSmall = styled.div`
     position: absolute;
     top: 255px;
     left: 0px;
-    font-family: Nunito;
+    font-family: var(--font-second);
     line-height: 14px;
     font-weight: 300;
 
@@ -265,7 +265,7 @@ const HeaderWrapper = styled.div`
   align-items: center;
 
   h2 {
-    font-family: 'Playfair Display SC';
+    font-family: var(--font-main);
     font-size: 24px;
     font-weight: 400;
     color: #000;
@@ -294,7 +294,7 @@ const Banner = styled.div`
     position: absolute;
     top: 155px;
     left: 35px;
-    font-family: 'Playfair Display SC';
+    font-family: var(--font-main);
     font-size: 48px;
     font-weight: 400;
     color: #000;
@@ -304,7 +304,7 @@ const Banner = styled.div`
     position: absolute;
     top: 220px;
     left: 35px;
-    font-family: Nunito;
+    font-family: var(--font-second);
     font-size: 12px;
     font-weight: 300;
     color: #282828;
@@ -336,7 +336,7 @@ const DropdownSmallWrapper = styled.div<{type: string}>`
   z-index: 2;
 
   > span:nth-child(1) {
-    font-family: Nunito;
+    font-family: var(--font-second);
     font-size: 10px;
     font-weight: 300;
     color: #000;
@@ -428,13 +428,13 @@ const Product = styled.div`
 `;
 
 const ProductName = styled.span`
-  font-family: 'Playfair Display SC';
+  font-family: var(--font-main);
   font-size: 14px;
   font-weight: 400;
 `;
 
 const ProductPrice = styled.span`
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 11px;
   font-weight: 300;
 `;
@@ -457,7 +457,7 @@ const ProductTriangleDescription = styled.span`
   position: absolute;
   top: 5px;
   left: 8px;
-  font-family: 'Playfair Display SC';
+  font-family: var(--font-main);
   font-size: 11px;
   line-height: 1.2;
   font-weight: 700;
@@ -485,7 +485,7 @@ const QuickShop = styled.button`
   position: absolute;
   top: 150px;
   left: 0px;
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 10px;
   font-weight: 300;
   color: #000;
@@ -503,7 +503,7 @@ const AddToBag = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 10px;
   line-height: 1.2;
   font-weight: 300;
@@ -521,7 +521,7 @@ const AddToBag = styled.button`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-family: Nunito;
+    font-family: var(--font-second);
     font-size: 10px;
     line-height: 1.2;
     font-weight: 300;
@@ -536,7 +536,7 @@ const WishList = styled.button`
   justify-content: space-between;
   align-items: center;
   align-self: end;
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 10px;
   line-height: 1.2;
   font-weight: 300;
@@ -555,7 +555,7 @@ const Compare = styled.button`
   justify-content: space-between;
   align-items: center;
   align-self: end;
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 10px;
   line-height: 1.2;
   font-weight: 300;

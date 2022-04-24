@@ -57,7 +57,7 @@ const Twitter = styled.div`
   align-items: center;
   border: 1px solid #fff;
   > p {
-    font-family: 'Playfair Display SC';
+    font-family: var(--font-main);
     font-size: 28px;
     color: #fff;
   }
@@ -97,7 +97,7 @@ const Telegram = styled.div`
   align-items: center;
   border: 1px solid #fff;
   > p {
-    font-family: 'Playfair Display SC';
+    font-family: var(--font-main);
     font-size: 28px;
     color: #fff;
   }
@@ -165,7 +165,7 @@ const BottomBlock = styled.div`
 
 const MainText = styled.div`
   margin: 0 0 10px 0;
-  font-family: 'Playfair Display SC';
+  font-family: var(--font-main);
   font-size: 14px;
   line-height: 1.2;
   font-weight: 400;
@@ -174,7 +174,7 @@ const MainText = styled.div`
 
 const Button = styled.button`
   padding: 0;
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 10px;
   line-height: 18px;
   font-weight: 300;
@@ -189,7 +189,7 @@ const Button = styled.button`
 `;
 
 const Text = styled.p`
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 10px;
   line-height: 18px;
   font-weight: 300;

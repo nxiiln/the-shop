@@ -36,7 +36,7 @@ const HeaderWrapper = styled.div`
   align-items: center;
   border-bottom: 1px solid #e4e2e1;
   h2 {
-    font-family: 'Playfair Display SC';
+    font-family: var(--font-main);
     font-size: 24px;
     line-height: 1.2;
     font-weight: 400;
@@ -55,7 +55,7 @@ const TitleWrapper = styled.div`
   justify-items: start;
   align-items: center;
   span {
-    font-family: Nunito;
+    font-family: var(--font-second);
     font-size: 12px;
     line-height: 1.2;
     font-weight: 300;
@@ -100,7 +100,7 @@ const Product = styled.div`
   align-items: center;
   background: transparent;
   span {
-    font-family: Nunito;
+    font-family: var(--font-second);
     font-size: 10px;
     line-height: 14px;
     font-weight: 400;
@@ -136,7 +136,7 @@ const X = styled.button`
 `;
 
 const Quantity = styled.span`
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 10px;
   line-height: 1.2;
   font-weight: 400;
@@ -149,7 +149,7 @@ const Quantity = styled.span`
 const AddToBag = styled.button`
   width: 119px;
   height: 30px;
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 10px;
   line-height: 1.2;
   font-weight: 300;

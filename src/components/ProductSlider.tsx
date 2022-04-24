@@ -91,7 +91,7 @@ const ProductTriangleDescription = styled.span`
   position: absolute;
   top: 5px;
   left: 4px;
-  font-family: 'Playfair Display SC';
+  font-family: var(--font-main);
   font-size: 14px;
   line-height: 1.2;
   font-weight: 700;

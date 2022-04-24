@@ -31,7 +31,7 @@ const TextBlockA = styled.div`
 `;
 
 const DescriptionA = styled.span`
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 16px;
   line-height: 1.2;
   font-weight: 300;
@@ -46,7 +46,7 @@ const SpringEssentials = styled.div`
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  font-family: 'Playfair Display SC';
+  font-family: var(--font-main);
   line-height: 1.2;
   font-weight: 400;
   color: #000;
@@ -68,7 +68,7 @@ const ButtonBannerA = styled.button`
   height: 30px;
   margin: 0;
   display: inline-block;
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 14px;
   line-height: 1.2;
   font-weight: 300;
@@ -107,7 +107,7 @@ const TextBlockB = styled.div`
 `;
 
 const DescriptionB = styled.div`
-  font-family: 'Playfair Display SC';
+  font-family: var(--font-main);
   font-size: 48px;
   line-height: 1.2;
   font-weight: 400;
@@ -116,7 +116,7 @@ const DescriptionB = styled.div`
 `;
 
 const SpringCollection = styled.div`
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 14px;
   line-height: 1.2;
   font-weight: 300;
@@ -147,11 +147,11 @@ const TextBlockC = styled.div`
   text-transform: uppercase;
   color: #000;
   > span:first-child {
-    font-family: 'Playfair Display SC';
+    font-family: var(--font-main);
     font-size: 36px;
   }
   > span:last-child {
-    font-family: Nunito;
+    font-family: var(--font-second);
     font-size: 18px;
   }
 `;
@@ -162,7 +162,7 @@ const ShopNow = styled.button`
   position: absolute;
   top: 110px;
   left: 85px;
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 10px;
   line-height: 1.2;
   font-weight: 300;
@@ -182,7 +182,7 @@ const UseCode = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 11px;
   line-height: 1.2;
   font-weight: 700;

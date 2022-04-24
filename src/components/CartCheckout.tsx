@@ -15,7 +15,7 @@ const Cart = styled.article`
     height: 50px;
     padding: 7px 0 0 17px;
     display: inline-block;
-    font-family: 'Playfair Display SC';
+    font-family: var(--font-main);
     font-size: 24px;
     font-weight: 400;
     color: #000;
@@ -39,7 +39,7 @@ const Product = styled.div`
   grid-template-columns: 92px 99px 35px 1fr;
   grid-template-rows: repeat(12, 9.167px);
   span {
-    font-family: Nunito;
+    font-family: var(--font-second);
     font-size: 10px;
     line-height: 12px;
     font-weight: 400;
@@ -106,7 +106,7 @@ const Total = styled.div`
   grid-template-columns: 1fr 1fr;
   grid-template-rows: repeat(10, 10px);
   span {
-    font-family: Nunito;
+    font-family: var(--font-second);
     font-size: 12px;
     line-height: 1.2;
     font-weight: 300;

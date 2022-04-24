@@ -34,7 +34,7 @@ const Item = styled.div`
 
 const Number = styled.span`
   margin: 0 0 13px 0;
-  font-family: 'Playfair Display SC';
+  font-family: var(--font-main);
   font-size: 24px;
   line-height: 1.2;
   font-weight: 400;
@@ -50,7 +50,7 @@ const TextWrapper = styled.div`
 `;
 
 const MainText = styled.span`
-  font-family: 'Playfair Display SC';
+  font-family: var(--font-main);
   font-size: 13px;
   line-height: 1.2;
   font-weight: 400;
@@ -59,7 +59,7 @@ const MainText = styled.span`
 `;
 
 const Text = styled.span`
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 10px;
   line-height: 1.2;
   font-weight: 300;

@@ -33,7 +33,7 @@ const PostHeader = styled.h2`
   width: 480px;
   margin: 0 0 22px 0;
   display: inline-block;
-  font-family: 'Playfair Display SC';
+  font-family: var(--font-main);
   font-size: 24px;
   line-height: 1.2;
   font-weight: 400;
@@ -43,7 +43,7 @@ const PostHeader = styled.h2`
 
 const PostDate = styled.span`
   margin-bottom: 13px;
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 11px;
   line-height: 1.2;
   font-weight: 300;
@@ -53,7 +53,7 @@ const PostDate = styled.span`
 
 const PostDescription = styled.div`
   margin-top: 18px;
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 14px;
   line-height: 22px;
   font-weight: 300;
@@ -70,7 +70,7 @@ const ReviewsWrapper = styled.article`
 
 const ReviewsNumber = styled.h2`
   margin: 0 0 12px 0;
-  font-family: 'Playfair Display SC';
+  font-family: var(--font-main);
   font-size: 24px;
   line-height: 1.2;
   font-weight: 400;
@@ -135,7 +135,7 @@ const WriteReview = styled.form`
 
 const WriteReviewHeader = styled.h2`
   margin: 0 0 20px 0;
-  font-family: 'Playfair Display SC';
+  font-family: var(--font-main);
   font-size: 18px;
   line-height: 1.2;
   font-weight: 400;
@@ -145,7 +145,7 @@ const WriteReviewHeader = styled.h2`
 const Label = styled.label`
   display: block;
   margin-bottom: 20px;
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 10px;
   line-height: 30px;
   font-weight: 400;
@@ -169,7 +169,7 @@ const SubmitReview = styled.button`
   height: 30px;
   position: relative;
   left: 475px;
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 10px;
   font-weight: 300;
   color: #fff;

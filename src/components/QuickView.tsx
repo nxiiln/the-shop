@@ -38,7 +38,7 @@ const TitleWrapper = styled.div`
 `;
 
 const Title = styled.span`
-  font-family: 'Playfair Display SC';
+  font-family: var(--font-main);
   font-size: 24px;
   font-weight: 400;
   color: #000;
@@ -63,7 +63,7 @@ const Close = styled.button`
     position: absolute;
     top: -5px;
     left: 7px;
-    font-family: Nunito;
+    font-family: var(--font-second);
     font-size: 25px;
     color: #000;
     transform: rotate(45deg);
@@ -91,7 +91,7 @@ const Index = styled.span`
 
 const Name = styled.span`
   margin-bottom: 15px;
-  font-family: 'Playfair Display SC';
+  font-family: var(--font-main);
   font-size: 24px;
   font-weight: 400;
   color: #000;
@@ -107,7 +107,7 @@ const Details = styled.span`
 
 const Price = styled.span`
   margin-bottom: 15px;
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 18px;
   font-weight: 300;
   color: #000;
@@ -118,7 +118,7 @@ const Select = styled.select<{attr: string}>`
   height: 29px;
   margin-bottom: ${props => props.attr === 'qty' ? '20px' : '5px'};
   padding-left: 12px;
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 11px;
   line-height: 1.2;
   font-weight: 300;
@@ -140,7 +140,7 @@ const ButtonsWrapper = styled.div`
 const AddToCart = styled.button`
   width: 103px;
   height: 30px;
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 10px;
   font-weight: 300;
   color: #fff;
@@ -155,7 +155,7 @@ const WishList = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 10px;
   font-weight: 400;
   color: #000;
@@ -173,7 +173,7 @@ const Compare = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 10px;
   font-weight: 400;
   color: #000;

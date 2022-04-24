@@ -15,7 +15,7 @@ const Wrapper = styled.article`
 const MainText = styled.h2`
   margin: 15px 0 20px 0;
   text-align: center;
-  font-family: 'Playfair Display SC';
+  font-family: var(--font-main);
   font-size: 24px;
   line-height: 1.2;
   font-weight: 400;
@@ -39,7 +39,7 @@ const Description = styled.div<Position>`
 
 const PostHeader = styled.div`
   margin: 12px 0 0 15px;
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 14px;
   line-height: 16px;
   font-weight: 300;
@@ -49,7 +49,7 @@ const PostHeader = styled.div`
 const PostAbout = styled.p`
   width: 120px;
   margin: 8px 0 0 15px;
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 10px;
   line-height: 1.2;
   font-weight: 300;
@@ -65,7 +65,7 @@ const ReadMore = styled.button`
   top: -15px;
   left: 155px;
   display: flex;
-  font-family: 'Playfair Display SC';
+  font-family: var(--font-main);
   font-size: 14px;
   line-height: 1.2;
   font-weight: 400;

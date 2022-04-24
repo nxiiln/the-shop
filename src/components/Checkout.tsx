@@ -76,7 +76,7 @@ const TitleWrapperInner = styled.div`
 `;
 
 const Title = styled.span<Status>`
-  font-family: 'Playfair Display SC';
+  font-family: var(--font-main);
   font-size: 24px;
   line-height: 1.2;
   font-weight: 400;
@@ -91,7 +91,7 @@ const Required = styled.span`
 `;
 
 const Label = styled.label`
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 10px;
   line-height: 1.2;
   font-weight: 300;
@@ -101,7 +101,7 @@ const Label = styled.label`
 const ButtonBlack = styled.button`
   width: 144px;
   height: 30px;
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 10px;
   font-weight: 300;
   color: #fff;
@@ -185,7 +185,7 @@ const LabelRadio1 = styled(Label)`
 `;
 
 const TextUp = styled.span`
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 13px;
   font-weight: 300;
   color: #000;
@@ -293,7 +293,7 @@ const Step3 = styled.div`
     > span {
       display: inline-block;
       margin-bottom: 38px;
-      font-family: Nunito;
+      font-family: var(--font-second);
       font-size: 13px;
       font-weight: 400;
       color: #000;
@@ -368,7 +368,7 @@ const DatalistWrapper4 = styled.div`
   flex-wrap: wrap;
   justify-content: space-between;
   > span {
-    font-family: Nunito;
+    font-family: var(--font-second);
     font-size: 10px;
     font-weight: 300;
     color: #000;
@@ -376,7 +376,7 @@ const DatalistWrapper4 = styled.div`
   > input {
     width: 77px;
     height: 30px;
-    font-family: Nunito;
+    font-family: var(--font-second);
     font-size: 10px;
     line-height: 1.2;
     font-weight: 300;
@@ -422,7 +422,7 @@ const Step5 = styled.div`
     justify-content: space-between;
     > p {
       margin: 0;
-      font-family: Nunito;
+      font-family: var(--font-second);
       font-size: 10px;
       line-height: 18px;
       font-weight: 400;

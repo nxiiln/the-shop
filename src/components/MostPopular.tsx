@@ -14,7 +14,7 @@ const MostPopularWrapper = styled.article`
 `;
 
 const MainText = styled.h2`
-  font-family: 'Playfair Display SC';
+  font-family: var(--font-main);
   font-size: 24px;
   line-height: 1.2;
   font-weight: 400;
@@ -69,7 +69,7 @@ const New = styled.div`
   position: absolute;
   top: 4px;
   left: 2px;
-  font-family: 'Playfair Display SC';
+  font-family: var(--font-main);
   font-size: 11px;
   line-height: 1.2;
   font-weight: 700;
@@ -86,7 +86,7 @@ const DescriptionWrapper = styled.div`
 `;
 
 const Description = styled.div`
-  font-family: 'Playfair Display SC';
+  font-family: var(--font-main);
   font-size: 14px;
   line-height: 1.2;
   font-weight: 400;
@@ -94,7 +94,7 @@ const Description = styled.div`
 `;
 
 const Price = styled.div`
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 11px;
   line-height: 1.2;
   font-weight: 300;
@@ -121,7 +121,7 @@ type Status = {status: boolean};
 
 const QuickShopText = styled.p<Status>`
   margin: 0;
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 10px;
   line-height: 1.2;
   font-weight: 300;
@@ -153,7 +153,7 @@ const AddToBag = styled.button`
 const AddToBagText = styled.p`
   width: 80px;
   margin: 0;
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 10px;
   line-height: 1.2;
   font-weight: 300;
@@ -168,7 +168,7 @@ const WishList = styled.button`
   justify-content: space-between;
   align-items: center;
   align-self: end;
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 10px;
   line-height: 1.2;
   font-weight: 300;
@@ -189,7 +189,7 @@ const Compare = styled.button`
   justify-content: space-between;
   align-items: center;
   align-self: end;
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 10px;
   line-height: 1.2;
   font-weight: 300;

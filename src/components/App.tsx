@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './Header';
-import MyAccount from './MyAccount';
+import Product from './Product';
+import TopBrand from './TopBrands';
 import PurchasesInfo from './PurchasesInfo';
 import Footer from './Footer';
 
@@ -9,7 +10,8 @@ const App = (): JSX.Element => {
   return(
     <>
       <Header />
-      <MyAccount />
+      <Product />
+      <TopBrand />
       <PurchasesInfo />
       <Footer />
     </>

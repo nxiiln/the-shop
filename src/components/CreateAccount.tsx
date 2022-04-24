@@ -32,7 +32,7 @@ const TitleWrapper = styled.div`
 `;
 
 const Title = styled.h2`
-  font-family: 'Playfair Display SC';
+  font-family: var(--font-main);
   font-size: 24px;
   font-weight: 400;
   color: #000;
@@ -67,14 +67,14 @@ const AddressInformation = styled.div`
 const Description = styled.span`
   margin-bottom: 25px;
   display: inline-block; 
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 13px;
   font-weight: 300;
   color: #000;
 `;
 
 const Label = styled.label`
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 10px;
   line-height: 1.2;
   font-weight: 300;
@@ -113,7 +113,7 @@ const ButtonCreateAccount = styled.button`
   position: absolute;
   top: 770px;
   left: 212px;
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 10px;
   font-weight: 300;
   color: #fff;

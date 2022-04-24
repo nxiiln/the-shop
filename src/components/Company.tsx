@@ -19,7 +19,7 @@ const Button = styled.button`
   height: 12px;
   margin: 0 0 8px 14px;
   padding: 0;
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 10px;
   text-transform: uppercase;
   text-align: start;

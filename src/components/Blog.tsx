@@ -36,7 +36,7 @@ const PostHeader = styled.h2`
   width: 480px;
   margin-bottom: 22px;
   display: inline-block;
-  font-family: 'Playfair Display SC';
+  font-family: var(--font-main);
   font-size: 24px;
   line-height: 1.2;
   font-weight: 400;
@@ -46,7 +46,7 @@ const PostHeader = styled.h2`
 
 const PostDate = styled.span`
   margin-bottom: 13px;
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 11px;
   line-height: 1.2;
   font-weight: 300;
@@ -57,7 +57,7 @@ const PostDate = styled.span`
 const PostDescription = styled.span`
   margin-top: 20px;
   margin-bottom: 20px;
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 14px;
   line-height: 22px;
   font-weight: 300;

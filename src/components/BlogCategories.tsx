@@ -19,7 +19,7 @@ const WrapperInner = styled.div`
 
 const Categories = styled.h2`
   margin: 0 0 25px 5px;
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 14px;
   line-height: 1.2;
   font-weight: 300;
@@ -30,7 +30,7 @@ const Category = styled.button`
   width: 132px;
   margin-bottom: 15px;
   display: flex;
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 11px;
   line-height: 1.2;
   font-weight: 300;

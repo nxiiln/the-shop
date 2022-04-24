@@ -45,7 +45,7 @@ const CartSymbol = styled.img`
 const Text = styled.div`
   width: 50px;
   height: 12px;
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 11px;
   line-height: 1.2;
   font-weight: 300;
@@ -106,7 +106,7 @@ const Description = styled.div`
   position: relative;
   top: -72px;
   left: 77px;
-  font-family: Playfair Display SC;
+  font-family: var(--font-main);
   font-size: 11px;
   line-height: 1.2;
   font-weight: 400;
@@ -120,7 +120,7 @@ const Price = styled.div`
   position: relative;
   top: -58px;
   left: 78px;
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 11px;
   line-height: 1.2;
   font-weight: 300;
@@ -166,7 +166,7 @@ const Total = styled.div`
   position: relative;
   top: 18px;
   left: 17px;
-  font-family: Playfair Display SC;
+  font-family: var(--font-main);
   font-size: 14px;
   line-height: 1.2;
   font-weight: 400;
@@ -178,7 +178,7 @@ const TotalPrice = styled.div`
   position: relative;
   top: 5.5px;
   left: 80px;
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 11px;
   line-height: 1.2;
   font-weight: 700;
@@ -191,7 +191,7 @@ const ViewCart = styled.button`
   position: relative;
   top: 18px;
   left: 10px;
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 10px;
   line-height: 1.2;
   font-weight: 300;
@@ -207,7 +207,7 @@ const Checkout = styled.button`
   position: relative;
   top: 18px;
   left: 16px;
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 10px;
   line-height: 1.2;
   font-weight: 300;

@@ -31,7 +31,7 @@ const TitleWrapper = styled.div`
 `;
 
 const Title = styled.h2`
-  font-family: 'Playfair Display SC';
+  font-family: var(--font-main);
   font-size: 24px;
   font-weight: 400;
   color: #000;
@@ -49,7 +49,7 @@ const Tab = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 13px;
   font-weight: 300;
   color: #000;
@@ -87,7 +87,7 @@ const MyAccountBody = styled.div`
 `;
 
 const Label = styled.label`
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 10px;
   line-height: 1.2;
   font-weight: 300;
@@ -124,7 +124,7 @@ const LabelCheckbox = styled(Label)`
 const ButtonBlack = styled.button`
   width: 144px;
   height: 30px;
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 10px;
   font-weight: 300;
   color: #fff;
@@ -161,7 +161,7 @@ const OrderHistoryHeader = styled.div`
   display: grid;
   grid-template-columns: 33px 205px 137px 130px 1fr;
   span {
-    font-family: Nunito;
+    font-family: var(--font-second);
     font-size: 12px;
     line-height: 1.2;
     font-weight: 300;
@@ -188,7 +188,7 @@ const Order = styled.div`
   text-transform: uppercase;
   background: #f7f7f7;
   span {
-    font-family: Nunito;
+    font-family: var(--font-second);
     font-size: 10px;
     line-height: 14px;
     font-weight: 400;
@@ -204,7 +204,7 @@ const Order = styled.div`
 const ButtonDetails = styled(ButtonBlack)<{status: boolean}>`
   width: 66px;
   span {
-    font-family: Nunito;
+    font-family: var(--font-second);
     font-size: 10px;
     font-weight: 300;
     color: #fff;
@@ -234,7 +234,7 @@ const OrderDetailsHeader = styled.div`
   border-bottom: 1px solid #e4e2e1;
   span {
     Text: product;
-    font-family: Nunito;
+    font-family: var(--font-second);
     font-size: 12px;
     line-height: 1.2;
     font-weight: 300;
@@ -250,7 +250,7 @@ const OrderDetailsBody = styled.div`
   border-bottom: 1px solid #e4e2e1;
 
   span {
-    font-family: Nunito;
+    font-family: var(--font-second);
     font-size: 10px;
     line-height: 14px;
     font-weight: 400;
@@ -274,7 +274,7 @@ const TotalBlock = styled.div`
   grid-template-columns: 1fr 1fr;
 
   span {
-    font-family: Nunito;
+    font-family: var(--font-second);
     font-size: 10px;
     line-height: 1.2;
     font-weight: 300;

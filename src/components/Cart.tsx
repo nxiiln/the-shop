@@ -39,7 +39,7 @@ const HeaderWrapper = styled.div`
   align-items: center;
   border-bottom: 1px solid #e4e2e1;
   h2 {
-    font-family: 'Playfair Display SC';
+    font-family: var(--font-main);
     font-size: 24px;
     line-height: 1.2;
     font-weight: 400;
@@ -58,7 +58,7 @@ const TitleWrapper = styled.div`
   justify-items: start;
   align-items: center;
   span {
-    font-family: Nunito;
+    font-family: var(--font-second);
     font-size: 12px;
     line-height: 1.2;
     font-weight: 300;
@@ -126,7 +126,7 @@ const Product = styled.div`
   align-items: center;
   background: transparent;
   span {
-    font-family: Nunito;
+    font-family: var(--font-second);
     font-size: 10px;
     line-height: 14px;
     font-weight: 400;
@@ -168,7 +168,7 @@ const Quantity = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 10px;
   line-height: 1.2;
   font-weight: 400;
@@ -184,7 +184,7 @@ const PlusMinus = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: Nunito;
+  font-family: var(--font-second);
   color: #aaa;
   background: transparent;
   border: none;
@@ -215,7 +215,7 @@ const EstimateDelivery = styled.div`
   justify-content: space-between;
   align-content: space-between;
   span:nth-child(1) {
-    font-family: Nunito;
+    font-family: var(--font-second);
     font-size: 12px;
     line-height: 1.2;
     font-weight: 300;
@@ -235,7 +235,7 @@ const Select = styled.select`
   width: 285px;
   height: 29px;
   padding-left: 12px;
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 10px;
   line-height: 1.2;
   font-weight: 300;
@@ -249,7 +249,7 @@ const Select = styled.select`
 const Postcode = styled.input`
   width: 142px;
   height: 30px;
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 12px;
   line-height: 1.2;
   font-weight: 300;
@@ -269,7 +269,7 @@ const Postcode = styled.input`
 const GetAQuote = styled.button`
   width: 119px;
   height: 30px;
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 10px;
   line-height: 1.2;
   font-weight: 300;
@@ -289,7 +289,7 @@ const Voucher = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   align-content: space-evenly;
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 12px;
   line-height: 1.2;
   font-weight: 300;
@@ -330,7 +330,7 @@ const Total = styled.div`
   grid-template-columns: 1fr 1fr;
   grid-template-rows: repeat(3, 42px) 27px 13px 13px;
   span {
-    font-family: Nunito;
+    font-family: var(--font-second);
     font-size: 12px;
     line-height: 1.2;
     font-weight: 300;
@@ -341,7 +341,7 @@ const Total = styled.div`
     justify-self: end;
   }
   span:nth-child(n+8) {
-    font-family: Nunito;
+    font-family: var(--font-second);
     font-size: 13px;
     font-weight: 700;
   }
@@ -369,7 +369,7 @@ const LineTotal = styled.div`
 const Button = styled.button`
   width: 291px;
   height: 30px;
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 10px;
   line-height: 1.2;
   font-weight: 400;

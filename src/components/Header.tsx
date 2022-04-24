@@ -7,7 +7,7 @@ import styled from 'styled-components/macro';
 
 
 const TheShop = styled.h1`
-  font-family: Playfair Display SC;
+  font-family: var(--font-main);
   font-size: 36px;
   line-height: 1.2;
   font-weight: 400;

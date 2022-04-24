@@ -28,7 +28,7 @@ const MainMenu = styled.ul<Open>`
   > li {
     padding: 0 20px 34px 20px;
     display: inline-block;
-    font-family: Nunito;
+    font-family: var(--font-second);
     font-size: 13px;
     line-height: 1.2;
     font-weight: 300;
@@ -74,7 +74,7 @@ const MenuInner = styled.ul`
   flex-direction: column;
   justify-content: flex-start;
   > li:first-child {
-    font-family: Nunito;
+    font-family: var(--font-second);
     font-size: 13px;
     line-height: 1.2;
     font-weight: 400;
@@ -84,7 +84,7 @@ const MenuInner = styled.ul`
   > li {
     height: 30px;
     display: inline-block;
-    font-family: Nunito;
+    font-family: var(--font-second);
     font-size: 14px;
     line-height: 28px;
     font-weight: 300;
@@ -114,7 +114,7 @@ const Text = styled.p`
   width: 115px;
   margin: 25px;
   text-align: center;
-  font-family: 'Playfair Display SC';
+  font-family: var(--font-main);
   font-size: 18px;
   line-height: 18px;
   font-weight: 400;

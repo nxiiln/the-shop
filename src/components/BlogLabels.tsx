@@ -13,7 +13,7 @@ const BlogLabelsWrapper = styled.article`
 
 const Labels = styled.h2`
   margin: 20px 0 0 20px;
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 14px;
   line-height: 1.2;
   font-weight: 300;

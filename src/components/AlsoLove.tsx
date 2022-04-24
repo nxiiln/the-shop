@@ -20,7 +20,7 @@ const AlsoLoveWrapper = styled.article<{status: boolean}>`
     position: relative;
     top: 25px;
     left: 22px;
-    font-family: 'Playfair Display SC';
+    font-family: var(--font-main);
     font-size: 21px;
     font-weight: 400;
     color: #000;
@@ -41,7 +41,7 @@ const AlsoLoveClose = styled.button`
     position: absolute;
     top: -5px;
     left: 7px;
-    font-family: Nunito;
+    font-family: var(--font-second);
     font-size: 25px;
     color: #000;
     transform: rotate(45deg);
@@ -67,7 +67,7 @@ const ProductAlso = styled.div`
   > span:nth-child(2) {
     width: 115px;
     margin: 0 0 20px 10px;
-    font-family: 'Playfair Display SC';
+    font-family: var(--font-main);
     font-size: 14px;
     line-height: 18px;
     font-weight: 400;
@@ -76,7 +76,7 @@ const ProductAlso = styled.div`
   }
   > span:nth-child(3) {
     margin: 0 0 25px 10px;
-    font-family: Nunito;
+    font-family: var(--font-second);
     font-size: 12px;
     line-height: 1.2;
     font-weight: 300;
@@ -88,7 +88,7 @@ const ButtonQuickView = styled.button`
   width: 107px;
   height: 30px;
   margin-left: 10px;
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 10px;
   color: #000;
   background: #fff;

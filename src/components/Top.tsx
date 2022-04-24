@@ -22,7 +22,7 @@ const GroupLeft = styled.div`
 const GroupCenter = styled.div`
   padding-top: 12px;
   padding-left: 5vw;
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 10px;
   text-transform: uppercase;
   color: #fff;
@@ -45,7 +45,7 @@ const Button = styled.button`
   height: 12px;
   display: block;
   padding: 0;
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 10px;
   text-transform: uppercase;
   text-align: start;

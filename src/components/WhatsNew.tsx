@@ -29,7 +29,7 @@ const Line = styled.div`
 
 const MainText = styled.h2`
   margin: 0;
-  font-family: 'Playfair Display SC';
+  font-family: var(--font-main);
   font-size: 24px;
   line-height: 1.2;
   font-weight: 400;

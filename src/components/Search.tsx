@@ -27,7 +27,7 @@ const Line = styled.div`
 
 const Input = styled.input<Focus>`
   width: ${props => props.focus ? '250px' : '70px'};
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 11px;
   line-height: 1.2;
   font-weight: 300;

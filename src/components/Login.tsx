@@ -32,7 +32,7 @@ const TitleWrapper = styled.div`
 `;
 
 const Title = styled.h2`
-  font-family: 'Playfair Display SC';
+  font-family: var(--font-main);
   font-size: 24px;
   font-weight: 400;
   color: #000;
@@ -52,7 +52,7 @@ const LeftGroup = styled.div`
 const TextUp = styled.span`
   display: inline-block;
   margin-bottom: 15px;
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 13px;
   font-weight: 300;
   color: #000;
@@ -79,7 +79,7 @@ const Label = styled.label`
   margin-bottom: 15px;
   display: grid;
   align-content: space-between;
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 10px;
   line-height: 1.2;
   font-weight: 300;
@@ -98,7 +98,7 @@ const ButtonLogin = styled.button`
   width: 112px;
   height: 30px;
   margin-top: 15px;
-  font-family: Nunito;
+  font-family: var(--font-second);
   font-size: 10px;
   font-weight: 300;
   color: #fff;
