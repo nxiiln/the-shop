@@ -1,18 +1,9 @@
 import {createGlobalStyle} from 'styled-components';
-import Nunito from './fonts/Nunito/Nunito-Regular.ttf'
-import PlayfairDisplaySC from './fonts/Playfair-Display/PlayfairDisplay-Regular.ttf';
+import fonts from './fonts';
 
 
-export default createGlobalStyle`
-  @font-face {
-    font-family: Nunito;
-    src: url(${Nunito});
-  }
-   
-  @font-face {
-    font-family: Playfair Display SC;
-    src: url(${PlayfairDisplaySC});
-  }
+const GlobalStyle = createGlobalStyle`
+  ${fonts}
 
   * {
     box-sizing: border-box;
@@ -35,3 +26,6 @@ export default createGlobalStyle`
     }
   }
 `;
+
+
+export default GlobalStyle;
