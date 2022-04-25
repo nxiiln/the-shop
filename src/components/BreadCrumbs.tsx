@@ -10,7 +10,7 @@ const Line = styled.div`
   width: 100%;
   height: 1px;
   margin-bottom: 10px;
-  background: #aaa;
+  background: var(--color-border);
 `;
 
 const BreadCrumbsWrapper = styled.div<{marginBottom: string}>`
@@ -22,18 +22,18 @@ const BreadCrumbsWrapper = styled.div<{marginBottom: string}>`
 `;
 
 const BreadCrumbsLeft = styled.div`
-  font-family: Arial;
+  font-family: var(--font-regular);
   font-size: 10px;
   font-weight: 400;
-  color: #aaa;
+  color: var(--color-text-regular);
   user-select: none;
 
   a {
     margin-right: 5px;
-    font-family: Arial;
+    font-family: var(--font-regular);
     font-size: 10px;
     font-weight: 400;
-    color: #aaa;
+    color: var(--color-text-regular);
     text-decoration: none;
     :hover {
       text-decoration: underline;
