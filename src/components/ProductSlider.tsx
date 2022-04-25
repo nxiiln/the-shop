@@ -5,7 +5,6 @@ import productSecond1 from '../images/productSecond1.png';
 import productSecond2 from '../images/productSecond2.png';
 import productSecond3 from '../images/productSecond3.png';
 import productSecond4 from '../images/productSecond4.png';
-import magnifyingGlass from '../images/magnifyingGlass.png';
 
 
 
@@ -19,16 +18,16 @@ const Slider = styled.article`
 
 const ImageSecondWrapper = styled.div`
   width: 80px;
-  height: 580px;
+  height: 520px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: center;
 `;
 
 const ButtonUp = styled.button`
   width: 20px;
   height: 10px;
-  margin-bottom: 10px;
   position: relative;
   background: none;
   border: none;
@@ -44,8 +43,6 @@ const ButtonUp = styled.button`
 `;
 
 const ButtonDown = styled(ButtonUp)`
-  margin-bottom: 30px;
-
   span {
     top: -7.5px;
     left: 3px;
@@ -56,19 +53,7 @@ const ButtonDown = styled(ButtonUp)`
 const ImageSecond = styled.img<{curr: boolean}>`
   width: 80px;
   height: 112px;
-  margin-bottom: 10px;
   ${props => props.curr && 'border: 1px solid var(--color-border);'}
-`;
-
-const ButtonIncrease = styled.button`
-  width: 30px;
-  height: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: none;
-  border: none;
-  cursor: pointer;
 `;
 
 const ImageMainWrapper = styled.div`
@@ -155,10 +140,6 @@ const ProductSlider = (): JSX.Element => {
         >
           <span>&#10094;</span>
         </ButtonDown>
-
-        <ButtonIncrease type='button'>
-          <img src={magnifyingGlass} alt='magnifyingGlass' />
-        </ButtonIncrease>
       </ImageSecondWrapper>
 
 
