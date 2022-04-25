@@ -21,7 +21,7 @@ const WrapperInner = styled.div`
 const Line = styled.div`
   width: 965px;
   height: 1px;
-  background: #aaa;
+  background: var(--color-border);
 `;
 
 const Item = styled.div`
@@ -38,7 +38,7 @@ const Number = styled.span`
   font-size: 24px;
   line-height: 1.2;
   font-weight: 400;
-  color: #000;
+  color: var(--color-text-main);
 `;
 
 const TextWrapper = styled.div`
@@ -55,7 +55,7 @@ const MainText = styled.span`
   line-height: 1.2;
   font-weight: 400;
   text-transform: uppercase;
-  color: #000;
+  color: var(--color-text-main);
 `;
 
 const Text = styled.span`
@@ -64,7 +64,7 @@ const Text = styled.span`
   line-height: 1.2;
   font-weight: 300;
   text-transform: uppercase;
-  color: #000;
+  color: var(--color-text-main);
 `;
 
 

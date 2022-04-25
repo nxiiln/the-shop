@@ -25,7 +25,7 @@ const WrapperInner = styled.div`
 const Line = styled.div`
   width: 370px;
   height: 1px;
-  background: #aaa;
+  background: var(--color-border);
 `;
 
 const MainText = styled.h2`
@@ -34,7 +34,7 @@ const MainText = styled.h2`
   font-size: 24px;
   line-height: 1.2;
   font-weight: 400;
-  color: #000;
+  color: var(--color-text-main);
 `;
 
 
