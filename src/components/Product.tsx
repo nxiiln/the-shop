@@ -1,14 +1,12 @@
 import React, {useState} from 'react';
 import styled from 'styled-components/macro';
 import BreadCrumbs from './BreadCrumbs';
+import RelatedProducts from './RelatedProducts';
 import ProductSlider from './ProductSlider';
 import twitterBlack from '../images/twitterBlack.png';
 import pinterestBlack from '../images/pinterestBlack.png';
 import googleBlack from '../images/googleBlack.png';
-import productRelated1 from '../images/productRelated1.png';
-import productRelated2 from '../images/productRelated2.png';
-import productRelated3 from '../images/productRelated3.png';
-import productRelated4 from '../images/productRelated4.png';
+
 
 
 
@@ -55,6 +53,7 @@ const Product = (): JSX.Element => {
         <div>
           <div>
             <ProductSlider />
+            <RelatedProducts />
           </div>
 
 
