@@ -3,9 +3,7 @@ import styled from 'styled-components/macro';
 import BreadCrumbs from './BreadCrumbs';
 import RelatedProducts from './RelatedProducts';
 import ProductSlider from './ProductSlider';
-import twitterBlack from '../images/twitterBlack.png';
-import pinterestBlack from '../images/pinterestBlack.png';
-import googleBlack from '../images/googleBlack.png';
+import ProductDescription from './ProductDescription';
 
 
 
@@ -22,6 +20,7 @@ const WrapperInner = styled.div`
   height: 1100px;
   > div {
     display: flex;
+    justify-content: space-between;
   }
 `;
 
@@ -58,6 +57,7 @@ const Product = (): JSX.Element => {
 
 
           <div>
+            <ProductDescription />
           </div>
         </div>
       </WrapperInner>
