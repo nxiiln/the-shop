@@ -7,26 +7,23 @@ const GlobalStyle = createGlobalStyle`
   ${fonts}
   ${colors}
 
-  * {
-    box-sizing: border-box;
-  }
+  * {box-sizing: border-box}
   
   body {
     margin: 0;
     overflow-x: hidden;
-    overflow-y: auto;
+
     &::-webkit-scrollbar {
-      width: 10px;
-      height: 10px;
-      background-color: #fff;
+      width: 6.5px;
+      background-color: var(--color-background-main);
     }
+
     &::-webkit-scrollbar-thumb {
-      background-color: #e4e2e1;
-      &:hover {
-        background-color: #aaa;
-      }
+      background-color: var(--color-background-second);
     }
   }
+
+  button, label, img {user-select: none}
 `;
 
 
