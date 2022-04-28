@@ -11,15 +11,16 @@ const GlobalStyle = createGlobalStyle`
   
   body {
     margin: 0;
-    overflow-x: hidden;
+    overflow: overlay;
 
     &::-webkit-scrollbar {
-      width: 6.5px;
-      background-color: var(--color-background-main);
+      width: 8px;
+      height: 8px;
     }
 
     &::-webkit-scrollbar-thumb {
-      background-color: var(--color-background-second);
+      background: var(--color-text-regular);
+      border-radius: 4px;
     }
   }
 
