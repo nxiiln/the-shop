@@ -222,6 +222,38 @@ const Quantity = styled.label`
   }
 `;
 
+const Buttons = styled.div`
+  width: 325px;
+  margin-bottom: 25px;
+  display: flex;
+  justify-content: space-between;
+
+  button {
+    width: 155px;
+    height: 30px;
+    font-family: var(--font-second);
+    font-size: 10px;
+    font-weight: 300;
+    cursor: pointer;
+  }
+
+  button:first-child {
+    color: var(--color-text-second);
+    background: var(--color-background-second);
+    border: none;
+  }
+
+  button:last-child {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--color-text-main);
+    background: var(--color-background-main);
+    border: 1px solid var(--color-border);
+    img {margin-right: 7px}
+  }
+`;
+
 
 
 
@@ -330,6 +362,18 @@ const ProductDescription = (): JSX.Element => {
           }}
         />
       </Quantity>
+
+
+      <Buttons>
+        <button type='button'>
+          ADD TO CART
+        </button>
+
+        <button type='button'>
+          <img src={wishList} alt='wishList' />
+          WISHLIST
+        </button>
+      </Buttons>
     </Wrapper>
   );
 }
