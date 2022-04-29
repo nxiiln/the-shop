@@ -254,6 +254,59 @@ const Buttons = styled.div`
   }
 `;
 
+const Accordion = styled.details`
+  width: 325px;
+  border-top: 1px solid var(--color-border);
+
+  summary {
+    padding: 12px 0 12px 0;
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-main);
+    font-size: 14px;
+    line-height: 1.2;
+    font-weight: 400;
+    color: var(--color-text-main);
+    list-style-type: none;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  summary > span:last-child {
+    font-size: 9px;
+    transform: rotate(-45deg);
+  }
+
+  &[open] {
+    summary > span:last-child {
+      transform: rotate(45deg);
+    }
+  }
+
+  p {
+    margin: 8px 0 12px 0;
+    font-family: var(--font-regular);
+    font-size: 11px;
+    line-height: 14px;
+    font-weight: 400;
+    color: var(--color-text-regular);
+  }
+`;
+
+const Tag = styled.button`
+  margin-right: 10px;
+  padding: 4px 8px 4px 8px;
+  font-family: var(--font-regular);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--color-text-main);
+  background: var(--color-background-highlight);
+  border: 1px solid var(--color-border);
+  border-radius: 15px;
+  cursor: pointer;
+  &:hover {text-decoration: underline}
+`;
+
 
 
 
@@ -374,6 +427,47 @@ const ProductDescription = (): JSX.Element => {
           WISHLIST
         </button>
       </Buttons>
+
+
+      <Accordion>
+        <summary>
+          <span>DESCRIPTION</span>
+          <span>◢</span>
+        </summary>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Integer et nisi erat.
+          Interdum et malesuada fames ac ante ipsum primis in faucibus.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.
+          Nunc eu commodo tellus. Mauris faucibus leo quis urna porta, at rutrum massa efficitur.
+          Donec tempor bibendum ex, sit amet lacinia nibh ultrices sit amet.
+        </p>
+      </Accordion>
+
+      <Accordion>
+        <summary>
+          <span>ADDITIONAL INFO</span>
+          <span>◢</span>
+        </summary>
+        <p>
+          Duis a ex id turpis consectetur consequat et in libero.
+          Integer varius consequat pulvinar.
+          Quisque at mattis diam.
+        </p>
+      </Accordion>
+
+      <Accordion>
+        <summary>
+          <span>TAGS</span>
+          <span>◢</span>
+        </summary>
+        <p>
+          <Tag type='button'>Dress</Tag>
+          <Tag type='button'>Striped</Tag>
+          <Tag type='button'>Detailed Swing Dress</Tag>
+        </p>
+      </Accordion>
     </Wrapper>
   );
 }
