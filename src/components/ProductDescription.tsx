@@ -197,6 +197,31 @@ const CheckboxColorWrapper = styled(CheckboxWrapper)`
   height: 30px;
 `;
 
+const Quantity = styled.label`
+  width: 60px;
+  height: 45px;
+  margin: 10px 10px 20px 10px;
+  display: grid;
+  align-content: space-between;
+  font-family: var(--font-second);
+  font-size: 11px;
+  line-height: 1.2;
+  font-weight: 300;
+  color: var(--color-text-main);
+
+  > input {
+    width: 58px;
+    height: 30px;
+    padding-left: 24px;
+    font-family: var(--font-second);
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--color-text-main);
+    border: 1px solid var(--color-border);
+    &:focus {outline: none}
+  }
+`;
+
 
 
 
@@ -208,6 +233,8 @@ const ProductDescription = (): JSX.Element => {
   const colorList: string[] = ['BLACK', 'BLUE'];
   const [colorOpen, setColorOpen] = useState<boolean>(false);
   const [color, setColor] = useState<string>('');
+
+  const [quantity, setQuantity] = useState<number>(1);
 
 
   return(
@@ -289,6 +316,20 @@ const ProductDescription = (): JSX.Element => {
           </CheckboxColorWrapper>
         }
       </Dropdown>
+
+
+      <Quantity>
+        QUANTITY
+        <input
+          type='number'
+          value={quantity}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
+            if (+e.target.value >= 1 && +e.target.value <= 9) {
+              setQuantity(+e.target.value);
+            }
+          }}
+        />
+      </Quantity>
     </Wrapper>
   );
 }
