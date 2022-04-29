@@ -1,13 +1,12 @@
 import React, {useState} from 'react';
 import styled from 'styled-components/macro';
+import wishList from '../images/wishList.png';
 
 
 
 
 const Wrapper = styled.article`
   width: 330px;
-  height: 640px;
-  border: 1px solid aqua;
 `;
 
 const Id = styled.span`
@@ -28,7 +27,7 @@ const Name = styled.h2`
 `;
 
 const AboutReviews = styled.div`
-  width: 230px;
+  width: 210px;
   margin-bottom: 15px;
   display: flex;
   justify-content: space-between;
@@ -114,6 +113,8 @@ const SmallDescription = styled.p`
 `;
 
 const Price = styled.span`
+  display: inline-block;
+  margin-bottom: 15px;
   font-family: var(--font-second);
   font-size: 18px;
   line-height: 1.2;
@@ -121,10 +122,94 @@ const Price = styled.span`
   color: var(--color-text-main);
 `;
 
+const Dropdown = styled.div<{open: boolean}>`
+  width: 325px;
+  margin-bottom: 7px;
+  padding: 0 10px 0 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  font-family: var(--font-second);
+  font-size: 11px;
+  font-weight: 300;
+  line-height: 1.2;
+  color: #000;
+  background: #f7f7f7;
+  border: 1px solid #e4e2e1;
+  border-radius: 20px;
+  span:nth-child(2) {transform: rotate(90deg)}
+
+  &:hover {
+    background: #fff;
+    border-radius: 0;
+  }
+
+  ${props => props.open && `
+    background: #fff;
+    border-radius: 0;
+    span:nth-child(2) {transform: rotate(-90deg)}
+  `}
+`;
+
+const DropdownHeader = styled.div`
+  width: 100%;
+  height: 29px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+`;
+
+const Checkbox = styled.label`
+  margin-bottom: 12px;
+  font-family: var(--font-second);
+  font-size: 10px;
+  font-weight: 400;
+  color: var(--color-text-main);
+  height: 18px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  :hover {text-decoration: underline}
+
+  > input {
+    margin: 0 7px 0 0;
+    accent-color: #000;
+    cursor: pointer;
+  }
+`;
+
+const CheckboxWrapper = styled.div`
+  margin: 10px 0 0 2px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: space-between;
+`;
+
+const CheckboxSizeWrapper = styled(CheckboxWrapper)`
+  width: 220px;
+  height: 60px;
+`;
+
+const CheckboxColorWrapper = styled(CheckboxWrapper)`
+  width: 150px;
+  height: 30px;
+`;
+
 
 
 
 const ProductDescription = (): JSX.Element => {
+  const sizeList: string[] = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
+  const [sizeOpen, setSizeOpen] = useState<boolean>(false);
+  const [size, setSize] = useState<string>('');
+
+  const colorList: string[] = ['BLACK', 'BLUE'];
+  const [colorOpen, setColorOpen] = useState<boolean>(false);
+  const [color, setColor] = useState<string>('');
+
+
   return(
     <Wrapper>
       <Id>MU-4587-89</Id>
@@ -143,9 +228,67 @@ const ProductDescription = (): JSX.Element => {
       <SmallDescription>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
         Integer et nisi erat.
-        Interdum et malesuada fames ac ante ipsum primis in faucibus.
+        Interdum et malesuada fames ac ante ipsum.
       </SmallDescription>
       <Price>$1,875.00</Price>
+
+
+      <Dropdown open={sizeOpen}>
+        <DropdownHeader onClick={(): void => {
+          sizeOpen ? setSizeOpen(false) : setSizeOpen(true)
+        }}>
+          <span>SIZE{size && `: ${size}`}</span>
+          <span>❯</span>
+        </DropdownHeader>
+
+        {sizeOpen &&
+          <CheckboxSizeWrapper>
+            {sizeList.map((currSize: string): JSX.Element => {
+              return(
+                <Checkbox key={currSize}>
+                  <input
+                    type='checkbox'
+                    checked={size === currSize}
+                    onChange={(): void => {
+                      size === currSize ? setSize('') : setSize(currSize);
+                    }}
+                  />
+                  {currSize}
+                </Checkbox>
+              );
+            })}
+          </CheckboxSizeWrapper>
+        }
+      </Dropdown>
+
+
+      <Dropdown open={colorOpen}>
+        <DropdownHeader onClick={(): void => {
+          colorOpen ? setColorOpen(false) : setColorOpen(true)
+        }}>
+          <span>COLOR{color && `: ${color}`}</span>
+          <span>❯</span>
+        </DropdownHeader>
+
+        {colorOpen &&
+          <CheckboxColorWrapper>
+            {colorList.map((currColor: string): JSX.Element => {
+              return(
+                <Checkbox key={currColor}>
+                  <input
+                    type='checkbox'
+                    checked={color === currColor}
+                    onChange={(): void => {
+                      color === currColor ? setColor('') : setColor(currColor);
+                    }}
+                  />
+                  {currColor}
+                </Checkbox>
+              );
+            })}
+          </CheckboxColorWrapper>
+        }
+      </Dropdown>
     </Wrapper>
   );
 }
