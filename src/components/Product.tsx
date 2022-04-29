@@ -4,6 +4,7 @@ import BreadCrumbs from './BreadCrumbs';
 import RelatedProducts from './RelatedProducts';
 import ProductSlider from './ProductSlider';
 import ProductDescription from './ProductDescription';
+import ProductReviews from './ProductReviews';
 
 
 
@@ -17,7 +18,6 @@ const WrapperOuter = styled.main`
 
 const WrapperInner = styled.div`
   width: 960px;
-  height: 1100px;
   > div {
     display: flex;
     justify-content: space-between;
@@ -58,6 +58,7 @@ const Product = (): JSX.Element => {
 
           <div>
             <ProductDescription />
+            <ProductReviews />
           </div>
         </div>
       </WrapperInner>
