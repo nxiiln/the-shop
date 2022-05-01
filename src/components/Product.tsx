@@ -45,7 +45,6 @@ const Product = (): JSX.Element => {
           }
           return='#'
           marginBottom='20px'
-          gridArea=''
         />
 
 
