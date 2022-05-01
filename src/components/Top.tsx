@@ -1,7 +1,6 @@
 import React from 'react';
 import Company from './Company';
 import Currency from './Currency';
-import Language from './Language';
 import styled from 'styled-components/macro';
 
 
@@ -83,7 +82,6 @@ const Top = (): JSX.Element => {
       <GroupLeft>
         <Company />
         <Currency />
-        <Language />
       </GroupLeft>
 
       <GroupCenter>
