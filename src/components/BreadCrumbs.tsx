@@ -65,15 +65,17 @@ const BreadCrumbsRight = styled(BreadCrumbsLeft)`
 interface Props {
   link: JSX.Element;
   return: string;
-  marginBottom: string;
-  gridArea: string;
+  marginBottom?: string;
+  gridArea?: string;
 }
 
 const BreadCrumbs = (props: Props): JSX.Element => {
   return(
-    <Wrapper gridArea={props.gridArea}>
+    <Wrapper gridArea={props.gridArea === undefined ? '' : props.gridArea}>
       <Line />
-      <BreadCrumbsWrapper marginBottom={props.marginBottom}>
+      <BreadCrumbsWrapper
+        marginBottom={props.marginBottom === undefined ? '' : props.marginBottom}
+      >
         <BreadCrumbsLeft>{props.link}</BreadCrumbsLeft>
         <BreadCrumbsRight>
           <span>&#10094;</span>
