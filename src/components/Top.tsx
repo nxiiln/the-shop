@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import Currency from './Currency';
 import styled from 'styled-components/macro';
 
 
@@ -14,19 +13,21 @@ const Nav = styled.nav`
 const GroupLeft = styled.div`
   width: 223px;
   display: flex;
-  justify-content: space-between;
+  justify-content: start;
 `;
 
-const Dropdown = styled.div<{open: boolean}>`
-  width: 85px;
-  height: 36px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+const Dropdown = styled.div<{open: boolean, width: string, height: string}>`
+  ${props =>`
+    width: ${props.width};
+    height: ${props.height};
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-  ${props => props.open && `
-    height: 130px;
-    background: var(--color-top-dropdown);
+    ${props.open && `
+      height: ${props.height};
+      background: var(--color-top-dropdown);
+    `}
   `}
 `;
 
@@ -45,6 +46,33 @@ const Link = styled.a`
 
 const LinkMain = styled(Link)<{open: boolean}>`
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &::after {
+    content: '◢';
+    display: inline-block;
+    font-size: 8px;
+    color: var(--color-text-regular);
+    transform: rotate(${props => props.open ? '' : '-'}45deg);
+  }
+`;
+
+const ButtonCurrency = styled.button`
+  width: 35px;
+  margin-top: 12px;
+  padding: 0;
+  display: flex;
+  font-family: var(--font-second);
+  font-size: 10px;
+  color: #aaa;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  &:hover {color: var(--color-text-second)}
+`;
+
+const ButtonCurrencyMain = styled(ButtonCurrency)<{open: boolean}>`
   justify-content: space-between;
   align-items: center;
 
@@ -117,25 +145,30 @@ const LogIn = styled(Button)`
 
 const Top = (): JSX.Element => {
   const list: string[] = ['ABOUT US', 'CONTACT', 'STORE LOCATION'];
-  const [open, setOpen] = useState<boolean>(false);
+  const [companyOpen, setCompanyOpen] = useState<boolean>(false);
+
+  const [currencyOpen, setCurrencyOpen] = useState<boolean>(false);
+  const [isUsd, setIsUsd] = useState<boolean>(true);
 
 
   return(
     <Nav>
       <GroupLeft>
         <Dropdown
-          open={open}
-          onMouseLeave={(): void => setOpen(false)}
+          width='85px'
+          height='130px'
+          open={companyOpen}
+          onMouseLeave={(): void => setCompanyOpen(false)}
         >
           <LinkMain
             href='#'
-            open={open}
-            onMouseEnter={(): void => setOpen(true)}
+            open={companyOpen}
+            onMouseEnter={(): void => setCompanyOpen(true)}
           >
             COMPANY
           </LinkMain>
 
-          {open && list.map((item: string): JSX.Element => {
+          {companyOpen && list.map((item: string): JSX.Element => {
             return(
               <Link
                 href='#'
@@ -147,7 +180,31 @@ const Top = (): JSX.Element => {
           })}
         </Dropdown>
 
-        <Currency />
+
+        <Dropdown
+          width='55px'
+          height='65px'
+          open={currencyOpen}
+          onClick={(): void => setCurrencyOpen(false)}
+          onMouseLeave={(): void => setCurrencyOpen(false)}
+        >
+          <ButtonCurrencyMain
+            type='button'
+            open={currencyOpen}
+            onMouseEnter={(): void => setCurrencyOpen(true)}
+          >
+            {isUsd ? 'USD' : 'EUR'}
+          </ButtonCurrencyMain>
+
+          {currencyOpen &&
+            <ButtonCurrency
+              type='button'
+              onClick={(): void => setIsUsd(!isUsd)}
+            >
+              {isUsd ? 'EUR' : 'USD'}
+            </ButtonCurrency>
+          }
+        </Dropdown>
       </GroupLeft>
 
       <GroupCenter>
