@@ -1,5 +1,4 @@
-import React from 'react';
-import Company from './Company';
+import React, {useState} from 'react';
 import Currency from './Currency';
 import styled from 'styled-components/macro';
 
@@ -9,13 +8,53 @@ const Nav = styled.nav`
   height: 36px;
   display: flex;
   justify-content: space-evenly;
-  background-color: #000;
+  background-color: var(--color-background-second);
 `;
 
 const GroupLeft = styled.div`
   width: 223px;
   display: flex;
   justify-content: space-between;
+`;
+
+const Dropdown = styled.div<{open: boolean}>`
+  width: 85px;
+  height: 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  ${props => props.open && `
+    height: 130px;
+    background: var(--color-top-dropdown);
+  `}
+`;
+
+const Link = styled.a`
+  width: 65px;
+  height: 12px;
+  margin-top: 12px;
+  font-family: var(--font-second);
+  font-size: 10px;
+  color: var(--color-text-regular);
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+  &:hover {color: var(--color-text-second)}
+`;
+
+const LinkMain = styled(Link)<{open: boolean}>`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &::after {
+    content: '◢';
+    display: inline-block;
+    font-size: 8px;
+    color: var(--color-text-regular);
+    transform: rotate(${props => props.open ? '' : '-'}45deg);
+  }
 `;
 
 const GroupCenter = styled.div`
@@ -77,10 +116,37 @@ const LogIn = styled(Button)`
 
 
 const Top = (): JSX.Element => {
+  const list: string[] = ['ABOUT US', 'CONTACT', 'STORE LOCATION'];
+  const [open, setOpen] = useState<boolean>(false);
+
+
   return(
     <Nav>
       <GroupLeft>
-        <Company />
+        <Dropdown
+          open={open}
+          onMouseLeave={(): void => setOpen(false)}
+        >
+          <LinkMain
+            href='#'
+            open={open}
+            onMouseEnter={(): void => setOpen(true)}
+          >
+            COMPANY
+          </LinkMain>
+
+          {open && list.map((item: string): JSX.Element => {
+            return(
+              <Link
+                href='#'
+                key={item}
+              >
+                {item}
+              </Link>
+            );
+          })}
+        </Dropdown>
+
         <Currency />
       </GroupLeft>
 
