@@ -11,7 +11,8 @@ import imageProductC from '../images/imageProductC.png';
 const CartPreviewWrapper = styled.div`
   box-sizing: content-box;
   width: 90px;
-  padding: 14px 8px 14px 0;
+  margin-right: 20px;
+  padding: 14px 0 14px 0;
   position: relative;
   display: flex;
   justify-content: space-between;
