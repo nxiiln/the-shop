@@ -20,7 +20,6 @@ const GlobalStyle = createGlobalStyle`
 
     &::-webkit-scrollbar-thumb {
       background: var(--color-text-regular);
-      border-radius: 4px;
     }
   }
 
