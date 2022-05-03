@@ -17,7 +17,7 @@ const GroupLeft = styled.div`
 `;
 
 const Dropdown = styled.div<{open: boolean, width: string, height: string}>`
-  ${props =>`
+  ${props => `
     width: ${props.width};
     height: ${props.height};
     display: flex;
@@ -55,6 +55,15 @@ const LinkMain = styled(Link)<{open: boolean}>`
     font-size: 8px;
     color: var(--color-text-regular);
     transform: rotate(${props => props.open ? '' : '-'}45deg);
+  }
+`;
+
+const LinkUnderline = styled(Link)<{withoutBorder?: boolean}>`
+  width: auto;
+  padding-right: 12px;
+  &:hover {text-decoration: underline}
+  ${props => !props.withoutBorder &&
+    'border-right: 1px solid var(--color-text-regular);'
   }
 `;
 
@@ -101,46 +110,7 @@ const GroupRight = styled.div`
   align-items: center;
 `;
 
-const Line = styled.div`
-  width: 1px;
-  height: 8px;
-  background-color: #4f4f4f;
-`;
 
-const Button = styled.button`
-  height: 12px;
-  display: block;
-  padding: 0;
-  font-family: var(--font-second);
-  font-size: 10px;
-  text-transform: uppercase;
-  text-align: start;
-  line-height: 0;
-  color: #aaa;
-  background-color: #000;
-  border: none;
-  &:hover {
-    color: #fff;
-    text-decoration: underline;
-    cursor: pointer;
-  }
-`;
-
-const MyAccount = styled(Button)`
-  width: 72px;
-`;
-
-const WishList = styled(Button)`
-  width: 54px;
-`;
-
-const Checkout = styled(Button)`
-  width: 58px;
-`;
-
-const LogIn = styled(Button)`
-  width: 38px;
-`;
 
 
 const Top = (): JSX.Element => {
@@ -212,13 +182,10 @@ const Top = (): JSX.Element => {
       </GroupCenter>
 
       <GroupRight>
-        <MyAccount type='button'>my account</MyAccount>
-        <Line />
-        <WishList type='button'>wish list</WishList>
-        <Line />
-        <Checkout type='button'>checkout</Checkout>
-        <Line />
-        <LogIn type='button'>log in</LogIn>
+        <LinkUnderline href='#'>MY ACCOUNT</LinkUnderline>
+        <LinkUnderline href='#'>WISH LIST</LinkUnderline>
+        <LinkUnderline href='#'>CHECKOUT</LinkUnderline>
+        <LinkUnderline href='#' withoutBorder>LOG IN</LinkUnderline>
       </GroupRight>
     </Nav>
   );
