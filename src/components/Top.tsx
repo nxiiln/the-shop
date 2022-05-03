@@ -67,7 +67,7 @@ const LinkUnderline = styled(Link)<{withoutBorder?: boolean}>`
   }
 `;
 
-const ButtonCurrency = styled.button`
+const Button = styled.button`
   width: 35px;
   margin-top: 12px;
   padding: 0;
@@ -81,7 +81,7 @@ const ButtonCurrency = styled.button`
   &:hover {color: var(--color-text-second)}
 `;
 
-const ButtonCurrencyMain = styled(ButtonCurrency)<{open: boolean}>`
+const ButtonMain = styled(Button)<{open: boolean}>`
   justify-content: space-between;
   align-items: center;
 
@@ -139,14 +139,7 @@ const Top = (): JSX.Element => {
           </LinkMain>
 
           {companyOpen && list.map((item: string): JSX.Element => {
-            return(
-              <Link
-                href='#'
-                key={item}
-              >
-                {item}
-              </Link>
-            );
+            return <Link href='#' key={item}>{item}</Link>
           })}
         </Dropdown>
 
@@ -158,21 +151,21 @@ const Top = (): JSX.Element => {
           onClick={(): void => setCurrencyOpen(false)}
           onMouseLeave={(): void => setCurrencyOpen(false)}
         >
-          <ButtonCurrencyMain
+          <ButtonMain
             type='button'
             open={currencyOpen}
             onMouseEnter={(): void => setCurrencyOpen(true)}
           >
             {isUsd ? 'USD' : 'EUR'}
-          </ButtonCurrencyMain>
+          </ButtonMain>
 
           {currencyOpen &&
-            <ButtonCurrency
+            <Button
               type='button'
               onClick={(): void => setIsUsd(!isUsd)}
             >
               {isUsd ? 'EUR' : 'USD'}
-            </ButtonCurrency>
+            </Button>
           }
         </Dropdown>
       </GroupLeft>
