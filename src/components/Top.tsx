@@ -2,18 +2,51 @@ import React, {useState} from 'react';
 import styled from 'styled-components/macro';
 
 
-const Nav = styled.nav`
+
+
+const WrapperOuter = styled.article`
   width: 100vw;
-  height: 36px;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   background-color: var(--color-background-second);
 `;
 
-const GroupLeft = styled.div`
-  width: 223px;
+const WrapperInner = styled.div`
+  width: 1100px;
+  min-width: 960px;
+  height: 36px;
+  position: relative;
+  z-index: 2;
   display: flex;
-  justify-content: start;
+  justify-content: space-between;
+  align-items: center;
+
+  > div:nth-child(1) {
+    height: 36px;
+    display: flex;
+  }
+
+  > div:nth-child(2) {
+    height: auto;
+    display: flex;
+    align-items: center;
+  }
+`;
+
+const Title = styled.div`
+  width: 100vw;
+  height: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  font-family: var(--font-second);
+  font-size: 10px;
+  font-weight: 300;
+  color: var(--color-text-second);
 `;
 
 const Dropdown = styled.div<{open: boolean, width: string, height: string}>`
@@ -33,8 +66,7 @@ const Dropdown = styled.div<{open: boolean, width: string, height: string}>`
 
 const Link = styled.a`
   width: 65px;
-  height: 12px;
-  margin-top: 12px;
+  margin: 11px 0 4px 0;
   font-family: var(--font-second);
   font-size: 10px;
   color: var(--color-text-regular);
@@ -60,7 +92,8 @@ const LinkMain = styled(Link)<{open: boolean}>`
 
 const LinkUnderline = styled(Link)<{withoutBorder?: boolean}>`
   width: auto;
-  padding-right: 12px;
+  margin: 0;
+  padding: 0 12px 0 12px;
   &:hover {text-decoration: underline}
   ${props => !props.withoutBorder &&
     'border-right: 1px solid var(--color-text-regular);'
@@ -69,7 +102,7 @@ const LinkUnderline = styled(Link)<{withoutBorder?: boolean}>`
 
 const Button = styled.button`
   width: 35px;
-  margin-top: 12px;
+  margin: 11px 0 4px 0;
   padding: 0;
   display: flex;
   font-family: var(--font-second);
@@ -94,95 +127,82 @@ const ButtonMain = styled(Button)<{open: boolean}>`
   }
 `;
 
-const GroupCenter = styled.div`
-  padding-top: 12px;
-  padding-left: 5vw;
-  font-family: var(--font-second);
-  font-size: 10px;
-  text-transform: uppercase;
-  color: #fff;
-`;
-
-const GroupRight = styled.div`
-  width: 295px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
 
 
+
+const companyList: string[] = ['ABOUT US', 'CONTACT', 'STORE LOCATION'];
 
 
 const Top = (): JSX.Element => {
-  const list: string[] = ['ABOUT US', 'CONTACT', 'STORE LOCATION'];
   const [companyOpen, setCompanyOpen] = useState<boolean>(false);
-
   const [currencyOpen, setCurrencyOpen] = useState<boolean>(false);
   const [isUsd, setIsUsd] = useState<boolean>(true);
 
 
   return(
-    <Nav>
-      <GroupLeft>
-        <Dropdown
-          width='85px'
-          height='130px'
-          open={companyOpen}
-          onMouseLeave={(): void => setCompanyOpen(false)}
-        >
-          <LinkMain
-            href='#'
+    <WrapperOuter>
+      <Title>FREE SHIPPING ON ORDERS ABOVE 50$</Title>
+      <WrapperInner>
+        <div>
+          <Dropdown
+            width='85px'
+            height='130px'
             open={companyOpen}
-            onMouseEnter={(): void => setCompanyOpen(true)}
+            onMouseLeave={(): void => setCompanyOpen(false)}
           >
-            COMPANY
-          </LinkMain>
-
-          {companyOpen && list.map((item: string): JSX.Element => {
-            return <Link href='#' key={item}>{item}</Link>
-          })}
-        </Dropdown>
-
-
-        <Dropdown
-          width='55px'
-          height='65px'
-          open={currencyOpen}
-          onClick={(): void => setCurrencyOpen(false)}
-          onMouseLeave={(): void => setCurrencyOpen(false)}
-        >
-          <ButtonMain
-            type='button'
-            open={currencyOpen}
-            onMouseEnter={(): void => setCurrencyOpen(true)}
-          >
-            {isUsd ? 'USD' : 'EUR'}
-          </ButtonMain>
-
-          {currencyOpen &&
-            <Button
-              type='button'
-              onClick={(): void => setIsUsd(!isUsd)}
+            <LinkMain
+              href='#'
+              open={companyOpen}
+              onMouseEnter={(): void => setCompanyOpen(true)}
             >
-              {isUsd ? 'EUR' : 'USD'}
-            </Button>
-          }
-        </Dropdown>
-      </GroupLeft>
+              COMPANY
+            </LinkMain>
 
-      <GroupCenter>
-        free shipping on orders above 50$
-      </GroupCenter>
+            {companyOpen && companyList.map((item: string): JSX.Element => {
+              return <Link href='#' key={item}>{item}</Link>
+            })}
+          </Dropdown>
 
-      <GroupRight>
-        <LinkUnderline href='#'>MY ACCOUNT</LinkUnderline>
-        <LinkUnderline href='#'>WISH LIST</LinkUnderline>
-        <LinkUnderline href='#'>CHECKOUT</LinkUnderline>
-        <LinkUnderline href='#' withoutBorder>LOG IN</LinkUnderline>
-      </GroupRight>
-    </Nav>
+
+          <Dropdown
+            width='55px'
+            height='65px'
+            open={currencyOpen}
+            onClick={(): void => setCurrencyOpen(false)}
+            onMouseLeave={(): void => setCurrencyOpen(false)}
+          >
+            <ButtonMain
+              type='button'
+              open={currencyOpen}
+              onMouseEnter={(): void => setCurrencyOpen(true)}
+            >
+              {isUsd ? 'USD' : 'EUR'}
+            </ButtonMain>
+
+            {currencyOpen &&
+              <Button
+                type='button'
+                onClick={(): void => setIsUsd(!isUsd)}
+              >
+                {isUsd ? 'EUR' : 'USD'}
+              </Button>
+            }
+          </Dropdown>
+        </div>
+
+
+        <div>
+          <LinkUnderline href='#'>MY ACCOUNT</LinkUnderline>
+          <LinkUnderline href='#'>WISH LIST</LinkUnderline>
+          <LinkUnderline href='#'>CHECKOUT</LinkUnderline>
+          <LinkUnderline href='#' withoutBorder>LOG IN</LinkUnderline>
+        </div>
+      </WrapperInner>
+    </WrapperOuter>
   );
 }
+
+
 
 
 export default Top;
