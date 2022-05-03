@@ -8,21 +8,15 @@ import imageProductC from '../images/imageProductC.png';
 
 
 
-type Open = {open: boolean};
-
-const CartWrapper = styled.div<Open>`
-  width: 90px;
-  position: absolute;
-  top: 70px;
-  left: 82.5vw;
+const CartPreviewWrapper = styled.div`
   box-sizing: content-box;
+  width: 90px;
+  padding: 14px 8px 14px 0;
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
-  ${props => props.open && `
-    padding: 0 18px 13px 0;
-  `}
 `;
 
 const Line = styled.div`
@@ -31,14 +25,14 @@ const Line = styled.div`
   background-color: #4f4f4f;
 `;
 
-const CartSymbolWrapper = styled.div<Open>`
+const CartPreviewSymbolWrapper = styled.div<{open: boolean}>`
   width: 25px;
   height: 25px;
   background-color: #000;
   border-radius: ${props => props.open ? '0%': '50%'}
 `;
 
-const CartSymbol = styled.img`
+const CartPreviewSymbol = styled.img`
   margin: 5.5px 0 0 7.5px;
 `;
 
@@ -56,7 +50,7 @@ const Text = styled.div`
 const Dropdown = styled.div`
   width: 172px;
   position: absolute;
-  top: 40px;
+  top: 55px;
   left: -65px;
   box-sizing: content-box;
   border: 1px solid #e4e2e1;
@@ -67,7 +61,7 @@ const TriangleOuter = styled.div`
   width: 0px;
   height: 0px;
   position: absolute;
-  top: -20px;
+  top: -21px;
   left: 75px;
   background-color: transparent;
   border-top: 10px solid transparent;
@@ -80,13 +74,13 @@ const TriangleInner = styled.div`
   width: 0px;
   height: 0px;
   position: absolute;
-  top: -6.5px;
-  left: -8px;
+  top: -7px;
+  left: -9px;
   background-color: transparent;
-  border-top: 8px solid transparent;
-  border-right: 8px solid transparent;
-  border-bottom: 8px solid #fff;
-  border-left: 8px solid transparent;
+  border-top: 9px solid transparent;
+  border-right: 9px solid transparent;
+  border-bottom: 9px solid #fff;
+  border-left: 9px solid transparent;
 `;
 
 const Product = styled.div`
@@ -266,18 +260,17 @@ const CartPreview = (): JSX.Element => {
 
 
   return(
-    <CartWrapper
-      open={open}
+    <CartPreviewWrapper
       onMouseEnter={(): void => setOpen(true)}
       onMouseLeave={(): void => setOpen(false)}
     >
       <Line />
-      <CartSymbolWrapper open={open}>
-        <CartSymbol
+      <CartPreviewSymbolWrapper open={open}>
+        <CartPreviewSymbol
           src={cartSymbol}
           alt='cart'
         />
-      </CartSymbolWrapper>
+      </CartPreviewSymbolWrapper>
       <Text>cart ({productsNumber})</Text>
 
       {open &&
@@ -316,7 +309,7 @@ const CartPreview = (): JSX.Element => {
           </Result>
         </Dropdown>
       }
-    </CartWrapper>
+    </CartPreviewWrapper>
   );
 }
 

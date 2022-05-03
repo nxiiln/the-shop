@@ -5,24 +5,52 @@ import Menu from './Menu';
 import styled from 'styled-components/macro';
 
 
-const TheShop = styled.h1`
+const Wrapper = styled.header`
+  width: 100vw;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+`;
+
+const CentralGroup = styled.div`
+  width: 1100px;
+  min-width: 960px;
+  height: 90px;
+  position: relative;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+`;
+
+const Title = styled.h1`
+  width: 100%;
+  height: 55px;
+  position: absolute;
+  display: flex;
+  justify-content: center;
   font-family: var(--font-main);
   font-size: 36px;
-  line-height: 1.2;
   font-weight: 400;
-  text-align: center;
-  color: #000;
+  color: var(--color-text-main);
+`;
+
+const CartPreviewWrapper = styled.div`
+  position: relative;
 `;
 
 
 const Header = (): JSX.Element => {
   return(
-    <header>
+    <Wrapper>
       <Top />
-      <TheShop>THE SHOP</TheShop>
-      <CartPreview />
+      <CentralGroup>
+        <Title>THE SHOP</Title>
+        <CartPreviewWrapper>
+          <CartPreview />
+        </CartPreviewWrapper>
+      </CentralGroup>
       <Menu />
-    </header>
+    </Wrapper>
   );
 }
 

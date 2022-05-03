@@ -3,10 +3,8 @@ import styled from 'styled-components/macro';
 import imageMenuInner from '../images/imageMenuInner.png';
 
 
-type Open = {open: boolean};
-
-const MenuWrapper = styled.section<Open>`
-  width: 100vw;
+const MenuWrapper = styled.article<{open: boolean}>`
+  width: 100%;
   height: 38px;
   position: relative;
   display: flex;
@@ -18,8 +16,9 @@ const MenuWrapper = styled.section<Open>`
   ${props => props.open && 'z-index: 2;'}
 `;
 
-const MainMenu = styled.ul<Open>`
-  width: 76vw;
+const MainMenu = styled.ul<{open: boolean}>`
+  width: 1100px;
+  min-width: 960px;
   height: 36px;
   display: flex;
   justify-content: center;
@@ -53,15 +52,15 @@ const MenuOpenWrapper = styled.div`
 `;
 
 const MenuOpen = styled.div`
-  width: 76vw;
-  padding: 25px 0 25px 0;
+  width: 1100px;
+  padding: 25px 25px 25px 25px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 `;
 
 const MenuInnerWrapper = styled.div`
-  width: 44vw;
+  width: 60%;
   display: flex;
   justify-content: space-between;
 `;
