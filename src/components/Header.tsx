@@ -1,6 +1,5 @@
 import React from 'react';
 import Top from './Top';
-import Search from './Search';
 import CartPreview from './CartPreview';
 import Menu from './Menu';
 import styled from 'styled-components/macro';
@@ -21,7 +20,6 @@ const Header = (): JSX.Element => {
     <header>
       <Top />
       <TheShop>THE SHOP</TheShop>
-      <Search />
       <CartPreview />
       <Menu />
     </header>
