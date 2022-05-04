@@ -5,7 +5,8 @@ import fromOurBlogB from '../images/fromOurBlogB.png';
 
 
 const Wrapper = styled.article`
-  width: 275px;
+  width: 310px;
+  min-width: 275px;
   height: 435px;
   margin-left: 40px;
   position: relative;
