@@ -14,7 +14,8 @@ const WrapperOuter = styled.section`
 `;
 
 const WrapperInner = styled.div`
-  width: 965px;
+  width: 1100px;
+  min-width: 960px;
   height: 105px;
   display: flex;
   flex-wrap: wrap;
@@ -23,7 +24,7 @@ const WrapperInner = styled.div`
 `;
 
 const Line = styled.div`
-  width: 370px;
+  width: 400px;
   height: 1px;
   background: var(--color-border);
 `;
