@@ -12,7 +12,7 @@ import paymentSystems from '../images/paymentSystems.png';
 
 const WrapperOuter = styled.footer`
   width: 100vw;
-  height: 480px;
+  height: 360px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -20,8 +20,10 @@ const WrapperOuter = styled.footer`
 `;
 
 const WrapperInner = styled.div`
-  width: 965px;
-  height: 430px;
+  width: 1100px;
+  min-width: 960px;
+  height: 300px;
+  margin: 0 10px 0 10px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -31,8 +33,8 @@ const WrapperInner = styled.div`
 
 //Top Block -------------------------------------
 const TopBlock = styled.div`
-  width: 670px;
-  height: 280px;
+  width: 1100px;
+  height: 150px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -47,20 +49,6 @@ const ShoppingGuide = styled.div`
 const HelpInfo = styled.div`
   width: 115px;
   height: 110px;
-`;
-
-const Twitter = styled.div`
-  width: 300px;
-  height: 135px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid #fff;
-  > p {
-    font-family: var(--font-main);
-    font-size: 28px;
-    color: #fff;
-  }
 `;
 
 const AboutUs = styled.div`
@@ -88,26 +76,9 @@ const Description = styled.div`
 //-----------------------------------------------
 
 
-//Telegram -------------------------------------
-const Telegram = styled.div`
-  width: 265px;
-  height: 282px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid #fff;
-  > p {
-    font-family: var(--font-main);
-    font-size: 28px;
-    color: #fff;
-  }
-`;
-//-----------------------------------------------
-
-
 //Middle Block ----------------------------------
 const MiddleBlock = styled.div`
-  width: 965px;
+  width: 1100px;
   height: 70px;
   margin-top: 30px;
   display: flex;
@@ -154,7 +125,7 @@ const ConnectUs = styled.div`
 
 //Bottom Block ----------------------------------
 const BottomBlock = styled.div`
-  width: 965px;
+  width: 1100px;
   height: 60px;
   display: flex;
   justify-content: space-between;
@@ -231,19 +202,6 @@ const Footer = (): JSX.Element => {
             <Button>DISCLAIMER</Button>
           </HelpInfo>
 
-          <Twitter>
-            <p>Twitter</p>
-          </Twitter>
-
-          <AboutUs>
-            <MainText>ABOUT US</MainText>
-            <Text>
-              One could refuse to pay expensive translators, the
-              european languages are member of the same family.
-              Their separate existence is a myth. Uses <span>read more</span>
-            </Text>
-          </AboutUs>
-
           <StoreLocation>
             <img src={storeLocation} alt='store location' />
             <Description>
@@ -256,12 +214,17 @@ const Footer = (): JSX.Element => {
               </Text>
             </Description>
           </StoreLocation>
+
+          <AboutUs>
+            <MainText>ABOUT US</MainText>
+            <Text>
+              Sed et aliquet nisl, sed scelerisque risus.
+              Phasellus vel ultricies augue.
+              Duis sem dui, pretium in convallis ut, sagittis eget nisi.
+              Uses <span>read more</span>
+            </Text>
+          </AboutUs>
         </TopBlock>
-
-
-        <Telegram>
-          <p>Telegram</p>
-        </Telegram>
 
 
         <MiddleBlock>
