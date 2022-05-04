@@ -9,8 +9,11 @@ import compare from '../images/compare.png';
 
 
 const MostPopularWrapper = styled.article`
-  width: 650px;
+  width: 705px;
   height: 440px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 `;
 
 const MainText = styled.h2`
