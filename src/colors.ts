@@ -12,9 +12,7 @@ const colors: string = `
     --color-border: #e4e2e1;
 
     --color-triangle-new: #000;
-    --color-triangle-sale: #c50e20;
-    
-    --color-top-dropdown: #333;
+    --color-triangle-sale: #c50e20;    
   }
 `;
 

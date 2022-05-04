@@ -59,7 +59,7 @@ const Dropdown = styled.div<{open: boolean, width: string, height: string}>`
 
     ${props.open && `
       height: ${props.height};
-      background: var(--color-top-dropdown);
+      background: #333;
     `}
   `}
 `;
