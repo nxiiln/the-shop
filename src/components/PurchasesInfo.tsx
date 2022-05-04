@@ -11,15 +11,15 @@ const WrapperOuter = styled.section`
 `;
 
 const WrapperInner = styled.div`
-  width: 745px;
+  width: 1100px;
   height: 105px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
 `;
 
 const Line = styled.div`
-  width: 965px;
+  width: 1100px;
   height: 1px;
   background: var(--color-border);
 `;
