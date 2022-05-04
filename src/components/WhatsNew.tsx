@@ -5,15 +5,16 @@ import imgB from '../images/whatsNewB.png';
 import imgC from '../images/whatsNewC.png';
 
 
-const Wrapper = styled.section`
+const Wrapper = styled.article`
   margin-top: 20px;
   display: flex;
   justify-content: center;
   align-content: space-between;
 `;
 
-const WrapperInner = styled.article`
-  width: 960px;
+const WrapperInner = styled.div`
+  width: 1100px;
+  min-width: 960px;
   height: 396px;
   display: flex;
   justify-content: space-between;
