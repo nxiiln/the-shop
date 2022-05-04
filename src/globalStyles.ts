@@ -11,7 +11,8 @@ const GlobalStyle = createGlobalStyle`
   
   body {
     margin: 0;
-    overflow: overlay;
+    overflow-y: overlay;
+    overflow-x: hidden;
 
     &::-webkit-scrollbar {
       width: 8px;
