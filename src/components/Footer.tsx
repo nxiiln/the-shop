@@ -180,7 +180,7 @@ const Text = styled.p`
 
 const Footer = (): JSX.Element => {
   return(
-    <WrapperOuter>
+    <WrapperOuter id='footer'>
       <WrapperInner>
         <TopBlock>
           <ShoppingGuide>
@@ -202,7 +202,7 @@ const Footer = (): JSX.Element => {
             <Button>DISCLAIMER</Button>
           </HelpInfo>
 
-          <StoreLocation>
+          <StoreLocation id='store-location'>
             <img src={storeLocation} alt='store location' />
             <Description>
               <MainText>STORE LOCATION</MainText>
@@ -215,7 +215,7 @@ const Footer = (): JSX.Element => {
             </Description>
           </StoreLocation>
 
-          <AboutUs>
+          <AboutUs id='about-us'>
             <MainText>ABOUT US</MainText>
             <Text>
               Sed et aliquet nisl, sed scelerisque risus.

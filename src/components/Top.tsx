@@ -50,17 +50,14 @@ const Title = styled.div`
 `;
 
 const Dropdown = styled.div<{open: boolean, width: string, height: string}>`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
   ${props => `
     width: ${props.width};
     height: ${props.height};
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    ${props.open && `
-      height: ${props.height};
-      background: #333;
-    `}
+    ${props.open && 'background: #333;'}
   `}
 `;
 
@@ -95,6 +92,7 @@ const LinkUnderline = styled(Link)<{withoutBorder?: boolean}>`
   margin: 0;
   padding: 0 12px 0 12px;
   &:hover {text-decoration: underline}
+
   ${props => !props.withoutBorder &&
     'border-right: 1px solid var(--color-text-regular);'
   }
@@ -130,11 +128,8 @@ const ButtonMain = styled(Button)<{open: boolean}>`
 
 
 
-const companyList: string[] = ['ABOUT US', 'CONTACT', 'STORE LOCATION'];
-
-
 const Top = (): JSX.Element => {
-  const [companyOpen, setCompanyOpen] = useState<boolean>(false);
+  const [contactOpen, setContactOpen] = useState<boolean>(false);
   const [currencyOpen, setCurrencyOpen] = useState<boolean>(false);
   const [isUsd, setIsUsd] = useState<boolean>(true);
 
@@ -146,21 +141,24 @@ const Top = (): JSX.Element => {
         <div>
           <Dropdown
             width='85px'
-            height='130px'
-            open={companyOpen}
-            onMouseLeave={(): void => setCompanyOpen(false)}
+            height='110px'
+            open={contactOpen}
+            onMouseLeave={(): void => setContactOpen(false)}
           >
             <LinkMain
-              href='#'
-              open={companyOpen}
-              onMouseEnter={(): void => setCompanyOpen(true)}
+              href='#footer'
+              open={contactOpen}
+              onMouseEnter={(): void => setContactOpen(true)}
             >
-              COMPANY
+              CONTACT
             </LinkMain>
 
-            {companyOpen && companyList.map((item: string): JSX.Element => {
-              return <Link href='#' key={item}>{item}</Link>
-            })}
+            {contactOpen &&
+              <>
+                <Link href='#store-location'>STORE LOCATION</Link>
+                <Link href='#about-us'>ABOUT US</Link>
+              </>
+            }
           </Dropdown>
 
 
