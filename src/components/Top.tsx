@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
+import {middleScreen, useMediaQuery} from '../mediaQueries';
 import styled from 'styled-components/macro';
 
 
 
 
 const WrapperOuter = styled.article`
-  width: 100vw;
+  width: 100%;
   display: flex;
   justify-content: center;
   background-color: var(--color-background-second);
@@ -13,7 +14,6 @@ const WrapperOuter = styled.article`
 
 const WrapperInner = styled.div`
   width: 1100px;
-  min-width: 960px;
   height: 36px;
   position: relative;
   z-index: 2;
@@ -34,7 +34,7 @@ const WrapperInner = styled.div`
 `;
 
 const Title = styled.div`
-  width: 100vw;
+  width: 100%;
   height: 36px;
   display: flex;
   justify-content: center;
@@ -47,6 +47,11 @@ const Title = styled.div`
   font-size: 10px;
   font-weight: 300;
   color: var(--color-text-second);
+
+  @media ${middleScreen} {
+    justify-content: end;
+    > span {margin-right: 10px}
+  }
 `;
 
 const Dropdown = styled.div<{open: boolean, width: string, height: string}>`
@@ -132,34 +137,41 @@ const Top = (): JSX.Element => {
   const [contactOpen, setContactOpen] = useState<boolean>(false);
   const [currencyOpen, setCurrencyOpen] = useState<boolean>(false);
   const [isUsd, setIsUsd] = useState<boolean>(true);
+  const screen = useMediaQuery();
 
 
   return(
     <WrapperOuter>
-      <Title>FREE SHIPPING ON ORDERS ABOVE 50$</Title>
+      <Title>
+        {screen.small || <span>FREE SHIPPING ON ORDERS ABOVE 50$</span>}
+      </Title>
+
+
       <WrapperInner>
         <div>
-          <Dropdown
-            width='85px'
-            height='110px'
-            open={contactOpen}
-            onMouseLeave={(): void => setContactOpen(false)}
-          >
-            <LinkMain
-              href='#footer'
+          {screen.big &&
+            <Dropdown
+              width='85px'
+              height='110px'
               open={contactOpen}
-              onMouseEnter={(): void => setContactOpen(true)}
+              onMouseLeave={(): void => setContactOpen(false)}
             >
-              CONTACT
-            </LinkMain>
+              <LinkMain
+                href='#footer'
+                open={contactOpen}
+                onMouseEnter={(): void => setContactOpen(true)}
+              >
+                CONTACT
+              </LinkMain>
 
-            {contactOpen &&
-              <>
-                <Link href='#store-location'>STORE LOCATION</Link>
-                <Link href='#about-us'>ABOUT US</Link>
-              </>
-            }
-          </Dropdown>
+              {contactOpen &&
+                <>
+                  <Link href='#store-location'>STORE LOCATION</Link>
+                  <Link href='#about-us'>ABOUT US</Link>
+                </>
+              }
+            </Dropdown>
+          }
 
 
           <Dropdown
@@ -189,12 +201,14 @@ const Top = (): JSX.Element => {
         </div>
 
 
-        <div>
-          <LinkUnderline href='#'>MY ACCOUNT</LinkUnderline>
-          <LinkUnderline href='#'>WISH LIST</LinkUnderline>
-          <LinkUnderline href='#'>CHECKOUT</LinkUnderline>
-          <LinkUnderline href='#' withoutBorder>LOG IN</LinkUnderline>
-        </div>
+        {screen.big &&
+          <div>
+            <LinkUnderline href='#'>MY ACCOUNT</LinkUnderline>
+            <LinkUnderline href='#'>WISH LIST</LinkUnderline>
+            <LinkUnderline href='#'>CHECKOUT</LinkUnderline>
+            <LinkUnderline href='#' withoutBorder>LOG IN</LinkUnderline>
+          </div>
+        }
       </WrapperInner>
     </WrapperOuter>
   );
