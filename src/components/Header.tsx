@@ -3,6 +3,7 @@ import Top from './Top';
 import CartPreview from './CartPreview';
 import Menu from './Menu';
 import styled from 'styled-components/macro';
+import {smallScreen, middleScreen, useMediaQuery} from '../mediaQueries';
 
 
 const Wrapper = styled.header`
@@ -36,10 +37,13 @@ const Title = styled.h1`
 
 const CartPreviewWrapper = styled.div`
   position: relative;
+  @media ${smallScreen}, ${middleScreen} {align-self: end}
 `;
 
 
 const Header = (): JSX.Element => {
+  const screen = useMediaQuery();
+
   return(
     <Wrapper>
       <Top />
@@ -49,7 +53,7 @@ const Header = (): JSX.Element => {
           <CartPreview />
         </CartPreviewWrapper>
       </CentralGroup>
-      <Menu />
+      {screen.big && <Menu />}
     </Wrapper>
   );
 }
