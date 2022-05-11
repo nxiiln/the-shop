@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components/macro';
-import imgA from '../images/whatsNewA.png';
-import imgB from '../images/whatsNewB.png';
-import imgC from '../images/whatsNewC.png';
+import ImageA from '../images/whatsNewA.png';
+import ImageB from '../images/whatsNewB.png';
+import ImageC from '../images/whatsNewC.png';
 
 
 const Wrapper = styled.article`
@@ -14,57 +14,72 @@ const Wrapper = styled.article`
 
 const WrapperInner = styled.div`
   width: 1100px;
-  min-width: 960px;
-  height: 396px;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: start;
+`;
+
+const TitleWrapper = styled.div`
+  width: 100%;
+  height: 45px;
   display: flex;
   justify-content: space-between;
-  flex-wrap: wrap;
 `;
 
 const Line = styled.div`
-  width: 357px;
+  width: calc(44% - 70px);
   height: 1px;
   margin-top: 15px;
-  background-color: #aaa;
+  background-color: var(--color-text-regular);
 `;
 
-const MainText = styled.h2`
+const Title = styled.h2`
   margin: 0;
+  flex: none;
   font-family: var(--font-main);
   font-size: 24px;
   line-height: 1.2;
   font-weight: 400;
-  color: #000;
+  color: var(--color-text-main);
 `;
 
-const Img = styled.img`
-  width: 312px;
-  height: 307px;
+const ImagesContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  > div {margin-right: 10px}
+  > div:last-child {margin: 0}
 `;
 
-const WrapperDescription = styled.div`
-  height: 30px;
+const ImageWrapper = styled.div`
+  max-width: 320px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
+  flex: auto;
 `;
 
-const SpringCollection = styled.span`
+const Image = styled.img`
+  width: 100%;
+`;
+
+const ImageTitle = styled.span`
+  margin-top: 5px;
+  font-family: 'Playfair Display SC';
+  font-size: 18px;
+  line-height: 1.2;
+  font-weight: 400;
+  color: var(--color-text-main);
+`;
+
+const ImageDescription = styled.span`
+  margin-top: 5px;
   font-family: Nunito;
   font-size: 10px;
   line-height: 1.2;
   font-weight: 300;
-  text-transform: uppercase;
-  color: #000
-`;
-
-const WrapperText = styled.div`
-  width: 80%;
-  height: 30px;
-  margin-left: 10%;
-  display: flex;
-  justify-content: space-between;
+  color: var(--color-text-main);
 `;
 
 
@@ -72,42 +87,43 @@ const WhatsNew = (): JSX.Element => {
   return(
     <Wrapper>
       <WrapperInner>
-        <Line />
-        <MainText>WHATS NEW</MainText>
-        <Line />
+        <TitleWrapper>
+          <Line />
+          <Title>WHATS NEW</Title>
+          <Line />
+        </TitleWrapper>
 
-        <Img src={imgA} alt='woman in dress'/>
-        <Img src={imgB} alt='handbags'/>
-        <Img src={imgC} alt='man in a jacket'/>
-
-        <WrapperText>
-          <WrapperDescription>
-            <span>
+        <ImagesContainer>
+          <ImageWrapper>
+            <Image src={ImageA} alt='woman in dress'/>
+            <ImageTitle>
               BLACK & WHITE
-            </span>
-            <SpringCollection>
-              spring collection 2022
-            </SpringCollection>
-          </WrapperDescription>
+            </ImageTitle>
+            <ImageDescription>
+              SPRING COLLECTION 2022
+            </ImageDescription>
+          </ImageWrapper>
 
-          <WrapperDescription>
-            <span>
+          <ImageWrapper>
+            <Image src={ImageB} alt='handbags'/>
+            <ImageTitle>
               COLOR SUMMER
-            </span>
-            <SpringCollection>
-              spring collection 2022
-            </SpringCollection>
-          </WrapperDescription>
+            </ImageTitle>
+            <ImageDescription>
+              SPRING COLLECTION 2022
+            </ImageDescription>
+          </ImageWrapper>
 
-          <WrapperDescription>
-            <span>
+          <ImageWrapper>
+            <Image src={ImageC} alt='man in a jacket'/>
+            <ImageTitle>
               VINTAGE FOR HIM
-            </span>
-            <SpringCollection>
-              spring collection 2022
-            </SpringCollection>
-          </WrapperDescription>
-        </WrapperText>
+            </ImageTitle>
+            <ImageDescription>
+              SPRING COLLECTION 2022
+            </ImageDescription>
+          </ImageWrapper>
+        </ImagesContainer>
       </WrapperInner>
     </Wrapper>
   );
