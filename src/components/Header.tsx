@@ -15,7 +15,6 @@ const Wrapper = styled.header`
 
 const CentralGroup = styled.div`
   width: 1100px;
-  min-width: 960px;
   height: 90px;
   position: relative;
   display: flex;
