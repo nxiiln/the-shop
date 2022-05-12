@@ -3,7 +3,7 @@ import Top from './Top';
 import CartPreview from './CartPreview';
 import Menu from './Menu';
 import styled from 'styled-components/macro';
-import {smallScreen, middleScreen, useMediaQuery} from '../mediaQueries';
+import {smallScreen, mediumScreen, useMediaQuery} from '../mediaQueries';
 
 
 const Wrapper = styled.header`
@@ -36,7 +36,7 @@ const Title = styled.h1`
 
 const CartPreviewWrapper = styled.div`
   position: relative;
-  @media ${smallScreen}, ${middleScreen} {align-self: end}
+  @media ${smallScreen}, ${mediumScreen} {align-self: end}
 `;
 
 

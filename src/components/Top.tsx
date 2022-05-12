@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {middleScreen, useMediaQuery} from '../mediaQueries';
+import {mediumScreen, useMediaQuery} from '../mediaQueries';
 import styled from 'styled-components/macro';
 
 
@@ -48,7 +48,7 @@ const Title = styled.div`
   font-weight: 300;
   color: var(--color-text-second);
 
-  @media ${middleScreen} {
+  @media ${mediumScreen} {
     justify-content: end;
     > span {margin-right: 10px}
   }
