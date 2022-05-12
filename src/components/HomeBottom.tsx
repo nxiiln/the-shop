@@ -13,7 +13,7 @@ const WrapperOuter = styled.article`
 
 const WrapperInner = styled.div`
   width: 1100px;
-  min-width: 960px;
+  min-width: 760px;
   display: flex;
   justify-content: space-between;
 `;
