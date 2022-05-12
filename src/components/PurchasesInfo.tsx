@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components/macro';
 
 
-const WrapperOuter = styled.section`
+const WrapperOuter = styled.article`
   width: 100vw;
   margin-top: 20px;
   display: flex;
@@ -12,6 +12,7 @@ const WrapperOuter = styled.section`
 
 const WrapperInner = styled.div`
   width: 1100px;
+  min-width: 760px;
   height: 105px;
   display: flex;
   justify-content: space-evenly;
@@ -20,6 +21,7 @@ const WrapperInner = styled.div`
 
 const Line = styled.div`
   width: 1100px;
+  min-width: 760px;
   height: 1px;
   background: var(--color-border);
 `;
