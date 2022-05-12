@@ -4,6 +4,7 @@ import emporioArmani from '../images/emporioArmani.png';
 import calvinKlein from '../images/calvinKlein.png';
 import dkny from '../images/dkny.png';
 import baldinini from '../images/baldinini.png';
+import {useMediaQuery} from '../mediaQueries';
 
 
 const WrapperOuter = styled.section`
@@ -15,7 +16,7 @@ const WrapperOuter = styled.section`
 
 const WrapperInner = styled.div`
   width: 1100px;
-  min-width: 960px;
+  min-width: 760px;
   height: 105px;
   display: flex;
   flex-wrap: wrap;
@@ -23,13 +24,21 @@ const WrapperInner = styled.div`
   align-items: center;
 `;
 
+const TitleWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
 const Line = styled.div`
-  width: 400px;
+  width: calc(53% - 145px);
   height: 1px;
   background: var(--color-border);
 `;
 
-const MainText = styled.h2`
+const Title = styled.h2`
+  width: 145px;
   margin: 0;
   font-family: var(--font-main);
   font-size: 24px;
@@ -40,16 +49,23 @@ const MainText = styled.h2`
 
 
 const TopBrands = (): JSX.Element => {
+  const screen = useMediaQuery();
+
   return(
     <WrapperOuter>
       <WrapperInner>
-        <Line />
-        <MainText>TOP BRANDS</MainText>
-        <Line />
-        <img
-          src={emporioArmani}
-          alt='Emporio Armani'
-        />
+        <TitleWrapper>
+          <Line />
+          <Title>TOP BRANDS</Title>
+          <Line />
+        </TitleWrapper>
+
+        {screen.big &&
+          <img
+            src={emporioArmani}
+            alt='Emporio Armani'
+          />
+        }
         <img
           src={calvinKlein}
           alt='Calvin Klein'
