@@ -6,28 +6,33 @@ import mostPopularC from '../images/mostPopularC.png';
 import cartSymbol from '../images/cartSymbol.png';
 import wishList from '../images/wishList.png';
 import compare from '../images/compare.png';
+import {mediumScreen, useMediaQuery} from '../mediaQueries';
 
 
 const MostPopularWrapper = styled.article`
   width: 705px;
+  min-width: 420px;
   height: 440px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  flex: auto;
+  @media ${mediumScreen} {max-width: 500px}
 `;
 
-const MainText = styled.h2`
+const Title = styled.h2`
+  width: 180px;
   font-family: var(--font-main);
   font-size: 24px;
   line-height: 1.2;
   font-weight: 400;
-  color: #000;
+  color: var(--color-text-main);
 `;
 
 const Line = styled.div`
-  width: 442px;
+  width: calc(97% - 180px);
   height: 1px;
-  background-color: #aaa;
+  background-color: var(--color-text-regular);
 `;
 
 const Top = styled.div`
@@ -62,7 +67,7 @@ const Triangle = styled.div<Attr>`
   left: -24px;
   border-right: 35px solid transparent;
   border-bottom: ${props => props.attr === 'new' ?
-    '35px solid #000' : '35px solid #c50e20'
+    '35px solid var(--color-triangle-new)' : '35px solid var(--color-triangle-sale)'
   };
   border-left: 35px solid transparent;
   transform: rotate(-45deg);
@@ -76,7 +81,7 @@ const New = styled.div`
   font-size: 11px;
   line-height: 1.2;
   font-weight: 700;
-  color: #fff;
+  color: var(--color-text-second);
 `;
 
 const DescriptionWrapper = styled.div`
@@ -93,7 +98,7 @@ const Description = styled.div`
   font-size: 14px;
   line-height: 1.2;
   font-weight: 400;
-  color: #000;
+  color: var(--color-text-main);
 `;
 
 const Price = styled.div`
@@ -101,7 +106,7 @@ const Price = styled.div`
   font-size: 11px;
   line-height: 1.2;
   font-weight: 300;
-  color: #000;
+  color: var(--color-text-main);
 `;
 
 const QuickShop = styled.button`
@@ -112,12 +117,10 @@ const QuickShop = styled.button`
   top: 120px;
   left: 0px;
   border: none;
-  background: #fff;
+  background: var(--color-background-main);
   opacity: 0.8;
   cursor: pointer;
-  &:hover {
-    opacity: 1;
-  }
+  &:hover {opacity: 1}
 `;
 
 type Status = {status: boolean};
@@ -145,12 +148,10 @@ const AddToBag = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #000;
+  background: var(--color-background-second);
   border: none;
   cursor: pointer;
-  &:hover {
-    opacity: 0.8;
-  }
+  &:hover {opacity: 0.8}
 `;
 
 const AddToBagText = styled.p`
@@ -160,7 +161,7 @@ const AddToBagText = styled.p`
   font-size: 10px;
   line-height: 1.2;
   font-weight: 300;
-  color: #fff;
+  color: var(--color-text-second);
 `;
 
 const WishList = styled.button`
@@ -175,13 +176,11 @@ const WishList = styled.button`
   font-size: 10px;
   line-height: 1.2;
   font-weight: 300;
-  color: #000;
+  color: var(--color-text-main);
   background: transparent;
   border: none;
   cursor: pointer;
-  &:hover {
-    text-decoration: underline;
-  }
+  &:hover {text-decoration: underline}
 `;
 
 const Compare = styled.button`
@@ -196,19 +195,19 @@ const Compare = styled.button`
   font-size: 10px;
   line-height: 1.2;
   font-weight: 300;
-  color: #000;
+  color: var(--color-text-main);
   background: none;
   border: none;
   cursor: pointer;
-  &:hover {
-    text-decoration: underline;
-  }
+  &:hover {text-decoration: underline}
 `;
 
 
 const MostPopular = (): JSX.Element => {
   const [product, setProduct] = useState<number>(0);
   const [quickShopStatus, setQuickShopStatus] = useState<boolean>(false);
+  const screen = useMediaQuery();
+
 
   const quickShop =
     <QuickShop
@@ -249,7 +248,7 @@ const MostPopular = (): JSX.Element => {
   return(
     <MostPopularWrapper>
       <Top>
-        <MainText>MOST POPULAR</MainText>
+        <Title>MOST POPULAR</Title>
         <Line />
       </Top>
 
@@ -294,23 +293,25 @@ const MostPopular = (): JSX.Element => {
           {product === 2 && purchase}
         </Product>
 
-        <Product
-          onMouseEnter={(): void => setProduct(3)}
-          onMouseLeave={(): void => setProduct(0)}
-        >
-          <img 
-            src={mostPopularC}
-            alt='man in white shirt'
-          />
-          {product === 3 && quickShop}
-          <DescriptionWrapper>
-            <Description>
-              DETAILED SWING DRESS
-            </Description>
-            <Price>$1,875</Price>
-          </DescriptionWrapper>
-          {product === 3 && purchase}
-        </Product>
+        {screen.big &&
+          <Product
+            onMouseEnter={(): void => setProduct(3)}
+            onMouseLeave={(): void => setProduct(0)}
+          >
+            <img 
+              src={mostPopularC}
+              alt='man in white shirt'
+            />
+            {product === 3 && quickShop}
+            <DescriptionWrapper>
+              <Description>
+                DETAILED SWING DRESS
+              </Description>
+              <Price>$1,875</Price>
+            </DescriptionWrapper>
+            {product === 3 && purchase}
+          </Product>
+        }
       </Products>
     </MostPopularWrapper>
   );
