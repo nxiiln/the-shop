@@ -6,13 +6,13 @@ import pinterest from '../images/pinterest.png';
 import youtube from '../images/youtube.png';
 import google from '../images/google.png';
 import paymentSystems from '../images/paymentSystems.png';
+import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
 
 
 
 
 const WrapperOuter = styled.footer`
   width: 100vw;
-  height: 360px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -21,8 +21,7 @@ const WrapperOuter = styled.footer`
 
 const WrapperInner = styled.div`
   width: 1100px;
-  min-width: 960px;
-  height: 300px;
+  min-width: 760px;
   margin: 0 10px 0 10px;
   display: flex;
   flex-wrap: wrap;
@@ -33,12 +32,18 @@ const WrapperInner = styled.div`
 
 //Top Block -------------------------------------
 const TopBlock = styled.div`
-  width: 1100px;
+  width: 100%;
   height: 150px;
+  margin-top: 30px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-content: space-between;
+
+  @media ${mediumScreen}, ${smallScreen} {
+    height: 10px;
+    justify-content: start;
+  }
 `;
 
 const ShoppingGuide = styled.div`
@@ -68,9 +73,8 @@ const Description = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  > div {
-    margin: 0 0 4px 0;
-  }
+
+  > div {margin: 0 0 4px 0}
 
 `;
 //-----------------------------------------------
@@ -78,7 +82,7 @@ const Description = styled.div`
 
 //Middle Block ----------------------------------
 const MiddleBlock = styled.div`
-  width: 1100px;
+  width: 100%;
   height: 70px;
   margin-top: 30px;
   display: flex;
@@ -94,17 +98,14 @@ const Newsletter = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  > div:first-child {
-    margin: 0;
-  }
+
+  > div:first-child {margin: 0}
 `;
 
 const Input = styled.input`
   width: 280px;
   height: 35px;
-  &:focus {
-    outline: none;
-  }
+  &:focus {outline: none;}
 `;
 
 const ConnectUs = styled.div`
@@ -113,19 +114,16 @@ const ConnectUs = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  > div {
-    margin: 0;
-  }
-  > img {
-    cursor: pointer;
-  }
+
+  > div {margin: 0}
+  > img {cursor: pointer}
 `;
 //-----------------------------------------------
 
 
 //Bottom Block ----------------------------------
 const BottomBlock = styled.div`
-  width: 1100px;
+  width: 100%;
   height: 60px;
   display: flex;
   justify-content: space-between;
@@ -153,10 +151,24 @@ const Button = styled.button`
   background-color: transparent;
   border: none;
   cursor: pointer;
+
   &:hover {
     text-decoration: underline;
     color: #fff;
   }
+`;
+
+const ButtonWithBorder = styled(Button)<{withoutBorder?: boolean, withoutPadding?: boolean}>`
+  height: 10px;
+  padding: 0 10px 0 10px;
+  display: flex;
+  align-items: center;
+
+  ${props => !props.withoutBorder &&
+    'border-right: 1px solid var(--color-text-regular);'
+  }
+
+  ${props => props.withoutPadding && 'padding-left: 0;'}
 `;
 
 const Text = styled.p`
@@ -166,12 +178,11 @@ const Text = styled.p`
   font-weight: 300;
   text-transform: uppercase;
   color: #aaa;
+
   > span {
     text-decoration: underline;
     cursor: pointer;
-    &:hover {
-      color: #fff;
-    }
+    &:hover {color: #fff}
   }
 `;
 
@@ -179,51 +190,65 @@ const Text = styled.p`
 
 
 const Footer = (): JSX.Element => {
+  const screen = useMediaQuery();
+
   return(
     <WrapperOuter id='footer'>
       <WrapperInner>
         <TopBlock>
-          <ShoppingGuide>
-            <MainText>SHOPPING GUIDE</MainText>
-            <Button>ABOUT G-STAR ROW</Button>
-            <Button>CORPORATE RESPONSIBILITY</Button>
-            <Button>PRESS ROOM</Button><br />
-            <Button>CAREERS</Button><br />
-            <Button>G-START RETAILERS</Button>
-            <Button>OPEN A G-STAR STORE</Button>
-          </ShoppingGuide>
+          {screen.big ?
+            <>
+              <ShoppingGuide>
+                <MainText>SHOPPING GUIDE</MainText>
+                <Button>ABOUT G-STAR ROW</Button>
+                <Button>CORPORATE RESPONSIBILITY</Button>
+                <Button>PRESS ROOM</Button><br />
+                <Button>CAREERS</Button><br />
+                <Button>G-START RETAILERS</Button>
+                <Button>OPEN A G-STAR STORE</Button>
+              </ShoppingGuide>
 
-          <HelpInfo>
-            <MainText>HELP & INFO</MainText>
-            <Button>FAQ</Button><br />
-            <Button>CONTACT</Button>
-            <Button>PRIVACY POLICY</Button>
-            <Button>TERMS & CONDITIONS</Button>
-            <Button>DISCLAIMER</Button>
-          </HelpInfo>
+              <HelpInfo>
+                <MainText>HELP & INFO</MainText>
+                <Button>FAQ</Button><br />
+                <Button>CONTACT</Button>
+                <Button>PRIVACY POLICY</Button>
+                <Button>TERMS & CONDITIONS</Button>
+                <Button>DISCLAIMER</Button>
+              </HelpInfo>
 
-          <StoreLocation id='store-location'>
-            <img src={storeLocation} alt='store location' />
-            <Description>
-              <MainText>STORE LOCATION</MainText>
-              <Text>
-                Company ltd.co<br />
-                234 Fake address name,
-                Fake City Name, Country
-                01234 (000) 123 456 xxx
-              </Text>
-            </Description>
-          </StoreLocation>
+              <StoreLocation id='store-location'>
+                <img src={storeLocation} alt='store location' />
+                <Description>
+                  <MainText>STORE LOCATION</MainText>
+                  <Text>
+                    Company ltd.co<br />
+                    234 Fake address name,
+                    Fake City Name, Country
+                    01234 (000) 123 456 xxx
+                  </Text>
+                </Description>
+              </StoreLocation>
 
-          <AboutUs id='about-us'>
-            <MainText>ABOUT US</MainText>
-            <Text>
-              Sed et aliquet nisl, sed scelerisque risus.
-              Phasellus vel ultricies augue.
-              Duis sem dui, pretium in convallis ut, sagittis eget nisi.
-              Uses <span>read more</span>
-            </Text>
-          </AboutUs>
+              <AboutUs id='about-us'>
+                <MainText>ABOUT US</MainText>
+                <Text>
+                  Sed et aliquet nisl, sed scelerisque risus.
+                  Phasellus vel ultricies augue.
+                  Duis sem dui, pretium in convallis ut, sagittis eget nisi.
+                  Uses <span>read more</span>
+                </Text>
+              </AboutUs>
+            </>
+            :
+            <>
+              <ButtonWithBorder type='button' withoutPadding>FAQ</ButtonWithBorder>
+              <ButtonWithBorder type='button'>CONTACT</ButtonWithBorder>
+              <ButtonWithBorder type='button'>PRIVACY POLICY</ButtonWithBorder>
+              <ButtonWithBorder type='button'>TERMS & CONDITIONS</ButtonWithBorder>
+              <ButtonWithBorder type='button' withoutBorder>DISCLAIMER</ButtonWithBorder>
+            </>
+          }
         </TopBlock>
 
 
