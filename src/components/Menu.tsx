@@ -11,19 +11,19 @@ const MenuWrapper = styled.article<{open: boolean}>`
   justify-content: center;
   align-content: flex-start;
   flex-wrap: wrap;
-  background-color: #fff;
+  background-color: var(--color-background-main);
   cursor: default;
   ${props => props.open && 'z-index: 2;'}
 `;
 
 const MainMenu = styled.ul<{open: boolean}>`
   width: 1100px;
-  min-width: 960px;
   height: 36px;
   display: flex;
   justify-content: center;
   margin: 0;
   padding: 0;
+
   > li {
     padding: 0 20px 34px 20px;
     display: inline-block;
@@ -32,12 +32,13 @@ const MainMenu = styled.ul<{open: boolean}>`
     line-height: 1.2;
     font-weight: 300;
     text-transform: uppercase;
-    color: #282828;
+    color: var(--color-text-main);
   }
+
   ${props => props.open && `
     border-bottom: 1px solid #aaa;
+
     > li:first-child {
-      color: #000;
       border-bottom: 2px solid #000;
       cursor: pointer;
     }
@@ -45,8 +46,8 @@ const MainMenu = styled.ul<{open: boolean}>`
 `;
 
 const MenuOpenWrapper = styled.div`
-  width: 100vw;
-  background: #fff;
+  width: 100%;
+  background: var(--color-background-main);
   display: flex;
   justify-content: center;
 `;
@@ -72,14 +73,16 @@ const MenuInner = styled.ul`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+
   > li:first-child {
     font-family: var(--font-second);
     font-size: 13px;
     line-height: 1.2;
     font-weight: 400;
     text-transform: uppercase;
-    color: #000;
+    color: var(--color-text-main);
   }
+
   > li {
     height: 30px;
     display: inline-block;
@@ -87,11 +90,9 @@ const MenuInner = styled.ul`
     font-size: 14px;
     line-height: 28px;
     font-weight: 300;
-    color: #aaa;
+    color: var(--color-text-regular);
     cursor: pointer;
-    &:hover {
-      color: #282828;
-    }
+    &:hover {color: var(--color-text-main)}
   }
 `;
 
@@ -105,7 +106,7 @@ const Message = styled.div`
   position: absolute;
   top: 20px;
   left: 160px;
-  background-color: #fff;
+  background-color: var(--color-background-main);
   border: 1px solid #000;
 `;
 
@@ -118,7 +119,7 @@ const Text = styled.p`
   line-height: 18px;
   font-weight: 400;
   text-transform: uppercase;
-  color: #000;
+  color: var(--color-text-main);
 `;
 
 
@@ -130,69 +131,67 @@ const Menu = (): JSX.Element => {
       open={open}
       onMouseLeave={(): void => setOpen(false)}
     >
-      <nav>
-        <MainMenu open={open}>
-          <li onMouseEnter={(): void => setOpen(true)}>
-            women
-          </li>
-          <li>men</li>
-          <li>kids</li>
-          <li>accessories</li>
-          <li>whats new</li>
-          <li>brands</li>
-          <li>sale</li>
-          <li>blog</li>
-        </MainMenu>
-      </nav>
+      <MainMenu open={open}>
+        <li onMouseEnter={(): void => setOpen(true)}>
+          women
+        </li>
+        <li>men</li>
+        <li>kids</li>
+        <li>accessories</li>
+        <li>whats new</li>
+        <li>brands</li>
+        <li>sale</li>
+        <li>blog</li>
+      </MainMenu>
 
       {open &&
         <MenuOpenWrapper>
-        <MenuOpen>
-          <MenuInnerWrapper>
-            <MenuInner>
-              <li>bottoms</li>
-              <li>Jeans</li>
-              <li>Pants</li>
-              <li>Shorts</li>
-              <li>Skirts</li>
-              <li>Dresses</li>
-            </MenuInner>
-            <MenuInner>
-              <li>tops</li>
-              <li>Jackets & Coats</li>
-              <li>Shirts</li>
-              <li>T-shirts</li>
-              <li>Knitwear</li>
-              <li>Sweats</li>
-            </MenuInner>
-            <MenuInner>
-              <li>shoes & more</li>
-              <li>Shoes</li>
-              <li>Underwear</li>
-              <li>Accessories</li>
-              <li>Collectables</li>
-              <li>Eyewear</li>
-            </MenuInner>
-            <MenuInner>
-              <li>collections</li>
-              <li>New arrivals</li>
-              <li>Urban Style</li>
-              <li>Raw Correct</li>
-            </MenuInner>
-          </MenuInnerWrapper>
+          <MenuOpen>
+            <MenuInnerWrapper>
+              <MenuInner>
+                <li>bottoms</li>
+                <li>Jeans</li>
+                <li>Pants</li>
+                <li>Shorts</li>
+                <li>Skirts</li>
+                <li>Dresses</li>
+              </MenuInner>
+              <MenuInner>
+                <li>tops</li>
+                <li>Jackets & Coats</li>
+                <li>Shirts</li>
+                <li>T-shirts</li>
+                <li>Knitwear</li>
+                <li>Sweats</li>
+              </MenuInner>
+              <MenuInner>
+                <li>shoes & more</li>
+                <li>Shoes</li>
+                <li>Underwear</li>
+                <li>Accessories</li>
+                <li>Collectables</li>
+                <li>Eyewear</li>
+              </MenuInner>
+              <MenuInner>
+                <li>collections</li>
+                <li>New arrivals</li>
+                <li>Urban Style</li>
+                <li>Raw Correct</li>
+              </MenuInner>
+            </MenuInnerWrapper>
 
-          <ImageWrapper>
-            <img
-              src={imageMenuInner}
-              alt='women in denim'
-            />
-            <Message>
-              <Text>
-                new denim collection now
-              </Text>
-            </Message>
-          </ImageWrapper>
-        </MenuOpen>
+            <ImageWrapper>
+              <img
+                src={imageMenuInner}
+                alt='women in denim'
+              />
+              <Message>
+                <Text>
+                  new denim collection now
+                </Text>
+              </Message>
+            </ImageWrapper>
+          </MenuOpen>
         </MenuOpenWrapper>
       }
     </MenuWrapper>
