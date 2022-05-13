@@ -4,13 +4,14 @@ import cartSymbol from '../images/cartSymbol.png';
 import imageProductA from '../images/imageProductA.png';
 import imageProductB from '../images/imageProductB.png';
 import imageProductC from '../images/imageProductC.png';
+import {smallScreen} from '../mediaQueries';
 
 
 
 
 const CartPreviewWrapper = styled.div`
   box-sizing: content-box;
-  width: 90px;
+  width: 80px;
   margin-right: 20px;
   padding: 14px 0 14px 0;
   position: relative;
@@ -20,17 +21,12 @@ const CartPreviewWrapper = styled.div`
   cursor: pointer;
 `;
 
-const Line = styled.div`
-  width: 1px;
-  height: 27px;
-  background-color: #4f4f4f;
-`;
-
 const CartPreviewSymbolWrapper = styled.div<{open: boolean}>`
   width: 25px;
   height: 25px;
-  background-color: #000;
-  border-radius: ${props => props.open ? '0%': '50%'}
+  background: var(--color-background-second);
+  border-radius: ${props => props.open ? '0%': '50%'};
+  @media ${smallScreen} {background: #404040;}
 `;
 
 const CartPreviewSymbol = styled.img`
@@ -45,16 +41,17 @@ const Text = styled.div`
   line-height: 1.2;
   font-weight: 300;
   text-transform: uppercase;
-  color: #282828;
+  color: var(--color-text-main);
+  @media ${smallScreen} {color: var(--color-text-second)}
 `;
 
 const Dropdown = styled.div`
   width: 172px;
   position: absolute;
   top: 55px;
-  left: -65px;
+  left: -73px;
   box-sizing: content-box;
-  border: 1px solid #e4e2e1;
+  border: 1px solid var(--color-border);
   z-index: 2;
 `;
 
@@ -67,7 +64,7 @@ const TriangleOuter = styled.div`
   background-color: transparent;
   border-top: 10px solid transparent;
   border-right: 10px solid transparent;
-  border-bottom: 10px solid #e4e2e1;
+  border-bottom: 10px solid var(--color-border);
   border-left: 10px solid transparent;
 `;
 
@@ -87,8 +84,8 @@ const TriangleInner = styled.div`
 const Product = styled.div`
   width: 172px;
   height: 94px;
-  background-color: #fff;
-  border-bottom: 1px solid #e4e2e1;
+  background: var(--color-background-main);
+  border-bottom: 1px solid var(--color-border);
 `;
 
 const ProductImage = styled.img`
@@ -106,7 +103,7 @@ const Description = styled.div`
   line-height: 1.2;
   font-weight: 400;
   text-transform: uppercase;
-  color: #000;
+  color: var(--color-text-main);
 `;
 
 const Price = styled.div`
@@ -119,7 +116,7 @@ const Price = styled.div`
   font-size: 11px;
   line-height: 1.2;
   font-weight: 300;
-  color: #000;
+  color: var(--color-text-main);
 `;
 
 const Remove = styled.button`
@@ -133,9 +130,7 @@ const Remove = styled.button`
   background-color: transparent;
   border: none;
   cursor: pointer;
-  &:hover {
-    color: #000;
-  }
+  &:hover {color: var(--color-text-main)}
 `;
 
 const X = styled.div`
@@ -151,7 +146,7 @@ const X = styled.div`
 const Result = styled.div`
   width: 172px;
   height: 91px;
-  background-color: #f7f7f7;
+  background: var(--color-background-highlight);
   cursor: default;
 `;
 
@@ -165,7 +160,7 @@ const Total = styled.div`
   font-size: 14px;
   line-height: 1.2;
   font-weight: 400;
-  color: #000;
+  color: var(--color-text-main);
 `;
 
 const TotalPrice = styled.div`
@@ -177,7 +172,7 @@ const TotalPrice = styled.div`
   font-size: 11px;
   line-height: 1.2;
   font-weight: 700;
-  color: #000;
+  color: var(--color-text-main);
 `;
 
 const ViewCart = styled.button`
@@ -191,8 +186,8 @@ const ViewCart = styled.button`
   line-height: 1.2;
   font-weight: 300;
   text-transform: uppercase;
-  background-color: white;
-  border: 1px solid #e4e2e1;
+  background: var(--color-background-main);
+  border: 1px solid var(--color-border);
   cursor: pointer;
 `;
 
@@ -207,8 +202,8 @@ const Checkout = styled.button`
   line-height: 1.2;
   font-weight: 300;
   text-transform: uppercase;
-  color: white;
-  background-color: black;
+  color: var(--color-text-second);
+  background-color: var(--color-background-second);
   border: none;
   cursor: pointer;
 `;
@@ -265,7 +260,6 @@ const CartPreview = (): JSX.Element => {
       onMouseEnter={(): void => setOpen(true)}
       onMouseLeave={(): void => setOpen(false)}
     >
-      <Line />
       <CartPreviewSymbolWrapper open={open}>
         <CartPreviewSymbol
           src={cartSymbol}

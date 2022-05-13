@@ -48,11 +48,13 @@ const Header = (): JSX.Element => {
       <Top />
       <CentralGroup>
         <Title>THE SHOP</Title>
-        <CartPreviewWrapper>
-          <CartPreview />
-        </CartPreviewWrapper>
+        {!screen.small &&
+          <CartPreviewWrapper>
+            <CartPreview />
+          </CartPreviewWrapper>
+        }
       </CentralGroup>
-      {screen.big && <Menu />}
+      <Menu />
     </Wrapper>
   );
 }

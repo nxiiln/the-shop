@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import CartPreview from './CartPreview';
 import {mediumScreen, useMediaQuery} from '../mediaQueries';
 import styled from 'styled-components/macro';
 
@@ -209,6 +210,8 @@ const Top = (): JSX.Element => {
             <LinkUnderline href='#' withoutBorder>LOG IN</LinkUnderline>
           </div>
         }
+
+        {screen.small && <CartPreview />}
       </WrapperInner>
     </WrapperOuter>
   );

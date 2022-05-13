@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import styled from 'styled-components/macro';
 import imageMenuInner from '../images/imageMenuInner.png';
+import {smallScreen, mediumScreen, useMediaQuery} from '../mediaQueries';
 
 
 const MenuWrapper = styled.article<{open: boolean}>`
@@ -13,7 +14,28 @@ const MenuWrapper = styled.article<{open: boolean}>`
   flex-wrap: wrap;
   background-color: var(--color-background-main);
   cursor: default;
+
   ${props => props.open && 'z-index: 2;'}
+
+  @media ${smallScreen}, ${mediumScreen} {
+    justify-content: start;
+  }
+`;
+
+const MenuSymbol = styled.div`
+  height: 15px;
+  margin-left: 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+
+  > div {
+    width: 20px;
+    height: 3px;
+    background: var(--color-background-second);
+    border-radius: 2px;
+  }
 `;
 
 const MainMenu = styled.ul<{open: boolean}>`
@@ -125,74 +147,85 @@ const Text = styled.p`
 
 const Menu = (): JSX.Element => {
   const [open, setOpen] = useState<boolean>(false);
+  const screen = useMediaQuery();
 
   return(
     <MenuWrapper
       open={open}
       onMouseLeave={(): void => setOpen(false)}
     >
-      <MainMenu open={open}>
-        <li onMouseEnter={(): void => setOpen(true)}>
-          women
-        </li>
-        <li>men</li>
-        <li>kids</li>
-        <li>accessories</li>
-        <li>whats new</li>
-        <li>brands</li>
-        <li>sale</li>
-        <li>blog</li>
-      </MainMenu>
+      {screen.big ?
+        <>
+          <MainMenu open={open}>
+            <li onMouseEnter={(): void => setOpen(true)}>
+              women
+            </li>
+            <li>men</li>
+            <li>kids</li>
+            <li>accessories</li>
+            <li>whats new</li>
+            <li>brands</li>
+            <li>sale</li>
+            <li>blog</li>
+          </MainMenu>
 
-      {open &&
-        <MenuOpenWrapper>
-          <MenuOpen>
-            <MenuInnerWrapper>
-              <MenuInner>
-                <li>bottoms</li>
-                <li>Jeans</li>
-                <li>Pants</li>
-                <li>Shorts</li>
-                <li>Skirts</li>
-                <li>Dresses</li>
-              </MenuInner>
-              <MenuInner>
-                <li>tops</li>
-                <li>Jackets & Coats</li>
-                <li>Shirts</li>
-                <li>T-shirts</li>
-                <li>Knitwear</li>
-                <li>Sweats</li>
-              </MenuInner>
-              <MenuInner>
-                <li>shoes & more</li>
-                <li>Shoes</li>
-                <li>Underwear</li>
-                <li>Accessories</li>
-                <li>Collectables</li>
-                <li>Eyewear</li>
-              </MenuInner>
-              <MenuInner>
-                <li>collections</li>
-                <li>New arrivals</li>
-                <li>Urban Style</li>
-                <li>Raw Correct</li>
-              </MenuInner>
-            </MenuInnerWrapper>
+          {open &&
+            <MenuOpenWrapper>
+              <MenuOpen>
+                <MenuInnerWrapper>
+                  <MenuInner>
+                    <li>bottoms</li>
+                    <li>Jeans</li>
+                    <li>Pants</li>
+                    <li>Shorts</li>
+                    <li>Skirts</li>
+                    <li>Dresses</li>
+                  </MenuInner>
+                  <MenuInner>
+                    <li>tops</li>
+                    <li>Jackets & Coats</li>
+                    <li>Shirts</li>
+                    <li>T-shirts</li>
+                    <li>Knitwear</li>
+                    <li>Sweats</li>
+                  </MenuInner>
+                  <MenuInner>
+                    <li>shoes & more</li>
+                    <li>Shoes</li>
+                    <li>Underwear</li>
+                    <li>Accessories</li>
+                    <li>Collectables</li>
+                    <li>Eyewear</li>
+                  </MenuInner>
+                  <MenuInner>
+                    <li>collections</li>
+                    <li>New arrivals</li>
+                    <li>Urban Style</li>
+                    <li>Raw Correct</li>
+                  </MenuInner>
+                </MenuInnerWrapper>
 
-            <ImageWrapper>
-              <img
-                src={imageMenuInner}
-                alt='women in denim'
-              />
-              <Message>
-                <Text>
-                  new denim collection now
-                </Text>
-              </Message>
-            </ImageWrapper>
-          </MenuOpen>
-        </MenuOpenWrapper>
+                <ImageWrapper>
+                  <img
+                    src={imageMenuInner}
+                    alt='women in denim'
+                  />
+                  <Message>
+                    <Text>
+                      new denim collection now
+                    </Text>
+                  </Message>
+                </ImageWrapper>
+              </MenuOpen>
+            </MenuOpenWrapper>
+          }
+        </>
+        :
+        <MenuSymbol>
+          <div />
+          <div />
+          <div />
+        </MenuSymbol>
       }
     </MenuWrapper>
   )
