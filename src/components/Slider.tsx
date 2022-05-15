@@ -3,19 +3,23 @@ import styled from 'styled-components/macro';
 import bannerA from '../images/bannerA.png';
 import bannerB from '../images/bannerB.png';
 import bannerC from '../images/bannerC.png';
+import {smallScreen, useMediaQuery} from '../mediaQueries';
 
 
-const SliderWrapper = styled.section`
+const SliderWrapper = styled.article`
   width: 100vw;
-  height: 496px;
   position: relative;
+`;
+
+const WrapperSlideA = styled.div`
+  height: 496px;
 `;
 
 const BannerA = styled.img`
   width: 100%;
   height: 100%;
+  position: relative;
   object-fit: cover;
-  position: absolute;
 `;
 
 const TextBlockA = styled.div`
@@ -36,7 +40,7 @@ const DescriptionA = styled.span`
   line-height: 1.2;
   font-weight: 300;
   text-transform: uppercase;
-  color: #000;
+  color: var(--color-text-main);
 `;
 
 const SpringEssentials = styled.div`
@@ -49,18 +53,20 @@ const SpringEssentials = styled.div`
   font-family: var(--font-main);
   line-height: 1.2;
   font-weight: 400;
-  color: #000;
+  color: var(--color-text-main);
 `;
 
 const Word = styled.span`
   display: inline-flex;
   align-items: flex-end;
-  font-size: 55px;
+  font-size: 42px;
   white-space: pre;
+  @media ${smallScreen} {font-size: 36px}
 `;
 
 const Letter = styled.span`
-  font-size: 60px;
+  font-size: 50px;
+  @media ${smallScreen} {font-size: 42px}
 `;
 
 const ButtonBannerA = styled.button`
@@ -69,14 +75,19 @@ const ButtonBannerA = styled.button`
   margin: 0;
   display: inline-block;
   font-family: var(--font-second);
-  font-size: 14px;
+  font-size: 13px;
   line-height: 1.2;
   font-weight: 300;
   text-transform: uppercase;
-  color: #fff;
+  color: var(--color-text-second);
   border: none;
-  background-color: #000;
+  background: var(--color-background-second);
   cursor: pointer;
+
+  @media ${smallScreen} {
+    width: 118px;
+    height: 30px;
+  }
 `;
 
 const WrapperSlideB = styled.div`
@@ -91,8 +102,8 @@ const WrapperBannerB = styled.div`
 `;
 
 const BannerB = styled.img`
-  width: 675px;
-  height: 496px;
+  width: 100%;
+  flex: auto;
 `;
 
 const TextBlockB = styled.div`
@@ -112,7 +123,7 @@ const DescriptionB = styled.div`
   line-height: 1.2;
   font-weight: 400;
   text-transform: uppercase;
-  color: #fff;
+  color: var(--color-text-second);
 `;
 
 const SpringCollection = styled.div`
@@ -121,7 +132,7 @@ const SpringCollection = styled.div`
   line-height: 1.2;
   font-weight: 300;
   text-transform: uppercase;
-  color: #fff;
+  color: var(--color-text-second);
 `;
 
 const WrapperBannerC = styled.div`
@@ -129,7 +140,7 @@ const WrapperBannerC = styled.div`
   min-height: 496px;
   margin-left: 10px;
   position: relative;
-  border: 1px solid #e4e2e1;
+  border: 1px solid var(--color-border);
 `;
 
 const TextBlockC = styled.div`
@@ -145,11 +156,13 @@ const TextBlockC = styled.div`
   line-height: 1.2;
   font-weight: 400;
   text-transform: uppercase;
-  color: #000;
+  color: var(--color-text-main);
+
   > span:first-child {
     font-family: var(--font-main);
     font-size: 36px;
   }
+
   > span:last-child {
     font-family: var(--font-second);
     font-size: 18px;
@@ -167,17 +180,17 @@ const ShopNow = styled.button`
   line-height: 1.2;
   font-weight: 300;
   text-transform: uppercase;
-  color: #fff;
-  background-color: #000;
+  color: var(--color-text-second);
+  background: var(--color-background-second);
   border: none;
   cursor: pointer;
 `;
 
 const UseCode = styled.div`
   width: 166px;
-  height: 28px;
+  height: 20px;
   position: absolute;
-  top: 164px;
+  top: 172px;
   left: 55px;
   display: flex;
   justify-content: center;
@@ -188,14 +201,11 @@ const UseCode = styled.div`
   font-weight: 700;
   text-transform: uppercase;
   white-space: pre;
-  background-color: #fff;
+  background: var(--color-background-second);
   z-index: 1;
-  > span:first-child {
-    color: #aaa;
-  }
-  > span:last-child {
-    color: #000;
-  }
+
+  > span:first-child {color: var(--color-text-regular)}
+  > span:last-child {color: var(--color-text-second)}
 `;
 
 const BannerC = styled.img`
@@ -213,29 +223,28 @@ const Indicator = styled.div`
   cursor: pointer;
 `;
 
-type Slide = {slide: number};
-
-const IndicatorA = styled(Indicator)<Slide>`
+const IndicatorA = styled(Indicator)<{slide: number}>`
   left: 48%;
   ${props => props.slide === 1 ? 
-    `background-color: #d7d5d4;` :
-    `background-color: #fff;
-     border: 1px solid #d7d5d4;`
+    `background-color: #555;` :
+    `background-color: transparent;
+     border: 1px solid #555;`
   }
 `;
 
-const IndicatorB = styled(Indicator)<Slide>`
+const IndicatorB = styled(Indicator)<{slide: number}>`
   left: calc(48% + 20px);
   ${props => props.slide === 2 ? 
-    `background-color: #d7d5d4;` :
-    `background-color: #fff;
-     border: 1px solid #d7d5d4;`
+    `background-color: #555;` :
+    `background-color: transparent;
+     border: 1px solid #555;`
   }
 `;
 
 
 const Slider = (): JSX.Element => {
   const [slide, setSlide] = useState<number>(1);
+  const screen = useMediaQuery();
 
   useEffect(() => {
     const interval: NodeJS.Timer = setInterval((): void => {
@@ -249,24 +258,24 @@ const Slider = (): JSX.Element => {
   return(
     <SliderWrapper>
       {slide === 1 && 
-        <>
+        <WrapperSlideA>
           <BannerA 
             src={bannerA}
             alt='woman with accessories'
           />
           <TextBlockA>
             <DescriptionA>
-              new accessories collection
+              {!screen.small && 'new accessories collection'}
             </DescriptionA>
             <SpringEssentials>
               <Word><Letter>S</Letter>PRING</Word>
               <Word><Letter> E</Letter>SSENTIALS</Word>
             </SpringEssentials>
             <ButtonBannerA type='button'>
-              shop women’s accessories
+              {screen.small ? 'shop now' : 'shop women’s accessories'}
             </ButtonBannerA>
           </TextBlockA>
-        </>
+        </WrapperSlideA>
       }
 
       {slide === 2 &&
@@ -286,21 +295,23 @@ const Slider = (): JSX.Element => {
             </TextBlockB>
           </WrapperBannerB>
 
-          <WrapperBannerC>
-            <TextBlockC>
-              <span>sale</span>
-              <span>up to 70%</span>
-            </TextBlockC>
-            <ShopNow type='button'>shop now</ShopNow>
-            <UseCode>
-              <span>use code: </span>
-              <span>sweetsale</span>
-            </UseCode>
-            <BannerC
-              src={bannerC}
-              alt='smiling woman'
-            />
-          </WrapperBannerC>
+          {screen.big &&
+            <WrapperBannerC>
+              <TextBlockC>
+                <span>sale</span>
+                <span>up to 70%</span>
+              </TextBlockC>
+              <ShopNow type='button'>shop now</ShopNow>
+              <UseCode>
+                <span>use code: </span>
+                <span>sweetsale</span>
+              </UseCode>
+              <BannerC
+                src={bannerC}
+                alt='smiling woman'
+              />
+            </WrapperBannerC>
+          }
         </WrapperSlideB>
       }
 
