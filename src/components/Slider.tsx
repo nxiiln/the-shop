@@ -6,6 +6,8 @@ import bannerC from '../images/bannerC.png';
 import {smallScreen, useMediaQuery} from '../mediaQueries';
 
 
+
+
 const SliderWrapper = styled.article`
   width: 100vw;
   position: relative;
@@ -214,32 +216,23 @@ const BannerC = styled.img`
   top: 172px;
 `;
 
-const Indicator = styled.div`
+const Indicator = styled.div<{active: boolean, left: string}>`
   width: 17px;
   height: 8px;
   position: absolute;
   top: 90%;
+  left: ${props => props.left};
   box-sizing: border-box;
   cursor: pointer;
-`;
 
-const IndicatorA = styled(Indicator)<{slide: number}>`
-  left: 48%;
-  ${props => props.slide === 1 ? 
+  ${props => props.active ? 
     `background-color: #555;` :
     `background-color: transparent;
      border: 1px solid #555;`
   }
 `;
 
-const IndicatorB = styled(Indicator)<{slide: number}>`
-  left: calc(48% + 20px);
-  ${props => props.slide === 2 ? 
-    `background-color: #555;` :
-    `background-color: transparent;
-     border: 1px solid #555;`
-  }
-`;
+
 
 
 const Slider = (): JSX.Element => {
@@ -254,6 +247,7 @@ const Slider = (): JSX.Element => {
 
     return (): void => clearInterval(interval);
   }, [slide]);
+
 
   return(
     <SliderWrapper>
@@ -277,6 +271,7 @@ const Slider = (): JSX.Element => {
           </TextBlockA>
         </WrapperSlideA>
       }
+
 
       {slide === 2 &&
         <WrapperSlideB>
@@ -315,19 +310,23 @@ const Slider = (): JSX.Element => {
         </WrapperSlideB>
       }
 
-      <IndicatorA
-        slide={slide}
+      <Indicator
+        active={slide === 1}
+        left='48%'
         onClick={(): void => setSlide(1)}
       >
-      </IndicatorA>
-      <IndicatorB
-        slide={slide}
+      </Indicator>
+      <Indicator
+        active={slide === 2}
+        left='calc(48% + 20px)'
         onClick={(): void => setSlide(2)}
       >
-      </IndicatorB>
+      </Indicator>
     </SliderWrapper>
   );
 }
+
+
 
 
 export default Slider;
