@@ -10,6 +10,7 @@ import {smallScreen, useMediaQuery} from '../mediaQueries';
 
 const SliderWrapper = styled.article`
   width: 100vw;
+  height: 496px;
   position: relative;
 `;
 
