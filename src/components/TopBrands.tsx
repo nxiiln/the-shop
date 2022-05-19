@@ -4,10 +4,10 @@ import emporioArmani from '../images/emporioArmani.png';
 import calvinKlein from '../images/calvinKlein.png';
 import dkny from '../images/dkny.png';
 import baldinini from '../images/baldinini.png';
-import {useMediaQuery} from '../mediaQueries';
+import {smallScreen, useMediaQuery} from '../mediaQueries';
 
 
-const WrapperOuter = styled.section`
+const WrapperOuter = styled.article`
   width: 100vw;
   margin-top: 10px;
   display: flex;
@@ -16,12 +16,12 @@ const WrapperOuter = styled.section`
 
 const WrapperInner = styled.div`
   width: 1100px;
-  min-width: 760px;
   height: 105px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+  @media ${smallScreen} {justify-content: space-evenly}
 `;
 
 const TitleWrapper = styled.div`
@@ -66,18 +66,24 @@ const TopBrands = (): JSX.Element => {
             alt='Emporio Armani'
           />
         }
-        <img
-          src={calvinKlein}
-          alt='Calvin Klein'
-        />
-        <img
-          src={dkny}
-          alt='DKNY'
-        />
-        <img
-          src={baldinini}
-          alt='Baldinini'
-        />
+
+        {!screen.small &&
+          <>
+            <img
+              src={calvinKlein}
+              alt='Calvin Klein'
+            />
+            <img
+              src={dkny}
+              alt='DKNY'
+            />
+            <img
+              src={baldinini}
+              alt='Baldinini'
+            />
+          </>
+        }
+
         <img
           src={emporioArmani}
           alt='Emporio Armani'
