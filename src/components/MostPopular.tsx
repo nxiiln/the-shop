@@ -6,18 +6,27 @@ import mostPopularC from '../images/mostPopularC.png';
 import cartSymbol from '../images/cartSymbol.png';
 import wishList from '../images/wishList.png';
 import compare from '../images/compare.png';
-import {mediumScreen, useMediaQuery} from '../mediaQueries';
+import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
 
 
 const MostPopularWrapper = styled.article`
-  width: 705px;
   min-width: 420px;
   height: 440px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   flex: auto;
-  @media ${mediumScreen} {max-width: 500px}
+
+  @media ${mediumScreen} {
+    max-width: 500px;
+  }
+
+  @media ${smallScreen} {
+    width: 100%;
+    min-width: 0;
+    height: 480px;
+    align-content: start;
+  }
 `;
 
 const Title = styled.h2`
@@ -49,6 +58,12 @@ const Products = styled.div`
   margin-top: 40px;
   display: flex;
   justify-content: space-between;
+
+  @media ${smallScreen} {
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    height: auto;
+  }
 `;
 
 const Product = styled.div`
@@ -57,9 +72,7 @@ const Product = styled.div`
   position: relative;
 `;
 
-type Attr = {attr: string};
-
-const Triangle = styled.div<Attr>`
+const Triangle = styled.div<{attr: string}>`
   width: 0;
   height: 0;
   position: absolute;
@@ -123,9 +136,7 @@ const QuickShop = styled.button`
   &:hover {opacity: 1}
 `;
 
-type Status = {status: boolean};
-
-const QuickShopText = styled.p<Status>`
+const QuickShopText = styled.p<{status: boolean}>`
   margin: 0;
   font-family: var(--font-second);
   font-size: 10px;
@@ -209,7 +220,7 @@ const MostPopular = (): JSX.Element => {
   const screen = useMediaQuery();
 
 
-  const quickShop =
+  const quickShop: JSX.Element =
     <QuickShop
       onMouseEnter={(): void => setQuickShopStatus(true)}
       onMouseLeave={(): void => setQuickShopStatus(false)}
@@ -219,7 +230,7 @@ const MostPopular = (): JSX.Element => {
       </QuickShopText>
     </QuickShop>;
 
-  const purchase =
+  const purchase: JSX.Element =
     <Purchase>
       <AddToBag>
         <img
