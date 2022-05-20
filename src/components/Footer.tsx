@@ -16,12 +16,11 @@ const WrapperOuter = styled.footer`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #000;
+  background-color: var(--color-background-second);
 `;
 
 const WrapperInner = styled.div`
   width: 1100px;
-  min-width: 760px;
   margin: 0 10px 0 10px;
   display: flex;
   flex-wrap: wrap;
@@ -62,14 +61,14 @@ const AboutUs = styled.div`
 `;
 
 const StoreLocation = styled.div`
-  width: 300px;
+  width: 280px;
   height: 100px;
   display: flex;
   justify-content: space-between;
 `;
 
 const Description = styled.div`
-  width: 140px;
+  width: 120px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -90,6 +89,12 @@ const MiddleBlock = styled.div`
   align-items: center;
   border-top: 1px solid #fff;
   border-bottom: 1px solid #fff;
+
+  @media ${smallScreen} {
+    height: 90px;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
 `;
 
 const Newsletter = styled.div`
@@ -100,6 +105,11 @@ const Newsletter = styled.div`
   align-items: center;
 
   > div:first-child {margin: 0}
+  
+  @media ${smallScreen} {
+    width: 100%;
+    justify-content: space-evenly;
+  }
 `;
 
 const Input = styled.input`
@@ -117,6 +127,11 @@ const ConnectUs = styled.div`
 
   > div {margin: 0}
   > img {cursor: pointer}
+
+  @media ${smallScreen} {
+    width: 100%;
+    justify-content: space-evenly;
+  }
 `;
 //-----------------------------------------------
 
@@ -128,6 +143,12 @@ const BottomBlock = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @media ${smallScreen} {
+    height: 75px;
+    flex-direction: column-reverse;
+    justify-content: space-evenly;
+  }
 `;
 //-----------------------------------------------
 
@@ -147,14 +168,14 @@ const Button = styled.button`
   font-size: 10px;
   line-height: 18px;
   font-weight: 300;
-  color: #aaa;
+  color: var(--color-text-regular);
   background-color: transparent;
   border: none;
   cursor: pointer;
 
   &:hover {
     text-decoration: underline;
-    color: #fff;
+    color: var(--color-text-second);
   }
 `;
 
@@ -177,12 +198,12 @@ const Text = styled.p`
   line-height: 18px;
   font-weight: 300;
   text-transform: uppercase;
-  color: #aaa;
+  color: var(--color-text-regular);
 
   > span {
     text-decoration: underline;
     cursor: pointer;
-    &:hover {color: #fff}
+    &:hover {color: var(--color-text-second)}
   }
 `;
 
@@ -223,9 +244,9 @@ const Footer = (): JSX.Element => {
                   <MainText>STORE LOCATION</MainText>
                   <Text>
                     Company ltd.co<br />
-                    234 Fake address name,
-                    Fake City Name, Country
-                    01234 (000) 123 456 xxx
+                    404 Address Name,<br />
+                    Default City,<br />
+                    Unknown Country<br />
                   </Text>
                 </Description>
               </StoreLocation>
@@ -259,7 +280,7 @@ const Footer = (): JSX.Element => {
           </Newsletter>
 
           <ConnectUs>
-            <MainText>CONNECT US</MainText>
+            {!screen.small && <MainText>CONNECT US</MainText>}
             <img src={twitter} alt='twitter' />
             <img src={pinterest} alt='pinterest' />
             <img src={youtube} alt='youtube' />
