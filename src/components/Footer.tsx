@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components/macro';
 import storeLocation from '../images/storeLocation.png';
 import twitter from '../images/twitter.png';
@@ -40,8 +39,8 @@ const TopBlock = styled.div`
   align-content: space-between;
 
   @media ${mediumScreen}, ${smallScreen} {
-    height: 10px;
-    justify-content: start;
+    height: auto;
+    justify-content: center;
   }
 `;
 
@@ -91,7 +90,7 @@ const MiddleBlock = styled.div`
   border-bottom: 1px solid #fff;
 
   @media ${smallScreen} {
-    height: 90px;
+    height: 110px;
     flex-direction: column;
     justify-content: space-evenly;
   }
@@ -108,7 +107,7 @@ const Newsletter = styled.div`
   
   @media ${smallScreen} {
     width: 100%;
-    justify-content: space-evenly;
+    justify-content: center;
   }
 `;
 
@@ -116,6 +115,11 @@ const Input = styled.input`
   width: 280px;
   height: 35px;
   &:focus {outline: none;}
+
+  @media ${smallScreen} {
+    width: 40%;
+    margin-left: 5%;
+  }
 `;
 
 const ConnectUs = styled.div`
@@ -146,6 +150,7 @@ const BottomBlock = styled.div`
 
   @media ${smallScreen} {
     height: 75px;
+    margin-top: 10px;
     flex-direction: column-reverse;
     justify-content: space-evenly;
   }
@@ -159,7 +164,7 @@ const MainText = styled.div`
   font-size: 14px;
   line-height: 1.2;
   font-weight: 400;
-  color: #ffffff;
+  color: var(--color-text-second);
 `;
 
 const Button = styled.button`
@@ -181,6 +186,7 @@ const Button = styled.button`
 
 const ButtonWithBorder = styled(Button)<{withoutBorder?: boolean, withoutPadding?: boolean}>`
   height: 10px;
+  margin-top: 10px;
   padding: 0 10px 0 10px;
   display: flex;
   align-items: center;
