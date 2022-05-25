@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components/macro';
 import {smallScreen} from '../mediaQueries';
 
@@ -7,65 +6,58 @@ const WrapperOuter = styled.article`
   width: 100vw;
   margin-top: 20px;
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
 `;
 
 const WrapperInner = styled.div`
   width: 1100px;
-  height: 105px;
+  height: 125px;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-`;
+  border-top: 1px solid var(--color-border);
 
-const Line = styled.div`
-  width: 1100px;
-  height: 1px;
-  background: var(--color-border);
+  > div:nth-child(2) {margin: 0 15px 0 15px}
 `;
 
 const Item = styled.div`
-  width: 220px;
-  height: 27px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 
   @media ${smallScreen} {
-    width: 170px;
-    height: 65px;
+    height: 90px;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    justify-content: start;
   }
 `;
 
 const Number = styled.span`
-  margin: 0 10px 13px 0;
+  margin: 0 10px 20px 0;
   font-family: var(--font-main);
   font-size: 24px;
   line-height: 1.2;
   font-weight: 400;
   color: var(--color-text-main);
 
-  @media ${smallScreen} {margin: 0}
+  @media ${smallScreen} {margin: 0 0 5px 0}
 `;
 
 const TextWrapper = styled.div`
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  flex-direction: column;
+  text-align: center;
 `;
 
 const MainText = styled.span`
+  margin-bottom: 5px;
   font-family: var(--font-main);
   font-size: 13px;
   line-height: 1.2;
   font-weight: 400;
   text-transform: uppercase;
   color: var(--color-text-main);
-  
-  @media ${smallScreen} {margin-bottom: 5px}
 `;
 
 const Text = styled.span`
@@ -81,7 +73,6 @@ const Text = styled.span`
 const PurchasesInfo = (): JSX.Element => {
   return(
     <WrapperOuter>
-      <Line />
       <WrapperInner>
         <Item>
           <Number>01.</Number>
