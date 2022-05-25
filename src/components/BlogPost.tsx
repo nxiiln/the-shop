@@ -1,9 +1,10 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import styled from 'styled-components/macro';
 import BreadCrumbs from './BreadCrumbs';
 import blogPost2 from '../images/blogPost2.png';
 import BlogCategories from './BlogCategories';
 import BlogLabels from './BlogLabels';
+import {mediumScreen, useMediaQuery} from '../mediaQueries';
 
 
 
@@ -15,9 +16,16 @@ const WrapperOuter = styled.main`
 `;
 
 const WrapperInner = styled.div`
-  width: 960px;
-  margin-bottom: 90px;
-  position: relative;
+  width: 1100px;
+  margin-bottom: 50px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 40px 240px 1fr 1fr;
+
+  @media ${mediumScreen} {
+    grid-template-columns: 1fr;
+    grid-template-rows: 40px repeat(3, auto);
+  }
 `;
 
 
@@ -25,8 +33,14 @@ const WrapperInner = styled.div`
 const PostWrapper = styled.article`
   width: 647px;
   margin-bottom: 25px;
+  grid-area: 2 / 1 / 4 / 2;
   display: flex;
   flex-direction: column;
+  justify-self: center;
+
+  @media ${mediumScreen} {
+    grid-area: 3 / 1 / 4 / 2;
+  }
 `;
 
 const PostHeader = styled.h2`
@@ -38,7 +52,7 @@ const PostHeader = styled.h2`
   line-height: 1.2;
   font-weight: 400;
   text-transform: uppercase;
-  color: #000;
+  color: var(--color-text-main);;
 `;
 
 const PostDate = styled.span`
@@ -48,7 +62,7 @@ const PostDate = styled.span`
   line-height: 1.2;
   font-weight: 300;
   text-transform: uppercase;
-  color: #000;
+  color: var(--color-text-main);;
 `;
 
 const PostDescription = styled.div`
@@ -57,7 +71,8 @@ const PostDescription = styled.div`
   font-size: 14px;
   line-height: 22px;
   font-weight: 300;
-  color: #aaa;
+  color: var(--color-text-regular);
+  
   p {margin: 0 0 30px 0;}
 `;
 //-----------------------------------------------
@@ -66,6 +81,8 @@ const PostDescription = styled.div`
 //Reviews----------------------------------------
 const ReviewsWrapper = styled.article`
   width: 650px;
+  grid-area: 4 / 1 / 5 / 2;
+  justify-self: center;
 `;
 
 const ReviewsNumber = styled.h2`
@@ -74,7 +91,7 @@ const ReviewsNumber = styled.h2`
   font-size: 24px;
   line-height: 1.2;
   font-weight: 400;
-  color: #000;
+  color: var(--color-text-main);;
 `;
 
 const Review = styled.div`
@@ -82,7 +99,7 @@ const Review = styled.div`
   margin-bottom: 8px;
   padding: 20px 35px 15px 30px;
   position: relative;
-  background: #f7f7f7;
+  background: var(--color-background-highlight);
 `;
 
 const Reviewname = styled.span`
@@ -90,7 +107,7 @@ const Reviewname = styled.span`
   font-size: 11px;
   line-height: 14px;
   font-weight: 700;
-  color: #000;
+  color: var(--color-text-main);;
 `;
 
 const ReviewText = styled.p`
@@ -99,7 +116,7 @@ const ReviewText = styled.p`
   font-size: 12px;
   line-height: 14px;
   font-weight: 400;
-  color: #aaa;
+  color: var(--color-text-regular);
 `;
 
 const ReviewDate = styled.span`
@@ -107,7 +124,7 @@ const ReviewDate = styled.span`
   font-size: 11px;
   line-height: 14px;
   font-weight: 400;
-  color: #aaa;
+  color: var(--color-text-regular);
 `;
 
 const ReviewReplay = styled.button`
@@ -117,7 +134,7 @@ const ReviewReplay = styled.button`
   font-size: 11px;
   line-height: 1.2;
   font-weight: 400;
-  color: #000;
+  color: var(--color-text-main);;
   background: transparent;
   border: none;
   cursor: pointer;
@@ -130,7 +147,7 @@ const WriteReview = styled.form`
   width: 645px;
   margin-top: 30px;
   padding: 35px 25px 25px 30px;
-  border: 1px solid #e4e2e1;
+  border: 1px solid var(--color-border);
 `;
 
 const WriteReviewHeader = styled.h2`
@@ -139,7 +156,7 @@ const WriteReviewHeader = styled.h2`
   font-size: 18px;
   line-height: 1.2;
   font-weight: 400;
-  color: #000;
+  color: var(--color-text-main);;
 `;
 
 const Label = styled.label`
@@ -149,19 +166,19 @@ const Label = styled.label`
   font-size: 10px;
   line-height: 30px;
   font-weight: 400;
-  color: #000;
+  color: var(--color-text-main);;
 `;
 
 const InputText = styled.input`
   width: 579px;
   height: 34px;
-  border: 1px solid #e4e2e1;
+  border: 1px solid var(--color-border);
 `;
 
 const InputTextArea = styled.textarea`
   width: 579px;
   height: 76px;
-  border: 1px solid #e4e2e1;
+  border: 1px solid var(--color-border);
 `;
 
 const SubmitReview = styled.button`
@@ -172,8 +189,8 @@ const SubmitReview = styled.button`
   font-family: var(--font-second);
   font-size: 10px;
   font-weight: 300;
-  color: #fff;
-  background: #000;
+  color: var(--color-text-second);
+  background: var(--color-background-second);
   border: none;
   cursor: pointer;
 `;
@@ -182,39 +199,42 @@ const SubmitReview = styled.button`
 
 
 
-const BlogPost = (): JSX.Element => {
-  interface Review {
-    id: number;
-    name: string;
-    text: string;
-    date: string;
+interface Review {
+  id: number;
+  name: string;
+  text: string;
+  date: string;
+}
+
+const reviewsList: Review[] = [
+  {
+    id: 1,
+    name: 'Ami Legge',
+    text: 'Curabitur justo elit, accumsan non interdum a, facilisis vel odio. Pellentesque commodo vulputate nisi id suscipit. Proin dapibus turpis vel rhoncus cursus. Aliquam sit amet gravida sem.',
+    date: '25 Marth 2022'
+  },
+  {
+    id: 2,
+    name: 'Lisa Beck',
+    text: 'Mauris sollicitudin vestibulum nisi, at dignissim quam volutpat in. Nulla id quam velit.',
+    date: '2 April 2022'
+  },
+  {
+    id: 3,
+    name: 'Stefanie Broadhurst',
+    text: 'Vivamus tristique tellus id sapien egestas, id pellentesque felis volutpat. Sed et convallis leo. Donec vitae eros rhoncus, blandit odio ut, bibendum metus.',
+    date: '3 April 2022'
   }
-
-  const reviewsList: Review[] = [
-    {
-      id: 1,
-      name: 'Ami Legge',
-      text: 'Curabitur justo elit, accumsan non interdum a, facilisis vel odio. Pellentesque commodo vulputate nisi id suscipit. Proin dapibus turpis vel rhoncus cursus. Aliquam sit amet gravida sem.',
-      date: '25 Marth 2022'
-    },
-    {
-      id: 2,
-      name: 'Lisa Beck',
-      text: 'Mauris sollicitudin vestibulum nisi, at dignissim quam volutpat in. Nulla id quam velit.',
-      date: '2 April 2022'
-    },
-    {
-      id: 3,
-      name: 'Stefanie Broadhurst',
-      text: 'Vivamus tristique tellus id sapien egestas, id pellentesque felis volutpat. Sed et convallis leo. Donec vitae eros rhoncus, blandit odio ut, bibendum metus.',
-      date: '3 April 2022'
-    }
-  ];
+];
 
 
+
+
+const BlogPost = (): JSX.Element => {
   const [reviews, setReviews] = useState<Review []>(reviewsList);
   const [name, setName] = useState<string>('');
   const [text, setText] = useState<string>('');
+  const screen = useMediaQuery();
 
 
   return(
@@ -229,8 +249,7 @@ const BlogPost = (): JSX.Element => {
             </>
           }
           return='#'
-          marginBottom='20px'
-          gridArea=''
+          gridArea={`1 / 1 / 2 / ${screen.big ? '3' : '1'}`}
         />
 
         <PostWrapper>
@@ -330,8 +349,8 @@ const BlogPost = (): JSX.Element => {
           </WriteReview>
         </ReviewsWrapper>
 
-        <BlogCategories />
-        <BlogLabels />
+        <BlogCategories gridArea={screen.big ? '2 / 2 / 3 / 3' : '2 / 1 / 3 / 2'} />
+        {screen.big && <BlogLabels gridArea='3 / 2 / 4 / 3' />}
       </WrapperInner>
     </WrapperOuter>
   );
