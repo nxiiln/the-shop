@@ -38,7 +38,12 @@ const TopBlock = styled.div`
   justify-content: space-between;
   align-content: space-between;
 
-  @media ${mediumScreen}, ${smallScreen} {
+  @media ${mediumScreen} {
+    height: auto;
+    justify-content: start;
+  }
+
+  @media ${smallScreen} {
     height: auto;
     justify-content: center;
   }
