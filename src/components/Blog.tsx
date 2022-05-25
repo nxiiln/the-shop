@@ -43,7 +43,7 @@ const PostsWrapper = styled.div`
 const OlderPosts = styled.button`
   width: 123px;
   height: 20px;
-  margin-left: 520px;
+  align-self: flex-end;
   background: transparent;
   border: none;
   cursor: pointer;
@@ -53,15 +53,16 @@ const OlderPosts = styled.button`
 
 //Post-------------------------------------------
 const PostWrapper = styled.article`
-  width: 647px;
+  width: 650px;
   margin-bottom: 30px;
   display: flex;
   flex-direction: column;
   cursor: pointer;
+
+  @media ${smallScreen} {width: 300px}
 `;
 
 const PostHeader = styled.h2`
-  width: 480px;
   margin-bottom: 22px;
   display: inline-block;
   font-family: var(--font-main);
@@ -80,6 +81,10 @@ const PostDate = styled.span`
   font-weight: 300;
   text-transform: uppercase;
   color: var(--color-text-main);
+`;
+
+const ProductImage = styled.img`
+  width: 100%;
 `;
 
 const PostDescription = styled.span`
@@ -161,7 +166,7 @@ const Blog = (): JSX.Element => {
               <PostWrapper key={post.id}>
                 <PostHeader>{post.header}</PostHeader>
                 <PostDate>{post.date}</PostDate>
-                <img src={post.image} alt={post.image} />
+                <ProductImage src={post.image} alt={post.image} />
                 <PostDescription>{post.description}</PostDescription>
                 {post.id !== 1 && <PostLine />}
               </PostWrapper>
