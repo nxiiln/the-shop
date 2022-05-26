@@ -18,7 +18,7 @@ const WrapperOuter = styled.main`
 
 const WrapperInner = styled.div`
   width: 1100px;
-  margin-bottom: 50px;
+  margin: 0 1% 50px 1%;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 40px 240px 1fr;
@@ -59,7 +59,10 @@ const PostWrapper = styled.article`
   flex-direction: column;
   cursor: pointer;
 
-  @media ${smallScreen} {width: 300px}
+  @media ${smallScreen} {
+    width: 100%;
+    max-width: 650px;
+  }
 `;
 
 const PostHeader = styled.h2`
