@@ -4,7 +4,7 @@ import BreadCrumbs from './BreadCrumbs';
 import blogPost2 from '../images/blogPost2.png';
 import BlogCategories from './BlogCategories';
 import BlogLabels from './BlogLabels';
-import {mediumScreen, useMediaQuery} from '../mediaQueries';
+import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
 
 
 
@@ -17,12 +17,12 @@ const WrapperOuter = styled.main`
 
 const WrapperInner = styled.div`
   width: 1100px;
-  margin-bottom: 50px;
+  margin: 0 1% 50px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 40px 240px 1fr 1fr;
 
-  @media ${mediumScreen} {
+  @media ${mediumScreen}, ${smallScreen} {
     grid-template-columns: 1fr;
     grid-template-rows: 40px repeat(3, auto);
   }
@@ -31,20 +31,26 @@ const WrapperInner = styled.div`
 
 //Post-------------------------------------------
 const PostWrapper = styled.article`
-  width: 647px;
+  width: 650px;
   margin-bottom: 25px;
   grid-area: 2 / 1 / 4 / 2;
   display: flex;
   flex-direction: column;
   justify-self: center;
 
-  @media ${mediumScreen} {
+  > img {width: 100%}
+
+  @media ${mediumScreen}, ${smallScreen} {
     grid-area: 3 / 1 / 4 / 2;
+  }
+
+  @media ${smallScreen} {
+    width: 100%;
+    max-width: 650px;
   }
 `;
 
 const PostHeader = styled.h2`
-  width: 480px;
   margin: 0 0 22px 0;
   display: inline-block;
   font-family: var(--font-main);
@@ -52,7 +58,7 @@ const PostHeader = styled.h2`
   line-height: 1.2;
   font-weight: 400;
   text-transform: uppercase;
-  color: var(--color-text-main);;
+  color: var(--color-text-main);
 `;
 
 const PostDate = styled.span`
@@ -62,7 +68,7 @@ const PostDate = styled.span`
   line-height: 1.2;
   font-weight: 300;
   text-transform: uppercase;
-  color: var(--color-text-main);;
+  color: var(--color-text-main);
 `;
 
 const PostDescription = styled.div`
@@ -71,11 +77,11 @@ const PostDescription = styled.div`
   font-size: 14px;
   line-height: 22px;
   font-weight: 300;
+  text-align: justify;
   color: var(--color-text-regular);
-  
-  p {margin: 0 0 30px 0;}
+
+  > p {margin: 0 0 30px 0}
 `;
-//-----------------------------------------------
 
 
 //Reviews----------------------------------------
@@ -83,6 +89,11 @@ const ReviewsWrapper = styled.article`
   width: 650px;
   grid-area: 4 / 1 / 5 / 2;
   justify-self: center;
+
+  @media ${smallScreen} {
+    width: 100%;
+    max-width: 650px;
+  }
 `;
 
 const ReviewsNumber = styled.h2`
@@ -91,11 +102,11 @@ const ReviewsNumber = styled.h2`
   font-size: 24px;
   line-height: 1.2;
   font-weight: 400;
-  color: var(--color-text-main);;
+  color: var(--color-text-main);
 `;
 
 const Review = styled.div`
-  width: 646px;
+  width: 100%;
   margin-bottom: 8px;
   padding: 20px 35px 15px 30px;
   position: relative;
@@ -107,7 +118,7 @@ const Reviewname = styled.span`
   font-size: 11px;
   line-height: 14px;
   font-weight: 700;
-  color: var(--color-text-main);;
+  color: var(--color-text-main);
 `;
 
 const ReviewText = styled.p`
@@ -128,23 +139,22 @@ const ReviewDate = styled.span`
 `;
 
 const ReviewReplay = styled.button`
-  position: absolute;
-  left: 570px;
+  display: block;
+  margin-left: auto;
   font-family: Arial;
   font-size: 11px;
   line-height: 1.2;
   font-weight: 400;
-  color: var(--color-text-main);;
+  color: var(--color-text-main);
   background: transparent;
   border: none;
   cursor: pointer;
 `;
-//-----------------------------------------------
 
 
 //WriteReview------------------------------------
 const WriteReview = styled.form`
-  width: 645px;
+  width: 100%;
   margin-top: 30px;
   padding: 35px 25px 25px 30px;
   border: 1px solid var(--color-border);
@@ -156,7 +166,7 @@ const WriteReviewHeader = styled.h2`
   font-size: 18px;
   line-height: 1.2;
   font-weight: 400;
-  color: var(--color-text-main);;
+  color: var(--color-text-main);
 `;
 
 const Label = styled.label`
@@ -166,17 +176,18 @@ const Label = styled.label`
   font-size: 10px;
   line-height: 30px;
   font-weight: 400;
-  color: var(--color-text-main);;
+  color: var(--color-text-main);
 `;
 
 const InputText = styled.input`
-  width: 579px;
+  width: 100%;
   height: 34px;
   border: 1px solid var(--color-border);
 `;
 
 const InputTextArea = styled.textarea`
-  width: 579px;
+  width: 100%;
+  max-width: 100%;
   height: 76px;
   border: 1px solid var(--color-border);
 `;
@@ -184,8 +195,6 @@ const InputTextArea = styled.textarea`
 const SubmitReview = styled.button`
   width: 103px;
   height: 30px;
-  position: relative;
-  left: 475px;
   font-family: var(--font-second);
   font-size: 10px;
   font-weight: 300;
@@ -194,7 +203,6 @@ const SubmitReview = styled.button`
   border: none;
   cursor: pointer;
 `;
-//-----------------------------------------------
 
 
 
