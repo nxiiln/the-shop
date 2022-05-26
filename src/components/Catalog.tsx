@@ -139,16 +139,11 @@ const DropdownSmallWrapper = styled.div<{type: string}>`
   align-items: center;
   z-index: 2;
 
-  > span:nth-child(1) {
+  > span {
     font-family: var(--font-second);
     font-size: 10px;
     font-weight: 300;
     color: #000;
-  }
-
-  > span:nth-child(3) {
-    font-size: 10px;
-    color: #bebebe;
   }
 `;
 
@@ -208,7 +203,7 @@ const DropdownSmallMode = styled.button`
 const Pagination = styled.div`
   width: 120px;
   height: 20px;
-  margin-left: 300px;
+  margin-left: auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -358,49 +353,6 @@ const Catalog = (): JSX.Element => {
                     </DropdownSmallBody>
                   }
                 </DropdownSmall>
-
-                <span>&#8595;</span>
-              </DropdownSmallWrapper>
-
-
-              <DropdownSmallWrapper
-                type='show'
-                onMouseEnter={(): void => setShowOpen(true)}
-                onMouseLeave={(): void => setShowOpen(false)}
-                onClick={(): void => setShowOpen(false)}
-              >
-                <span>SHOW</span>
-                <DropdownSmall type='show' open={showOpen}>
-                  <DropdownSmallHeader>
-                    {showMode}
-                    <Triangle type='show' />
-                  </DropdownSmallHeader>
-
-                  {showOpen &&
-                    <DropdownSmallBody>
-                      <DropdownSmallMode
-                        type='button'
-                        onClick={(): void => setShowMode(12)}
-                      >
-                        12
-                      </DropdownSmallMode>
-
-                      <DropdownSmallMode
-                        type='button'
-                        onClick={(): void => setShowMode(9)}
-                      >
-                        9
-                      </DropdownSmallMode>
-
-                      <DropdownSmallMode
-                        type='button'
-                        onClick={(): void => setShowMode(6)}
-                      >
-                        6
-                      </DropdownSmallMode>
-                    </DropdownSmallBody>
-                  }
-                </DropdownSmall>                
               </DropdownSmallWrapper>
             </WrapperDropdownsSmallPagination>
 
@@ -445,49 +397,6 @@ const Catalog = (): JSX.Element => {
                     </DropdownSmallBody>
                   }
                 </DropdownSmall>
-
-                <span>&#8595;</span>
-              </DropdownSmallWrapper>
-
-
-              <DropdownSmallWrapper
-                type='show'
-                onMouseEnter={(): void => setShowOpen(true)}
-                onMouseLeave={(): void => setShowOpen(false)}
-                onClick={(): void => setShowOpen(false)}
-              >
-                <span>SHOW</span>
-                <DropdownSmall type='show' open={showOpen}>
-                  <DropdownSmallHeader>
-                    {showMode}
-                    <Triangle type='show' />
-                  </DropdownSmallHeader>
-
-                  {showOpen &&
-                    <DropdownSmallBody>
-                      <DropdownSmallMode
-                        type='button'
-                        onClick={(): void => setShowMode(12)}
-                      >
-                        12
-                      </DropdownSmallMode>
-
-                      <DropdownSmallMode
-                        type='button'
-                        onClick={(): void => setShowMode(9)}
-                      >
-                        9
-                      </DropdownSmallMode>
-
-                      <DropdownSmallMode
-                        type='button'
-                        onClick={(): void => setShowMode(6)}
-                      >
-                        6
-                      </DropdownSmallMode>
-                    </DropdownSmallBody>
-                  }
-                </DropdownSmall>                
               </DropdownSmallWrapper>
 
 
