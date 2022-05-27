@@ -93,7 +93,7 @@ const HeaderWrapper = styled.div`
 `;
 
 const Banner = styled.div`
-  margin-top: 15px;
+  margin: 15px 0;
   position: relative;
 
   span:nth-child(2) {
@@ -117,8 +117,9 @@ const Banner = styled.div`
   }
 `;
 
-//DropdownSmall----------------------------------
-const DropdownSmallWrapper = styled.div`
+
+//Sort-------------------------------------------
+const SortWrapper = styled.div`
   width: 160px;
   height: 32px;
   display: flex;
@@ -134,44 +135,42 @@ const DropdownSmallWrapper = styled.div`
   }
 `;
 
-const DropdownSmall = styled.div<{type: string; open: boolean}>`
-  width: ${props => props.type === 'sort' ? '104px' : '61px'};
+const Sort = styled.div<{open: boolean}>`
+  width: 105px;
   height: ${props => props.open ? '106px' : '30px'};
   align-self: start;
   border: 1px solid #e4e2e1;
   z-index: 2;
 `;
 
-const DropdownSmallHeader = styled.div`
+const SortHeader = styled.div<{open: boolean}>`
   height: 30px;
   padding-left: 12px;
   display: flex;
-  justify-content: start;
+  justify-content: space-between;
   align-items: center;
   position: relative;
   font-family: Arial;
   font-size: 11px;
   font-weight: 400;
   color: #aaa;
+
+  > span {
+    margin-right: 5px;
+    font-size: 16px;
+    color: var(--color-text-main);
+    ${props => props.open && 'transform: rotate(90deg);'}
+  }
 `;
 
-const Triangle = styled.div<{type: string}>`
-  position: absolute;
-  top: 12px;
-  left: ${props => props.type === 'sort' ? '90px' : '48px'};
-  border-top: 4px solid #000;
-  border-right: 3px solid transparent;
-  border-left: 3px solid transparent;
-`;
-
-const DropdownSmallBody = styled.div`
+const SortBody = styled.div`
   margin-top: 8px;
   display: flex;
   flex-direction: column;
   background: #fff;
 `;
 
-const DropdownSmallMode = styled.button`
+const ButtonSortMode = styled.button`
   margin: 0 0 8px 7px;
   display: flex;
   font-family: Arial;
@@ -221,7 +220,8 @@ const Page = styled.button<{curr: boolean}>`
 
   ${props => props.curr ?
     `color: #000;
-     border: 1px solid #000;` :
+     border: 1px solid #000;`
+    :
     `color: #e4e2e1;
      border: 1px solid #e4e2e1;`
   }
@@ -231,8 +231,8 @@ const Page = styled.button<{curr: boolean}>`
 
 
 const Catalog = (): JSX.Element => {
-  const [sortingOpen, setSortingOpen] = useState<boolean>(false);
-  const [sortingMode, setSortingMode] = useState<string>('Position');
+  const [sortOpen, setSortOpen] = useState<boolean>(false);
+  const [sortMode, setSortMode] = useState<string>('Position');
   const [currPage, setCurrPage] = useState<number>(1);
 
 
@@ -300,44 +300,44 @@ const Catalog = (): JSX.Element => {
             </Banner>
 
             
-            <DropdownSmallWrapper
-              onMouseEnter={(): void => setSortingOpen(true)}
-              onMouseLeave={(): void => setSortingOpen(false)}
-              onClick={(): void => setSortingOpen(false)}
+            <SortWrapper
+              onMouseEnter={(): void => setSortOpen(true)}
+              onMouseLeave={(): void => setSortOpen(false)}
+              onClick={(): void => setSortOpen(false)}
             >
               <span>SORT BY</span>
-              <DropdownSmall type='sort' open={sortingOpen}>
-                <DropdownSmallHeader>
-                  {sortingMode}
-                  <Triangle type='sort' />
-                </DropdownSmallHeader>
+              <Sort open={sortOpen}>
+                <SortHeader open={sortOpen}>
+                  {sortMode}
+                  <span>▸</span>
+                </SortHeader>
 
-                {sortingOpen &&
-                  <DropdownSmallBody>
-                    <DropdownSmallMode
+                {sortOpen &&
+                  <SortBody>
+                    <ButtonSortMode
                       type='button'
-                      onClick={(): void => setSortingMode('Position')}
+                      onClick={(): void => setSortMode('Position')}
                     >
                       Position
-                    </DropdownSmallMode>
+                    </ButtonSortMode>
 
-                    <DropdownSmallMode
+                    <ButtonSortMode
                       type='button'
-                      onClick={(): void => setSortingMode('Price')}
+                      onClick={(): void => setSortMode('Price')}
                     >
                       Price
-                    </DropdownSmallMode>
+                    </ButtonSortMode>
 
-                    <DropdownSmallMode
+                    <ButtonSortMode
                       type='button'
-                      onClick={(): void => setSortingMode('Name')}
+                      onClick={(): void => setSortMode('Name')}
                     >
                       Name
-                    </DropdownSmallMode>
-                  </DropdownSmallBody>
+                    </ButtonSortMode>
+                  </SortBody>
                 }
-              </DropdownSmall>
-            </DropdownSmallWrapper>
+              </Sort>
+            </SortWrapper>
 
 
             <CatalogProducts />
