@@ -38,13 +38,13 @@ const BannerSmall = styled.div`
   margin-top: 50px;
   position: relative;
 
-  div {
+  > div {
     width: 119px;
     height: 57px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background: #fff;
+    background: var(--color-background-main);
     position: absolute;
     top: 255px;
     left: 0px;
@@ -52,15 +52,15 @@ const BannerSmall = styled.div`
     line-height: 14px;
     font-weight: 300;
 
-    span:first-child {
+    > span:first-child {
       font-size: 14px;
-      color: #000;
+      color: var(--color-text-main);
       margin-bottom: 2px;
     }
 
-    span:last-child {
+    > span:last-child {
       font-size: 11px;
-      color: #aaa;
+      color: var(--color-text-regular);
     }
   }
 `;
@@ -72,23 +72,23 @@ const HeaderWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  h2 {
+  > h2 {
     font-family: var(--font-main);
     font-size: 24px;
     font-weight: 400;
-    color: #000;
+    color: var(--color-text-main);
   }
 
-  div {
+  > div {
     width: 550px;
     margin: 0;
   }
 
-  span {
+  > span {
     font-family: Arial;
     font-size: 10px;
     font-weight: 400;
-    color: #aaa;
+    color: var(--color-text-regular);
   }
 `;
 
@@ -96,24 +96,24 @@ const Banner = styled.div`
   margin: 15px 0;
   position: relative;
 
-  span:nth-child(2) {
+  > span:nth-child(2) {
     position: absolute;
     top: 155px;
     left: 35px;
     font-family: var(--font-main);
     font-size: 48px;
     font-weight: 400;
-    color: #000;
+    color: var(--color-text-main);
   }
 
-  span:nth-child(3) {
+  > span:nth-child(3) {
     position: absolute;
     top: 220px;
     left: 35px;
     font-family: var(--font-second);
     font-size: 12px;
     font-weight: 300;
-    color: #282828;
+    color: var(--color-text-main);
   }
 `;
 
@@ -131,7 +131,7 @@ const SortWrapper = styled.div`
     font-family: var(--font-second);
     font-size: 10px;
     font-weight: 300;
-    color: #000;
+    color: var(--color-text-main);
   }
 `;
 
@@ -139,7 +139,7 @@ const Sort = styled.div<{open: boolean}>`
   width: 105px;
   height: ${props => props.open ? '106px' : '30px'};
   align-self: start;
-  border: 1px solid #e4e2e1;
+  border: 1px solid var(--color-border);
   z-index: 2;
 `;
 
@@ -153,7 +153,7 @@ const SortHeader = styled.div<{open: boolean}>`
   font-family: Arial;
   font-size: 11px;
   font-weight: 400;
-  color: #aaa;
+  color: var(--color-text-regular);
 
   > span {
     margin-right: 5px;
@@ -167,7 +167,7 @@ const SortBody = styled.div`
   margin-top: 8px;
   display: flex;
   flex-direction: column;
-  background: #fff;
+  background: var(--color-background-main);
 `;
 
 const ButtonSortMode = styled.button`
@@ -176,11 +176,12 @@ const ButtonSortMode = styled.button`
   font-family: Arial;
   font-size: 11px;
   font-weight: 400;
-  color: #aaa;
+  color: var(--color-text-regular);
   background: transparent;
   border: none;
-  :hover {
-    color: #000;
+
+  &:hover {
+    color: var(--color-text-main);
     cursor: pointer;
   }
 `;
@@ -199,7 +200,7 @@ const Pagination = styled.div`
 const Navigation = styled.button`
   padding: 0;
   font-size: 14px;
-  background: #fff;
+  background: var(--color-background-main);
   border: none;
   cursor: pointer;
 `;
@@ -215,7 +216,7 @@ const Page = styled.button<{curr: boolean}>`
   line-height: 1.2;
   font-weight: 400;
   text-transform: uppercase;
-  background: #fff;
+  background: var(--color-background-main);
   cursor: pointer;
 
   ${props => props.curr ?
