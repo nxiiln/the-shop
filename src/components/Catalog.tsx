@@ -117,22 +117,9 @@ const Banner = styled.div`
   }
 `;
 
-const WrapperDropdownsSmallPagination = styled.div`
-  width: 100%;
-  height: 30px;
-  margin-top: 6px;
-  display: flex;
-  align-items: center;
-`;
-
-
-//DropdownSmall---------------------------------
-const DropdownSmallWrapper = styled.div<{type: string}>`
-  ${props => props.type === 'sort' ? 'width: 175px;' : `
-    width: 100px;
-    margin-left: 30px;
-  `}
-
+//DropdownSmall----------------------------------
+const DropdownSmallWrapper = styled.div`
+  width: 160px;
   height: 32px;
   display: flex;
   justify-content: space-between;
@@ -152,6 +139,7 @@ const DropdownSmall = styled.div<{type: string; open: boolean}>`
   height: ${props => props.open ? '106px' : '30px'};
   align-self: start;
   border: 1px solid #e4e2e1;
+  z-index: 2;
 `;
 
 const DropdownSmallHeader = styled.div`
@@ -245,8 +233,6 @@ const Page = styled.button<{curr: boolean}>`
 const Catalog = (): JSX.Element => {
   const [sortingOpen, setSortingOpen] = useState<boolean>(false);
   const [sortingMode, setSortingMode] = useState<string>('Position');
-  const [showOpen, setShowOpen] = useState<boolean>(false);
-  const [showMode, setShowMode] = useState<number>(9);
   const [currPage, setCurrPage] = useState<number>(1);
 
 
@@ -314,114 +300,70 @@ const Catalog = (): JSX.Element => {
             </Banner>
 
             
-            <WrapperDropdownsSmallPagination>
-              <DropdownSmallWrapper
-                type='sort'
-                onMouseEnter={(): void => setSortingOpen(true)}
-                onMouseLeave={(): void => setSortingOpen(false)}
-                onClick={(): void => setSortingOpen(false)}
-              >
-                <span>SORT BY</span>
-                <DropdownSmall type='sort' open={sortingOpen}>
-                  <DropdownSmallHeader>
-                    {sortingMode}
-                    <Triangle type='sort' />
-                  </DropdownSmallHeader>
+            <DropdownSmallWrapper
+              onMouseEnter={(): void => setSortingOpen(true)}
+              onMouseLeave={(): void => setSortingOpen(false)}
+              onClick={(): void => setSortingOpen(false)}
+            >
+              <span>SORT BY</span>
+              <DropdownSmall type='sort' open={sortingOpen}>
+                <DropdownSmallHeader>
+                  {sortingMode}
+                  <Triangle type='sort' />
+                </DropdownSmallHeader>
 
-                  {sortingOpen &&
-                    <DropdownSmallBody>
-                      <DropdownSmallMode
-                        type='button'
-                        onClick={(): void => setSortingMode('Position')}
-                      >
-                        Position
-                      </DropdownSmallMode>
+                {sortingOpen &&
+                  <DropdownSmallBody>
+                    <DropdownSmallMode
+                      type='button'
+                      onClick={(): void => setSortingMode('Position')}
+                    >
+                      Position
+                    </DropdownSmallMode>
 
-                      <DropdownSmallMode
-                        type='button'
-                        onClick={(): void => setSortingMode('Price')}
-                      >
-                        Price
-                      </DropdownSmallMode>
+                    <DropdownSmallMode
+                      type='button'
+                      onClick={(): void => setSortingMode('Price')}
+                    >
+                      Price
+                    </DropdownSmallMode>
 
-                      <DropdownSmallMode
-                        type='button'
-                        onClick={(): void => setSortingMode('Name')}
-                      >
-                        Name
-                      </DropdownSmallMode>
-                    </DropdownSmallBody>
-                  }
-                </DropdownSmall>
-              </DropdownSmallWrapper>
-            </WrapperDropdownsSmallPagination>
+                    <DropdownSmallMode
+                      type='button'
+                      onClick={(): void => setSortingMode('Name')}
+                    >
+                      Name
+                    </DropdownSmallMode>
+                  </DropdownSmallBody>
+                }
+              </DropdownSmall>
+            </DropdownSmallWrapper>
+
 
             <CatalogProducts />
 
-            <WrapperDropdownsSmallPagination>
-              <DropdownSmallWrapper
-                type='sort'
-                onMouseEnter={(): void => setSortingOpen(true)}
-                onMouseLeave={(): void => setSortingOpen(false)}
-                onClick={(): void => setSortingOpen(false)}
-              >
-                <span>SORT BY</span>
-                <DropdownSmall type='sort' open={sortingOpen}>
-                  <DropdownSmallHeader>
-                    {sortingMode}
-                    <Triangle type='sort' />
-                  </DropdownSmallHeader>
 
-                  {sortingOpen &&
-                    <DropdownSmallBody>
-                      <DropdownSmallMode
-                        type='button'
-                        onClick={(): void => setSortingMode('Position')}
-                      >
-                        Position
-                      </DropdownSmallMode>
+            <Pagination>
+              <Navigation
+                type='button'
+                onClick={(): void => {
+                  if (currPage === 1) return;
+                  setCurrPage((prevCurrPage: number): number => prevCurrPage - 1);
+              }}>
+                &#10094;
+              </Navigation>
 
-                      <DropdownSmallMode
-                        type='button'
-                        onClick={(): void => setSortingMode('Price')}
-                      >
-                        Price
-                      </DropdownSmallMode>
+              {renderPages()}
 
-                      <DropdownSmallMode
-                        type='button'
-                        onClick={(): void => setSortingMode('Name')}
-                      >
-                        Name
-                      </DropdownSmallMode>
-                    </DropdownSmallBody>
-                  }
-                </DropdownSmall>
-              </DropdownSmallWrapper>
-
-
-              <Pagination>
-                <Navigation
-                  type='button'
-                  onClick={(): void => {
-                    if (currPage === 1) return;
-                    setCurrPage((prevCurrPage: number): number => prevCurrPage - 1);
-                }}>
-                  &#10094;
-                </Navigation>
-
-                {renderPages()}
-
-                <Navigation
-                  type='button'
-                  onClick={(): void => {
-                    if (currPage === 3) return;
-                    setCurrPage((prevCurrPage: number): number => prevCurrPage + 1);
-                }}>
-                  &#10095;
-                </Navigation>
-              </Pagination>
-            </WrapperDropdownsSmallPagination>
+              <Navigation
+                type='button'
+                onClick={(): void => {
+                  if (currPage === 3) return;
+                  setCurrPage((prevCurrPage: number): number => prevCurrPage + 1);
+              }}>
+                &#10095;
+              </Navigation>
+            </Pagination>
           </div>
         </Groups>
       </WrapperInner>
