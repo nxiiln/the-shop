@@ -34,10 +34,10 @@ const Product = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  color: #000;
+  color: var(--color-text-main);
   text-transform: uppercase;
 
-  :hover {cursor: pointer}
+  &:hover {cursor: pointer}
 `;
 
 const ProductName = styled.span`
@@ -60,7 +60,8 @@ const ProductTriangle = styled.div<{attr: string}>`
   left: -17.5px;
   border-right: 35px solid transparent;
   border-bottom: ${props => props.attr === 'new' ?
-    '35px solid #000' : '35px solid #c50e20'
+    '35px solid var(--color-triangle-new)' :
+    '35px solid var(--color-triangle-sale)'
   };
   border-left: 35px solid transparent;
   transform: rotate(-45deg);
@@ -74,7 +75,7 @@ const ProductTriangleDescription = styled.span`
   font-size: 11px;
   line-height: 1.2;
   font-weight: 700;
-  color: #fff;
+  color: var(--color-text-second);
 `;
 
 const ProductOpen = styled.div`
@@ -101,10 +102,10 @@ const QuickShop = styled.button`
   font-family: var(--font-second);
   font-size: 10px;
   font-weight: 300;
-  color: #000;
-  background: #fff;
-  border: none;
+  color: var(--color-text-main);
+  background: var(--color-background-main);
   opacity: 0.8;
+  border: none;
   cursor: pointer;
 
   &:hover {opacity: 1}
@@ -121,14 +122,14 @@ const AddToBag = styled.button`
   font-size: 10px;
   line-height: 1.2;
   font-weight: 300;
-  color: #fff;
-  background: #000;
+  color: var(--color-text-second);
+  background: var(--color-background-second);
   border: none;
   cursor: pointer;
 
   &:hover {opacity: 0.8}
 
-  div {
+  > div {
     width: 80px;
     display: flex;
     justify-content: space-between;
@@ -137,7 +138,7 @@ const AddToBag = styled.button`
     font-size: 10px;
     line-height: 1.2;
     font-weight: 300;
-    color: #fff;
+    color: var(--color-text-second);
   }
 `;
 
@@ -152,7 +153,7 @@ const WishList = styled.button`
   font-size: 10px;
   line-height: 1.2;
   font-weight: 300;
-  color: #000;
+  color: var(--color-text-main);
   background: transparent;
   border: none;
   cursor: pointer;
@@ -172,7 +173,7 @@ const Compare = styled.button`
   font-size: 10px;
   line-height: 1.2;
   font-weight: 300;
-  color: #000;
+  color: var(--color-text-main);
   background: none;
   border: none;
   cursor: pointer;
