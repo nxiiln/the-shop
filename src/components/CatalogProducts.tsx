@@ -27,7 +27,7 @@ const Products = styled.div`
 `;
 
 const Product = styled.div`
-  width: 240px;
+  width: 230px;
   height: 360px;
   position: relative;
   display: flex;
@@ -78,7 +78,7 @@ const ProductTriangleDescription = styled.span`
 `;
 
 const ProductOpen = styled.div`
-  width: 240px;
+  width: 230px;
   height: 425px;
   padding-bottom: 10px;
   position: absolute;
