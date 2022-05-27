@@ -3,29 +3,6 @@ import styled from 'styled-components/macro';
 
 
 
-const WrapperOuter = styled.article`
-  width: 100vw;
-  display: flex;
-  justify-content: center;
-`;
-
-const WrapperInner = styled.div`
-  width: 960px;
-  height: 1950px;
-`;
-
-const Line = styled.div`
-  width: 100%;
-  height: 1px;
-  margin-bottom: 10px;
-  background: #aaa;
-`;
-
-const Groups = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
 
 //Dropdown---------------------------------------
 const Dropdown = styled.div<{open: boolean}>`
@@ -38,21 +15,23 @@ const Dropdown = styled.div<{open: boolean}>`
   font-family: var(--font-second);
   font-size: 11px;
   font-weight: 300;
-  color: #000;
-  background: #f7f7f7;
-  border: 1px solid #e4e2e1;
+  color: var(--color-text-main);
+  background: var(--color-background-highlight);
+  border: 1px solid var(--color-border);
   border-radius: 20px;
-  span:nth-child(2) {transform: rotate(90deg);}
-
-  :hover {
-    background: #fff;
+  
+  &:hover {
+    background: var(--color-background-main);
     border-radius: 0;
   }
+  
+  > span:nth-child(2) {transform: rotate(90deg)}
 
   ${props => props.open && `
-    background: #fff;
+    background: var(--color-background-main);
     border-radius: 0;
-    span:nth-child(2) {transform: rotate(-90deg);}
+
+    > span:nth-child(2) {transform: rotate(-90deg)}
   `}
 `;
 
@@ -73,11 +52,12 @@ const ButtonFilter = styled.button`
   font-size: 10px;
   line-height: 24px;
   font-weight: 400;
-  color: #000;
-  background: #fff;
+  color: var(--color-text-main);
+  background: var(--color-background-main);
   border: none;
   cursor: pointer;
-  :hover {text-decoration: underline;}
+  
+  &:hover {text-decoration: underline}
 `;
 
 const ButtonWomenWrapper = styled.div`
@@ -91,11 +71,12 @@ const ResetFilter = styled.button`
   font-size: 10px;
   line-height: 1.2;
   font-weight: 400;
-  color: #aaa;
+  color: var(--color-text-regular);
   background: none;
   border: none;
   cursor: pointer;
-  :hover {text-decoration: underline;}
+
+  &:hover {text-decoration: underline}
 `;
 
 const ButtonCategoryWrapper = styled.div`
@@ -118,15 +99,17 @@ const Checkbox = styled.label`
   font-family: var(--font-second);
   font-size: 10px;
   font-weight: 400;
-  color: #000;
+  color: var(--color-text-main);
   height: 18px;
   display: flex;
   align-items: center;
   cursor: pointer;
-  :hover {text-decoration: underline;}
+  
+  &:hover {text-decoration: underline}
+  
   > input {
     margin: 0 7px 0 0;
-    accent-color: #000;
+    accent-color: var(--color-text-main);
   }
 `;
 
@@ -179,7 +162,7 @@ const RangeWrapper = styled.div`
       width: 20px;
       height: 20px;
       border-radius: 10px;
-      background: #000;
+      background: var(--color-background-second);
       pointer-events: auto;
     }
   }
@@ -212,11 +195,10 @@ const CatalogFilters = (): JSX.Element => {
   const [category, setCategory] = useState<boolean>(true);
   const [size, setSize] = useState<boolean>(true);
   const [priceRange, setPriceRange] = useState<boolean>(false);
-  const [color, setColor] = useState<boolean>(true);
-  const [brand, setBrand] = useState<boolean>(true);
-
   const [range1, setRange1] = useState<number>(30);
   const [range2, setRange2] = useState<number>(70);
+  const [color, setColor] = useState<boolean>(true);
+  const [brand, setBrand] = useState<boolean>(true);
 
 
   return(
