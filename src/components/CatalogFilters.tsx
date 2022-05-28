@@ -1,5 +1,6 @@
 import {useState} from 'react';
 import styled from 'styled-components/macro';
+import {mediumScreen, smallScreen} from '../mediaQueries';
 
 
 
@@ -33,15 +34,21 @@ const Dropdown = styled.div<{open: boolean}>`
 
     > span:nth-child(2) {transform: rotate(-90deg)}
   `}
+
+  @media ${mediumScreen}, ${smallScreen} {width: 100%}
 `;
 
-const DropdownHeader = styled.div`
+const DropdownHeader = styled.div<{open: boolean}>`
   width: 100%;
   height: 29px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
+
+  > span:last-child {
+    transform: ${props => props.open && 'rotate(90deg)'};
+  }
 `;
 
 
@@ -67,7 +74,7 @@ const ButtonWomenWrapper = styled.div`
 
 const ResetFilter = styled.button`
   margin: 24px 0 8px 0;
-  font-family: Arial;
+  font-family: var(--font-regular);
   font-size: 10px;
   line-height: 1.2;
   font-weight: 400;
@@ -79,7 +86,7 @@ const ResetFilter = styled.button`
   &:hover {text-decoration: underline}
 `;
 
-const ButtonCategoryWrapper = styled.div`
+const CategoryWrapper = styled.div`
   width: 115px;
   margin-top: 2px;
 `;
@@ -115,7 +122,6 @@ const Checkbox = styled.label`
 `;
 
 const CheckboxWrapper = styled.div`
-  width: 160px;
   height: 180px;
   margin: 10px 0 0 2px;
   display: flex;
@@ -125,11 +131,12 @@ const CheckboxWrapper = styled.div`
 `;
 
 const CheckboxSizeWrapper = styled(CheckboxWrapper)`
+  width: 140px;
   height: 90px;
 `;
 
 const CheckboxColorWrapper = styled(CheckboxWrapper)`
-  width: 164px;
+  width: 165px;
 `;
 
 
@@ -212,22 +219,23 @@ const brands: string[] = ['armany', 'burberry', 'chanel', 'dolce&gabbana', 'esca
 
 
 const CatalogFilters = (): JSX.Element => {
-  const [women, setWomen] = useState<boolean>(true);
-  const [category, setCategory] = useState<boolean>(true);
-  const [size, setSize] = useState<boolean>(true);
+  const [women, setWomen] = useState<boolean>(false);
+  const [category, setCategory] = useState<boolean>(false);
+  const [size, setSize] = useState<boolean>(false);
   const [priceRange, setPriceRange] = useState<boolean>(false);
   const [range1, setRange1] = useState<number>(30);
   const [range2, setRange2] = useState<number>(70);
-  const [color, setColor] = useState<boolean>(true);
-  const [brand, setBrand] = useState<boolean>(true);
+  const [color, setColor] = useState<boolean>(false);
+  const [brand, setBrand] = useState<boolean>(false);
 
 
   return(
     <>
       <Dropdown open={women}>
-        <DropdownHeader onClick={(): void => {
-          women ? setWomen(false) : setWomen(true)
-        }}>
+        <DropdownHeader
+          open={women}
+          onClick={(): void => women ? setWomen(false) : setWomen(true)}
+        >
           <span>WOMEN</span>
           <span>❯</span>
         </DropdownHeader>
@@ -247,15 +255,16 @@ const CatalogFilters = (): JSX.Element => {
 
 
       <Dropdown open={category}>
-        <DropdownHeader onClick={(): void => {
-          category ? setCategory(false) : setCategory(true)
-        }}>
+        <DropdownHeader
+          open={category}
+          onClick={(): void => category ? setCategory(false) : setCategory(true)}
+        >
           <span>CATEGORY</span>
           <span>❯</span>
         </DropdownHeader>
 
         {category &&
-          <ButtonCategoryWrapper>
+          <CategoryWrapper>
             <ButtonFilterBold>BOTTOMS</ButtonFilterBold>
             <ButtonFilterSecond>TOPS</ButtonFilterSecond>
             <ButtonFilterSecond>SHOES & MORE</ButtonFilterSecond>
@@ -266,15 +275,16 @@ const CatalogFilters = (): JSX.Element => {
             <ButtonFilterSecond>T-SHIRTS</ButtonFilterSecond>
             <ButtonFilterSecond>KNITWEAR</ButtonFilterSecond>
             <ButtonFilterSecond>SWEATS</ButtonFilterSecond>
-          </ButtonCategoryWrapper>
+          </CategoryWrapper>
         }
       </Dropdown>
 
 
       <Dropdown open={size}>
-        <DropdownHeader onClick={(): void => {
-          size ? setSize(false) : setSize(true)
-        }}>
+        <DropdownHeader
+          open={size}
+          onClick={(): void => size ? setSize(false) : setSize(true)}
+        >
           <span>SIZE</span>
           <span>❯</span>
         </DropdownHeader>
@@ -295,9 +305,10 @@ const CatalogFilters = (): JSX.Element => {
 
 
       <Dropdown open={priceRange}>
-        <DropdownHeader onClick={(): void => {
-          priceRange ? setPriceRange(false) : setPriceRange(true)
-        }}>
+        <DropdownHeader
+          open={priceRange}
+          onClick={(): void => priceRange ? setPriceRange(false) : setPriceRange(true)}
+        >
           <span>PRICE RANGE</span>
           <span>❯</span>
         </DropdownHeader>
@@ -332,9 +343,10 @@ const CatalogFilters = (): JSX.Element => {
 
 
       <Dropdown open={color}>
-        <DropdownHeader onClick={(): void => {
-          color ? setColor(false) : setColor(true)
-        }}>
+        <DropdownHeader
+          open={priceRange}
+          onClick={(): void => color ? setColor(false) : setColor(true)}
+        >
           <span>COLOR</span>
           <span>❯</span>
         </DropdownHeader>
@@ -355,9 +367,10 @@ const CatalogFilters = (): JSX.Element => {
 
 
       <Dropdown open={brand}>
-        <DropdownHeader onClick={(): void => {
-          brand ? setBrand(false) : setBrand(true)
-        }}>
+        <DropdownHeader
+          open={brand}
+          onClick={(): void => brand ? setBrand(false) : setBrand(true)}
+        >
           <span>BRAND</span>
           <span>❯</span>
         </DropdownHeader>
