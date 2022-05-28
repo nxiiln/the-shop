@@ -5,31 +5,29 @@ import CatalogFilters from './CatalogFilters';
 import CatalogProducts from './CatalogProducts';
 import banner from '../images/banner.png';
 import bannerSmall from '../images/bannerSmall.png';
+import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
 
 
 
 
-const WrapperOuter = styled.article`
+const WrapperOuter = styled.main`
   width: 100vw;
   display: flex;
   justify-content: center;
 `;
 
 const WrapperInner = styled.div`
-  width: 960px;
-  height: 1950px;
-`;
-
-const Line = styled.div`
-  width: 100%;
-  height: 1px;
-  margin-bottom: 10px;
-  background: var(--color-border);
+  width: 1100px;
+  padding: 0 1% 50px;
 `;
 
 const Groups = styled.div`
   display: flex;
   justify-content: space-between;
+
+  @media ${mediumScreen}, ${smallScreen} {
+    justify-content: center;
+  }
 `;
 
 const BannerSmall = styled.div`
@@ -66,7 +64,7 @@ const BannerSmall = styled.div`
 `;
 
 const HeaderWrapper = styled.div`
-  width: 725px;
+  width: 100%;
   height: 20px;
   display: flex;
   justify-content: space-between;
@@ -80,12 +78,15 @@ const HeaderWrapper = styled.div`
   }
 
   > div {
-    width: 550px;
+    width: calc(95% - 135px);
+    height: 1px;
+    margin-bottom: 10px;
+    background: var(--color-border);
     margin: 0;
   }
 
   > span {
-    font-family: Arial;
+    font-family: var(--font-regular);
     font-size: 10px;
     font-weight: 400;
     color: var(--color-text-regular);
@@ -96,20 +97,24 @@ const Banner = styled.div`
   margin: 15px 0;
   position: relative;
 
+  > img {width: 100%}
+
   > span:nth-child(2) {
     position: absolute;
-    top: 155px;
-    left: 35px;
+    top: 38%;
+    left: 5%;
     font-family: var(--font-main);
-    font-size: 48px;
+    font-size: 36px;
     font-weight: 400;
     color: var(--color-text-main);
+
+    @media ${smallScreen} {font-size: 4.8vw}
   }
 
   > span:nth-child(3) {
     position: absolute;
-    top: 220px;
-    left: 35px;
+    top: 52%;
+    left: 5.3%;
     font-family: var(--font-second);
     font-size: 12px;
     font-weight: 300;
@@ -150,7 +155,7 @@ const SortHeader = styled.div<{open: boolean}>`
   justify-content: space-between;
   align-items: center;
   position: relative;
-  font-family: Arial;
+  font-family: var(--font-regular);
   font-size: 11px;
   font-weight: 400;
   color: var(--color-text-regular);
@@ -173,7 +178,7 @@ const SortBody = styled.div`
 const ButtonSortMode = styled.button`
   margin: 0 0 8px 7px;
   display: flex;
-  font-family: Arial;
+  font-family: var(--font-regular);
   font-size: 11px;
   font-weight: 400;
   color: var(--color-text-regular);
@@ -211,7 +216,7 @@ const Page = styled.button<{curr: boolean}>`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: Arial;
+  font-family: var(--font-regular);
   font-size: 11px;
   line-height: 1.2;
   font-weight: 400;
@@ -235,6 +240,7 @@ const Catalog = (): JSX.Element => {
   const [sortOpen, setSortOpen] = useState<boolean>(false);
   const [sortMode, setSortMode] = useState<string>('Position');
   const [currPage, setCurrPage] = useState<number>(1);
+  const screen = useMediaQuery();
 
 
   const renderPages = (): JSX.Element[] => {
@@ -274,22 +280,24 @@ const Catalog = (): JSX.Element => {
 
 
         <Groups>
-          <div>
-            <CatalogFilters />
-            <BannerSmall>
-              <img src={bannerSmall} alt='bannerSmall' />
-              <div>
-                <span>MICHAEL KORS</span>
-                <span>SPRING 2022</span>
-              </div>
-            </BannerSmall>
-          </div>
+          {screen.big &&
+            <div>
+              <CatalogFilters />
+              <BannerSmall>
+                <img src={bannerSmall} alt='bannerSmall' />
+                <div>
+                  <span>MICHAEL KORS</span>
+                  <span>SPRING 2022</span>
+                </div>
+              </BannerSmall>
+            </div>
+          }
 
 
           <div>
             <HeaderWrapper>
               <h2>WOMEN</h2>
-              <Line />
+              <div />
               <span>557 items</span>
             </HeaderWrapper>
 
@@ -297,9 +305,10 @@ const Catalog = (): JSX.Element => {
             <Banner>
               <img src={banner} alt='banner' />
               <span>LOVE SUNHAT</span>
-              <span>NEW SUMMER HAT COLLECTION 2022</span>
+              {!screen.small && <span>NEW SUMMER HAT COLLECTION 2022</span>}
             </Banner>
 
+            {!screen.big && <CatalogFilters />}
             
             <SortWrapper
               onMouseEnter={(): void => setSortOpen(true)}
@@ -351,7 +360,7 @@ const Catalog = (): JSX.Element => {
                   if (currPage === 1) return;
                   setCurrPage((prevCurrPage: number): number => prevCurrPage - 1);
               }}>
-                &#10094;
+                ❮
               </Navigation>
 
               {renderPages()}
@@ -362,7 +371,7 @@ const Catalog = (): JSX.Element => {
                   if (currPage === 3) return;
                   setCurrPage((prevCurrPage: number): number => prevCurrPage + 1);
               }}>
-                &#10095;
+                ❯
               </Navigation>
             </Pagination>
           </div>
