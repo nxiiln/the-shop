@@ -14,21 +14,19 @@ import wishList from '../images/wishList.png';
 import compare from '../images/compare.png';
 
 
-
-
 const Products = styled.div`
-  width: 725px;
-  height: 1220px;
+  width: 100%;
+  max-width: 725px;
   margin: 22px 0 80px 0;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  align-content: space-between;
+  justify-content: space-around;
 `;
 
 const Product = styled.div`
   width: 230px;
   height: 360px;
+  margin-bottom: 75px;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -56,8 +54,8 @@ const ProductTriangle = styled.div<{attr: string}>`
   width: 0;
   height: 0;
   position: absolute;
-  top: -5px;
-  left: -17.5px;
+  top: -4px;
+  left: -22px;
   border-right: 35px solid transparent;
   border-bottom: ${props => props.attr === 'new' ?
     '35px solid var(--color-triangle-new)' :
@@ -70,7 +68,7 @@ const ProductTriangle = styled.div<{attr: string}>`
 const ProductTriangleDescription = styled.span`
   position: absolute;
   top: 5px;
-  left: 8px;
+  left: 5px;
   font-family: var(--font-main);
   font-size: 11px;
   line-height: 1.2;
