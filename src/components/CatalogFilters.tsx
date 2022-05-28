@@ -95,14 +95,15 @@ const ButtonFilterSecond = styled(ButtonFilter)`
 
 //Checkbox---------------------------------------
 const Checkbox = styled.label`
+  height: 18px;
   margin-bottom: 12px;
+  display: flex;
+  align-items: center;
   font-family: var(--font-second);
   font-size: 10px;
   font-weight: 400;
+  text-transform: uppercase;
   color: var(--color-text-main);
-  height: 18px;
-  display: flex;
-  align-items: center;
   cursor: pointer;
   
   &:hover {text-decoration: underline}
@@ -190,6 +191,26 @@ const RangeValue = styled.div`
 
 
 
+const sizes: string[] = ['xs', 's', 'm', 'l', 'xl', 'xxl'];
+const colors: string[] = [
+  'beige',
+  'black',
+  'blue',
+  'brown',
+  'cream',
+  'gold',
+  'green',
+  'grey',
+  'navy',
+  'orange',
+  'pink',
+  'purple'
+];
+const brands: string[] = ['armany', 'burberry', 'chanel', 'dolce&gabbana', 'escada', 'fendi'];
+
+
+
+
 const CatalogFilters = (): JSX.Element => {
   const [women, setWomen] = useState<boolean>(true);
   const [category, setCategory] = useState<boolean>(true);
@@ -208,7 +229,7 @@ const CatalogFilters = (): JSX.Element => {
           women ? setWomen(false) : setWomen(true)
         }}>
           <span>WOMEN</span>
-          <span>&#10095;</span>
+          <span>❯</span>
         </DropdownHeader>
 
         {women &&
@@ -230,7 +251,7 @@ const CatalogFilters = (): JSX.Element => {
           category ? setCategory(false) : setCategory(true)
         }}>
           <span>CATEGORY</span>
-          <span>&#10095;</span>
+          <span>❯</span>
         </DropdownHeader>
 
         {category &&
@@ -255,40 +276,19 @@ const CatalogFilters = (): JSX.Element => {
           size ? setSize(false) : setSize(true)
         }}>
           <span>SIZE</span>
-          <span>&#10095;</span>
+          <span>❯</span>
         </DropdownHeader>
 
         {size &&
           <CheckboxSizeWrapper>
-            <Checkbox>
-              <input type='checkbox' name='xs'/>
-              XS (34)
-            </Checkbox>
-
-            <Checkbox>
-              <input type='checkbox' name='s'/>
-              S (36)
-            </Checkbox>
-
-            <Checkbox>
-              <input type='checkbox' name='m' />
-              M (38)
-            </Checkbox>
-
-            <Checkbox>
-              <input type='checkbox' name='l' />
-              L (42)
-            </Checkbox>
-
-            <Checkbox>
-              <input type='checkbox' name='xl' />
-              XL (46)
-            </Checkbox>
-
-            <Checkbox>
-              <input type='checkbox' name='xxl' />
-              XXL (52)
-            </Checkbox>
+            {sizes.map((size: string): JSX.Element => {
+              return(
+                <Checkbox key={size}>
+                  <input type='checkbox' name={size}/>
+                  {size}
+                </Checkbox>
+              )
+            })}
           </CheckboxSizeWrapper>
         }
       </Dropdown>
@@ -299,7 +299,7 @@ const CatalogFilters = (): JSX.Element => {
           priceRange ? setPriceRange(false) : setPriceRange(true)
         }}>
           <span>PRICE RANGE</span>
-          <span>&#10095;</span>
+          <span>❯</span>
         </DropdownHeader>
 
         {priceRange && 
@@ -336,70 +336,19 @@ const CatalogFilters = (): JSX.Element => {
           color ? setColor(false) : setColor(true)
         }}>
           <span>COLOR</span>
-          <span>&#10095;</span>
+          <span>❯</span>
         </DropdownHeader>
 
         {color &&
           <CheckboxColorWrapper>
-            <Checkbox>
-              <input type='checkbox' name='beige'/>
-              BEIGE
-            </Checkbox>
-
-            <Checkbox>
-              <input type='checkbox' name='black'/>
-              BLACK
-            </Checkbox>
-
-            <Checkbox>
-              <input type='checkbox' name='blue'/>
-              BLUE
-            </Checkbox>
-
-            <Checkbox>
-              <input type='checkbox' name='brown'/>
-              BROWN
-            </Checkbox>
-
-            <Checkbox>
-              <input type='checkbox' name='cream'/>
-              CREAM
-            </Checkbox>
-
-            <Checkbox>
-              <input type='checkbox' name='gold'/>
-              GOLD
-            </Checkbox>
-
-            <Checkbox>
-              <input type='checkbox' name='green'/>
-              GREEN
-            </Checkbox>
-
-            <Checkbox>
-              <input type='checkbox' name='grey'/>
-              GREY
-            </Checkbox>
-
-            <Checkbox>
-              <input type='checkbox' name='navy'/>
-              NAVY
-            </Checkbox>
-
-            <Checkbox>
-              <input type='checkbox' name='orange'/>
-              ORANGE
-            </Checkbox>
-
-            <Checkbox>
-              <input type='checkbox' name='pink'/>
-              PINK
-            </Checkbox>
-
-            <Checkbox>
-              <input type='checkbox' name='purple'/>
-              PURPLE
-            </Checkbox>
+            {colors.map((color: string): JSX.Element => {
+              return(
+                <Checkbox key={color}>
+                  <input type='checkbox' name={color}/>
+                  {color}
+                </Checkbox>
+              )
+            })}
           </CheckboxColorWrapper>
         }
       </Dropdown>
@@ -410,40 +359,19 @@ const CatalogFilters = (): JSX.Element => {
           brand ? setBrand(false) : setBrand(true)
         }}>
           <span>BRAND</span>
-          <span>&#10095;</span>
+          <span>❯</span>
         </DropdownHeader>
 
         {brand &&
           <CheckboxWrapper>
-            <Checkbox>
-              <input type='checkbox' name='armany'/>
-              ARMANY
-            </Checkbox>
-
-            <Checkbox>
-              <input type='checkbox' name='burberry'/>
-              BURBERRY
-            </Checkbox>
-
-            <Checkbox>
-              <input type='checkbox' name='chanel'/>
-              CHANEL
-            </Checkbox>
-
-            <Checkbox>
-              <input type='checkbox' name='dolce&gabbana'/>
-              DOLCE&GABBANA
-            </Checkbox>
-
-            <Checkbox>
-              <input type='checkbox' name='escada'/>
-              ESCADA
-            </Checkbox>
-
-            <Checkbox>
-              <input type='checkbox' name='fendi'/>
-              FENDI
-            </Checkbox>
+            {brands.map((brand: string): JSX.Element => {
+              return(
+                <Checkbox key={brand}>
+                  <input type='checkbox' name={brand}/>
+                  {brand}
+                </Checkbox>
+              )
+            })}
           </CheckboxWrapper>
         }
       </Dropdown>
