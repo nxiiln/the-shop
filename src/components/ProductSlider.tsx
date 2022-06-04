@@ -1,19 +1,24 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import styled from 'styled-components/macro';
 import productMain from '../images/productMain.png';
 import productSecond1 from '../images/productSecond1.png';
 import productSecond2 from '../images/productSecond2.png';
 import productSecond3 from '../images/productSecond3.png';
 import productSecond4 from '../images/productSecond4.png';
+import {mediumScreen, useMediaQuery} from '../mediaQueries';
 
 
 
 
 const Slider = styled.article`
   width: 600px;
-  height: 680px;
   display: flex;
   justify-content: space-between;
+
+  @media ${mediumScreen} {
+    width: 100%;
+    flex-direction: column-reverse;
+  }
 `;
 
 const ImageSecondWrapper = styled.div`
@@ -23,9 +28,16 @@ const ImageSecondWrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  
+  @media ${mediumScreen} {
+    width: 100%;
+    height: auto;
+    margin-top: 10px;
+    flex-direction: row;
+  }
 `;
 
-const ButtonUp = styled.button`
+const ButtonUp = styled.button<{rotate: boolean}>`
   width: 20px;
   height: 10px;
   position: relative;
@@ -33,20 +45,19 @@ const ButtonUp = styled.button`
   border: none;
   cursor: default;
 
-  span {
+  > span {
     font-size: 18px;
     position: absolute;
-    top: -8.5px;
-    left: 5.5px;
-    transform: rotate(90deg);
+    top: -9px;
+    left: 6px;
+    ${props => props.rotate && 'transform: rotate(90deg);'}
   }
 `;
 
 const ButtonDown = styled(ButtonUp)`
-  span {
-    top: -7.5px;
+  > span {
+    top: -8px;
     left: 3px;
-    transform: rotate(-90deg);
   }
 `;
 
@@ -58,6 +69,11 @@ const ImageSecond = styled.img<{curr: boolean}>`
 
 const ImageMainWrapper = styled.div`
   position: relative;
+
+  > img {
+    width: 100%;
+    max-width: 490px;
+  }
 `;
 
 const ProductTriangle = styled.div`
@@ -87,7 +103,8 @@ const ProductTriangleDescription = styled.span`
 
 
 const ProductSlider = (): JSX.Element => {
-  const [imageSecond, setImageSecond] = useState<number>(1)
+  const [imageSecond, setImageSecond] = useState<number>(1);
+  const screen = useMediaQuery();
 
 
   return(
@@ -95,12 +112,13 @@ const ProductSlider = (): JSX.Element => {
       <ImageSecondWrapper>
         <ButtonUp
           type='button'
+          rotate={screen.big}
           onClick={(): void => {
             if (imageSecond === 1) return;
             setImageSecond((prevImageSecond: number): number => prevImageSecond - 1);
           }}
         >
-          <span>&#10094;</span>
+          <span>❮</span>
         </ButtonUp>
 
         <ImageSecond
@@ -133,12 +151,13 @@ const ProductSlider = (): JSX.Element => {
 
         <ButtonDown
           type='button'
+          rotate={screen.big}
           onClick={(): void => {
             if (imageSecond === 4) return;
             setImageSecond((prevImageSecond: number): number => prevImageSecond + 1);
           }}
         >
-          <span>&#10094;</span>
+          <span>❯</span>
         </ButtonDown>
       </ImageSecondWrapper>
 
