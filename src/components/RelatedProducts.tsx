@@ -3,7 +3,7 @@ import productRelated1 from '../images/productRelated1.png';
 import productRelated2 from '../images/productRelated2.png';
 import productRelated3 from '../images/productRelated3.png';
 import productRelated4 from '../images/productRelated4.png';
-import {mediumScreen, useMediaQuery} from '../mediaQueries';
+import {smallScreen, useMediaQuery} from '../mediaQueries';
 
 
 
@@ -47,6 +47,8 @@ const ImagesWrapper = styled.div`
   justify-content: space-between;
   align-content: space-between;
   align-items: center;
+
+  @media ${smallScreen} {justify-content: space-around}
 `;
 
 const ImageWrapper = styled.div`
@@ -136,11 +138,13 @@ const RelatedProducts = (): JSX.Element => {
           <ProductTriangleDescription>SALE</ProductTriangleDescription>
         </ImageWrapper>
 
-        <ImageWrapper>
-          <img src={productRelated3} alt='productRelated3' />
-          <Description>DETAILED SWING DRESS</Description>
-          <Price>$1875</Price>
-        </ImageWrapper>
+        {!screen.small && 
+          <ImageWrapper>
+            <img src={productRelated3} alt='productRelated3' />
+            <Description>DETAILED SWING DRESS</Description>
+            <Price>$1875</Price>
+          </ImageWrapper>
+        }
 
         {screen.big &&
           <ImageWrapper>
