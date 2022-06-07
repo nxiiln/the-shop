@@ -5,7 +5,7 @@ import productSecond1 from '../images/productSecond1.png';
 import productSecond2 from '../images/productSecond2.png';
 import productSecond3 from '../images/productSecond3.png';
 import productSecond4 from '../images/productSecond4.png';
-import {mediumScreen, useMediaQuery} from '../mediaQueries';
+import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
 
 
 
@@ -15,9 +15,10 @@ const Slider = styled.article`
   display: flex;
   justify-content: space-between;
 
-  @media ${mediumScreen} {
+  @media ${mediumScreen}, ${smallScreen} {
     width: 100%;
     flex-direction: column-reverse;
+    align-items: center;
   }
 `;
 
@@ -29,8 +30,9 @@ const ImageSecondWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   
-  @media ${mediumScreen} {
+  @media ${mediumScreen}, ${smallScreen} {
     width: 100%;
+    max-width: 490px;
     height: auto;
     margin-top: 10px;
     flex-direction: row;
@@ -142,12 +144,14 @@ const ProductSlider = (): JSX.Element => {
           onClick={(): void => setImageSecond(3)}
         />
 
-        <ImageSecond
-          src={productSecond4}
-          alt='imageSecond4'
-          curr={imageSecond === 4}
-          onClick={(): void => setImageSecond(4)}
-        />
+        {!screen.small &&
+          <ImageSecond
+            src={productSecond4}
+            alt='imageSecond4'
+            curr={imageSecond === 4}
+            onClick={(): void => setImageSecond(4)}
+          />
+        }
 
         <ButtonDown
           type='button'
