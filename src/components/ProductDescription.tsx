@@ -1,12 +1,19 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import styled from 'styled-components/macro';
 import wishList from '../images/wishList.png';
+import {smallScreen} from '../mediaQueries';
 
 
 
 
 const Wrapper = styled.article`
-  width: 330px;
+  width: 100%;
+  max-width: 330px;
+
+  @media ${smallScreen} {
+    width: 100%;
+    max-width: 490px;
+  }
 `;
 
 const Id = styled.span`
@@ -42,7 +49,7 @@ const Stars = styled.div<{rating: number}>`
   line-height: 0.8;
   letter-spacing: 0.5px;
 
-  div:first-child {
+  > div:first-child {
     display: inline-block;
     position: absolute;
 
@@ -54,11 +61,12 @@ const Stars = styled.div<{rating: number}>`
       var(--color-background-main) var(--rating)
     );
 
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
-  div:last-child {
+  > div:last-child {
     display: inline-block;
     position: absolute;
     color: var(--color-text-highlight);
@@ -98,7 +106,7 @@ const Availability = styled.div`
   font-weight: 400;
   color: var(--color-text-regular);
 
-  span {
+  > span {
     color: var(--color-text-highlight);
   }
 `;
@@ -123,7 +131,7 @@ const Price = styled.span`
 `;
 
 const Dropdown = styled.div<{open: boolean}>`
-  width: 325px;
+  width: 100%;
   margin-bottom: 7px;
   padding: 0 10px 0 10px;
   display: flex;
@@ -137,7 +145,8 @@ const Dropdown = styled.div<{open: boolean}>`
   background: #f7f7f7;
   border: 1px solid #e4e2e1;
   border-radius: 20px;
-  span:nth-child(2) {transform: rotate(90deg)}
+
+  > span:nth-child(2) {transform: rotate(90deg)}
 
   &:hover {
     background: #fff;
@@ -170,7 +179,8 @@ const Checkbox = styled.label`
   display: flex;
   align-items: center;
   cursor: pointer;
-  :hover {text-decoration: underline}
+  
+  &:hover {text-decoration: underline}
 
   > input {
     margin: 0 7px 0 0;
@@ -228,7 +238,9 @@ const Buttons = styled.div`
   display: flex;
   justify-content: space-between;
 
-  button {
+  @media ${smallScreen} {width: 100%}
+
+  > button {
     width: 155px;
     height: 30px;
     font-family: var(--font-second);
@@ -237,13 +249,13 @@ const Buttons = styled.div`
     cursor: pointer;
   }
 
-  button:first-child {
+  > button:first-child {
     color: var(--color-text-second);
     background: var(--color-background-second);
     border: none;
   }
 
-  button:last-child {
+  > button:last-child {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -258,7 +270,9 @@ const Accordion = styled.details`
   width: 325px;
   border-top: 1px solid var(--color-border);
 
-  summary {
+  @media ${smallScreen} {width: 100%}
+
+  > summary {
     padding: 12px 0 12px 0;
     display: flex;
     justify-content: space-between;
@@ -272,18 +286,18 @@ const Accordion = styled.details`
     user-select: none;
   }
 
-  summary > span:last-child {
+  > summary > span:last-child {
     font-size: 9px;
     transform: rotate(-45deg);
   }
 
   &[open] {
-    summary > span:last-child {
+    > summary > span:last-child {
       transform: rotate(45deg);
     }
   }
 
-  p {
+  > p {
     margin: 8px 0 12px 0;
     font-family: var(--font-regular);
     font-size: 11px;
