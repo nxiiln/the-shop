@@ -13,7 +13,10 @@ const Wrapper = styled.article`
   align-items: center;
   border: 1px solid var(--color-border);
 
-  @media ${smallScreen} {width: 100%}
+  @media ${smallScreen} {
+    width: 100%;
+    align-items: start;
+  }
 `;
 
 const Title = styled.h2`
@@ -24,6 +27,8 @@ const Title = styled.h2`
   line-height: 1.2;
   font-weight: 400;
   color: var(--color-text-main);
+
+  @media ${smallScreen} {align-self: center}
 `;
 
 const Review = styled.div`
@@ -145,11 +150,17 @@ const SetStars = styled(Stars)`
 const Label = styled.label`
   width: 290px;
   margin-bottom: 15px;
+  display: flex;
   flex-direction: column;
   font-family: var(--font-second);
   font-size: 10px;
   font-weight: 400;
   color: var(--color-main);
+
+  @media ${smallScreen} {
+    width: 93%;
+    margin-left: 16px;
+  }
 
   > input, > textarea {
     width: 290px;
@@ -165,6 +176,10 @@ const Label = styled.label`
       outline: none;
       border: 1px solid var(--color-background-second);
     }
+
+    @media ${smallScreen} {
+      width: 100%;
+    }
   }
 
   > textarea {height: 76px}
@@ -175,7 +190,7 @@ const Buttons = styled.div`
   display: flex;
   justify-content: space-between;
 
-  > button {margin: 0 18px 12px 18px}
+  > button {margin: 0 4% 12px}
 `;
 
 
