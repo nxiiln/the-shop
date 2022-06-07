@@ -1,5 +1,6 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import styled from 'styled-components/macro';
+import {smallScreen} from '../mediaQueries';
 
 
 
@@ -11,6 +12,8 @@ const Wrapper = styled.article`
   flex-direction: column;
   align-items: center;
   border: 1px solid var(--color-border);
+
+  @media ${smallScreen} {width: 100%}
 `;
 
 const Title = styled.h2`
@@ -27,11 +30,9 @@ const Review = styled.div`
   width: 320px;
   padding: 15px;
   margin-bottom: 10px;
-
   display: grid;
   grid-template-columns: auto auto;
   grid-template-rows: repeat(3, auto);
-
   font-family: var(--font-regular);
   font-size: 11px;
   line-height: 14px;
@@ -39,29 +40,34 @@ const Review = styled.div`
   color: var(--color-text-regular);
   background: var(--color-background-highlight);
 
-  span:nth-child(1) {
+  @media ${smallScreen} {
+    width: 100%;
+    max-width: 490px;
+  }
+
+  > span:nth-child(1) {
     grid-area: 1 / 1 / 2 / 2;
     font-family: var(--font-second);
     font-size: 13px;
     color: var(--color-text-main);
   }
 
-  div:nth-child(2) {
+  > div:nth-child(2) {
     grid-area: 1 / 2 / 2 / 3;
     justify-self: end;
   }
 
-  p {
+  > p {
     margin: 12px 0 12px 0;
     grid-area: 2 / 1 / 3 / 3;
   }
 
-  span:nth-child(4) {
+  > span:nth-child(4) {
     grid-area: 3 / 1 / 4 / 2;
     align-self: end;
   }
 
-  span:nth-child(5) {
+  > span:nth-child(5) {
     grid-area: 3 / 2 / 4 / 3;
     justify-self: end;
   }
@@ -75,7 +81,7 @@ const Stars = styled.div<{rating: number}>`
   line-height: 0.8;
   letter-spacing: 0.5px;
 
-  div:first-child {
+  > div:first-child {
     display: inline-block;
     position: absolute;
 
@@ -87,11 +93,12 @@ const Stars = styled.div<{rating: number}>`
       var(--color-background-main) var(--rating)
     );
 
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
-  div:last-child {
+  > div:last-child {
     display: inline-block;
     position: absolute;
     color: var(--color-text-highlight);
@@ -144,7 +151,7 @@ const Label = styled.label`
   font-weight: 400;
   color: var(--color-main);
 
-  input, textarea {
+  > input, > textarea {
     width: 290px;
     height: 34px;
     margin-top: 4px;
@@ -160,14 +167,15 @@ const Label = styled.label`
     }
   }
 
-  textarea {height: 76px}
+  > textarea {height: 76px}
 `;
 
 const Buttons = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
-  button {margin: 0 18px 12px 18px}
+
+  > button {margin: 0 18px 12px 18px}
 `;
 
 
@@ -246,8 +254,8 @@ const ProductReviews = (): JSX.Element => {
           >
             WRITE REVIEW
           </Button>
-        </> :
-
+        </>
+        :
         <>
           <Title>WRITE REVIEW</Title>
           <Rating>
@@ -316,7 +324,7 @@ const ProductReviews = (): JSX.Element => {
               type='button'
               onClick={(): void => {
                 if (rating === 0) return;
-                const date: Date = new Date;
+                const date: Date = new Date();
 
                 const day: string = date.getDate() <= 9 ?
                   `0${date.getDate()}` : `${date.getDate()}`;
