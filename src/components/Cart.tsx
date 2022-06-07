@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import styled from 'styled-components/macro';
 import BreadCrumbs from './BreadCrumbs';
 import cartProductA from '../images/cartProductA.png';
@@ -26,7 +26,7 @@ const WrapperInner = styled.div`
 const CartWrapper = styled.div`
   grid-area: 3 / 1 / 4 / 5;
   margin: 0 0 25px 0;
-  border: 1px solid #e4e2e1;
+  border: 1px solid var(--color-border);
   div:last-child {
     margin-bottom: 0;
   }
@@ -37,13 +37,13 @@ const HeaderWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  border-bottom: 1px solid #e4e2e1;
+  border-bottom: 1px solid var(--color-border);
   h2 {
     font-family: var(--font-main);
     font-size: 24px;
     line-height: 1.2;
     font-weight: 400;
-    color: #000;
+    color: var(--color-text-main);
   }
 `;
 
@@ -62,7 +62,7 @@ const TitleWrapper = styled.div`
     font-size: 12px;
     line-height: 1.2;
     font-weight: 300;
-    color: #000;
+    color: var(--color-text-main);
   }
   span:nth-child(2) {
     grid-column-start: 4;
@@ -80,7 +80,7 @@ const ProductWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #f7f7f7;
+  background: var(--color-background-highlight);
 `;
 
 const Product = styled.div`
@@ -131,7 +131,7 @@ const Product = styled.div`
     line-height: 14px;
     font-weight: 400;
     text-transform: uppercase;
-    color: #000;
+    color: var(--color-text-main);
   }
 `;
 
@@ -142,7 +142,7 @@ const ButtonUnderline = styled.button`
   line-height: 1.2;
   font-weight: 400;
   text-decoration: underline;
-  color: #000;
+  color: var(--color-text-main);
   background: transparent;
   border: none;
   cursor: pointer;
@@ -172,10 +172,9 @@ const Quantity = styled.div`
   font-size: 10px;
   line-height: 1.2;
   font-weight: 400;
-  color: #000;
-  background: #fff;
-  border: 1px solid #e4e2e1;
-}
+  color: var(--color-text-main);
+  background: var(--color-background-main);
+  border: 1px solid var(--color-border);
 `;
 
 const PlusMinus = styled.button`
@@ -185,12 +184,12 @@ const PlusMinus = styled.button`
   justify-content: center;
   align-items: center;
   font-family: var(--font-second);
-  color: #aaa;
+  color: var(--color-text-regular);
   background: transparent;
   border: none;
   cursor: pointer;
   :hover {
-    color: #000;
+    color: var(--color-text-main);
   }
 `;
 //-----------------------------------------------
@@ -204,7 +203,7 @@ const EstimateDeliveryWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid #e4e2e1;
+  border: 1px solid var(--color-border);
 `;
 
 const EstimateDelivery = styled.div`
@@ -220,14 +219,14 @@ const EstimateDelivery = styled.div`
     line-height: 1.2;
     font-weight: 300;
     text-transform: uppercase;
-    color: #000;
+    color: var(--color-text-main);
   }
   span:nth-child(2) {
     font-family: Arial;
     font-size: 11px;
     line-height: 1.2;
     font-weight: 400;
-    color: #aaa;
+    color: var(--color-text-regular);
   }
 `;
 
@@ -240,9 +239,9 @@ const Select = styled.select`
   line-height: 1.2;
   font-weight: 300;
   text-transform: uppercase;
-  color: #000;
-  background: #f7f7f7;
-  border: 1px solid #e4e2e1;
+  color: var(--color-text-main);
+  background: var(--color-background-highlight);
+  border: 1px solid var(--color-border);
   border-radius: 15px;
 `;
 
@@ -253,8 +252,8 @@ const Postcode = styled.input`
   font-size: 12px;
   line-height: 1.2;
   font-weight: 300;
-  color: #000;
-  border: 1px solid #e4e2e1;
+  color: var(--color-text-main);
+  border: 1px solid var(--color-border);
   outline: none;
   ::placeholder {
     padding-left: 12px;
@@ -262,7 +261,7 @@ const Postcode = styled.input`
     font-size: 11px;
     line-height: 1.2;
     font-weight: 400;
-    color: #aaa;
+    color: var(--color-text-regular);
   }
 `;
 
@@ -273,8 +272,8 @@ const GetAQuote = styled.button`
   font-size: 10px;
   line-height: 1.2;
   font-weight: 300;
-  color: #fff;
-  background: #000;
+  color: var(--color-text-second);
+  background: var(--color-background-second);
   border: none;
   cursor: pointer;
 `;
@@ -293,12 +292,12 @@ const Voucher = styled.div`
   font-size: 12px;
   line-height: 1.2;
   font-weight: 300;
-  color: #000;
-  border: 1px solid #e4e2e1;
+  color: var(--color-text-main);
+  border: 1px solid var(--color-border);
   input {
     width: 182px;
     height: 30px;
-    border: 1px solid #e4e2e1;
+    border: 1px solid var(--color-border);
     outline: none;
   }
 `;
@@ -311,9 +310,9 @@ const NeedHelp = styled.div`
   font-size: 11px;
   line-height: 1.2;
   font-weight: 400;
-  color: #aaa;
+  color: var(--color-text-regular);
   span {
-    color: #aea012;
+    color: var(--color-text-highlight);
   }
   p {
     margin: 0;
@@ -335,7 +334,7 @@ const Total = styled.div`
     line-height: 1.2;
     font-weight: 300;
     text-transform: uppercase;
-    color: #000;
+    color: var(--color-text-main);
   }
   span:nth-child(even) {
     justify-self: end;
@@ -363,7 +362,7 @@ const LineTotal = styled.div`
   width: 100%;
   height: 1px;
   grid-area: 4 / 1 / 5 / 3;
-  background: #aaa;
+  background: var(--color-border);
 `;
 
 const Button = styled.button`
@@ -378,16 +377,16 @@ const Button = styled.button`
 
 const ContinueShopping = styled(Button)`
   grid-area: 6 / 1 / 7 / 2;
-  color: #000;
-  background: #fff;
-  border: 1px solid #e4e2e1;
+  color: var(--color-text-main);
+  background: var(--color-background-main);
+  border: 1px solid var(--color-border);
 `;
 
 const Checkout = styled(Button)`
   grid-area: 6 / 4 / 7 / 5;
   justify-self: end;
-  color: #fff;
-  background: #000;
+  color: var(--color-text-second);
+  background: var(--color-background-second);
   border: none;
 `;
 
