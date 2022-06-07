@@ -141,20 +141,20 @@ const Dropdown = styled.div<{open: boolean}>`
   font-size: 11px;
   font-weight: 300;
   line-height: 1.2;
-  color: #000;
-  background: #f7f7f7;
-  border: 1px solid #e4e2e1;
+  color: var(--color-text-main);
+  background: var(--color-background-regular);
+  border: 1px solid var(--color-border);
   border-radius: 20px;
 
   > span:nth-child(2) {transform: rotate(90deg)}
 
   &:hover {
-    background: #fff;
+    background: var(--color-background-main);
     border-radius: 0;
   }
 
   ${props => props.open && `
-    background: #fff;
+    background: var(--color-background-main);
     border-radius: 0;
     span:nth-child(2) {transform: rotate(-90deg)}
   `}
@@ -179,12 +179,12 @@ const Checkbox = styled.label`
   display: flex;
   align-items: center;
   cursor: pointer;
-  
+
   &:hover {text-decoration: underline}
 
   > input {
     margin: 0 7px 0 0;
-    accent-color: #000;
+    accent-color: var(--color-text-main);
     cursor: pointer;
   }
 `;
