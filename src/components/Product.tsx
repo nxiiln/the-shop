@@ -1,26 +1,38 @@
-import React, {useState} from 'react';
 import styled from 'styled-components/macro';
 import BreadCrumbs from './BreadCrumbs';
 import RelatedProducts from './RelatedProducts';
 import ProductSlider from './ProductSlider';
 import ProductDescription from './ProductDescription';
 import ProductReviews from './ProductReviews';
-
+import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
 
 
 
 
 const WrapperOuter = styled.main`
   width: 100vw;
+  padding: 0 1% 100px;
   display: flex;
   justify-content: center;
 `;
 
 const WrapperInner = styled.div`
-  width: 960px;
+  width: 1100px;
+
   > div {
     display: flex;
     justify-content: space-between;
+
+    @media ${mediumScreen} {
+      > div {
+        margin: 0 20px 0;
+      }
+    }
+
+    @media ${smallScreen} {
+      flex-direction: column;
+      align-items: center;
+    }
   }
 `;
 
@@ -28,6 +40,8 @@ const WrapperInner = styled.div`
 
 
 const Product = (): JSX.Element => {
+  const screen = useMediaQuery();
+
   return(
     <WrapperOuter>
       <WrapperInner>
@@ -51,13 +65,14 @@ const Product = (): JSX.Element => {
         <div>
           <div>
             <ProductSlider />
-            <RelatedProducts />
+            {!screen.small && <RelatedProducts />}
           </div>
 
 
           <div>
             <ProductDescription />
             <ProductReviews />
+            {screen.small && <RelatedProducts />}
           </div>
         </div>
       </WrapperInner>
