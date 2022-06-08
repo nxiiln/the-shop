@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components/macro';
 import BreadCrumbs from './BreadCrumbs';
 import cartProductA from '../images/cartProductA.png';
@@ -15,19 +15,20 @@ const WrapperOuter = styled.section`
 `;
 
 const WrapperInner = styled.div`
-  width: 67%;
+  width: 1100px;
   display: grid;
   grid-template-columns: minmax(328px, 1fr) 23px 208px minmax(295px, 1fr);
   grid-template-rows: 10px 30px 1fr 135px 106px 30px;
 `;
 
 
-//Cart-------------------------------------------
+// Cart
 const CartWrapper = styled.div`
   grid-area: 3 / 1 / 4 / 5;
   margin: 0 0 25px 0;
   border: 1px solid var(--color-border);
-  div:last-child {
+  
+  > div:last-child {
     margin-bottom: 0;
   }
 `;
@@ -38,7 +39,8 @@ const HeaderWrapper = styled.div`
   justify-content: center;
   align-items: center;
   border-bottom: 1px solid var(--color-border);
-  h2 {
+  
+  > h2 {
     font-family: var(--font-main);
     font-size: 24px;
     line-height: 1.2;
@@ -57,17 +59,20 @@ const TitleWrapper = styled.div`
     minmax(50px, 7%) minmax(12px, 5%) minmax(40px, 19%) 55px;
   justify-items: start;
   align-items: center;
-  span {
+  
+  > span {
     font-family: var(--font-second);
     font-size: 12px;
     line-height: 1.2;
     font-weight: 300;
     color: var(--color-text-main);
   }
-  span:nth-child(2) {
+  
+  > span:nth-child(2) {
     grid-column-start: 4;
   }
-  span:nth-child(4) {
+  
+  > span:nth-child(4) {
     grid-column-start: 8;
     justify-self: end;
   }
@@ -101,18 +106,19 @@ const Product = styled.div`
     'img edi . ... ... ... ... ...'
     'img ... . ... ... ... ... ...';
 
-  img {grid-area: img;}
-  span:nth-child(2) {grid-area: nam;}
-  span:nth-child(3) {grid-area: clr;}
-  span:nth-child(4) {grid-area: siz;}
-  button:nth-child(5) {grid-area: edi;}
-  button:nth-child(6) {grid-area: x;}
-  span:nth-child(7) {grid-area: prc;}
-  div {grid-area: qnt;}
-  button:nth-child(9) {grid-area: pls;}
-  button:nth-child(10) {grid-area: mns;}
-  button:nth-child(11) {grid-area: upd;}
-  span:nth-child(12) {
+  > img {grid-area: img}
+  > span:nth-child(2) {grid-area: nam}
+  > span:nth-child(3) {grid-area: clr}
+  > span:nth-child(4) {grid-area: siz}
+  > button:nth-child(5) {grid-area: edi}
+  > button:nth-child(6) {grid-area: x}
+  > span:nth-child(7) {grid-area: prc}
+  > div {grid-area: qnt}
+  > button:nth-child(9) {grid-area: pls}
+  > button:nth-child(10) {grid-area: mns}
+  > button:nth-child(11) {grid-area: upd}
+
+  > span:nth-child(12) {
     grid-area: amt;
     justify-self: end;
   }
@@ -125,7 +131,8 @@ const Product = styled.div`
   justify-items: start;
   align-items: center;
   background: transparent;
-  span {
+  
+  > span {
     font-family: var(--font-second);
     font-size: 10px;
     line-height: 14px;
@@ -188,14 +195,14 @@ const PlusMinus = styled.button`
   background: transparent;
   border: none;
   cursor: pointer;
-  :hover {
+  
+  &:hover {
     color: var(--color-text-main);
   }
 `;
-//-----------------------------------------------
 
 
-//Estimate Delivery------------------------------
+// Estimate Delivery
 const EstimateDeliveryWrapper = styled.div`
   width: 328px;
   height: 196px;
@@ -213,7 +220,8 @@ const EstimateDelivery = styled.div`
   flex-wrap: wrap;
   justify-content: space-between;
   align-content: space-between;
-  span:nth-child(1) {
+  
+  > span:nth-child(1) {
     font-family: var(--font-second);
     font-size: 12px;
     line-height: 1.2;
@@ -221,7 +229,8 @@ const EstimateDelivery = styled.div`
     text-transform: uppercase;
     color: var(--color-text-main);
   }
-  span:nth-child(2) {
+  
+  > span:nth-child(2) {
     font-family: Arial;
     font-size: 11px;
     line-height: 1.2;
@@ -255,7 +264,8 @@ const Postcode = styled.input`
   color: var(--color-text-main);
   border: 1px solid var(--color-border);
   outline: none;
-  ::placeholder {
+  
+  &::placeholder {
     padding-left: 12px;
     font-family: Arial;
     font-size: 11px;
@@ -277,9 +287,9 @@ const GetAQuote = styled.button`
   border: none;
   cursor: pointer;
 `;
-//-----------------------------------------------
 
 
+// Voucher & Total
 const Voucher = styled.div`
   width: 231px;
   height: 113px;
@@ -294,7 +304,8 @@ const Voucher = styled.div`
   font-weight: 300;
   color: var(--color-text-main);
   border: 1px solid var(--color-border);
-  input {
+  
+  > input {
     width: 182px;
     height: 30px;
     border: 1px solid var(--color-border);
@@ -311,10 +322,12 @@ const NeedHelp = styled.div`
   line-height: 1.2;
   font-weight: 400;
   color: var(--color-text-regular);
-  span {
+  
+  > span {
     color: var(--color-text-highlight);
   }
-  p {
+  
+  > p {
     margin: 0;
     line-height: 1.8;
   }
@@ -328,7 +341,8 @@ const Total = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: repeat(3, 42px) 27px 13px 13px;
-  span {
+  
+  > span {
     font-family: var(--font-second);
     font-size: 12px;
     line-height: 1.2;
@@ -336,22 +350,27 @@ const Total = styled.div`
     text-transform: uppercase;
     color: var(--color-text-main);
   }
-  span:nth-child(even) {
+  
+  > span:nth-child(even) {
     justify-self: end;
   }
-  span:nth-child(n+8) {
+  
+  > span:nth-child(n+8) {
     font-family: var(--font-second);
     font-size: 13px;
     font-weight: 700;
   }
-  span:nth-child(8) {
+  
+  > span:nth-child(8) {
     grid-area: 5 / 1 / 6 / 2;
     justify-self: start;
   }
-  span:nth-child(9) {
+  
+  > span:nth-child(9) {
     grid-area: 6 / 1 / 7 / 2;
   }
-  span:nth-child(10) {
+  
+  > span:nth-child(10) {
     grid-area: 5 / 2 / 7 / 3;
     align-self: center;
     font-size: 18px;
@@ -393,66 +412,68 @@ const Checkout = styled(Button)`
 
 
 
+interface Product {
+  id: number;
+  status: boolean;
+  image: string;
+  name: string;
+  color: string;
+  size: number;
+  price: number;
+  quantity: number;
+  amount(): number;
+}
+
+const productList: Product[] = [
+  {
+    id: 1,
+    status: true,
+    image: cartProductA,
+    name: 'detailed swing dress',
+    color: 'yellow',
+    size: 12,
+    price: 275,
+    quantity: 1,
+    amount() {return this.price * this.quantity}
+  },
+  {
+    id: 2,
+    status: true,
+    image: cartProductB,
+    name: 'maxararzy frilled dress',
+    color: 'blue',
+    size: 14,
+    price: 325,
+    quantity: 2,
+    amount() {return this.price * this.quantity}
+  }
+];
+
+
+interface Region {
+  country: string;
+  cities: string[];
+}
+
+const regions: Region[] = [
+  {
+    country: 'Russia',
+    cities: ['Moscow', 'Saint Petersburg', 'Voronezh']
+  },
+  {
+    country: 'UK',
+    cities: ['Birmingham', 'London', 'Manchester']
+  },
+  {
+    country: 'United States',
+    cities: ['Los Angeles', 'New York', 'San Fransisco']
+  }
+];
+
+
+
+
 const Cart = (): JSX.Element => {
-  interface Product {
-    id: number;
-    status: boolean;
-    image: string;
-    name: string;
-    color: string;
-    size: number;
-    price: number;
-    quantity: number;
-    amount(): number;
-  }
-
-  const productList: Product[] = [
-    {
-      id: 1,
-      status: true,
-      image: cartProductA,
-      name: 'detailed swing dress',
-      color: 'yellow',
-      size: 12,
-      price: 275,
-      quantity: 1,
-      amount() {return this.price * this.quantity}
-    },
-    {
-      id: 2,
-      status: true,
-      image: cartProductB,
-      name: 'maxararzy frilled dress',
-      color: 'blue',
-      size: 14,
-      price: 325,
-      quantity: 2,
-      amount() {return this.price * this.quantity}
-    }
-  ];
-
-
-  interface Region {
-    country: string;
-    cities: string[];
-  }
-
-  const regions: Region[] = [
-    {
-      country: 'Russia',
-      cities: ['Moscow', 'Saint Petersburg', 'Voronezh']
-    },
-    {
-      country: 'UK',
-      cities: ['Birmingham', 'London', 'Manchester']
-    },
-    {
-      country: 'United States',
-      cities: ['Los Angeles', 'New York', 'San Fransisco']
-    }
-  ];
-
-
   const [products, setProducts] = useState<Product[]>(productList);
   const [country, setCountry] = useState<string>('default');
 
@@ -482,6 +503,8 @@ const Cart = (): JSX.Element => {
           <HeaderWrapper>
             <h2>CART</h2>
           </HeaderWrapper>
+
+
           <TitleWrapper>
             <span>PRODUCT</span>
             <span>PRICE</span>
@@ -489,8 +512,9 @@ const Cart = (): JSX.Element => {
             <span>AMOUNT</span>
           </TitleWrapper>
 
-          {products.map((product: Product): false | JSX.Element => {
-            return(product.status &&
+
+          {products.map((product: Product): false | JSX.Element =>
+            product.status &&
               <ProductWrapper key={product.id}>
                 <Product>
                   <img src={product.image} alt={product.name} />
@@ -498,6 +522,7 @@ const Cart = (): JSX.Element => {
                   <span>color: {product.color}</span>
                   <span>size: {product.size}</span>
                   <ButtonUnderline type='button'>Edit Item</ButtonUnderline>
+
                   <X
                     type='button'
                     onClick={(): void => {
@@ -509,10 +534,12 @@ const Cart = (): JSX.Element => {
                   >
                     +
                   </X>
+
                   <span>${product.price}</span>
                   <Quantity>
                     <span>{product.quantity}</span>
                   </Quantity>
+
                   <PlusMinus
                     type='button'
                     onClick={(): void => {
@@ -524,6 +551,7 @@ const Cart = (): JSX.Element => {
                   >
                     +
                   </PlusMinus>
+
                   <PlusMinus
                     type='button'
                     onClick={(): void => {
@@ -537,12 +565,12 @@ const Cart = (): JSX.Element => {
                   >
                     -
                   </PlusMinus>
+
                   <ButtonUnderline type='button'>Update</ButtonUnderline>
                   <span>${product.amount()}</span>
                 </Product>
               </ProductWrapper>
-            );
-          })}
+          )}
         </CartWrapper>
 
 
@@ -552,29 +580,34 @@ const Cart = (): JSX.Element => {
               ESTIMATE DELIVERY
             </span>
             <span>Enter your destination to get a delivery estimate</span>
+
             <Select
               defaultValue='default'
-              onChange={(e): void => setCountry(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLSelectElement>): void =>
+                setCountry(e.target.value)
+              }
             >
               <option value='default' disabled>select country</option>
-              {regions.map((region: Region): JSX.Element => {
-                return(
-                 <option key={region.country} value={region.country}>
-                   {region.country}
-                 </option>
-                )
-              })}
+              {regions.map((region: Region): JSX.Element =>
+                <option key={region.country} value={region.country}>
+                  {region.country}
+                </option>
+              )}
             </Select>
+
             <Select defaultValue='default'>
               <option value='default' disabled>select region, state or province</option>
               {country !== 'default' &&
                 regions
-                  .filter((region: Region): boolean => region.country === country)[0].cities
-                  .map((city: string): JSX.Element => {
-                    return <option key={city} value={city}>{city}</option>
-                  })
+                  .filter((region: Region): boolean => region.country === country)
+                  [0]
+                  .cities
+                  .map((city: string): JSX.Element =>
+                    <option key={city} value={city}>{city}</option>
+                  )
               }
             </Select>
+            
             <Postcode type='text' placeholder='Postcode/Zip'/>
             <GetAQuote type='button'>GET A QUOTE</GetAQuote>
           </EstimateDelivery>
