@@ -1,13 +1,14 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import styled from 'styled-components/macro';
 import BreadCrumbs from './BreadCrumbs';
 import cartProductA from '../images/cartProductA.png';
 import cartProductB from '../images/cartProductB.png';
+import {mediumScreen, useMediaQuery} from '../mediaQueries';
 
 
 
 
-const WrapperOuter = styled.section`
+const WrapperOuter = styled.main`
   width: 100vw;
   margin: 0 0 75px 0;
   display: flex;
@@ -16,9 +17,15 @@ const WrapperOuter = styled.section`
 
 const WrapperInner = styled.div`
   width: 1100px;
+  padding: 0 1% 0;
   display: grid;
   grid-template-columns: minmax(328px, 1fr) 23px 208px minmax(295px, 1fr);
   grid-template-rows: 10px 30px 1fr 135px 106px 30px;
+
+  @media ${mediumScreen} {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 10px 30px 1fr 135px 70px 60px 55px;
+  }
 `;
 
 
@@ -293,10 +300,11 @@ const GetAQuote = styled.button`
 const Voucher = styled.div`
   width: 231px;
   height: 113px;
+  padding: 0 10% 0;
   grid-area: 4 / 2 / 5 / 3;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: start;
   align-content: space-evenly;
   font-family: var(--font-second);
   font-size: 12px;
@@ -306,10 +314,15 @@ const Voucher = styled.div`
   border: 1px solid var(--color-border);
   
   > input {
-    width: 182px;
+    width: 100%;
     height: 30px;
     border: 1px solid var(--color-border);
     outline: none;
+  }
+
+  @media ${mediumScreen} {
+    width: 328px;
+    grid-area: 6 / 1 / 8 / 2;
   }
 `;
 
@@ -336,7 +349,7 @@ const NeedHelp = styled.div`
 const Total = styled.div`
   width: 295px;
   height: 180px;
-  grid-area: 4 / 4 / 6 / 5;
+  grid-area: 4 / 2 / 6 / 3;
   justify-self: end;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -399,14 +412,24 @@ const ContinueShopping = styled(Button)`
   color: var(--color-text-main);
   background: var(--color-background-main);
   border: 1px solid var(--color-border);
+
+  @media ${mediumScreen} {
+    grid-area: 7 / 2 / 8 / 3;
+    justify-self: end;
+    align-self: end;
+  }
 `;
 
 const Checkout = styled(Button)`
-  grid-area: 6 / 4 / 7 / 5;
+  grid-area: 6 / 2 / 7 / 3;
   justify-self: end;
   color: var(--color-text-second);
   background: var(--color-background-second);
   border: none;
+
+  @media ${mediumScreen} {
+    align-self: end;
+  }
 `;
 
 
@@ -476,6 +499,7 @@ const regions: Region[] = [
 const Cart = (): JSX.Element => {
   const [products, setProducts] = useState<Product[]>(productList);
   const [country, setCountry] = useState<string>('default');
+  const screen = useMediaQuery();
 
   const subtotal: number = products
     .map((product: Product): number => +product.status && product.amount())
@@ -620,13 +644,15 @@ const Cart = (): JSX.Element => {
         </Voucher>
 
 
-        <NeedHelp>
-          <span>Need Help?</span>
-          <p>
-            Call our customer care team on<br />
-            (08) 082340481 / Customer Service
-          </p>
-        </NeedHelp>
+        {screen.big &&
+          <NeedHelp>
+            <span>Need Help?</span>
+            <p>
+              Call our customer care team on<br />
+              (08) 082340481 / Customer Service
+            </p>
+          </NeedHelp>
+        }
 
 
         <Total>
