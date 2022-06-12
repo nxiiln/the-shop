@@ -304,7 +304,7 @@ const Voucher = styled.div`
   grid-area: 4 / 2 / 5 / 3;
   display: flex;
   flex-wrap: wrap;
-  justify-content: start;
+  justify-content: center;
   align-content: space-evenly;
   font-family: var(--font-second);
   font-size: 12px;
@@ -314,15 +314,18 @@ const Voucher = styled.div`
   border: 1px solid var(--color-border);
   
   > input {
-    width: 100%;
+    width: 80%;
     height: 30px;
     border: 1px solid var(--color-border);
     outline: none;
+
+    @media ${mediumScreen} {width: 100%}
   }
 
   @media ${mediumScreen} {
     width: 328px;
     grid-area: 6 / 1 / 8 / 2;
+    justify-content: start;
   }
 `;
 
@@ -349,7 +352,7 @@ const NeedHelp = styled.div`
 const Total = styled.div`
   width: 295px;
   height: 180px;
-  grid-area: 4 / 2 / 6 / 3;
+  grid-area: 4 / 4 / 6 / 5;
   justify-self: end;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -414,14 +417,14 @@ const ContinueShopping = styled(Button)`
   border: 1px solid var(--color-border);
 
   @media ${mediumScreen} {
-    grid-area: 7 / 2 / 8 / 3;
+    grid-area: 7 / 4 / 8 / 5;
     justify-self: end;
     align-self: end;
   }
 `;
 
 const Checkout = styled(Button)`
-  grid-area: 6 / 2 / 7 / 3;
+  grid-area: 6 / 4 / 7 / 5;
   justify-self: end;
   color: var(--color-text-second);
   background: var(--color-background-second);
