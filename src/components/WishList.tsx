@@ -15,7 +15,9 @@ const WrapperOuter = styled.section`
 `;
 
 const WrapperInner = styled.div`
-  width: 67%;
+  width: 1100px;
+  min-width: 760px;
+  padding: 0 1% 50px;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 10px 30px 1fr;
