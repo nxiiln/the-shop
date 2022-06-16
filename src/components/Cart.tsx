@@ -3,7 +3,7 @@ import styled from 'styled-components/macro';
 import BreadCrumbs from './BreadCrumbs';
 import cartProductA from '../images/cartProductA.png';
 import cartProductB from '../images/cartProductB.png';
-import {mediumScreen, useMediaQuery} from '../mediaQueries';
+import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
 
 
 
@@ -25,6 +25,11 @@ const WrapperInner = styled.div`
   @media ${mediumScreen} {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 10px 30px 1fr 135px 70px 60px 55px;
+  }
+
+  @media ${smallScreen} {
+    display: flex;
+    flex-direction: column;
   }
 `;
 
@@ -100,9 +105,9 @@ const Product = styled.div`
   height: 120px;
   display: grid;
   grid-template-areas:
-    'img ... . ... ... pls ... ...'
+    'img ... . ... qnt pls ... ...'
     'img nam x prc qnt ... upd amt'
-    'img ... . ... ... mns ... ...'
+    'img ... . ... qnt mns ... ...'
     'img clr . ... ... ... ... ...'
     'img ... . ... ... ... ... ...'
     'img siz . ... ... ... ... ...'
@@ -113,31 +118,16 @@ const Product = styled.div`
     'img edi . ... ... ... ... ...'
     'img ... . ... ... ... ... ...';
 
-  > img {grid-area: img}
-  > span:nth-child(2) {grid-area: nam}
-  > span:nth-child(3) {grid-area: clr}
-  > span:nth-child(4) {grid-area: siz}
-  > button:nth-child(5) {grid-area: edi}
-  > button:nth-child(6) {grid-area: x}
-  > span:nth-child(7) {grid-area: prc}
-  > div {grid-area: qnt}
-  > button:nth-child(9) {grid-area: pls}
-  > button:nth-child(10) {grid-area: mns}
-  > button:nth-child(11) {grid-area: upd}
-
-  > span:nth-child(12) {
-    grid-area: amt;
-    justify-self: end;
-  }
-
   grid-template-columns:
-    minmax(82px, 12.5%) minmax(145px, 20%) minmax(15px, 13%) minmax(40px, 19%)
+    minmax(90px, 12.5%) minmax(145px, 20%) minmax(15px, 13%) minmax(40px, 19%)
     minmax(50px, 7%) minmax(12px, 5%) minmax(40px, 19%) 55px;
 
   grid-template-rows: repeat(12, 10px);
   justify-items: start;
   align-items: center;
   background: transparent;
+
+  > img {grid-area: img}
   
   > span {
     font-family: var(--font-second);
@@ -147,9 +137,34 @@ const Product = styled.div`
     text-transform: uppercase;
     color: var(--color-text-main);
   }
+
+  @media ${smallScreen} {
+    width: auto;
+    grid-template-areas:
+      'img ... ... ... .'
+      'img nam nam nam x'
+      'img ... ... ... .'
+      'img clr clr ... .'
+      'img ... ... ... .'
+      'img siz ... ... .'
+      'img qnt pls ... .'
+      'img qnt pls amt .'
+      'img qnt mns amt .'
+      'img qnt mns ... .'
+      'img edi ... ... .'
+      'img edi ... ... .';
+    
+    grid-template-columns: 90px 70px 50px 30px 15px;
+
+    > img {
+      margin-right: 8px;
+      justify-self: end;
+    }
+  }
 `;
 
-const ButtonUnderline = styled.button`
+const ButtonUnderline = styled.button<{gridArea: string}>`
+  grid-area: ${props => props.gridArea};
   margin-left: -5px;
   font-family: Arial;
   font-size: 11px;
@@ -162,9 +177,10 @@ const ButtonUnderline = styled.button`
   cursor: pointer;
 `;
 
-const X = styled.button`
+const X = styled.button<{gridArea: string}>`
   width: 15px;
   height: 15px;
+  grid-area: ${props => props.gridArea};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -178,6 +194,7 @@ const X = styled.button`
 const Quantity = styled.div`
   width: 50px;
   height: 30px;
+  grid-area: qnt;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -191,9 +208,10 @@ const Quantity = styled.div`
   border: 1px solid var(--color-border);
 `;
 
-const PlusMinus = styled.button`
+const PlusMinus = styled.button<{gridArea: string}>`
   width: 12px;
   height: 12px;
+  grid-area: ${props => props.gridArea};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -203,9 +221,16 @@ const PlusMinus = styled.button`
   border: none;
   cursor: pointer;
   
-  &:hover {
-    color: var(--color-text-main);
-  }
+  &:hover {color: var(--color-text-main);}
+`;
+
+const Text = styled.span<{gridArea: string}>`
+  ${props => `
+    grid-area: ${props.gridArea};
+    ${props.gridArea === 'amt' && 'justify-self: end;'}
+  `};
+
+  @media ${smallScreen} {justify-self: start}
 `;
 
 
@@ -218,6 +243,12 @@ const EstimateDeliveryWrapper = styled.div`
   justify-content: center;
   align-items: center;
   border: 1px solid var(--color-border);
+
+  @media ${smallScreen} {
+    width: 100%;
+    margin: 0 0 25px;
+    align-self: center;
+  }
 `;
 
 const EstimateDelivery = styled.div`
@@ -227,6 +258,14 @@ const EstimateDelivery = styled.div`
   flex-wrap: wrap;
   justify-content: space-between;
   align-content: space-between;
+
+  @media ${smallScreen} {
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
   
   > span:nth-child(1) {
     font-family: var(--font-second);
@@ -244,6 +283,12 @@ const EstimateDelivery = styled.div`
     font-weight: 400;
     color: var(--color-text-regular);
   }
+
+  > div {
+    width: 280px;
+    display: flex;
+    justify-content: space-between;
+  }
 `;
 
 const Select = styled.select`
@@ -259,6 +304,10 @@ const Select = styled.select`
   background: var(--color-background-highlight);
   border: 1px solid var(--color-border);
   border-radius: 15px;
+
+  @media ${smallScreen} {
+    width: 100%;
+  }
 `;
 
 const Postcode = styled.input`
@@ -320,12 +369,21 @@ const Voucher = styled.div`
     outline: none;
 
     @media ${mediumScreen} {width: 100%}
+    @media ${smallScreen} {max-width: 260px}
   }
 
   @media ${mediumScreen} {
     width: 328px;
     grid-area: 6 / 1 / 8 / 2;
     justify-content: start;
+  }
+
+  @media ${smallScreen} {
+    width: 100%;
+    margin: 0 0 25px;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
   }
 `;
 
@@ -357,6 +415,12 @@ const Total = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: repeat(3, 42px) 27px 13px 13px;
+
+  @media ${smallScreen} {
+    width: 100%;
+    margin: 0 0 25px;
+    align-self: center;
+  }
   
   > span {
     font-family: var(--font-second);
@@ -401,13 +465,18 @@ const LineTotal = styled.div`
 `;
 
 const Button = styled.button`
-  width: 291px;
+  width: 290px;
   height: 30px;
   font-family: var(--font-second);
   font-size: 10px;
   line-height: 1.2;
   font-weight: 400;
   cursor: pointer;
+
+  @media ${smallScreen} {
+    width: 45%;
+    max-width: 290px;
+  }
 `;
 
 const ContinueShopping = styled(Button)`
@@ -434,6 +503,12 @@ const Checkout = styled(Button)`
     align-self: end;
   }
 `;
+
+const ButtonWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+`
 
 
 
@@ -521,7 +596,7 @@ const Cart = (): JSX.Element => {
             </>
           }
           return='#'
-          marginBottom=''
+          marginBottom='20px'
           gridArea='1 / 1 / 3 / 5'
         />
 
@@ -532,12 +607,14 @@ const Cart = (): JSX.Element => {
           </HeaderWrapper>
 
 
-          <TitleWrapper>
-            <span>PRODUCT</span>
-            <span>PRICE</span>
-            <span>QUANTITY</span>
-            <span>AMOUNT</span>
-          </TitleWrapper>
+          {!screen.small &&
+            <TitleWrapper>
+              <span>PRODUCT</span>
+              <span>PRICE</span>
+              <span>QUANTITY</span>
+              <span>AMOUNT</span>
+            </TitleWrapper>
+          }
 
 
           {products.map((product: Product): false | JSX.Element =>
@@ -545,13 +622,14 @@ const Cart = (): JSX.Element => {
               <ProductWrapper key={product.id}>
                 <Product>
                   <img src={product.image} alt={product.name} />
-                  <span>{product.name}</span>
-                  <span>color: {product.color}</span>
-                  <span>size: {product.size}</span>
-                  <ButtonUnderline type='button'>Edit Item</ButtonUnderline>
+                  <Text gridArea='nam'>{product.name}</Text>
+                  <Text gridArea='clr'>color: {product.color}</Text>
+                  <Text gridArea='siz'>size: {product.size}</Text>
+                  <ButtonUnderline type='button' gridArea='edi'>Edit Item</ButtonUnderline>
 
                   <X
                     type='button'
+                    gridArea='x'
                     onClick={(): void => {
                       const newProducts: Product[] = [...products];
                       const currIndex: number = products.indexOf(product);
@@ -562,13 +640,15 @@ const Cart = (): JSX.Element => {
                     +
                   </X>
 
-                  <span>${product.price}</span>
+                  {!screen.small && <Text gridArea='prc'>${product.price}</Text>}
+
                   <Quantity>
                     <span>{product.quantity}</span>
                   </Quantity>
 
                   <PlusMinus
                     type='button'
+                    gridArea='pls'
                     onClick={(): void => {
                       const newProducts: Product[] = [...products];
                       const currIndex: number = products.indexOf(product);
@@ -581,6 +661,7 @@ const Cart = (): JSX.Element => {
 
                   <PlusMinus
                     type='button'
+                    gridArea='mns'
                     onClick={(): void => {
                       const newProducts: Product[] = [...products];
                       const currIndex: number = products.indexOf(product);
@@ -593,8 +674,11 @@ const Cart = (): JSX.Element => {
                     -
                   </PlusMinus>
 
-                  <ButtonUnderline type='button'>Update</ButtonUnderline>
-                  <span>${product.amount()}</span>
+                  {!screen.small &&
+                    <ButtonUnderline type='button' gridArea='upd'>Update</ButtonUnderline>
+                  }
+
+                  <Text gridArea='amt'>${product.amount()}</Text>
                 </Product>
               </ProductWrapper>
           )}
@@ -603,9 +687,7 @@ const Cart = (): JSX.Element => {
 
         <EstimateDeliveryWrapper>
           <EstimateDelivery>
-            <span>
-              ESTIMATE DELIVERY
-            </span>
+            <span>ESTIMATE DELIVERY</span>
             <span>Enter your destination to get a delivery estimate</span>
 
             <Select
@@ -635,8 +717,10 @@ const Cart = (): JSX.Element => {
               }
             </Select>
             
-            <Postcode type='text' placeholder='Postcode/Zip'/>
-            <GetAQuote type='button'>GET A QUOTE</GetAQuote>
+            <div>
+              <Postcode type='text' placeholder='Postcode/Zip'/>
+              <GetAQuote type='button'>GET A QUOTE</GetAQuote>
+            </div>
           </EstimateDelivery>
         </EstimateDeliveryWrapper>
 
@@ -676,8 +760,19 @@ const Cart = (): JSX.Element => {
         </Total>
 
 
-        <ContinueShopping type='button'>CONTINUE SHOPPING</ContinueShopping>
-        <Checkout type='button'>CHECKOUT</Checkout>
+        {!screen.small &&
+          <>
+            <ContinueShopping type='button'>CONTINUE SHOPPING</ContinueShopping>
+            <Checkout type='button'>CHECKOUT</Checkout>
+          </>
+        }
+
+        {screen.small &&
+          <ButtonWrapper>
+            <ContinueShopping type='button'>CONTINUE SHOPPING</ContinueShopping>
+            <Checkout type='button'>CHECKOUT</Checkout>
+          </ButtonWrapper>
+        }
       </WrapperInner>
     </WrapperOuter>
   );
