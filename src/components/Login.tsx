@@ -9,14 +9,16 @@ const WrapperOuter = styled.main`
 `;
 
 const WrapperInner = styled.div`
-  width: 960px;
-  height: 795px;
+  width: 1100px;
+  padding: 0 1% 50px;
+  display: flex;
+  flex-direction: column;
 `;
 
 const UserLogin = styled.div`
   width: 675px;
   height: 345px;
-  margin-left: 142px;
+  align-self: center;
   position: relative; 
   border: 1px solid var(--color-border);
 `;
