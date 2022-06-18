@@ -9,14 +9,17 @@ const WrapperOuter = styled.main`
 `;
 
 const WrapperInner = styled.div`
-  width: 960px;
+  width: 1100px;
   height: 995px;
+  padding: 0 1% 0;
+  display: flex;
+  flex-direction: column;
 `;
 
 const CreateAccountWrapper = styled.div`
   width: 675px;
   height: 855px;
-  margin-left: 145px;
+  align-self: center;
   position: relative;
   border: 1px solid var(--color-border);
 `;
@@ -100,7 +103,7 @@ const LabelCheckbox = styled(Label)`
   display: flex;
   margin-top: 30px;
   align-items: center;
-  
+
   > input {
     margin: 0 10px 0 0;
     accent-color: var(--color-text-main);
