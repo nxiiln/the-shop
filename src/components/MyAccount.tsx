@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import styled from 'styled-components/macro';
 import BreadCrumbs from './BreadCrumbs';
 
@@ -34,7 +34,7 @@ const Title = styled.h2`
   font-family: var(--font-main);
   font-size: 24px;
   font-weight: 400;
-  color: #000;
+  color: var(--color-text-main);
 `;
 
 const Tabs = styled.div`
@@ -52,8 +52,8 @@ const Tab = styled.div`
   font-family: var(--font-second);
   font-size: 13px;
   font-weight: 300;
-  color: #000;
-  border: 1px solid #e4e2e1;
+  color: var(--color-text-main);
+  border: 1px solid var(--color-border);
   cursor: default;
   user-select: none;
 `;
@@ -79,11 +79,10 @@ const MyAccountBody = styled.div`
   height: 865px;
   display: flex;
   justify-content: center;
-  border: 1px solid #e4e2e1;
+  border: 1px solid var(--color-border);
   border-top: none;
-  > form {
-    margin-top: 48px;
-  }
+
+  > form {margin-top: 48px}
 `;
 
 const Label = styled.label`
@@ -91,7 +90,7 @@ const Label = styled.label`
   font-size: 10px;
   line-height: 1.2;
   font-weight: 300;
-  color: #000;
+  color: var(--color-text-main);
 `;
 
 const LabelText = styled(Label)`
@@ -99,13 +98,13 @@ const LabelText = styled(Label)`
   margin-bottom: 17px;
   display: grid;
   align-content: space-between;
+
   > input {
     width: 254px;
     height: 30px;
-    border: 1px solid #e4e2e1;
-    :focus {
-      outline: 1px solid #000;
-    }
+    border: 1px solid var(--color-border);
+    
+    &:focus {outline: 1px solid #000}
   }
 `;
 
@@ -115,9 +114,10 @@ const LabelCheckbox = styled(Label)`
   margin-top: 22px;
   align-items: center;
   font-weight: 400;
+  
   > input {
     margin: 0 10px 0 0;
-    accent-color: #000;
+    accent-color: var(--color-text-main);
   }
 `;
 
@@ -127,8 +127,8 @@ const ButtonBlack = styled.button`
   font-family: var(--font-second);
   font-size: 10px;
   font-weight: 300;
-  color: #fff;
-  background: #000;
+  color: var(--color-text-second);
+  background: var(--color-background-second);
   border: none;
   cursor: pointer;
 `;
@@ -144,7 +144,7 @@ const Required = styled.span`
   font-family: Arial;
   font-size: 11px;
   font-weight: 400;
-  color: #000;
+  color: var(--color-text-main);
 `;
 
 
@@ -160,17 +160,19 @@ const OrderHistoryHeader = styled.div`
   height: 25px;
   display: grid;
   grid-template-columns: 33px 205px 137px 130px 1fr;
-  span {
+
+  > span {
     font-family: var(--font-second);
     font-size: 12px;
     line-height: 1.2;
     font-weight: 300;
-    color: #000;
+    color: var(--color-text-main);
   }
-  span:nth-child(1) {grid-area: 1 / 2 / 1 / 3}
-  span:nth-child(2) {grid-area: 1 / 3 / 1 / 4}
-  span:nth-child(3) {grid-area: 1 / 4 / 1 / 5}
-  span:nth-child(4) {grid-area: 1 / 5 / 1 / 6}
+
+  > span:nth-child(1) {grid-area: 1 / 2 / 1 / 3}
+  > span:nth-child(2) {grid-area: 1 / 3 / 1 / 4}
+  > span:nth-child(3) {grid-area: 1 / 4 / 1 / 5}
+  > span:nth-child(4) {grid-area: 1 / 5 / 1 / 6}
 `;
 
 const OrderWrapper = styled.div`
@@ -186,28 +188,32 @@ const Order = styled.div`
   grid-template-columns: 33px 205px 137px 130px 106px 1fr;
   align-items: center;
   text-transform: uppercase;
-  background: #f7f7f7;
-  span {
+  background: var(--color-background-highlight);
+
+  > span {
     font-family: var(--font-second);
     font-size: 10px;
     line-height: 14px;
     font-weight: 400;
-    color: #000;
+    color: var(--color-text-main);
   }
-  span:nth-child(1) {grid-area: 1 / 2 / 1 / 3}
-  span:nth-child(2) {grid-area: 1 / 3 / 1 / 4}
-  span:nth-child(3) {grid-area: 1 / 4 / 1 / 5}
-  span:nth-child(4) {grid-area: 1 / 5 / 1 / 6}
-  button:nth-child(5) {grid-area: 1 / 6 / 1 / 7}
+
+  > span:nth-child(1) {grid-area: 1 / 2 / 1 / 3}
+  > span:nth-child(2) {grid-area: 1 / 3 / 1 / 4}
+  > span:nth-child(3) {grid-area: 1 / 4 / 1 / 5}
+  > span:nth-child(4) {grid-area: 1 / 5 / 1 / 6}
+  > button:nth-child(5) {grid-area: 1 / 6 / 1 / 7}
 `;
 
 const ButtonDetails = styled(ButtonBlack)<{status: boolean}>`
   width: 66px;
-  span {
+  
+  > span {
     font-family: var(--font-second);
     font-size: 10px;
     font-weight: 300;
-    color: #fff;
+    color: var(--color-text-second);
+
     ${props => props.status && `
       display: inline-block;
       font-size: 25px;
@@ -216,7 +222,6 @@ const ButtonDetails = styled(ButtonBlack)<{status: boolean}>`
     `}
   }
 `;
-//-----------------------------------------------
 
 
 //OrderDetails-----------------------------------
@@ -231,14 +236,14 @@ const OrderDetailsHeader = styled.div`
   display: grid;
   grid-template-columns: 200px 125px 125px 1fr;
   align-items: center;
-  border-bottom: 1px solid #e4e2e1;
-  span {
-    Text: product;
+  border-bottom: 1px solid var(--color-border);
+  
+  > span {
     font-family: var(--font-second);
     font-size: 12px;
     line-height: 1.2;
     font-weight: 300;
-    color: #000;
+    color: var(--color-text-main);
   }
 `;
 
@@ -247,22 +252,22 @@ const OrderDetailsBody = styled.div`
   display: grid;
   grid-template-columns: 200px 125px 125px 1fr;
   align-items: center;
-  border-bottom: 1px solid #e4e2e1;
+  border-bottom: 1px solid var(--color-border);
 
-  span {
+  > span {
     font-family: var(--font-second);
     font-size: 10px;
     line-height: 14px;
     font-weight: 400;
-    color: #000;
+    color: var(--color-text-main);
   }
 
-  span:last-child {justify-self: end;}
+  > span:last-child {justify-self: end;}
 `;
 
 const TotalBlockWrapper = styled.div`
   height: 140px;
-  border-bottom: 1px solid #e4e2e1;
+  border-bottom: 1px solid var(--color-border);
 `;
 
 const TotalBlock = styled.div`
@@ -273,28 +278,24 @@ const TotalBlock = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
 
-  span {
+  > span {
     font-family: var(--font-second);
     font-size: 10px;
     line-height: 1.2;
     font-weight: 300;
-    color: #000;
+    color: var(--color-text-main);
   }
 
-  span:nth-child(2n) {
-    justify-self: end;
-  }
+  > span:nth-child(2n) {justify-self: end}
 
-  span:nth-child(n+7) {
+  > span:nth-child(n+7) {
     font-size: 12px;
     font-weight: 700;
     align-self: end;
     justify-self: start;
   }
 
-  span:nth-child(9) {
-    justify-self: end;
-  }
+  > span:nth-child(9) {justify-self: end}
 `;
 
 const TotalBlockLine = styled.div`
@@ -303,129 +304,128 @@ const TotalBlockLine = styled.div`
   margin: 0;
   position: absolute;
   top: 61px;
-  background: #aaa;
+  background: var(--color-border);
 `;
 
 const DescriptionBlock = styled.div`
-  span {
+  > span {
     font-family: Arial;
     font-size: 11px;
-    color: #000;
+    color: var(--color-text-main);
     font-weight: 400;
   }
 
-  span:nth-child(3n+1) {
-    font-weight: 700;
-  }
+  > span:nth-child(3n+1) {font-weight: 700}
 `;
-//-----------------------------------------------
+
+
+
+
+interface order {
+  view: boolean;
+  number: string;
+  name: string;
+  datePurchased: string;
+  dateDespathed: string;
+  addressDelivery: string;
+  addressBilling: string;
+  status: string;
+  price: number;
+  qty: number;
+  amount(): number;
+  deliveryCosts: number;
+  giftVoucher: number;
+  total(): number;
+}
+
+const initialOrders: order[] = [
+  {
+    view: false,
+    number: 'FN9136137',
+    name: 'DETAILED SWING DRESS',
+    datePurchased: '02/02/2022',
+    dateDespathed: '04/02/2022',
+    addressDelivery: 'User User, Street1, City9, USA 10014',
+    addressBilling: 'User User, Street1, City9, USA 10014',
+    status: 'despatched',
+    price: 275,
+    qty: 1,
+    amount() {return this.price * this.qty},
+    deliveryCosts: 35,
+    giftVoucher: 5,
+    total() {return this.amount() + this.deliveryCosts - this.giftVoucher},
+  },
+  {
+    view: false,
+    number: 'FN9135142',
+    name: 'DETAILED SWING DRESS',
+    datePurchased: '16/01/2022',
+    dateDespathed: '18/01/2022',
+    addressDelivery: 'User User, Street1, City9, USA 10014',
+    addressBilling: 'User User, Street1, City9, USA 10014',
+    status: 'despatched',
+    price: 325,
+    qty: 1,
+    amount() {return this.price * this.qty},
+    deliveryCosts: 35,
+    giftVoucher: 5,
+    total() {return this.amount() + this.deliveryCosts - this.giftVoucher},
+  },
+  {
+    view: false,
+    number: 'FN9135132',
+    name: 'DETAILED SWING DRESS',
+    datePurchased: '08/01/2021',
+    dateDespathed: '10/01/2021',
+    addressDelivery: 'User User, Street1, City9, USA 10014',
+    addressBilling: 'User User, Street1, City9, USA 10014',
+    status: 'despatched',
+    price: 275,
+    qty: 2,
+    amount() {return this.price * this.qty},
+    deliveryCosts: 35,
+    giftVoucher: 5,
+    total() {return this.amount() + this.deliveryCosts - this.giftVoucher},
+  },
+  {
+    view: false,
+    number: 'FN9132142',
+    name: 'DETAILED SWING DRESS',
+    datePurchased: '04/01/2021',
+    dateDespathed: '06/01/2021',
+    addressDelivery: 'User User, Street1, City9, USA 10014',
+    addressBilling: 'User User, Street1, City9, USA 10014',
+    status: 'despatched',
+    price: 275,
+    qty: 3,
+    amount() {return this.price * this.qty},
+    deliveryCosts: 35,
+    giftVoucher: 5,
+    total() {return this.amount() + this.deliveryCosts - this.giftVoucher},
+  },
+  {
+    view: false,
+    number: 'FN9132138',
+    name: 'DETAILED SWING DRESS',
+    datePurchased: '02/01/2021',
+    dateDespathed: '04/01/2021',
+    addressDelivery: 'User User, Street1, City9, USA 10014',
+    addressBilling: 'User User, Street1, City9, USA 10014',
+    status: 'despatched',
+    price: 380,
+    qty: 1,
+    amount() {return this.price * this.qty},
+    deliveryCosts: 35,
+    giftVoucher: 5,
+    total() {return this.amount() + this.deliveryCosts - this.giftVoucher},
+  },
+];
 
 
 
 
 const MyAccount = (): JSX.Element => {
-  interface order {
-    view: boolean;
-    number: string;
-    name: string;
-    datePurchased: string;
-    dateDespathed: string;
-    addressDelivery: string;
-    addressBilling: string;
-    status: string;
-    price: number;
-    qty: number;
-    amount(): number;
-    deliveryCosts: number;
-    giftVoucher: number;
-    total(): number;
-  }
-
-  const initialOrders: order[] = [
-    {
-      view: false,
-      number: 'FN9136137',
-      name: 'DETAILED SWING DRESS',
-      datePurchased: '02/02/2022',
-      dateDespathed: '04/02/2022',
-      addressDelivery: 'User User, Street1, City9, USA 10014',
-      addressBilling: 'User User, Street1, City9, USA 10014',
-      status: 'despatched',
-      price: 275,
-      qty: 1,
-      amount() {return this.price * this.qty},
-      deliveryCosts: 35,
-      giftVoucher: 5,
-      total() {return this.amount() + this.deliveryCosts - this.giftVoucher},
-    },
-    {
-      view: false,
-      number: 'FN9135142',
-      name: 'DETAILED SWING DRESS',
-      datePurchased: '16/01/2022',
-      dateDespathed: '18/01/2022',
-      addressDelivery: 'User User, Street1, City9, USA 10014',
-      addressBilling: 'User User, Street1, City9, USA 10014',
-      status: 'despatched',
-      price: 325,
-      qty: 1,
-      amount() {return this.price * this.qty},
-      deliveryCosts: 35,
-      giftVoucher: 5,
-      total() {return this.amount() + this.deliveryCosts - this.giftVoucher},
-    },
-    {
-      view: false,
-      number: 'FN9135132',
-      name: 'DETAILED SWING DRESS',
-      datePurchased: '08/01/2021',
-      dateDespathed: '10/01/2021',
-      addressDelivery: 'User User, Street1, City9, USA 10014',
-      addressBilling: 'User User, Street1, City9, USA 10014',
-      status: 'despatched',
-      price: 275,
-      qty: 2,
-      amount() {return this.price * this.qty},
-      deliveryCosts: 35,
-      giftVoucher: 5,
-      total() {return this.amount() + this.deliveryCosts - this.giftVoucher},
-    },
-    {
-      view: false,
-      number: 'FN9132142',
-      name: 'DETAILED SWING DRESS',
-      datePurchased: '04/01/2021',
-      dateDespathed: '06/01/2021',
-      addressDelivery: 'User User, Street1, City9, USA 10014',
-      addressBilling: 'User User, Street1, City9, USA 10014',
-      status: 'despatched',
-      price: 275,
-      qty: 3,
-      amount() {return this.price * this.qty},
-      deliveryCosts: 35,
-      giftVoucher: 5,
-      total() {return this.amount() + this.deliveryCosts - this.giftVoucher},
-    },
-    {
-      view: false,
-      number: 'FN9132138',
-      name: 'DETAILED SWING DRESS',
-      datePurchased: '02/01/2021',
-      dateDespathed: '04/01/2021',
-      addressDelivery: 'User User, Street1, City9, USA 10014',
-      addressBilling: 'User User, Street1, City9, USA 10014',
-      status: 'despatched',
-      price: 380,
-      qty: 1,
-      amount() {return this.price * this.qty},
-      deliveryCosts: 35,
-      giftVoucher: 5,
-      total() {return this.amount() + this.deliveryCosts - this.giftVoucher},
-    },
-  ];
-
-
-  const [tab, setTab] = useState<string>('orderHistory');
+  const [tab, setTab] = useState<string>('myPersonalInfo');
   const [orders, setOrders] = useState<order[]>(initialOrders);
   const [currOrder, setCurrOrder] = useState<string>('');
 
@@ -443,7 +443,6 @@ const MyAccount = (): JSX.Element => {
           }
           return='#'
           marginBottom='20px'
-          gridArea=''
         />
 
 
@@ -594,84 +593,82 @@ const MyAccount = (): JSX.Element => {
                   <span>TOTAL</span>
                 </OrderHistoryHeader>
 
-                {orders.map((order: order): JSX.Element => {
-                  return(
-                    <OrderWrapper key={order.number}>
-                      <Order>
-                        <span>{order.number}</span>
-                        <span>
-                          {order.status === 'despatched' ?
-                          order.dateDespathed : order.datePurchased}
-                        </span>
-                        <span>{order.status}</span>
-                        <span>${order.total()}</span>
-                        <ButtonDetails
-                          type='button'
-                          status={order.number === currOrder}
-                          onClick={(): void => {
-                            order.number === currOrder ?
-                            setCurrOrder('') : setCurrOrder(order.number);
-                          }}
-                        >
-                          <span>{order.number === currOrder ? '+' : 'DETAILS'}</span>
-                        </ButtonDetails>
-                      </Order>
+                {orders.map((order: order): JSX.Element =>
+                  <OrderWrapper key={order.number}>
+                    <Order>
+                      <span>{order.number}</span>
+                      <span>
+                        {order.status === 'despatched' ?
+                        order.dateDespathed : order.datePurchased}
+                      </span>
+                      <span>{order.status}</span>
+                      <span>${order.total()}</span>
+                      <ButtonDetails
+                        type='button'
+                        status={order.number === currOrder}
+                        onClick={(): void => {
+                          order.number === currOrder ?
+                          setCurrOrder('') : setCurrOrder(order.number);
+                        }}
+                      >
+                        <span>{order.number === currOrder ? '+' : 'DETAILS'}</span>
+                      </ButtonDetails>
+                    </Order>
 
-                      {order.number === currOrder && 
-                        <OrderDetails>
-                          <OrderDetailsHeader>
-                            <span>PRODUCT</span>
-                            <span>PRICE</span>
-                            <span>Q-TY</span>
-                            <span>AMOUNT</span>
-                          </OrderDetailsHeader>
+                    {order.number === currOrder && 
+                      <OrderDetails>
+                        <OrderDetailsHeader>
+                          <span>PRODUCT</span>
+                          <span>PRICE</span>
+                          <span>Q-TY</span>
+                          <span>AMOUNT</span>
+                        </OrderDetailsHeader>
 
-                          <OrderDetailsBody>
-                            <span>{order.name}</span>
-                            <span>${order.price}</span>
-                            <span>{order.qty}</span>
+                        <OrderDetailsBody>
+                          <span>{order.name}</span>
+                          <span>${order.price}</span>
+                          <span>{order.qty}</span>
+                          <span>${order.amount()}</span>
+                        </OrderDetailsBody>
+
+                        <TotalBlockWrapper>
+                          <TotalBlock>
+                            <span>SUBTOTAL</span>
                             <span>${order.amount()}</span>
-                          </OrderDetailsBody>
 
-                          <TotalBlockWrapper>
-                            <TotalBlock>
-                              <span>SUBTOTAL</span>
-                              <span>${order.amount()}</span>
+                            <span>DELIVERY COSTS</span>
+                            <span>${order.deliveryCosts}</span>
 
-                              <span>DELIVERY COSTS</span>
-                              <span>${order.deliveryCosts}</span>
+                            <span>GIFT VOUCHER</span>
+                            <span>${order.giftVoucher}</span>
 
-                              <span>GIFT VOUCHER</span>
-                              <span>${order.giftVoucher}</span>
+                            <TotalBlockLine />
 
-                              <TotalBlockLine />
+                            <span>TOTAL</span>
+                            <span>${order.total()}</span>
+                          </TotalBlock>
+                        </TotalBlockWrapper>
 
-                              <span>TOTAL</span>
-                              <span>${order.total()}</span>
-                            </TotalBlock>
-                          </TotalBlockWrapper>
+                        <DescriptionBlock>
+                          <span>Purchased on: </span>
+                          <span>{order.datePurchased}</span><br />
 
-                          <DescriptionBlock>
-                            <span>Purchased on: </span>
-                            <span>{order.datePurchased}</span><br />
+                          <span>Order status: </span>
+                          <span>
+                            {order.status}{' '}
+                            {order.status === 'despatched' && order.dateDespathed}
+                          </span><br />
 
-                            <span>Order status: </span>
-                            <span>
-                              {order.status}{' '}
-                              {order.status === 'despatched' && order.dateDespathed}
-                            </span><br />
+                          <span>Delivery Address: </span>
+                          <span>{order.addressDelivery}</span><br />
 
-                            <span>Delivery Address: </span>
-                            <span>{order.addressDelivery}</span><br />
-
-                            <span>Billing Address: </span>
-                            <span>{order.addressBilling}</span>
-                          </DescriptionBlock>
-                        </OrderDetails>
-                      }
-                    </OrderWrapper>
-                  )
-                })}
+                          <span>Billing Address: </span>
+                          <span>{order.addressBilling}</span>
+                        </DescriptionBlock>
+                      </OrderDetails>
+                    }
+                  </OrderWrapper>
+                )}
               </OrderHistory>
             }
           </MyAccountBody>
