@@ -1,5 +1,6 @@
 import styled from 'styled-components/macro';
 import BreadCrumbs from './BreadCrumbs';
+import {smallScreen} from '../mediaQueries';
 
 
 const WrapperOuter = styled.main`
@@ -19,8 +20,19 @@ const UserLogin = styled.div`
   width: 675px;
   height: 345px;
   align-self: center;
-  position: relative; 
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
   border: 1px solid var(--color-border);
+
+  @media ${smallScreen} {
+    width: 100%;
+    max-width: 675px;
+    height: 560px;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: start;
+  }
 `;
 
 const TitleWrapper = styled.div`
@@ -39,15 +51,28 @@ const Title = styled.h2`
   color: var(--color-text-main);
 `;
 
-const LeftGroup = styled.div`
+const Groups = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  @media ${smallScreen} {
+    height: 100%;
+    flex-direction: column-reverse;
+    justify-content: space-around;
+    align-items: center;
+  }
+`;
+
+const RegisteredCustomers = styled.div`
   width: 260px;
   height: 225px;
-  position: absolute;
-  top: 90px;
-  left: 25px;
+  margin-left: 20px;
   display: flex;
   flex-wrap: wrap;
   justify-content: start;
+
+  @media ${smallScreen} {margin: 0}
 `;
 
 const TextUp = styled.span`
@@ -123,12 +148,14 @@ const ButtonUnderline = styled.button`
   cursor: pointer;
 `;
 
-const RightGroup = styled.div`
+const NewCustomers = styled.div`
   width: 255px;
   height: 165px;
-  position: absolute;
-  top: 90px;
-  left: 395px;
+  margin-right: 20px;
+  display: flex;
+  flex-wrap: wrap;
+
+  @media ${smallScreen} {margin: 0}
 `;
 
 const ButtonCreateAccount = styled(ButtonLogin)`
@@ -155,44 +182,46 @@ const Login = (): JSX.Element => (
         <TitleWrapper>
           <Title>USER LOGIN</Title>
         </TitleWrapper>
+        
+        <Groups>
+          <RegisteredCustomers>
+            <TextUp>REGISTERED CUSTOMERS</TextUp>
+            <Text>
+              <TextBold>Already registered? </TextBold>
+              Please log in below:
+            </Text>
 
-        <LeftGroup>
-          <TextUp>REGISTERED CUSTOMERS</TextUp>
-          <Text>
-            <TextBold>Already registered? </TextBold>
-            Please log in below:
-          </Text>
+            <form onSubmit={(e: React.FormEvent<HTMLFormElement>): void => e.preventDefault()}>
+              <Label>
+                E-MAIL*
+                <input type='email' required />
+              </Label>
 
-          <form onSubmit={(e: React.FormEvent<HTMLFormElement>): void => e.preventDefault()}>
-            <Label>
-              E-MAIL*
-              <input type='email' required />
-            </Label>
+              <Label>
+                PASSWORD*
+                <input type='password' required />
+              </Label>
 
-            <Label>
-              PASSWORD*
-              <input type='password' required />
-            </Label>
+              <ButtonLogin>LOGIN</ButtonLogin>
+              <ButtonUnderline type='button'>Forgot your password?</ButtonUnderline>
+            </form>
+          </RegisteredCustomers>
 
-            <ButtonLogin>LOGIN</ButtonLogin>
-            <ButtonUnderline type='button'>Forgot your password?</ButtonUnderline>
-          </form>
-        </LeftGroup>
+          <NewCustomers>
+            <TextUp>NEW CUSTOMERS</TextUp>
+            <Text>
+              <TextBold>Enter your email address to create an account:</TextBold>
+            </Text>
 
-        <RightGroup>
-          <TextUp>NEW CUSTOMERS</TextUp>
-          <Text>
-            <TextBold>Enter your email address to create an account:</TextBold>
-          </Text>
-
-          <form onSubmit={(e: React.FormEvent<HTMLFormElement>): void => e.preventDefault()}>
-            <Label>
-              E-MAIL*
-              <input type='email' required />
-            </Label>
-            <ButtonCreateAccount>CREATE AN ACCOUNT</ButtonCreateAccount>
-          </form>
-        </RightGroup>
+            <form onSubmit={(e: React.FormEvent<HTMLFormElement>): void => e.preventDefault()}>
+              <Label>
+                E-MAIL*
+                <input type='email' required />
+              </Label>
+              <ButtonCreateAccount>CREATE AN ACCOUNT</ButtonCreateAccount>
+            </form>
+          </NewCustomers>
+        </Groups>
       </UserLogin>
     </WrapperInner>
   </WrapperOuter>
