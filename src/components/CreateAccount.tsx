@@ -1,5 +1,8 @@
 import styled from 'styled-components/macro';
 import BreadCrumbs from './BreadCrumbs';
+import {smallScreen, useMediaQuery} from '../mediaQueries';
+
+
 
 
 const WrapperOuter = styled.main`
@@ -10,18 +13,28 @@ const WrapperOuter = styled.main`
 
 const WrapperInner = styled.div`
   width: 1100px;
-  height: 995px;
-  padding: 0 1% 0;
+  padding: 0 1% 50px;
   display: flex;
   flex-direction: column;
+
+  @media ${smallScreen} {width: 100%}
 `;
 
 const CreateAccountWrapper = styled.div`
   width: 675px;
   height: 855px;
-  align-self: center;
   position: relative;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
   border: 1px solid var(--color-border);
+
+  @media ${smallScreen} {
+    width: 100%;
+    max-width: 675px;
+    height: 1230px;
+  }
 `;
 
 const TitleWrapper = styled.div`
@@ -42,28 +55,44 @@ const Title = styled.h2`
 
 const Required = styled.span`
   position: absolute;
-  top: 18px;
-  left: 600px;
-  font-family: Arial;
+  top: 20px;
+  left: calc(100% - 70px);
+  font-family: var(--font-regular);
   font-size: 11px;
   font-weight: 400;
   color: var(--color-text-main);
+
+  @media ${smallScreen} {top: 65px}
+`;
+
+const Form = styled.form`
+   display: flex;
+   flex-direction: column;
+
+  > div {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+  
+    @media ${smallScreen} {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
 `;
 
 const PersonalInformation = styled.div`
   width: 260px;
-  height: 310px;
-  position: absolute;
-  top: 80px;
-  left: 25px;
+  margin-left: 20px;
+
+  @media ${smallScreen} {margin: 0}
 `;
 
 const AddressInformation = styled.div`
-  width: 275px;
-  height: 625px;
-  position: absolute;
-  top: 80px;
-  left: 392px;
+  width: 260px;
+  margin-right: 20px;
+
+  @media ${smallScreen} {margin: 30px 0 0}
 `;
 
 const Description = styled.span`
@@ -113,9 +142,8 @@ const LabelCheckbox = styled(Label)`
 const ButtonCreateAccount = styled.button`
   width: 254px;
   height: 30px;
-  position: absolute;
-  top: 770px;
-  left: 212px;
+  margin-top: 20px;
+  align-self: center;
   font-family: var(--font-second);
   font-size: 10px;
   font-weight: 300;
@@ -128,10 +156,9 @@ const ButtonCreateAccount = styled.button`
 const BackToLogin = styled.button`
   width: 80px;
   height: 10px;
-  position: absolute;
-  top: 820px;
-  left: 300px;
-  font-family: Arial;
+  margin-top: 20px;
+  align-self: center;
+  font-family: var(--font-regular);
   font-size: 11px;
   line-height: 1.2;
   font-weight: 400;
@@ -143,121 +170,143 @@ const BackToLogin = styled.button`
 `;
 
 
-const CreateAccount = (): JSX.Element => (
-  <WrapperOuter>
-    <WrapperInner>
-      <BreadCrumbs
-        link={
-          <>
-            <a href='#'>Home</a>
-            <span>/</span>
-            <span>Create An Account</span>
-          </>
-        }
-        return='#'
-        marginBottom='20px'
-      />
 
-      <CreateAccountWrapper>
-        <TitleWrapper>
-          <Title>CREATE AN ACCOUNT</Title>
+
+const CreateAccount = (): JSX.Element => {
+  const screen = useMediaQuery();
+  
+  return(
+    <WrapperOuter>
+      <WrapperInner>
+        <BreadCrumbs
+          link={
+            <>
+              <a href='#'>Home</a>
+              <span>/</span>
+              <span>Create An Account</span>
+            </>
+          }
+          return='#'
+          marginBottom='20px'
+        />
+
+
+        <CreateAccountWrapper>
           <Required>*Required</Required>
-        </TitleWrapper>
+          <TitleWrapper>
+            <Title>CREATE AN ACCOUNT</Title>
+          </TitleWrapper>
 
-        <form onSubmit={(e: React.FormEvent<HTMLFormElement>): void => e.preventDefault()}>
-          <PersonalInformation>
-            <Description>PERSONAL INFORMATION</Description>
-            <LabelText>
-              FIRST NAME*
-              <input type='text' required />
-            </LabelText>
+          <Form onSubmit={(e: React.FormEvent<HTMLFormElement>): void => e.preventDefault()}>
+            <div>
+              <PersonalInformation>
+                <Description>PERSONAL INFORMATION</Description>
+                <LabelText>
+                  FIRST NAME*
+                  <input type='text' required />
+                </LabelText>
 
-            <LabelText>
-              LAST NAME*
-              <input type='text' required />
-            </LabelText>
+                <LabelText>
+                  LAST NAME*
+                  <input type='text' required />
+                </LabelText>
 
-            <LabelText>
-              E-MAIL*
-              <input type='email' required />
-            </LabelText>
+                <LabelText>
+                  E-MAIL*
+                  <input type='email' required />
+                </LabelText>
 
-            <LabelText>
-              PASSWORD*
-              <input type='text' required />
-            </LabelText>
+                <LabelText>
+                  PASSWORD*
+                  <input type='text' required />
+                </LabelText>
 
-            <LabelCheckbox>
-              <input type='checkbox' name='subscribe' defaultChecked />
-              I WANT TO SUBSCRIBE TO THE NEWSLETTER
-            </LabelCheckbox>
-          </PersonalInformation>
+                {!screen.small &&
+                  <LabelCheckbox>
+                    <input type='checkbox' name='subscribe' defaultChecked />
+                    I WANT TO SUBSCRIBE TO THE NEWSLETTER
+                  </LabelCheckbox>
+                }
+              </PersonalInformation>
 
-          <AddressInformation>
-            <Description>ADDRESS INFORMATION</Description>
-            <LabelText>
-              FIRST NAME*
-              <input type='text' required />
-            </LabelText>
 
-            <LabelText>
-              LAST NAME*
-              <input type='text' required />
-            </LabelText>
+              <AddressInformation>
+                <Description>ADDRESS INFORMATION</Description>
+                <LabelText>
+                  FIRST NAME*
+                  <input type='text' required />
+                </LabelText>
 
-            <LabelText>
-              COMPANY
-              <input type='text' />
-            </LabelText>
+                <LabelText>
+                  LAST NAME*
+                  <input type='text' required />
+                </LabelText>
 
-            <LabelText>
-              ADDRESS 1
-              <input type='text' />
-            </LabelText>
+                <LabelText>
+                  COMPANY
+                  <input type='text' />
+                </LabelText>
 
-            <LabelText>
-              ADDRESS 2
-              <input type='text' />
-            </LabelText>
+                <LabelText>
+                  ADDRESS 1
+                  <input type='text' />
+                </LabelText>
 
-            <LabelText>
-              COUNTRY
-              <input list='country' />
-            </LabelText>
-            <datalist id='country'>
-              <option value='Russia' />
-              <option value='UK' />
-              <option value='USA' />
-            </datalist>
+                <LabelText>
+                  ADDRESS 2
+                  <input type='text' />
+                </LabelText>
 
-            <LabelText>
-              CITY
-              <input type='text' />
-            </LabelText>
+                <LabelText>
+                  COUNTRY
+                  <input list='country' />
+                </LabelText>
+                <datalist id='country'>
+                  <option value='Russia' />
+                  <option value='UK' />
+                  <option value='USA' />
+                </datalist>
 
-            <LabelText>
-              STATE
-              <input type='text' />
-            </LabelText>
+                <LabelText>
+                  CITY
+                  <input type='text' />
+                </LabelText>
 
-            <LabelText>
-              ZIP / POSTAL CODE*
-              <input type='text' required />
-            </LabelText>
+                <LabelText>
+                  STATE
+                  <input type='text' />
+                </LabelText>
 
-            <LabelText>
-              PHONE
-              <input type='text' />
-            </LabelText>
-          </AddressInformation>
+                <LabelText>
+                  ZIP / POSTAL CODE*
+                  <input type='text' required />
+                </LabelText>
 
-          <ButtonCreateAccount>CREATE AN ACCOUNT</ButtonCreateAccount>
-        </form>
+                <LabelText>
+                  PHONE
+                  <input type='text' />
+                </LabelText>
+              </AddressInformation>
+              
 
-        <BackToLogin type='button'>Back to Login</BackToLogin>
-      </CreateAccountWrapper>
-    </WrapperInner>
-  </WrapperOuter>
-);
+              {screen.small &&
+                <LabelCheckbox>
+                  <input type='checkbox' name='subscribe' defaultChecked />
+                  I WANT TO SUBSCRIBE TO THE NEWSLETTER
+                </LabelCheckbox>
+              }
+            </div>
+            <ButtonCreateAccount type='submit'>CREATE AN ACCOUNT</ButtonCreateAccount>
+          </Form>
+          
+          <BackToLogin type='button'>Back to Login</BackToLogin>
+        </CreateAccountWrapper>
+      </WrapperInner>
+    </WrapperOuter>
+  );
+}
+
+
+
 
 export default CreateAccount;
