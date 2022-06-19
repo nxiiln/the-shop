@@ -1,6 +1,7 @@
 import {useState} from 'react';
 import styled from 'styled-components/macro';
 import BreadCrumbs from './BreadCrumbs';
+import {mediumScreen} from '../mediaQueries';
 
 
 
@@ -12,14 +13,19 @@ const WrapperOuter = styled.main`
 `;
 
 const WrapperInner = styled.div`
-  width: 960px;
-  height: 100%;
-  margin-bottom: 55px;
+  width: 1100px;
+  padding: 0 1% 50px;
+  display: flex;
+  flex-direction: column;
+
+  @media ${mediumScreen} {width: 100%}
 `;
 
 const MyAccountWrapper = styled.div`
   width: 960px;
-  height: 890px;
+  align-self: center;
+
+  @media ${mediumScreen} {width: 100%}
 `;
 
 const TitleWrapper = styled.div`
