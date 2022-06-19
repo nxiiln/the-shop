@@ -327,7 +327,7 @@ const DescriptionBlock = styled.div`
 
 
 
-interface order {
+interface Order {
   view: boolean;
   number: string;
   name: string;
@@ -344,7 +344,7 @@ interface order {
   total(): number;
 }
 
-const initialOrders: order[] = [
+const orders: Order[] = [
   {
     view: false,
     number: 'FN9136137',
@@ -432,7 +432,6 @@ const initialOrders: order[] = [
 
 const MyAccount = (): JSX.Element => {
   const [tab, setTab] = useState<string>('myPersonalInfo');
-  const [orders, setOrders] = useState<order[]>(initialOrders);
   const [currOrder, setCurrOrder] = useState<string>('');
 
 
@@ -599,7 +598,7 @@ const MyAccount = (): JSX.Element => {
                   <span>TOTAL</span>
                 </OrderHistoryHeader>
 
-                {orders.map((order: order): JSX.Element =>
+                {orders.map((order: Order): JSX.Element =>
                   <OrderWrapper key={order.number}>
                     <Order>
                       <span>{order.number}</span>
