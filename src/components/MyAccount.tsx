@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import styled from 'styled-components/macro';
 import BreadCrumbs from './BreadCrumbs';
-import {mediumScreen} from '../mediaQueries';
+import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
 
 
 
@@ -18,14 +18,14 @@ const WrapperInner = styled.div`
   display: flex;
   flex-direction: column;
 
-  @media ${mediumScreen} {width: 100%}
+  @media ${mediumScreen}, ${smallScreen} {width: 100%}
 `;
 
 const MyAccountWrapper = styled.div`
   width: 960px;
   align-self: center;
 
-  @media ${mediumScreen} {width: 100%}
+  @media ${mediumScreen}, ${smallScreen} {width: 100%}
 `;
 
 const TitleWrapper = styled.div`
@@ -47,6 +47,16 @@ const Tabs = styled.div`
   width: 100%;
   height: 51px;
   display: flex;
+
+  @media ${smallScreen} {
+    height: auto;
+    flex-direction: column;
+    align-items: center;
+    border-left: 1px solid var(--color-border);
+    border-right: 1px solid var(--color-border);
+
+    > form {margin: 45px 0 45px}
+  }
 `;
 
 const Tab = styled.div`
@@ -62,6 +72,8 @@ const Tab = styled.div`
   border: 1px solid var(--color-border);
   cursor: default;
   user-select: none;
+
+  @media ${smallScreen} {width: 100%}
 `;
 
 const MyPersonalInfoTab = styled(Tab)<{currTab: string}>`
@@ -82,13 +94,12 @@ const OrderHistoryTab = styled(Tab)<{currTab: string}>`
 
 const MyAccountBody = styled.div`
   width: 100%;
-  height: 865px;
   display: flex;
   justify-content: center;
   border: 1px solid var(--color-border);
   border-top: none;
 
-  > form {margin-top: 48px}
+  > form {margin: 45px 0 45px}
 `;
 
 const Label = styled.label`
@@ -147,7 +158,7 @@ const ButtonUpdate = styled(ButtonBlack)`
 
 const Required = styled.span`
   margin-left: 12px;
-  font-family: Arial;
+  font-family: var(--font-regular);
   font-size: 11px;
   font-weight: 400;
   color: var(--color-text-main);
@@ -159,6 +170,12 @@ const OrderHistory = styled.div`
   width: 674px;
   height: 645px;
   margin-top: 48px;
+
+  @media ${smallScreen} {
+    width: 100%;
+    max-width: 674px;
+    padding: 0 2% 0;
+  }
 `;
 
 const OrderHistoryHeader = styled.div`
@@ -179,6 +196,22 @@ const OrderHistoryHeader = styled.div`
   > span:nth-child(2) {grid-area: 1 / 3 / 1 / 4}
   > span:nth-child(3) {grid-area: 1 / 4 / 1 / 5}
   > span:nth-child(4) {grid-area: 1 / 5 / 1 / 6}
+
+  @media ${smallScreen} {
+    width: 100%;
+    height: 35px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 66px;
+
+    > span:nth-child(1) {
+      grid-area: 1 / 1 / 1 / 2;
+      display: flex;
+      flex-direction: column;
+    }
+
+    > span:nth-child(2) {grid-area: 1 / 2 / 1 / 3}
+    > span:nth-child(3) {grid-area: 1 / 3 / 1 / 4}
+  }
 `;
 
 const OrderWrapper = styled.div`
@@ -209,6 +242,22 @@ const Order = styled.div`
   > span:nth-child(3) {grid-area: 1 / 4 / 1 / 5}
   > span:nth-child(4) {grid-area: 1 / 5 / 1 / 6}
   > button:nth-child(5) {grid-area: 1 / 6 / 1 / 7}
+
+  @media ${smallScreen} {
+    width: 100%;
+    height: 35px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 66px;
+
+    > span:nth-child(1) {
+      grid-area: 1 / 1 / 1 / 2;
+      display: flex;
+      flex-direction: column;
+    }
+
+    > span:nth-child(2) {grid-area: 1 / 2 / 1 / 3}
+    > span:nth-child(3) {grid-area: 1 / 3 / 1 / 4}
+  }
 `;
 
 const ButtonDetails = styled(ButtonBlack)<{status: boolean}>`
@@ -221,6 +270,7 @@ const ButtonDetails = styled(ButtonBlack)<{status: boolean}>`
     color: var(--color-text-second);
 
     ${props => props.status && `
+      margin: -4px 0 0 3px;
       display: inline-block;
       font-size: 25px;
       font-weight: 400;
@@ -234,7 +284,13 @@ const ButtonDetails = styled(ButtonBlack)<{status: boolean}>`
 const OrderDetails = styled.div`
   width: 505px;
   height: 320px;
-  margin: 48px 0 60px 0;
+  margin: 48px 0 60px;
+
+  @media ${smallScreen} {
+    width: 100%;
+    max-width: 505px;
+    margin: 20px 0 20px;
+  }
 `;
 
 const OrderDetailsHeader = styled.div`
@@ -250,6 +306,10 @@ const OrderDetailsHeader = styled.div`
     line-height: 1.2;
     font-weight: 300;
     color: var(--color-text-main);
+  }
+
+  @media ${smallScreen} {
+    grid-template-columns: 1fr max-content;
   }
 `;
 
@@ -267,8 +327,20 @@ const OrderDetailsBody = styled.div`
     font-weight: 400;
     color: var(--color-text-main);
   }
-
+  
   > span:last-child {justify-self: end;}
+  
+  @media ${smallScreen} {
+    grid-template-columns: 1fr 1fr;
+
+    > span:first-child {
+      width: max-content;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+    }
+  }
 `;
 
 const TotalBlockWrapper = styled.div`
@@ -279,7 +351,7 @@ const TotalBlockWrapper = styled.div`
 const TotalBlock = styled.div`
   width: 190px;
   height: 87px;
-  margin: 20px 0 0 312px;
+  margin: 20px 0 0 calc(100% - 190px);
   position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -315,7 +387,7 @@ const TotalBlockLine = styled.div`
 
 const DescriptionBlock = styled.div`
   > span {
-    font-family: Arial;
+    font-family: var(--font-regular);
     font-size: 11px;
     color: var(--color-text-main);
     font-weight: 400;
@@ -433,6 +505,253 @@ const orders: Order[] = [
 const MyAccount = (): JSX.Element => {
   const [tab, setTab] = useState<string>('myPersonalInfo');
   const [currOrder, setCurrOrder] = useState<string>('');
+  const screen = useMediaQuery();
+
+
+  const myPersonalInfo: JSX.Element =
+    <form onSubmit={(e: React.FormEvent<HTMLFormElement>): void => e.preventDefault()}>
+      <LabelText>
+        FIRST NAME*
+        <input type='text' required />
+      </LabelText>
+
+      <LabelText>
+        LAST NAME*
+        <input type='text' required />
+      </LabelText>
+
+      <LabelText>
+        E-MAIL*
+        <input type='email' required />
+      </LabelText>
+
+      <LabelText>
+        CURRENT PASSWORD*
+        <input type='password' required />
+      </LabelText>
+
+      <LabelText>
+        NEW PASSWORD
+        <input type='password' />
+      </LabelText>
+
+      <LabelText>
+        CONFIRMATION
+        <input type='password' />
+      </LabelText>
+
+      <LabelCheckbox>
+        <input type='checkbox' name='subscribe' defaultChecked />
+        I WANT TO SUBSCRIBE TO THE NEWSLETTER
+      </LabelCheckbox>
+
+      {!screen.small ?
+        <>
+          <ButtonUpdate>UPDATE</ButtonUpdate>
+          <Required>*Required</Required>
+        </>
+        :
+        <div>
+          <ButtonUpdate>UPDATE</ButtonUpdate>
+          <Required>*Required</Required>
+        </div>
+      }
+    </form>;
+
+
+  const myAddresses: JSX.Element =
+    <form>
+      <LabelText>
+        FIRST NAME*
+        <input type='text' required />
+      </LabelText>
+
+      <LabelText>
+        LAST NAME*
+        <input type='text' required />
+      </LabelText>
+
+      <LabelText>
+        COMPANY
+        <input type='text' />
+      </LabelText>
+
+      <LabelText>
+        ADDRESS 1
+        <input type='text' />
+      </LabelText>
+
+      <LabelText>
+        ADDRESS 2
+        <input type='text' />
+      </LabelText>
+
+      <LabelText>
+        COUNTRY
+        <input list='country' />
+      </LabelText>
+      <datalist id='country'>
+        <option value='Russia' />
+        <option value='UK' />
+        <option value='USA' />
+      </datalist>
+
+      <LabelText>
+        CITY
+        <input type='text' />
+      </LabelText>
+
+      <LabelText>
+        STATE
+        <input type='text' />
+      </LabelText>
+
+      <LabelText>
+        ZIP / POSTAL CODE*
+        <input type='text' required />
+      </LabelText>
+
+      <LabelText>
+        PHONE
+        <input type='text' />
+      </LabelText>
+
+      {!screen.small ?
+        <>
+          <ButtonUpdate>UPDATE</ButtonUpdate>
+          <Required>*Required</Required>
+        </>
+        :
+        <div>
+          <ButtonUpdate>UPDATE</ButtonUpdate>
+          <Required>*Required</Required>
+        </div>
+      }
+    </form>;
+  
+  
+  const orderHistory: JSX.Element =
+    <OrderHistory>
+      <OrderHistoryHeader>
+        {!screen.small ?
+          <>
+            <span>ORDER NUMBER</span>
+            <span>DATE</span>
+          </>
+          :
+          <span>
+            <span>ORDER#</span>
+            <span>DATE</span>
+          </span>
+        }
+        <span>STATUS</span>
+        <span>TOTAL</span>
+      </OrderHistoryHeader>
+
+      {orders.map((order: Order): JSX.Element =>
+        <OrderWrapper key={order.number}>
+          <Order>
+            {!screen.small ?
+              <>
+                <span>{order.number}</span>
+                <span>
+                  {order.status === 'despatched' ?
+                  order.dateDespathed : order.datePurchased}
+                </span>
+              </>
+              :
+              <span>
+                <span>{order.number}</span>
+                <span>
+                  {order.status === 'despatched' ?
+                  order.dateDespathed : order.datePurchased}
+                </span>
+              </span>
+            }
+
+            <span>{order.status}</span>
+            <span>${order.total()}</span>
+
+            <ButtonDetails
+              type='button'
+              status={order.number === currOrder}
+              onClick={(): void => {
+                order.number === currOrder ?
+                setCurrOrder('') : setCurrOrder(order.number);
+              }}
+            >
+              <span>{order.number === currOrder ? '+' : 'DETAILS'}</span>
+            </ButtonDetails>
+          </Order>
+
+          {order.number === currOrder && 
+            <OrderDetails>
+              <OrderDetailsHeader>
+                <span>PRODUCT</span>
+                {!screen.small &&
+                  <>
+                    <span>PRICE</span>
+                    <span>Q-TY</span>
+                  </>
+                }
+                <span>AMOUNT</span>
+              </OrderDetailsHeader>
+
+              <OrderDetailsBody>
+                {!screen.small ?
+                  <>
+                    <span>{order.name}</span>
+                    <span>${order.price}</span>
+                    <span>{order.qty}</span>
+                  </>
+                  :
+                  <span>
+                    <span>{order.name}</span>
+                    <span>{order.qty} X ${order.price}</span>
+                  </span>
+                }
+                <span>${order.amount()}</span>
+              </OrderDetailsBody>
+
+              <TotalBlockWrapper>
+                <TotalBlock>
+                  <span>SUBTOTAL</span>
+                  <span>${order.amount()}</span>
+
+                  <span>DELIVERY COSTS</span>
+                  <span>${order.deliveryCosts}</span>
+
+                  <span>GIFT VOUCHER</span>
+                  <span>${order.giftVoucher}</span>
+
+                  <TotalBlockLine />
+
+                  <span>TOTAL</span>
+                  <span>${order.total()}</span>
+                </TotalBlock>
+              </TotalBlockWrapper>
+
+              <DescriptionBlock>
+                <span>Purchased on: </span>
+                <span>{order.datePurchased}</span><br />
+
+                <span>Order status: </span>
+                <span>
+                  {order.status}{' '}
+                  {order.status === 'despatched' && order.dateDespathed}
+                </span><br />
+
+                <span>Delivery Address: </span>
+                <span>{order.addressDelivery}</span><br />
+
+                <span>Billing Address: </span>
+                <span>{order.addressBilling}</span>
+              </DescriptionBlock>
+            </OrderDetails>
+          }
+        </OrderWrapper>
+      )}
+    </OrderHistory>;
 
 
   return(
@@ -443,7 +762,7 @@ const MyAccount = (): JSX.Element => {
             <>
               <a href='#'>Home</a>
               <span>/</span>
-              <span>Create An Account</span>
+              <span>My Account</span>
             </>
           }
           return='#'
@@ -456,6 +775,7 @@ const MyAccount = (): JSX.Element => {
             <Title>MY ACCOUNT</Title>
           </TitleWrapper>
 
+
           <Tabs>
             <MyPersonalInfoTab
               currTab={tab}
@@ -463,6 +783,7 @@ const MyAccount = (): JSX.Element => {
             >
               MY PERSONAL INFO
             </MyPersonalInfoTab>
+            {screen.small && tab === 'myPersonalInfo' && myPersonalInfo}
 
             <MyAddressesTab
               currTab={tab}
@@ -470,6 +791,7 @@ const MyAccount = (): JSX.Element => {
             >
               MY ADDRESSES
             </MyAddressesTab>
+            {screen.small && tab === 'myAddresses' && myAddresses}
 
             <OrderHistoryTab
               currTab={tab}
@@ -477,206 +799,17 @@ const MyAccount = (): JSX.Element => {
             >
               ORDER HISTORY
             </OrderHistoryTab>
+            {screen.small && tab === 'orderHistory' && orderHistory}
           </Tabs>
 
 
-          <MyAccountBody>
-            {tab === 'myPersonalInfo' &&
-              <form
-                onSubmit={(e: React.FormEvent<HTMLFormElement>): void => e.preventDefault()}
-              >
-                <LabelText>
-                  FIRST NAME*
-                  <input type='text' required />
-                </LabelText>
-  
-                <LabelText>
-                  LAST NAME*
-                  <input type='text' required />
-                </LabelText>
-  
-                <LabelText>
-                  E-MAIL*
-                  <input type='email' required />
-                </LabelText>
-  
-                <LabelText>
-                  CURRENT PASSWORD*
-                  <input type='password' required />
-                </LabelText>
-
-                <LabelText>
-                  NEW PASSWORD
-                  <input type='password' />
-                </LabelText>
-
-                <LabelText>
-                  CONFIRMATION
-                  <input type='password' />
-                </LabelText>
-  
-                <LabelCheckbox>
-                  <input type='checkbox' name='subscribe' defaultChecked />
-                  I WANT TO SUBSCRIBE TO THE NEWSLETTER
-                </LabelCheckbox>
-
-                <ButtonUpdate>UPDATE</ButtonUpdate>
-                <Required>*Required</Required>
-              </form>
-            }
-
-
-            {tab === 'myAddresses' &&
-              <form>
-                <LabelText>
-                  FIRST NAME*
-                  <input type='text' required />
-                </LabelText>
-  
-                <LabelText>
-                  LAST NAME*
-                  <input type='text' required />
-                </LabelText>
-
-                <LabelText>
-                  COMPANY
-                  <input type='text' />
-                </LabelText>
-
-                <LabelText>
-                  ADDRESS 1
-                  <input type='text' />
-                </LabelText>
-
-                <LabelText>
-                  ADDRESS 2
-                  <input type='text' />
-                </LabelText>
-
-                <LabelText>
-                  COUNTRY
-                  <input list='country' />
-                </LabelText>
-                <datalist id='country'>
-                  <option value='Russia' />
-                  <option value='UK' />
-                  <option value='USA' />
-                </datalist>
-
-                <LabelText>
-                  CITY
-                  <input type='text' />
-                </LabelText>
-  
-                <LabelText>
-                  STATE
-                  <input type='text' />
-                </LabelText>
-
-                <LabelText>
-                  ZIP / POSTAL CODE*
-                  <input type='text' required />
-                </LabelText>
-
-                <LabelText>
-                  PHONE
-                  <input type='text' />
-                </LabelText>
-
-                <ButtonUpdate>UPDATE</ButtonUpdate>
-                <Required>*Required</Required>
-              </form>
-            }
-
-
-            {tab === 'orderHistory' &&
-              <OrderHistory>
-                <OrderHistoryHeader>
-                  <span>ORDER NUMBER</span>
-                  <span>DATE</span>
-                  <span>STATUS</span>
-                  <span>TOTAL</span>
-                </OrderHistoryHeader>
-
-                {orders.map((order: Order): JSX.Element =>
-                  <OrderWrapper key={order.number}>
-                    <Order>
-                      <span>{order.number}</span>
-                      <span>
-                        {order.status === 'despatched' ?
-                        order.dateDespathed : order.datePurchased}
-                      </span>
-                      <span>{order.status}</span>
-                      <span>${order.total()}</span>
-                      <ButtonDetails
-                        type='button'
-                        status={order.number === currOrder}
-                        onClick={(): void => {
-                          order.number === currOrder ?
-                          setCurrOrder('') : setCurrOrder(order.number);
-                        }}
-                      >
-                        <span>{order.number === currOrder ? '+' : 'DETAILS'}</span>
-                      </ButtonDetails>
-                    </Order>
-
-                    {order.number === currOrder && 
-                      <OrderDetails>
-                        <OrderDetailsHeader>
-                          <span>PRODUCT</span>
-                          <span>PRICE</span>
-                          <span>Q-TY</span>
-                          <span>AMOUNT</span>
-                        </OrderDetailsHeader>
-
-                        <OrderDetailsBody>
-                          <span>{order.name}</span>
-                          <span>${order.price}</span>
-                          <span>{order.qty}</span>
-                          <span>${order.amount()}</span>
-                        </OrderDetailsBody>
-
-                        <TotalBlockWrapper>
-                          <TotalBlock>
-                            <span>SUBTOTAL</span>
-                            <span>${order.amount()}</span>
-
-                            <span>DELIVERY COSTS</span>
-                            <span>${order.deliveryCosts}</span>
-
-                            <span>GIFT VOUCHER</span>
-                            <span>${order.giftVoucher}</span>
-
-                            <TotalBlockLine />
-
-                            <span>TOTAL</span>
-                            <span>${order.total()}</span>
-                          </TotalBlock>
-                        </TotalBlockWrapper>
-
-                        <DescriptionBlock>
-                          <span>Purchased on: </span>
-                          <span>{order.datePurchased}</span><br />
-
-                          <span>Order status: </span>
-                          <span>
-                            {order.status}{' '}
-                            {order.status === 'despatched' && order.dateDespathed}
-                          </span><br />
-
-                          <span>Delivery Address: </span>
-                          <span>{order.addressDelivery}</span><br />
-
-                          <span>Billing Address: </span>
-                          <span>{order.addressBilling}</span>
-                        </DescriptionBlock>
-                      </OrderDetails>
-                    }
-                  </OrderWrapper>
-                )}
-              </OrderHistory>
-            }
-          </MyAccountBody>
+          {!screen.small &&
+            <MyAccountBody>
+              {tab === 'myPersonalInfo' && myPersonalInfo}
+              {tab === 'myAddresses' && myAddresses}
+              {tab === 'orderHistory' && orderHistory}
+            </MyAccountBody>
+          }
         </MyAccountWrapper>
       </WrapperInner>
     </WrapperOuter>
