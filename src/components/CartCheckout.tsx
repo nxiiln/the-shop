@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import styled from 'styled-components/macro';
 import cartProductA from '../images/cartProductA.png';
 import cartProductB from '../images/cartProductB.png';
@@ -9,7 +9,8 @@ import cartProductB from '../images/cartProductB.png';
 const Cart = styled.article`
   width: 275px;
   height: min-content;
-  border: 1px solid #e4e2e1;
+  border: 1px solid var(--color-border);
+
   > span {
     width: 100%;
     height: 50px;
@@ -18,7 +19,7 @@ const Cart = styled.article`
     font-family: var(--font-main);
     font-size: 24px;
     font-weight: 400;
-    color: #000;
+    color: var(--color-text-main);
   }
 `;
 
@@ -29,7 +30,7 @@ const ProductWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f7f7f7;
+  background: var(--color-background-highlight);
 `;
 
 const Product = styled.div`
@@ -37,26 +38,30 @@ const Product = styled.div`
   height: 110px;
   display: grid;
   grid-template-columns: 92px 99px 35px 1fr;
-  grid-template-rows: repeat(12, 9.167px);
-  span {
+  grid-template-rows: repeat(12, 9px);
+  
+  > span {
     font-family: var(--font-second);
     font-size: 10px;
     line-height: 12px;
     font-weight: 400;
     text-transform: uppercase;
-    color: #000;
+    color: var(--color-text-main);
   }
-  img:nth-child(1) {
+
+  > img:nth-child(1) {
     height: 100%;
     grid-area: 1 / 1 / 13 / 2;
   }
-  span:nth-child(2) {grid-area: 1 / 2 / 3 / 3;}
-  span:nth-child(3) {grid-area: 4 / 2 / 5 / 3;}
-  span:nth-child(4) {grid-area: 6 / 2 / 7 / 3;}
-  span:nth-child(5) {grid-area: 8 / 2 / 9 / 3;}
-  button:nth-child(6) {grid-area: 11 / 2 / 12 / 3;}
-  button:nth-child(7) {grid-area: 1 / 4 / 2 / 5;}
-  span:nth-child(8) {
+
+  > span:nth-child(2) {grid-area: 1 / 2 / 3 / 3}
+  > span:nth-child(3) {grid-area: 4 / 2 / 5 / 3}
+  > span:nth-child(4) {grid-area: 6 / 2 / 7 / 3}
+  > span:nth-child(5) {grid-area: 8 / 2 / 9 / 3}
+  > button:nth-child(6) {grid-area: 11 / 2 / 12 / 3}
+  > button:nth-child(7) {grid-area: 1 / 4 / 2 / 5}
+
+  > span:nth-child(8) {
     grid-area: 11 / 3 / 12 / 4;
     font-size: 12px;
   }
@@ -66,12 +71,12 @@ const ButtonUnderline = styled.button`
   width: 60px;
   height: 10px;
   margin: 0px 0 0 -10px;
-  font-family: Arial;
+  font-family: var(--font-regular);
   font-size: 11px;
   line-height: 1.2;
   font-weight: 400;
   text-decoration: underline;
-  color: #000;
+  color: var(--color-text-main);
   background: transparent;
   border: none;
   cursor: pointer;
@@ -105,26 +110,30 @@ const Total = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: repeat(10, 10px);
-  span {
+
+  > span {
     font-family: var(--font-second);
     font-size: 12px;
     line-height: 1.2;
     font-weight: 300;
     text-transform: uppercase;
-    color: #000;
+    color: var(--color-text-main);
   }
-  span:nth-child(even) {justify-self: end;}
-  span:nth-child(3) {grid-area: 3 / 1 / 4 / 2;}
-  span:nth-child(4) {grid-area: 3 / 2 / 4 / 3;}
-  span:nth-child(5) {grid-area: 5 / 1 / 6 / 2;}
-  span:nth-child(6) {grid-area: 5 / 2 / 6 / 3;}
-  span:nth-child(7) {
+
+  > span:nth-child(even) {justify-self: end;}
+  > span:nth-child(3) {grid-area: 3 / 1 / 4 / 2}
+  > span:nth-child(4) {grid-area: 3 / 2 / 4 / 3}
+  > span:nth-child(5) {grid-area: 5 / 1 / 6 / 2}
+  > span:nth-child(6) {grid-area: 5 / 2 / 6 / 3}
+
+  > span:nth-child(7) {
     grid-area: 9 / 1 / 11 / 2;
     align-self: end;
     font-size: 13px;
     font-weight: 700;
   }
-  span:nth-child(8) {
+
+  > span:nth-child(8) {
     grid-area: 9 / 2 / 11 / 3;
     align-self: end;
     font-size: 13px;
@@ -135,47 +144,49 @@ const Total = styled.div`
 
 
 
-const CartCheckout = (): JSX.Element => {
-  interface Product {
-    id: number;
-    status: boolean;
-    image: string;
-    name: string;
-    color: string;
-    size: number;
-    qty: number;
-    price: number;
-    amount(): number;
+interface Product {
+  id: number;
+  status: boolean;
+  image: string;
+  name: string;
+  color: string;
+  size: number;
+  qty: number;
+  price: number;
+  amount(): number;
+}
+
+const initialProducts: Product[] = [
+  {
+    id: 1,
+    status: true,
+    image: cartProductA,
+    name: 'detailed swing dress',
+    color: 'yellow',
+    size: 12,
+    qty: 1,
+    price: 275,
+    amount() {return this.price * this.qty}
+  },
+  {
+    id: 2,
+    status: true,
+    image: cartProductB,
+    name: 'detailed swing dress',
+    color: 'blue',
+    size: 14,
+    qty: 1,
+    price: 325,
+    amount() {return this.price * this.qty}
   }
-
-  const initialProducts: Product[] = [
-    {
-      id: 1,
-      status: true,
-      image: cartProductA,
-      name: 'detailed swing dress',
-      color: 'yellow',
-      size: 12,
-      qty: 1,
-      price: 275,
-      amount() {return this.price * this.qty}
-    },
-    {
-      id: 2,
-      status: true,
-      image: cartProductB,
-      name: 'detailed swing dress',
-      color: 'blue',
-      size: 14,
-      qty: 1,
-      price: 325,
-      amount() {return this.price * this.qty}
-    }
-  ]
+]
 
 
+
+
+const CartCheckout = (): JSX.Element => {
   const [products, setProducts] = useState<Product[]>(initialProducts);
-
+  
   const subtotal: number = products
     .map((product: Product): number => +product.status && product.amount())
     .reduce((prev: number, curr: number): number => prev + curr);
@@ -184,8 +195,8 @@ const CartCheckout = (): JSX.Element => {
   return(
     <Cart>
       <span>CART</span>
-      {products.map((product: Product): false | JSX.Element => {
-        return(product.status &&
+      {products.map((product: Product): false | JSX.Element =>
+        product.status &&
           <ProductWrapper key={product.id}>
             <Product>
               <img src={product.image} alt={product.name} />
@@ -208,8 +219,7 @@ const CartCheckout = (): JSX.Element => {
               <span>${product.price}</span>
             </Product>
           </ProductWrapper>
-        )
-      })}
+      )}
 
       <TotalWrapper>
         <Total>
