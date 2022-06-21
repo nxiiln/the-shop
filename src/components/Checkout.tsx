@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import styled from 'styled-components/macro';
 import BreadCrumbs from './BreadCrumbs';
 import AlsoLove from './AlsoLove';
@@ -25,21 +25,19 @@ const WrapperInner = styled.div`
   justify-content: space-between;
   align-content: start;
 
-  article:first-child {
-    width: 960px;
-  }
+  > article:first-child {width: 960px}
 `;
 
 const ButtonUnderline = styled.button`
   width: 60px;
   height: 10px;
   margin: 0px 0 0 -10px;
-  font-family: Arial;
+  font-family: var(--font-regular);
   font-size: 11px;
   line-height: 1.2;
   font-weight: 400;
   text-decoration: underline;
-  color: #000;
+  color: var(--color-text-main);
   background: transparent;
   border: none;
   cursor: pointer;
@@ -52,18 +50,17 @@ const Steps = styled.article`
   height: 1200px;
 `;
 
-type Status = {status: boolean};
-
-const TitleWrapperOuter = styled.div<Status>`
+const TitleWrapperOuter = styled.div<{status: boolean}>`
   width: 675px;
   height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid #e4e2e1;
+  border: 1px solid var(--color-border);;
+  
   ${props => !props.status &&
     `margin-bottom: 10px;
-     background: #f7f7f7;`
+     background: var(--color-background-highlight);`
   }
 `;
 
@@ -75,19 +72,21 @@ const TitleWrapperInner = styled.div`
   align-items: center;
 `;
 
-const Title = styled.span<Status>`
+const Title = styled.span<{status: boolean}>`
   font-family: var(--font-main);
   font-size: 24px;
   line-height: 1.2;
   font-weight: 400;
-  color: ${props => props.status ? '#000' : '#aaa'};
+  color: ${props => props.status ?
+    'var(--color-text-main)' : 'var(--color-text-regular)'
+  };
 `;
 
 const Required = styled.span`
-  font-family: Arial;
+  font-family: var(--font-regular);
   font-size: 11px;
   font-weight: 400;
-  color: #000;
+  color: var(--color-text-main);
 `;
 
 const Label = styled.label`
@@ -95,7 +94,7 @@ const Label = styled.label`
   font-size: 10px;
   line-height: 1.2;
   font-weight: 300;
-  color: #000;
+  color: var(--color-text-main);
 `;
 
 const ButtonBlack = styled.button`
@@ -104,12 +103,11 @@ const ButtonBlack = styled.button`
   font-family: var(--font-second);
   font-size: 10px;
   font-weight: 300;
-  color: #fff;
-  background: #000;
+  color: var(--color-text-second);
+  background: var(--color-background-second);
   border: none;
   cursor: pointer;
 `;
-//-----------------------------------------------
 
 
 //Step1------------------------------------------
@@ -118,10 +116,10 @@ const Step1 = styled.div`
   height: 345px;
   margin-bottom: 10px;
   position: relative;
-  border: 1px solid #e4e2e1;
+  border: 1px solid var(--color-border);;
   border-top: none;
 
-  div:first-child {
+  > div:first-child {
     width: 255px;
     height: 225px;
     position: absolute;
@@ -130,6 +128,7 @@ const Step1 = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
     > form {
       width: 255px;
       height: 158px;
@@ -141,7 +140,7 @@ const Step1 = styled.div`
     }
   }
 
-  div:last-child {
+  > div:last-child {
     width: 220px;
     height: 225px;
     position: absolute;
@@ -150,6 +149,7 @@ const Step1 = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
     > form {
       width: 144px;
       height: 102px;
@@ -164,13 +164,13 @@ const LabelText1 = styled(Label)`
   height: 45px;
   display: grid;
   align-content: space-between;
+
   > input {
     width: 254px;
     height: 30px;
-    border: 1px solid #e4e2e1;
-    :focus {
-      outline: 1px solid #000;
-    }
+    border: 1px solid var(--color-border);;
+
+    &:focus {outline: 1px solid #000}
   }
 `;
 
@@ -178,9 +178,10 @@ const LabelRadio1 = styled(Label)`
   height: 14px;
   display: flex;
   align-items: end;
+
   > input {
     margin: 0 10px 0 0;
-    accent-color: #000;
+    accent-color: var(--color-text-main);
   }
 `;
 
@@ -188,28 +189,27 @@ const TextUp = styled.span`
   font-family: var(--font-second);
   font-size: 13px;
   font-weight: 300;
-  color: #000;
+  color: var(--color-text-main);
 `;
 
 const Text = styled.p`
-  font-family: Arial;
+  font-family: var(--font-regular);
   font-size: 11px;
   line-height: 1.2;
   font-weight: 400;
-  color: #000;
+  color: var(--color-text-main);
 `;
 
 const TextBold = styled.span`
-  font-family: Arial;
+  font-family: var(--font-regular);
   font-size: 11px;
   font-weight: 700;
-  color: #000;
+  color: var(--color-text-main);
 `;
 
 const PasswordHelp = styled(ButtonUnderline)`
   width: 90px;
 `;
-//-----------------------------------------------
 
 
 //Step2------------------------------------------
@@ -217,7 +217,7 @@ const Step2 = styled.div`
   width: 675px;
   height: 656px;
   margin-bottom: 10px;
-  border: 1px solid #e4e2e1;
+  border: 1px solid var(--color-border);;
   border-top: none;
 `;
 
@@ -243,13 +243,13 @@ const LabelText2 = styled(Label)`
   height: 45px;
   display: grid;
   align-content: space-between;
+
   > input {
     width: 289px;
     height: 30px;
-    border: 1px solid #e4e2e1;
-    :focus {
-      outline: 1px solid #000;
-    }
+    border: 1px solid var(--color-border);;
+    
+    &:focus {outline: 1px solid #000}
   }
 `;
 
@@ -258,9 +258,10 @@ const LabelRadio2 = styled(Label)`
   margin-bottom: 15px;
   display: flex;
   align-items: end;
+
   > input {
     margin: 0 15px 0 0;
-    accent-color: #000;
+    accent-color: var(--color-text-main);
   }
 `;
 
@@ -269,12 +270,12 @@ const LabelCheckbox = styled(Label)`
   display: flex;
   margin: 33px 0 33px 0;
   align-items: center;
+
   > input {
     margin: 0 10px 0 0;
-    accent-color: #000;
+    accent-color: var(--color-text-main);
   }
 `;
-//-----------------------------------------------
 
 
 //Step3------------------------------------------
@@ -282,25 +283,26 @@ const Step3 = styled.div`
   width: 675px;
   height: 286px;
   margin-bottom: 10px;
-  border: 1px solid #e4e2e1;
+  border: 1px solid var(--color-border);;
   border-top: none;
+
   > form {
     width: 430px;
     height: 220px;
     position: relative;
     top: 30px;
     left: 25px;
+
     > span {
       display: inline-block;
       margin-bottom: 38px;
       font-family: var(--font-second);
       font-size: 13px;
       font-weight: 400;
-      color: #000;
+      color: var(--color-text-main);
     }
-    > label:nth-child(5) {
-      margin-bottom: 30px;
-    }
+
+    > label:nth-child(5) {margin-bottom: 30px}
   }
 `;
 
@@ -309,12 +311,12 @@ const LabelRadio3 = styled(Label)`
   margin-bottom: 15px;
   display: flex;
   align-items: end;
+
   > input {
     margin: 0 15px 0 0;
-    accent-color: #000;
+    accent-color: var(--color-text-main);
   }
 `;
-//-----------------------------------------------
 
 
 //Step4------------------------------------------
@@ -322,8 +324,9 @@ const Step4 = styled.div`
   width: 675px;
   height: 356px;
   margin-bottom: 10px;
-  border: 1px solid #e4e2e1;
+  border: 1px solid var(--color-border);;
   border-top: none;
+
   > form {
     width: 270px;
     height: 298px;
@@ -350,13 +353,13 @@ const LabelText4 = styled(Label)`
   margin-bottom: 17px;
   display: grid;
   align-content: space-between;
+
   > input {
     width: 269px;
     height: 30px;
-    border: 1px solid #e4e2e1;
-    :focus {
-      outline: 1px solid #000;
-    }
+    border: 1px solid var(--color-border);;
+    
+    &:focus {outline: 1px solid #000}
   }
 `;
 
@@ -367,12 +370,14 @@ const DatalistWrapper4 = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  
   > span {
     font-family: var(--font-second);
     font-size: 10px;
     font-weight: 300;
-    color: #000;
+    color: var(--color-text-main);
   }
+
   > input {
     width: 77px;
     height: 30px;
@@ -380,11 +385,10 @@ const DatalistWrapper4 = styled.div`
     font-size: 10px;
     line-height: 1.2;
     font-weight: 300;
-    color: #000;
-    border: 1px solid #e4e2e1;
-    :focus {
-      outline: 1px solid #000;
-    }
+    color: var(--color-text-main);
+    border: 1px solid var(--color-border);;
+    
+    &:focus {outline: 1px solid #000}
   }
 `;
 
@@ -393,24 +397,24 @@ const Cvv = styled(Label)`
   margin-left: 24px;
   display: grid;
   align-content: space-between;
+  
   > input {
     width: 84px;
     height: 30px;
-    border: 1px solid #e4e2e1;
-    :focus {
-      outline: 1px solid #000;
-    }
+    border: 1px solid var(--color-border);;
+    
+    &:focus {outline: 1px solid #000}
   }
 `;
-//-----------------------------------------------
 
 
 //Step5------------------------------------------
 const Step5 = styled.div`
   width: 675px;
   height: 151px;
-  border: 1px solid #e4e2e1;
+  border: 1px solid var(--color-border);;
   border-top: none;
+
   > div {
     width: 328px;
     height: 88px;
@@ -420,6 +424,7 @@ const Step5 = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    
     > p {
       margin: 0;
       font-family: var(--font-second);
@@ -427,7 +432,7 @@ const Step5 = styled.div`
       line-height: 18px;
       font-weight: 400;
       text-transform: uppercase;
-      color: #000;
+      color: var(--color-text-main);
     }
   }
 `;
@@ -435,14 +440,12 @@ const Step5 = styled.div`
 const OrderNow = styled(ButtonBlack)`
   width: 291px;
 `;
-//-----------------------------------------------
 
 
 
 
 const Checkout = (): JSX.Element => {
   const [step, setStep] = useState<number>(1);
-
 
   return(
     <WrapperOuter>
@@ -457,12 +460,9 @@ const Checkout = (): JSX.Element => {
           }
           return='#'
           marginBottom='20px'
-          gridArea=''
         />
 
-
         <AlsoLove />
-
 
         <Steps>
           <TitleWrapperOuter status={step === 1}>
@@ -471,6 +471,7 @@ const Checkout = (): JSX.Element => {
               {step === 1 && <Required>*Required</Required>}
             </TitleWrapperInner>
           </TitleWrapperOuter>
+
           {step === 1 &&
             <Step1>
               <div>
@@ -479,6 +480,7 @@ const Checkout = (): JSX.Element => {
                   <TextBold>Already registered? </TextBold>
                   Please log in below:
                 </Text>
+
                 <form onSubmit={(e: React.FormEvent<HTMLFormElement>): void => {
                   e.preventDefault();
                   setStep(2);
@@ -527,100 +529,102 @@ const Checkout = (): JSX.Element => {
             </Step1>
           }
 
+
           <TitleWrapperOuter status={step === 2}>
             <TitleWrapperInner>
               <Title status={step === 2}>02. BILLING INFO</Title>
               {step === 2 && <Required>*Required</Required>}
             </TitleWrapperInner>
           </TitleWrapperOuter>
+
           {step === 2 &&
             <Step2>
               <Step2Form onSubmit={(e: React.FormEvent<HTMLFormElement>): void => {
                 e.preventDefault();
                 setStep(3);
               }}>
-              <Step2FormWrapper>
-                <LabelText2>
-                  FIRST NAME*
-                  <input type='text' required />
-                </LabelText2>
+                <Step2FormWrapper>
+                  <LabelText2>
+                    FIRST NAME*
+                    <input type='text' required />
+                  </LabelText2>
 
-                <LabelText2>
-                  LAST NAME*
-                  <input type='text' required />
-                </LabelText2>
+                  <LabelText2>
+                    LAST NAME*
+                    <input type='text' required />
+                  </LabelText2>
 
-                <LabelText2>
-                  COMPANY
-                  <input type='text' />
-                </LabelText2>
+                  <LabelText2>
+                    COMPANY
+                    <input type='text' />
+                  </LabelText2>
 
-                <LabelText2>
-                  E-MAIL ADDRESS*
-                  <input type='text' required />
-                </LabelText2>
+                  <LabelText2>
+                    E-MAIL ADDRESS*
+                    <input type='text' required />
+                  </LabelText2>
 
-                <LabelText2>
-                  ADDRESS 1
-                  <input type='text' />
-                </LabelText2>
+                  <LabelText2>
+                    ADDRESS 1
+                    <input type='text' />
+                  </LabelText2>
 
-                <LabelText2>
-                  ADDRESS 2
-                  <input type='text' />
-                </LabelText2>
+                  <LabelText2>
+                    ADDRESS 2
+                    <input type='text' />
+                  </LabelText2>
 
-                <LabelText2>
-                  COUNTRY
-                  <input list='countries' />
-                </LabelText2>
-                <datalist id='countries'>
-                  <option value='Russia' />
-                  <option value='UK' />
-                  <option value='USA' />
-                </datalist>
+                  <LabelText2>
+                    COUNTRY
+                    <input list='countries' />
+                  </LabelText2>
+                  <datalist id='countries'>
+                    <option value='Russia' />
+                    <option value='UK' />
+                    <option value='USA' />
+                  </datalist>
 
-                <LabelText2>
-                  CITY
-                  <input type='text' />
-                </LabelText2>
+                  <LabelText2>
+                    CITY
+                    <input type='text' />
+                  </LabelText2>
 
-                <LabelText2>
-                  STATE
-                  <input type='text' />
-                </LabelText2>
+                  <LabelText2>
+                    STATE
+                    <input type='text' />
+                  </LabelText2>
 
-                <LabelText2>
-                  ZIP / POSTAL CODE*
-                  <input type='text' required />
-                </LabelText2>
+                  <LabelText2>
+                    ZIP / POSTAL CODE*
+                    <input type='text' required />
+                  </LabelText2>
 
-                <LabelText2>
-                  PHONE
-                  <input type='text' />
-                </LabelText2>
+                  <LabelText2>
+                    PHONE
+                    <input type='text' />
+                  </LabelText2>
 
-                <LabelText2>
-                  FAX
-                  <input type='text' />
-                </LabelText2>
+                  <LabelText2>
+                    FAX
+                    <input type='text' />
+                  </LabelText2>
 
-                <LabelText2>
-                  PASSWORD*
-                  <input
-                    type='text'
-                    required
-                  />
-                </LabelText2>
+                  <LabelText2>
+                    PASSWORD*
+                    <input
+                      type='text'
+                      required
+                    />
+                  </LabelText2>
 
-                <LabelText2>
-                  CONFIRM PASSWORD*
-                  <input
-                    type='text'
-                    required
-                  />
-                </LabelText2>
-              </Step2FormWrapper>
+                  <LabelText2>
+                    CONFIRM PASSWORD*
+                    <input
+                      type='text'
+                      required
+                    />
+                  </LabelText2>
+                </Step2FormWrapper>
 
                 <LabelRadio2>
                   <input type='radio' name='shipping' value='this' defaultChecked />
@@ -642,12 +646,14 @@ const Checkout = (): JSX.Element => {
             </Step2>
           }
 
+
           <TitleWrapperOuter status={step === 3}>
             <TitleWrapperInner>
               <Title status={step === 3}>03. SHIPPING METHOD</Title>
               {step === 3 && <Required>*Required</Required>}
             </TitleWrapperInner>
           </TitleWrapperOuter>
+
           {step === 3 &&
             <Step3>
               <form onSubmit={(e: React.FormEvent<HTMLFormElement>): void => {
@@ -660,14 +666,17 @@ const Checkout = (): JSX.Element => {
                   <input type='radio' name='shipping-method' value='ground' defaultChecked />
                   UPS (GROUND) $7.25
                 </LabelRadio3>
+
                 <LabelRadio3>
                   <input type='radio' name='shipping-method' value='3-day-select' />
                   UPS (3 DAY SELECT) $9.75
                 </LabelRadio3>
+
                 <LabelRadio3>
                   <input type='radio' name='shipping-method' value='next-day-air' />
                   UPS (NEXT DAY AIR) $17.25
                 </LabelRadio3>
+
                 <LabelRadio3>
                   <input type='radio' name='shipping-method' value='second-day-air' />
                   UPS (SECOND DAY AIR) $12.25
@@ -678,12 +687,14 @@ const Checkout = (): JSX.Element => {
             </Step3>
           }
 
+
           <TitleWrapperOuter status={step === 4}>
             <TitleWrapperInner>
               <Title status={step === 4}>04. PAYMENT</Title>
               {step === 4 && <Required>*Required</Required>}
             </TitleWrapperInner>
           </TitleWrapperOuter>
+
           {step === 4 &&
             <Step4>
               <form onSubmit={(e: React.FormEvent<HTMLFormElement>): void => {
@@ -745,12 +756,14 @@ const Checkout = (): JSX.Element => {
             </Step4>
           }
 
+
           <TitleWrapperOuter status={step === 5}>
             <TitleWrapperInner>
               <Title status={step === 5}>05. ORDER REVIEW</Title>
               {step === 5 && <Required>*Required</Required>}
             </TitleWrapperInner>
           </TitleWrapperOuter>
+
           {step === 5 &&
             <Step5>
               <div>
