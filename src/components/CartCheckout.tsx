@@ -2,7 +2,7 @@ import {useState} from 'react';
 import styled from 'styled-components/macro';
 import cartProductA from '../images/cartProductA.png';
 import cartProductB from '../images/cartProductB.png';
-import {mediumScreen} from '../mediaQueries';
+import {mediumScreen, smallScreen} from '../mediaQueries';
 
 
 
@@ -23,7 +23,7 @@ const Cart = styled.article`
     color: var(--color-text-main);
   }
 
-  @media ${mediumScreen} {
+  @media ${mediumScreen}, ${smallScreen} {
     width: 100%;
     margin-bottom: 10px;
   }
@@ -38,7 +38,7 @@ const ProductWrapper = styled.div`
   align-items: center;
   background: var(--color-background-highlight);
 
-  @media ${mediumScreen} {padding: 0 2% 0}
+  @media ${mediumScreen}, ${smallScreen} {padding: 0 2% 0}
 `;
 
 const Product = styled.div`
@@ -74,7 +74,7 @@ const Product = styled.div`
     font-size: 12px;
   }
 
-  @media ${mediumScreen} {
+  @media ${mediumScreen}, ${smallScreen} {
     width: 100%;
     grid-template-columns: 92px max-content 1fr;
     
@@ -160,7 +160,7 @@ const Total = styled.div`
     font-weight: 700;
   }
 
-  @media ${mediumScreen} {
+  @media ${mediumScreen}, ${smallScreen} {
     width: 100%;
     padding: 0 2% 0;
   }
