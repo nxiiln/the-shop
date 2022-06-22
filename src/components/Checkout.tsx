@@ -7,6 +7,7 @@ import visaIcon from '../images/visaIcon.png';
 import masterCardIcon from '../images/masterCardIcon.png';
 import discoverIcon from '../images/discoverIcon.png';
 import americanExpressIcon from '../images/americanExpressIcon.png';
+import {mediumScreen, useMediaQuery} from '../mediaQueries';
 
 
 
@@ -18,14 +19,17 @@ const WrapperOuter = styled.main`
 `;
 
 const WrapperInner = styled.div`
-  width: 960px;
-  height: 1740px;
+  width: 1100px;
+  max-width: 100%;
+  padding: 0 1% 50px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-content: start;
 
-  > article:first-child {width: 960px}
+  > article:first-child {width: 100%}
+
+  @media ${mediumScreen} {justify-content: center}
 `;
 
 const ButtonUnderline = styled.button`
@@ -47,7 +51,7 @@ const ButtonUnderline = styled.button`
 //Steps------------------------------------------
 const Steps = styled.article`
   width: 675px;
-  height: 1200px;
+  @media ${mediumScreen} {width: 100%}
 `;
 
 const TitleWrapperOuter = styled.div<{status: boolean}>`
@@ -56,16 +60,18 @@ const TitleWrapperOuter = styled.div<{status: boolean}>`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid var(--color-border);;
+  border: 1px solid var(--color-border);
   
   ${props => !props.status &&
     `margin-bottom: 10px;
      background: var(--color-background-highlight);`
   }
+
+  @media ${mediumScreen} {width: 100%}
 `;
 
 const TitleWrapperInner = styled.div`
-  width: 630px;
+  width: 94%;
   height: 18px;
   display: flex;
   justify-content: space-between;
@@ -115,16 +121,15 @@ const Step1 = styled.div`
   width: 675px;
   height: 345px;
   margin-bottom: 10px;
-  position: relative;
-  border: 1px solid var(--color-border);;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border: 1px solid var(--color-border);
   border-top: none;
 
   > div:first-child {
     width: 255px;
     height: 225px;
-    position: absolute;
-    top: 38px;
-    left: 25px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -143,9 +148,6 @@ const Step1 = styled.div`
   > div:last-child {
     width: 220px;
     height: 225px;
-    position: absolute;
-    top: 38px;
-    left: 395px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -158,6 +160,8 @@ const Step1 = styled.div`
       justify-content: space-between;
     }
   }
+
+  @media ${mediumScreen} {width: 100%}
 `;
 
 const LabelText1 = styled(Label)`
@@ -168,7 +172,7 @@ const LabelText1 = styled(Label)`
   > input {
     width: 254px;
     height: 30px;
-    border: 1px solid var(--color-border);;
+    border: 1px solid var(--color-border);
 
     &:focus {outline: 1px solid #000}
   }
@@ -217,16 +221,18 @@ const Step2 = styled.div`
   width: 675px;
   height: 656px;
   margin-bottom: 10px;
-  border: 1px solid var(--color-border);;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--color-border);
   border-top: none;
+
+  @media ${mediumScreen} {width: 100%}
 `;
 
 const Step2Form = styled.form`
   width: 608px;
   height: 595px;
-  position: relative;
-  top: 38px;
-  left: 26px;
 `;
 
 const Step2FormWrapper = styled.div`
@@ -247,7 +253,7 @@ const LabelText2 = styled(Label)`
   > input {
     width: 289px;
     height: 30px;
-    border: 1px solid var(--color-border);;
+    border: 1px solid var(--color-border);
     
     &:focus {outline: 1px solid #000}
   }
@@ -283,7 +289,7 @@ const Step3 = styled.div`
   width: 675px;
   height: 286px;
   margin-bottom: 10px;
-  border: 1px solid var(--color-border);;
+  border: 1px solid var(--color-border);
   border-top: none;
 
   > form {
@@ -304,6 +310,8 @@ const Step3 = styled.div`
 
     > label:nth-child(5) {margin-bottom: 30px}
   }
+
+  @media ${mediumScreen} {width: 100%}
 `;
 
 const LabelRadio3 = styled(Label)`
@@ -324,7 +332,7 @@ const Step4 = styled.div`
   width: 675px;
   height: 356px;
   margin-bottom: 10px;
-  border: 1px solid var(--color-border);;
+  border: 1px solid var(--color-border);
   border-top: none;
 
   > form {
@@ -337,6 +345,8 @@ const Step4 = styled.div`
     flex-wrap: wrap;
     align-content: center;
   }
+
+  @media ${mediumScreen} {width: 100%}
 `;
 
 const Icons = styled.div`
@@ -357,7 +367,7 @@ const LabelText4 = styled(Label)`
   > input {
     width: 269px;
     height: 30px;
-    border: 1px solid var(--color-border);;
+    border: 1px solid var(--color-border);
     
     &:focus {outline: 1px solid #000}
   }
@@ -386,7 +396,7 @@ const DatalistWrapper4 = styled.div`
     line-height: 1.2;
     font-weight: 300;
     color: var(--color-text-main);
-    border: 1px solid var(--color-border);;
+    border: 1px solid var(--color-border);
     
     &:focus {outline: 1px solid #000}
   }
@@ -401,7 +411,7 @@ const Cvv = styled(Label)`
   > input {
     width: 84px;
     height: 30px;
-    border: 1px solid var(--color-border);;
+    border: 1px solid var(--color-border);
     
     &:focus {outline: 1px solid #000}
   }
@@ -412,7 +422,7 @@ const Cvv = styled(Label)`
 const Step5 = styled.div`
   width: 675px;
   height: 151px;
-  border: 1px solid var(--color-border);;
+  border: 1px solid var(--color-border);
   border-top: none;
 
   > div {
@@ -435,6 +445,8 @@ const Step5 = styled.div`
       color: var(--color-text-main);
     }
   }
+
+  @media ${mediumScreen} {width: 100%}
 `;
 
 const OrderNow = styled(ButtonBlack)`
@@ -446,6 +458,7 @@ const OrderNow = styled(ButtonBlack)`
 
 const Checkout = (): JSX.Element => {
   const [step, setStep] = useState<number>(1);
+  const screen = useMediaQuery();
 
   return(
     <WrapperOuter>
@@ -462,7 +475,7 @@ const Checkout = (): JSX.Element => {
           marginBottom='20px'
         />
 
-        <AlsoLove />
+        {screen.big ? <AlsoLove /> : <CartCheckout />}
 
         <Steps>
           <TitleWrapperOuter status={step === 1}>
@@ -778,7 +791,7 @@ const Checkout = (): JSX.Element => {
         </Steps>
 
 
-        <CartCheckout />
+        {screen.big && <CartCheckout />}
       </WrapperInner>
     </WrapperOuter>
   )
