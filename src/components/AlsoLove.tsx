@@ -10,7 +10,7 @@ import alsoLove3 from '../images/alsoLove3.png';
 
 const AlsoLoveWrapper = styled.article<{status: boolean}>`
   ${props => !props.status && 'display: none;'}
-  width: 960px;
+  width: 100%;
   height: 296px;
   margin-bottom: 30px;
   position: relative;
@@ -51,7 +51,7 @@ const AlsoLoveClose = styled.button`
 `;
 
 const ProductAlsoWrapper = styled.div`
-  width: 890px;
+  width: 95%;
   height: 190px;
   position: absolute;
   top: 75px;
