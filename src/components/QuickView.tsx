@@ -83,7 +83,7 @@ const DescriptionWrapper = styled.div`
 `;
 
 const Index = styled.span`
-  font-family: Arial;
+  font-family: var(--font-regular);
   font-size: 11px;
   font-weight: 400;
   color: var(--color-text-regular);
@@ -99,7 +99,7 @@ const Name = styled.span`
 
 const Details = styled.span`
   margin-bottom: 20px;
-  font-family: Arial;
+  font-family: var(--font-regular);
   font-size: 11px;
   font-weight: 400;
   color: var(--color-text-main);
