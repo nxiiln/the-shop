@@ -2,6 +2,7 @@ import {useState} from 'react';
 import styled from 'styled-components/macro';
 import cartProductA from '../images/cartProductA.png';
 import cartProductB from '../images/cartProductB.png';
+import {mediumScreen} from '../mediaQueries';
 
 
 
@@ -21,6 +22,11 @@ const Cart = styled.article`
     font-weight: 400;
     color: var(--color-text-main);
   }
+
+  @media ${mediumScreen} {
+    width: 100%;
+    margin-bottom: 10px;
+  }
 `;
 
 const ProductWrapper = styled.div`
@@ -31,6 +37,8 @@ const ProductWrapper = styled.div`
   justify-content: center;
   align-items: center;
   background: var(--color-background-highlight);
+
+  @media ${mediumScreen} {padding: 0 2% 0}
 `;
 
 const Product = styled.div`
@@ -64,6 +72,18 @@ const Product = styled.div`
   > span:nth-child(8) {
     grid-area: 11 / 3 / 12 / 4;
     font-size: 12px;
+  }
+
+  @media ${mediumScreen} {
+    width: 100%;
+    grid-template-columns: 92px max-content 1fr;
+    
+    > button:nth-child(7) {
+      grid-area: 1 / 3 / 2 / 4;
+      justify-self: end;
+    }
+
+    > span:nth-child(8) {justify-self: end}
   }
 `;
 
@@ -138,6 +158,11 @@ const Total = styled.div`
     align-self: end;
     font-size: 13px;
     font-weight: 700;
+  }
+
+  @media ${mediumScreen} {
+    width: 100%;
+    padding: 0 2% 0;
   }
 `;
 
