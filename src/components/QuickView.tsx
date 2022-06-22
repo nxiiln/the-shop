@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import styled from 'styled-components/macro';
 import quickViewImage from '../images/quickViewImage.png'
 import wishList from '../images/wishList.png'
@@ -14,8 +14,8 @@ const WrapperOuter = styled.article<{status: boolean}>`
   position: absolute;
   top: 0;
   left: 130px;
-  background: #fff;
-  box-shadow: 0 0 5px 5px #e4e2e1;
+  background: var(--color-background-main);
+  box-shadow: 0 0 5px 5px var(--color-border);
   z-index: 1;
 `;
 
@@ -41,13 +41,13 @@ const Title = styled.span`
   font-family: var(--font-main);
   font-size: 24px;
   font-weight: 400;
-  color: #000;
+  color: var(--color-text-main);
 `;
 
 const Line = styled.div`
   width: 442px;
   height: 1px;
-  background: #e4e2e1;
+  background: var(--color-border);
 `;
 
 const Close = styled.button`
@@ -55,9 +55,10 @@ const Close = styled.button`
   height: 29px;
   position: relative;
   align-self: start;
-  background: #fff;
-  border: 1px solid #e4e2e1;
+  background: var(--color-background-main);
+  border: 1px solid var(--color-border);
   cursor: pointer;
+
   > span:first-child  {
     display: inline-block;
     position: absolute;
@@ -65,11 +66,10 @@ const Close = styled.button`
     left: 7px;
     font-family: var(--font-second);
     font-size: 25px;
-    color: #000;
+    color: var(--color-text-main);
     transform: rotate(45deg);
   }
 `;
-//-----------------------------------------------
 
 
 //Description------------------------------------
@@ -86,7 +86,7 @@ const Index = styled.span`
   font-family: Arial;
   font-size: 11px;
   font-weight: 400;
-  color: #aaa;
+  color: var(--color-text-regular);
 `;
 
 const Name = styled.span`
@@ -94,7 +94,7 @@ const Name = styled.span`
   font-family: var(--font-main);
   font-size: 24px;
   font-weight: 400;
-  color: #000;
+  color: var(--color-text-main);
 `;
 
 const Details = styled.span`
@@ -102,7 +102,7 @@ const Details = styled.span`
   font-family: Arial;
   font-size: 11px;
   font-weight: 400;
-  color: #000000;
+  color: var(--color-text-main);
 `;
 
 const Price = styled.span`
@@ -110,7 +110,7 @@ const Price = styled.span`
   font-family: var(--font-second);
   font-size: 18px;
   font-weight: 300;
-  color: #000;
+  color: var(--color-text-main);
 `;
 
 const Select = styled.select<{attr: string}>`
@@ -123,9 +123,9 @@ const Select = styled.select<{attr: string}>`
   line-height: 1.2;
   font-weight: 300;
   text-transform: uppercase;
-  color: #000;
+  color: var(--color-text-main);
   background: #f7f7f7;
-  border: 1px solid #e4e2e1;
+  border: 1px solid var(--color-border);
   border-radius: 15px;
 `;
 
@@ -143,8 +143,8 @@ const AddToCart = styled.button`
   font-family: var(--font-second);
   font-size: 10px;
   font-weight: 300;
-  color: #fff;
-  background: #000;
+  color: var(--color-text-second);
+  background: var(--color-background-second);
   border: none;
   cursor: pointer;
 `;
@@ -158,13 +158,12 @@ const WishList = styled.button`
   font-family: var(--font-second);
   font-size: 10px;
   font-weight: 400;
-  color: #000;
-  background: #fff;
-  border: 1px solid #e4e2e1;
+  color: var(--color-text-main);
+  background: var(--color-background-main);
+  border: 1px solid var(--color-border);
   cursor: pointer;
-  > img {
-    margin-right: 5px;
-  }
+
+  > img {margin-right: 5px}
 `;
 
 const Compare = styled.button`
@@ -176,22 +175,19 @@ const Compare = styled.button`
   font-family: var(--font-second);
   font-size: 10px;
   font-weight: 400;
-  color: #000;
-  background-color: #f7f7f7;
-  border: 1px solid #e4e2e1;
+  color: var(--color-text-main);
+  background: var(--color-background-highlight);
+  border: 1px solid var(--color-border);
   cursor: pointer;
-  > img {
-    margin-right: 5px;
-  }
+  
+  > img {margin-right: 5px}
 `;
-//-----------------------------------------------
 
 
 
 
 const QuickView = (): JSX.Element => {
   const [display, setDisplay] = useState<boolean>(true);
-
 
   return(
     <WrapperOuter status={display}>
@@ -207,9 +203,7 @@ const QuickView = (): JSX.Element => {
           </Close>
         </TitleWrapper>
 
-
         <img src={quickViewImage} alt='woman in white dress' />
-
 
         <DescriptionWrapper>
           <Index>MU-4587-89</Index>
