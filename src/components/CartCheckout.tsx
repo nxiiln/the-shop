@@ -2,7 +2,7 @@ import {useState} from 'react';
 import styled from 'styled-components/macro';
 import cartProductA from '../images/cartProductA.png';
 import cartProductB from '../images/cartProductB.png';
-import {mediumScreen, smallScreen} from '../mediaQueries';
+import {bigScreen, mediumScreen, smallScreen} from '../mediaQueries';
 
 
 
@@ -21,6 +21,12 @@ const Cart = styled.article`
     font-size: 24px;
     font-weight: 400;
     color: var(--color-text-main);
+  }
+
+  @media ${bigScreen} {
+    max-width: 275px;
+    margin-left: 20px;
+    flex: 1 1;
   }
 
   @media ${mediumScreen}, ${smallScreen} {
