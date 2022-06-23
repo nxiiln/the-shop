@@ -7,7 +7,7 @@ import visaIcon from '../images/visaIcon.png';
 import masterCardIcon from '../images/masterCardIcon.png';
 import discoverIcon from '../images/discoverIcon.png';
 import americanExpressIcon from '../images/americanExpressIcon.png';
-import {mediumScreen, useMediaQuery} from '../mediaQueries';
+import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
 
 
 
@@ -29,7 +29,7 @@ const WrapperInner = styled.div`
 
   > article:first-child {width: 100%}
 
-  @media ${mediumScreen} {justify-content: center}
+  @media ${mediumScreen}, ${smallScreen} {justify-content: center}
 `;
 
 const ButtonUnderline = styled.button`
@@ -51,7 +51,7 @@ const ButtonUnderline = styled.button`
 //Steps------------------------------------------
 const Steps = styled.article`
   width: 675px;
-  @media ${mediumScreen} {width: 100%}
+  @media ${mediumScreen}, ${smallScreen} {width: 100%}
 `;
 
 const TitleWrapperOuter = styled.div<{status: boolean}>`
@@ -62,12 +62,12 @@ const TitleWrapperOuter = styled.div<{status: boolean}>`
   align-items: center;
   border: 1px solid var(--color-border);
   
-  ${props => !props.status &&
-    `margin-bottom: 10px;
-     background: var(--color-background-highlight);`
-  }
+  ${props => !props.status && `
+    margin-bottom: 10px;
+    background: var(--color-background-highlight);
+  `}
 
-  @media ${mediumScreen} {width: 100%}
+  @media ${mediumScreen}, ${smallScreen} {width: 100%}
 `;
 
 const TitleWrapperInner = styled.div`
@@ -161,7 +161,12 @@ const Step1 = styled.div`
     }
   }
 
-  @media ${mediumScreen} {width: 100%}
+  @media ${mediumScreen}, ${smallScreen} {width: 100%}
+
+  @media ${smallScreen} {
+    height: 600px;
+    flex-direction: column;
+  }
 `;
 
 const LabelText1 = styled(Label)`
@@ -227,12 +232,18 @@ const Step2 = styled.div`
   border: 1px solid var(--color-border);
   border-top: none;
 
-  @media ${mediumScreen} {width: 100%}
+  @media ${mediumScreen}, ${smallScreen} {width: 100%}
+  @media ${smallScreen} {height: 1100px}
 `;
 
 const Step2Form = styled.form`
   width: 608px;
   height: 595px;
+
+  @media ${smallScreen} {
+    width: 290px;
+    height: auto;
+  }
 `;
 
 const Step2FormWrapper = styled.div`
@@ -243,6 +254,13 @@ const Step2FormWrapper = styled.div`
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: space-between;
+
+  @media ${smallScreen} {
+    width: 290px;
+    height: 850px;
+    flex-wrap: nowrap;
+    flex-direction: column;
+  }
 `;
 
 const LabelText2 = styled(Label)`
@@ -299,6 +317,8 @@ const Step3 = styled.div`
     top: 30px;
     left: 25px;
 
+    @media ${smallScreen} {width: 250px}
+
     > span {
       display: inline-block;
       margin-bottom: 38px;
@@ -306,12 +326,14 @@ const Step3 = styled.div`
       font-size: 13px;
       font-weight: 400;
       color: var(--color-text-main);
+
+      @media ${smallScreen} {width: 250px}
     }
 
     > label:nth-child(5) {margin-bottom: 30px}
   }
 
-  @media ${mediumScreen} {width: 100%}
+  @media ${mediumScreen}, ${smallScreen} {width: 100%}
 `;
 
 const LabelRadio3 = styled(Label)`
@@ -346,7 +368,7 @@ const Step4 = styled.div`
     align-content: center;
   }
 
-  @media ${mediumScreen} {width: 100%}
+  @media ${mediumScreen}, ${smallScreen} {width: 100%}
 `;
 
 const Icons = styled.div`
@@ -421,36 +443,33 @@ const Cvv = styled(Label)`
 //Step5------------------------------------------
 const Step5 = styled.div`
   width: 675px;
-  height: 151px;
   border: 1px solid var(--color-border);
   border-top: none;
 
   > div {
-    width: 328px;
-    height: 88px;
-    position: relative;
-    top: 30px;
-    left: 25px;
+    padding: 30px 0 30px 25px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     
     > p {
-      margin: 0;
+      margin: 0 0 10px;
       font-family: var(--font-second);
       font-size: 10px;
       line-height: 18px;
       font-weight: 400;
       text-transform: uppercase;
       color: var(--color-text-main);
+      @media ${smallScreen} {width: 260px}
     }
   }
 
-  @media ${mediumScreen} {width: 100%}
+  @media ${mediumScreen}, ${smallScreen} {width: 100%}
 `;
 
 const OrderNow = styled(ButtonBlack)`
   width: 291px;
+  @media ${smallScreen} {width: 260px}
 `;
 
 
