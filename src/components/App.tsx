@@ -8,6 +8,7 @@ import MyAccount from './MyAccount';
 import WishList from './WishList';
 import Checkout from './Checkout';
 import Login from './Login';
+import Cart from './Cart';
 
 
 const App = (): JSX.Element => (
@@ -19,6 +20,7 @@ const App = (): JSX.Element => (
       <Route path='wish-list' element={<WishList />} />
       <Route path='checkout' element={<Checkout />} />
       <Route path='login' element={<Login />} />
+      <Route path='cart' element={<Cart />} />
     </Routes>
     <TopBrand />
     <PurchasesInfo />

@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import styled from 'styled-components/macro';
 import cartSymbol from '../images/cartSymbol.png';
 import imageProductA from '../images/imageProductA.png';
 import imageProductB from '../images/imageProductB.png';
 import imageProductC from '../images/imageProductC.png';
 import {smallScreen} from '../mediaQueries';
+import {Link} from 'react-router-dom';
 
 
 
@@ -175,37 +176,33 @@ const TotalPrice = styled.div`
   color: var(--color-text-main);
 `;
 
-const ViewCart = styled.button`
+const LinkBox = styled(Link)`
   width: 74px;
   height: 30px;
   position: relative;
   top: 18px;
-  left: 10px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
   font-family: var(--font-second);
   font-size: 10px;
   line-height: 1.2;
   font-weight: 300;
   text-transform: uppercase;
+  text-decoration: none;
+  `
+
+const ViewCart = styled(LinkBox)`
+  left: 10px;
   background: var(--color-background-main);
   border: 1px solid var(--color-border);
-  cursor: pointer;
 `;
 
-const Checkout = styled.button`
-  width: 74px;
-  height: 30px;
-  position: relative;
-  top: 18px;
+const Checkout = styled(LinkBox)`
   left: 16px;
-  font-family: var(--font-second);
-  font-size: 10px;
-  line-height: 1.2;
-  font-weight: 300;
-  text-transform: uppercase;
   color: var(--color-text-second);
   background-color: var(--color-background-second);
   border: none;
-  cursor: pointer;
 `;
 
 
@@ -299,14 +296,16 @@ const CartPreview = (): JSX.Element => {
           <Result>
             <Total>TOTAL:</Total>
             <TotalPrice>${totalPrice}</TotalPrice>
-            <ViewCart type='button'>view cart</ViewCart>
-            <Checkout type='button'>checkout</Checkout>
+            <ViewCart to='cart' >view cart</ViewCart>
+            <Checkout to='checkout'>checkout</Checkout>
           </Result>
         </Dropdown>
       }
     </CartPreviewWrapper>
   );
 }
+
+
 
 
 export default CartPreview;
