@@ -1,9 +1,9 @@
-import React from 'react';
+import styled from 'styled-components/macro';
+import {smallScreen, mediumScreen, useMediaQuery} from '../mediaQueries';
+import {Link} from 'react-router-dom';
 import Top from './Top';
 import CartPreview from './CartPreview';
 import Menu from './Menu';
-import styled from 'styled-components/macro';
-import {smallScreen, mediumScreen, useMediaQuery} from '../mediaQueries';
 
 
 const Wrapper = styled.header`
@@ -22,16 +22,20 @@ const CentralGroup = styled.div`
   align-items: center;
 `;
 
-const Title = styled.h1`
+const TitleWrapper = styled.div`
   width: 100%;
   height: 55px;
   position: absolute;
   display: flex;
   justify-content: center;
+`;
+
+const Title = styled(Link)`
   font-family: var(--font-main);
   font-size: 36px;
   font-weight: 400;
   color: var(--color-text-main);
+  text-decoration: none;
 `;
 
 const CartPreviewWrapper = styled.div`
@@ -47,7 +51,10 @@ const Header = (): JSX.Element => {
     <Wrapper>
       <Top />
       <CentralGroup>
-        <Title>THE SHOP</Title>
+        <TitleWrapper>
+          <Title to='/'>THE SHOP</Title>
+        </TitleWrapper>
+
         {!screen.small &&
           <CartPreviewWrapper>
             <CartPreview />
