@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import styled from 'styled-components/macro';
 import bannerA from '../images/bannerA.png';
 import bannerB from '../images/bannerB.png';
@@ -64,6 +64,7 @@ const Word = styled.span`
   align-items: flex-end;
   font-size: 42px;
   white-space: pre;
+
   @media ${smallScreen} {font-size: 36px}
 `;
 
@@ -258,14 +259,17 @@ const Slider = (): JSX.Element => {
             src={bannerA}
             alt='woman with accessories'
           />
+
           <TextBlockA>
             <DescriptionA>
               {!screen.small && 'new accessories collection'}
             </DescriptionA>
+
             <SpringEssentials>
               <Word><Letter>S</Letter>PRING</Word>
               <Word><Letter> E</Letter>SSENTIALS</Word>
             </SpringEssentials>
+
             <ButtonBannerA type='button'>
               {screen.small ? 'shop now' : 'shop women’s accessories'}
             </ButtonBannerA>
@@ -277,17 +281,11 @@ const Slider = (): JSX.Element => {
       {slide === 2 &&
         <WrapperSlideB>
           <WrapperBannerB>
-            <BannerB
-              src={bannerB}
-              alt='woman on sand'
-            />
+            <BannerB src={bannerB} alt='woman on sand' />
+
             <TextBlockB>
-              <DescriptionB>
-                desert lover
-              </DescriptionB>
-              <SpringCollection>
-                spring collection 2022
-              </SpringCollection>
+              <DescriptionB>desert lover</DescriptionB>
+              <SpringCollection>spring collection 2022</SpringCollection>
             </TextBlockB>
           </WrapperBannerB>
 
@@ -297,15 +295,15 @@ const Slider = (): JSX.Element => {
                 <span>sale</span>
                 <span>up to 70%</span>
               </TextBlockC>
+
               <ShopNow type='button'>shop now</ShopNow>
+
               <UseCode>
                 <span>use code: </span>
                 <span>sweetsale</span>
               </UseCode>
-              <BannerC
-                src={bannerC}
-                alt='smiling woman'
-              />
+
+              <BannerC src={bannerC} alt='smiling woman' />
             </WrapperBannerC>
           }
         </WrapperSlideB>
@@ -315,14 +313,13 @@ const Slider = (): JSX.Element => {
         active={slide === 1}
         left='48%'
         onClick={(): void => setSlide(1)}
-      >
-      </Indicator>
+      />
+      
       <Indicator
         active={slide === 2}
         left='calc(48% + 20px)'
         onClick={(): void => setSlide(2)}
-      >
-      </Indicator>
+      />
     </SliderWrapper>
   );
 }
