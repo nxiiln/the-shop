@@ -1,10 +1,9 @@
-import React from 'react';
 import styled from 'styled-components/macro';
+import {smallScreen, useMediaQuery} from '../mediaQueries';
 import emporioArmani from '../images/emporioArmani.png';
 import calvinKlein from '../images/calvinKlein.png';
 import dkny from '../images/dkny.png';
 import baldinini from '../images/baldinini.png';
-import {smallScreen, useMediaQuery} from '../mediaQueries';
 
 
 const WrapperOuter = styled.article`
@@ -21,6 +20,7 @@ const WrapperInner = styled.div`
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+
   @media ${smallScreen} {justify-content: space-evenly}
 `;
 
@@ -52,7 +52,7 @@ const TopBrands = (): JSX.Element => {
   const screen = useMediaQuery();
 
   return(
-    <WrapperOuter>
+    <WrapperOuter id='top-brands'>
       <WrapperInner>
         <TitleWrapper>
           <Line />
@@ -60,38 +60,18 @@ const TopBrands = (): JSX.Element => {
           <Line />
         </TitleWrapper>
 
-        {screen.big &&
-          <img
-            src={emporioArmani}
-            alt='Emporio Armani'
-          />
-        }
+        {screen.big && <img src={emporioArmani} alt='Emporio Armani' />}
 
         {!screen.small &&
           <>
-            <img
-              src={calvinKlein}
-              alt='Calvin Klein'
-            />
-            <img
-              src={dkny}
-              alt='DKNY'
-            />
-            <img
-              src={baldinini}
-              alt='Baldinini'
-            />
+            <img src={calvinKlein} alt='Calvin Klein'/>
+            <img src={dkny} alt='DKNY' />
+            <img src={baldinini} alt='Baldinini' />
           </>
         }
 
-        <img
-          src={emporioArmani}
-          alt='Emporio Armani'
-        />
-        <img
-          src={dkny}
-          alt='DKNY'
-        />
+        <img src={emporioArmani} alt='Emporio Armani'/>
+        <img src={dkny} alt='DKNY'/>
       </WrapperInner>
     </WrapperOuter>
   );
