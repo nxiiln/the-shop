@@ -1,4 +1,5 @@
 import styled from 'styled-components/macro';
+import {Link} from 'react-router-dom';
 import fromOurBlogA from '../images/fromOurBlogA.png';
 import fromOurBlogB from '../images/fromOurBlogB.png';
 
@@ -55,7 +56,7 @@ const PostAbout = styled.p`
   color: var(--color-text-regular);
 `;
 
-const ReadMore = styled.button`
+const ReadMore = styled(Link)`
   width: 95px;
   height: 20px;
   margin: 0;
@@ -68,9 +69,6 @@ const ReadMore = styled.button`
   line-height: 1.2;
   font-weight: 400;
   color: var(--color-text-main);
-  background: transparent;
-  border: none;
-  cursor: pointer;
 `;
 
 
@@ -97,7 +95,7 @@ const FromOurBlog = (): JSX.Element => (
       </PostAbout>
     </Description>
 
-    <ReadMore>READ MORE</ReadMore>
+    <ReadMore to='blog'>READ MORE</ReadMore>
   </Wrapper>
 );
 
