@@ -1,7 +1,7 @@
 import styled from 'styled-components/macro';
 
 
-const Wrapper = styled.article<{gridArea: string}>`
+const Wrapper = styled.article<{gridArea?: string}>`
   grid-area: ${props => props.gridArea};
 `
 
@@ -12,7 +12,7 @@ const Line = styled.div`
   background: var(--color-border);
 `;
 
-const BreadCrumbsWrapper = styled.div<{marginBottom: string}>`
+const BreadCrumbsWrapper = styled.div<{marginBottom?: string}>`
   width: 100%;
   margin-bottom: ${props => props.marginBottom};
   display: flex;
@@ -60,10 +60,10 @@ interface Props {
 }
 
 const BreadCrumbs = (props: Props): JSX.Element => (
-  <Wrapper gridArea={props.gridArea === undefined ? '' : props.gridArea}>
+  <Wrapper gridArea={props.gridArea}>
     <Line />
     <BreadCrumbsWrapper
-      marginBottom={props.marginBottom === undefined ? '' : props.marginBottom}
+      marginBottom={props.marginBottom}
     >
       <BreadCrumbsLeft>{props.link}</BreadCrumbsLeft>
       <BreadCrumbsRight>
