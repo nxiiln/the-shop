@@ -27,11 +27,12 @@ const CartPreviewSymbolWrapper = styled.div<{open: boolean}>`
   height: 25px;
   background: var(--color-background-second);
   border-radius: ${props => props.open ? '0%': '50%'};
+
   @media ${smallScreen} {background: #404040;}
 `;
 
 const CartPreviewSymbol = styled.img`
-  margin: 5.5px 0 0 7.5px;
+  margin: 6px 0 0 8px;
 `;
 
 const Text = styled.div`
@@ -43,6 +44,7 @@ const Text = styled.div`
   font-weight: 300;
   text-transform: uppercase;
   color: var(--color-text-main);
+
   @media ${smallScreen} {color: var(--color-text-second)}
 `;
 
@@ -131,6 +133,7 @@ const Remove = styled.button`
   background-color: transparent;
   border: none;
   cursor: pointer;
+
   &:hover {color: var(--color-text-main)}
 `;
 
@@ -208,44 +211,48 @@ const Checkout = styled(LinkBox)`
 
 
 
+interface Product {
+  id: string;
+  image: string;
+  description: string;
+  price: number;
+  status: boolean;
+};
+
+const productList: Product[] = [
+  {
+    id: 'productA',
+    image: imageProductA,
+    description: 'detailed swing dress',
+    price: 275,
+    status: true
+  },
+  {
+    id: 'productB',
+    image: imageProductB,
+    description: 'maxararzy frilled dress',
+    price: 1875,
+    status: true
+  },
+  {
+    id: 'productC',
+    image: imageProductC,
+    description: 'detailed swing dress',
+    price: 159,
+    status: true
+  }
+];
+
+
+
+
 const CartPreview = (): JSX.Element => {
-  interface Product {
-    id: string;
-    image: string;
-    description: string;
-    price: number;
-    status: boolean;
-  };
-
-  const productList: Product[] = [
-    {
-      id: 'productA',
-      image: imageProductA,
-      description: 'detailed swing dress',
-      price: 275,
-      status: true
-    },
-    {
-      id: 'productB',
-      image: imageProductB,
-      description: 'maxararzy frilled dress',
-      price: 1875,
-      status: true
-    },
-    {
-      id: 'productC',
-      image: imageProductC,
-      description: 'detailed swing dress',
-      price: 159,
-      status: true
-    }
-  ];
-
   const [open, setOpen] = useState<boolean>(false);
   const [products, setProducts] = useState<Product[]>(productList);
 
   const productsNumber: number = products
-    .filter((product: Product): boolean => product.status).length;
+    .filter((product: Product): boolean => product.status)
+    .length;
   
   const totalPrice: number = products
     .map((product: Product): number => +product.status && product.price)
@@ -269,29 +276,28 @@ const CartPreview = (): JSX.Element => {
         <Dropdown>
           <TriangleOuter><TriangleInner /></TriangleOuter>
 
-        {products.map((product: Product): false | JSX.Element => {
-          return(product.status &&
-            <Product key={product.id}>
-              <ProductImage
-                src={product.image}
-                alt='productPreview'
-              />
-              <Description>{product.description}</Description>
-              <Price>${product.price}</Price>
-              <Remove
-                type='button'
-                onClick={(): void => {
-                  const newProducts: Product[] = [...products];
-                  const currIndex: number = products.indexOf(product);
-                  newProducts[currIndex].status = false;
-                  setProducts(newProducts);
-                }}
-              >
-                <X>+</X>
-              </Remove>
-            </Product>
-          );
-        })}
+          {products.map((product: Product): false | JSX.Element =>
+            product.status &&
+              <Product key={product.id}>
+                <ProductImage
+                  src={product.image}
+                  alt='productPreview'
+                />
+                <Description>{product.description}</Description>
+                <Price>${product.price}</Price>
+                <Remove
+                  type='button'
+                  onClick={(): void => {
+                    const newProducts: Product[] = [...products];
+                    const currIndex: number = products.indexOf(product);
+                    newProducts[currIndex].status = false;
+                    setProducts(newProducts);
+                  }}
+                >
+                  <X>+</X>
+                </Remove>
+              </Product>
+          )}
 
           <Result>
             <Total>TOTAL:</Total>
