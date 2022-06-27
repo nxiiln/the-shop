@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import styled from 'styled-components/macro';
-import imageMenuInner from '../images/imageMenuInner.png';
 import {smallScreen, mediumScreen, useMediaQuery} from '../mediaQueries';
+import {Link} from 'react-router-dom';
+import imageMenuInner from '../images/imageMenuInner.png';
 
 
-const MenuWrapper = styled.article<{open: boolean}>`
+const MenuWrapper = styled.article<{number: boolean}>`
   width: 100%;
   height: 38px;
   position: relative;
@@ -15,11 +16,9 @@ const MenuWrapper = styled.article<{open: boolean}>`
   background-color: var(--color-background-main);
   cursor: default;
 
-  ${props => props.open && 'z-index: 2;'}
+  ${props => props.number && 'z-index: 2;'}
 
-  @media ${smallScreen}, ${mediumScreen} {
-    justify-content: start;
-  }
+  @media ${smallScreen}, ${mediumScreen} {justify-content: start}
 `;
 
 const MenuSymbol = styled.div`
@@ -38,7 +37,7 @@ const MenuSymbol = styled.div`
   }
 `;
 
-const MainMenu = styled.ul<{open: boolean}>`
+const MainMenu = styled.div<{number: number}>`
   width: 1100px;
   height: 36px;
   display: flex;
@@ -46,7 +45,7 @@ const MainMenu = styled.ul<{open: boolean}>`
   margin: 0;
   padding: 0;
 
-  > li {
+  > a {
     padding: 0 20px 34px 20px;
     display: inline-block;
     font-family: var(--font-second);
@@ -54,13 +53,14 @@ const MainMenu = styled.ul<{open: boolean}>`
     line-height: 1.2;
     font-weight: 300;
     text-transform: uppercase;
+    text-decoration: none;
     color: var(--color-text-main);
   }
+  
+  ${props => `
+    ${!!props.number && 'border-bottom: 1px solid var(--color-border);'}
 
-  ${props => props.open && `
-    border-bottom: 1px solid #aaa;
-
-    > li:first-child {
+    > a:nth-child(${props.number}) {
       border-bottom: 2px solid #000;
       cursor: pointer;
     }
@@ -114,6 +114,7 @@ const MenuInner = styled.ul`
     font-weight: 300;
     color: var(--color-text-regular);
     cursor: pointer;
+
     &:hover {color: var(--color-text-main)}
   }
 `;
@@ -146,30 +147,29 @@ const Text = styled.p`
 
 
 const Menu = (): JSX.Element => {
-  const [open, setOpen] = useState<boolean>(false);
+  const [number, setNumber] = useState<number>(0);
   const screen = useMediaQuery();
 
+  
   return(
     <MenuWrapper
-      open={open}
-      onMouseLeave={(): void => setOpen(false)}
+      number={!!number}
+      onMouseLeave={(): void => setNumber(0)}
     >
       {screen.big ?
         <>
-          <MainMenu open={open}>
-            <li onMouseEnter={(): void => setOpen(true)}>
-              women
-            </li>
-            <li>men</li>
-            <li>kids</li>
-            <li>accessories</li>
-            <li>whats new</li>
-            <li>brands</li>
-            <li>sale</li>
-            <li>blog</li>
+          <MainMenu number={number}>
+            <Link to='catalog' onMouseEnter={(): void => setNumber(1)}>women</Link>
+            <Link to='catalog' onMouseEnter={(): void => setNumber(2)}>men</Link>
+            <Link to='catalog' onMouseEnter={(): void => setNumber(3)}>kids</Link>
+            <Link to='catalog' onMouseEnter={(): void => setNumber(4)}>accessories</Link>
+            <Link to='catalog' onMouseEnter={(): void => setNumber(5)}>sale</Link>
+            <a href='#whats-new'>whats new</a>
+            <a href='#top-brands'>brands</a>
+            <Link to='blog'>blog</Link>
           </MainMenu>
 
-          {open &&
+          {!!number &&
             <MenuOpenWrapper>
               <MenuOpen>
                 <MenuInnerWrapper>
@@ -181,6 +181,7 @@ const Menu = (): JSX.Element => {
                     <li>Skirts</li>
                     <li>Dresses</li>
                   </MenuInner>
+
                   <MenuInner>
                     <li>tops</li>
                     <li>Jackets & Coats</li>
@@ -189,6 +190,7 @@ const Menu = (): JSX.Element => {
                     <li>Knitwear</li>
                     <li>Sweats</li>
                   </MenuInner>
+
                   <MenuInner>
                     <li>shoes & more</li>
                     <li>Shoes</li>
@@ -197,6 +199,7 @@ const Menu = (): JSX.Element => {
                     <li>Collectables</li>
                     <li>Eyewear</li>
                   </MenuInner>
+
                   <MenuInner>
                     <li>collections</li>
                     <li>New arrivals</li>
@@ -206,14 +209,10 @@ const Menu = (): JSX.Element => {
                 </MenuInnerWrapper>
 
                 <ImageWrapper>
-                  <img
-                    src={imageMenuInner}
-                    alt='women in denim'
-                  />
+                  <img src={imageMenuInner} alt='women in denim'/>
+
                   <Message>
-                    <Text>
-                      new denim collection now
-                    </Text>
+                    <Text>new denim collection now</Text>
                   </Message>
                 </ImageWrapper>
               </MenuOpen>
