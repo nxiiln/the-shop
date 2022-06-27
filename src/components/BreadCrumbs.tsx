@@ -20,7 +20,7 @@ const BreadCrumbsWrapper = styled.div<{marginBottom?: string}>`
   align-items: end;
 `;
 
-const BreadCrumbsLeft = styled.div`
+const BreadCrumbsLink = styled.div`
   font-family: var(--font-regular);
   font-size: 10px;
   font-weight: 400;
@@ -41,16 +41,6 @@ const BreadCrumbsLeft = styled.div`
   > span {margin-right: 5px}
 `;
 
-const BreadCrumbsRight = styled(BreadCrumbsLeft)`
-  &:hover {text-decoration: underline}
-
-  > a {margin: 0}
-
-  > span {
-    &:hover {cursor: pointer}
-  }
-`;
-
 
 interface Props {
   link: JSX.Element;
@@ -65,11 +55,7 @@ const BreadCrumbs = (props: Props): JSX.Element => (
     <BreadCrumbsWrapper
       marginBottom={props.marginBottom}
     >
-      <BreadCrumbsLeft>{props.link}</BreadCrumbsLeft>
-      <BreadCrumbsRight>
-        <span>❮</span>
-        <a href={props.return}>Return to Previous Page</a>
-      </BreadCrumbsRight>
+      <BreadCrumbsLink>{props.link}</BreadCrumbsLink>
     </BreadCrumbsWrapper>
   </Wrapper>
 );
