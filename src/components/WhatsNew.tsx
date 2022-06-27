@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components/macro';
 import ImageA from '../images/whatsNewA.png';
 import ImageB from '../images/whatsNewB.png';
@@ -83,51 +82,37 @@ const ImageDescription = styled.span`
 `;
 
 
-const WhatsNew = (): JSX.Element => {
-  return(
-    <Wrapper>
-      <WrapperInner>
-        <TitleWrapper>
-          <Line />
-          <Title>WHATS NEW</Title>
-          <Line />
-        </TitleWrapper>
+const WhatsNew = (): JSX.Element => (
+  <Wrapper id='whats-new'>
+    <WrapperInner>
+      <TitleWrapper>
+        <Line />
+        <Title>WHATS NEW</Title>
+        <Line />
+      </TitleWrapper>
 
-        <ImagesContainer>
-          <ImageWrapper>
-            <Image src={ImageA} alt='woman in dress'/>
-            <ImageTitle>
-              BLACK & WHITE
-            </ImageTitle>
-            <ImageDescription>
-              SPRING COLLECTION 2022
-            </ImageDescription>
-          </ImageWrapper>
+      <ImagesContainer>
+        <ImageWrapper>
+          <Image src={ImageA} alt='woman in dress'/>
+          <ImageTitle>BLACK & WHITE</ImageTitle>
+          <ImageDescription>SPRING COLLECTION 2022</ImageDescription>
+        </ImageWrapper>
 
-          <ImageWrapper>
-            <Image src={ImageB} alt='handbags'/>
-            <ImageTitle>
-              COLOR SUMMER
-            </ImageTitle>
-            <ImageDescription>
-              SPRING COLLECTION 2022
-            </ImageDescription>
-          </ImageWrapper>
+        <ImageWrapper>
+          <Image src={ImageB} alt='handbags'/>
+          <ImageTitle>COLOR SUMMER</ImageTitle>
+          <ImageDescription>SPRING COLLECTION 2022</ImageDescription>
+        </ImageWrapper>
 
-          <ImageWrapper>
-            <Image src={ImageC} alt='man in a jacket'/>
-            <ImageTitle>
-              VINTAGE FOR HIM
-            </ImageTitle>
-            <ImageDescription>
-              SPRING COLLECTION 2022
-            </ImageDescription>
-          </ImageWrapper>
-        </ImagesContainer>
-      </WrapperInner>
-    </Wrapper>
-  );
-}
+        <ImageWrapper>
+          <Image src={ImageC} alt='man in a jacket'/>
+          <ImageTitle>VINTAGE FOR HIM</ImageTitle>
+          <ImageDescription>SPRING COLLECTION 2022</ImageDescription>
+        </ImageWrapper>
+      </ImagesContainer>
+    </WrapperInner>
+  </Wrapper>
+);
 
 
 export default WhatsNew;
