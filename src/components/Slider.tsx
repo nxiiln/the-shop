@@ -1,9 +1,10 @@
 import {useState, useEffect} from 'react';
 import styled from 'styled-components/macro';
+import {smallScreen, useMediaQuery} from '../mediaQueries';
+import {Link} from 'react-router-dom';
 import bannerA from '../images/bannerA.png';
 import bannerB from '../images/bannerB.png';
 import bannerC from '../images/bannerC.png';
-import {smallScreen, useMediaQuery} from '../mediaQueries';
 
 
 
@@ -73,20 +74,22 @@ const Letter = styled.span`
   @media ${smallScreen} {font-size: 42px}
 `;
 
-const ButtonBannerA = styled.button`
+const LinkBannerA = styled(Link)`
   width: 249px;
   height: 30px;
   margin: 0;
-  display: inline-block;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
   font-family: var(--font-second);
   font-size: 13px;
   line-height: 1.2;
   font-weight: 300;
   text-transform: uppercase;
+  text-decoration: none;
   color: var(--color-text-second);
   border: none;
   background: var(--color-background-second);
-  cursor: pointer;
 
   @media ${smallScreen} {
     width: 118px;
@@ -173,21 +176,24 @@ const TextBlockC = styled.div`
   }
 `;
 
-const ShopNow = styled.button`
+const ShopNow = styled(Link)`
   width: 96px;
   height: 30px;
   position: absolute;
   top: 110px;
   left: 85px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
   font-family: var(--font-second);
   font-size: 10px;
   line-height: 1.2;
   font-weight: 300;
   text-transform: uppercase;
+  text-decoration: none;
   color: var(--color-text-second);
   background: var(--color-background-second);
   border: none;
-  cursor: pointer;
 `;
 
 const UseCode = styled.div`
@@ -270,9 +276,9 @@ const Slider = (): JSX.Element => {
               <Word><Letter> E</Letter>SSENTIALS</Word>
             </SpringEssentials>
 
-            <ButtonBannerA type='button'>
+            <LinkBannerA to='catalog'>
               {screen.small ? 'shop now' : 'shop women’s accessories'}
-            </ButtonBannerA>
+            </LinkBannerA>
           </TextBlockA>
         </WrapperSlideA>
       }
@@ -296,7 +302,7 @@ const Slider = (): JSX.Element => {
                 <span>up to 70%</span>
               </TextBlockC>
 
-              <ShopNow type='button'>shop now</ShopNow>
+              <ShopNow to='catalog'>shop now</ShopNow>
 
               <UseCode>
                 <span>use code: </span>
