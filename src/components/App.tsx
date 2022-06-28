@@ -17,7 +17,7 @@ const App = (): JSX.Element => (
   <>
     <Header />
     <Routes>
-      <Route path='/the-shop' element={<Home />} />
+      <Route path='/' element={<Home />} />
       <Route path='my-account' element={<MyAccount />} />
       <Route path='wish-list' element={<WishList />} />
       <Route path='checkout' element={<Checkout />} />

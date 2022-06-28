@@ -167,14 +167,14 @@ const Menu = (): JSX.Element => {
             <Link to='catalog' onMouseEnter={(): void => setNumber(5)}>sale</Link>
 
             <HashLink
-              to='the-shop/#whats-new'
+              to='/#whats-new'
               onMouseEnter={(): void => setNumber(6)}
             >
               whats new
             </HashLink>
 
             <HashLink
-              to='the-shop/#top-brands'
+              to='/#top-brands'
               onMouseEnter={(): void => setNumber(7)}
             >
               brands
