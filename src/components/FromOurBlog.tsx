@@ -1,5 +1,5 @@
 import styled from 'styled-components/macro';
-import {Link} from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
 import fromOurBlogA from '../images/fromOurBlogA.png';
 import fromOurBlogB from '../images/fromOurBlogB.png';
 
@@ -56,7 +56,7 @@ const PostAbout = styled.p`
   color: var(--color-text-regular);
 `;
 
-const ReadMore = styled(Link)`
+const ReadMore = styled(HashLink)`
   width: 95px;
   height: 20px;
   margin: 0;
@@ -95,7 +95,7 @@ const FromOurBlog = (): JSX.Element => (
       </PostAbout>
     </Description>
 
-    <ReadMore to='blog'>READ MORE</ReadMore>
+    <ReadMore to='blog#'>READ MORE</ReadMore>
   </Wrapper>
 );
 

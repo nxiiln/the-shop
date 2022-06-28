@@ -143,7 +143,7 @@ const Top = (): JSX.Element => {
 
 
   return(
-    <WrapperOuter>
+    <WrapperOuter id='top'>
       <Title>
         {!screen.small && <span>FREE SHIPPING ON ORDERS ABOVE 50$</span>}
       </Title>
