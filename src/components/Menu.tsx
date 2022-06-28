@@ -2,6 +2,7 @@ import {useState} from 'react';
 import styled from 'styled-components/macro';
 import {smallScreen, mediumScreen, useMediaQuery} from '../mediaQueries';
 import {Link} from 'react-router-dom';
+import {HashLink} from 'react-router-hash-link';
 import imageMenuInner from '../images/imageMenuInner.png';
 
 
@@ -164,9 +165,22 @@ const Menu = (): JSX.Element => {
             <Link to='catalog' onMouseEnter={(): void => setNumber(3)}>kids</Link>
             <Link to='catalog' onMouseEnter={(): void => setNumber(4)}>accessories</Link>
             <Link to='catalog' onMouseEnter={(): void => setNumber(5)}>sale</Link>
-            <a href='#whats-new'>whats new</a>
-            <a href='#top-brands'>brands</a>
-            <Link to='blog'>blog</Link>
+
+            <HashLink
+              to='the-shop/#whats-new'
+              onMouseEnter={(): void => setNumber(6)}
+            >
+              whats new
+            </HashLink>
+
+            <HashLink
+              to='the-shop/#top-brands'
+              onMouseEnter={(): void => setNumber(7)}
+            >
+              brands
+            </HashLink>
+            
+            <Link to='blog' onMouseEnter={(): void => setNumber(8)}>blog</Link>
           </MainMenu>
 
           {!!number &&
