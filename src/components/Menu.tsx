@@ -165,21 +165,8 @@ const Menu = (): JSX.Element => {
             <Link to='catalog' onMouseEnter={(): void => setNumber(3)}>kids</Link>
             <Link to='catalog' onMouseEnter={(): void => setNumber(4)}>accessories</Link>
             <Link to='catalog' onMouseEnter={(): void => setNumber(5)}>sale</Link>
-
-            <HashLink
-              to='/#whats-new'
-              onMouseEnter={(): void => setNumber(6)}
-            >
-              whats new
-            </HashLink>
-
-            <HashLink
-              to='/#top-brands'
-              onMouseEnter={(): void => setNumber(7)}
-            >
-              brands
-            </HashLink>
-            
+            <HashLink to='/#whats-new' smooth onMouseEnter={(): void => setNumber(6)}>whats new</HashLink>
+            <HashLink to='#top-brands' smooth onMouseEnter={(): void => setNumber(7)}>brands</HashLink>
             <Link to='blog' onMouseEnter={(): void => setNumber(8)}>blog</Link>
           </MainMenu>
 
