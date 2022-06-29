@@ -1,9 +1,9 @@
 import {useState} from 'react';
 import styled from 'styled-components/macro';
+import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
 import BreadCrumbs from './BreadCrumbs';
 import cartProductA from '../images/cartProductA.png';
 import cartProductB from '../images/cartProductB.png';
-import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
 
 
 
@@ -40,9 +40,7 @@ const CartWrapper = styled.div`
   margin: 0 0 25px 0;
   border: 1px solid var(--color-border);
   
-  > div:last-child {
-    margin-bottom: 0;
-  }
+  > div:last-child {margin-bottom: 0}
 `;
 
 const HeaderWrapper = styled.div`
@@ -80,9 +78,7 @@ const TitleWrapper = styled.div`
     color: var(--color-text-main);
   }
   
-  > span:nth-child(2) {
-    grid-column-start: 4;
-  }
+  > span:nth-child(2) {grid-column-start: 4}
   
   > span:nth-child(4) {
     grid-column-start: 8;
@@ -305,9 +301,7 @@ const Select = styled.select`
   border: 1px solid var(--color-border);
   border-radius: 15px;
 
-  @media ${smallScreen} {
-    width: 100%;
-  }
+  @media ${smallScreen} {width: 100%}
 `;
 
 const Postcode = styled.input`
@@ -397,9 +391,7 @@ const NeedHelp = styled.div`
   font-weight: 400;
   color: var(--color-text-regular);
   
-  > span {
-    color: var(--color-text-highlight);
-  }
+  > span {color: var(--color-text-highlight)}
   
   > p {
     margin: 0;
@@ -431,9 +423,7 @@ const Total = styled.div`
     color: var(--color-text-main);
   }
   
-  > span:nth-child(even) {
-    justify-self: end;
-  }
+  > span:nth-child(even) {justify-self: end}
   
   > span:nth-child(n+8) {
     font-family: var(--font-second);
@@ -446,9 +436,7 @@ const Total = styled.div`
     justify-self: start;
   }
   
-  > span:nth-child(9) {
-    grid-area: 6 / 1 / 7 / 2;
-  }
+  > span:nth-child(9) {grid-area: 6 / 1 / 7 / 2}
   
   > span:nth-child(10) {
     grid-area: 5 / 2 / 7 / 3;
@@ -499,9 +487,7 @@ const Checkout = styled(Button)`
   background: var(--color-background-second);
   border: none;
 
-  @media ${mediumScreen} {
-    align-self: end;
-  }
+  @media ${mediumScreen} {align-self: end}
 `;
 
 const ButtonWrapper = styled.div`
