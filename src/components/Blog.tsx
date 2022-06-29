@@ -1,11 +1,12 @@
 import styled from 'styled-components/macro';
+import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
+import {HashLink} from 'react-router-hash-link';
 import BreadCrumbs from './BreadCrumbs';
 import blogPost1 from '../images/blogPost1.png';
 import blogPost2 from '../images/blogPost2.png';
 import blogPost3 from '../images/blogPost3.png';
 import BlogCategories from './BlogCategories';
 import BlogLabels from './BlogLabels';
-import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
 
 
 
@@ -35,9 +36,7 @@ const PostsWrapper = styled.div`
   flex-direction: column;
   align-items: center;
 
-  @media ${mediumScreen}, ${smallScreen} {
-    grid-area: 3 / 1 / 4 / 2;
-  }
+  @media ${mediumScreen}, ${smallScreen} {grid-area: 3 / 1 / 4 / 2}
 `;
 
 const OlderPosts = styled.button`
@@ -47,17 +46,18 @@ const OlderPosts = styled.button`
   background: transparent;
   border: none;
   cursor: pointer;
+  
   &:hover {text-decoration: underline}
 `;
 
 
 //Post-------------------------------------------
-const PostWrapper = styled.article`
+const PostWrapper = styled(HashLink)`
   width: 650px;
   margin-bottom: 30px;
   display: flex;
   flex-direction: column;
-  cursor: pointer;
+  text-decoration: none;
 
   @media ${smallScreen} {
     width: 100%;
@@ -166,7 +166,7 @@ const Blog = (): JSX.Element => {
         <PostsWrapper>
           {posts.map((post: Post): JSX.Element => {
             return(
-              <PostWrapper key={post.id}>
+              <PostWrapper key={post.id} to='post#top'>
                 <PostHeader>{post.header}</PostHeader>
                 <PostDate>{post.date}</PostDate>
                 <ProductImage src={post.image} alt={post.image} />
