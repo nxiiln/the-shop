@@ -193,10 +193,11 @@ const LinkBox = styled(Link)`
   font-weight: 300;
   text-transform: uppercase;
   text-decoration: none;
-  `
+`;
 
 const ViewCart = styled(LinkBox)`
   left: 10px;
+  color: var(--color-text-main);
   background: var(--color-background-main);
   border: 1px solid var(--color-border);
 `;
