@@ -1,6 +1,7 @@
 import {useState} from 'react';
 import styled from 'styled-components/macro';
 import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
+import {HashLink} from 'react-router-hash-link';
 import BreadCrumbs from './BreadCrumbs';
 import cartProductA from '../images/cartProductA.png';
 import cartProductB from '../images/cartProductB.png';
@@ -452,14 +453,17 @@ const LineTotal = styled.div`
   background: var(--color-border);
 `;
 
-const Button = styled.button`
+const LinkNormal = styled(HashLink)`
   width: 290px;
   height: 30px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
   font-family: var(--font-second);
   font-size: 10px;
   line-height: 1.2;
   font-weight: 400;
-  cursor: pointer;
+  text-decoration: none;
 
   @media ${smallScreen} {
     width: 45%;
@@ -467,7 +471,7 @@ const Button = styled.button`
   }
 `;
 
-const ContinueShopping = styled(Button)`
+const ContinueShopping = styled(LinkNormal)`
   grid-area: 6 / 1 / 7 / 2;
   color: var(--color-text-main);
   background: var(--color-background-main);
@@ -480,12 +484,11 @@ const ContinueShopping = styled(Button)`
   }
 `;
 
-const Checkout = styled(Button)`
+const Checkout = styled(LinkNormal)`
   grid-area: 6 / 4 / 7 / 5;
   justify-self: end;
   color: var(--color-text-second);
   background: var(--color-background-second);
-  border: none;
 
   @media ${mediumScreen} {align-self: end}
 `;
@@ -748,15 +751,15 @@ const Cart = (): JSX.Element => {
 
         {!screen.small &&
           <>
-            <ContinueShopping type='button'>CONTINUE SHOPPING</ContinueShopping>
-            <Checkout type='button'>CHECKOUT</Checkout>
+            <ContinueShopping to='/catalog#top'>CONTINUE SHOPPING</ContinueShopping>
+            <Checkout to='/checkout#top'>CHECKOUT</Checkout>
           </>
         }
 
         {screen.small &&
           <ButtonWrapper>
-            <ContinueShopping type='button'>CONTINUE SHOPPING</ContinueShopping>
-            <Checkout type='button'>CHECKOUT</Checkout>
+            <ContinueShopping to='/catalog#top'>CONTINUE SHOPPING</ContinueShopping>
+            <Checkout to='/checkout#top'>CHECKOUT</Checkout>
           </ButtonWrapper>
         }
       </WrapperInner>
