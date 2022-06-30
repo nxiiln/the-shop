@@ -69,6 +69,9 @@ const ReadMore = styled(HashLink)`
   line-height: 1.2;
   font-weight: 400;
   color: var(--color-text-main);
+  text-decoration: none;
+
+  &:hover {text-decoration: underline}
 `;
 
 
