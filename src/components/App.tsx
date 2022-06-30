@@ -14,6 +14,7 @@ import Catalog from './Catalog';
 import Product from './Product';
 import Blog from './Blog';
 import BlogPost from './BlogPost';
+import PageNotFound from './404';
 
 
 const App = (): JSX.Element => (
@@ -31,6 +32,7 @@ const App = (): JSX.Element => (
       <Route path='catalog/product' element={<Product />} />
       <Route path='blog' element={<Blog />} />
       <Route path='blog/post' element={<BlogPost />} />
+      <Route path='*' element={<PageNotFound />} />
     </Routes>
     <TopBrand />
     <PurchasesInfo />
