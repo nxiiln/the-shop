@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import styled from 'styled-components/macro';
-import wishList from '../images/wishList.png';
 import {smallScreen} from '../mediaQueries';
+import wishList from '../images/wishList.png';
 
 
 
@@ -106,9 +106,7 @@ const Availability = styled.div`
   font-weight: 400;
   color: var(--color-text-regular);
 
-  > span {
-    color: var(--color-text-highlight);
-  }
+  > span {color: var(--color-text-highlight)}
 `;
 
 const SmallDescription = styled.p`
@@ -228,6 +226,7 @@ const Quantity = styled.label`
     font-weight: 300;
     color: var(--color-text-main);
     border: 1px solid var(--color-border);
+
     &:focus {outline: none}
   }
 `;
@@ -369,20 +368,18 @@ const ProductDescription = (): JSX.Element => {
 
         {sizeOpen &&
           <CheckboxSizeWrapper>
-            {sizeList.map((currSize: string): JSX.Element => {
-              return(
-                <Checkbox key={currSize}>
-                  <input
-                    type='checkbox'
-                    checked={size === currSize}
-                    onChange={(): void => {
-                      size === currSize ? setSize('') : setSize(currSize);
-                    }}
-                  />
-                  {currSize}
-                </Checkbox>
-              );
-            })}
+            {sizeList.map((currSize: string): JSX.Element =>
+              <Checkbox key={currSize}>
+                <input
+                  type='checkbox'
+                  checked={size === currSize}
+                  onChange={(): void => {
+                    size === currSize ? setSize('') : setSize(currSize);
+                  }}
+                />
+                {currSize}
+              </Checkbox>
+            )}
           </CheckboxSizeWrapper>
         }
       </Dropdown>
@@ -398,20 +395,18 @@ const ProductDescription = (): JSX.Element => {
 
         {colorOpen &&
           <CheckboxColorWrapper>
-            {colorList.map((currColor: string): JSX.Element => {
-              return(
-                <Checkbox key={currColor}>
-                  <input
-                    type='checkbox'
-                    checked={color === currColor}
-                    onChange={(): void => {
-                      color === currColor ? setColor('') : setColor(currColor);
-                    }}
-                  />
-                  {currColor}
-                </Checkbox>
-              );
-            })}
+            {colorList.map((currColor: string): JSX.Element =>
+              <Checkbox key={currColor}>
+                <input
+                  type='checkbox'
+                  checked={color === currColor}
+                  onChange={(): void => {
+                    color === currColor ? setColor('') : setColor(currColor);
+                  }}
+                />
+                {currColor}
+              </Checkbox>
+            )}
           </CheckboxColorWrapper>
         }
       </Dropdown>

@@ -1,11 +1,11 @@
 import {useState} from 'react';
 import styled from 'styled-components/macro';
+import {smallScreen} from '../mediaQueries';
+import {Link} from 'react-router-dom';
 import cartSymbol from '../images/cartSymbol.png';
 import imageProductA from '../images/imageProductA.png';
 import imageProductB from '../images/imageProductB.png';
 import imageProductC from '../images/imageProductC.png';
-import {smallScreen} from '../mediaQueries';
-import {Link} from 'react-router-dom';
 
 
 
@@ -266,11 +266,9 @@ const CartPreview = (): JSX.Element => {
       onMouseLeave={(): void => setOpen(false)}
     >
       <CartPreviewSymbolWrapper open={open}>
-        <CartPreviewSymbol
-          src={cartSymbol}
-          alt='cart'
-        />
+        <CartPreviewSymbol src={cartSymbol} alt='cart'/>
       </CartPreviewSymbolWrapper>
+
       <Text>cart ({productsNumber})</Text>
 
       {open &&
@@ -303,7 +301,7 @@ const CartPreview = (): JSX.Element => {
           <Result>
             <Total>TOTAL:</Total>
             <TotalPrice>${totalPrice}</TotalPrice>
-            <ViewCart to='cart' >view cart</ViewCart>
+            <ViewCart to='cart'>view cart</ViewCart>
             <Checkout to='checkout'>checkout</Checkout>
           </Result>
         </Dropdown>

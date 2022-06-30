@@ -267,56 +267,54 @@ const CatalogProducts = (): JSX.Element => {
 
   return(
     <Products>
-      {products.map((product: Product): JSX.Element => {
-        return(
-          <Product
-            key={product.id}
-            onMouseEnter={(): void => setProductOpen(product.id)}
-            onMouseLeave={(): false | void => {
-              productOpen === product.id && setProductOpen(0)
-            }}
-          >
-            <img src={product.image} alt={product.name} />
+      {products.map((product: Product): JSX.Element =>
+        <Product
+          key={product.id}
+          onMouseEnter={(): void => setProductOpen(product.id)}
+          onMouseLeave={(): false | void => {
+            productOpen === product.id && setProductOpen(0)
+          }}
+        >
+          <img src={product.image} alt={product.name} />
 
-            {(product.triangle === 'new' || product.triangle === 'sale') &&
-              <>
-                <ProductTriangle
-                  attr={product.triangle === 'new' ? 'new' : 'sale'}
-                />
-                <ProductTriangleDescription>
-                  {product.triangle === 'new' ? 'new' : 'sale'}
-                </ProductTriangleDescription>
-              </>
-            }
+          {(product.triangle === 'new' || product.triangle === 'sale') &&
+            <>
+              <ProductTriangle
+                attr={product.triangle === 'new' ? 'new' : 'sale'}
+              />
+              <ProductTriangleDescription>
+                {product.triangle === 'new' ? 'new' : 'sale'}
+              </ProductTriangleDescription>
+            </>
+          }
 
-            <ProductName>{product.name}</ProductName>
-            <ProductPrice>${product.price}</ProductPrice>
+          <ProductName>{product.name}</ProductName>
+          <ProductPrice>${product.price}</ProductPrice>
 
-            {productOpen === product.id &&
-              <ProductOpen to='product#top'>
-                <QuickShop onClick={(e: Click): void => e.preventDefault()}>QUICK SHOP</QuickShop>
+          {productOpen === product.id &&
+            <ProductOpen to='product#top'>
+              <QuickShop onClick={(e: Click): void => e.preventDefault()}>QUICK SHOP</QuickShop>
 
-                <AddToBag type='button' onClick={(e: Click): void => e.preventDefault()}>
-                  <div>
-                    <img src={cartSymbol} alt='cart symbol' />
-                    ADD TO BAG
-                  </div>
-                </AddToBag>
+              <AddToBag type='button' onClick={(e: Click): void => e.preventDefault()}>
+                <div>
+                  <img src={cartSymbol} alt='cart symbol' />
+                  ADD TO BAG
+                </div>
+              </AddToBag>
 
-                <WishList type='button' onClick={(e: Click): void => e.preventDefault()}>
-                  <img src={wishList} alt='wishlist' />
-                  WISHLIST
-                </WishList>
+              <WishList type='button' onClick={(e: Click): void => e.preventDefault()}>
+                <img src={wishList} alt='wishlist' />
+                WISHLIST
+              </WishList>
 
-                <Compare type='button' onClick={(e: Click): void => e.preventDefault()}>
-                  <img src={compare} alt='compare' />
-                  COMPARE
-                </Compare>
-              </ProductOpen>
-            }
-          </Product>
-        );
-      })}
+              <Compare type='button' onClick={(e: Click): void => e.preventDefault()}>
+                <img src={compare} alt='compare' />
+                COMPARE
+              </Compare>
+            </ProductOpen>
+          }
+        </Product>
+      )}
     </Products>
   );
 }

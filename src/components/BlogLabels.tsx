@@ -31,6 +31,7 @@ const Label = styled.span<{fontSize: string}>`
   font-weight: 400;
   color: var(--color-text-main);
   cursor: pointer;
+
   &:hover {text-decoration: underline}
 `;
 
@@ -88,18 +89,16 @@ const labels: {fontSize: string, label: string}[] = [
 ];
 
 
-const BlogLabels = ({gridArea}: {gridArea: string}): JSX.Element => {
-  return(
-    <Wrapper gridArea={gridArea}>
-      <Title>LABELS</Title>
-      <LabelsWrapper>
-        {labels.map((label: {fontSize: string, label: string}): JSX.Element => {
-          return <Label key={label.label} fontSize={label.fontSize}>{label.label}</Label>;
-        })}
-      </LabelsWrapper>
-    </Wrapper>
-  );
-}
+const BlogLabels = ({gridArea}: {gridArea: string}): JSX.Element => (
+  <Wrapper gridArea={gridArea}>
+    <Title>LABELS</Title>
+    <LabelsWrapper>
+      {labels.map((label: {fontSize: string, label: string}): JSX.Element =>
+        <Label key={label.label} fontSize={label.fontSize}>{label.label}</Label>
+      )}
+    </LabelsWrapper>
+  </Wrapper>
+);
 
 
 export default BlogLabels;

@@ -166,7 +166,7 @@ const Required = styled.span`
 `;
 
 
-//OrderHystory-----------------------------------
+// OrderHystory
 const OrderHistory = styled.div`
   width: 674px;
   height: 645px;
@@ -281,7 +281,7 @@ const ButtonDetails = styled(ButtonBlack)<{status: boolean}>`
 `;
 
 
-//OrderDetails-----------------------------------
+// OrderDetails
 const OrderDetails = styled.div`
   width: 505px;
   height: 320px;

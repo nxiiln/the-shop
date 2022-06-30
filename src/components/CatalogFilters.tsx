@@ -5,7 +5,7 @@ import {mediumScreen, smallScreen} from '../mediaQueries';
 
 
 
-//Dropdown---------------------------------------
+// Dropdown
 const Dropdown = styled.div<{open: boolean}>`
   width: 195px;
   margin-bottom: 7px;
@@ -52,7 +52,7 @@ const DropdownHeader = styled.div<{open: boolean}>`
 `;
 
 
-//Button-----------------------------------------
+// Button
 const ButtonFilter = styled.button`
   margin-left: 4px;
   font-family: var(--font-second);
@@ -100,7 +100,7 @@ const ButtonFilterSecond = styled(ButtonFilter)`
 `;
 
 
-//Checkbox---------------------------------------
+// Checkbox
 const Checkbox = styled.label`
   height: 18px;
   margin-bottom: 12px;
@@ -140,7 +140,7 @@ const CheckboxColorWrapper = styled(CheckboxWrapper)`
 `;
 
 
-//Range------------------------------------------
+// Range
 const RangeWrapper = styled.div`
   width: 160px;
   height: 10px;
@@ -291,14 +291,12 @@ const CatalogFilters = (): JSX.Element => {
 
         {size &&
           <CheckboxSizeWrapper>
-            {sizes.map((size: string): JSX.Element => {
-              return(
-                <Checkbox key={size}>
-                  <input type='checkbox' name={size}/>
-                  {size}
-                </Checkbox>
-              )
-            })}
+            {sizes.map((size: string): JSX.Element =>
+              <Checkbox key={size}>
+                <input type='checkbox' name={size}/>
+                {size}
+              </Checkbox>
+            )}
           </CheckboxSizeWrapper>
         }
       </Dropdown>
@@ -353,14 +351,12 @@ const CatalogFilters = (): JSX.Element => {
 
         {color &&
           <CheckboxColorWrapper>
-            {colors.map((color: string): JSX.Element => {
-              return(
-                <Checkbox key={color}>
-                  <input type='checkbox' name={color}/>
-                  {color}
-                </Checkbox>
-              )
-            })}
+            {colors.map((color: string): JSX.Element =>
+              <Checkbox key={color}>
+                <input type='checkbox' name={color}/>
+                {color}
+              </Checkbox>
+            )}
           </CheckboxColorWrapper>
         }
       </Dropdown>
@@ -377,14 +373,12 @@ const CatalogFilters = (): JSX.Element => {
 
         {brand &&
           <CheckboxWrapper>
-            {brands.map((brand: string): JSX.Element => {
-              return(
-                <Checkbox key={brand}>
-                  <input type='checkbox' name={brand}/>
-                  {brand}
-                </Checkbox>
-              )
-            })}
+            {brands.map((brand: string): JSX.Element =>
+              <Checkbox key={brand}>
+                <input type='checkbox' name={brand}/>
+                {brand}
+              </Checkbox>
+            )}
           </CheckboxWrapper>
         }
       </Dropdown>

@@ -77,6 +77,7 @@ const LinkSimple = styled.a`
   text-decoration: none;
   cursor: pointer;
   user-select: none;
+
   &:hover {color: var(--color-text-second)}
 `;
 
@@ -98,6 +99,7 @@ const LinkUnderline = styled(LinkSimple)<{withoutBorder?: boolean}>`
   width: auto;
   margin: 0;
   padding: 0 12px 0 12px;
+  
   &:hover {text-decoration: underline}
 
   ${props => !props.withoutBorder &&
@@ -112,10 +114,11 @@ const Button = styled.button`
   display: flex;
   font-family: var(--font-second);
   font-size: 10px;
-  color: #aaa;
+  color: var(--color-text-regular);
   background: transparent;
   border: none;
   cursor: pointer;
+
   &:hover {color: var(--color-text-second)}
 `;
 

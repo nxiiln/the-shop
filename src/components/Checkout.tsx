@@ -49,7 +49,7 @@ const ButtonUnderline = styled.button`
 `;
 
 
-//Steps------------------------------------------
+// Steps
 const Steps = styled.article`
   width: 675px;
   @media ${mediumScreen}, ${smallScreen} {width: 100%}
@@ -117,7 +117,7 @@ const ButtonBlack = styled.button`
 `;
 
 
-//Step1------------------------------------------
+// Step1
 const Step1 = styled.div`
   width: 675px;
   height: 345px;
@@ -222,7 +222,7 @@ const PasswordHelp = styled(ButtonUnderline)`
 `;
 
 
-//Step2------------------------------------------
+// Step2
 const Step2 = styled.div`
   width: 675px;
   height: 656px;
@@ -303,7 +303,7 @@ const LabelCheckbox = styled(Label)`
 `;
 
 
-//Step3------------------------------------------
+// Step3
 const Step3 = styled.div`
   width: 675px;
   height: 286px;
@@ -350,7 +350,7 @@ const LabelRadio3 = styled(Label)`
 `;
 
 
-//Step4------------------------------------------
+// Step4
 const Step4 = styled.div`
   width: 675px;
   height: 356px;
@@ -441,7 +441,7 @@ const Cvv = styled(Label)`
 `;
 
 
-//Step5------------------------------------------
+// Step5
 const Step5 = styled.div`
   width: 675px;
   border: 1px solid var(--color-border);

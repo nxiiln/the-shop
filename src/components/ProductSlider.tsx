@@ -1,11 +1,11 @@
 import {useState} from 'react';
 import styled from 'styled-components/macro';
+import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
 import productMain from '../images/productMain.png';
 import productSecond1 from '../images/productSecond1.png';
 import productSecond2 from '../images/productSecond2.png';
 import productSecond3 from '../images/productSecond3.png';
 import productSecond4 from '../images/productSecond4.png';
-import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
 
 
 
@@ -107,7 +107,6 @@ const ProductTriangleDescription = styled.span`
 const ProductSlider = (): JSX.Element => {
   const [imageSecond, setImageSecond] = useState<number>(1);
   const screen = useMediaQuery();
-
 
   return(
     <Slider>

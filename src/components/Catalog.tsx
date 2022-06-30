@@ -124,7 +124,7 @@ const Banner = styled.div`
 `;
 
 
-//Sort-------------------------------------------
+// Sort
 const SortWrapper = styled.div`
   width: 160px;
   height: 32px;
@@ -193,7 +193,7 @@ const ButtonSortMode = styled.button`
 `;
 
 
-//Pagination-------------------------------------
+// Pagination
 const Pagination = styled.div`
   width: 120px;
   height: 20px;
@@ -358,7 +358,7 @@ const Catalog = (): JSX.Element => {
                 type='button'
                 onClick={(): void => {
                   if (currPage === 1) return;
-                  setCurrPage((prevCurrPage: number): number => prevCurrPage - 1);
+                  setCurrPage((currPage: number): number => currPage - 1);
               }}>
                 ❮
               </Navigation>
@@ -369,7 +369,7 @@ const Catalog = (): JSX.Element => {
                 type='button'
                 onClick={(): void => {
                   if (currPage === 3) return;
-                  setCurrPage((prevCurrPage: number): number => prevCurrPage + 1);
+                  setCurrPage((currPage: number): number => currPage + 1);
               }}>
                 ❯
               </Navigation>

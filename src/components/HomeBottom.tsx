@@ -1,4 +1,3 @@
-import React from 'react';
 import MostPopular from './MostPopular';
 import FromOurBlog from './FromOurBlog';
 import styled from 'styled-components/macro';
@@ -24,16 +23,14 @@ const WrapperInner = styled.div`
 `;
 
 
-const HomeBottom = (): JSX.Element => {
-  return(
-    <WrapperOuter>
-      <WrapperInner>
-        <MostPopular />
-        <FromOurBlog />
-      </WrapperInner>
-    </WrapperOuter>
-  );
-}
+const HomeBottom = (): JSX.Element => (
+  <WrapperOuter>
+    <WrapperInner>
+      <MostPopular />
+      <FromOurBlog />
+    </WrapperInner>
+  </WrapperOuter>
+);
 
 
 export default HomeBottom;

@@ -177,9 +177,7 @@ const Label = styled.label`
       border: 1px solid var(--color-background-second);
     }
 
-    @media ${smallScreen} {
-      width: 100%;
-    }
+    @media ${smallScreen} {width: 100%}
   }
 
   > textarea {height: 76px}
@@ -248,20 +246,18 @@ const ProductReviews = (): JSX.Element => {
       {!writeReview ?
         <>
           <Title>{reviews.length} REVIEWS</Title>
-          {reviews.map((review: Review): JSX.Element => {
-            return(
-              <Review key={review.id}>
-                <span>{review.title}</span>
-                <Stars rating={review.rating}>
-                  <div>★★★★★</div>
-                  <div>☆☆☆☆☆</div>
-                </Stars>
-                <p>{review.text}</p>
-                <span>{review.date}</span>
-                <span>{review.name}</span>
-              </Review>
-            );
-          })}
+          {reviews.map((review: Review): JSX.Element =>
+            <Review key={review.id}>
+              <span>{review.title}</span>
+              <Stars rating={review.rating}>
+                <div>★★★★★</div>
+                <div>☆☆☆☆☆</div>
+              </Stars>
+              <p>{review.text}</p>
+              <span>{review.date}</span>
+              <span>{review.name}</span>
+            </Review>
+          )}
 
           <Button
             type='button'

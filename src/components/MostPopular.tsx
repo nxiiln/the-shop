@@ -1,12 +1,14 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import styled from 'styled-components/macro';
+import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
 import mostPopularA from '../images/mostPopularA.png';
 import mostPopularB from '../images/mostPopularB.png';
 import mostPopularC from '../images/mostPopularC.png';
 import cartSymbol from '../images/cartSymbol.png';
 import wishList from '../images/wishList.png';
 import compare from '../images/compare.png';
-import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
+
+
 
 
 const MostPopularWrapper = styled.article`
@@ -17,9 +19,7 @@ const MostPopularWrapper = styled.article`
   justify-content: space-between;
   flex: auto;
 
-  @media ${mediumScreen} {
-    max-width: 500px;
-  }
+  @media ${mediumScreen} {max-width: 500px}
 
   @media ${smallScreen} {
     width: 100%;
@@ -133,6 +133,7 @@ const QuickShop = styled.button`
   background: var(--color-background-main);
   opacity: 0.8;
   cursor: pointer;
+
   &:hover {opacity: 1}
 `;
 
@@ -162,6 +163,7 @@ const AddToBag = styled.button`
   background: var(--color-background-second);
   border: none;
   cursor: pointer;
+
   &:hover {opacity: 0.8}
 `;
 
@@ -191,6 +193,7 @@ const WishList = styled.button`
   background: transparent;
   border: none;
   cursor: pointer;
+
   &:hover {text-decoration: underline}
 `;
 
@@ -210,8 +213,11 @@ const Compare = styled.button`
   background: none;
   border: none;
   cursor: pointer;
+
   &:hover {text-decoration: underline}
 `;
+
+
 
 
 const MostPopular = (): JSX.Element => {
@@ -230,27 +236,21 @@ const MostPopular = (): JSX.Element => {
       </QuickShopText>
     </QuickShop>;
 
+
   const purchase: JSX.Element =
     <Purchase>
       <AddToBag>
-        <img
-          src={cartSymbol}
-          alt='cart symbol'
-        />
+        <img src={cartSymbol} alt='cart symbol' />
         <AddToBagText>ADD TO BAG</AddToBagText>
       </AddToBag>
+
       <WishList>
-        <img
-          src={wishList}
-          alt='wishlist'
-        />
+        <img src={wishList} alt='wishlist' />
         WISHLIST
       </WishList>
+
       <Compare>
-        <img
-          src={compare}
-          alt='compare'
-        />
+        <img src={compare} alt='compare' />
         COMPARE
       </Compare>
     </Purchase>;
@@ -268,19 +268,18 @@ const MostPopular = (): JSX.Element => {
           onMouseEnter={(): void => setProduct(1)}
           onMouseLeave={(): void => setProduct(0)}
         >
-          <img 
-            src={mostPopularA}
-            alt='woman in orange dress'
-          />
+          <img src={mostPopularA} alt='woman in orange dress' />
           <Triangle attr='new' />
           <New>NEW</New>
           {product === 1 && quickShop}
+
           <DescriptionWrapper>
             <Description>
               DETAILED SWING DRESS
             </Description>
             <Price>$1,875</Price>
           </DescriptionWrapper>
+
           {product === 1 && purchase}
         </Product>
 
@@ -288,19 +287,18 @@ const MostPopular = (): JSX.Element => {
           onMouseEnter={(): void => setProduct(2)}
           onMouseLeave={(): void => setProduct(0)}
         >
-          <img 
-            src={mostPopularB}
-            alt='woman in beige dress'
-          />
+          <img src={mostPopularB} alt='woman in beige dress' />
           <Triangle attr='sale' />
           <New>SALE</New>
           {product === 2 && quickShop}
+          
           <DescriptionWrapper>
             <Description>
               MAXARARZY FRILLED DRESS
             </Description>
             <Price>$1,875</Price>
           </DescriptionWrapper>
+
           {product === 2 && purchase}
         </Product>
 
@@ -309,17 +307,16 @@ const MostPopular = (): JSX.Element => {
             onMouseEnter={(): void => setProduct(3)}
             onMouseLeave={(): void => setProduct(0)}
           >
-            <img 
-              src={mostPopularC}
-              alt='man in white shirt'
-            />
+            <img src={mostPopularC} alt='man in white shirt' />
             {product === 3 && quickShop}
+
             <DescriptionWrapper>
               <Description>
                 DETAILED SWING DRESS
               </Description>
               <Price>$1,875</Price>
             </DescriptionWrapper>
+
             {product === 3 && purchase}
           </Product>
         }

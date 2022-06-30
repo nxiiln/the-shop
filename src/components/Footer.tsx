@@ -1,11 +1,11 @@
 import styled from 'styled-components/macro';
+import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
 import storeLocation from '../images/storeLocation.png';
 import twitter from '../images/twitter.png';
 import pinterest from '../images/pinterest.png';
 import youtube from '../images/youtube.png';
 import google from '../images/google.png';
 import paymentSystems from '../images/paymentSystems.png';
-import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
 
 
 
@@ -26,142 +26,6 @@ const WrapperInner = styled.div`
   justify-content: space-between;
   align-content: space-between;
 `;
-
-
-//Top Block -------------------------------------
-const TopBlock = styled.div`
-  width: 100%;
-  height: 150px;
-  margin-top: 30px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-content: space-between;
-
-  @media ${mediumScreen} {
-    height: auto;
-    justify-content: start;
-  }
-
-  @media ${smallScreen} {
-    height: auto;
-    justify-content: center;
-  }
-`;
-
-const ShoppingGuide = styled.div`
-  width: 150px;
-  height: 130px;
-`;
-
-const HelpInfo = styled.div`
-  width: 115px;
-  height: 110px;
-`;
-
-const AboutUs = styled.div`
-  width: 305px;
-  height: 80px;
-`;
-
-const StoreLocation = styled.div`
-  width: 280px;
-  height: 100px;
-  display: flex;
-  justify-content: space-between;
-`;
-
-const Description = styled.div`
-  width: 120px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-
-  > div {margin: 0 0 4px 0}
-
-`;
-//-----------------------------------------------
-
-
-//Middle Block ----------------------------------
-const MiddleBlock = styled.div`
-  width: 100%;
-  height: 70px;
-  margin-top: 30px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-top: 1px solid #fff;
-  border-bottom: 1px solid #fff;
-
-  @media ${smallScreen} {
-    height: 110px;
-    flex-direction: column;
-    justify-content: space-evenly;
-  }
-`;
-
-const Newsletter = styled.div`
-  width: 380px;
-  height: 38px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  > div:first-child {margin: 0}
-  
-  @media ${smallScreen} {
-    width: 100%;
-    justify-content: center;
-  }
-`;
-
-const Input = styled.input`
-  width: 280px;
-  height: 35px;
-  &:focus {outline: none;}
-
-  @media ${smallScreen} {
-    width: 40%;
-    margin-left: 5%;
-  }
-`;
-
-const ConnectUs = styled.div`
-  width: 290px;
-  height: 28px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  > div {margin: 0}
-  > img {cursor: pointer}
-
-  @media ${smallScreen} {
-    width: 100%;
-    justify-content: space-evenly;
-  }
-`;
-//-----------------------------------------------
-
-
-//Bottom Block ----------------------------------
-const BottomBlock = styled.div`
-  width: 100%;
-  height: 60px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  @media ${smallScreen} {
-    height: 75px;
-    margin-top: 10px;
-    flex-direction: column-reverse;
-    justify-content: space-evenly;
-  }
-`;
-//-----------------------------------------------
-
 
 const MainText = styled.div`
   margin: 0 0 10px 0;
@@ -214,7 +78,141 @@ const Text = styled.p`
   > span {
     text-decoration: underline;
     cursor: pointer;
+    
     &:hover {color: var(--color-text-second)}
+  }
+`;
+
+
+// Top Block 
+const TopBlock = styled.div`
+  width: 100%;
+  height: 150px;
+  margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-content: space-between;
+
+  @media ${mediumScreen} {
+    height: auto;
+    justify-content: start;
+  }
+
+  @media ${smallScreen} {
+    height: auto;
+    justify-content: center;
+  }
+`;
+
+const ShoppingGuide = styled.div`
+  width: 150px;
+  height: 130px;
+`;
+
+const HelpInfo = styled.div`
+  width: 115px;
+  height: 110px;
+`;
+
+const AboutUs = styled.div`
+  width: 305px;
+  height: 80px;
+`;
+
+const StoreLocation = styled.div`
+  width: 280px;
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+`;
+
+const Description = styled.div`
+  width: 120px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  > div {margin: 0 0 4px 0}
+
+`;
+
+
+// Middle Block 
+const MiddleBlock = styled.div`
+  width: 100%;
+  height: 70px;
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+
+  @media ${smallScreen} {
+    height: 110px;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+`;
+
+const Newsletter = styled.div`
+  width: 380px;
+  height: 38px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  > div:first-child {margin: 0}
+  
+  @media ${smallScreen} {
+    width: 100%;
+    justify-content: center;
+  }
+`;
+
+const Input = styled.input`
+  width: 280px;
+  height: 35px;
+
+  &:focus {outline: none}
+
+  @media ${smallScreen} {
+    width: 40%;
+    margin-left: 5%;
+  }
+`;
+
+const ConnectUs = styled.div`
+  width: 290px;
+  height: 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  > div {margin: 0}
+  > img {cursor: pointer}
+
+  @media ${smallScreen} {
+    width: 100%;
+    justify-content: space-evenly;
+  }
+`;
+
+
+// Bottom Block
+const BottomBlock = styled.div`
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  @media ${smallScreen} {
+    height: 75px;
+    margin-top: 10px;
+    flex-direction: column-reverse;
+    justify-content: space-evenly;
   }
 `;
 

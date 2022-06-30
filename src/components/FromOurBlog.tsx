@@ -1,5 +1,5 @@
 import styled from 'styled-components/macro';
-import { HashLink } from 'react-router-hash-link';
+import {HashLink} from 'react-router-hash-link';
 import fromOurBlogA from '../images/fromOurBlogA.png';
 import fromOurBlogB from '../images/fromOurBlogB.png';
 

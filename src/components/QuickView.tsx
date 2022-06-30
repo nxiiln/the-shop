@@ -28,7 +28,7 @@ const WrapperInner = styled.div`
 `;
 
 
-//Title------------------------------------------
+// Title
 const TitleWrapper = styled.div`
   width: 643px;
   height: 65px;
@@ -72,7 +72,7 @@ const Close = styled.button`
 `;
 
 
-//Description------------------------------------
+// Description
 const DescriptionWrapper = styled.div`
   width: 328px;
   height: 278px;
@@ -124,7 +124,7 @@ const Select = styled.select<{attr: string}>`
   font-weight: 300;
   text-transform: uppercase;
   color: var(--color-text-main);
-  background: #f7f7f7;
+  background: var(--color-background-highlight);
   border: 1px solid var(--color-border);
   border-radius: 15px;
 `;

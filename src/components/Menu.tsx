@@ -6,6 +6,8 @@ import {HashLink} from 'react-router-hash-link';
 import imageMenuInner from '../images/imageMenuInner.png';
 
 
+
+
 const MenuWrapper = styled.article<{number: boolean}>`
   width: 100%;
   height: 38px;
@@ -147,6 +149,8 @@ const Text = styled.p`
 `;
 
 
+
+
 const Menu = (): JSX.Element => {
   const [number, setNumber] = useState<number>(0);
   const screen = useMediaQuery();
@@ -230,6 +234,8 @@ const Menu = (): JSX.Element => {
     </MenuWrapper>
   )
 }
+
+
 
 
 export default Menu;

@@ -30,7 +30,7 @@ const WrapperInner = styled.div`
 `;
 
 
-//Post-------------------------------------------
+// Post
 const PostWrapper = styled.article`
   width: 650px;
   margin-bottom: 25px;
@@ -85,7 +85,7 @@ const PostDescription = styled.div`
 `;
 
 
-//Reviews----------------------------------------
+// Reviews
 const ReviewsWrapper = styled.article`
   width: 650px;
   grid-area: 4 / 1 / 5 / 2;
@@ -115,7 +115,7 @@ const Review = styled.div`
 `;
 
 const Reviewname = styled.span`
-  font-family: Arial;
+  font-family: var(--font-regular);
   font-size: 11px;
   line-height: 14px;
   font-weight: 700;
@@ -124,7 +124,7 @@ const Reviewname = styled.span`
 
 const ReviewText = styled.p`
   margin: 10px 0 10px 0;
-  font-family: Arial;
+  font-family: var(--font-regular);
   font-size: 12px;
   line-height: 14px;
   font-weight: 400;
@@ -132,7 +132,7 @@ const ReviewText = styled.p`
 `;
 
 const ReviewDate = styled.span`
-  font-family: Arial;
+  font-family: var(--font-regular);
   font-size: 11px;
   line-height: 14px;
   font-weight: 400;
@@ -142,7 +142,7 @@ const ReviewDate = styled.span`
 const ReviewReplay = styled.button`
   display: block;
   margin-left: auto;
-  font-family: Arial;
+  font-family: var(--font-regular);
   font-size: 11px;
   line-height: 1.2;
   font-weight: 400;
@@ -153,7 +153,7 @@ const ReviewReplay = styled.button`
 `;
 
 
-//WriteReview------------------------------------
+// WriteReview
 const WriteReview = styled.form`
   width: 100%;
   margin-top: 30px;
@@ -315,16 +315,15 @@ const BlogPost = (): JSX.Element => {
           <ReviewsNumber>
             3 REVIEWS
           </ReviewsNumber>
-          {reviews.map((review: Review) => {
-            return(
-              <Review key={review.id}>
-                <Reviewname>{review.name}</Reviewname>
-                <ReviewText>{review.text}</ReviewText>
-                <ReviewDate>{review.date}</ReviewDate>
-                <ReviewReplay type='button'>Replay</ReviewReplay>
-              </Review>
-            );
-          })}
+
+          {reviews.map((review: Review) =>
+            <Review key={review.id}>
+              <Reviewname>{review.name}</Reviewname>
+              <ReviewText>{review.text}</ReviewText>
+              <ReviewDate>{review.date}</ReviewDate>
+              <ReviewReplay type='button'>Replay</ReviewReplay>
+            </Review>
+          )}
 
           <WriteReview onSubmit={(e: React.FormEvent<HTMLFormElement>): void => {
             e.preventDefault();
@@ -340,6 +339,7 @@ const BlogPost = (): JSX.Element => {
             setReviews(newReviews);
           }}>
             <WriteReviewHeader>WRITE REVIEW</WriteReviewHeader>
+
             <Label>
               NAME
               <InputText
@@ -348,6 +348,7 @@ const BlogPost = (): JSX.Element => {
                 onChange={(e: React.ChangeEvent<HTMLInputElement>): void => setName(e.target.value)}
               />
             </Label>
+
             <Label>
               REVIEW TEXT
               <InputTextArea
@@ -355,6 +356,7 @@ const BlogPost = (): JSX.Element => {
                 onChange={(e: React.ChangeEvent<HTMLTextAreaElement>): void => setText(e.target.value)}
               />
             </Label>
+            
             <SubmitReview type='submit'>SUBMIT REVIEW</SubmitReview>
           </WriteReview>
         </ReviewsWrapper>

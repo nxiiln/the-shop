@@ -70,37 +70,35 @@ const Text = styled.span`
 `;
 
 
-const PurchasesInfo = (): JSX.Element => {
-  return(
-    <WrapperOuter>
-      <WrapperInner>
-        <Item>
-          <Number>01.</Number>
-          <TextWrapper>
-            <MainText>Free Shipping</MainText>
-            <Text>On all orders over $50</Text>
-          </TextWrapper>
-        </Item>
+const PurchasesInfo = (): JSX.Element => (
+  <WrapperOuter>
+    <WrapperInner>
+      <Item>
+        <Number>01.</Number>
+        <TextWrapper>
+          <MainText>Free Shipping</MainText>
+          <Text>On all orders over $50</Text>
+        </TextWrapper>
+      </Item>
 
-        <Item>
-          <Number>02.</Number>
-          <TextWrapper>
-            <MainText>Money back guarantee</MainText>
-            <Text>On all orders</Text>
-          </TextWrapper>
-        </Item>
-        
-        <Item>
-          <Number>03.</Number>
-          <TextWrapper>
-            <MainText>Worldwide Delivery</MainText>
-            <Text>To over 80 countries</Text>
-          </TextWrapper>
-        </Item>
-      </WrapperInner>
-    </WrapperOuter>
-  );
-}
+      <Item>
+        <Number>02.</Number>
+        <TextWrapper>
+          <MainText>Money back guarantee</MainText>
+          <Text>On all orders</Text>
+        </TextWrapper>
+      </Item>
+      
+      <Item>
+        <Number>03.</Number>
+        <TextWrapper>
+          <MainText>Worldwide Delivery</MainText>
+          <Text>To over 80 countries</Text>
+        </TextWrapper>
+      </Item>
+    </WrapperInner>
+  </WrapperOuter>
+);
 
 
 export default PurchasesInfo;

@@ -227,7 +227,6 @@ const WishList = (): JSX.Element => {
   const [products, setProducts] = useState<Product[]>(productList);
   const screen = useMediaQuery();
 
-
   return(
     <WrapperOuter>
       <WrapperInner>

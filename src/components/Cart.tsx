@@ -163,7 +163,7 @@ const Product = styled.div`
 const ButtonUnderline = styled.button<{gridArea: string}>`
   grid-area: ${props => props.gridArea};
   margin-left: -5px;
-  font-family: Arial;
+  font-family: var(--font-regular);
   font-size: 11px;
   line-height: 1.2;
   font-weight: 400;
@@ -274,7 +274,7 @@ const EstimateDelivery = styled.div`
   }
   
   > span:nth-child(2) {
-    font-family: Arial;
+    font-family: var(--font-regular);
     font-size: 11px;
     line-height: 1.2;
     font-weight: 400;
@@ -318,7 +318,7 @@ const Postcode = styled.input`
   
   &::placeholder {
     padding-left: 12px;
-    font-family: Arial;
+    font-family: var(--font-regular);
     font-size: 11px;
     line-height: 1.2;
     font-weight: 400;
@@ -386,7 +386,7 @@ const NeedHelp = styled.div`
   width: 185px;
   height: 50px;
   grid-area: 5 / 3 / 6 / 4;
-  font-family: Arial;
+  font-family: var(--font-regular);
   font-size: 11px;
   line-height: 1.2;
   font-weight: 400;

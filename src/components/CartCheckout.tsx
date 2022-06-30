@@ -1,8 +1,8 @@
 import {useState} from 'react';
 import styled from 'styled-components/macro';
+import {bigScreen, mediumScreen, smallScreen} from '../mediaQueries';
 import cartProductA from '../images/cartProductA.png';
 import cartProductB from '../images/cartProductB.png';
-import {bigScreen, mediumScreen, smallScreen} from '../mediaQueries';
 
 
 

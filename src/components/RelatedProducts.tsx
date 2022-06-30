@@ -1,9 +1,9 @@
 import styled from 'styled-components/macro';
+import {smallScreen, useMediaQuery} from '../mediaQueries';
 import productRelated1 from '../images/productRelated1.png';
 import productRelated2 from '../images/productRelated2.png';
 import productRelated3 from '../images/productRelated3.png';
 import productRelated4 from '../images/productRelated4.png';
-import {smallScreen, useMediaQuery} from '../mediaQueries';
 
 
 

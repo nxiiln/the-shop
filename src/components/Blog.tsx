@@ -51,7 +51,7 @@ const OlderPosts = styled.button`
 `;
 
 
-//Post-------------------------------------------
+// Post
 const PostWrapper = styled(HashLink)`
   width: 650px;
   margin-bottom: 30px;
@@ -163,17 +163,15 @@ const Blog = (): JSX.Element => {
         />
         
         <PostsWrapper>
-          {posts.map((post: Post): JSX.Element => {
-            return(
-              <PostWrapper key={post.id} to='post#top'>
-                <PostHeader>{post.header}</PostHeader>
-                <PostDate>{post.date}</PostDate>
-                <ProductImage src={post.image} alt={post.image} />
-                <PostDescription>{post.description}</PostDescription>
-                {post.id !== 1 && <PostLine />}
-              </PostWrapper>
-            );
-          })}
+          {posts.map((post: Post): JSX.Element =>
+            <PostWrapper key={post.id} to='post#top'>
+              <PostHeader>{post.header}</PostHeader>
+              <PostDate>{post.date}</PostDate>
+              <ProductImage src={post.image} alt={post.image} />
+              <PostDescription>{post.description}</PostDescription>
+              {post.id !== 1 && <PostLine />}
+            </PostWrapper>
+          )}
 
           <OlderPosts>OLDER POSTS ❯</OlderPosts>
         </PostsWrapper>

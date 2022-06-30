@@ -39,9 +39,7 @@ const Title = styled.h2`
   font-weight: 300;
   color: var(--color-text-main);
 
-  @media ${mediumScreen}, ${smallScreen} {
-    margin: 0 0 0 20px;
-  }
+  @media ${mediumScreen}, ${smallScreen} {margin: 0 0 0 20px}
 `;
 
 const Indicator = styled.span<{open: boolean}>`
@@ -62,6 +60,7 @@ const Category = styled.button`
   background: transparent;
   border: none;
   cursor: pointer;
+  
   &:hover {text-decoration: underline}
 `;
 
