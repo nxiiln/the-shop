@@ -12,6 +12,7 @@ import Cart from './Cart';
 import Catalog from './Catalog';
 import Blog from './Blog';
 import BlogPost from './BlogPost';
+import Product from './Product';
 
 
 const App = (): JSX.Element => (
@@ -27,6 +28,7 @@ const App = (): JSX.Element => (
       <Route path='catalog' element={<Catalog />} />
       <Route path='blog' element={<Blog />} />
       <Route path='blog/post' element={<BlogPost />} />
+      <Route path='catalog/product' element={<Product />} />
     </Routes>
     <TopBrand />
     <PurchasesInfo />

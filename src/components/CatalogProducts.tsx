@@ -1,5 +1,6 @@
 import {useState} from 'react';
 import styled from 'styled-components/macro';
+import {HashLink} from 'react-router-hash-link';
 import product1 from '../images/product1.png';
 import product2 from '../images/product2.png';
 import product3 from '../images/product3.png';
@@ -12,6 +13,8 @@ import product9 from '../images/product9.png';
 import cartSymbol from '../images/cartSymbol.png';
 import wishList from '../images/wishList.png';
 import compare from '../images/compare.png';
+
+
 
 
 const Products = styled.div`
@@ -76,7 +79,7 @@ const ProductTriangleDescription = styled.span`
   color: var(--color-text-second);
 `;
 
-const ProductOpen = styled.div`
+const ProductOpen = styled(HashLink)`
   width: 230px;
   height: 425px;
   padding-bottom: 10px;
@@ -84,10 +87,8 @@ const ProductOpen = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  top: 0px;
-  left: 0px;
+  text-decoration: none;
   box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.23);
-  cursor: pointer;
 `;
 
 const QuickShop = styled.button`
@@ -261,6 +262,7 @@ const products: Product[] = [
 
 const CatalogProducts = (): JSX.Element => {
   const [productOpen, setProductOpen] = useState<number>(0);
+  type Click = React.MouseEvent<HTMLButtonElement, MouseEvent>;
   
 
   return(
@@ -291,32 +293,23 @@ const CatalogProducts = (): JSX.Element => {
             <ProductPrice>${product.price}</ProductPrice>
 
             {productOpen === product.id &&
-              <ProductOpen>
-                <QuickShop>QUICK SHOP</QuickShop>
+              <ProductOpen to='product#top'>
+                <QuickShop onClick={(e: Click): void => e.preventDefault()}>QUICK SHOP</QuickShop>
 
-                <AddToBag type='button'>
+                <AddToBag type='button' onClick={(e: Click): void => e.preventDefault()}>
                   <div>
-                    <img
-                      src={cartSymbol}
-                      alt='cart symbol'
-                    />
+                    <img src={cartSymbol} alt='cart symbol' />
                     ADD TO BAG
                   </div>
                 </AddToBag>
 
-                <WishList type='button'>
-                  <img
-                    src={wishList}
-                    alt='wishlist'
-                  />
+                <WishList type='button' onClick={(e: Click): void => e.preventDefault()}>
+                  <img src={wishList} alt='wishlist' />
                   WISHLIST
                 </WishList>
 
-                <Compare type='button'>
-                  <img
-                    src={compare}
-                    alt='compare'
-                  />
+                <Compare type='button' onClick={(e: Click): void => e.preventDefault()}>
+                  <img src={compare} alt='compare' />
                   COMPARE
                 </Compare>
               </ProductOpen>
