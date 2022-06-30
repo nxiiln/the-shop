@@ -1,6 +1,7 @@
 import styled from 'styled-components/macro';
-import BreadCrumbs from './BreadCrumbs';
 import {smallScreen} from '../mediaQueries';
+import {Link} from 'react-router-dom';
+import BreadCrumbs from './BreadCrumbs';
 
 
 const WrapperOuter = styled.main`
@@ -169,12 +170,11 @@ const Login = (): JSX.Element => (
       <BreadCrumbs
         link={
           <>
-            <a href='#'>Home</a>
+            <Link to='/'>Home</Link>
             <span>/</span>
             <span>Login</span>
           </>
         }
-        return='#'
         marginBottom='20px'
       />
 

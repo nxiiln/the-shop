@@ -1,10 +1,11 @@
 import {useState} from 'react';
 import styled from 'styled-components/macro';
+import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
+import {Link} from 'react-router-dom';
 import BreadCrumbs from './BreadCrumbs';
 import blogPost2 from '../images/blogPost2.png';
 import BlogCategories from './BlogCategories';
 import BlogLabels from './BlogLabels';
-import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
 
 
 
@@ -251,12 +252,13 @@ const BlogPost = (): JSX.Element => {
         <BreadCrumbs
           link={
             <>
-              <a href='#'>Home</a>
+              <Link to='/'>Home</Link>
+              <span>/</span>
+              <Link to='/blog'>Blog</Link>
               <span>/</span>
               <span>Do you realy love a trench coat?</span>
             </>
           }
-          return='#'
           gridArea={`1 / 1 / 2 / ${screen.big ? '3' : '1'}`}
         />
 

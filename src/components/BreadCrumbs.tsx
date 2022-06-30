@@ -44,7 +44,6 @@ const BreadCrumbsLink = styled.div`
 
 interface Props {
   link: JSX.Element;
-  return: string;
   marginBottom?: string;
   gridArea?: string;
 }
@@ -52,9 +51,7 @@ interface Props {
 const BreadCrumbs = (props: Props): JSX.Element => (
   <Wrapper gridArea={props.gridArea}>
     <Line />
-    <BreadCrumbsWrapper
-      marginBottom={props.marginBottom}
-    >
+    <BreadCrumbsWrapper marginBottom={props.marginBottom}>
       <BreadCrumbsLink>{props.link}</BreadCrumbsLink>
     </BreadCrumbsWrapper>
   </Wrapper>

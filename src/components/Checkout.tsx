@@ -1,5 +1,7 @@
 import {useState} from 'react';
 import styled from 'styled-components/macro';
+import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
+import {Link} from 'react-router-dom';
 import BreadCrumbs from './BreadCrumbs';
 import AlsoLove from './AlsoLove';
 import CartCheckout from './CartCheckout';
@@ -7,7 +9,6 @@ import visaIcon from '../images/visaIcon.png';
 import masterCardIcon from '../images/masterCardIcon.png';
 import discoverIcon from '../images/discoverIcon.png';
 import americanExpressIcon from '../images/americanExpressIcon.png';
-import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
 
 
 
@@ -485,12 +486,11 @@ const Checkout = (): JSX.Element => {
         <BreadCrumbs
           link={
             <>
-              <a href='#'>Home</a>
+              <Link to='/'>Home</Link>
               <span>/</span>
               <span>Checkout</span>
             </>
           }
-          return='#'
           marginBottom='20px'
         />
 

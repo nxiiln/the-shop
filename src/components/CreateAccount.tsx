@@ -186,7 +186,6 @@ const CreateAccount = (): JSX.Element => {
               <span>Create An Account</span>
             </>
           }
-          return='#'
           marginBottom='20px'
         />
 

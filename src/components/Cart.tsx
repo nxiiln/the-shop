@@ -579,12 +579,11 @@ const Cart = (): JSX.Element => {
         <BreadCrumbs
           link={
             <>
-              <a href='#'>Home</a>
+              <HashLink to='/'>Home</HashLink>
               <span>/</span>
               <span>Cart</span>
             </>
           }
-          return='#'
           marginBottom='20px'
           gridArea='1 / 1 / 3 / 5'
         />

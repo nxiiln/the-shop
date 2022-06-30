@@ -1,11 +1,12 @@
 import {useState} from 'react';
 import styled from 'styled-components/macro';
+import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
+import {Link} from 'react-router-dom';
 import BreadCrumbs from './BreadCrumbs';
 import CatalogFilters from './CatalogFilters';
 import CatalogProducts from './CatalogProducts';
 import banner from '../images/banner.png';
 import bannerSmall from '../images/bannerSmall.png';
-import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
 
 
 
@@ -269,12 +270,11 @@ const Catalog = (): JSX.Element => {
         <BreadCrumbs
           link={
             <>
-              <a href='#'>Home</a>
+              <Link to='/'>Home</Link>
               <span>/</span>
-              <span>Women</span>
+              <span>Catalog</span>
             </>
           }
-          return='#'
           marginBottom='20px'
         />
 

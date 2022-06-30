@@ -1,10 +1,11 @@
 import styled from 'styled-components/macro';
+import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
+import {Link} from 'react-router-dom';
 import BreadCrumbs from './BreadCrumbs';
 import RelatedProducts from './RelatedProducts';
 import ProductSlider from './ProductSlider';
 import ProductDescription from './ProductDescription';
 import ProductReviews from './ProductReviews';
-import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
 
 
 
@@ -48,16 +49,13 @@ const Product = (): JSX.Element => {
         <BreadCrumbs
           link={
             <>
-              <a href='#'>Home</a>
+              <Link to='/'>Home</Link>
               <span>/</span>
-              <a href='#'>Women</a>
-              <span>/</span>
-              <a href='#'>Tops</a>
+              <Link to='/catalog'>Catalog</Link>
               <span>/</span>
               <span>Detailed Swing Dress</span>
             </>
           }
-          return='#'
           marginBottom='20px'
         />
 

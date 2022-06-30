@@ -1,9 +1,10 @@
 import {useState} from 'react';
 import styled from 'styled-components/macro';
+import {smallScreen, useMediaQuery} from '../mediaQueries';
+import {Link} from 'react-router-dom';
 import BreadCrumbs from './BreadCrumbs';
 import cartProductA from '../images/cartProductA.png';
 import cartProductB from '../images/cartProductB.png';
-import {smallScreen, useMediaQuery} from '../mediaQueries';
 
 
 
@@ -233,12 +234,11 @@ const WishList = (): JSX.Element => {
         <BreadCrumbs
           link={
             <>
-              <a href='#'>Home</a>
+              <Link to='/'>Home</Link>
               <span>/</span>
               <span>Wish List</span>
             </>
           }
-          return='#'
           marginBottom='20px'
         />
 

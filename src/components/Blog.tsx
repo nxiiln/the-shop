@@ -154,12 +154,11 @@ const Blog = (): JSX.Element => {
         <BreadCrumbs
           link={
             <>
-              <a href='#'>Home</a>
+              <HashLink to='/'>Home</HashLink>
               <span>/</span>
               <span>Blog</span>
             </>
           }
-          return='#'
           gridArea={`1 / 1 / 2 / ${screen.big ? '3' : '1'}`}
         />
         

@@ -1,7 +1,8 @@
 import {useState} from 'react';
 import styled from 'styled-components/macro';
-import BreadCrumbs from './BreadCrumbs';
 import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
+import {Link} from 'react-router-dom';
+import BreadCrumbs from './BreadCrumbs';
 
 
 
@@ -760,12 +761,11 @@ const MyAccount = (): JSX.Element => {
         <BreadCrumbs
           link={
             <>
-              <a href='#'>Home</a>
+              <Link to='/'>Home</Link>
               <span>/</span>
               <span>My Account</span>
             </>
           }
-          return='#'
           marginBottom='20px'
         />
 
