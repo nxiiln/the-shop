@@ -121,8 +121,7 @@ const Label = styled.label`
   }
 `;
 
-const ButtonLogin = styled.button`
-  width: 112px;
+const ButtonPreset: string = `
   height: 30px;
   margin-top: 15px;
   font-family: var(--font-second);
@@ -130,6 +129,11 @@ const ButtonLogin = styled.button`
   font-weight: 300;
   color: var(--color-text-second);
   background: var(--color-background-second);
+`;
+
+const ButtonLogin = styled.button`
+  ${ButtonPreset}
+  width: 112px;
   border: none;
   cursor: pointer;
 `;
@@ -159,8 +163,13 @@ const NewCustomers = styled.div`
   @media ${smallScreen} {margin: 0}
 `;
 
-const ButtonCreateAccount = styled(ButtonLogin)`
+const ButtonCreateAccount = styled(Link)`
+  ${ButtonPreset}
   width: 254px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
 `;
 
 
@@ -218,7 +227,7 @@ const Login = (): JSX.Element => (
                 E-MAIL*
                 <input type='email' required />
               </Label>
-              <ButtonCreateAccount>CREATE AN ACCOUNT</ButtonCreateAccount>
+              <ButtonCreateAccount to='/create-account'>CREATE AN ACCOUNT</ButtonCreateAccount>
             </form>
           </NewCustomers>
         </Groups>

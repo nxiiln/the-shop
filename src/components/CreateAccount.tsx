@@ -1,6 +1,7 @@
 import styled from 'styled-components/macro';
-import BreadCrumbs from './BreadCrumbs';
 import {smallScreen, useMediaQuery} from '../mediaQueries';
+import {Link} from 'react-router-dom';
+import BreadCrumbs from './BreadCrumbs';
 
 
 
@@ -153,7 +154,7 @@ const ButtonCreateAccount = styled.button`
   cursor: pointer;
 `;
 
-const BackToLogin = styled.button`
+const BackToLogin = styled(Link)`
   width: 80px;
   height: 10px;
   margin-top: 20px;
@@ -162,11 +163,7 @@ const BackToLogin = styled.button`
   font-size: 11px;
   line-height: 1.2;
   font-weight: 400;
-  text-decoration: underline;
   color: var(--color-text-main);
-  background: transparent;
-  border: none;
-  cursor: pointer;
 `;
 
 
@@ -181,9 +178,9 @@ const CreateAccount = (): JSX.Element => {
         <BreadCrumbs
           link={
             <>
-              <a href='#'>Home</a>
+              <Link to='/'>Home</Link>
               <span>/</span>
-              <span>Create An Account</span>
+              <span>Create Account</span>
             </>
           }
           marginBottom='20px'
@@ -298,7 +295,7 @@ const CreateAccount = (): JSX.Element => {
             <ButtonCreateAccount type='submit'>CREATE AN ACCOUNT</ButtonCreateAccount>
           </Form>
           
-          <BackToLogin type='button'>Back to Login</BackToLogin>
+          <BackToLogin to='/login'>Back to Login</BackToLogin>
         </CreateAccountWrapper>
       </WrapperInner>
     </WrapperOuter>

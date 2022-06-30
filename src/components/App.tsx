@@ -8,11 +8,12 @@ import MyAccount from './MyAccount';
 import WishList from './WishList';
 import Checkout from './Checkout';
 import Login from './Login';
+import CreateAccount from './CreateAccount';
 import Cart from './Cart';
 import Catalog from './Catalog';
+import Product from './Product';
 import Blog from './Blog';
 import BlogPost from './BlogPost';
-import Product from './Product';
 
 
 const App = (): JSX.Element => (
@@ -24,11 +25,12 @@ const App = (): JSX.Element => (
       <Route path='wish-list' element={<WishList />} />
       <Route path='checkout' element={<Checkout />} />
       <Route path='login' element={<Login />} />
+      <Route path='create-account' element={<CreateAccount />} />
       <Route path='cart' element={<Cart />} />
       <Route path='catalog' element={<Catalog />} />
+      <Route path='catalog/product' element={<Product />} />
       <Route path='blog' element={<Blog />} />
       <Route path='blog/post' element={<BlogPost />} />
-      <Route path='catalog/product' element={<Product />} />
     </Routes>
     <TopBrand />
     <PurchasesInfo />
