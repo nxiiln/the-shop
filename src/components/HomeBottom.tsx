@@ -13,6 +13,7 @@ const WrapperOuter = styled.article`
 
 const WrapperInner = styled.div`
   width: 1100px;
+  padding: 0 1%;
   display: flex;
   justify-content: space-between;
 
