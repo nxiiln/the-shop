@@ -2,6 +2,7 @@ import styled from 'styled-components/macro';
 import {HashLink} from 'react-router-hash-link';
 import fromOurBlogA from '../images/fromOurBlogA.png';
 import fromOurBlogB from '../images/fromOurBlogB.png';
+import {smallScreen} from '../mediaQueries';
 
 
 const Wrapper = styled.article`
@@ -11,6 +12,8 @@ const Wrapper = styled.article`
   margin-left: 40px;
   position: relative;
   border: 1px solid var(--color-border);
+
+  @media ${smallScreen} {margin: 0}
 `;
 
 const MainText = styled.h2`
