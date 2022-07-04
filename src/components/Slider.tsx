@@ -24,6 +24,8 @@ const BannerA = styled.img`
   height: 100%;
   position: relative;
   object-fit: cover;
+
+  @media ${smallScreen} {object-position: -550px}
 `;
 
 const TextBlockA = styled.div`
@@ -36,6 +38,13 @@ const TextBlockA = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+
+  @media ${smallScreen} {
+    width: auto;
+    height: auto;
+    top: 65%;
+    left: 55%;
+  }
 `;
 
 const DescriptionA = styled.span`
@@ -65,17 +74,14 @@ const Word = styled.span`
   align-items: flex-end;
   font-size: 42px;
   white-space: pre;
-
-  @media ${smallScreen} {font-size: 36px}
 `;
 
 const Letter = styled.span`
   font-size: 50px;
-  @media ${smallScreen} {font-size: 42px}
 `;
 
 const LinkBannerA = styled(Link)`
-  width: 249px;
+  width: 250px;
   height: 30px;
   margin: 0;
   display: inline-flex;
@@ -91,10 +97,7 @@ const LinkBannerA = styled(Link)`
   border: none;
   background: var(--color-background-second);
 
-  @media ${smallScreen} {
-    width: 118px;
-    height: 30px;
-  }
+  @media ${smallScreen} {width: 130px}
 `;
 
 const WrapperSlideB = styled.div`
@@ -106,11 +109,6 @@ const WrapperBannerB = styled.div`
   position: relative;
   display: flex;
   justify-content: center;
-`;
-
-const BannerB = styled.img`
-  width: 100%;
-  flex: auto;
 `;
 
 const TextBlockB = styled.div`
@@ -261,20 +259,19 @@ const Slider = (): JSX.Element => {
     <SliderWrapper>
       {slide === 1 && 
         <WrapperSlideA>
-          <BannerA 
-            src={bannerA}
-            alt='woman with accessories'
-          />
+          <BannerA src={bannerA} alt='woman with accessories' />
 
           <TextBlockA>
-            <DescriptionA>
-              {!screen.small && 'new accessories collection'}
-            </DescriptionA>
+            {!screen.small &&
+              <>
+                <DescriptionA>new accessories collection</DescriptionA>
 
-            <SpringEssentials>
-              <Word><Letter>S</Letter>PRING</Word>
-              <Word><Letter> E</Letter>SSENTIALS</Word>
-            </SpringEssentials>
+                <SpringEssentials>
+                  <Word><Letter>S</Letter>PRING</Word>
+                  <Word><Letter> E</Letter>SSENTIALS</Word>
+                </SpringEssentials>
+              </>
+            }
 
             <LinkBannerA to='catalog'>
               {screen.small ? 'shop now' : 'shop women’s accessories'}
@@ -286,16 +283,18 @@ const Slider = (): JSX.Element => {
 
       {slide === 2 &&
         <WrapperSlideB>
-          <WrapperBannerB>
-            <BannerB src={bannerB} alt='woman on sand' />
+          {!screen.small && 
+            <WrapperBannerB>
+              <img src={bannerB} alt='woman on sand' />
 
-            <TextBlockB>
-              <DescriptionB>desert lover</DescriptionB>
-              <SpringCollection>spring collection 2022</SpringCollection>
-            </TextBlockB>
-          </WrapperBannerB>
+              <TextBlockB>
+                <DescriptionB>desert lover</DescriptionB>
+                <SpringCollection>spring collection 2022</SpringCollection>
+              </TextBlockB>
+            </WrapperBannerB>
+          }
 
-          {screen.big &&
+          {!screen.medium &&
             <WrapperBannerC>
               <TextBlockC>
                 <span>sale</span>
