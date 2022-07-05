@@ -6,14 +6,14 @@ import ImageC from '../images/whatsNewC.png';
 
 const Wrapper = styled.article`
   margin-top: 20px;
-  padding: 0 1% 0;
   display: flex;
   justify-content: center;
   align-content: space-between;
-`;
+  `;
 
 const WrapperInner = styled.div`
   width: 1100px;
+  padding: 0 1% 0;
   display: flex;
   flex-wrap: wrap;
   align-content: start;
