@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import styled from 'styled-components/macro';
 import {mediumScreen, useMediaQuery} from '../mediaQueries';
-import {Link} from 'react-router-dom';
+import {HashLink} from 'react-router-hash-link';
 import CartPreview from './CartPreview';
 
 
@@ -68,7 +68,7 @@ const Dropdown = styled.div<{open: boolean, width: string, height: string}>`
   `}
 `;
 
-const LinkSimple = styled.a`
+const LinkSimple = styled(HashLink)`
   width: 65px;
   margin: 11px 0 4px 0;
   font-family: var(--font-second);
@@ -162,7 +162,8 @@ const Top = (): JSX.Element => {
               onMouseLeave={(): void => setContactOpen(false)}
             >
               <LinkMain
-                href='#footer'
+                to='/#footer'
+                smooth
                 open={contactOpen}
                 onMouseEnter={(): void => setContactOpen(true)}
               >
@@ -171,8 +172,8 @@ const Top = (): JSX.Element => {
 
               {contactOpen &&
                 <>
-                  <LinkSimple href='#store-location'>STORE LOCATION</LinkSimple>
-                  <LinkSimple href='#about-us'>ABOUT US</LinkSimple>
+                  <LinkSimple to='/#store-location' smooth>STORE LOCATION</LinkSimple>
+                  <LinkSimple to='/#about-us' smooth>ABOUT US</LinkSimple>
                 </>
               }
             </Dropdown>
@@ -208,10 +209,10 @@ const Top = (): JSX.Element => {
 
         {screen.big &&
           <div>
-            <LinkUnderline as={Link} to='my-account'>MY ACCOUNT</LinkUnderline>
-            <LinkUnderline as={Link} to='wish-list'>WISH LIST</LinkUnderline>
-            <LinkUnderline as={Link} to='checkout'>CHECKOUT</LinkUnderline>
-            <LinkUnderline as={Link} to='login' withoutBorder>LOG IN</LinkUnderline>
+            <LinkUnderline to='my-account'>MY ACCOUNT</LinkUnderline>
+            <LinkUnderline to='wish-list'>WISH LIST</LinkUnderline>
+            <LinkUnderline to='checkout'>CHECKOUT</LinkUnderline>
+            <LinkUnderline to='login' withoutBorder>LOG IN</LinkUnderline>
           </div>
         }
 
