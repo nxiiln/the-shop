@@ -13,7 +13,6 @@ import compare from '../images/compare.png';
 
 const MostPopularWrapper = styled.article`
   min-width: 420px;
-  height: 440px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -24,7 +23,6 @@ const MostPopularWrapper = styled.article`
   @media ${smallScreen} {
     width: 100%;
     min-width: 0;
-    height: 480px;
     align-content: start;
   }
 `;
