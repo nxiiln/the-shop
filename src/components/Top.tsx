@@ -171,8 +171,8 @@ const Top = (): JSX.Element => {
 
               {contactOpen &&
                 <>
-                  <LinkSimple to='/#store-location' smooth>STORE LOCATION</LinkSimple>
-                  <LinkSimple to='/#about-us' smooth>ABOUT US</LinkSimple>
+                  <LinkSimple to='#store-location' smooth>STORE LOCATION</LinkSimple>
+                  <LinkSimple to='#about-us' smooth>ABOUT US</LinkSimple>
                 </>
               }
             </Dropdown>
