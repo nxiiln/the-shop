@@ -162,8 +162,7 @@ const Top = (): JSX.Element => {
               onMouseLeave={(): void => setContactOpen(false)}
             >
               <LinkMain
-                to='/#footer'
-                smooth
+                as='span'
                 open={contactOpen}
                 onMouseEnter={(): void => setContactOpen(true)}
               >
@@ -184,7 +183,7 @@ const Top = (): JSX.Element => {
             width='55px'
             height='65px'
             open={currencyOpen}
-            onClick={(): void => setCurrencyOpen(false)}
+            onClick={(): void => setCurrencyOpen(!currencyOpen)}
             onMouseLeave={(): void => setCurrencyOpen(false)}
           >
             <ButtonMain
