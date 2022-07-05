@@ -262,7 +262,9 @@ const products: Product[] = [
 
 const CatalogProducts = (): JSX.Element => {
   const [productOpen, setProductOpen] = useState<number>(0);
+
   type Click = React.MouseEvent<HTMLButtonElement, MouseEvent>;
+  const preventDefault = (e: Click): void => e.preventDefault();
   
 
   return(
@@ -270,10 +272,9 @@ const CatalogProducts = (): JSX.Element => {
       {products.map((product: Product): JSX.Element =>
         <Product
           key={product.id}
+          onClick={(): void => setProductOpen(product.id)}
           onMouseEnter={(): void => setProductOpen(product.id)}
-          onMouseLeave={(): false | void => {
-            productOpen === product.id && setProductOpen(0)
-          }}
+          onMouseLeave={(): void => setProductOpen(0)}
         >
           <img src={product.image} alt={product.name} />
 
@@ -293,21 +294,21 @@ const CatalogProducts = (): JSX.Element => {
 
           {productOpen === product.id &&
             <ProductOpen to='product#top'>
-              <QuickShop onClick={(e: Click): void => e.preventDefault()}>QUICK SHOP</QuickShop>
+              <QuickShop onClick={preventDefault}>QUICK SHOP</QuickShop>
 
-              <AddToBag type='button' onClick={(e: Click): void => e.preventDefault()}>
+              <AddToBag type='button' onClick={preventDefault}>
                 <div>
                   <img src={cartSymbol} alt='cart symbol' />
                   ADD TO BAG
                 </div>
               </AddToBag>
 
-              <WishList type='button' onClick={(e: Click): void => e.preventDefault()}>
+              <WishList type='button' onClick={preventDefault}>
                 <img src={wishList} alt='wishlist' />
                 WISHLIST
               </WishList>
 
-              <Compare type='button' onClick={(e: Click): void => e.preventDefault()}>
+              <Compare type='button' onClick={preventDefault}>
                 <img src={compare} alt='compare' />
                 COMPARE
               </Compare>
