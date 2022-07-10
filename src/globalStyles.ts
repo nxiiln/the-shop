@@ -23,7 +23,7 @@ const GlobalStyle = createGlobalStyle`
     }
   }
 
-  button, label, img {user-select: none}
+  button, a, label, img {user-select: none}
 `;
 
 
