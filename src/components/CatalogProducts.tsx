@@ -1,6 +1,8 @@
 import {useState} from 'react';
 import styled from 'styled-components/macro';
 import {HashLink} from 'react-router-hash-link';
+import {useAppSelector, useAppDispatch} from '../redux-hooks';
+import {add} from '../slices/cart';
 import product1 from '../images/product1.png';
 import product2 from '../images/product2.png';
 import product3 from '../images/product3.png';
@@ -10,6 +12,7 @@ import product6 from '../images/product6.png';
 import product7 from '../images/product7.png';
 import product8 from '../images/product8.png';
 import product9 from '../images/product9.png';
+import product10 from '../images/mostPopularA.png';
 import cartSymbol from '../images/cartSymbol.png';
 import wishList from '../images/wishList.png';
 import compare from '../images/compare.png';
@@ -23,7 +26,7 @@ const Products = styled.div`
   margin: 22px 0 80px 0;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  /* justify-content: space-around; */
 `;
 
 const Product = styled.div`
@@ -110,7 +113,7 @@ const QuickShop = styled.button`
   &:hover {opacity: 1}
 `;
 
-const AddToBag = styled.button`
+const AddToCart = styled.button`
   width: 100%;
   height: 25px;
   margin-top: 365px;
@@ -188,72 +191,72 @@ interface Product {
   image: string;
   name: string;
   price: number;
-  triangle: string;
+  triangle?: string;
 }
 
 const products: Product[] = [
   {
     id: 1,
     image: product1,
-    name: 'detailed swing dress',
+    name: 'product 1',
     price: 1875,
-    triangle: 'new',
+    // triangle: 'new',
   },
   {
     id: 2,
     image: product2,
-    name: 'maxararzy frilled dress',
+    name: 'product 2',
     price: 1875,
-    triangle: 'sale',
+    // triangle: 'sale',
   },
   {
     id: 3,
     image: product3,
-    name: 'detailed swing dress',
+    name: 'product 3',
     price: 1875,
-    triangle: '',
   },
   {
     id: 4,
     image: product4,
-    name: 'maxararzy frilled dress',
+    name: 'product 4',
     price: 1875,
-    triangle: '',
   },
   {
     id: 5,
     image: product5,
-    name: 'detailed swing dress',
+    name: 'product 5',
     price: 1875,
-    triangle: '',
   },
   {
     id: 6,
     image: product6,
-    name: 'maxararzy frilled dress',
+    name: 'product 6',
     price: 1875,
-    triangle: 'sale',
+    // triangle: 'sale',
   },
   {
     id: 7,
     image: product7,
-    name: 'detailed swing dress',
+    name: 'product 7',
     price: 1875,
-    triangle: '',
   },
   {
     id: 8,
     image: product8,
-    name: 'maxararzy frilled dress',
+    name: 'product 8',
     price: 1875,
-    triangle: '',
   },
   {
     id: 9,
     image: product9,
-    name: 'detailed swing dress',
+    name: 'product 9',
     price: 1875,
-    triangle: '',
+  },
+  {
+    id: 10,
+    image: product10,
+    name: 'product 10',
+    price: 1875,
   },
 ];
 
@@ -262,6 +265,8 @@ const products: Product[] = [
 
 const CatalogProducts = (): JSX.Element => {
   const [productOpen, setProductOpen] = useState<number>(0);
+  const cart = useAppSelector(state => state.cart);
+  const dispatch = useAppDispatch();
 
   type Click = React.MouseEvent<HTMLButtonElement, MouseEvent>;
   const preventDefault = (e: Click): void => e.preventDefault();
@@ -296,12 +301,20 @@ const CatalogProducts = (): JSX.Element => {
             <ProductOpen to='product#top'>
               <QuickShop onClick={preventDefault}>QUICK SHOP</QuickShop>
 
-              <AddToBag type='button' onClick={preventDefault}>
+              <AddToCart
+                type='button'
+                onClick={(e: Click): void => {
+                  e.preventDefault();
+                  const id = product.id;
+                  const find = (product: Product): boolean => product.id === id;
+                  if (cart.findIndex(find) === -1) dispatch(add(products[product.id - 1]));
+                }}
+              >
                 <div>
                   <img src={cartSymbol} alt='cart symbol' />
-                  ADD TO BAG
+                  ADD TO CART
                 </div>
-              </AddToBag>
+              </AddToCart>
 
               <WishList type='button' onClick={preventDefault}>
                 <img src={wishList} alt='wishlist' />
