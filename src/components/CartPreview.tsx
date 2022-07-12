@@ -2,10 +2,19 @@ import {useState} from 'react';
 import styled from 'styled-components/macro';
 import {smallScreen} from '../mediaQueries';
 import {Link} from 'react-router-dom';
+import {useAppSelector, useAppDispatch} from '../redux-hooks';
+import {remove} from '../slices/cart'
 import cartSymbol from '../images/cartSymbol.png';
-import imageProductA from '../images/imageProductA.png';
-import imageProductB from '../images/imageProductB.png';
-import imageProductC from '../images/imageProductC.png';
+import product1 from '../images/product1.png';
+import product2 from '../images/product2.png';
+import product3 from '../images/product3.png';
+import product4 from '../images/product4.png';
+import product5 from '../images/product5.png';
+import product6 from '../images/product6.png';
+import product7 from '../images/product7.png';
+import product8 from '../images/product8.png';
+import product9 from '../images/product9.png';
+import product10 from '../images/product10.png';
 
 
 
@@ -14,7 +23,7 @@ const CartPreviewWrapper = styled.div`
   box-sizing: content-box;
   width: 80px;
   margin-right: 20px;
-  padding: 14px 0 14px 0;
+  padding: 14px 0 20px 0;
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -92,6 +101,7 @@ const Product = styled.div`
 `;
 
 const ProductImage = styled.img`
+  width: 58px;
   margin: 6px 0 0 6px;
 `;
 
@@ -213,51 +223,24 @@ const Checkout = styled(LinkBox)`
 
 
 interface Product {
-  id: string;
+  id: number;
   image: string;
-  description: string;
+  name: string;
   price: number;
-  status: boolean;
-};
-
-const productList: Product[] = [
-  {
-    id: 'productA',
-    image: imageProductA,
-    description: 'detailed swing dress',
-    price: 275,
-    status: true
-  },
-  {
-    id: 'productB',
-    image: imageProductB,
-    description: 'maxararzy frilled dress',
-    price: 1875,
-    status: true
-  },
-  {
-    id: 'productC',
-    image: imageProductC,
-    description: 'detailed swing dress',
-    price: 159,
-    status: true
-  }
-];
+  triangle?: string;
+}
 
 
 
 
 const CartPreview = (): JSX.Element => {
   const [open, setOpen] = useState<boolean>(false);
-  const [products, setProducts] = useState<Product[]>(productList);
+  const cart = useAppSelector(state => state.cart);
+  const dispatch = useAppDispatch();
 
-  const productsNumber: number = products
-    .filter((product: Product): boolean => product.status)
-    .length;
-  
-  const totalPrice: number = products
-    .map((product: Product): number => +product.status && product.price)
-    .reduce((prev: number, curr: number): number => prev + curr);
+  const totalPrice: number = cart
+    .map((product: Product): number => product.price)
+    .reduce(((prev: number, curr: number): number => prev + curr), 0);
 
 
   return(
@@ -269,33 +252,24 @@ const CartPreview = (): JSX.Element => {
         <CartPreviewSymbol src={cartSymbol} alt='cart'/>
       </CartPreviewSymbolWrapper>
 
-      <Text>cart ({productsNumber})</Text>
+      <Text>cart ({cart.length})</Text>
 
       {open &&
         <Dropdown>
           <TriangleOuter><TriangleInner /></TriangleOuter>
 
-          {products.map((product: Product): false | JSX.Element =>
-            product.status &&
-              <Product key={product.id}>
-                <ProductImage
-                  src={product.image}
-                  alt='productPreview'
-                />
-                <Description>{product.description}</Description>
-                <Price>${product.price}</Price>
-                <Remove
-                  type='button'
-                  onClick={(): void => {
-                    const newProducts: Product[] = [...products];
-                    const currIndex: number = products.indexOf(product);
-                    newProducts[currIndex].status = false;
-                    setProducts(newProducts);
-                  }}
-                >
-                  <X>+</X>
-                </Remove>
-              </Product>
+          {cart.map((product: Product): false | JSX.Element =>
+            <Product key={product.id}>
+              <ProductImage src={product.image} alt='product preview' />
+              <Description>{product.name}</Description>
+              <Price>${product.price}</Price>
+              <Remove
+                type='button'
+                onClick={(): void => {dispatch(remove(cart.indexOf(product)))}}
+              >
+                <X>+</X>
+              </Remove>
+            </Product>
           )}
 
           <Result>
