@@ -1,80 +1,67 @@
-import {useState} from 'react';
 import styled from 'styled-components/macro';
-import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
-import productMain from '../images/productMain.png';
-import productSecond1 from '../images/productSecond1.png';
-import productSecond2 from '../images/productSecond2.png';
-import productSecond3 from '../images/productSecond3.png';
-import productSecond4 from '../images/productSecond4.png';
+import {mediumScreen, smallScreen} from '../mediaQueries';
+import {useParams} from 'react-router-dom';
+import product1 from '../images/product1.png';
+import product2 from '../images/product2.png';
+import product3 from '../images/product3.png';
+import product4 from '../images/product4.png';
+import product5 from '../images/product5.png';
+import product6 from '../images/product6.png';
+import product7 from '../images/product7.png';
+import product8 from '../images/product8.png';
+import product9 from '../images/product9.png';
+import product10 from '../images/mostPopularA.png';
 
 
 
+
+const productImages: string[] = [
+  product1,
+  product2,
+  product3,
+  product4,
+  product5,
+  product6,
+  product7,
+  product8,
+  product9,
+  product10,
+];
 
 const Slider = styled.article`
-  width: 600px;
+  width: 400px;
+  position: relative;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  border: 1px solid orange;
 
+  > img {width: 100%}
+  
   @media ${mediumScreen}, ${smallScreen} {
     width: 100%;
     flex-direction: column-reverse;
     align-items: center;
   }
-`;
 
-const ImageSecondWrapper = styled.div`
-  width: 80px;
-  height: 520px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  
-  @media ${mediumScreen}, ${smallScreen} {
-    width: 100%;
-    max-width: 490px;
-    height: auto;
-    margin-top: 10px;
-    flex-direction: row;
+  @media ${smallScreen} {
+
+    > img {
+      /* width: 100%; */
+      /* object-fit: cover; */
+      /* max-width: 400px; */
+      /* min-width: 400px; */
+    }
   }
 `;
 
-const ButtonUp = styled.button<{rotate: boolean}>`
-  width: 20px;
-  height: 10px;
+const ImageWrapper = styled.div`
+  width: 400px;
   position: relative;
-  background: none;
-  border: none;
-  cursor: default;
-
-  > span {
-    font-size: 18px;
-    position: absolute;
-    top: -9px;
-    left: 6px;
-    ${props => props.rotate && 'transform: rotate(90deg);'}
-  }
-`;
-
-const ButtonDown = styled(ButtonUp)`
-  > span {
-    top: -8px;
-    left: 3px;
-  }
-`;
-
-const ImageSecond = styled.img<{curr: boolean}>`
-  width: 80px;
-  height: 112px;
-  ${props => props.curr && 'border: 1px solid var(--color-border);'}
-`;
-
-const ImageMainWrapper = styled.div`
-  position: relative;
+  border: 1px solid aqua;
 
   > img {
     width: 100%;
-    max-width: 490px;
+    max-width: 400px;
   }
 `;
 
@@ -105,71 +92,22 @@ const ProductTriangleDescription = styled.span`
 
 
 const ProductSlider = (): JSX.Element => {
-  const [imageSecond, setImageSecond] = useState<number>(1);
-  const screen = useMediaQuery();
+  const findProductId = (id: string | undefined): number => {
+    if (typeof id === 'string') {
+      return +id.replace(/(product)(\d+$)/, '$2') - 1;
+    }
+    return -1;
+  }
+  
 
   return(
     <Slider>
-      <ImageSecondWrapper>
-        <ButtonUp
-          type='button'
-          rotate={screen.big}
-          onClick={(): void => {
-            if (imageSecond === 1) return;
-            setImageSecond((prevImageSecond: number): number => prevImageSecond - 1);
-          }}
-        >
-          <span>❮</span>
-        </ButtonUp>
-
-        <ImageSecond
-          src={productSecond1}
-          alt='imageSecond1'
-          curr={imageSecond === 1}
-          onClick={(): void => setImageSecond(1)}
-        />
-
-        <ImageSecond
-          src={productSecond2}
-          alt='imageSecond2'
-          curr={imageSecond === 2}
-          onClick={(): void => setImageSecond(2)}
-        />
-
-        <ImageSecond
-          src={productSecond3}
-          alt='imageSecond3'
-          curr={imageSecond === 3}
-          onClick={(): void => setImageSecond(3)}
-        />
-
-        {!screen.small &&
-          <ImageSecond
-            src={productSecond4}
-            alt='imageSecond4'
-            curr={imageSecond === 4}
-            onClick={(): void => setImageSecond(4)}
-          />
-        }
-
-        <ButtonDown
-          type='button'
-          rotate={screen.big}
-          onClick={(): void => {
-            if (imageSecond === 4) return;
-            setImageSecond((prevImageSecond: number): number => prevImageSecond + 1);
-          }}
-        >
-          <span>❯</span>
-        </ButtonDown>
-      </ImageSecondWrapper>
-
-
-      <ImageMainWrapper>
-        <ProductTriangle />
-        <ProductTriangleDescription>NEW</ProductTriangleDescription>
-        <img src={productMain} alt='imageMain' />
-      </ImageMainWrapper>
+      <ProductTriangle />
+      <ProductTriangleDescription>NEW</ProductTriangleDescription>
+      <img
+        src={productImages[findProductId(useParams().id)]}
+        alt='product image'
+      />
     </Slider>
   );
 }
