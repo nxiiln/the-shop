@@ -26,7 +26,7 @@ const Products = styled.div`
   margin: 22px 0 80px 0;
   display: flex;
   flex-wrap: wrap;
-  /* justify-content: space-around; */
+  justify-content: space-around;
 `;
 
 const Product = styled.div`
@@ -298,7 +298,7 @@ const CatalogProducts = (): JSX.Element => {
           <ProductPrice>${product.price}</ProductPrice>
 
           {productOpen === product.id &&
-            <ProductOpen to='product#top'>
+            <ProductOpen to={`product${product.id}#top`}>
               <QuickShop onClick={preventDefault}>QUICK SHOP</QuickShop>
 
               <AddToCart
