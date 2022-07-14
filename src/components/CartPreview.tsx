@@ -238,7 +238,7 @@ const CartPreview = (): JSX.Element => {
         <Dropdown>
           <TriangleOuter><TriangleInner /></TriangleOuter>
 
-          {cart.map((product: IProduct): false | JSX.Element =>
+          {cart.map((product: IProduct): JSX.Element =>
             <Product key={product.id}>
               <ProductImage src={product.image} alt='product preview' />
               <Description>{product.name}</Description>

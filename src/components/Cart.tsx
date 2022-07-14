@@ -573,7 +573,7 @@ const Cart = (): JSX.Element => {
           }
 
 
-          {cart.map((product: IProduct): false | JSX.Element =>
+          {cart.map((product: IProduct): JSX.Element =>
             <ProductWrapper key={product.id}>
               <Product>
                 <img src={product.image} alt={product.name} />
