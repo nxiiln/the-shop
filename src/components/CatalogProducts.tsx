@@ -191,7 +191,10 @@ interface Product {
   image: string;
   name: string;
   price: number;
+  color: string;
+  size: string;
   triangle?: string;
+  quantity: number;
 }
 
 const products: Product[] = [
@@ -200,63 +203,93 @@ const products: Product[] = [
     image: product1,
     name: 'product 1',
     price: 1875,
-    // triangle: 'new',
+    color: 'pink',
+    size: 's',
+    quantity: 1,
+    triangle: 'new',
   },
   {
     id: 2,
     image: product2,
     name: 'product 2',
     price: 1875,
-    // triangle: 'sale',
+    color: 'pink',
+    size: 's',
+    quantity: 1,
+    triangle: 'sale',
   },
   {
     id: 3,
     image: product3,
     name: 'product 3',
     price: 1875,
+    color: 'pink',
+    size: 's',
+    quantity: 1,
   },
   {
     id: 4,
     image: product4,
     name: 'product 4',
     price: 1875,
+    color: 'pink',
+    size: 's',
+    quantity: 1,
   },
   {
     id: 5,
     image: product5,
     name: 'product 5',
     price: 1875,
+    color: 'pink',
+    size: 's',
+    quantity: 1,
   },
   {
     id: 6,
     image: product6,
     name: 'product 6',
     price: 1875,
-    // triangle: 'sale',
+    color: 'pink',
+    size: 's',
+    quantity: 1,
+    triangle: 'sale',
   },
   {
     id: 7,
     image: product7,
     name: 'product 7',
     price: 1875,
+    color: 'pink',
+    size: 's',
+    quantity: 1,
   },
   {
     id: 8,
     image: product8,
     name: 'product 8',
     price: 1875,
+    color: 'pink',
+    size: 's',
+    quantity: 1,
   },
   {
     id: 9,
     image: product9,
     name: 'product 9',
     price: 1875,
+    color: 'pink',
+    size: 's',
+    quantity: 1,
   },
   {
     id: 10,
     image: product10,
     name: 'product 10',
     price: 1875,
+    color: 'pink',
+    size: 's',
+    quantity: 1,
   },
 ];
 
@@ -307,7 +340,7 @@ const CatalogProducts = (): JSX.Element => {
                   e.preventDefault();
                   const id = product.id;
                   const find = (product: Product): boolean => product.id === id;
-                  if (cart.findIndex(find) === -1) dispatch(add(products[product.id - 1]));
+                  if (cart.findIndex(find) === -1) dispatch(add(product));
                 }}
               >
                 <div>
