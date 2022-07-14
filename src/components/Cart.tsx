@@ -2,9 +2,9 @@ import {useState} from 'react';
 import styled from 'styled-components/macro';
 import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
 import {HashLink} from 'react-router-hash-link';
+import {useAppSelector, useAppDispatch} from '../redux-hooks';
+import {remove, incrementQuantity, decrementQuantity} from '../slices/cart';
 import BreadCrumbs from './BreadCrumbs';
-import cartProductA from '../images/cartProductA.png';
-import cartProductB from '../images/cartProductB.png';
 
 
 
@@ -124,7 +124,10 @@ const Product = styled.div`
   align-items: center;
   background: transparent;
 
-  > img {grid-area: img}
+  > img {
+    width: 85px;
+    grid-area: img;
+  }
   
   > span {
     font-family: var(--font-second);
@@ -504,40 +507,14 @@ const ButtonWrapper = styled.div`
 
 interface Product {
   id: number;
-  status: boolean;
   image: string;
   name: string;
-  color: string;
-  size: number;
   price: number;
+  color: string;
+  size: string;
+  triangle?: string;
   quantity: number;
-  amount(): number;
 }
-
-const productList: Product[] = [
-  {
-    id: 1,
-    status: true,
-    image: cartProductA,
-    name: 'detailed swing dress',
-    color: 'yellow',
-    size: 12,
-    price: 275,
-    quantity: 1,
-    amount() {return this.price * this.quantity}
-  },
-  {
-    id: 2,
-    status: true,
-    image: cartProductB,
-    name: 'maxararzy frilled dress',
-    color: 'blue',
-    size: 14,
-    price: 325,
-    quantity: 2,
-    amount() {return this.price * this.quantity}
-  }
-];
 
 
 interface Region {
@@ -564,13 +541,15 @@ const regions: Region[] = [
 
 
 const Cart = (): JSX.Element => {
-  const [products, setProducts] = useState<Product[]>(productList);
+  const cart = useAppSelector(state => state.cart);
+  const dispatch = useAppDispatch();
   const [country, setCountry] = useState<string>('default');
   const screen = useMediaQuery();
-
-  const subtotal: number = products
-    .map((product: Product): number => +product.status && product.amount())
-    .reduce((prev: number, curr: number): number => prev + curr);
+  
+  const amount = (product: Product): number => product.price * product.quantity;
+  const subtotal: number = cart
+    .map(amount)
+    .reduce((prev: number, curr: number): number => prev + curr, 0);
 
 
   return(
@@ -605,70 +584,52 @@ const Cart = (): JSX.Element => {
           }
 
 
-          {products.map((product: Product): false | JSX.Element =>
-            product.status &&
-              <ProductWrapper key={product.id}>
-                <Product>
-                  <img src={product.image} alt={product.name} />
-                  <Text gridArea='nam'>{product.name}</Text>
-                  <Text gridArea='clr'>color: {product.color}</Text>
-                  <Text gridArea='siz'>size: {product.size}</Text>
-                  <ButtonUnderline type='button' gridArea='edi'>Edit Item</ButtonUnderline>
+          {cart.map((product: Product): false | JSX.Element =>
+            <ProductWrapper key={product.id}>
+              <Product>
+                <img src={product.image} alt={product.name} />
+                <Text gridArea='nam'>{product.name}</Text>
+                <Text gridArea='clr'>color: {product.color}</Text>
+                <Text gridArea='siz'>size: {product.size}</Text>
+                <ButtonUnderline type='button' gridArea='edi'>Edit Item</ButtonUnderline>
 
-                  <X
-                    type='button'
-                    gridArea='x'
-                    onClick={(): void => {
-                      const newProducts: Product[] = [...products];
-                      const currIndex: number = products.indexOf(product);
-                      newProducts[currIndex].status = false;
-                      setProducts(newProducts);
-                    }}
-                  >
-                    +
-                  </X>
+                <X
+                  type='button'
+                  gridArea='x'
+                  onClick={(): void => {dispatch(remove(product))}}
+                >
+                  +
+                </X>
 
-                  {!screen.small && <Text gridArea='prc'>${product.price}</Text>}
+                {!screen.small && <Text gridArea='prc'>${product.price}</Text>}
 
-                  <Quantity>
-                    <span>{product.quantity}</span>
-                  </Quantity>
+                <Quantity>
+                  <span>{product.quantity}</span>
+                </Quantity>
 
-                  <PlusMinus
-                    type='button'
-                    gridArea='pls'
-                    onClick={(): void => {
-                      const newProducts: Product[] = [...products];
-                      const currIndex: number = products.indexOf(product);
-                      newProducts[currIndex].quantity += 1;
-                      setProducts(newProducts);
-                    }}
-                  >
-                    +
-                  </PlusMinus>
+                <PlusMinus
+                  type='button'
+                  gridArea='pls'
+                  onClick={(): void => {dispatch(incrementQuantity(product))}}
+                >
+                  +
+                </PlusMinus>
 
-                  <PlusMinus
-                    type='button'
-                    gridArea='mns'
-                    onClick={(): void => {
-                      const newProducts: Product[] = [...products];
-                      const currIndex: number = products.indexOf(product);
-                      if (newProducts[currIndex].quantity > 1) {
-                        newProducts[currIndex].quantity -= 1;
-                      } 
-                      setProducts(newProducts);
-                    }}
-                  >
-                    -
-                  </PlusMinus>
+                <PlusMinus
+                  type='button'
+                  gridArea='mns'
+                  onClick={(): void => {dispatch(decrementQuantity(product))}}
+                >
+                  -
+                </PlusMinus>
 
-                  {!screen.small &&
-                    <ButtonUnderline type='button' gridArea='upd'>Update</ButtonUnderline>
-                  }
+                {!screen.small &&
+                  <ButtonUnderline type='button' gridArea='upd'>Update</ButtonUnderline>
+                }
 
-                  <Text gridArea='amt'>${product.amount()}</Text>
-                </Product>
-              </ProductWrapper>
+                <Text gridArea='amt'>${amount(product)}</Text>
+              </Product>
+            </ProductWrapper>
           )}
         </CartWrapper>
 
