@@ -1,8 +1,9 @@
 import {useState} from 'react';
 import styled from 'styled-components/macro';
 import {bigScreen, mediumScreen, smallScreen} from '../mediaQueries';
-import cartProductA from '../images/cartProductA.png';
-import cartProductB from '../images/cartProductB.png';
+import {useAppSelector, useAppDispatch} from '../redux-hooks';
+import {remove} from '../slices/cart';
+import {IProduct} from '../IProduct';
 
 
 
@@ -175,81 +176,37 @@ const Total = styled.div`
 
 
 
-interface Product {
-  id: number;
-  status: boolean;
-  image: string;
-  name: string;
-  color: string;
-  size: number;
-  qty: number;
-  price: number;
-  amount(): number;
-}
-
-const initialProducts: Product[] = [
-  {
-    id: 1,
-    status: true,
-    image: cartProductA,
-    name: 'detailed swing dress',
-    color: 'yellow',
-    size: 12,
-    qty: 1,
-    price: 275,
-    amount() {return this.price * this.qty}
-  },
-  {
-    id: 2,
-    status: true,
-    image: cartProductB,
-    name: 'detailed swing dress',
-    color: 'blue',
-    size: 14,
-    qty: 1,
-    price: 325,
-    amount() {return this.price * this.qty}
-  }
-]
-
-
-
-
 const CartCheckout = (): JSX.Element => {
-  const [products, setProducts] = useState<Product[]>(initialProducts);
-  
-  const subtotal: number = products
-    .map((product: Product): number => +product.status && product.amount())
-    .reduce((prev: number, curr: number): number => prev + curr);
+  const cart = useAppSelector(state => state.cart);
+  const dispatch = useAppDispatch();
+
+  const amount = (product: IProduct): number => product.price * product.quantity;
+  const subtotal: number = cart
+    .map(amount)
+    .reduce((prev: number, curr: number): number => prev + curr, 0);
 
 
   return(
     <Cart>
       <span>CART</span>
-      {products.map((product: Product): false | JSX.Element =>
-        product.status &&
-          <ProductWrapper key={product.id}>
-            <Product>
-              <img src={product.image} alt={product.name} />
-              <span>{product.name}</span>
-              <span>color: {product.color}</span>
-              <span>size: {product.size}</span>
-              <span>qty: {product.qty}</span>
-              <ButtonUnderline type='button'>Edit Item</ButtonUnderline>
-              <X
-                type='button'
-                onClick={(): void => {
-                  const newProducts: Product[] = [...products];
-                  const currIndex: number = products.indexOf(product);
-                  newProducts[currIndex].status = false;
-                  setProducts(newProducts);
-                }}
-              >
-                +
-              </X>
-              <span>${product.price}</span>
-            </Product>
-          </ProductWrapper>
+      {cart.map((product: IProduct): JSX.Element =>
+        <ProductWrapper key={product.id}>
+          <Product>
+            <img src={product.image} alt={product.name} />
+            <span>{product.name}</span>
+            <span>color: {product.color}</span>
+            <span>size: {product.size}</span>
+            <span>qty: {product.quantity}</span>
+            <ButtonUnderline type='button'>Edit Item</ButtonUnderline>
+            <X
+              type='button'
+              onClick={(): void => {dispatch(remove(product))}}
+            >
+              +
+            </X>
+            <span>${product.price}</span>
+          </Product>
+        </ProductWrapper>
       )}
 
       <TotalWrapper>
