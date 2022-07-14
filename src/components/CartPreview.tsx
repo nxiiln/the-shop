@@ -13,8 +13,8 @@ import cartSymbol from '../images/cartSymbol.png';
 const CartPreviewWrapper = styled.div`
   box-sizing: content-box;
   width: 80px;
-  margin-right: 20px;
-  padding: 14px 0 20px 0;
+  margin-right: 25px;
+  padding: 15px 0;
   position: relative;
   display: flex;
   justify-content: space-between;
