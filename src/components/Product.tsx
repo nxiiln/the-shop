@@ -61,10 +61,11 @@ const WrapperInner = styled.div`
 
 const Slider = styled.article`
   width: 400px;
+  margin-bottom: 20px;
   position: relative;
   display: flex;
   justify-content: center;
-  border: 1px solid orange;
+  /* border: 1px solid orange; */
 
   > img {width: 100%}
   
