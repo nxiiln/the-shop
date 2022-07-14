@@ -1,5 +1,4 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {RootState} from '../store';
 
 
 interface Product {
@@ -8,6 +7,9 @@ interface Product {
   name: string;
   price: number;
   triangle?: string;
+  color: string;
+  size: string;
+  quantity: number;
 }
 
 const initialState: Product[] = [];
@@ -21,14 +23,22 @@ export const cartSlice = createSlice({
       state.push(action.payload);
     },
 
-    remove: (state, action: PayloadAction<number>): void => {
-      state.splice(action.payload, 1);
+    remove: (state, action: PayloadAction<Product>) => {
+      return state.filter(product => product.id !== action.payload.id);
+    },
+
+    incrementQuantity: (state, action: PayloadAction<Product>): void => {
+      const index = state.findIndex(product => product.id === action.payload.id);
+      state[index].quantity += 1;
+    },
+
+    decrementQuantity: (state, action: PayloadAction<Product>): void => {
+      const index = state.findIndex(product => product.id === action.payload.id);
+      if (state[index].quantity > 1) state[index].quantity -= 1;
     }
   }
 });
 
 
-export const {add} = cartSlice.actions;
-export const {remove} = cartSlice.actions;
-export const cartSelector = (state: RootState) => state.cart;
+export const {add, remove, incrementQuantity, decrementQuantity} = cartSlice.actions;
 export default cartSlice.reducer;
