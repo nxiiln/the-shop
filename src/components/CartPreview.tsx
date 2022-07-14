@@ -228,6 +228,9 @@ interface Product {
   name: string;
   price: number;
   triangle?: string;
+  color: string;
+  size: string;
+  quantity: number;
 }
 
 
@@ -240,7 +243,7 @@ const CartPreview = (): JSX.Element => {
 
   const totalPrice: number = cart
     .map((product: Product): number => product.price)
-    .reduce(((prev: number, curr: number): number => prev + curr), 0);
+    .reduce((prev: number, curr: number): number => prev + curr, 0);
 
 
   return(
@@ -265,7 +268,7 @@ const CartPreview = (): JSX.Element => {
               <Price>${product.price}</Price>
               <Remove
                 type='button'
-                onClick={(): void => {dispatch(remove(cart.indexOf(product)))}}
+                onClick={(): void => {dispatch(remove(product))}}
               >
                 <X>+</X>
               </Remove>
