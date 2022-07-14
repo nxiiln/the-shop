@@ -2,7 +2,7 @@ import {useState} from 'react';
 import styled from 'styled-components/macro';
 import {bigScreen, mediumScreen, smallScreen} from '../mediaQueries';
 import {useAppSelector, useAppDispatch} from '../redux-hooks';
-import {remove} from '../slices/cart';
+import {cartRemove} from '../slices/cart';
 import {IProduct} from '../IProduct';
 
 
@@ -200,7 +200,7 @@ const CartCheckout = (): JSX.Element => {
             <ButtonUnderline type='button'>Edit Item</ButtonUnderline>
             <X
               type='button'
-              onClick={(): void => {dispatch(remove(product))}}
+              onClick={(): void => {dispatch(cartRemove(product))}}
             >
               +
             </X>

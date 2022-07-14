@@ -2,7 +2,7 @@ import {useState} from 'react';
 import styled from 'styled-components/macro';
 import {HashLink} from 'react-router-hash-link';
 import {useAppSelector, useAppDispatch} from '../redux-hooks';
-import {add} from '../slices/cart';
+import {cartAdd} from '../slices/cart';
 import {products} from '../products';
 import {IProduct} from '../IProduct';
 import cartSymbol from '../images/cartSymbol.png';
@@ -222,7 +222,7 @@ const CatalogProducts = (): JSX.Element => {
                   e.preventDefault();
                   const id = product.id;
                   const find = (product: IProduct): boolean => product.id === id;
-                  if (cart.findIndex(find) === -1) dispatch(add(product));
+                  if (cart.findIndex(find) === -1) dispatch(cartAdd(product));
                 }}
               >
                 <div>

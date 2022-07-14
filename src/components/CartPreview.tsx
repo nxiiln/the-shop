@@ -3,7 +3,7 @@ import styled from 'styled-components/macro';
 import {smallScreen} from '../mediaQueries';
 import {Link} from 'react-router-dom';
 import {useAppSelector, useAppDispatch} from '../redux-hooks';
-import {remove} from '../slices/cart'
+import {cartRemove} from '../slices/cart'
 import {IProduct} from '../IProduct';
 import cartSymbol from '../images/cartSymbol.png';
 
@@ -245,7 +245,7 @@ const CartPreview = (): JSX.Element => {
               <Price>${product.price}</Price>
               <Remove
                 type='button'
-                onClick={(): void => {dispatch(remove(product))}}
+                onClick={(): void => {dispatch(cartRemove(product))}}
               >
                 <X>+</X>
               </Remove>

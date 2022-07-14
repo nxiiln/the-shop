@@ -3,7 +3,7 @@ import styled from 'styled-components/macro';
 import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
 import {HashLink} from 'react-router-hash-link';
 import {useAppSelector, useAppDispatch} from '../redux-hooks';
-import {remove, incrementQuantity, decrementQuantity} from '../slices/cart';
+import {cartRemove, quantityIncrement, quantityDecrement} from '../slices/cart';
 import {IProduct} from '../IProduct';
 import BreadCrumbs from './BreadCrumbs';
 
@@ -585,7 +585,7 @@ const Cart = (): JSX.Element => {
                 <X
                   type='button'
                   gridArea='x'
-                  onClick={(): void => {dispatch(remove(product))}}
+                  onClick={(): void => {dispatch(cartRemove(product))}}
                 >
                   +
                 </X>
@@ -599,7 +599,7 @@ const Cart = (): JSX.Element => {
                 <PlusMinus
                   type='button'
                   gridArea='pls'
-                  onClick={(): void => {dispatch(incrementQuantity(product))}}
+                  onClick={(): void => {dispatch(quantityIncrement(product))}}
                 >
                   +
                 </PlusMinus>
@@ -607,7 +607,7 @@ const Cart = (): JSX.Element => {
                 <PlusMinus
                   type='button'
                   gridArea='mns'
-                  onClick={(): void => {dispatch(decrementQuantity(product))}}
+                  onClick={(): void => {dispatch(quantityDecrement(product))}}
                 >
                   -
                 </PlusMinus>

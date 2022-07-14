@@ -8,16 +8,16 @@ export const wishListSlice = createSlice({
   name: 'wishList',
   initialState,
   reducers: {
-    add: (state, action: PayloadAction<IProduct>): void => {
+    wishListAdd: (state, action: PayloadAction<IProduct>): void => {
       state.push(action.payload);
     },
 
-    remove: (state, action: PayloadAction<IProduct>) => {
+    wishListRemove: (state, action: PayloadAction<IProduct>) => {
       return state.filter(product => product.id !== action.payload.id);
     }
   }
 });
 
 
-export const {add, remove} = wishListSlice.actions;
+export const {wishListAdd, wishListRemove} = wishListSlice.actions;
 export default wishListSlice.reducer;
