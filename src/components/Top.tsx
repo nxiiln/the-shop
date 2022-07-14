@@ -183,13 +183,12 @@ const Top = (): JSX.Element => {
             width='55px'
             height='65px'
             open={currencyOpen}
-            onClick={(): void => setCurrencyOpen(!currencyOpen)}
+            onMouseEnter={(): void => setCurrencyOpen(true)}
             onMouseLeave={(): void => setCurrencyOpen(false)}
-          >
+            >
             <ButtonMain
               type='button'
               open={currencyOpen}
-              onMouseEnter={(): void => setCurrencyOpen(true)}
             >
               {isUsd ? 'USD' : 'EUR'}
             </ButtonMain>
