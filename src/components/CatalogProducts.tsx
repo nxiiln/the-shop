@@ -3,6 +3,7 @@ import styled from 'styled-components/macro';
 import {HashLink} from 'react-router-hash-link';
 import {useAppSelector, useAppDispatch} from '../redux-hooks';
 import {add} from '../slices/cart';
+import {IProduct} from '../IProduct';
 import product1 from '../images/product1.png';
 import product2 from '../images/product2.png';
 import product3 from '../images/product3.png';
@@ -186,18 +187,8 @@ const Compare = styled.button`
 
 
 
-interface Product {
-  id: number;
-  image: string;
-  name: string;
-  price: number;
-  color: string;
-  size: string;
-  triangle?: string;
-  quantity: number;
-}
 
-const products: Product[] = [
+const products: IProduct[] = [
   {
     id: 1,
     image: product1,
@@ -307,7 +298,7 @@ const CatalogProducts = (): JSX.Element => {
 
   return(
     <Products>
-      {products.map((product: Product): JSX.Element =>
+      {products.map((product: IProduct): JSX.Element =>
         <Product
           key={product.id}
           onClick={(): void => setProductOpen(product.id)}
@@ -339,7 +330,7 @@ const CatalogProducts = (): JSX.Element => {
                 onClick={(e: Click): void => {
                   e.preventDefault();
                   const id = product.id;
-                  const find = (product: Product): boolean => product.id === id;
+                  const find = (product: IProduct): boolean => product.id === id;
                   if (cart.findIndex(find) === -1) dispatch(add(product));
                 }}
               >

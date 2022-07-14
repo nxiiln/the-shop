@@ -4,6 +4,7 @@ import {smallScreen} from '../mediaQueries';
 import {Link} from 'react-router-dom';
 import {useAppSelector, useAppDispatch} from '../redux-hooks';
 import {remove} from '../slices/cart'
+import {IProduct} from '../IProduct';
 import cartSymbol from '../images/cartSymbol.png';
 import product1 from '../images/product1.png';
 import product2 from '../images/product2.png';
@@ -222,27 +223,13 @@ const Checkout = styled(LinkBox)`
 
 
 
-interface Product {
-  id: number;
-  image: string;
-  name: string;
-  price: number;
-  triangle?: string;
-  color: string;
-  size: string;
-  quantity: number;
-}
-
-
-
-
 const CartPreview = (): JSX.Element => {
   const [open, setOpen] = useState<boolean>(false);
   const cart = useAppSelector(state => state.cart);
   const dispatch = useAppDispatch();
 
   const totalPrice: number = cart
-    .map((product: Product): number => product.price)
+    .map((product: IProduct): number => product.price)
     .reduce((prev: number, curr: number): number => prev + curr, 0);
 
 
@@ -261,7 +248,7 @@ const CartPreview = (): JSX.Element => {
         <Dropdown>
           <TriangleOuter><TriangleInner /></TriangleOuter>
 
-          {cart.map((product: Product): false | JSX.Element =>
+          {cart.map((product: IProduct): false | JSX.Element =>
             <Product key={product.id}>
               <ProductImage src={product.image} alt='product preview' />
               <Description>{product.name}</Description>

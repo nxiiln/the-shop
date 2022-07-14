@@ -4,6 +4,7 @@ import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
 import {HashLink} from 'react-router-hash-link';
 import {useAppSelector, useAppDispatch} from '../redux-hooks';
 import {remove, incrementQuantity, decrementQuantity} from '../slices/cart';
+import {IProduct} from '../IProduct';
 import BreadCrumbs from './BreadCrumbs';
 
 
@@ -500,21 +501,9 @@ const ButtonWrapper = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
-`
+`;
 
 
-
-
-interface Product {
-  id: number;
-  image: string;
-  name: string;
-  price: number;
-  color: string;
-  size: string;
-  triangle?: string;
-  quantity: number;
-}
 
 
 interface Region {
@@ -546,7 +535,7 @@ const Cart = (): JSX.Element => {
   const [country, setCountry] = useState<string>('default');
   const screen = useMediaQuery();
   
-  const amount = (product: Product): number => product.price * product.quantity;
+  const amount = (product: IProduct): number => product.price * product.quantity;
   const subtotal: number = cart
     .map(amount)
     .reduce((prev: number, curr: number): number => prev + curr, 0);
@@ -584,7 +573,7 @@ const Cart = (): JSX.Element => {
           }
 
 
-          {cart.map((product: Product): false | JSX.Element =>
+          {cart.map((product: IProduct): false | JSX.Element =>
             <ProductWrapper key={product.id}>
               <Product>
                 <img src={product.image} alt={product.name} />
