@@ -222,9 +222,7 @@ const CatalogProducts = (): JSX.Element => {
                 type='button'
                 onClick={(e: Click): void => {
                   e.preventDefault();
-                  const id = product.id;
-                  const find = (product: IProduct): boolean => product.id === id;
-                  if (cart.findIndex(find) === -1) dispatch(cartAdd(product));
+                  dispatch(cartAdd(product));
                 }}
               >
                 <div>
@@ -237,9 +235,7 @@ const CatalogProducts = (): JSX.Element => {
                 type='button'
                 onClick={(e: Click): void => {
                   e.preventDefault();
-                  const id = product.id;
-                  const find = (product: IProduct): boolean => product.id === id;
-                  if (wishList.findIndex(find) === -1) dispatch(wishListAdd(product));
+                  dispatch(wishListAdd(product));
                 }}
               >
                 <img src={wishListSymbol} alt='wishlist' />
