@@ -9,7 +9,9 @@ export const wishListSlice = createSlice({
   initialState,
   reducers: {
     wishListAdd: (state, action: PayloadAction<IProduct>): void => {
-      state.push(action.payload);
+      if (state.findIndex(product => product.id === action.payload.id) === -1) {
+        state.push(action.payload);
+      }
     },
 
     wishListRemove: (state, action: PayloadAction<IProduct>) => {
