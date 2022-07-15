@@ -1,10 +1,11 @@
-import {useState} from 'react';
 import styled from 'styled-components/macro';
 import {smallScreen, useMediaQuery} from '../mediaQueries';
 import {Link} from 'react-router-dom';
 import BreadCrumbs from './BreadCrumbs';
-import cartProductA from '../images/cartProductA.png';
-import cartProductB from '../images/cartProductB.png';
+import {useAppSelector, useAppDispatch} from '../redux-hooks';
+import {wishListRemove} from '../slices/wishList';
+import {cartAdd} from '../slices/cart';
+import {IProduct} from '../IProduct';
 
 
 
@@ -88,7 +89,12 @@ const Product = styled.div`
   display: grid;
 
   > button:nth-child(1) {grid-area: 2 / 1 / 3 / 2}
-  > img:nth-child(2) {grid-area: 1 / 2 / 13 / 3}
+
+  > img:nth-child(2) {
+    width: 85px;
+    grid-area: 1 / 2 / 13 / 3;
+  }
+
   > span:nth-child(3) {grid-area: 2 / 3 / 3 / 4}
   > span:nth-child(4) {grid-area: 4 / 3 / 5 / 4}
   > span:nth-child(5) {grid-area: 6 / 3 / 7 / 4}
@@ -186,46 +192,11 @@ const AddToBag = styled.button`
 
 
 
-interface Product {
-  id: number;
-  status: boolean;
-  image: string;
-  name: string;
-  color: string;
-  size: number;
-  price: number;
-  quantity: number;
-}
-
-const productList: Product[] = [
-  {
-    id: 1,
-    status: true,
-    image: cartProductA,
-    name: 'detailed swing dress',
-    color: 'yellow',
-    size: 12,
-    price: 275,
-    quantity: 1
-  },
-  {
-    id: 2,
-    status: true,
-    image: cartProductB,
-    name: 'maxararzy frilled dress',
-    color: 'blue',
-    size: 14,
-    price: 325,
-    quantity: 2
-  }
-];
-
-
-
-
 const WishList = (): JSX.Element => {
-  const [products, setProducts] = useState<Product[]>(productList);
   const screen = useMediaQuery();
+  const wishList = useAppSelector(state => state.wishList);
+  const dispatch = useAppDispatch();
+
 
   return(
     <WrapperOuter>
@@ -254,31 +225,30 @@ const WishList = (): JSX.Element => {
             </TitleWrapper>
           }
 
-          {products.map((product: Product): false | JSX.Element =>
-            product.status &&
-              <ProductWrapper key={product.id}>
-                <Product>
-                  <X
-                    type='button'
-                    onClick={(): void => {
-                      const newProducts: Product[] = [...products];
-                      const currIndex: number = products.indexOf(product);
-                      newProducts[currIndex].status = false;
-                      setProducts(newProducts);
-                    }}
-                  >
-                    +
-                  </X>
-                  <img src={product.image} alt={product.name} />
-                  <span>{product.name}</span>
-                  <span>color: {product.color}</span>
-                  <span>size: {product.size}</span>
-                  <ButtonUnderline type='button'>Edit Item</ButtonUnderline>
-                  <span>${product.price}</span>
-                  <span>{screen.small && 'Q-ty: '}{product.quantity}</span>
-                  <AddToBag type='button'>ADD TO BAG</AddToBag>
-                </Product>
-              </ProductWrapper>
+          {wishList.map((product: IProduct): JSX.Element =>
+            <ProductWrapper key={product.id}>
+              <Product>
+                <X
+                  type='button'
+                  onClick={(): void => {dispatch(wishListRemove(product))}}
+                >
+                  +
+                </X>
+                <img src={product.image} alt={product.name} />
+                <span>{product.name}</span>
+                <span>color: {product.color}</span>
+                <span>size: {product.size}</span>
+                <ButtonUnderline type='button'>Edit Item</ButtonUnderline>
+                <span>${product.price}</span>
+                <span>{screen.small && 'Q-ty: '}{product.quantity}</span>
+                <AddToBag
+                  type='button'
+                  onClick={(): void => {dispatch(cartAdd(product))}}
+                >
+                  ADD TO CART
+                </AddToBag>
+              </Product>
+            </ProductWrapper>
           )}
         </CartWrapper>
       </WrapperInner>
