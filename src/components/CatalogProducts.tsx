@@ -3,10 +3,11 @@ import styled from 'styled-components/macro';
 import {HashLink} from 'react-router-hash-link';
 import {useAppSelector, useAppDispatch} from '../redux-hooks';
 import {cartAdd} from '../slices/cart';
+import {wishListAdd} from '../slices/wishList';
 import {products} from '../products';
 import {IProduct} from '../IProduct';
 import cartSymbol from '../images/cartSymbol.png';
-import wishList from '../images/wishList.png';
+import wishListSymbol from '../images/wishList.png';
 import compare from '../images/compare.png';
 
 
@@ -181,6 +182,7 @@ const Compare = styled.button`
 const CatalogProducts = (): JSX.Element => {
   const [productOpen, setProductOpen] = useState<number>(0);
   const cart = useAppSelector(state => state.cart);
+  const wishList = useAppSelector(state => state.wishList);
   const dispatch = useAppDispatch();
 
   type Click = React.MouseEvent<HTMLButtonElement, MouseEvent>;
@@ -231,8 +233,16 @@ const CatalogProducts = (): JSX.Element => {
                 </div>
               </AddToCart>
 
-              <WishList type='button' onClick={preventDefault}>
-                <img src={wishList} alt='wishlist' />
+              <WishList
+                type='button'
+                onClick={(e: Click): void => {
+                  e.preventDefault();
+                  const id = product.id;
+                  const find = (product: IProduct): boolean => product.id === id;
+                  if (wishList.findIndex(find) === -1) dispatch(wishListAdd(product));
+                }}
+              >
+                <img src={wishListSymbol} alt='wishlist' />
                 WISHLIST
               </WishList>
 
