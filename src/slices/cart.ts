@@ -9,7 +9,9 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     cartAdd: (state, action: PayloadAction<IProduct>): void => {
-      state.push(action.payload);
+      if (state.findIndex(product => product.id === action.payload.id) === -1) {
+        state.push(action.payload);
+      }
     },
 
     cartRemove: (state, action: PayloadAction<IProduct>) => {
