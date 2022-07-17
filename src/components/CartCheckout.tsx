@@ -194,7 +194,7 @@ const CartCheckout = (): JSX.Element => {
             >
               +
             </X>
-            <span>${product.price}</span>
+            <span>${product.price * product.quantity}</span>
           </Product>
         </ProductWrapper>
       )}
