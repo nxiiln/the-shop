@@ -6,30 +6,7 @@ import RelatedProducts from './RelatedProducts';
 import ProductDescription from './ProductDescription';
 import ProductReviews from './ProductReviews';
 import PageNotFound from './404';
-
-import product1 from '../images/product1.png';
-import product2 from '../images/product2.png';
-import product3 from '../images/product3.png';
-import product4 from '../images/product4.png';
-import product5 from '../images/product5.png';
-import product6 from '../images/product6.png';
-import product7 from '../images/product7.png';
-import product8 from '../images/product8.png';
-import product9 from '../images/product9.png';
-import product10 from '../images/mostPopularA.png';
-
-const productImages: string[] = [
-  product1,
-  product2,
-  product3,
-  product4,
-  product5,
-  product6,
-  product7,
-  product8,
-  product9,
-  product10,
-];
+import {products} from '../products';
 
 
 
@@ -59,7 +36,7 @@ const WrapperInner = styled.div`
   }
 `;
 
-const Slider = styled.article`
+const ProductImage = styled.div`
   width: 400px;
   margin-bottom: 20px;
   position: relative;
@@ -145,19 +122,19 @@ const Product = (): JSX.Element => {
 
             <div>
               <div>
-                <Slider>
+                <ProductImage>
                   <ProductTriangle />
                   <ProductTriangleDescription>NEW</ProductTriangleDescription>
                   <img
-                    src={productImages[(productId - 1)]}
+                    src={products[productId - 1].image}
                     alt='product image'
                   />
-                </Slider>
+                </ProductImage>
                 {!screen.small && <RelatedProducts />}
               </div>
 
               <div>
-                <ProductDescription />
+                <ProductDescription {...products[productId - 1]} />
                 <ProductReviews />
                 {screen.small && <RelatedProducts />}
               </div>
