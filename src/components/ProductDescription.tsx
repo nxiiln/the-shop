@@ -1,10 +1,11 @@
 import {useState} from 'react';
 import styled from 'styled-components/macro';
 import {smallScreen} from '../mediaQueries';
+import {IProduct} from '../IProduct';
+import {sizes, colors} from './CatalogFilters';
+import wishListSymbol from '../images/wishList.png';
 import {useAppDispatch, useAppSelector} from '../redux-hooks';
 import {cartAdd, cartRemove, cartProductSize, cartProductColor} from '../slices/cart';
-import wishListSymbol from '../images/wishList.png';
-import {IProduct} from '../IProduct';
 import {wishListAdd, wishListRemove, wishListProductSize, wishListProductColor} from '../slices/wishList';
 
 
@@ -336,25 +337,10 @@ const ProductDescription = (product: IProduct): JSX.Element => {
   const wishList: IProduct[] = useAppSelector(state => state.wishList);
   const dispatch = useAppDispatch();
   
-  const sizes: string[] = ['xs', 's', 'm', 'l', 'xl', 'xxl'];
   const [sizeOpen, setSizeOpen] = useState<boolean>(false);
   const initialSize: string = typeof cartProduct === 'undefined' ? product.size : cartProduct.size;
   const [size, setSize] = useState<string>(initialSize);
   
-  const colors: string[] = [
-    'beige',
-    'black',
-    'blue',
-    'brown',
-    'cream',
-    'gold',
-    'green',
-    'grey',
-    'navy',
-    'orange',
-    'pink',
-    'purple'
-  ];
   const [colorOpen, setColorOpen] = useState<boolean>(false);
   const initialColor: string = typeof cartProduct === 'undefined' ? product.color : cartProduct.color;
   const [color, setColor] = useState<string>(initialColor);
