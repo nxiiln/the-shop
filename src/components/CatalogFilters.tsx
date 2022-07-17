@@ -67,13 +67,8 @@ const ButtonFilter = styled.button`
   &:hover {text-decoration: underline}
 `;
 
-const ButtonWomenWrapper = styled.div`
-  width: 107px;
-  margin-top: 2px;
-`;
-
 const ResetFilter = styled.button`
-  margin: 24px 0 8px 0;
+  margin-bottom: 8px;
   font-family: var(--font-regular);
   font-size: 10px;
   line-height: 1.2;
@@ -198,8 +193,8 @@ const RangeValue = styled.div`
 
 
 
-const sizes: string[] = ['xs', 's', 'm', 'l', 'xl', 'xxl'];
-const colors: string[] = [
+export const sizes: string[] = ['xs', 's', 'm', 'l', 'xl', 'xxl'];
+export const colors: string[] = [
   'beige',
   'black',
   'blue',
@@ -213,44 +208,21 @@ const colors: string[] = [
   'pink',
   'purple'
 ];
-const brands: string[] = ['armany', 'burberry', 'chanel', 'dolce&gabbana', 'escada', 'fendi'];
 
 
 
 
 const CatalogFilters = (): JSX.Element => {
-  const [women, setWomen] = useState<boolean>(false);
   const [category, setCategory] = useState<boolean>(false);
   const [size, setSize] = useState<boolean>(false);
   const [priceRange, setPriceRange] = useState<boolean>(false);
   const [range1, setRange1] = useState<number>(30);
   const [range2, setRange2] = useState<number>(70);
   const [color, setColor] = useState<boolean>(false);
-  const [brand, setBrand] = useState<boolean>(false);
 
 
   return(
     <>
-      <Dropdown open={women}>
-        <DropdownHeader
-          open={women}
-          onClick={(): void => women ? setWomen(false) : setWomen(true)}
-        >
-          <span>WOMEN</span>
-          <span>❯</span>
-        </DropdownHeader>
-
-        {women &&
-          <ButtonWomenWrapper>
-            <ButtonFilter>BOTTOMS</ButtonFilter>
-            <ButtonFilter>TOPS</ButtonFilter>
-            <ButtonFilter>SHOES & MORE</ButtonFilter>
-            <ButtonFilter>COLLECTION</ButtonFilter>
-          </ButtonWomenWrapper>
-        }
-      </Dropdown>
-
-
       <ResetFilter>Reset Filter</ResetFilter>
 
 
@@ -358,28 +330,6 @@ const CatalogFilters = (): JSX.Element => {
               </Checkbox>
             )}
           </CheckboxColorWrapper>
-        }
-      </Dropdown>
-
-
-      <Dropdown open={brand}>
-        <DropdownHeader
-          open={brand}
-          onClick={(): void => brand ? setBrand(false) : setBrand(true)}
-        >
-          <span>BRAND</span>
-          <span>❯</span>
-        </DropdownHeader>
-
-        {brand &&
-          <CheckboxWrapper>
-            {brands.map((brand: string): JSX.Element =>
-              <Checkbox key={brand}>
-                <input type='checkbox' name={brand}/>
-                {brand}
-              </Checkbox>
-            )}
-          </CheckboxWrapper>
         }
       </Dropdown>
     </>
