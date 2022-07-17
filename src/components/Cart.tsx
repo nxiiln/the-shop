@@ -17,10 +17,23 @@ const WrapperOuter = styled.main`
   justify-content: center;
 `;
 
-const WrapperInner = styled.div`
+const WrapperInner = styled.div<{empty: boolean}>`
   width: 1100px;
   padding: 0 1% 0;
-  display: grid;
+
+  ${props => props.empty ?
+   `display: flex;
+    flex-direction: column;
+    align-items: center;
+    > article {align-self: stretch}
+    > div {
+      margin-bottom: 20px;
+      border: none;
+    }`
+    :
+    'display: grid;'
+  }
+
   grid-template-columns: minmax(328px, 1fr) 23px 208px minmax(295px, 1fr);
   grid-template-rows: 10px 30px 1fr 135px 106px 30px;
 
@@ -530,7 +543,7 @@ const Cart = (): JSX.Element => {
 
   return(
     <WrapperOuter>
-      <WrapperInner>
+      <WrapperInner empty={cart.length === 0}>
         <BreadCrumbs
           link={
             <>
@@ -542,159 +555,171 @@ const Cart = (): JSX.Element => {
           marginBottom='20px'
           gridArea='1 / 1 / 3 / 5'
         />
-
-
-        <CartWrapper>
-          <HeaderWrapper>
-            <h2>CART</h2>
-          </HeaderWrapper>
-
-
-          {!screen.small &&
-            <TitleWrapper>
-              <span>PRODUCT</span>
-              <span>PRICE</span>
-              <span>QUANTITY</span>
-              <span>AMOUNT</span>
-            </TitleWrapper>
-          }
-
-
-          {cart.map((product: IProduct): JSX.Element =>
-            <ProductWrapper key={product.id}>
-              <Product>
-                <HashLink to={`/catalog/product${product.id}#top`}>
-                  <img src={product.image} alt={product.name} />
-                </HashLink>
-
-                <Text gridArea='nam'>{product.name}</Text>
-                <Text gridArea='clr'>color: {product.color}</Text>
-                <Text gridArea='siz'>size: {product.size}</Text>
-
-                <X
-                  type='button'
-                  gridArea='x'
-                  onClick={(): void => {dispatch(cartRemove(product))}}
-                >
-                  +
-                </X>
-
-                {!screen.small && <Text gridArea='prc'>${product.price}</Text>}
-
-                <Quantity>
-                  <span>{product.quantity}</span>
-                </Quantity>
-
-                <PlusMinus
-                  type='button'
-                  gridArea='pls'
-                  onClick={(): void => {dispatch(quantityIncrement(product))}}
-                >
-                  +
-                </PlusMinus>
-
-                <PlusMinus
-                  type='button'
-                  gridArea='mns'
-                  onClick={(): void => {dispatch(quantityDecrement(product))}}
-                >
-                  -
-                </PlusMinus>
-
-                <Text gridArea='amt'>${amount(product)}</Text>
-              </Product>
-            </ProductWrapper>
-          )}
-        </CartWrapper>
-
-
-        <EstimateDeliveryWrapper>
-          <EstimateDelivery>
-            <span>ESTIMATE DELIVERY</span>
-            <span>Enter your destination to get a delivery estimate</span>
-
-            <Select
-              defaultValue='default'
-              onChange={(e: React.ChangeEvent<HTMLSelectElement>): void =>
-                setCountry(e.target.value)
-              }
-            >
-              <option value='default' disabled>select country</option>
-              {regions.map((region: Region): JSX.Element =>
-                <option key={region.country} value={region.country}>
-                  {region.country}
-                </option>
-              )}
-            </Select>
-
-            <Select defaultValue='default'>
-              <option value='default' disabled>select region, state or province</option>
-              {country !== 'default' &&
-                regions
-                  .filter((region: Region): boolean => region.country === country)
-                  [0]
-                  .cities
-                  .map((city: string): JSX.Element =>
-                    <option key={city} value={city}>{city}</option>
-                  )
-              }
-            </Select>
-            
-            <div>
-              <Postcode type='text' placeholder='Postcode/Zip'/>
-              <GetAQuote type='button'>GET A QUOTE</GetAQuote>
-            </div>
-          </EstimateDelivery>
-        </EstimateDeliveryWrapper>
-
-
-        <Voucher>
-          <span>REDEEM DISCOUNT VOUCHER</span>
-          <input type='text' />
-        </Voucher>
-
-
-        {screen.big &&
-          <NeedHelp>
-            <span>Need Help?</span>
-            <p>
-              Call our customer care team on<br />
-              (08) 082340481 / Customer Service
-            </p>
-          </NeedHelp>
-        }
-
-
-        <Total>
-          <span>subtotal</span>
-          <span>${subtotal}</span>
-
-          <span>delivery costs</span>
-          <span>${subtotal && 35}</span>
-
-          <span>gift voucher</span>
-          <span>$5</span>
-
-          <LineTotal />
-
-          <span>total</span>
-          <span>including tax</span>
-          <span>${subtotal > 0 ? subtotal + 35 - 5 : 0}</span>
-        </Total>
-
-
-        {!screen.small &&
+        
+        {cart.length > 0 ?
           <>
-            <ContinueShopping to='/catalog#top'>CONTINUE SHOPPING</ContinueShopping>
-            <Checkout to='/checkout#top'>CHECKOUT</Checkout>
-          </>
-        }
+            <CartWrapper>
+              <HeaderWrapper>
+                <h2>CART</h2>
+              </HeaderWrapper>
+              
+              
+              {!screen.small &&
+                <TitleWrapper>
+                  <span>PRODUCT</span>
+                  <span>PRICE</span>
+                  <span>QUANTITY</span>
+                  <span>AMOUNT</span>
+                </TitleWrapper>
+              }
 
-        {screen.small &&
-          <ButtonWrapper>
+
+              {cart.map((product: IProduct): JSX.Element =>
+                <ProductWrapper key={product.id}>
+                  <Product>
+                    <HashLink to={`/catalog/product${product.id}#top`}>
+                      <img src={product.image} alt={product.name} />
+                    </HashLink>
+
+                    <Text gridArea='nam'>{product.name}</Text>
+                    <Text gridArea='clr'>color: {product.color}</Text>
+                    <Text gridArea='siz'>size: {product.size}</Text>
+
+                    <X
+                      type='button'
+                      gridArea='x'
+                      onClick={(): void => {dispatch(cartRemove(product))}}
+                    >
+                      +
+                    </X>
+
+                    {!screen.small && <Text gridArea='prc'>${product.price}</Text>}
+
+                    <Quantity>
+                      <span>{product.quantity}</span>
+                    </Quantity>
+
+                    <PlusMinus
+                      type='button'
+                      gridArea='pls'
+                      onClick={(): void => {dispatch(quantityIncrement(product))}}
+                    >
+                      +
+                    </PlusMinus>
+
+                    <PlusMinus
+                      type='button'
+                      gridArea='mns'
+                      onClick={(): void => {dispatch(quantityDecrement(product))}}
+                    >
+                      -
+                    </PlusMinus>
+
+                    <Text gridArea='amt'>${amount(product)}</Text>
+                  </Product>
+                </ProductWrapper>
+              )}
+            </CartWrapper>
+
+
+            <EstimateDeliveryWrapper>
+              <EstimateDelivery>
+                <span>ESTIMATE DELIVERY</span>
+                <span>Enter your destination to get a delivery estimate</span>
+
+                <Select
+                  defaultValue='default'
+                  onChange={(e: React.ChangeEvent<HTMLSelectElement>): void =>
+                    setCountry(e.target.value)
+                  }
+                >
+                  <option value='default' disabled>select country</option>
+                  {regions.map((region: Region): JSX.Element =>
+                    <option key={region.country} value={region.country}>
+                      {region.country}
+                    </option>
+                  )}
+                </Select>
+
+                <Select defaultValue='default'>
+                  <option value='default' disabled>select region, state or province</option>
+                  {country !== 'default' &&
+                    regions
+                      .filter((region: Region): boolean => region.country === country)
+                      [0]
+                      .cities
+                      .map((city: string): JSX.Element =>
+                        <option key={city} value={city}>{city}</option>
+                      )
+                  }
+                </Select>
+                
+                <div>
+                  <Postcode type='text' placeholder='Postcode/Zip'/>
+                  <GetAQuote type='button'>GET A QUOTE</GetAQuote>
+                </div>
+              </EstimateDelivery>
+            </EstimateDeliveryWrapper>
+
+
+            <Voucher>
+              <span>REDEEM DISCOUNT VOUCHER</span>
+              <input type='text' />
+            </Voucher>
+
+
+            {screen.big &&
+              <NeedHelp>
+                <span>Need Help?</span>
+                <p>
+                  Call our customer care team on<br />
+                  (08) 082340481 / Customer Service
+                </p>
+              </NeedHelp>
+            }
+
+
+            <Total>
+              <span>subtotal</span>
+              <span>${subtotal}</span>
+
+              <span>delivery costs</span>
+              <span>${subtotal && 35}</span>
+
+              <span>gift voucher</span>
+              <span>$5</span>
+
+              <LineTotal />
+
+              <span>total</span>
+              <span>including tax</span>
+              <span>${subtotal > 0 ? subtotal + 35 - 5 : 0}</span>
+            </Total>
+
+
+            {!screen.small &&
+              <>
+                <ContinueShopping to='/catalog#top'>CONTINUE SHOPPING</ContinueShopping>
+                <Checkout to='/checkout#top'>CHECKOUT</Checkout>
+              </>
+            }
+
+            {screen.small &&
+              <ButtonWrapper>
+                <ContinueShopping to='/catalog#top'>CONTINUE SHOPPING</ContinueShopping>
+                <Checkout to='/checkout#top'>CHECKOUT</Checkout>
+              </ButtonWrapper>
+            }
+          </>
+
+          :
+
+          <>
+            <HeaderWrapper>
+              <h2>CART IS EMPTY</h2>
+            </HeaderWrapper>
             <ContinueShopping to='/catalog#top'>CONTINUE SHOPPING</ContinueShopping>
-            <Checkout to='/checkout#top'>CHECKOUT</Checkout>
-          </ButtonWrapper>
+          </>
         }
       </WrapperInner>
     </WrapperOuter>
