@@ -21,9 +21,18 @@ const WrapperInner = styled.div<{empty: boolean}>`
   width: 1100px;
   padding: 0 1% 50px;
   
-  ${props => !props.empty ?
+  ${props => props.empty ?
    `display: flex;
-    flex-direction: column;`
+    flex-direction: column;
+    > h2 {
+      margin: 20px 0;
+      align-self: center;
+      font-family: var(--font-main);
+      font-size: 24px;
+      line-height: 1.2;
+      font-weight: 400;
+      color: var(--color-text-main);
+    }`
    :
    `display: grid;
     border-bottom: 1px solid var(--color-border);
@@ -193,7 +202,7 @@ const WishList = (): JSX.Element => {
 
   return(
     <WrapperOuter>
-      <WrapperInner empty={wishList.length > 0}>
+      <WrapperInner empty={wishList.length === 0}>
         <BreadCrumbs
           link={
             <>
@@ -255,9 +264,7 @@ const WishList = (): JSX.Element => {
             </CartWrapper>
           </>
         :
-          <HeaderWrapper>
-            <h2>WISH LIST IS EMPTY</h2>
-          </HeaderWrapper>
+          <h2>WISH LIST IS EMPTY</h2>
         }
       </WrapperInner>
     </WrapperOuter>
