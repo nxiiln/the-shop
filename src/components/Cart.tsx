@@ -104,7 +104,7 @@ const Product = styled.div`
   display: grid;
   grid-template-areas:
     'img ... . ... qnt pls ... ...'
-    'img nam x prc qnt ... upd amt'
+    'img nam x prc qnt ... ... amt'
     'img ... . ... qnt mns ... ...'
     'img clr . ... ... ... ... ...'
     'img ... . ... ... ... ... ...'
@@ -113,7 +113,7 @@ const Product = styled.div`
     'img ... . ... ... ... ... ...'
     'img ... . ... ... ... ... ...'
     'img ... . ... ... ... ... ...'
-    'img edi . ... ... ... ... ...'
+    'img ... . ... ... ... ... ...'
     'img ... . ... ... ... ... ...';
 
   grid-template-columns:
@@ -125,9 +125,10 @@ const Product = styled.div`
   align-items: center;
   background: transparent;
 
-  > img {
+  > a {
     width: 85px;
     grid-area: img;
+    > img {width: 100%}
   }
   
   > span {
@@ -152,8 +153,8 @@ const Product = styled.div`
       'img qnt pls amt .'
       'img qnt mns amt .'
       'img qnt mns ... .'
-      'img edi ... ... .'
-      'img edi ... ... .';
+      'img ... ... ... .'
+      'img ... ... ... .';
     
     grid-template-columns: 90px 70px 50px 30px 15px;
 
@@ -162,20 +163,6 @@ const Product = styled.div`
       justify-self: end;
     }
   }
-`;
-
-const ButtonUnderline = styled.button<{gridArea: string}>`
-  grid-area: ${props => props.gridArea};
-  margin-left: -5px;
-  font-family: var(--font-regular);
-  font-size: 11px;
-  line-height: 1.2;
-  font-weight: 400;
-  text-decoration: underline;
-  color: var(--color-text-main);
-  background: transparent;
-  border: none;
-  cursor: pointer;
 `;
 
 const X = styled.button<{gridArea: string}>`
@@ -576,11 +563,13 @@ const Cart = (): JSX.Element => {
           {cart.map((product: IProduct): JSX.Element =>
             <ProductWrapper key={product.id}>
               <Product>
-                <img src={product.image} alt={product.name} />
+                <HashLink to={`/catalog/product${product.id}#top`}>
+                  <img src={product.image} alt={product.name} />
+                </HashLink>
+
                 <Text gridArea='nam'>{product.name}</Text>
                 <Text gridArea='clr'>color: {product.color}</Text>
                 <Text gridArea='siz'>size: {product.size}</Text>
-                <ButtonUnderline type='button' gridArea='edi'>Edit Item</ButtonUnderline>
 
                 <X
                   type='button'
@@ -611,10 +600,6 @@ const Cart = (): JSX.Element => {
                 >
                   -
                 </PlusMinus>
-
-                {!screen.small &&
-                  <ButtonUnderline type='button' gridArea='upd'>Update</ButtonUnderline>
-                }
 
                 <Text gridArea='amt'>${amount(product)}</Text>
               </Product>
