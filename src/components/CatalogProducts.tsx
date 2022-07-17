@@ -21,7 +21,7 @@ const Products = styled.div`
   justify-content: space-around;
 `;
 
-const Product = styled.div`
+const Product = styled(HashLink)`
   width: 230px;
   height: 360px;
   margin-bottom: 75px;
@@ -30,8 +30,9 @@ const Product = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  color: var(--color-text-main);
   text-transform: uppercase;
+  text-decoration: none;
+  color: var(--color-text-main);
 
   &:hover {cursor: pointer}
 `;
@@ -74,7 +75,7 @@ const ProductTriangleDescription = styled.span`
   color: var(--color-text-second);
 `;
 
-const ProductOpen = styled(HashLink)`
+const ProductOpen = styled.div`
   width: 230px;
   height: 425px;
   padding-bottom: 10px;
@@ -82,7 +83,6 @@ const ProductOpen = styled(HashLink)`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  text-decoration: none;
   box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.23);
 `;
 
@@ -175,7 +175,7 @@ const CatalogProducts = (): JSX.Element => {
       {products.map((product: IProduct): JSX.Element =>
         <Product
           key={product.id}
-          onClick={(): void => setProductOpen(product.id)}
+          to={`product${product.id}#top`}
           onMouseEnter={(): void => setProductOpen(product.id)}
           onMouseLeave={(): void => setProductOpen(0)}
         >
@@ -196,7 +196,7 @@ const CatalogProducts = (): JSX.Element => {
           <ProductPrice>${product.price}</ProductPrice>
 
           {productOpen === product.id &&
-            <ProductOpen to={`product${product.id}#top`}>
+            <ProductOpen>
               <QuickShop onClick={preventDefault}>QUICK SHOP</QuickShop>
 
               <AddToCart
