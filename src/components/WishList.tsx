@@ -1,11 +1,12 @@
 import styled from 'styled-components/macro';
 import {smallScreen, useMediaQuery} from '../mediaQueries';
 import {Link} from 'react-router-dom';
-import BreadCrumbs from './BreadCrumbs';
+import {HashLink} from 'react-router-hash-link';
 import {useAppSelector, useAppDispatch} from '../redux-hooks';
 import {wishListRemove} from '../slices/wishList';
-import {cartAdd} from '../slices/cart';
+import {cartAdd, cartRemove} from '../slices/cart';
 import {IProduct} from '../IProduct';
+import BreadCrumbs from './BreadCrumbs';
 
 
 
@@ -90,18 +91,18 @@ const Product = styled.div`
 
   > button:nth-child(1) {grid-area: 2 / 1 / 3 / 2}
 
-  > img:nth-child(2) {
+  > a:nth-child(2) {
     width: 85px;
     grid-area: 1 / 2 / 13 / 3;
+
+    > img {width: 100%}
   }
 
   > span:nth-child(3) {grid-area: 2 / 3 / 3 / 4}
   > span:nth-child(4) {grid-area: 4 / 3 / 5 / 4}
   > span:nth-child(5) {grid-area: 6 / 3 / 7 / 4}
-  > button:nth-child(6) {grid-area: 11 / 3 / 12 / 4}
-  > span:nth-child(7) {grid-area: 2 / 4 / 3 / 5}
-  > span:nth-child(8) {grid-area: 2 / 5 / 3 / 6}
-  > button:nth-child(9) {grid-area: 2 / 6 / 5 / 7}
+  > span:nth-child(6) {grid-area: 2 / 4 / 3 / 5}
+  > button:nth-child(7) {grid-area: 2 / 6 / 5 / 7}
 
   grid-template-columns:
     minmax(25px, 4.8%) minmax(90px, 12%) minmax(150px, 23%)
@@ -139,28 +140,13 @@ const Product = styled.div`
     > span:nth-child(3) {grid-area: 2 / 3 / 3 / 4}
     > span:nth-child(4) {grid-area: 3 / 3 / 4 / 4}
     > span:nth-child(5) {grid-area: 4 / 3 / 5 / 4}
-    > button:nth-child(6) {grid-area: 9 / 3 / 10 / 4}
-    > span:nth-child(7) {grid-area: 5 / 3 / 7 / 4}
-    > span:nth-child(8) {grid-area: 7 / 3 / 9 / 4}
+    > span:nth-child(6) {grid-area: 5 / 3 / 7 / 4}
 
-    > button:nth-child(9) {
+    > button:nth-child(7) {
       grid-area: 11 / 2 / 13 / 4;
       justify-self: center;
     }
   }
-`;
-
-const ButtonUnderline = styled.button`
-  margin-left: -5px;
-  font-family: Arial;
-  font-size: 11px;
-  line-height: 1.2;
-  font-weight: 400;
-  text-decoration: underline;
-  color: var(--color-text-main);
-  background: transparent;
-  border: none;
-  cursor: pointer;
 `;
 
 const X = styled.button`
@@ -195,6 +181,7 @@ const AddToBag = styled.button`
 const WishList = (): JSX.Element => {
   const screen = useMediaQuery();
   const wishList = useAppSelector(state => state.wishList);
+  const cart = useAppSelector(state => state.cart);
   const dispatch = useAppDispatch();
 
 
@@ -221,7 +208,6 @@ const WishList = (): JSX.Element => {
             <TitleWrapper>
               <span>PRODUCT</span>
               <span>PRICE</span>
-              <span>Q-TY</span>
             </TitleWrapper>
           }
 
@@ -234,18 +220,26 @@ const WishList = (): JSX.Element => {
                 >
                   +
                 </X>
-                <img src={product.image} alt={product.name} />
+
+                <HashLink to={`/catalog/product${product.id}`}>
+                  <img src={product.image} alt={product.name} />
+                </HashLink>
+
                 <span>{product.name}</span>
                 <span>color: {product.color}</span>
                 <span>size: {product.size}</span>
-                <ButtonUnderline type='button'>Edit Item</ButtonUnderline>
                 <span>${product.price}</span>
-                <span>{screen.small && 'Q-ty: '}{product.quantity}</span>
+                
                 <AddToBag
                   type='button'
-                  onClick={(): void => {dispatch(cartAdd(product))}}
+                  onClick={(): void => {
+                    !cart.some(cartProduct => cartProduct.id === product.id) ?
+                      dispatch(cartAdd(product)) : dispatch(cartRemove(product));
+                  }}
                 >
-                  ADD TO CART
+                  {!cart.some(cartProduct => cartProduct.id === product.id) ? 
+                    'ADD TO CART' : 'PRODUCT IN CART'
+                  }
                 </AddToBag>
               </Product>
             </ProductWrapper>
