@@ -114,7 +114,10 @@ const Product = (): JSX.Element => {
                   <span>/</span>
                   <Link to='/catalog'>Catalog</Link>
                   <span>/</span>
-                  <span>Detailed Swing Dress</span>
+                  <span>
+                    {products[productId - 1].name[0].toUpperCase()}
+                    {products[productId - 1].name.substring(1)}
+                  </span>
                 </>
               }
               marginBottom='20px'
