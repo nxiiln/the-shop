@@ -2,6 +2,7 @@ import {useState} from 'react';
 import styled from 'styled-components/macro';
 import {smallScreen} from '../mediaQueries';
 import {Link} from 'react-router-dom';
+import {HashLink} from 'react-router-hash-link';
 import {useAppSelector, useAppDispatch} from '../redux-hooks';
 import {cartRemove} from '../slices/cart'
 import {IProduct} from '../IProduct';
@@ -84,9 +85,11 @@ const TriangleInner = styled.div`
   border-left: 9px solid transparent;
 `;
 
-const Product = styled.div`
+const Product = styled(HashLink)`
   width: 172px;
   height: 94px;
+  display: block;
+  text-decoration: none;
   background: var(--color-background-main);
   border-bottom: 1px solid var(--color-border);
 `;
@@ -219,7 +222,7 @@ const CartPreview = (): JSX.Element => {
   const dispatch = useAppDispatch();
 
   const totalPrice: number = cart
-    .map((product: IProduct): number => product.price)
+    .map((product: IProduct): number => product.price * product.quantity)
     .reduce((prev: number, curr: number): number => prev + curr, 0);
 
 
@@ -239,13 +242,16 @@ const CartPreview = (): JSX.Element => {
           <TriangleOuter><TriangleInner /></TriangleOuter>
 
           {cart.map((product: IProduct): JSX.Element =>
-            <Product key={product.id}>
+            <Product key={product.id} to={`/catalog/product${product.id}#top`}>
               <ProductImage src={product.image} alt='product preview' />
               <Description>{product.name}</Description>
-              <Price>${product.price}</Price>
+              <Price>${product.price * product.quantity}</Price>
               <Remove
                 type='button'
-                onClick={(): void => {dispatch(cartRemove(product))}}
+                onClick={(e): void => {
+                  e.preventDefault();
+                  dispatch(cartRemove(product));
+                }}
               >
                 <X>+</X>
               </Remove>
