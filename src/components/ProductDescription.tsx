@@ -1,7 +1,11 @@
 import {useState} from 'react';
 import styled from 'styled-components/macro';
 import {smallScreen} from '../mediaQueries';
-import wishList from '../images/wishList.png';
+import {useAppDispatch, useAppSelector} from '../redux-hooks';
+import {cartAdd, cartRemove, cartProductSize, cartProductColor} from '../slices/cart';
+import wishListSymbol from '../images/wishList.png';
+import {IProduct} from '../IProduct';
+import {wishListAdd, wishListRemove, wishListProductSize, wishListProductColor} from '../slices/wishList';
 
 
 
@@ -30,6 +34,7 @@ const Name = styled.h2`
   font-size: 24px;
   font-weight: 400;
   line-height: 1.2;
+  text-transform: uppercase;
   color: var(--color-text-main);
 `;
 
@@ -164,18 +169,20 @@ const DropdownHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  text-transform: uppercase;
   cursor: pointer;
 `;
 
 const Checkbox = styled.label`
+  height: 18px;
   margin-bottom: 12px;
+  display: flex;
+  align-items: center;
   font-family: var(--font-second);
   font-size: 10px;
   font-weight: 400;
+  text-transform: uppercase;
   color: var(--color-text-main);
-  height: 18px;
-  display: flex;
-  align-items: center;
   cursor: pointer;
 
   &:hover {text-decoration: underline}
@@ -201,8 +208,8 @@ const CheckboxSizeWrapper = styled(CheckboxWrapper)`
 `;
 
 const CheckboxColorWrapper = styled(CheckboxWrapper)`
-  width: 150px;
-  height: 30px;
+  width: 100%;
+  height: 100px;
 `;
 
 const Quantity = styled.label`
@@ -233,7 +240,7 @@ const Quantity = styled.label`
 
 const Buttons = styled.div`
   width: 325px;
-  margin-bottom: 25px;
+  margin: 20px 0;
   display: flex;
   justify-content: space-between;
 
@@ -323,25 +330,43 @@ const Tag = styled.button`
 
 
 
-const ProductDescription = (): JSX.Element => {
-  const sizeList: string[] = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
+const ProductDescription = (product: IProduct): JSX.Element => {
+  const cart: IProduct[] = useAppSelector(state => state.cart);
+  const cartProduct: IProduct | undefined = cart.find(cartProduct => cartProduct.id === product.id);
+  const wishList: IProduct[] = useAppSelector(state => state.wishList);
+  const dispatch = useAppDispatch();
+  
+  const sizes: string[] = ['xs', 's', 'm', 'l', 'xl', 'xxl'];
   const [sizeOpen, setSizeOpen] = useState<boolean>(false);
-  const [size, setSize] = useState<string>('');
-
-  const colorList: string[] = ['BLACK', 'BLUE'];
+  const initialSize: string = typeof cartProduct === 'undefined' ? product.size : cartProduct.size;
+  const [size, setSize] = useState<string>(initialSize);
+  
+  const colors: string[] = [
+    'beige',
+    'black',
+    'blue',
+    'brown',
+    'cream',
+    'gold',
+    'green',
+    'grey',
+    'navy',
+    'orange',
+    'pink',
+    'purple'
+  ];
   const [colorOpen, setColorOpen] = useState<boolean>(false);
-  const [color, setColor] = useState<string>('');
-
-  const [quantity, setQuantity] = useState<number>(1);
-
-
+  const initialColor: string = typeof cartProduct === 'undefined' ? product.color : cartProduct.color;
+  const [color, setColor] = useState<string>(initialColor);
+  
+  
   return(
     <Wrapper>
-      <Id>MU-4587-89</Id>
-      <Name>DETAILED SWING DRESS</Name>
+      <Id>PR-{product.id}256-08</Id>
+      <Name>{product.name}</Name>
 
       <AboutReviews>
-        <Stars rating={4}>
+        <Stars rating={4.5}>
           <div>★★★★★</div>
           <div>☆☆☆☆☆</div>
         </Stars>
@@ -350,31 +375,34 @@ const ProductDescription = (): JSX.Element => {
       </AboutReviews>
 
       <Availability>Availability: <span>In stock</span></Availability>
-      <SmallDescription>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        Integer et nisi erat.
-        Interdum et malesuada fames ac ante ipsum.
-      </SmallDescription>
-      <Price>$1,875.00</Price>
+      <SmallDescription>{product.smallDescription}</SmallDescription>
+      <Price>${product.price}</Price>
 
 
       <Dropdown open={sizeOpen}>
-        <DropdownHeader onClick={(): void => {
-          sizeOpen ? setSizeOpen(false) : setSizeOpen(true)
-        }}>
-          <span>SIZE{size && `: ${size}`}</span>
+        <DropdownHeader onClick={(): void => setSizeOpen(!sizeOpen)}>
+          <span>SIZE: {size}</span>
           <span>❯</span>
         </DropdownHeader>
 
         {sizeOpen &&
           <CheckboxSizeWrapper>
-            {sizeList.map((currSize: string): JSX.Element =>
+            {sizes.map((currSize: string): JSX.Element =>
               <Checkbox key={currSize}>
                 <input
                   type='checkbox'
-                  checked={size === currSize}
+                  checked={currSize === size}
                   onChange={(): void => {
-                    size === currSize ? setSize('') : setSize(currSize);
+                    setSize(currSize);
+                    const size: string = currSize;
+                    
+                    if (cart.some(cartProduct => cartProduct.id === product.id)) {
+                      dispatch(cartProductSize({...product, size}));
+                    }
+
+                    if (wishList.some(wishListProduct => wishListProduct.id === product.id)) {
+                      dispatch(wishListProductSize({...product, size}));
+                    }
                   }}
                 />
                 {currSize}
@@ -386,22 +414,29 @@ const ProductDescription = (): JSX.Element => {
 
 
       <Dropdown open={colorOpen}>
-        <DropdownHeader onClick={(): void => {
-          colorOpen ? setColorOpen(false) : setColorOpen(true)
-        }}>
-          <span>COLOR{color && `: ${color}`}</span>
+        <DropdownHeader onClick={(): void => setColorOpen(!colorOpen)}>
+          <span>COLOR: {color}</span>
           <span>❯</span>
         </DropdownHeader>
 
         {colorOpen &&
           <CheckboxColorWrapper>
-            {colorList.map((currColor: string): JSX.Element =>
+            {colors.map((currColor: string): JSX.Element =>
               <Checkbox key={currColor}>
                 <input
                   type='checkbox'
-                  checked={color === currColor}
+                  checked={currColor === color}
                   onChange={(): void => {
-                    color === currColor ? setColor('') : setColor(currColor);
+                    setColor(currColor);
+                    const color: string = currColor;
+
+                    if (cart.some(cartProduct => cartProduct.id === product.id)) {
+                      dispatch(cartProductColor({...product, color}));
+                    }
+
+                    if (wishList.some(wishListProduct => wishListProduct.id === product.id)) {
+                      dispatch(wishListProductColor({...product, color}));
+                    }
                   }}
                 />
                 {currColor}
@@ -412,28 +447,30 @@ const ProductDescription = (): JSX.Element => {
       </Dropdown>
 
 
-      <Quantity>
-        QUANTITY
-        <input
-          type='number'
-          value={quantity}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
-            if (+e.target.value >= 1 && +e.target.value <= 9) {
-              setQuantity(+e.target.value);
-            }
-          }}
-        />
-      </Quantity>
-
-
       <Buttons>
-        <button type='button'>
-          ADD TO CART
+        <button
+          type='button'
+          onClick={(): void => {
+            !cart.some(cartProduct => cartProduct.id === product.id) ?
+            dispatch(cartAdd({...product, size, color})) : dispatch(cartRemove(product));
+          }}
+        >
+          {!cart.some(cartProduct => cartProduct.id === product.id) ?
+            'ADD TO CART' : 'PRODUCT IN CART'
+          }
         </button>
 
-        <button type='button'>
-          <img src={wishList} alt='wishList' />
-          WISHLIST
+        <button
+          type='button'
+          onClick={(): void => {
+            !wishList.some(wishListProduct => wishListProduct.id === product.id) ?
+            dispatch(wishListAdd({...product, size, color})) : dispatch(wishListRemove(product));
+          }}
+        >
+          <img src={wishListSymbol} alt='wishList' />
+          {!wishList.some(wishListProduct => wishListProduct.id === product.id) ?
+            'WISHLIST' : 'PRODUCT IN WISHLIST'
+          }
         </button>
       </Buttons>
 
@@ -443,15 +480,7 @@ const ProductDescription = (): JSX.Element => {
           <span>DESCRIPTION</span>
           <span>◢</span>
         </summary>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          Integer et nisi erat.
-          Interdum et malesuada fames ac ante ipsum primis in faucibus.
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.
-          Nunc eu commodo tellus. Mauris faucibus leo quis urna porta, at rutrum massa efficitur.
-          Donec tempor bibendum ex, sit amet lacinia nibh ultrices sit amet.
-        </p>
+        <p>{product.description}</p>
       </Accordion>
 
       <Accordion>
@@ -459,11 +488,7 @@ const ProductDescription = (): JSX.Element => {
           <span>ADDITIONAL INFO</span>
           <span>◢</span>
         </summary>
-        <p>
-          Duis a ex id turpis consectetur consequat et in libero.
-          Integer varius consequat pulvinar.
-          Quisque at mattis diam.
-        </p>
+        <p>{product.additionalInfo}</p>
       </Accordion>
 
       <Accordion>
@@ -472,9 +497,9 @@ const ProductDescription = (): JSX.Element => {
           <span>◢</span>
         </summary>
         <p>
-          <Tag type='button'>Dress</Tag>
-          <Tag type='button'>Striped</Tag>
-          <Tag type='button'>Detailed Swing Dress</Tag>
+          {product.tags.map((tag: string): JSX.Element =>
+            <Tag key={tag} type='button'>{tag}</Tag>
+          )}
         </p>
       </Accordion>
     </Wrapper>
