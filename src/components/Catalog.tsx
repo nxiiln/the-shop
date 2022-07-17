@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom';
 import BreadCrumbs from './BreadCrumbs';
 import CatalogFilters from './CatalogFilters';
 import CatalogProducts from './CatalogProducts';
+import {products} from '../products';
 import banner from '../images/banner.png';
 import bannerSmall from '../images/bannerSmall.png';
 
@@ -296,9 +297,9 @@ const Catalog = (): JSX.Element => {
 
           <div>
             <HeaderWrapper>
-              <h2>WOMEN</h2>
+              <h2>CATALOG</h2>
               <div />
-              <span>557 items</span>
+              <span>{products.length} items</span>
             </HeaderWrapper>
 
 
