@@ -1,6 +1,6 @@
-import {useState} from 'react';
 import styled from 'styled-components/macro';
 import {bigScreen, mediumScreen, smallScreen} from '../mediaQueries';
+import {HashLink} from 'react-router-hash-link';
 import {useAppSelector, useAppDispatch} from '../redux-hooks';
 import {cartRemove} from '../slices/cart';
 import {IProduct} from '../IProduct';
@@ -64,19 +64,21 @@ const Product = styled.div`
     color: var(--color-text-main);
   }
 
-  > img:nth-child(1) {
+  > a:nth-child(1) {
+    width: 85px;
     height: 100%;
     grid-area: 1 / 1 / 13 / 2;
+
+    > img {width: 100%}
   }
 
   > span:nth-child(2) {grid-area: 1 / 2 / 3 / 3}
   > span:nth-child(3) {grid-area: 4 / 2 / 5 / 3}
   > span:nth-child(4) {grid-area: 6 / 2 / 7 / 3}
   > span:nth-child(5) {grid-area: 8 / 2 / 9 / 3}
-  > button:nth-child(6) {grid-area: 11 / 2 / 12 / 3}
-  > button:nth-child(7) {grid-area: 1 / 4 / 2 / 5}
+  > button:nth-child(6) {grid-area: 1 / 4 / 2 / 5}
 
-  > span:nth-child(8) {
+  > span:nth-child(7) {
     grid-area: 11 / 3 / 12 / 4;
     font-size: 12px;
   }
@@ -85,28 +87,13 @@ const Product = styled.div`
     width: 100%;
     grid-template-columns: 92px max-content 1fr;
     
-    > button:nth-child(7) {
+    > button:nth-child(6) {
       grid-area: 1 / 3 / 2 / 4;
       justify-self: end;
     }
 
-    > span:nth-child(8) {justify-self: end}
+    > span:nth-child(7) {justify-self: end}
   }
-`;
-
-const ButtonUnderline = styled.button`
-  width: 60px;
-  height: 10px;
-  margin: 0px 0 0 -10px;
-  font-family: var(--font-regular);
-  font-size: 11px;
-  line-height: 1.2;
-  font-weight: 400;
-  text-decoration: underline;
-  color: var(--color-text-main);
-  background: transparent;
-  border: none;
-  cursor: pointer;
 `;
 
 const X = styled.button`
@@ -192,12 +179,15 @@ const CartCheckout = (): JSX.Element => {
       {cart.map((product: IProduct): JSX.Element =>
         <ProductWrapper key={product.id}>
           <Product>
-            <img src={product.image} alt={product.name} />
+            <HashLink to={`/catalog/product${product.id}#top`}>
+              <img src={product.image} alt={product.name} />
+            </HashLink>
+
             <span>{product.name}</span>
             <span>color: {product.color}</span>
             <span>size: {product.size}</span>
             <span>qty: {product.quantity}</span>
-            <ButtonUnderline type='button'>Edit Item</ButtonUnderline>
+
             <X
               type='button'
               onClick={(): void => {dispatch(cartRemove(product))}}
