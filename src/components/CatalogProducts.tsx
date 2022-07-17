@@ -2,13 +2,12 @@ import {useState} from 'react';
 import styled from 'styled-components/macro';
 import {HashLink} from 'react-router-hash-link';
 import {useAppSelector, useAppDispatch} from '../redux-hooks';
-import {cartAdd} from '../slices/cart';
-import {wishListAdd} from '../slices/wishList';
-import {products} from '../products';
+import {cartAdd, cartRemove} from '../slices/cart';
+import {wishListAdd, wishListRemove} from '../slices/wishList';
 import {IProduct} from '../IProduct';
+import {products} from '../products';
 import cartSymbol from '../images/cartSymbol.png';
 import wishListSymbol from '../images/wishList.png';
-import compare from '../images/compare.png';
 
 
 
@@ -125,7 +124,6 @@ const AddToCart = styled.button`
   &:hover {opacity: 0.8}
 
   > div {
-    width: 80px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -134,11 +132,12 @@ const AddToCart = styled.button`
     line-height: 1.2;
     font-weight: 300;
     color: var(--color-text-second);
+
+    > img {margin-right: 5px}
   }
 `;
 
 const WishList = styled.button`
-  width: 75px;
   height: 15px;
   display: flex;
   justify-content: space-between;
@@ -154,26 +153,8 @@ const WishList = styled.button`
   cursor: pointer;
 
   &:hover {text-decoration: underline}
-`;
 
-const Compare = styled.button`
-  width: 80px;
-  height: 15px;
-  margin: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  align-self: end;
-  font-family: var(--font-second);
-  font-size: 10px;
-  line-height: 1.2;
-  font-weight: 300;
-  color: var(--color-text-main);
-  background: none;
-  border: none;
-  cursor: pointer;
-
-  &:hover {text-decoration: underline}
+  > img {margin-right: 5px}
 `;
 
 
@@ -222,12 +203,15 @@ const CatalogProducts = (): JSX.Element => {
                 type='button'
                 onClick={(e: Click): void => {
                   e.preventDefault();
-                  dispatch(cartAdd(product));
+                  !cart.some(cartProduct => cartProduct.id === product.id) ?
+                    dispatch(cartAdd(product)) : dispatch(cartRemove(product));
                 }}
               >
                 <div>
                   <img src={cartSymbol} alt='cart symbol' />
-                  ADD TO CART
+                  {!cart.some(cartProduct => cartProduct.id === product.id) ? 
+                    'ADD TO CART' : 'PRODUCT IN CART'
+                  }
                 </div>
               </AddToCart>
 
@@ -235,17 +219,15 @@ const CatalogProducts = (): JSX.Element => {
                 type='button'
                 onClick={(e: Click): void => {
                   e.preventDefault();
-                  dispatch(wishListAdd(product));
+                  !wishList.some(wishListProduct => wishListProduct.id === product.id) ?
+                    dispatch(wishListAdd(product)) : dispatch(wishListRemove(product));
                 }}
               >
                 <img src={wishListSymbol} alt='wishlist' />
-                WISHLIST
+                {!wishList.some(wishListProduct => wishListProduct.id === product.id) ?
+                  'WISHLIST' : 'PRODUCT IN WISHLIST'
+                }
               </WishList>
-
-              <Compare type='button' onClick={preventDefault}>
-                <img src={compare} alt='compare' />
-                COMPARE
-              </Compare>
             </ProductOpen>
           }
         </Product>
