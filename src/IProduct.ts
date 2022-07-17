@@ -7,4 +7,8 @@ export interface IProduct {
   color: string;
   size: string;
   quantity: number;
+  smallDescription: string;
+  description: string;
+  additionalInfo: string;
+  tags: string[];
 }
