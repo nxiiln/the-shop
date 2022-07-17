@@ -206,58 +206,58 @@ const WishList = (): JSX.Element => {
         />
 
         {wishList.length > 0 ?
-        <>
-        <CartWrapper>
-          <HeaderWrapper>
-            <h2>WISH LIST</h2>
-          </HeaderWrapper>
+          <>
+            <CartWrapper>
+              <HeaderWrapper>
+                <h2>WISH LIST</h2>
+              </HeaderWrapper>
 
-          {!screen.small &&
-            <TitleWrapper>
-              <span>PRODUCT</span>
-              <span>PRICE</span>
-            </TitleWrapper>
-          }
+              {!screen.small &&
+                <TitleWrapper>
+                  <span>PRODUCT</span>
+                  <span>PRICE</span>
+                </TitleWrapper>
+              }
 
-          {wishList.map((product: IProduct): JSX.Element =>
-            <ProductWrapper key={product.id}>
-              <Product>
-                <X
-                  type='button'
-                  onClick={(): void => {dispatch(wishListRemove(product))}}
-                >
-                  +
-                </X>
+              {wishList.map((product: IProduct): JSX.Element =>
+                <ProductWrapper key={product.id}>
+                  <Product>
+                    <X
+                      type='button'
+                      onClick={(): void => {dispatch(wishListRemove(product))}}
+                    >
+                      +
+                    </X>
 
-                <HashLink to={`/catalog/product${product.id}`}>
-                  <img src={product.image} alt={product.name} />
-                </HashLink>
+                    <HashLink to={`/catalog/product${product.id}`}>
+                      <img src={product.image} alt={product.name} />
+                    </HashLink>
 
-                <span>{product.name}</span>
-                <span>color: {product.color}</span>
-                <span>size: {product.size}</span>
-                <span>${product.price}</span>
-                
-                <AddToBag
-                  type='button'
-                  onClick={(): void => {
-                    !cart.some(cartProduct => cartProduct.id === product.id) ?
-                      dispatch(cartAdd(product)) : dispatch(cartRemove(product));
-                  }}
-                >
-                  {!cart.some(cartProduct => cartProduct.id === product.id) ? 
-                    'ADD TO CART' : 'PRODUCT IN CART'
-                  }
-                </AddToBag>
-              </Product>
-            </ProductWrapper>
-          )}
-        </CartWrapper>
-        </>
+                    <span>{product.name}</span>
+                    <span>color: {product.color}</span>
+                    <span>size: {product.size}</span>
+                    <span>${product.price}</span>
+                    
+                    <AddToBag
+                      type='button'
+                      onClick={(): void => {
+                        !cart.some(cartProduct => cartProduct.id === product.id) ?
+                          dispatch(cartAdd(product)) : dispatch(cartRemove(product));
+                      }}
+                    >
+                      {!cart.some(cartProduct => cartProduct.id === product.id) ? 
+                        'ADD TO CART' : 'PRODUCT IN CART'
+                      }
+                    </AddToBag>
+                  </Product>
+                </ProductWrapper>
+              )}
+            </CartWrapper>
+          </>
         :
-        <HeaderWrapper>
-          <h2>WISH LIST IS EMPTY</h2>
-        </HeaderWrapper>
+          <HeaderWrapper>
+            <h2>WISH LIST IS EMPTY</h2>
+          </HeaderWrapper>
         }
       </WrapperInner>
     </WrapperOuter>
