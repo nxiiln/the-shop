@@ -17,12 +17,19 @@ const WrapperOuter = styled.main`
   justify-content: center;
 `;
 
-const WrapperInner = styled.div`
+const WrapperInner = styled.div<{empty: boolean}>`
   width: 1100px;
   padding: 0 1% 50px;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 10px 30px 1fr;
+  
+  ${props => !props.empty ?
+   `display: flex;
+    flex-direction: column;`
+   :
+   `display: grid;
+    border-bottom: 1px solid var(--color-border);
+    grid-template-columns: 1fr;
+    grid-template-rows: 10px 30px 1fr;`
+  }
 `;
 
 const CartWrapper = styled.div`
@@ -37,7 +44,6 @@ const HeaderWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  border-bottom: 1px solid var(--color-border);
 
   > h2 {
     font-family: var(--font-main);
@@ -187,7 +193,7 @@ const WishList = (): JSX.Element => {
 
   return(
     <WrapperOuter>
-      <WrapperInner>
+      <WrapperInner empty={wishList.length > 0}>
         <BreadCrumbs
           link={
             <>
@@ -199,6 +205,8 @@ const WishList = (): JSX.Element => {
           marginBottom='20px'
         />
 
+        {wishList.length > 0 ?
+        <>
         <CartWrapper>
           <HeaderWrapper>
             <h2>WISH LIST</h2>
@@ -245,6 +253,12 @@ const WishList = (): JSX.Element => {
             </ProductWrapper>
           )}
         </CartWrapper>
+        </>
+        :
+        <HeaderWrapper>
+          <h2>WISH LIST IS EMPTY</h2>
+        </HeaderWrapper>
+        }
       </WrapperInner>
     </WrapperOuter>
   );
