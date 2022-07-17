@@ -29,7 +29,8 @@ const WrapperInner = styled.div<{empty: boolean}>`
     > div {
       margin-bottom: 20px;
       border: none;
-    }`
+    }
+    > a {align-self: center}`
     :
     'display: grid;'
   }
