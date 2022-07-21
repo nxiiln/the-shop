@@ -5,14 +5,13 @@ import {useAppSelector, useAppDispatch} from '../redux-hooks';
 import {cartAdd, cartRemove} from '../slices/cart';
 import {wishListAdd, wishListRemove} from '../slices/wishList';
 import {IProduct} from '../IProduct';
-import {products} from '../products';
 import cartSymbol from '../images/cartSymbol.png';
 import wishListSymbol from '../images/wishList.png';
 
 
 
 
-const Products = styled.div`
+const ProductsWrapper = styled.div`
   width: 100%;
   max-width: 725px;
   margin: 22px 0 80px 0;
@@ -35,6 +34,8 @@ const Product = styled(HashLink)`
   color: var(--color-text-main);
 
   &:hover {cursor: pointer}
+
+  > img {width: 100%}
 `;
 
 const ProductName = styled.span`
@@ -160,7 +161,7 @@ const WishList = styled.button`
 
 
 
-const CatalogProducts = (): JSX.Element => {
+const Products = ({products}: {products: IProduct[]}): JSX.Element => {
   const [productOpen, setProductOpen] = useState<number>(0);
   const cart = useAppSelector(state => state.cart);
   const wishList = useAppSelector(state => state.wishList);
@@ -171,11 +172,11 @@ const CatalogProducts = (): JSX.Element => {
   
 
   return(
-    <Products>
+    <ProductsWrapper>
       {products.map((product: IProduct): JSX.Element =>
         <Product
           key={product.id}
-          to={`product${product.id}#top`}
+          to={`/catalog/product${product.id}#top`}
           onMouseEnter={(): void => setProductOpen(product.id)}
           onMouseLeave={(): void => setProductOpen(0)}
         >
@@ -232,11 +233,11 @@ const CatalogProducts = (): JSX.Element => {
           }
         </Product>
       )}
-    </Products>
+    </ProductsWrapper>
   );
 }
 
 
 
 
-export default CatalogProducts;
+export default Products;
