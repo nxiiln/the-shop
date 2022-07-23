@@ -5,7 +5,7 @@ import ImageC from '../images/whatsNewC.png';
 
 
 const Wrapper = styled.article`
-  margin-top: 20px;
+  margin-top: 50px;
   display: flex;
   justify-content: center;
   align-content: space-between;
@@ -30,7 +30,7 @@ const Line = styled.div`
   width: calc(44% - 70px);
   height: 1px;
   margin-top: 15px;
-  background-color: var(--color-text-regular);
+  background-color: var(--color-border);
 `;
 
 const Title = styled.h2`

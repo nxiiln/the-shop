@@ -8,7 +8,6 @@ import baldinini from '../images/baldinini.png';
 
 const WrapperOuter = styled.article`
   width: 100vw;
-  margin-top: 10px;
   display: flex;
   justify-content: center;
 `;

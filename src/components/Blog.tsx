@@ -66,7 +66,7 @@ const PostWrapper = styled(HashLink)`
 `;
 
 const PostHeader = styled.h2`
-  margin-bottom: 22px;
+  margin: 0 0 22px;
   display: inline-block;
   font-family: var(--font-main);
   font-size: 24px;
