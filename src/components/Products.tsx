@@ -7,14 +7,15 @@ import {wishListAdd, wishListRemove} from '../slices/wishList';
 import {IProduct} from '../IProduct';
 import cartSymbol from '../images/cartSymbol.png';
 import wishListSymbol from '../images/wishList.png';
+import { useMediaQuery } from '../mediaQueries';
 
 
 
 
-const ProductsWrapper = styled.div`
+const ProductsWrapper = styled.div<{maxWidth?: string, margin?: string}>`
   width: 100%;
-  max-width: 725px;
-  margin: 22px 0 80px 0;
+  max-width: ${props => props.maxWidth};
+  margin: ${props => props.margin};
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -160,8 +161,15 @@ const WishList = styled.button`
 
 
 
+interface IProps {
+  products: IProduct[];
+  maxWidth?: string;
+  margin?: string;
+}
 
-const Products = ({products}: {products: IProduct[]}): JSX.Element => {
+
+const Products = (props: IProps): JSX.Element => {
+  const screen = useMediaQuery();
   const [productOpen, setProductOpen] = useState<number>(0);
   const cart = useAppSelector(state => state.cart);
   const wishList = useAppSelector(state => state.wishList);
@@ -172,8 +180,8 @@ const Products = ({products}: {products: IProduct[]}): JSX.Element => {
   
 
   return(
-    <ProductsWrapper>
-      {products.map((product: IProduct): JSX.Element =>
+    <ProductsWrapper maxWidth={props.maxWidth} margin={props.margin}>
+      {props.products.map((product: IProduct): JSX.Element =>
         <Product
           key={product.id}
           to={`/catalog/product${product.id}#top`}
@@ -196,7 +204,7 @@ const Products = ({products}: {products: IProduct[]}): JSX.Element => {
           <ProductName>{product.name}</ProductName>
           <ProductPrice>${product.price}</ProductPrice>
 
-          {productOpen === product.id &&
+          {screen.touch && productOpen === product.id &&
             <ProductOpen>
               <QuickShop onClick={preventDefault}>QUICK SHOP</QuickShop>
 
