@@ -2,6 +2,7 @@ import styled from 'styled-components/macro';
 import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
 import {Link, useParams} from 'react-router-dom';
 import BreadCrumbs from './BreadCrumbs';
+import Products from './Products';
 import RelatedProducts from './RelatedProducts';
 import ProductDescription from './ProductDescription';
 import ProductReviews from './ProductReviews';
@@ -86,6 +87,38 @@ const ProductTriangleDescription = styled.span`
   color: var(--color-text-second);
 `;
 
+const WrapperRelatedProducts = styled.article`
+  /* width: 720px; */
+  /* height: 310px; */
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const HeaderRelatedProducts = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  > div {
+    width: calc(95% - 240px);
+    height: 1px;
+    background: var(--color-border);
+  }
+
+  > span {
+    margin: 0;
+    font-family: var(--font-main);
+    font-size: 24px;
+    line-height: 1.2;
+    font-weight: 400;
+    color: var(--color-text-main);
+  }
+`;
+
 
 
 
@@ -100,6 +133,21 @@ const Product = (): JSX.Element => {
   }
 
   const productId: number = findProductId(useParams().id);
+
+  const relatedProducts: JSX.Element =
+    <WrapperRelatedProducts>
+      <HeaderRelatedProducts>
+        <span>RELATED PRODUCTS</span>
+        <div />
+      </HeaderRelatedProducts>
+
+      <Products
+        products={products.filter(product =>
+          product.id === 3 || product.id === 4 || product.id === 10
+        )}
+        margin='20px 0 0'
+      />
+    </WrapperRelatedProducts>;
 
   
   return(
@@ -133,13 +181,14 @@ const Product = (): JSX.Element => {
                     alt='product image'
                   />
                 </ProductImage>
-                {!screen.small && <RelatedProducts />}
+                
+                {!screen.small && relatedProducts}
               </div>
 
               <div>
                 <ProductDescription {...products[productId - 1]} />
                 <ProductReviews />
-                {screen.small && <RelatedProducts />}
+                {screen.small && relatedProducts}
               </div>
             </div>
           </WrapperInner>
