@@ -11,6 +11,9 @@ const colors: string = `
 
     --color-border: #e4e2e1;
 
+    --color-button-solid-hover: #333; 
+    --color-button-outline-hover: #f7f7f7; 
+
     --color-triangle-new: #000;
     --color-triangle-sale: #c50e20;    
   }
