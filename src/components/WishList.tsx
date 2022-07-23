@@ -186,7 +186,7 @@ const X = styled.button`
   cursor: pointer;
 `;
 
-const AddToBag = styled.button`
+const AddToCart = styled.button`
   width: 119px;
   height: 30px;
   font-family: var(--font-second);
@@ -197,6 +197,8 @@ const AddToBag = styled.button`
   background: var(--color-background-second);
   border: none;
   cursor: pointer;
+
+  &:hover {background: var(--color-button-solid-hover)}
 `;
 
 
@@ -256,7 +258,7 @@ const WishList = (): JSX.Element => {
                     <span>size: {product.size}</span>
                     <span>${product.price}</span>
                     
-                    <AddToBag
+                    <AddToCart
                       type='button'
                       onClick={(): void => {
                         !cart.some(cartProduct => cartProduct.id === product.id) ?
@@ -266,7 +268,7 @@ const WishList = (): JSX.Element => {
                       {!cart.some(cartProduct => cartProduct.id === product.id) ? 
                         'ADD TO CART' : 'PRODUCT IN CART'
                       }
-                    </AddToBag>
+                    </AddToCart>
                   </Product>
                 </ProductWrapper>
               )}

@@ -204,6 +204,8 @@ const ViewCart = styled(LinkBox)`
   color: var(--color-text-main);
   background: var(--color-background-main);
   border: 1px solid var(--color-border);
+
+  &:hover {background: var(--color-button-outline-hover)}
 `;
 
 const Checkout = styled(LinkBox)`
@@ -211,6 +213,8 @@ const Checkout = styled(LinkBox)`
   color: var(--color-text-second);
   background-color: var(--color-background-second);
   border: none;
+
+  &:hover {background: var(--color-button-solid-hover)}
 `;
 
 

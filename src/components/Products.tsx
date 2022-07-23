@@ -123,7 +123,7 @@ const AddToCart = styled.button`
   border: none;
   cursor: pointer;
 
-  &:hover {opacity: 0.8}
+  &:hover {background: var(--color-button-solid-hover)}
 
   > div {
     display: flex;

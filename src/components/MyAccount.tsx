@@ -149,6 +149,8 @@ const ButtonBlack = styled.button`
   background: var(--color-background-second);
   border: none;
   cursor: pointer;
+
+  &:hover {background: var(--color-button-solid-hover)}
 `;
 
 const ButtonUpdate = styled(ButtonBlack)`

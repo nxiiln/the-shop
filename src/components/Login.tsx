@@ -138,6 +138,8 @@ const ButtonLogin = styled.button`
   width: 112px;
   border: none;
   cursor: pointer;
+
+  &:hover {background: var(--color-button-solid-hover)}
 `;
 
 const ButtonUnderline = styled.button`
@@ -172,6 +174,8 @@ const ButtonCreateAccount = styled(Link)`
   justify-content: center;
   align-items: center;
   text-decoration: none;
+
+  &:hover {background: var(--color-button-solid-hover)}
 `;
 
 

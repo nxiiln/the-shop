@@ -97,6 +97,7 @@ const LinkBannerA = styled(Link)`
   border: none;
   background: var(--color-background-second);
 
+  &:hover {background: var(--color-button-solid-hover)}
   @media ${smallScreen} {width: 130px}
 `;
 
@@ -192,6 +193,8 @@ const ShopNow = styled(Link)`
   color: var(--color-text-second);
   background: var(--color-background-second);
   border: none;
+
+  &:hover {background: var(--color-button-solid-hover)}
 `;
 
 const UseCode = styled.div`

@@ -351,6 +351,8 @@ const GetAQuote = styled.button`
   background: var(--color-background-second);
   border: none;
   cursor: pointer;
+
+  &:hover {background: var(--color-button-solid-hover)}
 `;
 
 
@@ -491,6 +493,8 @@ export const ContinueShopping = styled(LinkNormal)`
   background: var(--color-background-main);
   border: 1px solid var(--color-border);
 
+  &:hover {background: var(--color-button-outline-hover)}
+
   @media ${mediumScreen} {
     grid-area: 7 / 4 / 8 / 5;
     justify-self: end;
@@ -504,6 +508,7 @@ const Checkout = styled(LinkNormal)`
   color: var(--color-text-second);
   background: var(--color-background-second);
 
+  &:hover {background: var(--color-button-solid-hover)}
   @media ${mediumScreen} {align-self: end}
 `;
 

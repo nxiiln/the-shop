@@ -123,6 +123,8 @@ const Button = styled.button`
   background: var(--color-background-second);
   border: none;
   cursor: pointer;
+
+  &:hover {background: var(--color-button-solid-hover)}
 `;
 
 const Rating = styled.div`

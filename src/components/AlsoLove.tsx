@@ -98,6 +98,8 @@ const ButtonQuickView = styled.button`
   background: var(--color-background-main);
   border: 1px solid var(--color-border);
   cursor: pointer;
+
+  &:hover {background: var(--color-button-outline-hover)}
 `;
 
 

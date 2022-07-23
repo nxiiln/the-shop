@@ -260,6 +260,8 @@ const Buttons = styled.div`
     color: var(--color-text-second);
     background: var(--color-background-second);
     border: none;
+
+    &:hover {background: var(--color-button-solid-hover)}
   }
 
   > button:last-child {
@@ -270,6 +272,8 @@ const Buttons = styled.div`
     background: var(--color-background-main);
     border: 1px solid var(--color-border);
     img {margin-right: 7px}
+
+    &:hover {background: var(--color-button-outline-hover)}
   }
 `;
 
