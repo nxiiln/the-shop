@@ -3,7 +3,6 @@ import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
 import {Link, useParams} from 'react-router-dom';
 import BreadCrumbs from './BreadCrumbs';
 import Products from './Products';
-import RelatedProducts from './RelatedProducts';
 import ProductDescription from './ProductDescription';
 import ProductReviews from './ProductReviews';
 import PageNotFound from './404';
