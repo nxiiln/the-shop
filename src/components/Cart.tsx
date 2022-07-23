@@ -12,26 +12,35 @@ import BreadCrumbs from './BreadCrumbs';
 
 const WrapperOuter = styled.main`
   width: 100vw;
-  margin: 0 0 75px 0;
   display: flex;
   justify-content: center;
 `;
 
 const WrapperInner = styled.div<{empty: boolean}>`
   width: 1100px;
-  padding: 0 1% 0;
+  padding: 0 1% 50px;
 
   ${props => props.empty ?
    `display: flex;
     flex-direction: column;
     align-items: center;
+    
     > article {align-self: stretch}
-    > div {
-      margin-bottom: 20px;
-      border: none;
+
+    > h2 {
+      margin: 0 0 20px;
+      align-self: center;
+      font-family: var(--font-main);
+      font-size: 24px;
+      line-height: 1.2;
+      font-weight: 400;
+      color: var(--color-text-main);
     }
+
     > a {align-self: center}`
+
     :
+    
     'display: grid;'
   }
 
@@ -476,7 +485,7 @@ const LinkNormal = styled(HashLink)`
   }
 `;
 
-const ContinueShopping = styled(LinkNormal)`
+export const ContinueShopping = styled(LinkNormal)`
   grid-area: 6 / 1 / 7 / 2;
   color: var(--color-text-main);
   background: var(--color-background-main);
@@ -716,9 +725,7 @@ const Cart = (): JSX.Element => {
           :
 
           <>
-            <HeaderWrapper>
-              <h2>CART IS EMPTY</h2>
-            </HeaderWrapper>
+            <h2>CART IS EMPTY</h2>
             <ContinueShopping to='/catalog#top'>CONTINUE SHOPPING</ContinueShopping>
           </>
         }

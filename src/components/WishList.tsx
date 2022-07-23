@@ -1,5 +1,5 @@
 import styled from 'styled-components/macro';
-import {smallScreen, useMediaQuery} from '../mediaQueries';
+import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
 import {Link} from 'react-router-dom';
 import {HashLink} from 'react-router-hash-link';
 import {useAppSelector, useAppDispatch} from '../redux-hooks';
@@ -7,6 +7,7 @@ import {wishListRemove} from '../slices/wishList';
 import {cartAdd, cartRemove} from '../slices/cart';
 import {IProduct} from '../IProduct';
 import BreadCrumbs from './BreadCrumbs';
+import {ContinueShopping} from './Cart';
 
 
 
@@ -24,16 +25,24 @@ const WrapperInner = styled.div<{empty: boolean}>`
   ${props => props.empty ?
    `display: flex;
     flex-direction: column;
+
     > h2 {
-      margin: 20px 0;
+      margin: 0 0 20px;
       align-self: center;
       font-family: var(--font-main);
       font-size: 24px;
       line-height: 1.2;
       font-weight: 400;
       color: var(--color-text-main);
+    }
+
+    > a {
+      align-self: center;
+      @media ${mediumScreen} {align-self: center}
     }`
+
    :
+
    `display: grid;
     border-bottom: 1px solid var(--color-border);
     grid-template-columns: 1fr;
@@ -264,7 +273,10 @@ const WishList = (): JSX.Element => {
             </CartWrapper>
           </>
         :
-          <h2>WISH LIST IS EMPTY</h2>
+          <>
+            <h2>WISH LIST IS EMPTY</h2>
+            <ContinueShopping to='/catalog#top'>CONTINUE SHOPPING</ContinueShopping>
+          </>
         }
       </WrapperInner>
     </WrapperOuter>

@@ -2,6 +2,7 @@ import {useState} from 'react';
 import styled from 'styled-components/macro';
 import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
 import {Link} from 'react-router-dom';
+import {useAppSelector} from '../redux-hooks';
 import BreadCrumbs from './BreadCrumbs';
 import AlsoLove from './AlsoLove';
 import CartCheckout from './CartCheckout';
@@ -9,7 +10,7 @@ import visaIcon from '../images/visaIcon.png';
 import masterCardIcon from '../images/masterCardIcon.png';
 import discoverIcon from '../images/discoverIcon.png';
 import americanExpressIcon from '../images/americanExpressIcon.png';
-import { useAppSelector } from '../redux-hooks';
+import {ContinueShopping} from './Cart';
 
 
 
@@ -28,16 +29,24 @@ const WrapperInner = styled.div<{empty: boolean}>`
   
   ${props => props.empty ?
    `flex-direction: column;
+   
     > h2 {
-      margin: 20px 0;
+      margin: 0 0 20px;
       align-self: center;
       font-family: var(--font-main);
       font-size: 24px;
       line-height: 1.2;
       font-weight: 400;
       color: var(--color-text-main);
+    }
+
+    > a {
+      align-self: center;
+      @media ${mediumScreen} {align-self: center}
     }`
+
     :
+
    `flex-wrap: wrap;
     justify-content: space-between;
     align-content: start;`
@@ -834,7 +843,10 @@ const Checkout = (): JSX.Element => {
 
           :
 
-          <h2>NO SELECTED PRODUCTS</h2>
+          <>
+            <h2>NO SELECTED PRODUCTS</h2>
+            <ContinueShopping to='/catalog#top'>CONTINUE SHOPPING</ContinueShopping>
+          </>
         }
       </WrapperInner>
     </WrapperOuter>
