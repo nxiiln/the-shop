@@ -4,7 +4,7 @@ import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
 import {Link} from 'react-router-dom';
 import BreadCrumbs from './BreadCrumbs';
 import CatalogFilters from './CatalogFilters';
-import CatalogProducts from './CatalogProducts';
+import Products from './Products';
 import {products} from '../products';
 import banner from '../images/banner.png';
 import bannerSmall from '../images/bannerSmall.png';
@@ -351,7 +351,7 @@ const Catalog = (): JSX.Element => {
             </SortWrapper>
 
 
-            <CatalogProducts />
+            <Products products={products} maxWidth='725px' margin='22px 0 80px 0' />
 
 
             <Pagination>
