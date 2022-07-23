@@ -4,7 +4,7 @@ import {HashRouter} from 'react-router-dom';
 import {store} from './store';
 import {Provider} from 'react-redux';
 import App from './components/App';
-import GlobalStyles from './globalStyles';
+import GlobalStyles from './styles/globalStyles';
 
 
 ReactDOM.render(

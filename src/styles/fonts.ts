@@ -1,5 +1,5 @@
-import Nunito from './fonts/Nunito-Regular.ttf'
-import PlayfairDisplaySC from './fonts/PlayfairDisplay-Regular.ttf';
+import Nunito from '../fonts/Nunito-Regular.ttf'
+import PlayfairDisplaySC from '../fonts/PlayfairDisplay-Regular.ttf';
 
 
 const fonts: string = `
