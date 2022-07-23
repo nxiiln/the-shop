@@ -274,7 +274,7 @@ const CatalogFilters = (): JSX.Element => {
       </Dropdown>
 
 
-      <Dropdown open={priceRange}>
+      {/* <Dropdown open={priceRange}>
         <DropdownHeader
           open={priceRange}
           onClick={(): void => priceRange ? setPriceRange(false) : setPriceRange(true)}
@@ -309,7 +309,7 @@ const CatalogFilters = (): JSX.Element => {
             <RangeValue>{range2}</RangeValue>
           </RangeWrapper>
         }
-      </Dropdown>
+      </Dropdown> */}
 
 
       <Dropdown open={color}>
