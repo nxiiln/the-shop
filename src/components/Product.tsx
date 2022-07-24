@@ -186,7 +186,7 @@ const Product = (): JSX.Element => {
 
               <div>
                 <ProductDescription {...products[productId - 1]} />
-                <ProductReviews />
+                <ProductReviews initialReviews={products[productId - 1].reviews} />
                 {screen.small && relatedProducts}
               </div>
             </div>
