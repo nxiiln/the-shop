@@ -1,6 +1,7 @@
 import {useState} from 'react';
 import styled from 'styled-components/macro';
 import {smallScreen} from '../mediaQueries';
+import {IProductReview} from '../types/IProductReview';
 
 
 
@@ -196,51 +197,13 @@ const Buttons = styled.div`
 
 
 
-interface Review {
-  id: number;
-  title: string;
-  rating: number;
-  text: string;
-  date: string;
-  name: string;
-}
-
-const reviewsList: Review[] = [
-  {
-    id: 1,
-    title: 'Must have!',
-    rating: 5,
-    text: `
-      Maximus nisl lorem, a pulvinar arcu mattis vitae.
-      Vivamus porta, nisi ut tempor viverra, sed lacinia mauris sapien in lorem.
-      Fusce posuere semper eros nec porttitor.
-      Proin odio justo, maximus sed eros nec, luctus convallis ligula.`,
-    date: '25.04.2022',
-    name: 'Liya Andrade'
-  },
-  {
-    id: 2,
-    title: 'Very good',
-    rating: 4,
-    text: `
-      In sed tortor at sapien accumsan congue.
-      Phasellus aliquet, justo eu varius egestas, ex lectus mattis nulla.
-      Vivamus rhoncus ante turpis, nec dictum nulla convallis vitae.`,
-    date: '29.04.2022',
-    name: 'Anisa Bell'
-  }
-]
-
-
-
-
-const ProductReviews = (): JSX.Element => {
-  const [reviews, setReviews] = useState<Review[]>(reviewsList);
+const ProductReviews = ({initialReviews}: {initialReviews: IProductReview[]}): JSX.Element => {
+  const [reviews, setReviews] = useState<IProductReview[]>(initialReviews);
   const [writeReview, setWriteReview] = useState<boolean>(false);
-  const [rating, setRating] = useState<number>(0);
-  const [name, setName] = useState<string>('');
   const [title, setTitle] = useState<string>('');
+  const [rating, setRating] = useState<number>(0);
   const [text, setText] = useState<string>('');
+  const [author, setAuthor] = useState<string>('');
 
 
   return(
@@ -248,8 +211,12 @@ const ProductReviews = (): JSX.Element => {
       {!writeReview ?
         <>
           <Title>{reviews.length} REVIEWS</Title>
-          {reviews.map((review: Review): JSX.Element =>
-            <Review key={review.id}>
+          {reviews.map((review): JSX.Element =>
+            <Review
+              key={reviews.findIndex(
+                (currReview: IProductReview): boolean => currReview.rating === review.rating
+              )}
+            >
               <span>{review.title}</span>
               <Stars rating={review.rating}>
                 <div>★★★★★</div>
@@ -257,7 +224,7 @@ const ProductReviews = (): JSX.Element => {
               </Stars>
               <p>{review.text}</p>
               <span>{review.date}</span>
-              <span>{review.name}</span>
+              <span>{review.title}</span>
             </Review>
           )}
 
@@ -291,9 +258,9 @@ const ProductReviews = (): JSX.Element => {
             NAME
             <input
               type='text'
-              value={name}
+              value={author}
               onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
-                setName(e.target.value);
+                setAuthor(e.target.value);
               }}
             />
           </Label>
@@ -326,7 +293,7 @@ const ProductReviews = (): JSX.Element => {
                 setTitle('');
                 setRating(0);
                 setText('');
-                setName('');
+                setAuthor('');
                 setWriteReview(false);
               }}
             >
@@ -345,23 +312,22 @@ const ProductReviews = (): JSX.Element => {
                 const month: string = date.getMonth() <= 10 ?
                   `0${date.getMonth() + 1}` : `${date.getMonth() + 1}`;
 
-                const review: Review = {
-                  id: reviews[reviews.length - 1].id + 1,
+                const review: IProductReview = {
                   title: title,
                   rating: rating,
                   text: text,
                   date: `${day}.${month}.${date.getFullYear()}`,
-                  name: name
+                  author: author
                 };
 
-                const newReviews: Review[] = [...reviews];
+                const newReviews: IProductReview[] = [...reviews];
                 newReviews.push(review);
 
                 setReviews(newReviews);
                 setTitle('');
                 setRating(0);
                 setText('');
-                setName('');
+                setAuthor('');
                 setWriteReview(false);
               }}
             >
