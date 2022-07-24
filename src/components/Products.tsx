@@ -4,7 +4,7 @@ import {HashLink} from 'react-router-hash-link';
 import {useAppSelector, useAppDispatch} from '../redux-hooks';
 import {cartAdd, cartRemove} from '../slices/cart';
 import {wishListAdd, wishListRemove} from '../slices/wishList';
-import {IProduct} from '../IProduct';
+import {IProduct} from '../types/IProduct';
 import cartSymbol from '../images/cartSymbol.png';
 import wishListSymbol from '../images/wishList.png';
 import { useMediaQuery } from '../mediaQueries';
