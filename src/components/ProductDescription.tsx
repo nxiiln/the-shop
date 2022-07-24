@@ -1,12 +1,13 @@
 import {useState} from 'react';
 import styled from 'styled-components/macro';
 import {smallScreen} from '../mediaQueries';
-import {IProduct} from '../IProduct';
-import {sizes, colors} from './CatalogFilters';
-import wishListSymbol from '../images/wishList.png';
 import {useAppDispatch, useAppSelector} from '../redux-hooks';
 import {cartAdd, cartRemove, cartProductSize, cartProductColor} from '../slices/cart';
 import {wishListAdd, wishListRemove, wishListProductSize, wishListProductColor} from '../slices/wishList';
+import {sizes, colors} from './CatalogFilters';
+import {IProduct} from '../types/IProduct';
+import {IProductReview} from '../types/IProductReview';
+import wishListSymbol from '../images/wishList.png';
 
 
 
@@ -40,7 +41,7 @@ const Name = styled.h2`
 `;
 
 const AboutReviews = styled.div`
-  width: 210px;
+  width: 130px;
   margin-bottom: 15px;
   display: flex;
   justify-content: space-between;
@@ -85,23 +86,6 @@ const NumberReviews = styled.span`
   font-weight: 400;
   line-height: 1.2;
   color: var(--color-text-main);
-`;
-
-const AddReview = styled.button`
-  width: 75px;
-  font-family: var(--font-regular);
-  font-size: 11px;
-  font-weight: 400;
-  line-height: 1.2;
-  color: var(--color-text-main);
-  background: none;
-  border: none;
-  border-left: 1px solid var(--color-text-regular);
-
-  &:hover {
-    text-decoration: underline;
-    cursor: pointer;
-  }
 `;
 
 const Availability = styled.div`
@@ -356,12 +340,17 @@ const ProductDescription = (product: IProduct): JSX.Element => {
       <Name>{product.name}</Name>
 
       <AboutReviews>
-        <Stars rating={4.5}>
+        <Stars
+          rating={product.reviews
+            .map((review: IProductReview): number => review.rating)
+            .reduce((prevRating: number, currRating: number): number => prevRating + currRating)
+            / product.reviews.length
+          }
+        >
           <div>★★★★★</div>
           <div>☆☆☆☆☆</div>
         </Stars>
-        <NumberReviews>2 Reviews</NumberReviews>
-        <AddReview type='button'>Add Review</AddReview>
+        <NumberReviews>{product.reviews.length} Reviews</NumberReviews>
       </AboutReviews>
 
       <Availability>Availability: <span>In stock</span></Availability>
