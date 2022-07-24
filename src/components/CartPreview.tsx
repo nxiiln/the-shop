@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 import {HashLink} from 'react-router-hash-link';
 import {useAppSelector, useAppDispatch} from '../redux-hooks';
 import {cartRemove} from '../slices/cart'
-import {IProduct} from '../IProduct';
+import {IProduct} from '../types/IProduct';
 import cartSymbol from '../images/cartSymbol.png';
 
 

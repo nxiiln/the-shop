@@ -4,7 +4,7 @@ import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
 import {HashLink} from 'react-router-hash-link';
 import {useAppSelector, useAppDispatch} from '../redux-hooks';
 import {cartRemove, quantityIncrement, quantityDecrement} from '../slices/cart';
-import {IProduct} from '../IProduct';
+import {IProduct} from '../types/IProduct';
 import BreadCrumbs from './BreadCrumbs';
 
 

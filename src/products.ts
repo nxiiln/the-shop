@@ -1,4 +1,4 @@
-import {IProduct} from './IProduct';
+import {IProduct} from './types/IProduct';
 import product1 from './images/product1.png';
 import product2 from './images/product2.png';
 import product3 from './images/product3.png';
@@ -24,6 +24,22 @@ export const products: IProduct[] = [
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer et nisi erat. Interdum et malesuada fames ac ante ipsum primis in faucibus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae. Nunc eu commodo tellus. Mauris faucibus leo quis urna porta, at rutrum massa efficitur. Donec tempor bibendum ex, sit amet lacinia nibh ultrices sit amet.',
     additionalInfo: 'Duis a ex id turpis consectetur consequat et in libero. Integer varius consequat pulvinar. Quisque at mattis diam.',
     tags: ['Dress', 'Striped', 'Detailed Swing Dress'],
+    reviews: [
+      {
+        title: 'Must have!',
+        rating: 5,
+        text: 'Maximus nisl lorem, a pulvinar arcu mattis vitae. Vivamus porta, nisi ut tempor viverra, sed lacinia mauris sapien in lorem. Fusce posuere semper eros nec porttitor. Proin odio justo, maximus sed eros nec, luctus convallis ligula.',
+        date: '25.04.2022',
+        author: 'Liya Andrade',
+      },
+      {
+        title: 'Very good',
+        rating: 4,
+        text: 'In sed tortor at sapien accumsan congue. Phasellus aliquet, justo eu varius egestas, ex lectus mattis nulla. Vivamus rhoncus ante turpis, nec dictum nulla convallis vitae.',
+        date: '29.04.2022',
+        author: 'Anisa Bell',
+      },
+    ],
     triangle: 'new',
   },
   {
@@ -38,6 +54,22 @@ export const products: IProduct[] = [
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer et nisi erat. Interdum et malesuada fames ac ante ipsum primis in faucibus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae. Nunc eu commodo tellus. Mauris faucibus leo quis urna porta, at rutrum massa efficitur. Donec tempor bibendum ex, sit amet lacinia nibh ultrices sit amet.',
     additionalInfo: 'Duis a ex id turpis consectetur consequat et in libero. Integer varius consequat pulvinar. Quisque at mattis diam.',
     tags: ['Dress', 'Striped', 'Detailed Swing Dress'],
+    reviews: [
+      {
+        title: 'Must have!',
+        rating: 5,
+        text: 'Maximus nisl lorem, a pulvinar arcu mattis vitae. Vivamus porta, nisi ut tempor viverra, sed lacinia mauris sapien in lorem. Fusce posuere semper eros nec porttitor. Proin odio justo, maximus sed eros nec, luctus convallis ligula.',
+        date: '25.04.2022',
+        author: 'Liya Andrade',
+      },
+      {
+        title: 'Very good',
+        rating: 4,
+        text: 'In sed tortor at sapien accumsan congue. Phasellus aliquet, justo eu varius egestas, ex lectus mattis nulla. Vivamus rhoncus ante turpis, nec dictum nulla convallis vitae.',
+        date: '29.04.2022',
+        author: 'Anisa Bell',
+      },
+    ],
     triangle: 'sale',
   },
   {
@@ -52,6 +84,22 @@ export const products: IProduct[] = [
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer et nisi erat. Interdum et malesuada fames ac ante ipsum primis in faucibus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae. Nunc eu commodo tellus. Mauris faucibus leo quis urna porta, at rutrum massa efficitur. Donec tempor bibendum ex, sit amet lacinia nibh ultrices sit amet.',
     additionalInfo: 'Duis a ex id turpis consectetur consequat et in libero. Integer varius consequat pulvinar. Quisque at mattis diam.',
     tags: ['Dress', 'Striped', 'Detailed Swing Dress'],
+    reviews: [
+      {
+        title: 'Must have!',
+        rating: 5,
+        text: 'Maximus nisl lorem, a pulvinar arcu mattis vitae. Vivamus porta, nisi ut tempor viverra, sed lacinia mauris sapien in lorem. Fusce posuere semper eros nec porttitor. Proin odio justo, maximus sed eros nec, luctus convallis ligula.',
+        date: '25.04.2022',
+        author: 'Liya Andrade',
+      },
+      {
+        title: 'Very good',
+        rating: 4,
+        text: 'In sed tortor at sapien accumsan congue. Phasellus aliquet, justo eu varius egestas, ex lectus mattis nulla. Vivamus rhoncus ante turpis, nec dictum nulla convallis vitae.',
+        date: '29.04.2022',
+        author: 'Anisa Bell',
+      },
+    ],
   },
   {
     id: 4,
@@ -65,6 +113,22 @@ export const products: IProduct[] = [
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer et nisi erat. Interdum et malesuada fames ac ante ipsum primis in faucibus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae. Nunc eu commodo tellus. Mauris faucibus leo quis urna porta, at rutrum massa efficitur. Donec tempor bibendum ex, sit amet lacinia nibh ultrices sit amet.',
     additionalInfo: 'Duis a ex id turpis consectetur consequat et in libero. Integer varius consequat pulvinar. Quisque at mattis diam.',
     tags: ['Dress', 'Striped', 'Detailed Swing Dress'],
+    reviews: [
+      {
+        title: 'Must have!',
+        rating: 5,
+        text: 'Maximus nisl lorem, a pulvinar arcu mattis vitae. Vivamus porta, nisi ut tempor viverra, sed lacinia mauris sapien in lorem. Fusce posuere semper eros nec porttitor. Proin odio justo, maximus sed eros nec, luctus convallis ligula.',
+        date: '25.04.2022',
+        author: 'Liya Andrade',
+      },
+      {
+        title: 'Very good',
+        rating: 4,
+        text: 'In sed tortor at sapien accumsan congue. Phasellus aliquet, justo eu varius egestas, ex lectus mattis nulla. Vivamus rhoncus ante turpis, nec dictum nulla convallis vitae.',
+        date: '29.04.2022',
+        author: 'Anisa Bell',
+      },
+    ],
   },
   {
     id: 5,
@@ -78,6 +142,22 @@ export const products: IProduct[] = [
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer et nisi erat. Interdum et malesuada fames ac ante ipsum primis in faucibus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae. Nunc eu commodo tellus. Mauris faucibus leo quis urna porta, at rutrum massa efficitur. Donec tempor bibendum ex, sit amet lacinia nibh ultrices sit amet.',
     additionalInfo: 'Duis a ex id turpis consectetur consequat et in libero. Integer varius consequat pulvinar. Quisque at mattis diam.',
     tags: ['Dress', 'Striped', 'Detailed Swing Dress'],
+    reviews: [
+      {
+        title: 'Must have!',
+        rating: 5,
+        text: 'Maximus nisl lorem, a pulvinar arcu mattis vitae. Vivamus porta, nisi ut tempor viverra, sed lacinia mauris sapien in lorem. Fusce posuere semper eros nec porttitor. Proin odio justo, maximus sed eros nec, luctus convallis ligula.',
+        date: '25.04.2022',
+        author: 'Liya Andrade',
+      },
+      {
+        title: 'Very good',
+        rating: 4,
+        text: 'In sed tortor at sapien accumsan congue. Phasellus aliquet, justo eu varius egestas, ex lectus mattis nulla. Vivamus rhoncus ante turpis, nec dictum nulla convallis vitae.',
+        date: '29.04.2022',
+        author: 'Anisa Bell',
+      },
+    ],
   },
   {
     id: 6,
@@ -91,6 +171,22 @@ export const products: IProduct[] = [
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer et nisi erat. Interdum et malesuada fames ac ante ipsum primis in faucibus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae. Nunc eu commodo tellus. Mauris faucibus leo quis urna porta, at rutrum massa efficitur. Donec tempor bibendum ex, sit amet lacinia nibh ultrices sit amet.',
     additionalInfo: 'Duis a ex id turpis consectetur consequat et in libero. Integer varius consequat pulvinar. Quisque at mattis diam.',
     tags: ['Dress', 'Striped', 'Detailed Swing Dress'],
+    reviews: [
+      {
+        title: 'Must have!',
+        rating: 5,
+        text: 'Maximus nisl lorem, a pulvinar arcu mattis vitae. Vivamus porta, nisi ut tempor viverra, sed lacinia mauris sapien in lorem. Fusce posuere semper eros nec porttitor. Proin odio justo, maximus sed eros nec, luctus convallis ligula.',
+        date: '25.04.2022',
+        author: 'Liya Andrade',
+      },
+      {
+        title: 'Very good',
+        rating: 4,
+        text: 'In sed tortor at sapien accumsan congue. Phasellus aliquet, justo eu varius egestas, ex lectus mattis nulla. Vivamus rhoncus ante turpis, nec dictum nulla convallis vitae.',
+        date: '29.04.2022',
+        author: 'Anisa Bell',
+      },
+    ],
     triangle: 'sale',
   },
   {
@@ -105,6 +201,22 @@ export const products: IProduct[] = [
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer et nisi erat. Interdum et malesuada fames ac ante ipsum primis in faucibus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae. Nunc eu commodo tellus. Mauris faucibus leo quis urna porta, at rutrum massa efficitur. Donec tempor bibendum ex, sit amet lacinia nibh ultrices sit amet.',
     additionalInfo: 'Duis a ex id turpis consectetur consequat et in libero. Integer varius consequat pulvinar. Quisque at mattis diam.',
     tags: ['Dress', 'Striped', 'Detailed Swing Dress'],
+    reviews: [
+      {
+        title: 'Must have!',
+        rating: 5,
+        text: 'Maximus nisl lorem, a pulvinar arcu mattis vitae. Vivamus porta, nisi ut tempor viverra, sed lacinia mauris sapien in lorem. Fusce posuere semper eros nec porttitor. Proin odio justo, maximus sed eros nec, luctus convallis ligula.',
+        date: '25.04.2022',
+        author: 'Liya Andrade',
+      },
+      {
+        title: 'Very good',
+        rating: 4,
+        text: 'In sed tortor at sapien accumsan congue. Phasellus aliquet, justo eu varius egestas, ex lectus mattis nulla. Vivamus rhoncus ante turpis, nec dictum nulla convallis vitae.',
+        date: '29.04.2022',
+        author: 'Anisa Bell',
+      },
+    ],
   },
   {
     id: 8,
@@ -118,6 +230,22 @@ export const products: IProduct[] = [
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer et nisi erat. Interdum et malesuada fames ac ante ipsum primis in faucibus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae. Nunc eu commodo tellus. Mauris faucibus leo quis urna porta, at rutrum massa efficitur. Donec tempor bibendum ex, sit amet lacinia nibh ultrices sit amet.',
     additionalInfo: 'Duis a ex id turpis consectetur consequat et in libero. Integer varius consequat pulvinar. Quisque at mattis diam.',
     tags: ['Dress', 'Striped', 'Detailed Swing Dress'],
+    reviews: [
+      {
+        title: 'Must have!',
+        rating: 5,
+        text: 'Maximus nisl lorem, a pulvinar arcu mattis vitae. Vivamus porta, nisi ut tempor viverra, sed lacinia mauris sapien in lorem. Fusce posuere semper eros nec porttitor. Proin odio justo, maximus sed eros nec, luctus convallis ligula.',
+        date: '25.04.2022',
+        author: 'Liya Andrade',
+      },
+      {
+        title: 'Very good',
+        rating: 4,
+        text: 'In sed tortor at sapien accumsan congue. Phasellus aliquet, justo eu varius egestas, ex lectus mattis nulla. Vivamus rhoncus ante turpis, nec dictum nulla convallis vitae.',
+        date: '29.04.2022',
+        author: 'Anisa Bell',
+      },
+    ],
   },
   {
     id: 9,
@@ -131,6 +259,22 @@ export const products: IProduct[] = [
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer et nisi erat. Interdum et malesuada fames ac ante ipsum primis in faucibus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae. Nunc eu commodo tellus. Mauris faucibus leo quis urna porta, at rutrum massa efficitur. Donec tempor bibendum ex, sit amet lacinia nibh ultrices sit amet.',
     additionalInfo: 'Duis a ex id turpis consectetur consequat et in libero. Integer varius consequat pulvinar. Quisque at mattis diam.',
     tags: ['Dress', 'Striped', 'Detailed Swing Dress'],
+    reviews: [
+      {
+        title: 'Must have!',
+        rating: 5,
+        text: 'Maximus nisl lorem, a pulvinar arcu mattis vitae. Vivamus porta, nisi ut tempor viverra, sed lacinia mauris sapien in lorem. Fusce posuere semper eros nec porttitor. Proin odio justo, maximus sed eros nec, luctus convallis ligula.',
+        date: '25.04.2022',
+        author: 'Liya Andrade',
+      },
+      {
+        title: 'Very good',
+        rating: 4,
+        text: 'In sed tortor at sapien accumsan congue. Phasellus aliquet, justo eu varius egestas, ex lectus mattis nulla. Vivamus rhoncus ante turpis, nec dictum nulla convallis vitae.',
+        date: '29.04.2022',
+        author: 'Anisa Bell',
+      },
+    ],
   },
   {
     id: 10,
@@ -144,5 +288,21 @@ export const products: IProduct[] = [
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer et nisi erat. Interdum et malesuada fames ac ante ipsum primis in faucibus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae. Nunc eu commodo tellus. Mauris faucibus leo quis urna porta, at rutrum massa efficitur. Donec tempor bibendum ex, sit amet lacinia nibh ultrices sit amet.',
     additionalInfo: 'Duis a ex id turpis consectetur consequat et in libero. Integer varius consequat pulvinar. Quisque at mattis diam.',
     tags: ['Dress', 'Striped', 'Detailed Swing Dress'],
+    reviews: [
+      {
+        title: 'Must have!',
+        rating: 5,
+        text: 'Maximus nisl lorem, a pulvinar arcu mattis vitae. Vivamus porta, nisi ut tempor viverra, sed lacinia mauris sapien in lorem. Fusce posuere semper eros nec porttitor. Proin odio justo, maximus sed eros nec, luctus convallis ligula.',
+        date: '25.04.2022',
+        author: 'Liya Andrade',
+      },
+      {
+        title: 'Very good',
+        rating: 4,
+        text: 'In sed tortor at sapien accumsan congue. Phasellus aliquet, justo eu varius egestas, ex lectus mattis nulla. Vivamus rhoncus ante turpis, nec dictum nulla convallis vitae.',
+        date: '29.04.2022',
+        author: 'Anisa Bell',
+      },
+    ],
   },
 ];

@@ -1,3 +1,5 @@
+import {IProductReview} from "./IProductReview";
+
 export interface IProduct {
   id: number;
   image: string;
@@ -11,4 +13,5 @@ export interface IProduct {
   description: string;
   additionalInfo: string;
   tags: string[];
+  reviews: IProductReview[];
 }

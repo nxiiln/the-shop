@@ -5,7 +5,7 @@ import {HashLink} from 'react-router-hash-link';
 import {useAppSelector, useAppDispatch} from '../redux-hooks';
 import {wishListRemove} from '../slices/wishList';
 import {cartAdd, cartRemove} from '../slices/cart';
-import {IProduct} from '../IProduct';
+import {IProduct} from '../types/IProduct';
 import BreadCrumbs from './BreadCrumbs';
 import {ContinueShopping} from './Cart';
 
