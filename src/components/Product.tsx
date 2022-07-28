@@ -122,16 +122,15 @@ const HeaderRelatedProducts = styled.div`
 
 
 const Product = (): JSX.Element => {
-  const screen = useMediaQuery();
-
   const findProductId = (id: string | undefined): number => {
     if (typeof id === 'string') {
       return +id.replace(/(product)(\d+$)/, '$2');
     }
     return -1;
   }
-
+  
   const productId: number = findProductId(useParams().id);
+  const screen = useMediaQuery();
 
   const relatedProducts: JSX.Element =
     <WrapperRelatedProducts>
@@ -186,7 +185,7 @@ const Product = (): JSX.Element => {
 
               <div>
                 <ProductDescription {...products[productId - 1]} />
-                <ProductReviews initialReviews={products[productId - 1].reviews} />
+                <ProductReviews productId={productId} />
                 {screen.small && relatedProducts}
               </div>
             </div>
