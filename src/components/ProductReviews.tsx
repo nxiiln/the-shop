@@ -1,7 +1,11 @@
 import {useState} from 'react';
 import styled from 'styled-components/macro';
 import {smallScreen} from '../mediaQueries';
+import {useAppDispatch} from '../redux-hooks';
+import {productRatingAdd} from '../slices/productRating';
 import {IProductReview} from '../types/IProductReview';
+import {IProductReviews} from '../types/IProductReviews';
+import {productReviews} from '../productReviews';
 
 
 
@@ -197,26 +201,26 @@ const Buttons = styled.div`
 
 
 
-const ProductReviews = ({initialReviews}: {initialReviews: IProductReview[]}): JSX.Element => {
-  const [reviews, setReviews] = useState<IProductReview[]>(initialReviews);
+const ProductReviews = ({productId}: {productId: number}): JSX.Element => {
+  const reviewsKey = `product${productId}`;
+  const [reviews, setReviews] = useState<IProductReviews>(productReviews);
+  const currReviews: IProductReview[] = reviews[reviewsKey];
+
   const [writeReview, setWriteReview] = useState<boolean>(false);
   const [title, setTitle] = useState<string>('');
   const [rating, setRating] = useState<number>(0);
   const [text, setText] = useState<string>('');
   const [author, setAuthor] = useState<string>('');
+  const dispatch = useAppDispatch();
 
 
   return(
     <Wrapper>
       {!writeReview ?
         <>
-          <Title>{reviews.length} REVIEWS</Title>
-          {reviews.map((review): JSX.Element =>
-            <Review
-              key={reviews.findIndex(
-                (currReview: IProductReview): boolean => currReview.rating === review.rating
-              )}
-            >
+          <Title>{currReviews.length} REVIEWS</Title>
+          {currReviews.map((review: IProductReview): JSX.Element =>
+            <Review key={review.id}>
               <span>{review.title}</span>
               <Stars rating={review.rating}>
                 <div>★★★★★</div>
@@ -224,7 +228,7 @@ const ProductReviews = ({initialReviews}: {initialReviews: IProductReview[]}): J
               </Stars>
               <p>{review.text}</p>
               <span>{review.date}</span>
-              <span>{review.title}</span>
+              <span>{review.author}</span>
             </Review>
           )}
 
@@ -313,6 +317,7 @@ const ProductReviews = ({initialReviews}: {initialReviews: IProductReview[]}): J
                   `0${date.getMonth() + 1}` : `${date.getMonth() + 1}`;
 
                 const review: IProductReview = {
+                  id: currReviews.length + 1,
                   title: title,
                   rating: rating,
                   text: text,
@@ -320,10 +325,10 @@ const ProductReviews = ({initialReviews}: {initialReviews: IProductReview[]}): J
                   author: author
                 };
 
-                const newReviews: IProductReview[] = [...reviews];
-                newReviews.push(review);
-
+                const newReviews: IProductReviews = JSON.parse(JSON.stringify(reviews));
+                newReviews[reviewsKey].push(review);
                 setReviews(newReviews);
+                dispatch(productRatingAdd({productId: reviewsKey, rating: rating}));
                 setTitle('');
                 setRating(0);
                 setText('');
