@@ -45,6 +45,7 @@ const Text = styled.div`
   font-weight: 300;
   text-transform: uppercase;
   color: var(--color-text-main);
+  user-select: none;
 
   @media ${smallScreen} {color: var(--color-text-second)}
 `;
