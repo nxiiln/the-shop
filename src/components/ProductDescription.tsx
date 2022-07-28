@@ -7,6 +7,8 @@ import {wishListAdd, wishListRemove, wishListProductSize, wishListProductColor} 
 import {sizes, colors} from './CatalogFilters';
 import {IProduct} from '../types/IProduct';
 import {IProductReview} from '../types/IProductReview';
+import {IProductRating} from '../types/IProductRating';
+import {productReviews} from '../productReviews';
 import wishListSymbol from '../images/wishList.png';
 
 
@@ -321,8 +323,11 @@ const Tag = styled.button`
 
 const ProductDescription = (product: IProduct): JSX.Element => {
   const cart: IProduct[] = useAppSelector(state => state.cart);
-  const cartProduct: IProduct | undefined = cart.find(cartProduct => cartProduct.id === product.id);
+  const cartProduct: IProduct | undefined = cart
+    .find((cartProduct: IProduct): boolean => cartProduct.id === product.id);
+
   const wishList: IProduct[] = useAppSelector(state => state.wishList);
+  const ratings = useAppSelector(state => state.productRating);
   const dispatch = useAppDispatch();
   
   const [sizeOpen, setSizeOpen] = useState<boolean>(false);
@@ -333,24 +338,32 @@ const ProductDescription = (product: IProduct): JSX.Element => {
   const initialColor: string = typeof cartProduct === 'undefined' ? product.color : cartProduct.color;
   const [color, setColor] = useState<string>(initialColor);
   
+  const reviewsKey: string = `product${product.id}`;
+  const initialRatings: number[] = productReviews[reviewsKey]
+    .map((review: IProductReview): number => review.rating);
+
+  const userRatings: number[] = ratings
+    .filter((rating: IProductRating): boolean => rating.productId === reviewsKey)
+    .map((rating: IProductRating): number => rating.rating);
+
+  const numberReviews: number = initialRatings.length + userRatings.length;
   
+  const rating: number = [...initialRatings, ...userRatings]
+    .reduce((prevRating: number, currRating: number): number => prevRating + currRating, 0)
+    / numberReviews;
+
+
   return(
     <Wrapper>
       <Id>PR-{product.id}256-08</Id>
       <Name>{product.name}</Name>
 
       <AboutReviews>
-        <Stars
-          rating={product.reviews
-            .map((review: IProductReview): number => review.rating)
-            .reduce((prevRating: number, currRating: number): number => prevRating + currRating)
-            / product.reviews.length
-          }
-        >
+        <Stars rating={rating}>
           <div>★★★★★</div>
           <div>☆☆☆☆☆</div>
         </Stars>
-        <NumberReviews>{product.reviews.length} Reviews</NumberReviews>
+        <NumberReviews>{numberReviews} Reviews</NumberReviews>
       </AboutReviews>
 
       <Availability>Availability: <span>In stock</span></Availability>
