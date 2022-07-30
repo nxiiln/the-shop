@@ -267,14 +267,24 @@ const BlogPost = (): JSX.Element => {
 
               <WriteReview onSubmit={(e: React.FormEvent<HTMLFormElement>): void => {
                 e.preventDefault();
+                if (name === '' || text === '') return;
+
                 const newReviews: IBlogPostReview[] = JSON.parse(JSON.stringify(reviews));
                 const date: Date = new Date();
+
+                const day: string = date.getDate() <= 9 ?
+                  `0${date.getDate()}` : `${date.getDate()}`;
+
+                const month: string = date.getMonth() <= 10 ?
+                  `0${date.getMonth() + 1}` : `${date.getMonth() + 1}`;
+
                 const newReview: IBlogPostReview = {
                   id: reviews[reviews.length-1].id + 1,
                   name: name,
                   text: text,
-                  date: `${date.getDate()} ${date.getMonth()} ${date.getFullYear()}`
+                  date: `${day}.${month}.${date.getFullYear()}`
                 };
+
                 newReviews.push(newReview);
                 setReviews(newReviews);
               }}>
@@ -286,6 +296,7 @@ const BlogPost = (): JSX.Element => {
                     type='text'
                     value={name}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>): void => setName(e.target.value)}
+                    required
                   />
                 </Label>
 
@@ -294,6 +305,7 @@ const BlogPost = (): JSX.Element => {
                   <InputTextArea
                     value={text}
                     onChange={(e: React.ChangeEvent<HTMLTextAreaElement>): void => setText(e.target.value)}
+                    required
                   />
                 </Label>
                 
