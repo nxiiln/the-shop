@@ -5,8 +5,7 @@ import {useAppDispatch} from '../redux-hooks';
 import {productRatingAdd} from '../slices/productRating';
 import {IProductReview} from '../types/IProductReview';
 import {IProductReviews} from '../types/IProductReviews';
-import {productReviews} from '../productReviews';
-
+import data from '../data.json';
 
 
 
@@ -203,7 +202,7 @@ const Buttons = styled.div`
 
 const ProductReviews = ({productId}: {productId: number}): JSX.Element => {
   const reviewsKey = `product${productId}`;
-  const [reviews, setReviews] = useState<IProductReviews>(productReviews);
+  const [reviews, setReviews] = useState<IProductReviews>(data.productReviews);
   const currReviews: IProductReview[] = reviews[reviewsKey];
 
   const [writeReview, setWriteReview] = useState<boolean>(false);

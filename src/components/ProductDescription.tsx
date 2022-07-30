@@ -8,7 +8,8 @@ import {sizes, colors} from './CatalogFilters';
 import {IProduct} from '../types/IProduct';
 import {IProductReview} from '../types/IProductReview';
 import {IProductRating} from '../types/IProductRating';
-import {productReviews} from '../productReviews';
+// import {productReviews} from '../productReviews';
+import data from '../data.json';
 import wishListSymbol from '../images/wishList.png';
 
 
@@ -338,8 +339,8 @@ const ProductDescription = (product: IProduct): JSX.Element => {
   const initialColor: string = typeof cartProduct === 'undefined' ? product.color : cartProduct.color;
   const [color, setColor] = useState<string>(initialColor);
   
-  const reviewsKey: string = `product${product.id}`;
-  const initialRatings: number[] = productReviews[reviewsKey]
+  const reviewsKey = `product${product.id}` as keyof typeof data.productReviews;
+  const initialRatings: number[] = data.productReviews[reviewsKey]
     .map((review: IProductReview): number => review.rating);
 
   const userRatings: number[] = ratings
