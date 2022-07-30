@@ -2,11 +2,11 @@ import styled from 'styled-components/macro';
 import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
 import {HashLink} from 'react-router-hash-link';
 import BreadCrumbs from './BreadCrumbs';
-import blogPost1 from '../images/blogPost1.png';
-import blogPost2 from '../images/blogPost2.png';
-import blogPost3 from '../images/blogPost3.png';
 import BlogCategories from './BlogCategories';
 import BlogLabels from './BlogLabels';
+import {IBlogPost} from '../types/IBlogPost';
+import data from '../data.json';
+import {blogPostImages} from '../images/blogPostImages';
 
 
 
@@ -37,17 +37,6 @@ const PostsWrapper = styled.div`
   align-items: center;
 
   @media ${mediumScreen}, ${smallScreen} {grid-area: 3 / 1 / 4 / 2}
-`;
-
-const OlderPosts = styled.button`
-  width: 123px;
-  height: 20px;
-  align-self: flex-end;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  
-  &:hover {text-decoration: underline}
 `;
 
 
@@ -110,41 +99,6 @@ const PostLine = styled.div`
 
 
 
-interface Post {
-  id: number;
-  header: string;
-  date: string;
-  image: string;
-  description: string;
-}
-
-const posts: Post[] = [
-  {
-    id: 3,
-    header: 'what’s the best beauty look to wear with a metallic?',
-    date: '25 Marth 2022',
-    image: blogPost1,
-    description: 'Every color has a personality, an emotion that you channel while wearing it. Red is exciting — a color to evoke your inner daring. Then, there"s pink: safe, benign, and obviously pretty. Or is it?'
-  },
-  {
-    id: 2,
-    header: 'do you realy love trench coat?',
-    date: '16 Marth 2022',
-    image: blogPost2,
-    description: 'Every color has a personality, an emotion that you channel while wearing it. Red is exciting — a color to evoke your inner daring. Then, there"s pink: safe, benign, and obviously pretty. Or is it?'
-  },
-  {
-    id: 1,
-    header: 'how to wear a scarf like a french woman',
-    date: '08 January 2022',
-    image: blogPost3,
-    description: 'Every color has a personality, an emotion that you channel while wearing it. Red is exciting — a color to evoke your inner daring. Then, there"s pink: safe, benign, and obviously pretty. Or is it?'
-  }
-];
-
-
-
-
 const Blog = (): JSX.Element => {
   const screen = useMediaQuery();
 
@@ -163,17 +117,15 @@ const Blog = (): JSX.Element => {
         />
         
         <PostsWrapper>
-          {posts.map((post: Post): JSX.Element =>
-            <PostWrapper key={post.id} to='post#top'>
+          {[...data.blogPosts].reverse().map((post: IBlogPost): JSX.Element =>
+            <PostWrapper key={post.id} to={`post${post.id}#top`}>
               <PostHeader>{post.header}</PostHeader>
               <PostDate>{post.date}</PostDate>
-              <ProductImage src={post.image} alt={post.image} />
+              <ProductImage src={blogPostImages[`blogPost${post.id}`]} alt={post.header} />
               <PostDescription>{post.description}</PostDescription>
               {post.id !== 1 && <PostLine />}
             </PostWrapper>
           )}
-
-          <OlderPosts>OLDER POSTS ❯</OlderPosts>
         </PostsWrapper>
 
         <BlogCategories gridArea={screen.big ? '2 / 2 / 3 / 3' : '2 / 1 / 3 / 2'} />
