@@ -31,7 +31,7 @@ const App = (): JSX.Element => (
       <Route path='catalog' element={<Catalog />} />
       <Route path='catalog/:id' element={<Product />} />
       <Route path='blog' element={<Blog />} />
-      <Route path='blog/post' element={<BlogPost />} />
+      <Route path='blog/:id' element={<BlogPost />} />
       <Route path='*' element={<PageNotFound />} />
     </Routes>
     <TopBrand />
