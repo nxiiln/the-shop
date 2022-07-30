@@ -4,6 +4,7 @@ import {HashLink} from 'react-router-hash-link';
 import {useAppSelector, useAppDispatch} from '../redux-hooks';
 import {cartRemove} from '../slices/cart';
 import {IProduct} from '../types/IProduct';
+import {productImages} from '../images/productImages';
 
 
 
@@ -180,7 +181,7 @@ const CartCheckout = (): JSX.Element => {
         <ProductWrapper key={product.id}>
           <Product>
             <HashLink to={`/catalog/product${product.id}#top`}>
-              <img src={product.image} alt={product.name} />
+              <img src={productImages[`product${product.id}`]} alt={product.name} />
             </HashLink>
 
             <span>{product.name}</span>

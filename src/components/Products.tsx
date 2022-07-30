@@ -1,13 +1,14 @@
 import {useState} from 'react';
 import styled from 'styled-components/macro';
+import {useMediaQuery} from '../mediaQueries';
 import {HashLink} from 'react-router-hash-link';
 import {useAppSelector, useAppDispatch} from '../redux-hooks';
 import {cartAdd, cartRemove} from '../slices/cart';
 import {wishListAdd, wishListRemove} from '../slices/wishList';
 import {IProduct} from '../types/IProduct';
+import {productImages} from '../images/productImages';
 import cartSymbol from '../images/cartSymbol.png';
 import wishListSymbol from '../images/wishList.png';
-import { useMediaQuery } from '../mediaQueries';
 
 
 
@@ -161,12 +162,12 @@ const WishList = styled.button`
 
 
 
+
 interface IProps {
   products: IProduct[];
   maxWidth?: string;
   margin?: string;
 }
-
 
 const Products = (props: IProps): JSX.Element => {
   const screen = useMediaQuery();
@@ -188,7 +189,7 @@ const Products = (props: IProps): JSX.Element => {
           onMouseEnter={(): void => setProductOpen(product.id)}
           onMouseLeave={(): void => setProductOpen(0)}
         >
-          <img src={product.image} alt={product.name} />
+          <img src={productImages[`product${product.id}`]} alt={product.name} />
 
           {(product.triangle === 'new' || product.triangle === 'sale') &&
             <>

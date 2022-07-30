@@ -6,6 +6,7 @@ import {HashLink} from 'react-router-hash-link';
 import {useAppSelector, useAppDispatch} from '../redux-hooks';
 import {cartRemove} from '../slices/cart'
 import {IProduct} from '../types/IProduct';
+import {productImages} from '../images/productImages';
 import cartSymbol from '../images/cartSymbol.png';
 
 
@@ -248,7 +249,7 @@ const CartPreview = (): JSX.Element => {
 
           {cart.map((product: IProduct): JSX.Element =>
             <Product key={product.id} to={`/catalog/product${product.id}#top`}>
-              <ProductImage src={product.image} alt='product preview' />
+              <ProductImage src={productImages[`product${product.id}`]} alt='product preview' />
               <Description>{product.name}</Description>
               <Price>${product.price * product.quantity}</Price>
               <Remove

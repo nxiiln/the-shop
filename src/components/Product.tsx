@@ -1,12 +1,13 @@
 import styled from 'styled-components/macro';
 import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
 import {Link, useParams} from 'react-router-dom';
+import data from '../data.json';
+import {productImages} from '../images/productImages';
 import BreadCrumbs from './BreadCrumbs';
 import Products from './Products';
 import ProductDescription from './ProductDescription';
 import ProductReviews from './ProductReviews';
 import PageNotFound from './404';
-import {products} from '../products';
 
 
 
@@ -140,7 +141,7 @@ const Product = (): JSX.Element => {
       </HeaderRelatedProducts>
 
       <Products
-        products={products.filter(product =>
+        products={data.products.filter(product =>
           product.id === 3 || product.id === 4 || product.id === 10
         )}
         margin='20px 0 0'
@@ -161,8 +162,8 @@ const Product = (): JSX.Element => {
                   <Link to='/catalog'>Catalog</Link>
                   <span>/</span>
                   <span>
-                    {products[productId - 1].name[0].toUpperCase()}
-                    {products[productId - 1].name.substring(1)}
+                    {data.products[productId - 1].name[0].toUpperCase()}
+                    {data.products[productId - 1].name.substring(1)}
                   </span>
                 </>
               }
@@ -175,7 +176,7 @@ const Product = (): JSX.Element => {
                   <ProductTriangle />
                   <ProductTriangleDescription>NEW</ProductTriangleDescription>
                   <img
-                    src={products[productId - 1].image}
+                    src={productImages[`product${productId}`]}
                     alt='product image'
                   />
                 </ProductImage>
@@ -184,7 +185,7 @@ const Product = (): JSX.Element => {
               </div>
 
               <div>
-                <ProductDescription {...products[productId - 1]} />
+                <ProductDescription {...data.products[productId - 1]} />
                 <ProductReviews productId={productId} />
                 {screen.small && relatedProducts}
               </div>

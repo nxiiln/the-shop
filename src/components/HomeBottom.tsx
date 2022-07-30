@@ -1,8 +1,8 @@
 import styled from 'styled-components/macro';
 import {mediumScreen, smallScreen} from '../mediaQueries';
 import Products from './Products';
-import {products} from '../products';
 import FromOurBlog from './FromOurBlog';
+import data from '../data.json';
 
 
 const WrapperOuter = styled.article`
@@ -74,7 +74,7 @@ const HomeBottom = (): JSX.Element => (
         </MostPopularTop>
 
         <Products
-          products={products.filter(product =>
+          products={data.products.filter(product =>
             product.id === 3 || product.id === 4 || product.id === 10
           )}
           margin='20px 0 0'

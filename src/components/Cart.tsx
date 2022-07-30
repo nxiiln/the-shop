@@ -4,8 +4,9 @@ import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
 import {HashLink} from 'react-router-hash-link';
 import {useAppSelector, useAppDispatch} from '../redux-hooks';
 import {cartRemove, quantityIncrement, quantityDecrement} from '../slices/cart';
-import {IProduct} from '../types/IProduct';
 import BreadCrumbs from './BreadCrumbs';
+import {IProduct} from '../types/IProduct';
+import {productImages} from '../images/productImages';
 
 
 
@@ -593,7 +594,7 @@ const Cart = (): JSX.Element => {
                 <ProductWrapper key={product.id}>
                   <Product>
                     <HashLink to={`/catalog/product${product.id}#top`}>
-                      <img src={product.image} alt={product.name} />
+                      <img src={productImages[`product${product.id}`]} alt={product.name} />
                     </HashLink>
 
                     <Text gridArea='nam'>{product.name}</Text>

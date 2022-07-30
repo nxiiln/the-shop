@@ -6,6 +6,7 @@ import {useAppSelector, useAppDispatch} from '../redux-hooks';
 import {wishListRemove} from '../slices/wishList';
 import {cartAdd, cartRemove} from '../slices/cart';
 import {IProduct} from '../types/IProduct';
+import {productImages} from '../images/productImages';
 import BreadCrumbs from './BreadCrumbs';
 import {ContinueShopping} from './Cart';
 
@@ -250,7 +251,7 @@ const WishList = (): JSX.Element => {
                     </X>
 
                     <HashLink to={`/catalog/product${product.id}`}>
-                      <img src={product.image} alt={product.name} />
+                      <img src={productImages[`product${product.id}`]} alt={product.name} />
                     </HashLink>
 
                     <span>{product.name}</span>

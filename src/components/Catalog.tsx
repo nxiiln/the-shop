@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 import BreadCrumbs from './BreadCrumbs';
 import CatalogFilters from './CatalogFilters';
 import Products from './Products';
-import {products} from '../products';
+import data from '../data.json';
 import banner from '../images/banner.png';
 import bannerSmall from '../images/bannerSmall.png';
 
@@ -299,7 +299,7 @@ const Catalog = (): JSX.Element => {
             <HeaderWrapper>
               <h2>CATALOG</h2>
               <div />
-              <span>{products.length} items</span>
+              <span>{data.products.length} items</span>
             </HeaderWrapper>
 
 
@@ -351,7 +351,7 @@ const Catalog = (): JSX.Element => {
             </SortWrapper>
 
 
-            <Products products={products} maxWidth='725px' margin='22px 0 80px 0' />
+            <Products products={data.products} maxWidth='725px' margin='22px 0 80px 0' />
 
 
             <Pagination>
