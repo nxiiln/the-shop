@@ -345,5 +345,100 @@
         "author": "Anisa Bell"
       }
     ]
-  }
+  },
+  "blogPosts": [
+    {
+      "id": 1,
+      "header": "what’s the best beauty look to wear with a metallic?",
+      "date": "08 January 2022",
+      "description": "Every color has a personality, an emotion that you channel while wearing it. Red is exciting — a color to evoke your inner daring. Then, there's pink: safe, benign, and obviously pretty. Or is it?",
+      "text": [
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pretium accumsan metus vestibulum dignissim. Aenean et lorem in risus mollis finibus eget nec ipsum. Curabitur commodo gravida lacus, eget tempus lorem sodales a. Cras tincidunt blandit pulvinar. Phasellus ut cursus diam. Aenean ac fringilla magna, et vulputate lectus. Vestibulum pretium ut massa vitae egestas.",
+        "Mauris tempus luctus gravida. Vivamus hendrerit purus commodo diam aliquet, mollis porta dui vestibulum. Curabitur ultrices facilisis libero id tristique. Maecenas sagittis elit in ex varius consequat. Cras condimentum, enim sed volutpat pellentesque, mauris elit hendrerit neque, vitae volutpat lorem massa a ante. Quisque id nisi congue, semper ante ultricies, dapibus orci. Morbi lacinia bibendum massa ac ornare. Cras pharetra et elit ac efficitur. Sed vitae ipsum ut odio rutrum facilisis id a ligula. Interdum et malesuada fames ac ante ipsum primis in faucibus. Ut sit amet fringilla tortor. Integer semper dignissim lorem, sit amet molestie lacus mollis et. Sed a risus ut orci viverra sodales ut in dolor. Nunc condimentum, ipsum nec eleifend volutpat, lorem neque pretium massa, quis ultricies odio ligula nec ante.",
+        "Mauris tempus luctus gravida. Vivamus hendrerit purus commodo diam aliquet, mollis porta dui vestibulum. Curabitur ultrices facilisis libero id tristique. Maecenas sagittis elit in ex varius consequat. Cras condimentum, enim sed volutpat pellentesque, mauris elit hendrerit neque, vitae volutpat lorem massa a ante. Quisque id nisi congue, semper ante ultricies, dapibus orci. Morbi lacinia bibendum massa ac ornare. Cras pharetra et elit ac efficitur. Sed vitae ipsum ut odio rutrum facilisis id a ligula. Interdum et malesuada fames ac ante ipsum primis in faucibus. Ut sit amet fringilla tortor. Integer semper dignissim lorem, sit amet molestie lacus mollis et. Sed a risus ut orci viverra sodales ut in dolor. Nunc condimentum, ipsum nec eleifend volutpat, lorem neque pretium massa, quis ultricies odio ligula nec ante."
+      ],
+      "reviews": [
+        {
+          "id": 1,
+          "name": "Ami Legge",
+          "text": "Curabitur justo elit, accumsan non interdum a, facilisis vel odio. Pellentesque commodo vulputate nisi. Proin dapibus turpis vel rhoncus cursus. Aliquam sit amet gravida sem.",
+          "date": "25 Marth 2022"
+        },
+        {
+          "id": 2,
+          "name": "Lisa Beck",
+          "text": "Mauris sollicitudin vestibulum nisi, at dignissim quam volutpat in. Nulla id quam velit.",
+          "date": "2 April 2022"
+        },
+        {
+          "id": 3,
+          "name": "Stefanie Broadhurst",
+          "text": "Vivamus tristique tellus id sapien egestas, id pellentesque felis volutpat. Sed et convallis leo. Donec vitae eros rhoncus, blandit odio ut, bibendum metus.",
+          "date": "3 April 2022"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "header": "do you realy love trench coat?",
+      "date": "16 Marth 2022",
+      "description": "Every color has a personality, an emotion that you channel while wearing it. Red is exciting — a color to evoke your inner daring. Then, there's pink: safe, benign, and obviously pretty. Or is it?",
+      "text": [
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pretium accumsan metus vestibulum dignissim. Aenean et lorem in risus mollis finibus eget nec ipsum. Curabitur commodo gravida lacus, eget tempus lorem sodales a. Cras tincidunt blandit pulvinar. Phasellus ut cursus diam. Aenean ac fringilla magna, et vulputate lectus. Vestibulum pretium ut massa vitae egestas.",
+        "Mauris tempus luctus gravida. Vivamus hendrerit purus commodo diam aliquet, mollis porta dui vestibulum. Curabitur ultrices facilisis libero id tristique. Maecenas sagittis elit in ex varius consequat. Cras condimentum, enim sed volutpat pellentesque, mauris elit hendrerit neque, vitae volutpat lorem massa a ante. Quisque id nisi congue, semper ante ultricies, dapibus orci. Morbi lacinia bibendum massa ac ornare. Cras pharetra et elit ac efficitur. Sed vitae ipsum ut odio rutrum facilisis id a ligula. Interdum et malesuada fames ac ante ipsum primis in faucibus. Ut sit amet fringilla tortor. Integer semper dignissim lorem, sit amet molestie lacus mollis et. Sed a risus ut orci viverra sodales ut in dolor. Nunc condimentum, ipsum nec eleifend volutpat, lorem neque pretium massa, quis ultricies odio ligula nec ante.",
+        "Mauris tempus luctus gravida. Vivamus hendrerit purus commodo diam aliquet, mollis porta dui vestibulum. Curabitur ultrices facilisis libero id tristique. Maecenas sagittis elit in ex varius consequat. Cras condimentum, enim sed volutpat pellentesque, mauris elit hendrerit neque, vitae volutpat lorem massa a ante. Quisque id nisi congue, semper ante ultricies, dapibus orci. Morbi lacinia bibendum massa ac ornare. Cras pharetra et elit ac efficitur. Sed vitae ipsum ut odio rutrum facilisis id a ligula. Interdum et malesuada fames ac ante ipsum primis in faucibus. Ut sit amet fringilla tortor. Integer semper dignissim lorem, sit amet molestie lacus mollis et. Sed a risus ut orci viverra sodales ut in dolor. Nunc condimentum, ipsum nec eleifend volutpat, lorem neque pretium massa, quis ultricies odio ligula nec ante."
+      ],
+      "reviews": [
+        {
+          "id": 1,
+          "name": "Ami Legge",
+          "text": "Curabitur justo elit, accumsan non interdum a, facilisis vel odio. Pellentesque commodo vulputate nisi. Proin dapibus turpis vel rhoncus cursus. Aliquam sit amet gravida sem.",
+          "date": "25 Marth 2022"
+        },
+        {
+          "id": 2,
+          "name": "Lisa Beck",
+          "text": "Mauris sollicitudin vestibulum nisi, at dignissim quam volutpat in. Nulla id quam velit.",
+          "date": "2 April 2022"
+        },
+        {
+          "id": 3,
+          "name": "Stefanie Broadhurst",
+          "text": "Vivamus tristique tellus id sapien egestas, id pellentesque felis volutpat. Sed et convallis leo. Donec vitae eros rhoncus, blandit odio ut, bibendum metus.",
+          "date": "3 April 2022"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "header": "how to wear a scarf like a french woman",
+      "date": "25 Marth 2022",
+      "description": "Every color has a personality, an emotion that you channel while wearing it. Red is exciting — a color to evoke your inner daring. Then, there's pink: safe, benign, and obviously pretty. Or is it?",
+      "text": [
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pretium accumsan metus vestibulum dignissim. Aenean et lorem in risus mollis finibus eget nec ipsum. Curabitur commodo gravida lacus, eget tempus lorem sodales a. Cras tincidunt blandit pulvinar. Phasellus ut cursus diam. Aenean ac fringilla magna, et vulputate lectus. Vestibulum pretium ut massa vitae egestas.",
+        "Mauris tempus luctus gravida. Vivamus hendrerit purus commodo diam aliquet, mollis porta dui vestibulum. Curabitur ultrices facilisis libero id tristique. Maecenas sagittis elit in ex varius consequat. Cras condimentum, enim sed volutpat pellentesque, mauris elit hendrerit neque, vitae volutpat lorem massa a ante. Quisque id nisi congue, semper ante ultricies, dapibus orci. Morbi lacinia bibendum massa ac ornare. Cras pharetra et elit ac efficitur. Sed vitae ipsum ut odio rutrum facilisis id a ligula. Interdum et malesuada fames ac ante ipsum primis in faucibus. Ut sit amet fringilla tortor. Integer semper dignissim lorem, sit amet molestie lacus mollis et. Sed a risus ut orci viverra sodales ut in dolor. Nunc condimentum, ipsum nec eleifend volutpat, lorem neque pretium massa, quis ultricies odio ligula nec ante.",
+        "Mauris tempus luctus gravida. Vivamus hendrerit purus commodo diam aliquet, mollis porta dui vestibulum. Curabitur ultrices facilisis libero id tristique. Maecenas sagittis elit in ex varius consequat. Cras condimentum, enim sed volutpat pellentesque, mauris elit hendrerit neque, vitae volutpat lorem massa a ante. Quisque id nisi congue, semper ante ultricies, dapibus orci. Morbi lacinia bibendum massa ac ornare. Cras pharetra et elit ac efficitur. Sed vitae ipsum ut odio rutrum facilisis id a ligula. Interdum et malesuada fames ac ante ipsum primis in faucibus. Ut sit amet fringilla tortor. Integer semper dignissim lorem, sit amet molestie lacus mollis et. Sed a risus ut orci viverra sodales ut in dolor. Nunc condimentum, ipsum nec eleifend volutpat, lorem neque pretium massa, quis ultricies odio ligula nec ante."
+      ],
+      "reviews": [
+        {
+          "id": 1,
+          "name": "Ami Legge",
+          "text": "Curabitur justo elit, accumsan non interdum a, facilisis vel odio. Pellentesque commodo vulputate nisi. Proin dapibus turpis vel rhoncus cursus. Aliquam sit amet gravida sem.",
+          "date": "25 Marth 2022"
+        },
+        {
+          "id": 2,
+          "name": "Lisa Beck",
+          "text": "Mauris sollicitudin vestibulum nisi, at dignissim quam volutpat in. Nulla id quam velit.",
+          "date": "2 April 2022"
+        },
+        {
+          "id": 3,
+          "name": "Stefanie Broadhurst",
+          "text": "Vivamus tristique tellus id sapien egestas, id pellentesque felis volutpat. Sed et convallis leo. Donec vitae eros rhoncus, blandit odio ut, bibendum metus.",
+          "date": "3 April 2022"
+        }
+      ]
+    }
+  ]
 }
