@@ -21,47 +21,50 @@ const WrapperOuter = styled.main`
 const WrapperInner = styled.div`
   width: 1100px;
   padding: 0 1% 100px;
+`;
 
-  > div {
-    display: flex;
-    justify-content: space-between;
+const Groups = styled.div`
+  display: flex;
+  justify-content: space-between;
 
-    @media ${mediumScreen} {
-      > div {padding: 0 20px}
-    }
-
-    @media ${smallScreen} {
-      flex-direction: column;
-      align-items: center;
-    }
+  @media ${smallScreen} {
+    flex-direction: column;
+    align-items: center;
   }
 `;
 
+const LeftGroup = styled.div`
+  flex: 4 0 0;
+  padding-right: 50px;
+
+  @media ${smallScreen} {
+    width: 100%;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+  }
+`;
+
+const RightGroup = styled.div`
+  flex: 3 0 0;
+  @media ${smallScreen} {max-width: 550px}
+`;
+
 const ProductImage = styled.div`
-  width: 400px;
+  max-width: 400px;
   margin-bottom: 20px;
   position: relative;
   display: flex;
   justify-content: center;
-  /* border: 1px solid orange; */
 
   > img {width: 100%}
   
   @media ${mediumScreen}, ${smallScreen} {
-    width: 100%;
     flex-direction: column-reverse;
     align-items: center;
   }
-
-  @media ${smallScreen} {
-
-    > img {
-      /* width: 100%; */
-      /* object-fit: cover; */
-      /* max-width: 400px; */
-      /* min-width: 400px; */
-    }
-  }
+  
+  @media ${smallScreen} {width: 100%}
 `;
 
 const ProductTriangle = styled.div`
@@ -88,8 +91,6 @@ const ProductTriangleDescription = styled.span`
 `;
 
 const WrapperRelatedProducts = styled.article`
-  /* width: 720px; */
-  /* height: 310px; */
   margin-top: 50px;
   display: flex;
   flex-direction: column;
@@ -142,7 +143,7 @@ const Product = (): JSX.Element => {
 
       <Products
         products={data.products.filter(product =>
-          product.id === 3 || product.id === 4 || product.id === 10
+          product.id === 3 || product.id === 10
         )}
         margin='20px 0 0'
       />
@@ -170,8 +171,8 @@ const Product = (): JSX.Element => {
               marginBottom='20px'
             />
 
-            <div>
-              <div>
+            <Groups>
+              <LeftGroup>
                 <ProductImage>
                   <ProductTriangle />
                   <ProductTriangleDescription>NEW</ProductTriangleDescription>
@@ -182,14 +183,14 @@ const Product = (): JSX.Element => {
                 </ProductImage>
                 
                 {!screen.small && relatedProducts}
-              </div>
+              </LeftGroup>
 
-              <div>
+              <RightGroup>
                 <ProductDescription {...data.products[productId - 1]} />
                 <ProductReviews productId={productId} />
                 {screen.small && relatedProducts}
-              </div>
-            </div>
+              </RightGroup>
+            </Groups>
           </WrapperInner>
         </WrapperOuter>
         : 

@@ -10,8 +10,8 @@ import data from '../data.json';
 
 
 const Wrapper = styled.article`
-  width: 326px;
   margin-top: 55px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -36,7 +36,7 @@ const Title = styled.h2`
 `;
 
 const Review = styled.div`
-  width: 320px;
+  width: 100%;
   padding: 15px;
   margin-bottom: 10px;
   display: grid;
@@ -48,11 +48,6 @@ const Review = styled.div`
   font-weight: 400;
   color: var(--color-text-regular);
   background: var(--color-background-highlight);
-
-  @media ${smallScreen} {
-    width: 100%;
-    max-width: 490px;
-  }
 
   > span:nth-child(1) {
     grid-area: 1 / 1 / 2 / 2;
@@ -134,7 +129,7 @@ const Button = styled.button`
 const Rating = styled.div`
   width: 140px;
   height: 20px;
-  margin: 0 0 10px 16px;
+  margin-bottom: 10px;
   align-self: start;
   display: flex;
   justify-content: space-between;
@@ -154,7 +149,7 @@ const SetStars = styled(Stars)`
 `;
 
 const Label = styled.label`
-  width: 290px;
+  width: 100%;
   margin-bottom: 15px;
   display: flex;
   flex-direction: column;
@@ -163,13 +158,8 @@ const Label = styled.label`
   font-weight: 400;
   color: var(--color-main);
 
-  @media ${smallScreen} {
-    width: 93%;
-    margin-left: 16px;
-  }
-
   > input, > textarea {
-    width: 290px;
+    width: 100%;
     height: 34px;
     margin-top: 4px;
     font-family: var(--font-regular);
@@ -182,8 +172,6 @@ const Label = styled.label`
       outline: none;
       border: 1px solid var(--color-background-second);
     }
-
-    @media ${smallScreen} {width: 100%}
   }
 
   > textarea {height: 76px}

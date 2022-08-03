@@ -8,7 +8,6 @@ import {sizes, colors} from './CatalogFilters';
 import {IProduct} from '../types/IProduct';
 import {IProductReview} from '../types/IProductReview';
 import {IProductRating} from '../types/IProductRating';
-// import {productReviews} from '../productReviews';
 import data from '../data.json';
 import wishListSymbol from '../images/wishList.png';
 
@@ -16,13 +15,7 @@ import wishListSymbol from '../images/wishList.png';
 
 
 const Wrapper = styled.article`
-  width: 100%;
-  max-width: 330px;
-
-  @media ${smallScreen} {
-    width: 100%;
-    max-width: 490px;
-  }
+  @media ${smallScreen} {width: 100%}
 `;
 
 const Id = styled.span`
@@ -200,34 +193,7 @@ const CheckboxColorWrapper = styled(CheckboxWrapper)`
   height: 100px;
 `;
 
-const Quantity = styled.label`
-  width: 60px;
-  height: 45px;
-  margin: 10px 10px 20px 10px;
-  display: grid;
-  align-content: space-between;
-  font-family: var(--font-second);
-  font-size: 11px;
-  line-height: 1.2;
-  font-weight: 300;
-  color: var(--color-text-main);
-
-  > input {
-    width: 58px;
-    height: 30px;
-    padding-left: 24px;
-    font-family: var(--font-second);
-    font-size: 12px;
-    font-weight: 300;
-    color: var(--color-text-main);
-    border: 1px solid var(--color-border);
-
-    &:focus {outline: none}
-  }
-`;
-
 const Buttons = styled.div`
-  width: 325px;
   margin: 20px 0;
   display: flex;
   justify-content: space-between;
@@ -235,7 +201,7 @@ const Buttons = styled.div`
   @media ${smallScreen} {width: 100%}
 
   > button {
-    width: 155px;
+    width: 40%;
     height: 30px;
     font-family: var(--font-second);
     font-size: 10px;
@@ -265,7 +231,6 @@ const Buttons = styled.div`
 `;
 
 const Accordion = styled.details`
-  width: 325px;
   border-top: 1px solid var(--color-border);
 
   @media ${smallScreen} {width: 100%}
