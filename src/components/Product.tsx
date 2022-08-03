@@ -8,6 +8,7 @@ import Products from './Products';
 import ProductDescription from './ProductDescription';
 import ProductReviews from './ProductReviews';
 import PageNotFound from './404';
+import {IProduct} from '../types/IProduct';
 
 
 
@@ -67,13 +68,16 @@ const ProductImage = styled.div`
   @media ${smallScreen} {width: 100%}
 `;
 
-const ProductTriangle = styled.div`
+const ProductTriangle = styled.div<{attr: string}>`
   width: 0;
   height: 0;
   position: absolute;
   top: -6px;
   left: -26px;
-  border-bottom: 40px solid var(--color-triangle-new);
+  border-bottom: ${props => props.attr === 'new' ?
+    '40px solid var(--color-triangle-new)' :
+    '40px solid var(--color-triangle-sale)'
+  };
   border-right: 40px solid transparent;
   border-left: 40px solid transparent;
   transform: rotate(-45deg);
@@ -84,9 +88,10 @@ const ProductTriangleDescription = styled.span`
   top: 5px;
   left: 4px;
   font-family: var(--font-main);
-  font-size: 14px;
+  font-size: 13px;
   line-height: 1.2;
   font-weight: 700;
+  text-transform: uppercase;
   color: var(--color-text-second);
 `;
 
@@ -132,6 +137,7 @@ const Product = (): JSX.Element => {
   }
   
   const productId: number = findProductId(useParams().id);
+  const currProduct: IProduct = data.products[productId - 1];
   const screen = useMediaQuery();
 
   const relatedProducts: JSX.Element =
@@ -163,8 +169,8 @@ const Product = (): JSX.Element => {
                   <Link to='/catalog'>Catalog</Link>
                   <span>/</span>
                   <span>
-                    {data.products[productId - 1].name[0].toUpperCase()}
-                    {data.products[productId - 1].name.substring(1)}
+                    {currProduct.name[0].toUpperCase()}
+                    {currProduct.name.substring(1)}
                   </span>
                 </>
               }
@@ -174,19 +180,29 @@ const Product = (): JSX.Element => {
             <Groups>
               <LeftGroup>
                 <ProductImage>
-                  <ProductTriangle />
-                  <ProductTriangleDescription>NEW</ProductTriangleDescription>
                   <img
                     src={productImages[`product${productId}`]}
                     alt='product image'
                   />
+
+                  {(currProduct.triangle === 'new' || currProduct.triangle === 'sale') &&
+                    <>
+                      <ProductTriangle
+                        attr={currProduct.triangle === 'new' ? 'new' : 'sale'}
+                      />
+
+                      <ProductTriangleDescription>
+                        {currProduct.triangle === 'new' ? 'new' : 'sale'}
+                      </ProductTriangleDescription>
+                    </>
+                  }
                 </ProductImage>
                 
                 {!screen.small && relatedProducts}
               </LeftGroup>
 
               <RightGroup>
-                <ProductDescription {...data.products[productId - 1]} />
+                <ProductDescription {...currProduct} />
                 <ProductReviews productId={productId} />
                 {screen.small && relatedProducts}
               </RightGroup>
