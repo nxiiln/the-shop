@@ -1,11 +1,11 @@
-import Slider from './Slider';
+import Carousel from './Carousel';
 import WhatsNew from './WhatsNew';
 import HomeBottom from './HomeBottom';
 
 
 const Home = (): JSX.Element => (
   <main>
-    <Slider />
+    <Carousel />
     <WhatsNew />
     <HomeBottom />
   </main>

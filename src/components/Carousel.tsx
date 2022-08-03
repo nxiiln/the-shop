@@ -9,7 +9,7 @@ import bannerC from '../images/bannerC.png';
 
 
 
-const SliderWrapper = styled.article`
+const CarouselWrapper = styled.article`
   width: 100vw;
   height: 496px;
   position: relative;
@@ -244,7 +244,7 @@ const Indicator = styled.div<{active: boolean, left: string}>`
 
 
 
-const Slider = (): JSX.Element => {
+const Carousel = (): JSX.Element => {
   const [slide, setSlide] = useState<number>(1);
   const screen = useMediaQuery();
 
@@ -259,7 +259,7 @@ const Slider = (): JSX.Element => {
 
 
   return(
-    <SliderWrapper>
+    <CarouselWrapper>
       {slide === 1 && 
         <WrapperSlideA>
           <BannerA src={bannerA} alt='woman with accessories' />
@@ -328,11 +328,11 @@ const Slider = (): JSX.Element => {
         left='calc(48% + 20px)'
         onClick={(): void => setSlide(2)}
       />
-    </SliderWrapper>
+    </CarouselWrapper>
   );
 }
 
 
 
 
-export default Slider;
+export default Carousel;
