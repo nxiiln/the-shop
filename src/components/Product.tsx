@@ -182,7 +182,7 @@ const Product = (): JSX.Element => {
                 <ProductImage>
                   <img
                     src={productImages[`product${productId}`]}
-                    alt='product image'
+                    alt='product'
                   />
 
                   {(currProduct.triangle === 'new' || currProduct.triangle === 'sale') &&
