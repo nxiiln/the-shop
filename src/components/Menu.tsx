@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import styled from 'styled-components/macro';
 import {smallScreen, mediumScreen, useMediaQuery} from '../mediaQueries';
 import {Link} from 'react-router-dom';
@@ -20,23 +20,83 @@ const MenuWrapper = styled.article<{number: boolean}>`
   cursor: default;
 
   ${props => props.number && 'z-index: 2;'}
-
   @media ${smallScreen}, ${mediumScreen} {justify-content: start}
 `;
 
-const MenuSymbol = styled.div`
-  height: 15px;
+const MenuSymbol = styled(HashLink)<{open: boolean}>`
+  height: 21px;
   margin-left: 22px;
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   cursor: pointer;
+  z-index: 3;
 
   > div {
     width: 20px;
     height: 3px;
-    background: var(--color-background-second);
+    position: relative;
+    background: ${props => props.open ?
+      'var(--color-background-main)' :
+      'var(--color-background-second)'
+    };
+    opacity: 1;
     border-radius: 2px;
+    transition: all 0.2s ease-out;
+  }
+
+  > div:nth-child(4) {opacity: 0}
+  
+  ${props => props.open && `
+    > div:nth-child(1) {
+      transform: rotate(45deg);
+    }
+    
+    > div:nth-child(2) {
+      top: -6px;
+      left: 12px;
+      transform: rotate(-45deg);
+    }
+    
+    > div:nth-child(3) {
+      transform: rotate(-45deg);
+    }
+
+    > div:nth-child(4) {
+      opacity: 1;
+      top: -6px;
+      left: 12px;
+      transform: rotate(45deg);
+    }
+  `}
+`;
+
+const DropdownMenu = styled.div<{open: boolean}>`
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  left: 0;
+  top: calc(-100vh - 126px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: var(--color-background-second);
+  opacity: 1;
+  z-index: 2;
+  transition: top 0.2s ease-out;
+
+  ${props => props.open && 'top: -126px;'}
+
+  > a {
+    visibility: ${props => props.open ? 'visibility' : 'hidden'};
+    margin-bottom: 30px;
+    font-family: var(--font-second);
+    font-size: 24px;
+    font-weight: 300;
+    color: var(--color-text-second);
+    text-decoration: none;
   }
 `;
 
@@ -153,7 +213,14 @@ const Text = styled.p`
 
 const Menu = (): JSX.Element => {
   const [number, setNumber] = useState<number>(0);
+  const [dropdownMenu, setDropdownMenu] = useState<boolean>(false);
   const screen = useMediaQuery();
+
+  useEffect(() => {
+    dropdownMenu ?
+      document.body.style.overflowY = 'hidden' :
+      document.body.style.overflowY = 'overlay';
+  }, [dropdownMenu]);
 
   
   return(
@@ -225,11 +292,60 @@ const Menu = (): JSX.Element => {
           }
         </>
         :
-        <MenuSymbol>
-          <div />
-          <div />
-          <div />
-        </MenuSymbol>
+        <>
+          <MenuSymbol
+            open={dropdownMenu}
+            onClick={(): void => setDropdownMenu(!dropdownMenu)}
+            to='#top'
+            smooth
+          >
+            <div /><div /><div /><div />
+          </MenuSymbol>
+
+          <DropdownMenu open={dropdownMenu}>
+            <HashLink
+              to={'/catalog#top'}
+              onClick={(): void => setDropdownMenu(false)}
+            >
+              CATALOG
+            </HashLink> 
+
+            <HashLink
+              to={'/my-account#top'}
+              onClick={(): void => setDropdownMenu(false)}
+            >
+              MY ACCOUNT
+            </HashLink>
+
+            <HashLink
+              to={'/wish-list#top'}
+              onClick={(): void => setDropdownMenu(false)}
+            >
+              WISH LIST
+            </HashLink>
+
+            <HashLink
+              to={'/checkout#top'}
+              onClick={(): void => setDropdownMenu(false)}
+            >
+              CHECKOUT
+            </HashLink>
+
+            <HashLink
+              to={'/login#top'}
+              onClick={(): void => setDropdownMenu(false)}
+            >
+              LOG IN
+            </HashLink>
+
+            <HashLink
+              to={'/blog#top'}
+              onClick={(): void => setDropdownMenu(false)}
+            >
+              BLOG
+            </HashLink> 
+          </DropdownMenu>
+        </>
       }
     </MenuWrapper>
   )
