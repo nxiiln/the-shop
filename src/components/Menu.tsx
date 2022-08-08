@@ -83,7 +83,7 @@ const DropdownMenu = styled.div<{open: boolean}>`
   justify-content: center;
   align-items: center;
   background: var(--color-background-second);
-  opacity: 1;
+  opacity: 0.9;
   z-index: 2;
   transition: top 0.2s ease-out;
 
