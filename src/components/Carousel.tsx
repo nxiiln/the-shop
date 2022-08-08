@@ -265,8 +265,6 @@ const Indicator = styled.div<{active: boolean}>`
 const Carousel = (): JSX.Element => {
   const [slide, setSlide] = useState<number>(1);
   const refSlides = useRef<HTMLDivElement>(null);
-  const refWrapperSlide1 = useRef<HTMLDivElement>(null);
-  const refWrapperSlide2 = useRef<HTMLDivElement>(null);
   const screen = useMediaQuery();
 
   
@@ -301,7 +299,7 @@ const Carousel = (): JSX.Element => {
           }
         }}>
 
-        <WrapperSlide1 ref={refWrapperSlide1}>
+        <WrapperSlide1>
           <Banner1 src={bannerA} alt='woman with accessories' />
 
           <TextBlock1>
@@ -321,7 +319,7 @@ const Carousel = (): JSX.Element => {
         </WrapperSlide1>
 
 
-        <WrapperSlide2 ref={refWrapperSlide2}>
+        <WrapperSlide2>
           {!screen.small && 
             <WrapperBanner2>
               <img src={bannerB} alt='woman on sand' />
