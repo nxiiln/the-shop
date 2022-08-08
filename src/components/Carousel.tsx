@@ -270,10 +270,9 @@ const Carousel = (): JSX.Element => {
   
   useEffect((): {(): void} => {
     const interval: NodeJS.Timer = setInterval((): void => {
-      refSlides.current
-        ?.querySelectorAll(':scope > div')
-        [slide < 2 ? slide : 0]
-        .scrollIntoView({behavior: 'smooth', block: 'nearest'});
+      slide < 2 ?
+        refSlides.current?.scrollBy({left: 1, behavior: 'smooth'}) :
+        refSlides.current?.scroll({left: 0, behavior: 'smooth'});
     }, 5000);
     
     return (): void => clearInterval(interval);
