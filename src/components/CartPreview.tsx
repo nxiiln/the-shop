@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import styled from 'styled-components/macro';
-import {smallScreen} from '../mediaQueries';
+import {smallScreen, useMediaQuery} from '../mediaQueries';
 import {Link} from 'react-router-dom';
 import {HashLink} from 'react-router-hash-link';
 import {useAppSelector, useAppDispatch} from '../redux-hooks';
@@ -226,6 +226,7 @@ const CartPreview = (): JSX.Element => {
   const [open, setOpen] = useState<boolean>(false);
   const cart = useAppSelector(state => state.cart);
   const dispatch = useAppDispatch();
+  const screen = useMediaQuery();
 
   const totalPrice: number = cart
     .map((product: IProduct): number => product.price * product.quantity)
@@ -234,8 +235,9 @@ const CartPreview = (): JSX.Element => {
 
   return(
     <CartPreviewWrapper
-      onMouseEnter={(): void => setOpen(true)}
-      onMouseLeave={(): void => setOpen(false)}
+      onMouseEnter={(): void | false => !screen.touch && setOpen(true)}
+      onMouseLeave={(): void | false => !screen.touch && setOpen(false)}
+      onClick={(): void | false => screen.touch && setOpen(!open)}
     >
       <CartPreviewSymbolWrapper open={open}>
         <CartPreviewSymbol src={cartSymbol} alt='cart'/>
@@ -254,8 +256,9 @@ const CartPreview = (): JSX.Element => {
               <Price>${product.price * product.quantity}</Price>
               <Remove
                 type='button'
-                onClick={(e): void => {
+                onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
                   e.preventDefault();
+                  e.stopPropagation();
                   dispatch(cartRemove(product));
                 }}
               >
