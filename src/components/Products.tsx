@@ -205,7 +205,7 @@ const Products = (props: IProps): JSX.Element => {
           <ProductName>{product.name}</ProductName>
           <ProductPrice>${product.price}</ProductPrice>
 
-          {screen.touch && productOpen === product.id &&
+          {!screen.touch && productOpen === product.id &&
             <ProductOpen>
               <QuickShop onClick={preventDefault}>QUICK SHOP</QuickShop>
 

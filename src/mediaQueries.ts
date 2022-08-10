@@ -16,7 +16,7 @@ export const useMediaQuery = (): Screen => {
   const [big, setBig] = useState<boolean>(window.matchMedia(bigScreen).matches);
   const [medium, setMedium] = useState<boolean>(window.matchMedia(mediumScreen).matches);
   const [small, setSmall] = useState<boolean>(window.matchMedia(smallScreen).matches);
-  const touch: boolean = window.matchMedia('(hover: hover)').matches;
+  const touch: boolean = !window.matchMedia('(hover: hover)').matches;
   const screen: Screen = {big: big, medium: medium, small: small, touch: touch};
  
   useEffect(() => {
