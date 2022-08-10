@@ -21,7 +21,7 @@ const WrapperOuter = styled.main`
 
 const WrapperInner = styled.div`
   width: 1100px;
-  padding: 0 1% 100px;
+  padding: 0 1.5% 100px;
 `;
 
 const Groups = styled.div`
