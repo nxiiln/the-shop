@@ -159,12 +159,12 @@ const Top = (): JSX.Element => {
               width='85px'
               height='110px'
               open={contactOpen}
+              onMouseEnter={(): void => setContactOpen(true)}
               onMouseLeave={(): void => setContactOpen(false)}
             >
               <LinkMain
                 as='span'
                 open={contactOpen}
-                onMouseEnter={(): void => setContactOpen(true)}
               >
                 CONTACT
               </LinkMain>
@@ -183,8 +183,9 @@ const Top = (): JSX.Element => {
             width='55px'
             height='65px'
             open={currencyOpen}
-            onMouseEnter={(): void => setCurrencyOpen(true)}
-            onMouseLeave={(): void => setCurrencyOpen(false)}
+            onMouseEnter={(): void | false => !screen.touch && setCurrencyOpen(true)}
+            onMouseLeave={(): void | false => !screen.touch && setCurrencyOpen(false)}
+            onClick={(): void | false => screen.touch && setCurrencyOpen(!currencyOpen)}
             >
             <ButtonMain
               type='button'
