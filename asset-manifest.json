@@ -1,18 +1,15 @@
 {
   "files": {
-    "main.js": "/the-shop/static/js/main.b9239e1f.chunk.js",
-    "main.js.map": "/the-shop/static/js/main.b9239e1f.chunk.js.map",
+    "main.js": "/the-shop/static/js/main.f86d3cc5.chunk.js",
+    "main.js.map": "/the-shop/static/js/main.f86d3cc5.chunk.js.map",
     "runtime-main.js": "/the-shop/static/js/runtime-main.b132e303.js",
     "runtime-main.js.map": "/the-shop/static/js/runtime-main.b132e303.js.map",
-    "static/js/2.13209140.chunk.js": "/the-shop/static/js/2.13209140.chunk.js",
-    "static/js/2.13209140.chunk.js.map": "/the-shop/static/js/2.13209140.chunk.js.map",
+    "static/js/2.49011da4.chunk.js": "/the-shop/static/js/2.49011da4.chunk.js",
+    "static/js/2.49011da4.chunk.js.map": "/the-shop/static/js/2.49011da4.chunk.js.map",
     "index.html": "/the-shop/index.html",
-    "static/js/2.13209140.chunk.js.LICENSE.txt": "/the-shop/static/js/2.13209140.chunk.js.LICENSE.txt",
+    "static/js/2.49011da4.chunk.js.LICENSE.txt": "/the-shop/static/js/2.49011da4.chunk.js.LICENSE.txt",
     "static/media/Nunito-Regular.2b68f7ab.ttf": "/the-shop/static/media/Nunito-Regular.2b68f7ab.ttf",
     "static/media/PlayfairDisplay-Regular.b982583b.ttf": "/the-shop/static/media/PlayfairDisplay-Regular.b982583b.ttf",
-    "static/media/alsoLove1.336a75ad.png": "/the-shop/static/media/alsoLove1.336a75ad.png",
-    "static/media/alsoLove2.c09707c7.png": "/the-shop/static/media/alsoLove2.c09707c7.png",
-    "static/media/alsoLove3.f02ba2a9.png": "/the-shop/static/media/alsoLove3.f02ba2a9.png",
     "static/media/banner.406af17c.png": "/the-shop/static/media/banner.406af17c.png",
     "static/media/bannerA.f8e4ddd3.png": "/the-shop/static/media/bannerA.f8e4ddd3.png",
     "static/media/bannerB.52f92e7e.png": "/the-shop/static/media/bannerB.52f92e7e.png",
@@ -34,7 +31,6 @@
     "static/media/product7.84337f7c.png": "/the-shop/static/media/product7.84337f7c.png",
     "static/media/product8.53ec7575.png": "/the-shop/static/media/product8.53ec7575.png",
     "static/media/product9.23fe5cc8.png": "/the-shop/static/media/product9.23fe5cc8.png",
-    "static/media/quickViewImage.bd1da10a.png": "/the-shop/static/media/quickViewImage.bd1da10a.png",
     "static/media/storeLocation.9a017b09.png": "/the-shop/static/media/storeLocation.9a017b09.png",
     "static/media/whatsNewA.2e4e3238.png": "/the-shop/static/media/whatsNewA.2e4e3238.png",
     "static/media/whatsNewB.d94e2ca1.png": "/the-shop/static/media/whatsNewB.d94e2ca1.png",
@@ -42,7 +38,7 @@
   },
   "entrypoints": [
     "static/js/runtime-main.b132e303.js",
-    "static/js/2.13209140.chunk.js",
-    "static/js/main.b9239e1f.chunk.js"
+    "static/js/2.49011da4.chunk.js",
+    "static/js/main.f86d3cc5.chunk.js"
   ]
 }
