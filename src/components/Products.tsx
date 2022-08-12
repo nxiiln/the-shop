@@ -5,8 +5,10 @@ import {HashLink} from 'react-router-hash-link';
 import {useAppSelector, useAppDispatch} from '../redux-hooks';
 import {cartAdd, cartRemove} from '../slices/cart';
 import {wishListAdd, wishListRemove} from '../slices/wishList';
+import {quickViewChange} from '../slices/quickView';
 import {IProduct} from '../types/IProduct';
 import {productImages} from '../images/productImages';
+import QuickView from './QuickView';
 import cartSymbol from '../images/cartSymbol.png';
 import wishListSymbol from '../images/wishList.png';
 
@@ -172,13 +174,13 @@ interface IProps {
 const Products = (props: IProps): JSX.Element => {
   const screen = useMediaQuery();
   const [productOpen, setProductOpen] = useState<number>(0);
+  const [productQuickView, setProductQuickView] = useState<IProduct>(props.products[0]);
   const cart = useAppSelector(state => state.cart);
   const wishList = useAppSelector(state => state.wishList);
   const dispatch = useAppDispatch();
 
   type Click = React.MouseEvent<HTMLButtonElement, MouseEvent>;
-  const preventDefault = (e: Click): void => e.preventDefault();
-  
+
 
   return(
     <ProductsWrapper maxWidth={props.maxWidth} margin={props.margin}>
@@ -205,10 +207,18 @@ const Products = (props: IProps): JSX.Element => {
           <ProductName>{product.name}</ProductName>
           <ProductPrice>${product.price}</ProductPrice>
 
-          {!screen.touch && productOpen === product.id &&
+          {!screen.small && !screen.touch && productOpen === product.id &&
             <ProductOpen>
-              <QuickShop onClick={preventDefault}>QUICK SHOP</QuickShop>
-
+              <QuickShop
+                onClick={(e: Click): void => {
+                  e.preventDefault();
+                  setProductQuickView(product);
+                  dispatch(quickViewChange(true));
+                }}
+              >
+                QUICK SHOP
+              </QuickShop>
+              
               <AddToCart
                 type='button'
                 onClick={(e: Click): void => {
@@ -242,6 +252,8 @@ const Products = (props: IProps): JSX.Element => {
           }
         </Product>
       )}
+
+      <QuickView {...productQuickView} />
     </ProductsWrapper>
   );
 }
