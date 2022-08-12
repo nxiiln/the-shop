@@ -219,7 +219,7 @@ const Menu = (): JSX.Element => {
   useEffect(() => {
     dropdownMenu ?
       document.body.style.overflowY = 'hidden' :
-      document.body.style.overflowY = 'overlay';
+      document.body.style.overflowY = '';
   }, [dropdownMenu]);
 
   
@@ -302,48 +302,18 @@ const Menu = (): JSX.Element => {
             <div /><div /><div /><div />
           </MenuSymbol>
 
-          <DropdownMenu open={dropdownMenu}>
-            <HashLink
-              to={'/catalog#top'}
-              onClick={(): void => setDropdownMenu(false)}
-            >
-              CATALOG
-            </HashLink> 
-
-            <HashLink
-              to={'/my-account#top'}
-              onClick={(): void => setDropdownMenu(false)}
-            >
-              MY ACCOUNT
-            </HashLink>
-
-            <HashLink
-              to={'/wish-list#top'}
-              onClick={(): void => setDropdownMenu(false)}
-            >
-              WISH LIST
-            </HashLink>
-
-            <HashLink
-              to={'/checkout#top'}
-              onClick={(): void => setDropdownMenu(false)}
-            >
-              CHECKOUT
-            </HashLink>
-
-            <HashLink
-              to={'/login#top'}
-              onClick={(): void => setDropdownMenu(false)}
-            >
-              LOG IN
-            </HashLink>
-
-            <HashLink
-              to={'/blog#top'}
-              onClick={(): void => setDropdownMenu(false)}
-            >
-              BLOG
-            </HashLink> 
+          <DropdownMenu
+            open={dropdownMenu}
+            onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>): void => {
+              if (e.target !== e.currentTarget) setDropdownMenu(false);
+            }}
+          >
+            <HashLink to={'/catalog#top'}>CATALOG</HashLink>
+            <HashLink to={'/my-account#top'}>MY ACCOUNT</HashLink>
+            <HashLink to={'/wish-list#top'}>WISH LIST</HashLink>
+            <HashLink to={'/checkout#top'}>CHECKOUT</HashLink>
+            <HashLink to={'/login#top'}>LOG IN</HashLink>
+            <HashLink to={'/blog#top'}>BLOG</HashLink>
           </DropdownMenu>
         </>
       }
