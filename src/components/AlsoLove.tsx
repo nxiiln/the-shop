@@ -1,9 +1,12 @@
 import {useState} from 'react';
 import styled from 'styled-components/macro';
+import {HashLink} from 'react-router-hash-link';
 import QuickView from './QuickView';
-import alsoLove1 from '../images/alsoLove1.png';
-import alsoLove2 from '../images/alsoLove2.png';
-import alsoLove3 from '../images/alsoLove3.png';
+import {useAppDispatch} from '../redux-hooks';
+import {quickViewChange} from '../slices/quickView';
+import data from '../data.json';
+import {IProduct} from '../types/IProduct';
+import {productImages} from '../images/productImages';
 
 
 
@@ -37,6 +40,8 @@ const AlsoLoveClose = styled.button`
   background: var(--color-background-main);
   border: 1px solid var(--color-border);
   cursor: pointer;
+
+  &:hover {background: var(--color-button-outline-hover)}
 
   > span:first-child  {
     display: inline-block;
@@ -88,6 +93,13 @@ const ProductAlso = styled.div`
   }
 `;
 
+const ImageLink = styled(HashLink)`
+  > img {
+    width: 140px;
+    height: 188px;
+  }
+`;
+
 const ButtonQuickView = styled.button`
   width: 107px;
   height: 30px;
@@ -105,40 +117,10 @@ const ButtonQuickView = styled.button`
 
 
 
-interface ProductAlso {
-  id: number;
-  image: string;
-  name: string;
-  price: number;
-}
-
-const productsAlso: ProductAlso[] = [
-  {
-    id: 1,
-    image: alsoLove1,
-    name: 'detailed swing dress',
-    price: 1875
-  },
-  {
-    id: 2,
-    image: alsoLove2,
-    name: 'detailed swing dress',
-    price: 850
-  },
-  {
-    id: 3,
-    image: alsoLove3,
-    name: 'detailed swing dress',
-    price: 875
-  }
-];
-
-
-
-
 const AlsoLove = (): JSX.Element => {
   const [display, setDisplay] = useState<boolean>(true);
-  const [quickView, setQuickView] = useState<boolean>(false);
+  const [productQuickView, setProductQuickView] = useState<IProduct>(data.products[0]);
+  const dispatch = useAppDispatch();
 
 
   return(
@@ -153,24 +135,38 @@ const AlsoLove = (): JSX.Element => {
       </AlsoLoveClose>
 
       <ProductAlsoWrapper>
-        {productsAlso.map((product: ProductAlso): JSX.Element =>
-          <ProductAlso key={product.id}>
-            <img src={product.image} alt={product.name} />
-            <span>{product.name}</span>
-            <span>
-              ${product.price.toString().replace(/(.+)(...)$/, '$1,$2')}
-            </span>
-            <ButtonQuickView
-              type='button'
-              onClick={(): void => setQuickView(true)}
-            >
-              QUICKVIEW
-            </ButtonQuickView>
-          </ProductAlso>
+        {data.products
+          .filter((product: IProduct): boolean =>
+            product.id === 3 || product.id === 4 || product.id === 8
+          )
+          .map((product: IProduct): JSX.Element =>
+            <ProductAlso key={product.id}>
+              <ImageLink to={`/catalog/product${product.id}#top`}>
+                <img
+                  src={productImages[`product${product.id}`]}
+                  alt='woman in white dress'
+                />
+              </ImageLink>
+
+              <span>{product.name}</span>
+              <span>
+                ${product.price.toString().replace(/(.+)(...)$/, '$1,$2')}
+              </span>
+              
+              <ButtonQuickView
+                type='button'
+                onClick={(): void => {
+                  setProductQuickView(product);
+                  dispatch(quickViewChange(true));
+                }}
+              >
+                QUICKVIEW
+              </ButtonQuickView>
+            </ProductAlso>
         )}
       </ProductAlsoWrapper>
 
-      {quickView && <QuickView />}
+      <QuickView {...productQuickView} />
     </AlsoLoveWrapper>
   )
 }
