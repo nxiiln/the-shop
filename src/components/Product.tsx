@@ -158,7 +158,7 @@ const Product = (): JSX.Element => {
   
   return(
     <>
-      {productId >= 1 && productId <= 10 ?
+      {productId >= 1 && productId <= 12 ?
         <WrapperOuter>
           <WrapperInner>
             <BreadCrumbs
