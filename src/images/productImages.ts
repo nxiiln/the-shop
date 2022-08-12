@@ -20,5 +20,7 @@ export const productImages: {[key: string]: string} = {
   product7: product7,
   product8: product8,
   product9: product9,
-  product10: product10
+  product10: product10,
+  product11: product4,
+  product12: product3
 };
