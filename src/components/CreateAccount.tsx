@@ -1,6 +1,10 @@
+import {useEffect, useState} from 'react';
 import styled from 'styled-components/macro';
 import {smallScreen, useMediaQuery} from '../mediaQueries';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
+import {HashLink} from 'react-router-hash-link';
+import {useAppSelector, useAppDispatch} from '../redux-hooks';
+import {accountChange} from '../slices/account';
 import BreadCrumbs from './BreadCrumbs';
 
 
@@ -23,7 +27,7 @@ const WrapperInner = styled.div`
 
 const CreateAccountWrapper = styled.div`
   width: 675px;
-  height: 855px;
+  /* height: calc( + 20px); */
   position: relative;
   align-self: center;
   display: flex;
@@ -113,18 +117,25 @@ const Label = styled.label`
   color: var(--color-text-main);
 `;
 
-const LabelText = styled(Label)`
+const LabelText = styled(Label)<{error?: boolean}>`
+  position: relative;
   height: 45px;
-  margin-bottom: 17px;
+  margin-bottom: 20px;
   display: grid;
   align-content: space-between;
 
   > input {
     width: 254px;
     height: 30px;
-    border: 1px solid var(--color-border);
+    border: 1px solid ${props => !props.error ?
+      'var(--color-border)' : 'var(--color-input-error)'
+    };
 
-    &:focus {outline: 1px solid #000}
+    &:focus {
+      outline: 1px solid ${props => !props.error ?
+        'var(--color-input-outline)' : 'var(--color-input-error)'
+      };
+    }
   }
 `;
 
@@ -133,6 +144,7 @@ const LabelCheckbox = styled(Label)`
   display: flex;
   margin-top: 30px;
   align-items: center;
+  cursor: pointer;
 
   > input {
     margin: 0 10px 0 0;
@@ -156,10 +168,10 @@ const ButtonCreateAccount = styled.button`
   &:hover {background: var(--color-button-solid-hover)}
 `;
 
-const BackToLogin = styled(Link)`
+const BackToLogin = styled(HashLink)`
   width: 80px;
   height: 10px;
-  margin-top: 20px;
+  margin: 20px 0 30px 0;
   align-self: center;
   font-family: var(--font-regular);
   font-size: 11px;
@@ -168,11 +180,58 @@ const BackToLogin = styled(Link)`
   color: var(--color-text-main);
 `;
 
+const Error = styled.span`
+  position: absolute;
+  top: 47px;
+  left: 0;
+  font-family: var(--font-regular);
+  font-size: 11px;
+  color: var(--color-input-error);
+`;
+
 
 
 
 const CreateAccount = (): JSX.Element => {
   const screen = useMediaQuery();
+  const account = useAppSelector(state => state.account);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const [firstName, setFirstName] = useState<string>('');
+  const [firstNameError, setFirstNameError] = useState<boolean>(false);
+
+  const [lastName, setLastName] = useState<string>('');
+  const [lastNameError, setLastNameError] = useState<boolean>(false);
+
+  const [email, setEmail] = useState<string>(account[account.length - 1]?.email || '');
+  const [emailError, setEmailError] = useState<boolean>(false);
+
+  const [password, setPassword] = useState<string>('');
+  const [passwordError, setPasswordError] = useState<boolean>(false);
+
+  const [confirmPassword, setConfirmPassword] = useState<string>('');
+  const [confirmPasswordError, setConfirmPasswordError] = useState<boolean>(false);
+
+  const [newsletterSubscription, setNewsletterSubscription] = useState<boolean>(true);
+  const [address1, setAddress1] = useState<string>('');
+  const [address2, setAddress2] = useState<string>('');
+  const [country, setCountry] = useState<string>('');
+  const [city, setCity] = useState<string>('');
+
+  const [zip, setZip] = useState<string>('');
+  const [zipError, setZipError] = useState<boolean>(false);
+
+  type Change = React.ChangeEvent<HTMLInputElement>;
+  type Focus = React.FocusEvent<HTMLInputElement>;
+
+  useEffect((): void => {
+    if (confirmPassword) {
+      password !== confirmPassword ?
+        setConfirmPasswordError(true) : setConfirmPasswordError(false);
+    }
+  }, [password, confirmPassword, confirmPasswordError]);
+
   
   return(
     <WrapperOuter>
@@ -195,33 +254,124 @@ const CreateAccount = (): JSX.Element => {
             <Title>CREATE AN ACCOUNT</Title>
           </TitleWrapper>
 
-          <Form onSubmit={(e: React.FormEvent<HTMLFormElement>): void => e.preventDefault()}>
+          <Form
+            noValidate
+            onSubmit={(e: React.FormEvent<HTMLFormElement>): void => {
+              e.preventDefault();
+
+              if (e.currentTarget.checkValidity() && !confirmPasswordError) {
+                dispatch(accountChange({
+                  firstName: firstName,
+                  lastName: lastName,
+                  email: email,
+                  password: password,
+                  newsletterSubscription: newsletterSubscription,
+                  address1: address1,
+                  address2: address2,
+                  country: country,
+                  city: city,
+                  zip: zip
+                }));
+
+                navigate('/my-account');
+              }
+            }}
+          >
             <div>
               <PersonalInformation>
                 <Description>PERSONAL INFORMATION</Description>
-                <LabelText>
+
+                <LabelText error={firstNameError}>
                   FIRST NAME*
-                  <input type='text' required />
+                  <input
+                    type='text'
+                    required
+                    value={firstName}
+                    onChange={(e: Change): void => {
+                      setFirstName(e.target.value);
+                      e.target.validity.valid && setFirstNameError(false);
+                    }}
+                    onInvalid={(): void => setFirstNameError(true)}
+                  />
+                  <Error>{firstNameError && 'Enter first name'}</Error>
                 </LabelText>
 
-                <LabelText>
+                <LabelText error={lastNameError}>
                   LAST NAME*
-                  <input type='text' required />
+                  <input
+                    type='text'
+                    required
+                    value={lastName}
+                    onChange={(e: Change): void => {
+                      setLastName(e.target.value);
+                      e.target.validity.valid && setLastNameError(false);
+                    }}
+                    onInvalid={(): void => setLastNameError(true)}
+                  />
+                  <Error>{lastNameError && 'Enter last name'}</Error>
                 </LabelText>
 
-                <LabelText>
+                <LabelText error={emailError}>
                   E-MAIL*
-                  <input type='email' required />
+                  <input
+                    type='email'
+                    pattern='.+@.+\..+'
+                    required
+                    placeholder='your@email.com'
+                    value={email}
+
+                    onChange={(e: Change): void => {
+                      setEmail(e.target.value);
+                      e.target.validity.valid && setEmailError(false);
+                    }}
+
+                    onBlur={(e: Focus): void => {
+                      if (email && !e.target.validity.valid) setEmailError(true);
+                    }}
+
+                    onInvalid={(): void => setEmailError(true)}
+                  />
+                  <Error>{emailError && 'Enter a valid email'}</Error>
                 </LabelText>
 
-                <LabelText>
+                <LabelText error={passwordError}>
                   PASSWORD*
-                  <input type='text' required />
+                  <input
+                    type='password'
+                    required
+                    value={password}
+
+                    onChange={(e: Change): void => {
+                      setPassword(e.target.value);
+                      e.target.validity.valid && setPasswordError(false);
+                    }}
+
+                    onBlur={(): void => password !== confirmPassword ?
+                      setConfirmPasswordError(true) : setConfirmPasswordError(false)
+                    }
+
+                    onInvalid={(): void => setPasswordError(true)}
+                  />
+                  <Error>{passwordError && 'Enter password'}</Error>
+                </LabelText>
+
+                <LabelText error={confirmPasswordError}>
+                  CONFIRM PASSWORD*
+                  <input
+                    type='password'
+                    value={confirmPassword}
+                    onChange={(e: Change): void => setConfirmPassword(e.target.value)}
+                  />
+                  <Error>{confirmPasswordError && 'Passwords do not match'}</Error>
                 </LabelText>
 
                 {!screen.small &&
                   <LabelCheckbox>
-                    <input type='checkbox' name='subscribe' defaultChecked />
+                    <input
+                      type='checkbox'
+                      checked={newsletterSubscription}
+                      onChange={(e): void => setNewsletterSubscription(e.target.checked)}
+                    />
                     I WANT TO SUBSCRIBE TO THE NEWSLETTER
                   </LabelCheckbox>
                 }
@@ -231,65 +381,65 @@ const CreateAccount = (): JSX.Element => {
               <AddressInformation>
                 <Description>ADDRESS INFORMATION</Description>
                 <LabelText>
-                  FIRST NAME*
-                  <input type='text' required />
-                </LabelText>
-
-                <LabelText>
-                  LAST NAME*
-                  <input type='text' required />
-                </LabelText>
-
-                <LabelText>
-                  COMPANY
-                  <input type='text' />
-                </LabelText>
-
-                <LabelText>
                   ADDRESS 1
-                  <input type='text' />
+                  <input
+                    type='text'
+                    value={address1}
+                    onChange={(e: Change): void => setAddress1(e.target.value)}
+                  />
                 </LabelText>
 
                 <LabelText>
                   ADDRESS 2
-                  <input type='text' />
+                  <input
+                    type='text'
+                    value={address2}
+                    onChange={(e: Change): void => setAddress2(e.target.value)}
+                  />
                 </LabelText>
 
                 <LabelText>
                   COUNTRY
-                  <input list='country' />
+                  <input
+                    type='text'
+                    value={country}
+                    onChange={(e: Change): void => setCountry(e.target.value)}
+                  />
                 </LabelText>
-                <datalist id='country'>
-                  <option value='Russia' />
-                  <option value='UK' />
-                  <option value='USA' />
-                </datalist>
 
                 <LabelText>
                   CITY
-                  <input type='text' />
+                  <input
+                    type='text'
+                    value={city}
+                    onChange={(e: Change): void => setCity(e.target.value)}
+                  />
                 </LabelText>
 
-                <LabelText>
-                  STATE
-                  <input type='text' />
-                </LabelText>
-
-                <LabelText>
+                <LabelText error={zipError}>
                   ZIP / POSTAL CODE*
-                  <input type='text' required />
-                </LabelText>
-
-                <LabelText>
-                  PHONE
-                  <input type='text' />
+                  <input
+                    type='text'
+                    required
+                    value={zip}
+                    onChange={(e: Change): void => {
+                      setZip(e.target.value);
+                      e.target.validity.valid && setZipError(false);
+                    }}
+                    onInvalid={(): void => setZipError(true)}
+                  />
+                  <Error>{zipError && 'Enter zip / postal code'}</Error>
                 </LabelText>
               </AddressInformation>
               
 
               {screen.small &&
                 <LabelCheckbox>
-                  <input type='checkbox' name='subscribe' defaultChecked />
+                  <input
+                    type='checkbox'
+                    checked={newsletterSubscription}
+                    onChange={(e: Change): void => setNewsletterSubscription(e.target.checked)}
+                  />
                   I WANT TO SUBSCRIBE TO THE NEWSLETTER
                 </LabelCheckbox>
               }
@@ -297,7 +447,7 @@ const CreateAccount = (): JSX.Element => {
             <ButtonCreateAccount type='submit'>CREATE AN ACCOUNT</ButtonCreateAccount>
           </Form>
           
-          <BackToLogin to='/login'>Back to Login</BackToLogin>
+          <BackToLogin to='/login#top'>Back to Login</BackToLogin>
         </CreateAccountWrapper>
       </WrapperInner>
     </WrapperOuter>
