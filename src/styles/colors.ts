@@ -15,7 +15,10 @@ const colors: string = `
     --color-button-outline-hover: #f7f7f7; 
 
     --color-triangle-new: #000;
-    --color-triangle-sale: #c50e20;    
+    --color-triangle-sale: #c50e20;
+    
+    --color-input-outline: #000;
+    --color-input-error: #f00;
   }
 `;
 
