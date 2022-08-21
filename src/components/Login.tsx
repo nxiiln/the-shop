@@ -3,7 +3,7 @@ import styled from 'styled-components/macro';
 import {smallScreen} from '../mediaQueries';
 import {Link, useNavigate} from 'react-router-dom';
 import {useAppDispatch} from '../redux-hooks';
-import {accountChange} from '../slices/account';
+import {accountSetNewEmail} from '../slices/account';
 import BreadCrumbs from './BreadCrumbs';
 
 
@@ -262,7 +262,7 @@ const Login = (): JSX.Element => {
                 onSubmit={(e: React.FormEvent<HTMLFormElement>): void => {
                   e.preventDefault();
                   if (e.currentTarget.checkValidity()) {
-                    dispatch(accountChange({email: emailNew}));
+                    dispatch(accountSetNewEmail(emailNew));
                     navigate('/create-account');
                   }
                 }}
