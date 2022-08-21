@@ -537,13 +537,13 @@ const MyAccount = (): JSX.Element => {
     .findIndex((account: IAccount): boolean => account.isActive);
   const account = stateAccount.accounts[accountId];
 
-  const [firstName, setFirstName] = useState<string>(account.firstName);
+  const [firstName, setFirstName] = useState<string>(account?.firstName || '');
   const [firstNameError, setFirstNameError] = useState<boolean>(false);
 
-  const [lastName, setLastName] = useState<string>(account.lastName);
+  const [lastName, setLastName] = useState<string>(account?.lastName || '');
   const [lastNameError, setLastNameError] = useState<boolean>(false);
 
-  const [email, setEmail] = useState<string>(account.email);
+  const [email, setEmail] = useState<string>(account?.email || '');
   const [emailError, setEmailError] = useState<boolean>(false);
 
   const [newPassword, setNewPassword] = useState<string>('');
@@ -649,7 +649,7 @@ const MyAccount = (): JSX.Element => {
         <input
           type='password'
           value={confirmNewPassword}
-          
+
           onChange={(e: Change): void => {
             setConfirmNewPassword(e.target.value);
             e.target.validity.valid && setConfirmNewPasswordError(false);
