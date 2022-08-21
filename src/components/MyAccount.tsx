@@ -532,22 +532,21 @@ const MyAccount = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const screen = useMediaQuery();
 
-  const accounts = useAppSelector(state => state.account);
-  const accountId = accounts.findIndex((account: IAccount): boolean | undefined => account?.isActive);
-  const account = accounts[accountId];
+  const stateAccount = useAppSelector(state => state.account);
+  const accountId = stateAccount.accounts
+    .findIndex((account: IAccount): boolean => account.isActive);
+  const account = stateAccount.accounts[accountId];
 
-  const [firstName, setFirstName] = useState<string>(account?.firstName || '');
+  const [firstName, setFirstName] = useState<string>(account.firstName);
   const [firstNameError, setFirstNameError] = useState<boolean>(false);
 
-  const [lastName, setLastName] = useState<string>(account?.lastName || '');
+  const [lastName, setLastName] = useState<string>(account.lastName);
   const [lastNameError, setLastNameError] = useState<boolean>(false);
 
-  const [email, setEmail] = useState<string>(account?.email || '');
+  const [email, setEmail] = useState<string>(account.email);
   const [emailError, setEmailError] = useState<boolean>(false);
 
   const [newPassword, setNewPassword] = useState<string>('');
-  const [newPasswordError, setNewPasswordError] = useState<boolean>(false);
-
   const [confirmNewPassword, setConfirmNewPassword] = useState<string>('');
   const [confirmNewPasswordError, setConfirmNewPasswordError] = useState<boolean>(false);
 
@@ -638,12 +637,7 @@ const MyAccount = (): JSX.Element => {
         <input
           type='password'
           value={newPassword}
-
-          onChange={(e: Change): void => {
-            setNewPassword(e.target.value);
-            e.target.validity.valid && setNewPasswordError(false);
-          }}
-
+          onChange={(e: Change): void => setNewPassword(e.target.value)}
           onBlur={(): void => newPassword !== confirmNewPassword ?
             setConfirmNewPasswordError(true) : setConfirmNewPasswordError(false)
           }
@@ -655,6 +649,7 @@ const MyAccount = (): JSX.Element => {
         <input
           type='password'
           value={confirmNewPassword}
+          
           onChange={(e: Change): void => {
             setConfirmNewPassword(e.target.value);
             e.target.validity.valid && setConfirmNewPasswordError(false);
