@@ -4,7 +4,7 @@ import {smallScreen, useMediaQuery} from '../mediaQueries';
 import {Link, useNavigate} from 'react-router-dom';
 import {HashLink} from 'react-router-hash-link';
 import {useAppSelector, useAppDispatch} from '../redux-hooks';
-import {accountChange} from '../slices/account';
+import {accountCreate} from '../slices/account';
 import BreadCrumbs from './BreadCrumbs';
 
 
@@ -204,7 +204,7 @@ const CreateAccount = (): JSX.Element => {
   const [lastName, setLastName] = useState<string>('');
   const [lastNameError, setLastNameError] = useState<boolean>(false);
 
-  const [email, setEmail] = useState<string>(account[account.length - 1]?.email || '');
+  const [email, setEmail] = useState<string>(account.newEmail);
   const [emailError, setEmailError] = useState<boolean>(false);
 
   const [password, setPassword] = useState<string>('');
@@ -260,7 +260,8 @@ const CreateAccount = (): JSX.Element => {
               e.preventDefault();
 
               if (e.currentTarget.checkValidity() && !confirmPasswordError) {
-                dispatch(accountChange({
+                dispatch(accountCreate({
+                  isActive: true,
                   firstName: firstName,
                   lastName: lastName,
                   email: email,
