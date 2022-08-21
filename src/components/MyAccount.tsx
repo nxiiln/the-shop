@@ -1,8 +1,11 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import styled from 'styled-components/macro';
 import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
 import {Link} from 'react-router-dom';
 import BreadCrumbs from './BreadCrumbs';
+import { useAppDispatch, useAppSelector } from '../redux-hooks';
+import { IAccount } from '../types/IAccount';
+import { accountChangeMyPersonalInfo } from '../slices/account';
 
 
 
@@ -71,7 +74,7 @@ const Tab = styled.div`
   font-weight: 300;
   color: var(--color-text-main);
   border: 1px solid var(--color-border);
-  cursor: default;
+  cursor: pointer;
   user-select: none;
 
   @media ${smallScreen} {width: 100%}
@@ -95,6 +98,7 @@ const OrderHistoryTab = styled(Tab)<{currTab: string}>`
 
 const MyAccountBody = styled.div`
   width: 100%;
+  padding-bottom: 20px;
   display: flex;
   justify-content: center;
   border: 1px solid var(--color-border);
@@ -111,7 +115,8 @@ const Label = styled.label`
   color: var(--color-text-main);
 `;
 
-const LabelText = styled(Label)`
+const LabelText = styled(Label)<{error?: boolean}>`
+  position: relative;
   height: 45px;
   margin-bottom: 17px;
   display: grid;
@@ -120,9 +125,15 @@ const LabelText = styled(Label)`
   > input {
     width: 254px;
     height: 30px;
-    border: 1px solid var(--color-border);
-    
-    &:focus {outline: 1px solid #000}
+    border: 1px solid ${props => !props.error ?
+      'var(--color-border)' : 'var(--color-input-error)'
+    };
+
+    &:focus {
+      outline: 1px solid ${props => !props.error ?
+        'var(--color-input-outline)' : 'var(--color-input-error)'
+      };
+    }
   }
 `;
 
@@ -132,6 +143,7 @@ const LabelCheckbox = styled(Label)`
   margin-top: 22px;
   align-items: center;
   font-weight: 400;
+  cursor: pointer;
   
   > input {
     margin: 0 10px 0 0;
@@ -171,7 +183,7 @@ const Required = styled.span`
 // OrderHystory
 const OrderHistory = styled.div`
   width: 674px;
-  height: 645px;
+  /* height: 645px; */
   margin-top: 48px;
 
   @media ${smallScreen} {
@@ -399,6 +411,15 @@ const DescriptionBlock = styled.div`
   > span:nth-child(3n+1) {font-weight: 700}
 `;
 
+const Error = styled.span`
+  position: absolute;
+  top: 47px;
+  left: 0;
+  font-family: var(--font-regular);
+  font-size: 11px;
+  color: var(--color-input-error);
+`;
+
 
 
 
@@ -508,43 +529,150 @@ const orders: Order[] = [
 const MyAccount = (): JSX.Element => {
   const [tab, setTab] = useState<string>('myPersonalInfo');
   const [currOrder, setCurrOrder] = useState<string>('');
+  const dispatch = useAppDispatch();
   const screen = useMediaQuery();
+
+  const accounts = useAppSelector(state => state.account);
+  const accountId = accounts.findIndex((account: IAccount): boolean | undefined => account?.isActive);
+  const account = accounts[accountId];
+
+  const [firstName, setFirstName] = useState<string>(account?.firstName || '');
+  const [firstNameError, setFirstNameError] = useState<boolean>(false);
+
+  const [lastName, setLastName] = useState<string>(account?.lastName || '');
+  const [lastNameError, setLastNameError] = useState<boolean>(false);
+
+  const [email, setEmail] = useState<string>(account?.email || '');
+  const [emailError, setEmailError] = useState<boolean>(false);
+
+  const [newPassword, setNewPassword] = useState<string>('');
+  const [newPasswordError, setNewPasswordError] = useState<boolean>(false);
+
+  const [confirmNewPassword, setConfirmNewPassword] = useState<string>('');
+  const [confirmNewPasswordError, setConfirmNewPasswordError] = useState<boolean>(false);
+
+  const [newsletterSubscription, setNewsletterSubscription] = useState<boolean>(true);
+
+  type Change = React.ChangeEvent<HTMLInputElement>;
+  type Focus = React.FocusEvent<HTMLInputElement>;
+
+  useEffect((): void => {
+    if (confirmNewPassword) {
+      newPassword !== confirmNewPassword ?
+        setConfirmNewPasswordError(true) : setConfirmNewPasswordError(false);
+    }
+  }, [newPassword, confirmNewPassword, confirmNewPasswordError]);
 
 
   const myPersonalInfo: JSX.Element =
-    <form onSubmit={(e: React.FormEvent<HTMLFormElement>): void => e.preventDefault()}>
-      <LabelText>
+    <form
+      noValidate
+      onSubmit={(e: React.FormEvent<HTMLFormElement>): void => {
+        e.preventDefault();
+        if (accountId !== -1 && e.currentTarget.checkValidity() && !confirmNewPasswordError) {
+          dispatch(accountChangeMyPersonalInfo({
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            password: newPassword ? newPassword : account.password,
+            newsletterSubscription: newsletterSubscription
+          }))
+        }
+      }}
+    >
+      <LabelText error={firstNameError}>
         FIRST NAME*
-        <input type='text' required />
+        <input
+          type='text'
+          required
+          value={firstName}
+          onChange={(e: Change): void => {
+            setFirstName(e.target.value);
+            e.target.validity.valid && setFirstNameError(false);
+          }}
+          onInvalid={(): void => setFirstNameError(true)}
+        />
+        <Error>{firstNameError && 'Enter first name'}</Error>
       </LabelText>
 
-      <LabelText>
+      <LabelText error={lastNameError}>
         LAST NAME*
-        <input type='text' required />
+        <input
+          type='text'
+          required
+          value={lastName}
+          onChange={(e: Change): void => {
+            setLastName(e.target.value);
+            e.target.validity.valid && setLastNameError(false);
+          }}
+          onInvalid={(): void => setLastNameError(true)}
+        />
+        <Error>{lastNameError && 'Enter last name'}</Error>
       </LabelText>
 
-      <LabelText>
+      <LabelText error={emailError}>
         E-MAIL*
-        <input type='email' required />
-      </LabelText>
+        <input
+          type='email'
+          pattern='.+@.+\..+'
+          required
+          placeholder='your@email.com'
+          value={email}
 
-      <LabelText>
-        CURRENT PASSWORD*
-        <input type='password' required />
+          onChange={(e: Change): void => {
+            setEmail(e.target.value);
+            e.target.validity.valid && setEmailError(false);
+          }}
+
+          onBlur={(e: Focus): void => {
+            if (email && !e.target.validity.valid) setEmailError(true);
+          }}
+
+          onInvalid={(): void => setEmailError(true)}
+        />
+        <Error>{emailError && 'Enter a valid email'}</Error>
       </LabelText>
 
       <LabelText>
         NEW PASSWORD
-        <input type='password' />
+        <input
+          type='password'
+          value={newPassword}
+
+          onChange={(e: Change): void => {
+            setNewPassword(e.target.value);
+            e.target.validity.valid && setNewPasswordError(false);
+          }}
+
+          onBlur={(): void => newPassword !== confirmNewPassword ?
+            setConfirmNewPasswordError(true) : setConfirmNewPasswordError(false)
+          }
+        />
       </LabelText>
 
-      <LabelText>
-        CONFIRMATION
-        <input type='password' />
+      <LabelText error={confirmNewPasswordError}>
+        CONFIRM NEW PASSWORD
+        <input
+          type='password'
+          value={confirmNewPassword}
+          onChange={(e: Change): void => {
+            setConfirmNewPassword(e.target.value);
+            e.target.validity.valid && setConfirmNewPasswordError(false);
+          }}
+
+          onBlur={(): void => newPassword !== confirmNewPassword ?
+            setConfirmNewPasswordError(true) : setConfirmNewPasswordError(false)
+          }
+        />
+        <Error>{confirmNewPasswordError && 'Passwords do not match'}</Error>
       </LabelText>
 
       <LabelCheckbox>
-        <input type='checkbox' name='subscribe' defaultChecked />
+        <input
+          type='checkbox'
+          checked={newsletterSubscription}
+          onChange={(e: Change): void => setNewsletterSubscription(e.target.checked)}
+        />
         I WANT TO SUBSCRIBE TO THE NEWSLETTER
       </LabelCheckbox>
 
@@ -564,21 +692,6 @@ const MyAccount = (): JSX.Element => {
 
   const myAddresses: JSX.Element =
     <form>
-      <LabelText>
-        FIRST NAME*
-        <input type='text' required />
-      </LabelText>
-
-      <LabelText>
-        LAST NAME*
-        <input type='text' required />
-      </LabelText>
-
-      <LabelText>
-        COMPANY
-        <input type='text' />
-      </LabelText>
-
       <LabelText>
         ADDRESS 1
         <input type='text' />
@@ -605,18 +718,8 @@ const MyAccount = (): JSX.Element => {
       </LabelText>
 
       <LabelText>
-        STATE
-        <input type='text' />
-      </LabelText>
-
-      <LabelText>
         ZIP / POSTAL CODE*
         <input type='text' required />
-      </LabelText>
-
-      <LabelText>
-        PHONE
-        <input type='text' />
       </LabelText>
 
       {!screen.small ?
