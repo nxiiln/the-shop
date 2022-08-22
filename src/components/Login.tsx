@@ -1,9 +1,9 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import styled from 'styled-components/macro';
 import {smallScreen} from '../mediaQueries';
 import {Link, useNavigate} from 'react-router-dom';
 import {useAppDispatch, useAppSelector} from '../redux-hooks';
-import {accountLogOut, accountSetNewEmail} from '../slices/account';
+import {accountLogIn, accountLogOut, accountSetNewEmail} from '../slices/account';
 import {IAccount} from '../types/IAccount';
 import BreadCrumbs from './BreadCrumbs';
 
@@ -70,7 +70,6 @@ const Groups = styled.div`
 
 const RegisteredCustomers = styled.div`
   width: 260px;
-  height: 225px;
   margin-left: 20px;
   display: flex;
   flex-wrap: wrap;
@@ -107,7 +106,7 @@ const TextBold = styled.span`
 const Label = styled.label<{error?: boolean}>`
   position: relative;
   height: 45px;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   display: grid;
   align-content: space-between;
   font-family: var(--font-second);
@@ -143,31 +142,16 @@ const ButtonPreset: string = `
 
 const ButtonLogin = styled.button`
   ${ButtonPreset}
-  width: 112px;
+  width: 254px;
   border: none;
   cursor: pointer;
 
   &:hover {background: var(--color-button-solid-hover)}
 `;
 
-const ButtonUnderline = styled.button`
-  width: 125px;
-  height: 10px;
-  margin-left: 20px;
-  font-family: var(--font-regular);
-  font-size: 11px;
-  line-height: 1.2;
-  font-weight: 400;
-  text-decoration: underline;
-  color: var(--color-text-main);
-  background: transparent;
-  border: none;
-  cursor: pointer;
-`;
-
 const NewCustomers = styled.div`
   width: 255px;
-  height: 165px;
+  height: 175px;
   margin-right: 20px;
   display: flex;
   flex-wrap: wrap;
@@ -193,7 +177,7 @@ const Error = styled.span`
   left: 0;
   font-family: var(--font-regular);
   font-size: 11px;
-  color: #f00;
+  color: var(--color-input-error);
 `;
 
 const LogOutWrapper = styled.div`
@@ -219,13 +203,35 @@ const ButtonLogOut = styled.button`
 const Login = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const [emailNew, setEmailNew] = useState<string>('');
-  const [emailNewError, setEmailNewError] = useState<boolean>(false);
-  
-  const accountActiveId = useAppSelector(
+
+  const accounts: IAccount[] = useAppSelector(state => state.account.accounts);
+  const accountActiveId: number = useAppSelector(
     state => state.account.accounts
       .findIndex((account: IAccount): boolean => account.isActive)
   );
+
+  const [email, setEmail] = useState<string>('');
+  const [emailError, setEmailError] = useState<boolean>(false);
+  const [existEmailError, setExistEmailError] = useState<boolean>(false);
+
+  const [password, setPassword] = useState<string>('');
+  const [passwordError, setPasswordError] = useState<boolean>(false);
+  const [invalidPassword, setInvalidPassword] = useState<boolean>(false);
+
+  const [newEmail, setNewEmail] = useState<string>('');
+  const [newEmailError, setNewEmailError] = useState<boolean>(false);
+
+  type Form = React.FormEvent<HTMLFormElement>;
+  type Change = React.ChangeEvent<HTMLInputElement>;
+  type Focus = React.FocusEvent<HTMLInputElement>;
+
+  useEffect((): void => {
+    if (passwordError || existEmailError) setInvalidPassword(false);
+    if (emailError) {
+      setExistEmailError(false);
+      setInvalidPassword(false);
+    }
+  }, [emailError, existEmailError, passwordError, invalidPassword]);
 
   
   return(
@@ -256,19 +262,77 @@ const Login = (): JSX.Element => {
                   Please log in below:
                 </Text>
 
-                <form onSubmit={(e: React.FormEvent<HTMLFormElement>): void => e.preventDefault()}>
-                  <Label>
+                <form
+                  noValidate
+                  onSubmit={(e: Form): void => {
+                    e.preventDefault();
+                    const existAccountId: number = accounts
+                      .findIndex((account: IAccount): boolean => account.email === email);
+
+                    if (e.currentTarget.checkValidity()) {
+                      if (existAccountId !== -1) {
+                        setExistEmailError(false);
+                        accounts[existAccountId].password === password ?
+                          setInvalidPassword(false) : setInvalidPassword(true);
+                      } else setExistEmailError(true);
+ 
+                      if (existAccountId !== -1 && accounts[existAccountId].password === password) {
+                        dispatch(accountLogIn(existAccountId));
+                        navigate('/my-account');
+                      }
+                    }
+                  }}
+                >
+                  <Label error={emailError || existEmailError}>
                     E-MAIL*
-                    <input type='email' required />
+                    <input
+                      type='email'
+                      pattern='.+@.+\..+'
+                      required
+                      value={email}
+
+                      onChange={(e: Change): void => {
+                        setEmail(e.target.value);
+                        e.target.validity.valid && setEmailError(false);
+                      }}
+
+                      onBlur={(e: Focus): void => {
+                        if (email && !e.target.validity.valid) setEmailError(true);
+                      }}
+
+                      onInvalid={(): void => setEmailError(true)}
+                    />
+                    <Error>
+                      {emailError && 'Enter a valid email'}
+                      {existEmailError && 'Email does not exist'}
+                    </Error>
                   </Label>
 
-                  <Label>
+                  <Label error={passwordError || invalidPassword}>
                     PASSWORD*
-                    <input type='password' required />
+                    <input
+                      type='password'
+                      required
+                      value={password}
+
+                      onChange={(e: Change): void => {
+                        setPassword(e.target.value);
+                        e.target.validity.valid && setPasswordError(false);
+                      }}
+
+                      onBlur={(e: Focus): void => {
+                        if (password && !e.target.validity.valid) setEmailError(true);
+                      }}
+
+                      onInvalid={(): void => setPasswordError(true)}
+                    />
+                    <Error>
+                      {passwordError && 'Enter password'}
+                      {invalidPassword && 'Invalid password'}
+                    </Error>
                   </Label>
 
                   <ButtonLogin>LOGIN</ButtonLogin>
-                  <ButtonUnderline type='button'>Forgot your password?</ButtonUnderline>
                 </form>
               </RegisteredCustomers>
 
@@ -281,35 +345,35 @@ const Login = (): JSX.Element => {
 
                 <form
                   noValidate
-                  onSubmit={(e: React.FormEvent<HTMLFormElement>): void => {
+                  onSubmit={(e: Form): void => {
                     e.preventDefault();
                     if (e.currentTarget.checkValidity()) {
-                      dispatch(accountSetNewEmail(emailNew));
+                      dispatch(accountSetNewEmail(newEmail));
                       navigate('/create-account');
                     }
                   }}
                 >
-                  <Label error={emailNewError}>
+                  <Label error={newEmailError}>
                     E-MAIL*
                     <input
                       type='email'
                       pattern='.+@.+\..+'
                       required
                       placeholder='your@email.com'
-                      value={emailNew}
+                      value={newEmail}
 
-                      onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
-                        setEmailNew(e.target.value);
-                        e.target.validity.valid && setEmailNewError(false);
+                      onChange={(e: Change): void => {
+                        setNewEmail(e.target.value);
+                        e.target.validity.valid && setNewEmailError(false);
                       }}
                       
-                      onBlur={(e: React.FocusEvent<HTMLInputElement>): void => {
-                        if (emailNew && !e.target.validity.valid) setEmailNewError(true);
+                      onBlur={(e: Focus): void => {
+                        if (newEmail && !e.target.validity.valid) setNewEmailError(true);
                       }}
 
-                      onInvalid={(): void => setEmailNewError(true)}
+                      onInvalid={(): void => setNewEmailError(true)}
                     />
-                    <Error>{emailNewError && 'Please enter a valid email address'}</Error>
+                    <Error>{newEmailError && 'Enter a valid email'}</Error>
                   </Label>
 
                   <ButtonCreateAccount type='submit'>CREATE AN ACCOUNT</ButtonCreateAccount>
@@ -324,7 +388,7 @@ const Login = (): JSX.Element => {
                   if (accountActiveId !== -1) dispatch(accountLogOut(accountActiveId));
                 }}
               >
-                LOG OUT
+                LOGOUT
               </ButtonLogOut>
             </LogOutWrapper>
           }
