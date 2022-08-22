@@ -550,7 +550,10 @@ const MyAccount = (): JSX.Element => {
   const [confirmNewPassword, setConfirmNewPassword] = useState<string>('');
   const [confirmNewPasswordError, setConfirmNewPasswordError] = useState<boolean>(false);
 
-  const [newsletterSubscription, setNewsletterSubscription] = useState<boolean>(true);
+  const [
+    newsletterSubscription,
+    setNewsletterSubscription
+  ] = useState<boolean>(account?.newsletterSubscription);
 
   type Change = React.ChangeEvent<HTMLInputElement>;
   type Focus = React.FocusEvent<HTMLInputElement>;
