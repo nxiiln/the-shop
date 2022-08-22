@@ -36,6 +36,10 @@ export const accountSlice = createSlice({
       account.newsletterSubscription = action.payload.newsletterSubscription;
     },
 
+    accountLogIn: (state, action: PayloadAction<number>): void => {
+      state.accounts[action.payload].isActive = true;
+    },
+
     accountLogOut: (state, action: PayloadAction<number>): void => {
       state.accounts[action.payload].isActive = false;
     }
@@ -47,6 +51,7 @@ export const {
   accountSetNewEmail,
   accountCreate,
   accountChangeMyPersonalInfo,
+  accountLogIn,
   accountLogOut
 } = accountSlice.actions;
 
