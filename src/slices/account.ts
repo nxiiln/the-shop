@@ -34,10 +34,20 @@ export const accountSlice = createSlice({
       account.email = action.payload.email;
       account.password = action.payload.password;
       account.newsletterSubscription = action.payload.newsletterSubscription;
+    },
+
+    accountLogOut: (state, action: PayloadAction<number>): void => {
+      state.accounts[action.payload].isActive = false;
     }
   }
 });
 
 
-export const {accountSetNewEmail, accountCreate, accountChangeMyPersonalInfo} = accountSlice.actions;
+export const {
+  accountSetNewEmail,
+  accountCreate,
+  accountChangeMyPersonalInfo,
+  accountLogOut
+} = accountSlice.actions;
+
 export default accountSlice.reducer;
