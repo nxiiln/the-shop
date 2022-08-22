@@ -2,8 +2,9 @@ import {useState} from 'react';
 import styled from 'styled-components/macro';
 import {smallScreen} from '../mediaQueries';
 import {Link, useNavigate} from 'react-router-dom';
-import {useAppDispatch} from '../redux-hooks';
-import {accountSetNewEmail} from '../slices/account';
+import {useAppDispatch, useAppSelector} from '../redux-hooks';
+import {accountLogOut, accountSetNewEmail} from '../slices/account';
+import {IAccount} from '../types/IAccount';
 import BreadCrumbs from './BreadCrumbs';
 
 
@@ -24,7 +25,6 @@ const WrapperInner = styled.div`
 
 const UserLogin = styled.div`
   width: 675px;
-  height: 345px;
   align-self: center;
   display: flex;
   flex-wrap: wrap;
@@ -34,7 +34,6 @@ const UserLogin = styled.div`
   @media ${smallScreen} {
     width: 100%;
     max-width: 675px;
-    height: 560px;
     flex-wrap: nowrap;
     flex-direction: column;
     justify-content: start;
@@ -59,13 +58,12 @@ const Title = styled.h2`
 
 const Groups = styled.div`
   width: 100%;
+  padding: 30px 0;
   display: flex;
   justify-content: space-between;
 
   @media ${smallScreen} {
-    height: 100%;
     flex-direction: column-reverse;
-    justify-content: space-around;
     align-items: center;
   }
 `;
@@ -174,7 +172,7 @@ const NewCustomers = styled.div`
   display: flex;
   flex-wrap: wrap;
 
-  @media ${smallScreen} {margin: 0}
+  @media ${smallScreen} {margin: 0 0 60px 0}
 `;
 
 const ButtonCreateAccount = styled.button`
@@ -198,6 +196,23 @@ const Error = styled.span`
   color: #f00;
 `;
 
+const LogOutWrapper = styled.div`
+  width: 100%;
+  padding: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const ButtonLogOut = styled.button`
+  ${ButtonPreset}
+  width: 200px;
+  margin: 0;
+  cursor: pointer;
+
+  &:hover {background: var(--color-button-solid-hover)}
+`;
+
 
 
 
@@ -206,7 +221,13 @@ const Login = (): JSX.Element => {
   const navigate = useNavigate();
   const [emailNew, setEmailNew] = useState<string>('');
   const [emailNewError, setEmailNewError] = useState<boolean>(false);
+  
+  const accountActiveId = useAppSelector(
+    state => state.account.accounts
+      .findIndex((account: IAccount): boolean => account.isActive)
+  );
 
+  
   return(
     <WrapperOuter>
       <WrapperInner>
@@ -226,74 +247,87 @@ const Login = (): JSX.Element => {
             <Title>USER LOGIN</Title>
           </TitleWrapper>
           
-          <Groups>
-            <RegisteredCustomers>
-              <TextUp>REGISTERED CUSTOMERS</TextUp>
-              <Text>
-                <TextBold>Already registered? </TextBold>
-                Please log in below:
-              </Text>
+          {accountActiveId === - 1 ?
+            <Groups>
+              <RegisteredCustomers>
+                <TextUp>REGISTERED CUSTOMERS</TextUp>
+                <Text>
+                  <TextBold>Already registered? </TextBold>
+                  Please log in below:
+                </Text>
 
-              <form onSubmit={(e: React.FormEvent<HTMLFormElement>): void => e.preventDefault()}>
-                <Label>
-                  E-MAIL*
-                  <input type='email' required />
-                </Label>
+                <form onSubmit={(e: React.FormEvent<HTMLFormElement>): void => e.preventDefault()}>
+                  <Label>
+                    E-MAIL*
+                    <input type='email' required />
+                  </Label>
 
-                <Label>
-                  PASSWORD*
-                  <input type='password' required />
-                </Label>
+                  <Label>
+                    PASSWORD*
+                    <input type='password' required />
+                  </Label>
 
-                <ButtonLogin>LOGIN</ButtonLogin>
-                <ButtonUnderline type='button'>Forgot your password?</ButtonUnderline>
-              </form>
-            </RegisteredCustomers>
+                  <ButtonLogin>LOGIN</ButtonLogin>
+                  <ButtonUnderline type='button'>Forgot your password?</ButtonUnderline>
+                </form>
+              </RegisteredCustomers>
 
 
-            <NewCustomers>
-              <TextUp>NEW CUSTOMERS</TextUp>
-              <Text>
-                <TextBold>Enter your email address to create an account:</TextBold>
-              </Text>
+              <NewCustomers>
+                <TextUp>NEW CUSTOMERS</TextUp>
+                <Text>
+                  <TextBold>Enter your email address to create an account:</TextBold>
+                </Text>
 
-              <form
-                noValidate
-                onSubmit={(e: React.FormEvent<HTMLFormElement>): void => {
-                  e.preventDefault();
-                  if (e.currentTarget.checkValidity()) {
-                    dispatch(accountSetNewEmail(emailNew));
-                    navigate('/create-account');
-                  }
+                <form
+                  noValidate
+                  onSubmit={(e: React.FormEvent<HTMLFormElement>): void => {
+                    e.preventDefault();
+                    if (e.currentTarget.checkValidity()) {
+                      dispatch(accountSetNewEmail(emailNew));
+                      navigate('/create-account');
+                    }
+                  }}
+                >
+                  <Label error={emailNewError}>
+                    E-MAIL*
+                    <input
+                      type='email'
+                      pattern='.+@.+\..+'
+                      required
+                      placeholder='your@email.com'
+                      value={emailNew}
+
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
+                        setEmailNew(e.target.value);
+                        e.target.validity.valid && setEmailNewError(false);
+                      }}
+                      
+                      onBlur={(e: React.FocusEvent<HTMLInputElement>): void => {
+                        if (emailNew && !e.target.validity.valid) setEmailNewError(true);
+                      }}
+
+                      onInvalid={(): void => setEmailNewError(true)}
+                    />
+                    <Error>{emailNewError && 'Please enter a valid email address'}</Error>
+                  </Label>
+
+                  <ButtonCreateAccount type='submit'>CREATE AN ACCOUNT</ButtonCreateAccount>
+                </form>
+              </NewCustomers>
+            </Groups>
+          :
+            <LogOutWrapper>
+              <ButtonLogOut
+                type='button'
+                onClick={(): void => {
+                  if (accountActiveId !== -1) dispatch(accountLogOut(accountActiveId));
                 }}
               >
-                <Label error={emailNewError}>
-                  E-MAIL*
-                  <input
-                    type='email'
-                    pattern='.+@.+\..+'
-                    required
-                    placeholder='your@email.com'
-                    value={emailNew}
-
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
-                      setEmailNew(e.target.value);
-                      e.target.validity.valid && setEmailNewError(false);
-                    }}
-                    
-                    onBlur={(e: React.FocusEvent<HTMLInputElement>): void => {
-                      if (emailNew && !e.target.validity.valid) setEmailNewError(true);
-                    }}
-
-                    onInvalid={(): void => setEmailNewError(true)}
-                  />
-                  <Error>{emailNewError && 'Please enter a valid email address'}</Error>
-                </Label>
-
-                <ButtonCreateAccount type='submit'>CREATE AN ACCOUNT</ButtonCreateAccount>
-              </form>
-            </NewCustomers>
-          </Groups>
+                LOG OUT
+              </ButtonLogOut>
+            </LogOutWrapper>
+          }
         </UserLogin>
       </WrapperInner>
     </WrapperOuter>
