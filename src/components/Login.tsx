@@ -222,9 +222,9 @@ const Login = (): JSX.Element => {
   const [newEmailError, setNewEmailError] = useState<boolean>(false);
   const [registeredEmailError, setRegisteredEmailError] = useState<boolean>(false);
 
-  type Form = React.FormEvent<HTMLFormElement>;
-  type Change = React.ChangeEvent<HTMLInputElement>;
-  type Focus = React.FocusEvent<HTMLInputElement>;
+  type TForm = React.FormEvent<HTMLFormElement>;
+  type TChange = React.ChangeEvent<HTMLInputElement>;
+  type TFocus = React.FocusEvent<HTMLInputElement>;
 
   useEffect((): void => {
     if (emailError) {
@@ -266,7 +266,7 @@ const Login = (): JSX.Element => {
 
                 <form
                   noValidate
-                  onSubmit={(e: Form): void => {
+                  onSubmit={(e: TForm): void => {
                     e.preventDefault();
                     const existAccountId: number = accounts
                       .findIndex((account: TAccount): boolean => account.email === email);
@@ -293,12 +293,12 @@ const Login = (): JSX.Element => {
                       required
                       value={email}
 
-                      onChange={(e: Change): void => {
+                      onChange={(e: TChange): void => {
                         setEmail(e.target.value);
                         e.target.validity.valid && setEmailError(false);
                       }}
 
-                      onBlur={(e: Focus): void => {
+                      onBlur={(e: TFocus): void => {
                         if (email && !e.target.validity.valid) setEmailError(true);
                       }}
 
@@ -317,12 +317,12 @@ const Login = (): JSX.Element => {
                       required
                       value={password}
 
-                      onChange={(e: Change): void => {
+                      onChange={(e: TChange): void => {
                         setPassword(e.target.value);
                         e.target.validity.valid && setPasswordError(false);
                       }}
 
-                      onBlur={(e: Focus): void => {
+                      onBlur={(e: TFocus): void => {
                         if (password && !e.target.validity.valid) setEmailError(true);
                       }}
 
@@ -347,7 +347,7 @@ const Login = (): JSX.Element => {
 
                 <form
                   noValidate
-                  onSubmit={(e: Form): void => {
+                  onSubmit={(e: TForm): void => {
                     e.preventDefault();
 
                     const registeredEmail: boolean = accounts
@@ -370,12 +370,12 @@ const Login = (): JSX.Element => {
                       placeholder='your@email.com'
                       value={newEmail}
 
-                      onChange={(e: Change): void => {
+                      onChange={(e: TChange): void => {
                         setNewEmail(e.target.value);
                         e.target.validity.valid && setNewEmailError(false);
                       }}
                       
-                      onBlur={(e: Focus): void => {
+                      onBlur={(e: TFocus): void => {
                         if (newEmail && !e.target.validity.valid) setNewEmailError(true);
                       }}
 
