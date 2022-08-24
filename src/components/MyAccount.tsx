@@ -186,14 +186,6 @@ const Required = styled.span`
   color: var(--color-text-main);
 `;
 
-const ChangesApplied = styled.div`
-  position: absolute;
-  top: 70px;
-  left: 100px;
-  font-family: var(--font-regular);
-  font-size: 12px;
-`;
-
 
 // OrderHystory
 const OrderHistory = styled.div`
@@ -711,9 +703,8 @@ const MyAccount = (): JSX.Element => {
       </LabelCheckbox>
 
       <ButtonUpdateWrapper>
-        <ButtonUpdate>UPDATE</ButtonUpdate>
+        <ButtonUpdate>{changesApplied ? 'UPDATE SAVED' : 'UPDATE'}</ButtonUpdate>
         <Required>*Required</Required>
-        <ChangesApplied>{changesApplied && 'Changes applied'}</ChangesApplied>
       </ButtonUpdateWrapper>
     </form>;
 
@@ -789,9 +780,8 @@ const MyAccount = (): JSX.Element => {
       </LabelText>
 
       <ButtonUpdateWrapper>
-        <ButtonUpdate>UPDATE</ButtonUpdate>
+        <ButtonUpdate>{changesApplied ? 'UPDATE SAVED' : 'UPDATE'}</ButtonUpdate>
         <Required>*Required</Required>
-        <ChangesApplied>{changesApplied && 'Changes applied'}</ChangesApplied>
       </ButtonUpdateWrapper>
     </form>;
   
