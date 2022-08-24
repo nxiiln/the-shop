@@ -1,6 +1,6 @@
-import {IAccount} from './IAccount';
+import {TAccount} from './TAccount';
 
 export interface IAccounts {
   newEmail: string;
-  accounts: IAccount[];
+  accounts: TAccount[];
 }

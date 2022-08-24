@@ -4,7 +4,7 @@ import {mediumScreen, useMediaQuery} from '../mediaQueries';
 import {HashLink} from 'react-router-hash-link';
 import CartPreview from './CartPreview';
 import {useAppSelector} from '../redux-hooks';
-import {IAccount} from '../types/IAccount';
+import {TAccount} from '../types/TAccount';
 
 
 
@@ -148,7 +148,7 @@ const Top = (): JSX.Element => {
   
   const activeAccount: boolean = useAppSelector(
     state => state.account.accounts
-      .findIndex((account: IAccount): boolean => account.isActive) !== -1
+      .findIndex((account: TAccount): boolean => account.isActive) !== -1
   );
 
 

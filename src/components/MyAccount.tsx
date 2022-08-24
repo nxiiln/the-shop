@@ -3,9 +3,9 @@ import styled from 'styled-components/macro';
 import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
 import {Link} from 'react-router-dom';
 import BreadCrumbs from './BreadCrumbs';
-import { useAppDispatch, useAppSelector } from '../redux-hooks';
-import { IAccount } from '../types/IAccount';
-import { accountChangeMyPersonalInfo } from '../slices/account';
+import {useAppDispatch, useAppSelector} from '../redux-hooks';
+import {TAccount} from '../types/TAccount';
+import {accountChangeMyPersonalInfo} from '../slices/account';
 
 
 
@@ -534,7 +534,7 @@ const MyAccount = (): JSX.Element => {
 
   const stateAccount = useAppSelector(state => state.account);
   const accountId = stateAccount.accounts
-    .findIndex((account: IAccount): boolean => account.isActive);
+    .findIndex((account: TAccount): boolean => account.isActive);
   const account = stateAccount.accounts[accountId];
 
   const [firstName, setFirstName] = useState<string>(account?.firstName || '');

@@ -16,13 +16,13 @@ import Blog from './Blog';
 import BlogPost from './BlogPost';
 import PageNotFound from './404';
 import {useAppSelector} from '../redux-hooks';
-import {IAccount} from '../types/IAccount';
+import {TAccount} from '../types/TAccount';
 
 
 const App = (): JSX.Element => {
   const activeAccount: boolean = useAppSelector(
     state => state.account.accounts
-      .findIndex((account: IAccount): boolean => account.isActive)!== -1
+      .findIndex((account: TAccount): boolean => account.isActive)!== -1
   );
 
   return(

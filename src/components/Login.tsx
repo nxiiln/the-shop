@@ -4,7 +4,7 @@ import {smallScreen} from '../mediaQueries';
 import {Link, useNavigate} from 'react-router-dom';
 import {useAppDispatch, useAppSelector} from '../redux-hooks';
 import {accountLogIn, accountLogOut, accountSetNewEmail} from '../slices/account';
-import {IAccount} from '../types/IAccount';
+import {TAccount} from '../types/TAccount';
 import BreadCrumbs from './BreadCrumbs';
 
 
@@ -204,10 +204,10 @@ const Login = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const accounts: IAccount[] = useAppSelector(state => state.account.accounts);
+  const accounts: TAccount[] = useAppSelector(state => state.account.accounts);
   const activeAccountId: number = useAppSelector(
     state => state.account.accounts
-      .findIndex((account: IAccount): boolean => account.isActive)
+      .findIndex((account: TAccount): boolean => account.isActive)
   );
 
   const [email, setEmail] = useState<string>('');
@@ -269,7 +269,7 @@ const Login = (): JSX.Element => {
                   onSubmit={(e: Form): void => {
                     e.preventDefault();
                     const existAccountId: number = accounts
-                      .findIndex((account: IAccount): boolean => account.email === email);
+                      .findIndex((account: TAccount): boolean => account.email === email);
 
                     if (e.currentTarget.checkValidity()) {
                       if (existAccountId !== -1) {
@@ -351,7 +351,7 @@ const Login = (): JSX.Element => {
                     e.preventDefault();
 
                     const registeredEmail: boolean = accounts
-                      .findIndex((account: IAccount): boolean => account.email === newEmail) !== -1;
+                      .findIndex((account: TAccount): boolean => account.email === newEmail) !== -1;
 
                     if (e.currentTarget.checkValidity()) {
                       if (!registeredEmail) {
