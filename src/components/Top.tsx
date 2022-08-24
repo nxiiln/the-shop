@@ -3,6 +3,8 @@ import styled from 'styled-components/macro';
 import {mediumScreen, useMediaQuery} from '../mediaQueries';
 import {HashLink} from 'react-router-hash-link';
 import CartPreview from './CartPreview';
+import {useAppSelector} from '../redux-hooks';
+import {IAccount} from '../types/IAccount';
 
 
 
@@ -143,6 +145,11 @@ const Top = (): JSX.Element => {
   const [currencyOpen, setCurrencyOpen] = useState<boolean>(false);
   const [isUsd, setIsUsd] = useState<boolean>(true);
   const screen = useMediaQuery();
+  
+  const activeAccount: boolean = useAppSelector(
+    state => state.account.accounts
+      .findIndex((account: IAccount): boolean => account.isActive) !== -1
+  );
 
 
   return(
@@ -211,7 +218,9 @@ const Top = (): JSX.Element => {
             <LinkUnderline to='my-account'>MY ACCOUNT</LinkUnderline>
             <LinkUnderline to='wish-list'>WISH LIST</LinkUnderline>
             <LinkUnderline to='checkout'>CHECKOUT</LinkUnderline>
-            <LinkUnderline to='login' withoutBorder>LOG IN</LinkUnderline>
+            <LinkUnderline to='login' withoutBorder>
+              {activeAccount ? 'LOG OUT' : 'LOG IN'}
+            </LinkUnderline>
           </div>
         }
 
