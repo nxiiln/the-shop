@@ -1,14 +1,8 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {IAccount} from '../types/IAccount';
 import {IAccounts} from '../types/IAccounts';
+import {IMyPersonalInfo} from '../types/IMyPersonalInfo';
 
-interface IMyPersonalInfo {
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-  newsletterSubscription: boolean;
-}
 
 const initialState: IAccounts = {newEmail: '', accounts: []};
 
