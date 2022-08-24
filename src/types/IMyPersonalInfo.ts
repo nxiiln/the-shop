@@ -1,4 +1,4 @@
-export interface IMyPersonalInfo {
+export interface IPersonalInfo {
   firstName: string;
   lastName: string;
   email: string;

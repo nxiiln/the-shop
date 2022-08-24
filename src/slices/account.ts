@@ -1,7 +1,7 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {IAccount} from '../types/IAccount';
 import {IAccounts} from '../types/IAccounts';
-import {IMyPersonalInfo} from '../types/IMyPersonalInfo';
+import {IPersonalInfo} from '../types/IMyPersonalInfo';
 
 
 const initialState: IAccounts = {newEmail: '', accounts: []};
@@ -18,7 +18,7 @@ export const accountSlice = createSlice({
       state.accounts.push(action.payload);
     },
 
-    accountChangeMyPersonalInfo: (state, action: PayloadAction<IMyPersonalInfo>): void => {
+    accountChangeMyPersonalInfo: (state, action: PayloadAction<IPersonalInfo>): void => {
       const account = state.accounts[state.accounts.findIndex(
         (account: IAccount): boolean => account.isActive
       )];
