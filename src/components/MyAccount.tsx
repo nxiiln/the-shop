@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 import BreadCrumbs from './BreadCrumbs';
 import {useAppDispatch, useAppSelector} from '../redux-hooks';
 import {TAccount} from '../types/TAccount';
-import {accountChangePersonalInfo} from '../slices/account';
+import {accountChangePersonalInfo, accountChangeAddressInfo} from '../slices/account';
 
 
 
@@ -555,6 +555,15 @@ const MyAccount = (): JSX.Element => {
     setNewsletterSubscription
   ] = useState<boolean>(account?.newsletterSubscription);
 
+  const [address1, setAddress1] = useState<string>(account?.address1 || '');
+  const [address2, setAddress2] = useState<string>(account?.address2 || '');
+  const [country, setCountry] = useState<string>(account?.country || '');
+  const [city, setCity] = useState<string>(account?.city || '');
+
+  const [zip, setZip] = useState<string>(account?.zip || '');
+  const [zipError, setZipError] = useState<boolean>(false);
+
+  type Submit = React.FormEvent<HTMLFormElement>;
   type Change = React.ChangeEvent<HTMLInputElement>;
   type Focus = React.FocusEvent<HTMLInputElement>;
 
@@ -569,7 +578,7 @@ const MyAccount = (): JSX.Element => {
   const myPersonalInfo: JSX.Element =
     <form
       noValidate
-      onSubmit={(e: React.FormEvent<HTMLFormElement>): void => {
+      onSubmit={(e: Submit): void => {
         e.preventDefault();
         if (accountId !== -1 && e.currentTarget.checkValidity() && !confirmNewPasswordError) {
           dispatch(accountChangePersonalInfo({
@@ -689,35 +698,69 @@ const MyAccount = (): JSX.Element => {
 
 
   const myAddresses: JSX.Element =
-    <form>
+    <form
+      noValidate
+      onSubmit={(e: Submit): void => {
+        if (e.currentTarget.checkValidity()) {
+          dispatch(accountChangeAddressInfo({
+            address1: address1,
+            address2: address2,
+            country: country,
+            city: city,
+            zip: zip
+          }));
+        }
+      }}
+    >
       <LabelText>
         ADDRESS 1
-        <input type='text' />
+        <input
+          type='text'
+          value={address1}
+          onChange={(e: Change): void => setAddress1(e.target.value)}
+        />
       </LabelText>
 
       <LabelText>
         ADDRESS 2
-        <input type='text' />
+        <input
+          type='text'
+          value={address2}
+          onChange={(e: Change): void => setAddress2(e.target.value)}
+        />
       </LabelText>
 
       <LabelText>
         COUNTRY
-        <input list='country' />
+        <input
+          type='text'
+          value={country}
+          onChange={(e: Change): void => setCountry(e.target.value)}
+        />
       </LabelText>
-      <datalist id='country'>
-        <option value='Russia' />
-        <option value='UK' />
-        <option value='USA' />
-      </datalist>
 
       <LabelText>
         CITY
-        <input type='text' />
+        <input
+          type='text'
+          value={city}
+          onChange={(e: Change): void => setCity(e.target.value)}
+        />
       </LabelText>
 
-      <LabelText>
+      <LabelText error={zipError}>
         ZIP / POSTAL CODE*
-        <input type='text' required />
+        <input
+          type='text'
+          required
+          value={zip}
+          onChange={(e: Change): void => {
+            setZip(e.target.value);
+            e.target.validity.valid && setZipError(false);
+          }}
+          onInvalid={(): void => setZipError(true)}
+        />
+        <Error>{zipError && 'Enter zip / postal code'}</Error>
       </LabelText>
 
       {!screen.small ?
