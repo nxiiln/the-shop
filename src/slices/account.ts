@@ -18,7 +18,7 @@ export const accountSlice = createSlice({
       state.accounts.push(action.payload);
     },
 
-    accountChangeMyPersonalInfo: (state, action: PayloadAction<IPersonalInfo>): void => {
+    accountChangePersonalInfo: (state, action: PayloadAction<IPersonalInfo>): void => {
       const account = state.accounts[state.accounts.findIndex(
         (account: TAccount): boolean => account.isActive
       )];
@@ -44,7 +44,7 @@ export const accountSlice = createSlice({
 export const {
   accountSetNewEmail,
   accountCreate,
-  accountChangeMyPersonalInfo,
+  accountChangePersonalInfo,
   accountLogIn,
   accountLogOut
 } = accountSlice.actions;

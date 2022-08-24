@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 import BreadCrumbs from './BreadCrumbs';
 import {useAppDispatch, useAppSelector} from '../redux-hooks';
 import {TAccount} from '../types/TAccount';
-import {accountChangeMyPersonalInfo} from '../slices/account';
+import {accountChangePersonalInfo} from '../slices/account';
 
 
 
@@ -572,7 +572,7 @@ const MyAccount = (): JSX.Element => {
       onSubmit={(e: React.FormEvent<HTMLFormElement>): void => {
         e.preventDefault();
         if (accountId !== -1 && e.currentTarget.checkValidity() && !confirmNewPasswordError) {
-          dispatch(accountChangeMyPersonalInfo({
+          dispatch(accountChangePersonalInfo({
             firstName: firstName,
             lastName: lastName,
             email: email,
