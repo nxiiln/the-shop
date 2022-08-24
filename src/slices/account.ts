@@ -30,6 +30,18 @@ export const accountSlice = createSlice({
       account.newsletterSubscription = action.payload.newsletterSubscription;
     },
 
+    accountChangeAddressInfo: (state, action): void => {
+      const account = state.accounts[state.accounts.findIndex(
+        (account: TAccount): boolean => account.isActive
+      )];
+
+      account.address1 = action.payload.address1;
+      account.address2 = action.payload.address2;
+      account.country = action.payload.country;
+      account.city = action.payload.city;
+      account.zip = action.payload.zip;
+    },
+
     accountLogIn: (state, action: PayloadAction<number>): void => {
       state.accounts[action.payload].isActive = true;
     },
@@ -45,6 +57,7 @@ export const {
   accountSetNewEmail,
   accountCreate,
   accountChangePersonalInfo,
+  accountChangeAddressInfo,
   accountLogIn,
   accountLogOut
 } = accountSlice.actions;
