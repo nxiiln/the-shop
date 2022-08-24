@@ -15,30 +15,39 @@ import Product from './Product';
 import Blog from './Blog';
 import BlogPost from './BlogPost';
 import PageNotFound from './404';
+import {useAppSelector} from '../redux-hooks';
+import {IAccount} from '../types/IAccount';
 
 
-const App = (): JSX.Element => (
-  <>
-    <Header />
-    <Routes>
-      <Route path='/' element={<Home />} />
-      <Route path='my-account' element={<MyAccount />} />
-      <Route path='wish-list' element={<WishList />} />
-      <Route path='checkout' element={<Checkout />} />
-      <Route path='login' element={<Login />} />
-      <Route path='create-account' element={<CreateAccount />} />
-      <Route path='cart' element={<Cart />} />
-      <Route path='catalog' element={<Catalog />} />
-      <Route path='catalog/:id' element={<Product />} />
-      <Route path='blog' element={<Blog />} />
-      <Route path='blog/:id' element={<BlogPost />} />
-      <Route path='*' element={<PageNotFound />} />
-    </Routes>
-    <TopBrand />
-    <PurchasesInfo />
-    <Footer />
-  </>
-);
+const App = (): JSX.Element => {
+  const activeAccount: boolean = useAppSelector(
+    state => state.account.accounts
+      .findIndex((account: IAccount): boolean => account.isActive)!== -1
+  );
+
+  return(
+    <>
+      <Header />
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='my-account' element={activeAccount ? <MyAccount /> : <Login />} />
+        <Route path='wish-list' element={<WishList />} />
+        <Route path='checkout' element={<Checkout />} />
+        <Route path='login' element={<Login />} />
+        <Route path='create-account' element={<CreateAccount />} />
+        <Route path='cart' element={<Cart />} />
+        <Route path='catalog' element={<Catalog />} />
+        <Route path='catalog/:id' element={<Product />} />
+        <Route path='blog' element={<Blog />} />
+        <Route path='blog/:id' element={<BlogPost />} />
+        <Route path='*' element={<PageNotFound />} />
+      </Routes>
+      <TopBrand />
+      <PurchasesInfo />
+      <Footer />
+    </>
+  );
+};
 
 
 export default App;
