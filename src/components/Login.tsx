@@ -205,7 +205,7 @@ const Login = (): JSX.Element => {
   const navigate = useNavigate();
 
   const accounts: IAccount[] = useAppSelector(state => state.account.accounts);
-  const accountActiveId: number = useAppSelector(
+  const activeAccountId: number = useAppSelector(
     state => state.account.accounts
       .findIndex((account: IAccount): boolean => account.isActive)
   );
@@ -220,18 +220,20 @@ const Login = (): JSX.Element => {
 
   const [newEmail, setNewEmail] = useState<string>('');
   const [newEmailError, setNewEmailError] = useState<boolean>(false);
+  const [registeredEmailError, setRegisteredEmailError] = useState<boolean>(false);
 
   type Form = React.FormEvent<HTMLFormElement>;
   type Change = React.ChangeEvent<HTMLInputElement>;
   type Focus = React.FocusEvent<HTMLInputElement>;
 
   useEffect((): void => {
-    if (passwordError || existEmailError) setInvalidPassword(false);
     if (emailError) {
       setExistEmailError(false);
       setInvalidPassword(false);
     }
-  }, [emailError, existEmailError, passwordError, invalidPassword]);
+    if (passwordError || existEmailError) setInvalidPassword(false);
+    if (newEmailError) setRegisteredEmailError(false);
+  }, [emailError, existEmailError, passwordError, invalidPassword, newEmailError]);
 
   
   return(
@@ -253,7 +255,7 @@ const Login = (): JSX.Element => {
             <Title>USER LOGIN</Title>
           </TitleWrapper>
           
-          {accountActiveId === - 1 ?
+          {activeAccountId === - 1 ?
             <Groups>
               <RegisteredCustomers>
                 <TextUp>REGISTERED CUSTOMERS</TextUp>
@@ -304,7 +306,7 @@ const Login = (): JSX.Element => {
                     />
                     <Error>
                       {emailError && 'Enter a valid email'}
-                      {existEmailError && 'Email does not exist'}
+                      {existEmailError && 'Account with this email address does not exist'}
                     </Error>
                   </Label>
 
@@ -347,13 +349,19 @@ const Login = (): JSX.Element => {
                   noValidate
                   onSubmit={(e: Form): void => {
                     e.preventDefault();
+
+                    const registeredEmail: boolean = accounts
+                      .findIndex((account: IAccount): boolean => account.email === newEmail) !== -1;
+
                     if (e.currentTarget.checkValidity()) {
-                      dispatch(accountSetNewEmail(newEmail));
-                      navigate('/create-account');
+                      if (!registeredEmail) {
+                        dispatch(accountSetNewEmail(newEmail));
+                        navigate('/create-account');
+                      } else setRegisteredEmailError(true);
                     }
                   }}
                 >
-                  <Label error={newEmailError}>
+                  <Label error={newEmailError || registeredEmailError}>
                     E-MAIL*
                     <input
                       type='email'
@@ -373,7 +381,10 @@ const Login = (): JSX.Element => {
 
                       onInvalid={(): void => setNewEmailError(true)}
                     />
-                    <Error>{newEmailError && 'Enter a valid email'}</Error>
+                    <Error>
+                      {newEmailError && 'Enter a valid email'}
+                      {registeredEmailError && 'Account with this email address exists'}
+                    </Error>
                   </Label>
 
                   <ButtonCreateAccount type='submit'>CREATE AN ACCOUNT</ButtonCreateAccount>
@@ -385,7 +396,7 @@ const Login = (): JSX.Element => {
               <ButtonLogOut
                 type='button'
                 onClick={(): void => {
-                  if (accountActiveId !== -1) dispatch(accountLogOut(accountActiveId));
+                  if (activeAccountId !== -1) dispatch(accountLogOut(activeAccountId));
                 }}
               >
                 LOGOUT
