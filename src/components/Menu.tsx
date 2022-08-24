@@ -4,6 +4,8 @@ import {smallScreen, mediumScreen, useMediaQuery} from '../mediaQueries';
 import {Link} from 'react-router-dom';
 import {HashLink} from 'react-router-hash-link';
 import imageMenuInner from '../images/imageMenuInner.png';
+import {useAppSelector} from '../redux-hooks';
+import {IAccount} from '../types/IAccount';
 
 
 
@@ -216,6 +218,11 @@ const Menu = (): JSX.Element => {
   const [dropdownMenu, setDropdownMenu] = useState<boolean>(false);
   const screen = useMediaQuery();
 
+  const activeAccount: boolean = useAppSelector(
+    state => state.account.accounts
+      .findIndex((account: IAccount): boolean => account.isActive) !== -1
+  );
+
   useEffect(() => {
     dropdownMenu ?
       document.body.style.overflowY = 'hidden' :
@@ -312,7 +319,7 @@ const Menu = (): JSX.Element => {
             <HashLink to={'/my-account#top'}>MY ACCOUNT</HashLink>
             <HashLink to={'/wish-list#top'}>WISH LIST</HashLink>
             <HashLink to={'/checkout#top'}>CHECKOUT</HashLink>
-            <HashLink to={'/login#top'}>LOG IN</HashLink>
+            <HashLink to={'/login#top'}>{activeAccount ? 'LOG OUT' : 'LOG IN'}</HashLink>
             <HashLink to={'/blog#top'}>BLOG</HashLink>
           </DropdownMenu>
         </>
