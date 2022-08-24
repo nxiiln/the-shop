@@ -165,6 +165,13 @@ const ButtonBlack = styled.button`
   &:hover {background: var(--color-button-solid-hover)}
 `;
 
+const ButtonUpdateWrapper = styled.div`
+  width: 255px;
+  position: relative;
+  display: flex;
+  align-items: baseline;
+`;
+
 const ButtonUpdate = styled(ButtonBlack)`
   width: 144px;
   height: 30px;
@@ -172,18 +179,25 @@ const ButtonUpdate = styled(ButtonBlack)`
 `;
 
 const Required = styled.span`
-  margin-left: 12px;
+  margin-left: 40px;
   font-family: var(--font-regular);
   font-size: 11px;
   font-weight: 400;
   color: var(--color-text-main);
 `;
 
+const ChangesApplied = styled.div`
+  position: absolute;
+  top: 70px;
+  left: 100px;
+  font-family: var(--font-regular);
+  font-size: 12px;
+`;
+
 
 // OrderHystory
 const OrderHistory = styled.div`
   width: 674px;
-  /* height: 645px; */
   margin-top: 48px;
 
   @media ${smallScreen} {
@@ -563,9 +577,11 @@ const MyAccount = (): JSX.Element => {
   const [zip, setZip] = useState<string>(account?.zip || '');
   const [zipError, setZipError] = useState<boolean>(false);
 
-  type Submit = React.FormEvent<HTMLFormElement>;
-  type Change = React.ChangeEvent<HTMLInputElement>;
-  type Focus = React.FocusEvent<HTMLInputElement>;
+  const [changesApplied, setChangesApplied] = useState<boolean>(false);
+
+  type TForm = React.FormEvent<HTMLFormElement>;
+  type TChange = React.ChangeEvent<HTMLInputElement>;
+  type TFocus = React.FocusEvent<HTMLInputElement>;
 
   useEffect((): void => {
     if (confirmNewPassword) {
@@ -574,12 +590,21 @@ const MyAccount = (): JSX.Element => {
     }
   }, [newPassword, confirmNewPassword, confirmNewPasswordError]);
 
+  useEffect((): void => {
+    if (changesApplied) {
+      setTimeout((): void => {
+        setChangesApplied(false);
+      }, 2000);
+    }
+  }, [changesApplied]);
+
 
   const myPersonalInfo: JSX.Element =
     <form
       noValidate
-      onSubmit={(e: Submit): void => {
+      onSubmit={(e: TForm): void => {
         e.preventDefault();
+
         if (accountId !== -1 && e.currentTarget.checkValidity() && !confirmNewPasswordError) {
           dispatch(accountChangePersonalInfo({
             firstName: firstName,
@@ -587,7 +612,9 @@ const MyAccount = (): JSX.Element => {
             email: email,
             password: newPassword ? newPassword : account.password,
             newsletterSubscription: newsletterSubscription
-          }))
+          }));
+
+          setChangesApplied(true);
         }
       }}
     >
@@ -597,7 +624,7 @@ const MyAccount = (): JSX.Element => {
           type='text'
           required
           value={firstName}
-          onChange={(e: Change): void => {
+          onChange={(e: TChange): void => {
             setFirstName(e.target.value);
             e.target.validity.valid && setFirstNameError(false);
           }}
@@ -612,7 +639,7 @@ const MyAccount = (): JSX.Element => {
           type='text'
           required
           value={lastName}
-          onChange={(e: Change): void => {
+          onChange={(e: TChange): void => {
             setLastName(e.target.value);
             e.target.validity.valid && setLastNameError(false);
           }}
@@ -630,12 +657,12 @@ const MyAccount = (): JSX.Element => {
           placeholder='your@email.com'
           value={email}
 
-          onChange={(e: Change): void => {
+          onChange={(e: TChange): void => {
             setEmail(e.target.value);
             e.target.validity.valid && setEmailError(false);
           }}
 
-          onBlur={(e: Focus): void => {
+          onBlur={(e: TFocus): void => {
             if (email && !e.target.validity.valid) setEmailError(true);
           }}
 
@@ -649,7 +676,7 @@ const MyAccount = (): JSX.Element => {
         <input
           type='password'
           value={newPassword}
-          onChange={(e: Change): void => setNewPassword(e.target.value)}
+          onChange={(e: TChange): void => setNewPassword(e.target.value)}
           onBlur={(): void => newPassword !== confirmNewPassword ?
             setConfirmNewPasswordError(true) : setConfirmNewPasswordError(false)
           }
@@ -662,7 +689,7 @@ const MyAccount = (): JSX.Element => {
           type='password'
           value={confirmNewPassword}
 
-          onChange={(e: Change): void => {
+          onChange={(e: TChange): void => {
             setConfirmNewPassword(e.target.value);
             e.target.validity.valid && setConfirmNewPasswordError(false);
           }}
@@ -678,29 +705,25 @@ const MyAccount = (): JSX.Element => {
         <input
           type='checkbox'
           checked={newsletterSubscription}
-          onChange={(e: Change): void => setNewsletterSubscription(e.target.checked)}
+          onChange={(e: TChange): void => setNewsletterSubscription(e.target.checked)}
         />
         I WANT TO SUBSCRIBE TO THE NEWSLETTER
       </LabelCheckbox>
 
-      {!screen.small ?
-        <>
-          <ButtonUpdate>UPDATE</ButtonUpdate>
-          <Required>*Required</Required>
-        </>
-        :
-        <div>
-          <ButtonUpdate>UPDATE</ButtonUpdate>
-          <Required>*Required</Required>
-        </div>
-      }
+      <ButtonUpdateWrapper>
+        <ButtonUpdate>UPDATE</ButtonUpdate>
+        <Required>*Required</Required>
+        <ChangesApplied>{changesApplied && 'Changes applied'}</ChangesApplied>
+      </ButtonUpdateWrapper>
     </form>;
 
 
   const myAddresses: JSX.Element =
     <form
       noValidate
-      onSubmit={(e: Submit): void => {
+      onSubmit={(e: TForm): void => {
+        e.preventDefault();
+
         if (e.currentTarget.checkValidity()) {
           dispatch(accountChangeAddressInfo({
             address1: address1,
@@ -709,6 +732,8 @@ const MyAccount = (): JSX.Element => {
             city: city,
             zip: zip
           }));
+
+          setChangesApplied(true);
         }
       }}
     >
@@ -717,7 +742,7 @@ const MyAccount = (): JSX.Element => {
         <input
           type='text'
           value={address1}
-          onChange={(e: Change): void => setAddress1(e.target.value)}
+          onChange={(e: TChange): void => setAddress1(e.target.value)}
         />
       </LabelText>
 
@@ -726,7 +751,7 @@ const MyAccount = (): JSX.Element => {
         <input
           type='text'
           value={address2}
-          onChange={(e: Change): void => setAddress2(e.target.value)}
+          onChange={(e: TChange): void => setAddress2(e.target.value)}
         />
       </LabelText>
 
@@ -735,7 +760,7 @@ const MyAccount = (): JSX.Element => {
         <input
           type='text'
           value={country}
-          onChange={(e: Change): void => setCountry(e.target.value)}
+          onChange={(e: TChange): void => setCountry(e.target.value)}
         />
       </LabelText>
 
@@ -744,7 +769,7 @@ const MyAccount = (): JSX.Element => {
         <input
           type='text'
           value={city}
-          onChange={(e: Change): void => setCity(e.target.value)}
+          onChange={(e: TChange): void => setCity(e.target.value)}
         />
       </LabelText>
 
@@ -754,7 +779,7 @@ const MyAccount = (): JSX.Element => {
           type='text'
           required
           value={zip}
-          onChange={(e: Change): void => {
+          onChange={(e: TChange): void => {
             setZip(e.target.value);
             e.target.validity.valid && setZipError(false);
           }}
@@ -763,17 +788,11 @@ const MyAccount = (): JSX.Element => {
         <Error>{zipError && 'Enter zip / postal code'}</Error>
       </LabelText>
 
-      {!screen.small ?
-        <>
-          <ButtonUpdate>UPDATE</ButtonUpdate>
-          <Required>*Required</Required>
-        </>
-        :
-        <div>
-          <ButtonUpdate>UPDATE</ButtonUpdate>
-          <Required>*Required</Required>
-        </div>
-      }
+      <ButtonUpdateWrapper>
+        <ButtonUpdate>UPDATE</ButtonUpdate>
+        <Required>*Required</Required>
+        <ChangesApplied>{changesApplied && 'Changes applied'}</ChangesApplied>
+      </ButtonUpdateWrapper>
     </form>;
   
   
