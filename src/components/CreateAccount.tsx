@@ -222,8 +222,8 @@ const CreateAccount = (): JSX.Element => {
   const [zip, setZip] = useState<string>('');
   const [zipError, setZipError] = useState<boolean>(false);
 
-  type Change = React.ChangeEvent<HTMLInputElement>;
-  type Focus = React.FocusEvent<HTMLInputElement>;
+  type TChange = React.ChangeEvent<HTMLInputElement>;
+  type TFocus = React.FocusEvent<HTMLInputElement>;
 
   useEffect((): void => {
     if (confirmPassword) {
@@ -288,7 +288,7 @@ const CreateAccount = (): JSX.Element => {
                     type='text'
                     required
                     value={firstName}
-                    onChange={(e: Change): void => {
+                    onChange={(e: TChange): void => {
                       setFirstName(e.target.value);
                       e.target.validity.valid && setFirstNameError(false);
                     }}
@@ -303,7 +303,7 @@ const CreateAccount = (): JSX.Element => {
                     type='text'
                     required
                     value={lastName}
-                    onChange={(e: Change): void => {
+                    onChange={(e: TChange): void => {
                       setLastName(e.target.value);
                       e.target.validity.valid && setLastNameError(false);
                     }}
@@ -321,12 +321,12 @@ const CreateAccount = (): JSX.Element => {
                     placeholder='your@email.com'
                     value={email}
 
-                    onChange={(e: Change): void => {
+                    onChange={(e: TChange): void => {
                       setEmail(e.target.value);
                       e.target.validity.valid && setEmailError(false);
                     }}
 
-                    onBlur={(e: Focus): void => {
+                    onBlur={(e: TFocus): void => {
                       if (email && !e.target.validity.valid) setEmailError(true);
                     }}
 
@@ -342,7 +342,7 @@ const CreateAccount = (): JSX.Element => {
                     required
                     value={password}
 
-                    onChange={(e: Change): void => {
+                    onChange={(e: TChange): void => {
                       setPassword(e.target.value);
                       e.target.validity.valid && setPasswordError(false);
                     }}
@@ -361,7 +361,7 @@ const CreateAccount = (): JSX.Element => {
                   <input
                     type='password'
                     value={confirmPassword}
-                    onChange={(e: Change): void => setConfirmPassword(e.target.value)}
+                    onChange={(e: TChange): void => setConfirmPassword(e.target.value)}
                   />
                   <Error>{confirmPasswordError && 'Passwords do not match'}</Error>
                 </LabelText>
@@ -386,7 +386,7 @@ const CreateAccount = (): JSX.Element => {
                   <input
                     type='text'
                     value={address1}
-                    onChange={(e: Change): void => setAddress1(e.target.value)}
+                    onChange={(e: TChange): void => setAddress1(e.target.value)}
                   />
                 </LabelText>
 
@@ -395,7 +395,7 @@ const CreateAccount = (): JSX.Element => {
                   <input
                     type='text'
                     value={address2}
-                    onChange={(e: Change): void => setAddress2(e.target.value)}
+                    onChange={(e: TChange): void => setAddress2(e.target.value)}
                   />
                 </LabelText>
 
@@ -404,7 +404,7 @@ const CreateAccount = (): JSX.Element => {
                   <input
                     type='text'
                     value={country}
-                    onChange={(e: Change): void => setCountry(e.target.value)}
+                    onChange={(e: TChange): void => setCountry(e.target.value)}
                   />
                 </LabelText>
 
@@ -413,7 +413,7 @@ const CreateAccount = (): JSX.Element => {
                   <input
                     type='text'
                     value={city}
-                    onChange={(e: Change): void => setCity(e.target.value)}
+                    onChange={(e: TChange): void => setCity(e.target.value)}
                   />
                 </LabelText>
 
@@ -423,7 +423,7 @@ const CreateAccount = (): JSX.Element => {
                     type='text'
                     required
                     value={zip}
-                    onChange={(e: Change): void => {
+                    onChange={(e: TChange): void => {
                       setZip(e.target.value);
                       e.target.validity.valid && setZipError(false);
                     }}
@@ -439,7 +439,7 @@ const CreateAccount = (): JSX.Element => {
                   <input
                     type='checkbox'
                     checked={newsletterSubscription}
-                    onChange={(e: Change): void => setNewsletterSubscription(e.target.checked)}
+                    onChange={(e: TChange): void => setNewsletterSubscription(e.target.checked)}
                   />
                   I WANT TO SUBSCRIBE TO THE NEWSLETTER
                 </LabelCheckbox>
