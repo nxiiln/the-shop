@@ -4,6 +4,7 @@ import wishListReducer from './slices/wishList';
 import productRatingReducer from './slices/productRating';
 import quickViewReducer from './slices/quickView';
 import accountReducer from './slices/account';
+import checkoutReducer from './slices/checkout';
 
 
 export const store = configureStore({
@@ -13,6 +14,7 @@ export const store = configureStore({
     productRating: productRatingReducer,
     quickView: quickViewReducer,
     account: accountReducer,
+    checkout: checkoutReducer
   }
 });
 
