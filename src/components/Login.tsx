@@ -281,6 +281,7 @@ const Login = (): JSX.Element => {
                       if (existAccountId !== -1 && accounts[existAccountId].password === password) {
                         dispatch(accountLogIn(existAccountId));
                         navigate('/my-account');
+                        window.scroll(0, 0);
                       }
                     }
                   }}
@@ -357,6 +358,7 @@ const Login = (): JSX.Element => {
                       if (!registeredEmail) {
                         dispatch(accountSetNewEmail(newEmail));
                         navigate('/create-account');
+                        window.scroll(0, 0);
                       } else setRegisteredEmailError(true);
                     }
                   }}

@@ -224,7 +224,12 @@ const CheckoutStep1 = (): JSX.Element => {
 
         <form onSubmit={(e: React.FormEvent<HTMLFormElement>): void => {
           e.preventDefault();
-          newCustomers === 'register' ? navigate('/login') : dispatch(checkoutSetStep(2));
+          
+          if (newCustomers === 'register') {
+            navigate('/login');
+            dispatch(checkoutSetStep(2));
+            window.scroll(0, 0);
+          }
         }}>
           <LabelRadio inputMargin='0 10px 0 0'>
             <input
