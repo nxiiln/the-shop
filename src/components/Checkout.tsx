@@ -68,11 +68,12 @@ const Steps = styled.article`
   @media ${mediumScreen}, ${smallScreen} {width: 100%}
 `;
 
-const TitleWrapperOuter = styled.div<{status: boolean, off?: boolean}>`
+const TitleWrapper = styled.div<{status: boolean, off?: boolean}>`
   width: 675px;
   height: 50px;
+  padding: 0 3%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   border: 1px solid var(--color-border);
   user-select: none;
@@ -84,14 +85,6 @@ const TitleWrapperOuter = styled.div<{status: boolean, off?: boolean}>`
   `}
 
   @media ${mediumScreen}, ${smallScreen} {width: 100%}
-`;
-
-const TitleWrapperInner = styled.div`
-  width: 94%;
-  height: 18px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 `;
 
 const Title = styled.span<{status: boolean}>`
@@ -513,18 +506,16 @@ const Checkout = (): JSX.Element => {
             {screen.big ? <AlsoLove /> : <CartCheckout />}
 
             <Steps>
-              <TitleWrapperOuter
+              <TitleWrapper
                 status={step === 1}
                 off={activeAccountId !== -1}
                 onClick={(): void => {
                   activeAccountId === -1 && setStep(1);
                 }}
               >
-                <TitleWrapperInner>
-                  <Title status={step === 1}>01. CHECKOUT</Title>
-                  {step === 1 && <Required>*Required</Required>}
-                </TitleWrapperInner>
-              </TitleWrapperOuter>
+                <Title status={step === 1}>01. CHECKOUT</Title>
+                {step === 1 && <Required>*Required</Required>}
+              </TitleWrapper>
 
               {step === 1 &&
                 <Step1>
@@ -649,18 +640,16 @@ const Checkout = (): JSX.Element => {
               }
 
 
-              <TitleWrapperOuter
+              <TitleWrapper
                 status={step === 2}
                 off={activeAccountId !== -1}
                 onClick={(): void => {
                   activeAccountId === -1 && setStep(2);
                 }}
               >
-                <TitleWrapperInner>
-                  <Title status={step === 2}>02. BILLING INFO</Title>
-                  {step === 2 && <Required>*Required</Required>}
-                </TitleWrapperInner>
-              </TitleWrapperOuter>
+                <Title status={step === 2}>02. BILLING INFO</Title>
+                {step === 2 && <Required>*Required</Required>}
+              </TitleWrapper>
 
               {step === 2 &&
                 <Step2>
@@ -797,15 +786,13 @@ const Checkout = (): JSX.Element => {
               }
 
 
-              <TitleWrapperOuter
+              <TitleWrapper
                 status={step === 3}
                 onClick={(): void => setStep(3)}
               >
-                <TitleWrapperInner>
-                  <Title status={step === 3}>03. SHIPPING METHOD</Title>
-                  {step === 3 && <Required>*Required</Required>}
-                </TitleWrapperInner>
-              </TitleWrapperOuter>
+                <Title status={step === 3}>03. SHIPPING METHOD</Title>
+                {step === 3 && <Required>*Required</Required>}
+              </TitleWrapper>
 
               {step === 3 &&
                 <Step3>
@@ -872,15 +859,13 @@ const Checkout = (): JSX.Element => {
               }
 
 
-              <TitleWrapperOuter
+              <TitleWrapper
                 status={step === 4}
                 onClick={(): void => setStep(4)}
               >
-                <TitleWrapperInner>
-                  <Title status={step === 4}>04. PAYMENT</Title>
-                  {step === 4 && <Required>*Required</Required>}
-                </TitleWrapperInner>
-              </TitleWrapperOuter>
+                <Title status={step === 4}>04. PAYMENT</Title>
+                {step === 4 && <Required>*Required</Required>}
+              </TitleWrapper>
 
               {step === 4 &&
                 <Step4>
@@ -1019,15 +1004,13 @@ const Checkout = (): JSX.Element => {
               }
 
 
-              <TitleWrapperOuter
+              <TitleWrapper
                 status={step === 5}
                 onClick={(): void => setStep(5)}
               >
-                <TitleWrapperInner>
-                  <Title status={step === 5}>05. ORDER REVIEW</Title>
-                  {step === 5 && <Required>*Required</Required>}
-                </TitleWrapperInner>
-              </TitleWrapperOuter>
+                <Title status={step === 5}>05. ORDER REVIEW</Title>
+                {step === 5 && <Required>*Required</Required>}
+              </TitleWrapper>
 
               {step === 5 &&
                 <Step5>
