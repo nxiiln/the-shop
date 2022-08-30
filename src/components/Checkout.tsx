@@ -9,7 +9,7 @@ import {TAccount} from '../types/TAccount';
 import BreadCrumbs from './BreadCrumbs';
 import AlsoLove from './AlsoLove';
 import CartCheckout from './CartCheckout';
-import {LabelText, LabelRadio} from './Labels';
+import {LabelText, LabelRadio, LabelError} from './Labels';
 import visaIcon from '../images/visaIcon.png';
 import masterCardIcon from '../images/masterCardIcon.png';
 import discoverIcon from '../images/discoverIcon.png';
@@ -116,15 +116,6 @@ const ButtonBlack = styled.button`
   cursor: pointer;
 
   &:hover {background: var(--color-button-solid-hover)}
-`;
-
-const Error = styled.span`
-  position: absolute;
-  top: 47px;
-  left: 0;
-  font-family: var(--font-regular);
-  font-size: 11px;
-  color: var(--color-input-error);
 `;
 
 
@@ -372,57 +363,57 @@ const OrderNow = styled(ButtonBlack)`
 
 const Checkout = (): JSX.Element => {
   const cart = useAppSelector(state => state.cart);
-  const accounts = useAppSelector(state => state.account.accounts);
+  const accounts = useAppSelector(state => state.account.accounts); // 1
   const activeAccountId: number = useAppSelector(
     state => state.account.accounts
       .findIndex((account: TAccount): boolean => account.isActive)
-  );
+  ); // 5
   
   const screen = useMediaQuery();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   
   const [step, setStep] = useState<number>(activeAccountId === -1 ? 1 : 3);
-  const [step2Complete, setStep2Complete] = useState<boolean>(false);
-  const [step4Complete, setStep4Complete] = useState<boolean>(false);
+  const [step2Complete, setStep2Complete] = useState<boolean>(false); // 2 5
+  const [step4Complete, setStep4Complete] = useState<boolean>(false); // 4 5
 
-  const [email, setEmail] = useState<string>('');
-  const [emailError, setEmailError] = useState<boolean>(false);
-  const [existEmailError, setExistEmailError] = useState<boolean>(false);
+  const [email, setEmail] = useState<string>(''); // 1
+  const [emailError, setEmailError] = useState<boolean>(false); // 1
+  const [existEmailError, setExistEmailError] = useState<boolean>(false); // 1
 
-  const [password, setPassword] = useState<string>('');
-  const [passwordError, setPasswordError] = useState<boolean>(false);
-  const [invalidPassword, setInvalidPassword] = useState<boolean>(false);
+  const [password, setPassword] = useState<string>(''); // 1
+  const [passwordError, setPasswordError] = useState<boolean>(false); // 1
+  const [invalidPassword, setInvalidPassword] = useState<boolean>(false); // 1
 
-  const [newCustomers, setNewCustomers] = useState<string>('checkout-as-guest');
+  const [newCustomers, setNewCustomers] = useState<string>('checkout-as-guest'); // 1
 
-  const [firstName, setFirstName] = useState<string>('');
-  const [firstNameError, setFirstNameError] = useState<boolean>(false);
-  const [lastName, setLastName] = useState<string>('');
-  const [lastNameError, setLastNameError] = useState<boolean>(false);
+  const [firstName, setFirstName] = useState<string>(''); // 2
+  const [firstNameError, setFirstNameError] = useState<boolean>(false); // 2
+  const [lastName, setLastName] = useState<string>(''); // 2
+  const [lastNameError, setLastNameError] = useState<boolean>(false); // 2
 
-  const [address1, setAddress1] = useState<string>('');
-  const [address2, setAddress2] = useState<string>('');
-  const [country, setCountry] = useState<string>('');
-  const [city, setCity] = useState<string>('');
-  const [zip, setZip] = useState<string>('');
-  const [zipError, setZipError] = useState<boolean>(false);
+  const [address1, setAddress1] = useState<string>(''); // 2
+  const [address2, setAddress2] = useState<string>(''); // 2
+  const [country, setCountry] = useState<string>(''); // 2
+  const [city, setCity] = useState<string>(''); // 2
+  const [zip, setZip] = useState<string>(''); // 2
+  const [zipError, setZipError] = useState<boolean>(false); // 2
 
-  const [shippingMethod, setShippingMethod] = useState<string>('ground');
+  const [shippingMethod, setShippingMethod] = useState<string>('ground'); // 3
 
-  const [cardHolder, setCardHolder] = useState<string>('');
-  const [cardHolderError, setCardHolderError] = useState<boolean>(false);
-  const [cardNumber, setCardNumber] = useState<string>('');
-  const [cardNumberError, setCardNumberError] = useState<boolean>(false);
+  const [cardHolder, setCardHolder] = useState<string>(''); // 4
+  const [cardHolderError, setCardHolderError] = useState<boolean>(false); // 4
+  const [cardNumber, setCardNumber] = useState<string>(''); // 4
+  const [cardNumberError, setCardNumberError] = useState<boolean>(false); // 4
 
-  const [expirationMonth, setExpirationMonth] = useState<string>('');
-  const [expirationMonthError, setExpirationMonthError] = useState<boolean>(false);
-  const [expirationYear, setExpirationYear] = useState<string>('');
-  const [expirationYearError, setExpirationYearError] = useState<boolean>(false);
-  const [cvv, setCvv] = useState<string>('');
-  const [cvvError, setCvvError] = useState<boolean>(false);
+  const [expirationMonth, setExpirationMonth] = useState<string>(''); // 4
+  const [expirationMonthError, setExpirationMonthError] = useState<boolean>(false); // 4
+  const [expirationYear, setExpirationYear] = useState<string>(''); // 4
+  const [expirationYearError, setExpirationYearError] = useState<boolean>(false); // 4
+  const [cvv, setCvv] = useState<string>(''); // 4
+  const [cvvError, setCvvError] = useState<boolean>(false); // 4
 
-  const [orderPaid, setOrderPaid] = useState<boolean>(false);
+  const [orderPaid, setOrderPaid] = useState<boolean>(false); // 5
 
   type TForm = React.FormEvent<HTMLFormElement>;
   type TChange = React.ChangeEvent<HTMLInputElement>;
@@ -435,13 +426,13 @@ const Checkout = (): JSX.Element => {
     }
     if (passwordError) setExistEmailError(false);
     if (passwordError || existEmailError) setInvalidPassword(false);
-  }, [emailError, existEmailError, passwordError, invalidPassword]);
+  }, [emailError, existEmailError, passwordError, invalidPassword]); // 1
 
   useEffect((): void => {
     if (step2Complete && step4Complete) {
       setTimeout((): void => setOrderPaid(false), 2000);
     }
-  }, [orderPaid]);
+  }, [orderPaid]); // 5
 
 
   return(
@@ -527,10 +518,10 @@ const Checkout = (): JSX.Element => {
                           
                           onInvalid={(): void => setEmailError(true)}
                         />
-                        <Error>
+                        <LabelError>
                           {emailError && 'Enter a valid email'}
                           {existEmailError && 'Account with this email address does not exist'}
-                        </Error>
+                        </LabelError>
                       </LabelText>
 
                       <LabelText
@@ -550,10 +541,10 @@ const Checkout = (): JSX.Element => {
 
                           onInvalid={(): void => setPasswordError(true)}
                           />
-                          <Error>
+                          <LabelError>
                             {passwordError && 'Enter password'}
                             {invalidPassword && 'Invalid password'}
-                          </Error>
+                          </LabelError>
                       </LabelText>
 
                       <ButtonBlack>LOG IN & CHECKOUT</ButtonBlack>
@@ -636,7 +627,7 @@ const Checkout = (): JSX.Element => {
                           }}
                           onInvalid={(): void => setFirstNameError(true)}
                         />
-                        <Error>{firstNameError && 'Enter first name'}</Error>
+                        <LabelError>{firstNameError && 'Enter first name'}</LabelError>
                       </LabelText>
 
                       <LabelText
@@ -654,7 +645,7 @@ const Checkout = (): JSX.Element => {
                           }}
                           onInvalid={(): void => setLastNameError(true)}
                         />
-                        <Error>{lastNameError && 'Enter last name'}</Error>
+                        <LabelError>{lastNameError && 'Enter last name'}</LabelError>
                       </LabelText>
 
                       <LabelText inputWidth='290px' >
@@ -708,7 +699,7 @@ const Checkout = (): JSX.Element => {
                           }}
                           onInvalid={(): void => setZipError(true)}
                         />
-                        <Error>{zipError && 'Enter zip / postal code'}</Error>
+                        <LabelError>{zipError && 'Enter zip / postal code'}</LabelError>
                       </LabelText>
 
                       <LabelText
@@ -734,7 +725,7 @@ const Checkout = (): JSX.Element => {
 
                           onInvalid={(): void => setEmailError(true)}
                         />
-                        <Error>{emailError && 'Enter a valid email'}</Error>
+                        <LabelError>{emailError && 'Enter a valid email'}</LabelError>
                       </LabelText>
                     </Step2FormWrapper>
                     <ButtonBlack>CONTINUE</ButtonBlack>
@@ -861,7 +852,7 @@ const Checkout = (): JSX.Element => {
                         }}
                         onInvalid={(): void => setCardHolderError(true)}
                       />
-                      <Error>{cardHolderError && 'Enter card holder'}</Error>
+                      <LabelError>{cardHolderError && 'Enter card holder'}</LabelError>
                     </LabelText>
 
                     <LabelText
@@ -884,7 +875,7 @@ const Checkout = (): JSX.Element => {
                         }}
                         onInvalid={(): void => setCardNumberError(true)}
                       />
-                      <Error>{cardNumberError && 'Enter card number'}</Error>
+                      <LabelError>{cardNumberError && 'Enter card number'}</LabelError>
                     </LabelText>
 
                     <ExpirationWrapper>
@@ -928,9 +919,9 @@ const Checkout = (): JSX.Element => {
                           />
                       </LabelText>
 
-                      <Error>
+                      <LabelError>
                         {(expirationMonthError || expirationYearError) && 'Enter a valid expiration date'}
-                      </Error>
+                      </LabelError>
                     </ExpirationWrapper>
 
                     <LabelText

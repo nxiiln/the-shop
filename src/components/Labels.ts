@@ -57,3 +57,12 @@ export const LabelRadio = styled(Label)<{labelMargin?: string, inputMargin?: str
     accent-color: var(--color-text-main);
   }
 `;
+
+export const LabelError = styled.span`
+  position: absolute;
+  top: 47px;
+  left: 0;
+  font-family: var(--font-regular);
+  font-size: 11px;
+  color: var(--color-input-error);
+`;
