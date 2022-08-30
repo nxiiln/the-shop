@@ -167,6 +167,7 @@ const CheckoutStep1 = (): JSX.Element => {
               type='email'
               pattern='.+@.+\..+'
               required
+              placeholder='your@email.com'
               value={email}
 
               onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
