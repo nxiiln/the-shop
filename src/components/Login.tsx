@@ -63,7 +63,7 @@ const Groups = styled.div`
   justify-content: space-between;
 
   @media ${smallScreen} {
-    flex-direction: column-reverse;
+    flex-direction: column;
     align-items: center;
   }
 `;
@@ -75,7 +75,7 @@ const RegisteredCustomers = styled.div`
   flex-wrap: wrap;
   justify-content: start;
 
-  @media ${smallScreen} {margin: 0}
+  @media ${smallScreen} {margin: 0 0 60px 0}
 `;
 
 const TextUp = styled.span`
@@ -156,7 +156,7 @@ const NewCustomers = styled.div`
   display: flex;
   flex-wrap: wrap;
 
-  @media ${smallScreen} {margin: 0 0 60px 0}
+  @media ${smallScreen} {margin: 0}
 `;
 
 const ButtonCreateAccount = styled.button`
