@@ -1,7 +1,7 @@
-import {useState, useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components/macro';
 import {smallScreen, mediumScreen, useMediaQuery} from '../mediaQueries';
-import {Link} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import {HashLink} from 'react-router-hash-link';
 import imageMenuInner from '../images/imageMenuInner.png';
 import {useAppSelector} from '../redux-hooks';
@@ -104,13 +104,13 @@ const DropdownMenu = styled.div<{open: boolean}>`
 
 const MainMenu = styled.div<{number: number}>`
   width: 1100px;
-  height: 36px;
+  height: 38px;
   display: flex;
   justify-content: center;
   margin: 0;
   padding: 0;
 
-  > a {
+  > span, a {
     padding: 0 20px 34px 20px;
     display: inline-block;
     font-family: var(--font-second);
@@ -120,14 +120,18 @@ const MainMenu = styled.div<{number: number}>`
     text-transform: uppercase;
     text-decoration: none;
     color: var(--color-text-main);
+    cursor: pointer;
+
+    &:hover {
+      border-bottom: 2px solid #000;
+    }
   }
   
   ${props => `
-    ${!!props.number && 'border-bottom: 1px solid var(--color-border);'}
+    ${props.number > 0 && props.number < 6 && 'border-bottom: 1px solid var(--color-border);'}
 
-    > a:nth-child(${props.number}) {
+    > span:nth-child(${props.number}) {
       border-bottom: 2px solid #000;
-      cursor: pointer;
     }
   `}
 `;
@@ -179,6 +183,7 @@ const MenuInner = styled.ul`
     font-weight: 300;
     color: var(--color-text-regular);
     cursor: pointer;
+    user-select: none;
 
     &:hover {color: var(--color-text-main)}
   }
@@ -217,11 +222,19 @@ const Menu = (): JSX.Element => {
   const [number, setNumber] = useState<number>(0);
   const [dropdownMenu, setDropdownMenu] = useState<boolean>(false);
   const screen = useMediaQuery();
+  const navigate = useNavigate();
 
   const activeAccount: boolean = useAppSelector(
     state => state.account.accounts
       .findIndex((account: TAccount): boolean => account.isActive) !== -1
   );
+
+  const goToCatalog = (e: React.MouseEvent<HTMLUListElement, MouseEvent>): void => {
+    if (e.target !== e.currentTarget) {
+      navigate('/catalog');
+      window.scroll(0, 0);
+    }
+  };
 
   useEffect(() => {
     dropdownMenu ?
@@ -232,27 +245,47 @@ const Menu = (): JSX.Element => {
   
   return(
     <MenuWrapper
-      number={!!number}
+      number={number > 0 && number < 6}
       onMouseLeave={(): void => setNumber(0)}
     >
       {screen.big ?
         <>
           <MainMenu number={number}>
-            <Link to='catalog' onMouseEnter={(): void => setNumber(1)}>women</Link>
-            <Link to='catalog' onMouseEnter={(): void => setNumber(2)}>men</Link>
-            <Link to='catalog' onMouseEnter={(): void => setNumber(3)}>kids</Link>
-            <Link to='catalog' onMouseEnter={(): void => setNumber(4)}>accessories</Link>
-            <Link to='catalog' onMouseEnter={(): void => setNumber(5)}>sale</Link>
-            <HashLink to='/#whats-new' smooth onMouseEnter={(): void => setNumber(6)}>whats new</HashLink>
-            <HashLink to='#top-brands' smooth onMouseEnter={(): void => setNumber(7)}>brands</HashLink>
-            <Link to='blog' onMouseEnter={(): void => setNumber(8)}>blog</Link>
+            <span onClick={(): void => setNumber(1)}>women</span>
+            <span onClick={(): void => setNumber(2)}>men</span>
+            <span onClick={(): void => setNumber(3)}>kids</span>
+            <span onClick={(): void => setNumber(4)}>accessories</span>
+            <span onClick={(): void => setNumber(5)}>sale</span>
+
+            <HashLink
+              to='/#whats-new'
+              smooth
+              onMouseEnter={(): void => setNumber(6)}
+            >
+              whats new
+            </HashLink>
+
+            <HashLink
+              to='#top-brands'
+              smooth
+              onMouseEnter={(): void => setNumber(7)}
+            >
+              brands
+            </HashLink>
+
+            <HashLink
+              to='blog#top'
+              onMouseEnter={(): void => setNumber(8)}
+            >
+              blog
+            </HashLink>
           </MainMenu>
 
-          {!!number &&
+          {number > 0 && number < 6 &&
             <MenuOpenWrapper>
               <MenuOpen>
                 <MenuInnerWrapper>
-                  <MenuInner>
+                  <MenuInner onClick={goToCatalog}>
                     <li>bottoms</li>
                     <li>Jeans</li>
                     <li>Pants</li>
@@ -261,7 +294,7 @@ const Menu = (): JSX.Element => {
                     <li>Dresses</li>
                   </MenuInner>
 
-                  <MenuInner>
+                  <MenuInner onClick={goToCatalog}>
                     <li>tops</li>
                     <li>Jackets & Coats</li>
                     <li>Shirts</li>
@@ -270,7 +303,7 @@ const Menu = (): JSX.Element => {
                     <li>Sweats</li>
                   </MenuInner>
 
-                  <MenuInner>
+                  <MenuInner onClick={goToCatalog}>
                     <li>shoes & more</li>
                     <li>Shoes</li>
                     <li>Underwear</li>
@@ -279,7 +312,7 @@ const Menu = (): JSX.Element => {
                     <li>Eyewear</li>
                   </MenuInner>
 
-                  <MenuInner>
+                  <MenuInner onClick={goToCatalog}>
                     <li>collections</li>
                     <li>New arrivals</li>
                     <li>Urban Style</li>
