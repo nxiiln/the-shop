@@ -3,6 +3,7 @@ import styled from 'styled-components/macro';
 import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
 import {Link, useNavigate} from 'react-router-dom';
 import {useAppSelector, useAppDispatch} from '../redux-hooks';
+import {checkoutSetStep, checkoutSetStep2Complete, checkoutSetStep4Complete} from '../slices/checkout';
 import {accountLogIn} from '../slices/account';
 import {cartReset} from '../slices/cart';
 import {TAccount} from '../types/TAccount';
@@ -373,9 +374,12 @@ const Checkout = (): JSX.Element => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   
-  const [step, setStep] = useState<number>(activeAccountId === -1 ? 1 : 3);
-  const [step2Complete, setStep2Complete] = useState<boolean>(false); // 2 5
-  const [step4Complete, setStep4Complete] = useState<boolean>(false); // 4 5
+  const storeStep = useAppSelector(state => state.checkout.step);
+  const step: number = storeStep !== 0 ? storeStep :
+    activeAccountId === -1 ? 1 : 3;
+
+  const step2Complete = useAppSelector(state => state.checkout.step2Complete);
+  const step4Complete = useAppSelector(state => state.checkout.step4Complete);
 
   const [email, setEmail] = useState<string>(''); // 1
   const [emailError, setEmailError] = useState<boolean>(false); // 1
@@ -458,7 +462,7 @@ const Checkout = (): JSX.Element => {
                 status={step === 1}
                 off={activeAccountId !== -1}
                 onClick={(): void => {
-                  activeAccountId === -1 && setStep(1);
+                  activeAccountId === -1 && dispatch(checkoutSetStep(1));
                 }}
               >
                 <Title status={step === 1}>01. CHECKOUT</Title>
@@ -492,7 +496,7 @@ const Checkout = (): JSX.Element => {
 
                         if (existAccountId !== -1 && accounts[existAccountId].password === password) {
                           dispatch(accountLogIn(existAccountId));
-                          setStep(3);
+                          dispatch(checkoutSetStep(3));
                         }
                       }}
                     >
@@ -562,7 +566,7 @@ const Checkout = (): JSX.Element => {
 
                     <form onSubmit={(e: TForm): void => {
                       e.preventDefault();
-                      newCustomers === 'register' ? navigate('/login') : setStep(2);
+                      newCustomers === 'register' ? navigate('/login') : dispatch(checkoutSetStep(2));
                     }}>
                       <LabelRadio inputMargin='0 10px 0 0'>
                         <input
@@ -592,7 +596,7 @@ const Checkout = (): JSX.Element => {
                 status={step === 2}
                 off={activeAccountId !== -1}
                 onClick={(): void => {
-                  activeAccountId === -1 && setStep(2);
+                  activeAccountId === -1 && dispatch(checkoutSetStep(2));
                 }}
               >
                 <Title status={step === 2}>02. BILLING INFO</Title>
@@ -606,8 +610,8 @@ const Checkout = (): JSX.Element => {
                     onSubmit={(e: TForm): void => {
                       e.preventDefault();
                       if (e.currentTarget.checkValidity()) {
-                        setStep2Complete(true);
-                        setStep(3);
+                        dispatch(checkoutSetStep2Complete(true));
+                        dispatch(checkoutSetStep(3))
                       }
                     }}
                   >
@@ -736,7 +740,7 @@ const Checkout = (): JSX.Element => {
 
               <TitleWrapper
                 status={step === 3}
-                onClick={(): void => setStep(3)}
+                onClick={(): void => {dispatch(checkoutSetStep(3))}}
               >
                 <Title status={step === 3}>03. SHIPPING METHOD</Title>
                 {step === 3 && <Required>*Required</Required>}
@@ -746,7 +750,7 @@ const Checkout = (): JSX.Element => {
                 <Step3>
                   <form onSubmit={(e: TForm): void => {
                     e.preventDefault();
-                    setStep(4);
+                    dispatch(checkoutSetStep(4));
                   }}>
                     <span>PLEASE CHOOSE A SHIPPING METHOD TO DELIVERY YOUR ORDER:</span>
 
@@ -809,7 +813,8 @@ const Checkout = (): JSX.Element => {
 
               <TitleWrapper
                 status={step === 4}
-                onClick={(): void => setStep(4)}
+                onClick={(): void => {dispatch(checkoutSetStep(4))}
+                }
               >
                 <Title status={step === 4}>04. PAYMENT</Title>
                 {step === 4 && <Required>*Required</Required>}
@@ -822,8 +827,8 @@ const Checkout = (): JSX.Element => {
                     onSubmit={(e: TForm): void => {
                     e.preventDefault();
                     if (e.currentTarget.checkValidity()) {
-                      setStep4Complete(true);
-                      setStep(5);
+                      dispatch(checkoutSetStep4Complete(true));
+                      dispatch(checkoutSetStep(5));
                     }
                   }}>
                     <Icons>
@@ -954,7 +959,7 @@ const Checkout = (): JSX.Element => {
 
               <TitleWrapper
                 status={step === 5}
-                onClick={(): void => setStep(5)}
+                onClick={(): void => {dispatch(checkoutSetStep(5))}}
               >
                 <Title status={step === 5}>05. ORDER REVIEW</Title>
                 {step === 5 && <Required>*Required</Required>}
@@ -970,8 +975,8 @@ const Checkout = (): JSX.Element => {
                     <OrderNow
                       type='button'
                       onClick={(): void => {
-                        if (!step4Complete) setStep(4);
-                        if (!step2Complete && activeAccountId === -1) setStep(2);
+                        if (!step4Complete) dispatch(checkoutSetStep(4));
+                        if (!step2Complete && activeAccountId === -1) dispatch(checkoutSetStep(2));
 
                         const confirmPurchase = (): void => {
                           setOrderPaid(true);
