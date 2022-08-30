@@ -184,7 +184,7 @@ const LogOutWrapper = styled.div`
   width: 100%;
   padding: 50px;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
 `;
 
@@ -395,10 +395,12 @@ const Login = (): JSX.Element => {
             </Groups>
           :
             <LogOutWrapper>
+              <TextUp>ARE YOU SURE YOU WANT TO LOG OUT?</TextUp>
               <ButtonLogOut
                 type='button'
                 onClick={(): void => {
                   if (activeAccountId !== -1) dispatch(accountLogOut(activeAccountId));
+                  window.scroll(0, 0);
                 }}
               >
                 LOGOUT
