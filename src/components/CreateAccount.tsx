@@ -275,6 +275,7 @@ const CreateAccount = (): JSX.Element => {
                 }));
 
                 navigate('/my-account');
+                window.scroll(0, 0);
               }
             }}
           >
