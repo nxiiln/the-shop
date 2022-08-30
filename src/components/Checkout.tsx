@@ -1,7 +1,7 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import styled from 'styled-components/macro';
 import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import {useAppSelector} from '../redux-hooks';
 import BreadCrumbs from './BreadCrumbs';
 import AlsoLove from './AlsoLove';
@@ -11,6 +11,10 @@ import masterCardIcon from '../images/masterCardIcon.png';
 import discoverIcon from '../images/discoverIcon.png';
 import americanExpressIcon from '../images/americanExpressIcon.png';
 import {ContinueShopping} from './Cart';
+import {accountLogIn} from '../slices/account';
+import {TAccount} from '../types/TAccount';
+import {useDispatch} from 'react-redux';
+import {cartReset} from '../slices/cart';
 
 
 
@@ -57,21 +61,6 @@ const WrapperInner = styled.div<{empty: boolean}>`
   @media ${mediumScreen}, ${smallScreen} {justify-content: center}
 `;
 
-const ButtonUnderline = styled.button`
-  width: 60px;
-  height: 10px;
-  margin: 0px 0 0 -10px;
-  font-family: var(--font-regular);
-  font-size: 11px;
-  line-height: 1.2;
-  font-weight: 400;
-  text-decoration: underline;
-  color: var(--color-text-main);
-  background: transparent;
-  border: none;
-  cursor: pointer;
-`;
-
 
 // Steps
 const Steps = styled.article`
@@ -79,13 +68,15 @@ const Steps = styled.article`
   @media ${mediumScreen}, ${smallScreen} {width: 100%}
 `;
 
-const TitleWrapperOuter = styled.div<{status: boolean}>`
+const TitleWrapperOuter = styled.div<{status: boolean, off?: boolean}>`
   width: 675px;
   height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
   border: 1px solid var(--color-border);
+  user-select: none;
+  ${props => !props.off && 'cursor: pointer;'}
   
   ${props => !props.status && `
     margin-bottom: 10px;
@@ -128,6 +119,41 @@ const Label = styled.label`
   color: var(--color-text-main);
 `;
 
+const LabelText = styled(Label)<{labelMargin?: string, inputWidth?: string, error?: boolean}>`
+  height: 45px;
+  margin: ${props => props.labelMargin};
+  position: relative;
+  display: grid;
+  align-content: space-between;
+
+  > input {
+    width: ${props => props.inputWidth};
+    height: 30px;
+    border: 1px solid ${props => !props.error ?
+      'var(--color-border)' : 'var(--color-input-error)'
+    };
+
+    &:focus {
+      outline: 1px solid ${props => !props.error ?
+        'var(--color-input-outline)' : 'var(--color-input-error)'
+      };
+    }
+  }
+`;
+
+const LabelRadio = styled(Label)<{labelMargin?: string, inputMargin: string}>`
+  height: 14px;
+  margin: ${props => props.labelMargin};
+  display: flex;
+  align-items: end;
+  cursor: pointer;
+
+  > input {
+    margin: ${props => props.inputMargin};
+    accent-color: var(--color-text-main);
+  }
+`;
+
 const ButtonBlack = styled.button`
   width: 144px;
   height: 30px;
@@ -140,6 +166,15 @@ const ButtonBlack = styled.button`
   cursor: pointer;
 
   &:hover {background: var(--color-button-solid-hover)}
+`;
+
+const Error = styled.span`
+  position: absolute;
+  top: 47px;
+  left: 0;
+  font-family: var(--font-regular);
+  font-size: 11px;
+  color: var(--color-input-error);
 `;
 
 
@@ -196,31 +231,6 @@ const Step1 = styled.div`
   }
 `;
 
-const LabelText1 = styled(Label)`
-  height: 45px;
-  display: grid;
-  align-content: space-between;
-
-  > input {
-    width: 254px;
-    height: 30px;
-    border: 1px solid var(--color-border);
-
-    &:focus {outline: 1px solid #000}
-  }
-`;
-
-const LabelRadio1 = styled(Label)`
-  height: 14px;
-  display: flex;
-  align-items: end;
-
-  > input {
-    margin: 0 10px 0 0;
-    accent-color: var(--color-text-main);
-  }
-`;
-
 const TextUp = styled.span`
   font-family: var(--font-second);
   font-size: 13px;
@@ -243,15 +253,11 @@ const TextBold = styled.span`
   color: var(--color-text-main);
 `;
 
-const PasswordHelp = styled(ButtonUnderline)`
-  width: 90px;
-`;
-
 
 // Step2
 const Step2 = styled.div`
   width: 675px;
-  height: 656px;
+  height: 500px;
   margin-bottom: 10px;
   display: flex;
   justify-content: center;
@@ -260,12 +266,14 @@ const Step2 = styled.div`
   border-top: none;
 
   @media ${mediumScreen}, ${smallScreen} {width: 100%}
-  @media ${smallScreen} {height: 1100px}
+  @media ${smallScreen} {height: 750px}
 `;
 
 const Step2Form = styled.form`
   width: 608px;
-  height: 595px;
+  height: auto;
+
+  > button {margin-left: calc(50% - 144px / 2)}
 
   @media ${smallScreen} {
     width: 290px;
@@ -275,7 +283,7 @@ const Step2Form = styled.form`
 
 const Step2FormWrapper = styled.div`
   width: 605px;
-  height: 410px;
+  height: 320px;
   margin-bottom: 25px;
   display: flex;
   flex-wrap: wrap;
@@ -284,47 +292,10 @@ const Step2FormWrapper = styled.div`
 
   @media ${smallScreen} {
     width: 290px;
-    height: 850px;
+    height: 550px;
+    margin-bottom: 50px;
     flex-wrap: nowrap;
     flex-direction: column;
-  }
-`;
-
-const LabelText2 = styled(Label)`
-  height: 45px;
-  display: grid;
-  align-content: space-between;
-
-  > input {
-    width: 289px;
-    height: 30px;
-    border: 1px solid var(--color-border);
-    
-    &:focus {outline: 1px solid #000}
-  }
-`;
-
-const LabelRadio2 = styled(Label)`
-  height: 14px;
-  margin-bottom: 15px;
-  display: flex;
-  align-items: end;
-
-  > input {
-    margin: 0 15px 0 0;
-    accent-color: var(--color-text-main);
-  }
-`;
-
-const LabelCheckbox = styled(Label)`
-  height: 18px;
-  display: flex;
-  margin: 33px 0 33px 0;
-  align-items: center;
-
-  > input {
-    margin: 0 10px 0 0;
-    accent-color: var(--color-text-main);
   }
 `;
 
@@ -363,18 +334,6 @@ const Step3 = styled.div`
   @media ${mediumScreen}, ${smallScreen} {width: 100%}
 `;
 
-const LabelRadio3 = styled(Label)`
-  height: 14px;
-  margin-bottom: 15px;
-  display: flex;
-  align-items: end;
-
-  > input {
-    margin: 0 15px 0 0;
-    accent-color: var(--color-text-main);
-  }
-`;
-
 
 // Step4
 const Step4 = styled.div`
@@ -399,7 +358,7 @@ const Step4 = styled.div`
 `;
 
 const Icons = styled.div`
-  width: 217px;
+  width: 270px;
   height: 32px;
   margin-bottom: 32px;
   display: flex;
@@ -407,62 +366,21 @@ const Icons = styled.div`
   align-items: center;
 `;
 
-const LabelText4 = styled(Label)`
-  height: 45px;
-  margin-bottom: 17px;
-  display: grid;
-  align-content: space-between;
-
-  > input {
-    width: 269px;
-    height: 30px;
-    border: 1px solid var(--color-border);
-    
-    &:focus {outline: 1px solid #000}
-  }
-`;
-
-const DatalistWrapper4 = styled.div`
+const ExpirationWrapper = styled.div`
   width: 160px;
-  height: 45px;
-  margin-bottom: 32px;
+  height: 60px;
+  position: relative;
+  margin-bottom: 10px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  
-  > span {
+  align-items: end;
+
+  > span:first-child {
     font-family: var(--font-second);
     font-size: 10px;
     font-weight: 300;
     color: var(--color-text-main);
-  }
-
-  > input {
-    width: 77px;
-    height: 30px;
-    font-family: var(--font-second);
-    font-size: 10px;
-    line-height: 1.2;
-    font-weight: 300;
-    color: var(--color-text-main);
-    border: 1px solid var(--color-border);
-    
-    &:focus {outline: 1px solid #000}
-  }
-`;
-
-const Cvv = styled(Label)`
-  height: 45px;
-  margin-left: 24px;
-  display: grid;
-  align-content: space-between;
-  
-  > input {
-    width: 84px;
-    height: 30px;
-    border: 1px solid var(--color-border);
-    
-    &:focus {outline: 1px solid #000}
   }
 `;
 
@@ -503,9 +421,77 @@ const OrderNow = styled(ButtonBlack)`
 
 
 const Checkout = (): JSX.Element => {
-  const [step, setStep] = useState<number>(1);
-  const screen = useMediaQuery();
   const cart = useAppSelector(state => state.cart);
+  const accounts = useAppSelector(state => state.account.accounts);
+  const activeAccountId: number = useAppSelector(
+    state => state.account.accounts
+      .findIndex((account: TAccount): boolean => account.isActive)
+  );
+  
+  const screen = useMediaQuery();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  
+  const [step, setStep] = useState<number>(activeAccountId === -1 ? 1 : 3);
+  const [step2Complete, setStep2Complete] = useState<boolean>(false);
+  const [step4Complete, setStep4Complete] = useState<boolean>(false);
+
+  const [email, setEmail] = useState<string>('');
+  const [emailError, setEmailError] = useState<boolean>(false);
+  const [existEmailError, setExistEmailError] = useState<boolean>(false);
+
+  const [password, setPassword] = useState<string>('');
+  const [passwordError, setPasswordError] = useState<boolean>(false);
+  const [invalidPassword, setInvalidPassword] = useState<boolean>(false);
+
+  const [newCustomers, setNewCustomers] = useState<string>('checkout-as-guest');
+
+  const [firstName, setFirstName] = useState<string>('');
+  const [firstNameError, setFirstNameError] = useState<boolean>(false);
+  const [lastName, setLastName] = useState<string>('');
+  const [lastNameError, setLastNameError] = useState<boolean>(false);
+
+  const [address1, setAddress1] = useState<string>('');
+  const [address2, setAddress2] = useState<string>('');
+  const [country, setCountry] = useState<string>('');
+  const [city, setCity] = useState<string>('');
+  const [zip, setZip] = useState<string>('');
+  const [zipError, setZipError] = useState<boolean>(false);
+
+  const [shippingMethod, setShippingMethod] = useState<string>('ground');
+
+  const [cardHolder, setCardHolder] = useState<string>('');
+  const [cardHolderError, setCardHolderError] = useState<boolean>(false);
+  const [cardNumber, setCardNumber] = useState<string>('');
+  const [cardNumberError, setCardNumberError] = useState<boolean>(false);
+
+  const [expirationMonth, setExpirationMonth] = useState<string>('');
+  const [expirationMonthError, setExpirationMonthError] = useState<boolean>(false);
+  const [expirationYear, setExpirationYear] = useState<string>('');
+  const [expirationYearError, setExpirationYearError] = useState<boolean>(false);
+  const [cvv, setCvv] = useState<string>('');
+  const [cvvError, setCvvError] = useState<boolean>(false);
+
+  const [orderPaid, setOrderPaid] = useState<boolean>(false);
+
+  type TForm = React.FormEvent<HTMLFormElement>;
+  type TChange = React.ChangeEvent<HTMLInputElement>;
+  type TFocus = React.FocusEvent<HTMLInputElement>;
+
+  useEffect((): void => {
+    if (emailError) {
+      setExistEmailError(false);
+      setInvalidPassword(false);
+    }
+    if (passwordError) setExistEmailError(false);
+    if (passwordError || existEmailError) setInvalidPassword(false);
+  }, [emailError, existEmailError, passwordError, invalidPassword]);
+
+  useEffect((): void => {
+    if (step2Complete && step4Complete) {
+      setTimeout((): void => setOrderPaid(false), 2000);
+    }
+  }, [orderPaid]);
 
 
   return(
@@ -527,7 +513,13 @@ const Checkout = (): JSX.Element => {
             {screen.big ? <AlsoLove /> : <CartCheckout />}
 
             <Steps>
-              <TitleWrapperOuter status={step === 1}>
+              <TitleWrapperOuter
+                status={step === 1}
+                off={activeAccountId !== -1}
+                onClick={(): void => {
+                  activeAccountId === -1 && setStep(1);
+                }}
+              >
                 <TitleWrapperInner>
                   <Title status={step === 1}>01. CHECKOUT</Title>
                   {step === 1 && <Required>*Required</Required>}
@@ -543,23 +535,80 @@ const Checkout = (): JSX.Element => {
                       Please log in below:
                     </Text>
 
-                    <form onSubmit={(e: React.FormEvent<HTMLFormElement>): void => {
-                      e.preventDefault();
-                      setStep(2);
-                    }}
-                    >
-                      <LabelText1>
-                        E-MAIL*
-                        <input type='email' required />
-                      </LabelText1>
+                    <form
+                      noValidate
+                      onSubmit={(e: TForm): void => {
+                        e.preventDefault();
 
-                      <LabelText1>
+                        const existAccountId: number = accounts
+                          .findIndex((account: TAccount): boolean => account.email === email);
+
+                        if (e.currentTarget.checkValidity()) {
+                          if (existAccountId !== -1) {
+                            setExistEmailError(false);
+                            accounts[existAccountId].password === password ?
+                              setInvalidPassword(false) : setInvalidPassword(true);
+                          } else setExistEmailError(true);
+                        }
+
+                        if (existAccountId !== -1 && accounts[existAccountId].password === password) {
+                          dispatch(accountLogIn(existAccountId));
+                          setStep(3);
+                        }
+                      }}
+                    >
+                      <LabelText
+                        inputWidth='255px'
+                        error={emailError || existEmailError}
+                      >
+                        E-MAIL*
+                        <input
+                          type='email'
+                          pattern='.+@.+\..+'
+                          required
+                          value={email}
+
+                          onChange={(e: TChange): void => {
+                            setEmail(e.target.value);
+                            e.target.validity.valid && setEmailError(false);
+                          }}
+
+                          onBlur={(e: TFocus): void => {
+                            if (email && !e.target.validity.valid) setEmailError(true);
+                          }}
+                          
+                          onInvalid={(): void => setEmailError(true)}
+                        />
+                        <Error>
+                          {emailError && 'Enter a valid email'}
+                          {existEmailError && 'Account with this email address does not exist'}
+                        </Error>
+                      </LabelText>
+
+                      <LabelText
+                        inputWidth='255px'
+                        error={passwordError || invalidPassword}
+                      >
                         PASSWORD*
-                        <input type='password' required />
-                      </LabelText1>
+                        <input
+                          type='password'
+                          required
+                          value={password}
+                          
+                          onChange={(e: TChange): void => {
+                            setPassword(e.target.value);
+                            e.target.validity.valid && setPasswordError(false);
+                          }}
+
+                          onInvalid={(): void => setPasswordError(true)}
+                          />
+                          <Error>
+                            {passwordError && 'Enter password'}
+                            {invalidPassword && 'Invalid password'}
+                          </Error>
+                      </LabelText>
 
                       <ButtonBlack>LOG IN & CHECKOUT</ButtonBlack>
-                      <PasswordHelp type='button'>Password Help</PasswordHelp>
                     </form>
                   </div>
                   
@@ -572,19 +621,27 @@ const Checkout = (): JSX.Element => {
                       Easy access to your order history and status
                     </Text>
 
-                    <form onSubmit={(e: React.FormEvent<HTMLFormElement>): void => {
+                    <form onSubmit={(e: TForm): void => {
                       e.preventDefault();
-                      setStep(2);
+                      newCustomers === 'register' ? navigate('/login') : setStep(2);
                     }}>
-                      <LabelRadio1>
-                        <input type='radio' name='new-customer' value='register'/>
+                      <LabelRadio inputMargin='0 10px 0 0'>
+                        <input
+                          type='radio'
+                          checked={newCustomers === 'register'}
+                          onChange={(): void => setNewCustomers('register')}
+                        />
                         REGISTER
-                      </LabelRadio1>
+                      </LabelRadio>
 
-                      <LabelRadio1>
-                        <input type='radio' name='new-customer' value='checkout-as-guest' defaultChecked />
+                      <LabelRadio inputMargin='0 10px 0 0'>
+                        <input
+                          type='radio'
+                          checked={newCustomers === 'checkout-as-guest'}
+                          onChange={(): void => setNewCustomers('checkout-as-guest')}
+                        />
                         CHECKOUT AS GUEST
-                      </LabelRadio1>                  
+                      </LabelRadio>                  
                       <ButtonBlack>CONTINUE</ButtonBlack>
                     </form>
                   </div>
@@ -592,7 +649,13 @@ const Checkout = (): JSX.Element => {
               }
 
 
-              <TitleWrapperOuter status={step === 2}>
+              <TitleWrapperOuter
+                status={step === 2}
+                off={activeAccountId !== -1}
+                onClick={(): void => {
+                  activeAccountId === -1 && setStep(2);
+                }}
+              >
                 <TitleWrapperInner>
                   <Title status={step === 2}>02. BILLING INFO</Title>
                   {step === 2 && <Required>*Required</Required>}
@@ -601,115 +664,143 @@ const Checkout = (): JSX.Element => {
 
               {step === 2 &&
                 <Step2>
-                  <Step2Form onSubmit={(e: React.FormEvent<HTMLFormElement>): void => {
-                    e.preventDefault();
-                    setStep(3);
-                  }}>
+                  <Step2Form
+                    noValidate
+                    onSubmit={(e: TForm): void => {
+                      e.preventDefault();
+                      if (e.currentTarget.checkValidity()) {
+                        setStep2Complete(true);
+                        setStep(3);
+                      }
+                    }}
+                  >
                     <Step2FormWrapper>
-                      <LabelText2>
+                      <LabelText
+                        inputWidth='290px'
+                        error={firstNameError}
+                      >
                         FIRST NAME*
-                        <input type='text' required />
-                      </LabelText2>
+                        <input
+                          type='text'
+                          required
+                          value={firstName}
+                          onChange={(e: TChange): void => {
+                            setFirstName(e.target.value);
+                            e.target.validity.valid && setFirstNameError(false);
+                          }}
+                          onInvalid={(): void => setFirstNameError(true)}
+                        />
+                        <Error>{firstNameError && 'Enter first name'}</Error>
+                      </LabelText>
 
-                      <LabelText2>
+                      <LabelText
+                        inputWidth='290px'
+                        error={lastNameError}
+                      >
                         LAST NAME*
-                        <input type='text' required />
-                      </LabelText2>
+                        <input
+                          type='text'
+                          required
+                          value={lastName}
+                          onChange={(e: TChange): void => {
+                            setLastName(e.target.value);
+                            e.target.validity.valid && setLastNameError(false);
+                          }}
+                          onInvalid={(): void => setLastNameError(true)}
+                        />
+                        <Error>{lastNameError && 'Enter last name'}</Error>
+                      </LabelText>
 
-                      <LabelText2>
-                        COMPANY
-                        <input type='text' />
-                      </LabelText2>
-
-                      <LabelText2>
-                        E-MAIL ADDRESS*
-                        <input type='text' required />
-                      </LabelText2>
-
-                      <LabelText2>
+                      <LabelText inputWidth='290px' >
                         ADDRESS 1
-                        <input type='text' />
-                      </LabelText2>
+                        <input
+                          type='text'
+                          value={address1}
+                          onChange={(e: TChange): void => setAddress1(e.target.value)}
+                        />
+                      </LabelText>
 
-                      <LabelText2>
+                      <LabelText inputWidth='290px' >
                         ADDRESS 2
-                        <input type='text' />
-                      </LabelText2>
+                        <input
+                          type='text'
+                          value={address2}
+                          onChange={(e: TChange): void => setAddress2(e.target.value)}
+                        />
+                      </LabelText>
 
-                      <LabelText2>
+                      <LabelText inputWidth='290px' >
                         COUNTRY
-                        <input list='countries' />
-                      </LabelText2>
-                      <datalist id='countries'>
-                        <option value='Russia' />
-                        <option value='UK' />
-                        <option value='USA' />
-                      </datalist>
+                        <input
+                          type='text'
+                          value={country}
+                          onChange={(e: TChange): void => setCountry(e.target.value)}
+                        />
+                      </LabelText>
 
-                      <LabelText2>
+                      <LabelText inputWidth='290px' >
                         CITY
-                        <input type='text' />
-                      </LabelText2>
+                        <input
+                          type='text'
+                          value={city}
+                          onChange={(e: TChange): void => setCity(e.target.value)}
+                        />
+                      </LabelText>
 
-                      <LabelText2>
-                        STATE
-                        <input type='text' />
-                      </LabelText2>
-
-                      <LabelText2>
+                      <LabelText
+                        inputWidth='290px'
+                        error={zipError}
+                      >
                         ZIP / POSTAL CODE*
-                        <input type='text' required />
-                      </LabelText2>
-
-                      <LabelText2>
-                        PHONE
-                        <input type='text' />
-                      </LabelText2>
-
-                      <LabelText2>
-                        FAX
-                        <input type='text' />
-                      </LabelText2>
-
-                      <LabelText2>
-                        PASSWORD*
                         <input
                           type='text'
                           required
+                          value={zip}
+                          onChange={(e: TChange): void => {
+                            setZip(e.target.value);
+                            e.target.validity.valid && setZipError(false);
+                          }}
+                          onInvalid={(): void => setZipError(true)}
                         />
-                      </LabelText2>
+                        <Error>{zipError && 'Enter zip / postal code'}</Error>
+                      </LabelText>
 
-                      <LabelText2>
-                        CONFIRM PASSWORD*
+                      <LabelText
+                        inputWidth='290px'
+                        error={emailError}
+                      >
+                        E-MAIL*
                         <input
-                          type='text'
+                          type='email'
+                          pattern='.+@.+\..+'
                           required
+                          placeholder='your@email.com'
+                          value={email}
+
+                          onChange={(e: TChange): void => {
+                            setEmail(e.target.value);
+                            e.target.validity.valid && setEmailError(false);
+                          }}
+
+                          onBlur={(e: TFocus): void => {
+                            if (email && !e.target.validity.valid) setEmailError(true);
+                          }}
+
+                          onInvalid={(): void => setEmailError(true)}
                         />
-                      </LabelText2>
+                        <Error>{emailError && 'Enter a valid email'}</Error>
+                      </LabelText>
                     </Step2FormWrapper>
-
-                    <LabelRadio2>
-                      <input type='radio' name='shipping' value='this' defaultChecked />
-                      SHIP TO THIS ADDRESS
-                    </LabelRadio2>
-
-                    <LabelRadio2>
-                      <input type='radio' name='shipping' value='different' />
-                      SHIP TO DIFFERENT ADDRESS
-                    </LabelRadio2>
-
-                    <LabelCheckbox>
-                      <input type='checkbox' name='subscribe-newsletter' defaultChecked />
-                      I WANT TO SUBSCRIBE TO THE NEWSLETTER
-                    </LabelCheckbox>
-
                     <ButtonBlack>CONTINUE</ButtonBlack>
                   </Step2Form>
                 </Step2>
               }
 
 
-              <TitleWrapperOuter status={step === 3}>
+              <TitleWrapperOuter
+                status={step === 3}
+                onClick={(): void => setStep(3)}
+              >
                 <TitleWrapperInner>
                   <Title status={step === 3}>03. SHIPPING METHOD</Title>
                   {step === 3 && <Required>*Required</Required>}
@@ -718,31 +809,62 @@ const Checkout = (): JSX.Element => {
 
               {step === 3 &&
                 <Step3>
-                  <form onSubmit={(e: React.FormEvent<HTMLFormElement>): void => {
+                  <form onSubmit={(e: TForm): void => {
                     e.preventDefault();
                     setStep(4);
                   }}>
                     <span>PLEASE CHOOSE A SHIPPING METHOD TO DELIVERY YOUR ORDER:</span>
 
-                    <LabelRadio3>
-                      <input type='radio' name='shipping-method' value='ground' defaultChecked />
+                    <LabelRadio
+                      labelMargin='0 0 15px 0'
+                      inputMargin='0 15px 0 0'
+                    >
+                      <input
+                        type='radio'
+                        value='ground'
+                        checked={shippingMethod === 'ground'}
+                        onChange={(): void => setShippingMethod('ground')}
+                      />
                       UPS (GROUND) $7.25
-                    </LabelRadio3>
+                    </LabelRadio>
 
-                    <LabelRadio3>
-                      <input type='radio' name='shipping-method' value='3-day-select' />
+                    <LabelRadio
+                      labelMargin='0 0 15px 0'
+                      inputMargin='0 15px 0 0'
+                    >
+                      <input
+                        type='radio'
+                        checked={shippingMethod === '3-day-select'}
+                        onChange={(): void => setShippingMethod('3-day-select')}
+                      />
                       UPS (3 DAY SELECT) $9.75
-                    </LabelRadio3>
+                    </LabelRadio>
 
-                    <LabelRadio3>
-                      <input type='radio' name='shipping-method' value='next-day-air' />
+                    <LabelRadio
+                      labelMargin='0 0 15px 0'
+                      inputMargin='0 15px 0 0'
+                    >
+                      <input
+                        type='radio'
+                        value='next-day-air'
+                        checked={shippingMethod === 'next-day-air'}
+                        onChange={(): void => setShippingMethod('nex-day-air')}
+                      />
                       UPS (NEXT DAY AIR) $17.25
-                    </LabelRadio3>
+                    </LabelRadio>
 
-                    <LabelRadio3>
-                      <input type='radio' name='shipping-method' value='second-day-air' />
+                    <LabelRadio
+                      labelMargin='0 0 15px 0'
+                      inputMargin='0 15px 0 0'
+                    >
+                      <input
+                        type='radio'
+                        value='second-day-air'
+                        checked={shippingMethod === 'second-day-air'}
+                        onChange={(): void => setShippingMethod('second-day-air')}
+                      />
                       UPS (SECOND DAY AIR) $12.25
-                    </LabelRadio3>
+                    </LabelRadio>
 
                     <ButtonBlack>CONTINUE</ButtonBlack>
                   </form>
@@ -750,7 +872,10 @@ const Checkout = (): JSX.Element => {
               }
 
 
-              <TitleWrapperOuter status={step === 4}>
+              <TitleWrapperOuter
+                status={step === 4}
+                onClick={(): void => setStep(4)}
+              >
                 <TitleWrapperInner>
                   <Title status={step === 4}>04. PAYMENT</Title>
                   {step === 4 && <Required>*Required</Required>}
@@ -759,9 +884,14 @@ const Checkout = (): JSX.Element => {
 
               {step === 4 &&
                 <Step4>
-                  <form onSubmit={(e: React.FormEvent<HTMLFormElement>): void => {
+                  <form
+                    noValidate
+                    onSubmit={(e: TForm): void => {
                     e.preventDefault();
-                    setStep(5);
+                    if (e.currentTarget.checkValidity()) {
+                      setStep4Complete(true);
+                      setStep(5);
+                    }
                   }}>
                     <Icons>
                       <img src={visaIcon} alt='visaIcon' />
@@ -770,48 +900,118 @@ const Checkout = (): JSX.Element => {
                       <img src={americanExpressIcon} alt='americanExpressIcon' />
                     </Icons>
 
-                    <LabelText4>
+                    <LabelText
+                      labelMargin='0 0 17px 0'
+                      inputWidth='270px'
+                      error={cardHolderError}
+                    >
                       CARD HOLDER*
-                      <input type='text' required />
-                    </LabelText4>
+                      <input
+                        type='text'
+                        pattern="[a-zA-Z\s'`~\.-]+"
+                        maxLength={48}
+                        required
+                        placeholder='John Doe'
+                        value={cardHolder}
+                        onChange={(e: TChange): void => {
+                          setCardHolder(e.target.value);
+                          e.target.validity.valid && setCardHolderError(false);
+                        }}
+                        onInvalid={(): void => setCardHolderError(true)}
+                      />
+                      <Error>{cardHolderError && 'Enter card holder'}</Error>
+                    </LabelText>
 
-                    <LabelText4>
+                    <LabelText
+                      labelMargin='0 0 17px 0'
+                      inputWidth='270px'
+                      error={cardNumberError}
+                    >
                       CARD NUMBER*
-                      <input type='text' required />
-                    </LabelText4>
+                      <input
+                        type='text'
+                        inputMode='decimal'
+                        pattern='([0-9]{4}\s?){4}'
+                        maxLength={19}
+                        required
+                        placeholder='1234 5678 9012 3456'
+                        value={cardNumber.replace(/([0-9]{4}(?!\s|$))/g, '$& ')}
+                        onChange={(e: TChange): void => {
+                          setCardNumber(e.target.value);
+                          e.target.validity.valid && setCardNumberError(false);
+                        }}
+                        onInvalid={(): void => setCardNumberError(true)}
+                      />
+                      <Error>{cardNumberError && 'Enter card number'}</Error>
+                    </LabelText>
 
-                    <DatalistWrapper4>
+                    <ExpirationWrapper>
                       <span>EXPIRATION DATE*</span>
 
-                      <input list='month' required />
-                      <datalist id='month'>
-                        <option value='01' />
-                        <option value='02' />
-                        <option value='03' />
-                        <option value='04' />
-                        <option value='05' />
-                        <option value='06' />
-                        <option value='07' />
-                        <option value='08' />
-                        <option value='09' />
-                        <option value='10' />
-                        <option value='11' />
-                        <option value='12' />
-                      </datalist>
+                      <LabelText
+                        inputWidth='77px'
+                        error={expirationMonthError}
+                      >
+                        <input
+                          type='text'
+                          inputMode='decimal'
+                          pattern='0[1-9]|1[0-2]'
+                          required
+                          placeholder='01'
+                          value={expirationMonth}
+                          onChange={(e: TChange): void => {
+                            setExpirationMonth(e.target.value);
+                            e.target.validity.valid && setExpirationMonthError(false);
+                          }}
+                          onInvalid={(): void => setExpirationMonthError(true)}
+                        />             
+                      </LabelText>
 
-                      <input list='year' required />
-                      <datalist id='year'>
-                        <option value='22' />
-                        <option value='23' />
-                        <option value='24' />
-                        <option value='25' />
-                      </datalist>
-                    </DatalistWrapper4>
+                      <LabelText
+                        inputWidth='77px'
+                        error={expirationYearError}
+                      >
+                        <input
+                          type='text'
+                          inputMode='decimal'
+                          pattern='[2-9][0-9]'
+                          required
+                          placeholder='24'
+                          value={expirationYear}
+                          onChange={(e: TChange): void => {
+                            setExpirationYear(e.target.value);
+                            e.target.validity.valid && setExpirationYearError(false);
+                          }}
+                          onInvalid={(): void => setExpirationYearError(true)}
+                          />
+                      </LabelText>
 
-                    <Cvv>
+                      <Error>
+                        {(expirationMonthError || expirationYearError) && 'Enter a valid expiration date'}
+                      </Error>
+                    </ExpirationWrapper>
+
+                    <LabelText
+                      labelMargin='0 0 0 25px'
+                      inputWidth='85px'
+                      error={cvvError}
+                    >
                       CVV*
-                      <input type='text' required />
-                    </Cvv>
+                      <input
+                        type='text'
+                        inputMode='decimal'
+                        pattern='[0-9]{3}'
+                        maxLength={4}
+                        required
+                        placeholder='123'
+                        value={cvv}
+                        onChange={(e: TChange): void => {
+                          setCvv(e.target.value);
+                          e.target.validity.valid && setCvvError(false);
+                        }}
+                        onInvalid={(): void => setCvvError(true)}
+                      />
+                    </LabelText>
 
                     <ButtonBlack>CONTINUE</ButtonBlack>
                   </form>
@@ -819,7 +1019,10 @@ const Checkout = (): JSX.Element => {
               }
 
 
-              <TitleWrapperOuter status={step === 5}>
+              <TitleWrapperOuter
+                status={step === 5}
+                onClick={(): void => setStep(5)}
+              >
                 <TitleWrapperInner>
                   <Title status={step === 5}>05. ORDER REVIEW</Title>
                   {step === 5 && <Required>*Required</Required>}
@@ -833,18 +1036,36 @@ const Checkout = (): JSX.Element => {
                       Please review all the information on this page.<br />
                       Press the order now button to confirm your purchase.
                     </p>
-                    <OrderNow type='button'>ORDER NOW</OrderNow>
+                    <OrderNow
+                      type='button'
+                      onClick={(): void => {
+                        if (!step4Complete) setStep(4);
+                        if (!step2Complete && activeAccountId === -1) setStep(2);
+
+                        const confirmPurchase = (): void => {
+                          setOrderPaid(true);
+                          setTimeout((): void => {
+                            dispatch(cartReset());
+                            window.scroll(0, 0);
+                          }, 2000);
+                        }
+
+                        if (activeAccountId === -1) {
+                          if (step2Complete && step4Complete) confirmPurchase();
+                        } else {
+                          if (step4Complete) confirmPurchase();
+                        }
+                      }}
+                    >
+                      {orderPaid ? 'ORDER HAS BEEN PAID' : 'ORDER NOW'}
+                    </OrderNow>
                   </div>
                 </Step5>
               }
             </Steps>
-
-
             {screen.big && <CartCheckout />}
           </>
-
           :
-
           <>
             <h2>NO SELECTED PRODUCTS</h2>
             <ContinueShopping to='/catalog#top'>CONTINUE SHOPPING</ContinueShopping>
