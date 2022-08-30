@@ -36,7 +36,9 @@ export const cartSlice = createSlice({
     cartProductColor: (state, action: PayloadAction<IProduct>): void => {
       const index = state.findIndex(product => product.id === action.payload.id);
       state[index].color = action.payload.color;
-    }
+    },
+
+    cartReset: () => []
   }
 });
 
@@ -47,7 +49,8 @@ export const {
   quantityIncrement,
   quantityDecrement,
   cartProductSize,
-  cartProductColor
+  cartProductColor,
+  cartReset
 } = cartSlice.actions;
 
 export default cartSlice.reducer;
