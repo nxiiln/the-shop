@@ -2,7 +2,10 @@ import {useEffect, useState} from 'react';
 import styled from 'styled-components/macro';
 import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
 import {Link, useNavigate} from 'react-router-dom';
-import {useAppSelector} from '../redux-hooks';
+import {useAppSelector, useAppDispatch} from '../redux-hooks';
+import {accountLogIn} from '../slices/account';
+import {cartReset} from '../slices/cart';
+import {TAccount} from '../types/TAccount';
 import BreadCrumbs from './BreadCrumbs';
 import AlsoLove from './AlsoLove';
 import CartCheckout from './CartCheckout';
@@ -11,10 +14,6 @@ import masterCardIcon from '../images/masterCardIcon.png';
 import discoverIcon from '../images/discoverIcon.png';
 import americanExpressIcon from '../images/americanExpressIcon.png';
 import {ContinueShopping} from './Cart';
-import {accountLogIn} from '../slices/account';
-import {TAccount} from '../types/TAccount';
-import {useDispatch} from 'react-redux';
-import {cartReset} from '../slices/cart';
 
 
 
@@ -423,7 +422,7 @@ const Checkout = (): JSX.Element => {
   
   const screen = useMediaQuery();
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   
   const [step, setStep] = useState<number>(activeAccountId === -1 ? 1 : 3);
   const [step2Complete, setStep2Complete] = useState<boolean>(false);
