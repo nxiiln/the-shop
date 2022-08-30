@@ -227,9 +227,8 @@ const CheckoutStep1 = (): JSX.Element => {
           
           if (newCustomers === 'register') {
             navigate('/login');
-            dispatch(checkoutSetStep(2));
             window.scroll(0, 0);
-          }
+          } else dispatch(checkoutSetStep(2));
         }}>
           <LabelRadio inputMargin='0 10px 0 0'>
             <input
