@@ -8,7 +8,7 @@ interface ICheckout {
 }
 
 const initialState: ICheckout = {
-  step: 1,
+  step: 0,
   step2Complete: false,
   step4Complete: false
 };
