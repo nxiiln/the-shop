@@ -13,6 +13,7 @@ import AlsoLove from './AlsoLove';
 import CartCheckout from './CartCheckout';
 import {LabelText, LabelRadio, LabelError} from './Labels';
 import CheckoutStep1 from './CheckoutStep1';
+import CheckoutStep2 from './CheckoutStep2';
 
 import visaIcon from '../images/visaIcon.png';
 import masterCardIcon from '../images/masterCardIcon.png';
@@ -120,52 +121,6 @@ const ButtonBlack = styled.button`
   cursor: pointer;
 
   &:hover {background: var(--color-button-solid-hover)}
-`;
-
-
-// Step2
-const Step2 = styled.div`
-  width: 675px;
-  height: 500px;
-  margin-bottom: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid var(--color-border);
-  border-top: none;
-
-  @media ${mediumScreen}, ${smallScreen} {width: 100%}
-  @media ${smallScreen} {height: 750px}
-`;
-
-const Step2Form = styled.form`
-  width: 608px;
-  height: auto;
-
-  > button {margin-left: calc(50% - 144px / 2)}
-
-  @media ${smallScreen} {
-    width: 290px;
-    height: auto;
-  }
-`;
-
-const Step2FormWrapper = styled.div`
-  width: 605px;
-  height: 320px;
-  margin-bottom: 25px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: space-between;
-
-  @media ${smallScreen} {
-    width: 290px;
-    height: 550px;
-    margin-bottom: 50px;
-    flex-wrap: nowrap;
-    flex-direction: column;
-  }
 `;
 
 
@@ -314,21 +269,6 @@ const Checkout = (): JSX.Element => {
   const step2Complete = useAppSelector(state => state.checkout.step2Complete);
   const step4Complete = useAppSelector(state => state.checkout.step4Complete);
 
-  const [email, setEmail] = useState<string>(''); // 1 2
-  const [emailError, setEmailError] = useState<boolean>(false); // 1 2
-
-  const [firstName, setFirstName] = useState<string>(''); // 2
-  const [firstNameError, setFirstNameError] = useState<boolean>(false); // 2
-  const [lastName, setLastName] = useState<string>(''); // 2
-  const [lastNameError, setLastNameError] = useState<boolean>(false); // 2
-
-  const [address1, setAddress1] = useState<string>(''); // 2
-  const [address2, setAddress2] = useState<string>(''); // 2
-  const [country, setCountry] = useState<string>(''); // 2
-  const [city, setCity] = useState<string>(''); // 2
-  const [zip, setZip] = useState<string>(''); // 2
-  const [zipError, setZipError] = useState<boolean>(false); // 2
-
   const [shippingMethod, setShippingMethod] = useState<string>('ground'); // 3
 
   const [cardHolder, setCardHolder] = useState<string>(''); // 4
@@ -347,8 +287,6 @@ const Checkout = (): JSX.Element => {
 
   type TForm = React.FormEvent<HTMLFormElement>;
   type TChange = React.ChangeEvent<HTMLInputElement>;
-  type TFocus = React.FocusEvent<HTMLInputElement>;
-
 
   useEffect((): void => {
     if (step2Complete && step4Complete) {
@@ -401,139 +339,7 @@ const Checkout = (): JSX.Element => {
                 {step === 2 && <Required>*Required</Required>}
               </TitleWrapper>
 
-              {step === 2 &&
-                <Step2>
-                  <Step2Form
-                    noValidate
-                    onSubmit={(e: TForm): void => {
-                      e.preventDefault();
-                      if (e.currentTarget.checkValidity()) {
-                        dispatch(checkoutSetStep2Complete(true));
-                        dispatch(checkoutSetStep(3))
-                      }
-                    }}
-                  >
-                    <Step2FormWrapper>
-                      <LabelText
-                        inputWidth='290px'
-                        error={firstNameError}
-                      >
-                        FIRST NAME*
-                        <input
-                          type='text'
-                          required
-                          value={firstName}
-                          onChange={(e: TChange): void => {
-                            setFirstName(e.target.value);
-                            e.target.validity.valid && setFirstNameError(false);
-                          }}
-                          onInvalid={(): void => setFirstNameError(true)}
-                        />
-                        <LabelError>{firstNameError && 'Enter first name'}</LabelError>
-                      </LabelText>
-
-                      <LabelText
-                        inputWidth='290px'
-                        error={lastNameError}
-                      >
-                        LAST NAME*
-                        <input
-                          type='text'
-                          required
-                          value={lastName}
-                          onChange={(e: TChange): void => {
-                            setLastName(e.target.value);
-                            e.target.validity.valid && setLastNameError(false);
-                          }}
-                          onInvalid={(): void => setLastNameError(true)}
-                        />
-                        <LabelError>{lastNameError && 'Enter last name'}</LabelError>
-                      </LabelText>
-
-                      <LabelText inputWidth='290px' >
-                        ADDRESS 1
-                        <input
-                          type='text'
-                          value={address1}
-                          onChange={(e: TChange): void => setAddress1(e.target.value)}
-                        />
-                      </LabelText>
-
-                      <LabelText inputWidth='290px' >
-                        ADDRESS 2
-                        <input
-                          type='text'
-                          value={address2}
-                          onChange={(e: TChange): void => setAddress2(e.target.value)}
-                        />
-                      </LabelText>
-
-                      <LabelText inputWidth='290px' >
-                        COUNTRY
-                        <input
-                          type='text'
-                          value={country}
-                          onChange={(e: TChange): void => setCountry(e.target.value)}
-                        />
-                      </LabelText>
-
-                      <LabelText inputWidth='290px' >
-                        CITY
-                        <input
-                          type='text'
-                          value={city}
-                          onChange={(e: TChange): void => setCity(e.target.value)}
-                        />
-                      </LabelText>
-
-                      <LabelText
-                        inputWidth='290px'
-                        error={zipError}
-                      >
-                        ZIP / POSTAL CODE*
-                        <input
-                          type='text'
-                          required
-                          value={zip}
-                          onChange={(e: TChange): void => {
-                            setZip(e.target.value);
-                            e.target.validity.valid && setZipError(false);
-                          }}
-                          onInvalid={(): void => setZipError(true)}
-                        />
-                        <LabelError>{zipError && 'Enter zip / postal code'}</LabelError>
-                      </LabelText>
-
-                      <LabelText
-                        inputWidth='290px'
-                        error={emailError}
-                      >
-                        E-MAIL*
-                        <input
-                          type='email'
-                          pattern='.+@.+\..+'
-                          required
-                          placeholder='your@email.com'
-                          value={email}
-
-                          onChange={(e: TChange): void => {
-                            setEmail(e.target.value);
-                            e.target.validity.valid && setEmailError(false);
-                          }}
-
-                          onBlur={(e: TFocus): void => {
-                            if (email && !e.target.validity.valid) setEmailError(true);
-                          }}
-
-                          onInvalid={(): void => setEmailError(true)}
-                        />
-                        <LabelError>{emailError && 'Enter a valid email'}</LabelError>
-                      </LabelText>
-                    </Step2FormWrapper>
-                    <ButtonBlack>CONTINUE</ButtonBlack>
-                  </Step2Form>
-                </Step2>
-              }
+              {step === 2 && <CheckoutStep2 />}
 
 
               <TitleWrapper
