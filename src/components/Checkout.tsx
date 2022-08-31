@@ -11,9 +11,10 @@ import {TAccount} from '../types/TAccount';
 import BreadCrumbs from './BreadCrumbs';
 import AlsoLove from './AlsoLove';
 import CartCheckout from './CartCheckout';
-import {LabelText, LabelRadio, LabelError} from './Labels';
+import {LabelText, LabelError} from './Labels';
 import CheckoutStep1 from './CheckoutStep1';
 import CheckoutStep2 from './CheckoutStep2';
+import CheckoutStep3 from './CheckoutStep3';
 
 import visaIcon from '../images/visaIcon.png';
 import masterCardIcon from '../images/masterCardIcon.png';
@@ -121,41 +122,6 @@ const ButtonBlack = styled.button`
   cursor: pointer;
 
   &:hover {background: var(--color-button-solid-hover)}
-`;
-
-
-// Step3
-const Step3 = styled.div`
-  width: 675px;
-  height: 286px;
-  margin-bottom: 10px;
-  border: 1px solid var(--color-border);
-  border-top: none;
-
-  > form {
-    width: 430px;
-    height: 220px;
-    position: relative;
-    top: 30px;
-    left: 25px;
-
-    @media ${smallScreen} {width: 250px}
-
-    > span {
-      display: inline-block;
-      margin-bottom: 38px;
-      font-family: var(--font-second);
-      font-size: 13px;
-      font-weight: 400;
-      color: var(--color-text-main);
-
-      @media ${smallScreen} {width: 250px}
-    }
-
-    > label:nth-child(5) {margin-bottom: 30px}
-  }
-
-  @media ${mediumScreen}, ${smallScreen} {width: 100%}
 `;
 
 
@@ -269,8 +235,6 @@ const Checkout = (): JSX.Element => {
   const step2Complete = useAppSelector(state => state.checkout.step2Complete);
   const step4Complete = useAppSelector(state => state.checkout.step4Complete);
 
-  const [shippingMethod, setShippingMethod] = useState<string>('ground'); // 3
-
   const [cardHolder, setCardHolder] = useState<string>(''); // 4
   const [cardHolderError, setCardHolderError] = useState<boolean>(false); // 4
   const [cardNumber, setCardNumber] = useState<string>(''); // 4
@@ -350,70 +314,7 @@ const Checkout = (): JSX.Element => {
                 {step === 3 && <Required>*Required</Required>}
               </TitleWrapper>
 
-              {step === 3 &&
-                <Step3>
-                  <form onSubmit={(e: TForm): void => {
-                    e.preventDefault();
-                    dispatch(checkoutSetStep(4));
-                  }}>
-                    <span>PLEASE CHOOSE A SHIPPING METHOD TO DELIVERY YOUR ORDER:</span>
-
-                    <LabelRadio
-                      labelWidth='200px'
-                      labelMargin='0 0 15px 0'
-                      inputMargin='0 15px 0 0'
-                    >
-                      <input
-                        type='radio'
-                        checked={shippingMethod === 'ground'}
-                        onChange={(): void => setShippingMethod('ground')}
-                      />
-                      UPS (GROUND) $7.25
-                    </LabelRadio>
-
-                    <LabelRadio
-                      labelWidth='200px'
-                      labelMargin='0 0 15px 0'
-                      inputMargin='0 15px 0 0'
-                    >
-                      <input
-                        type='radio'
-                        checked={shippingMethod === '3-day-select'}
-                        onChange={(): void => setShippingMethod('3-day-select')}
-                      />
-                      UPS (3 DAY SELECT) $9.75
-                    </LabelRadio>
-
-                    <LabelRadio
-                      labelWidth='200px'
-                      labelMargin='0 0 15px 0'
-                      inputMargin='0 15px 0 0'
-                    >
-                      <input
-                        type='radio'
-                        checked={shippingMethod === 'next-day-air'}
-                        onChange={(): void => setShippingMethod('next-day-air')}
-                      />
-                      UPS (NEXT DAY AIR) $17.25
-                    </LabelRadio>
-
-                    <LabelRadio
-                      labelWidth='200px'
-                      labelMargin='0 0 15px 0'
-                      inputMargin='0 15px 0 0'
-                    >
-                      <input
-                        type='radio'
-                        checked={shippingMethod === 'second-day-air'}
-                        onChange={(): void => setShippingMethod('second-day-air')}
-                      />
-                      UPS (SECOND DAY AIR) $12.25
-                    </LabelRadio>
-
-                    <ButtonBlack>CONTINUE</ButtonBlack>
-                  </form>
-                </Step3>
-              }
+              {step === 3 && <CheckoutStep3 />}
 
 
               <TitleWrapper
