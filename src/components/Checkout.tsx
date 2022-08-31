@@ -300,7 +300,7 @@ const Checkout = (): JSX.Element => {
   const dispatch = useAppDispatch();
   
   const checkoutStep = useAppSelector(state => state.checkout.step);
-  const step: number = (checkoutStep === 0) ? (activeAccountId === -1 ? 1 : 3) : checkoutStep;
+  const step: number = activeAccountId === -1 ? checkoutStep : 3;
 
   const step2Complete = useAppSelector(state => state.checkout.step2Complete);
   const step4Complete = useAppSelector(state => state.checkout.step4Complete);
