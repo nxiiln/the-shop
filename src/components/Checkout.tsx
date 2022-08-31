@@ -298,10 +298,19 @@ const Checkout = (): JSX.Element => {
   
   const screen = useMediaQuery();
   const dispatch = useAppDispatch();
-  
   const checkoutStep = useAppSelector(state => state.checkout.step);
-  const step: number = activeAccountId === -1 ? checkoutStep : 3;
 
+  const calculateStep = (): number => {
+    if (activeAccountId > -1) {
+      if (checkoutStep < 3) {
+        dispatch(checkoutSetStep(3));
+        return checkoutStep;
+      }
+    }
+    return checkoutStep;
+  }
+
+  const step = calculateStep();
   const step2Complete = useAppSelector(state => state.checkout.step2Complete);
   const step4Complete = useAppSelector(state => state.checkout.step4Complete);
 
@@ -549,7 +558,6 @@ const Checkout = (): JSX.Element => {
                     >
                       <input
                         type='radio'
-                        value='ground'
                         checked={shippingMethod === 'ground'}
                         onChange={(): void => setShippingMethod('ground')}
                       />
@@ -574,9 +582,8 @@ const Checkout = (): JSX.Element => {
                     >
                       <input
                         type='radio'
-                        value='next-day-air'
                         checked={shippingMethod === 'next-day-air'}
-                        onChange={(): void => setShippingMethod('nex-day-air')}
+                        onChange={(): void => setShippingMethod('next-day-air')}
                       />
                       UPS (NEXT DAY AIR) $17.25
                     </LabelRadio>
@@ -587,7 +594,6 @@ const Checkout = (): JSX.Element => {
                     >
                       <input
                         type='radio'
-                        value='second-day-air'
                         checked={shippingMethod === 'second-day-air'}
                         onChange={(): void => setShippingMethod('second-day-air')}
                       />
