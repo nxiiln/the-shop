@@ -553,6 +553,7 @@ const Checkout = (): JSX.Element => {
                     <span>PLEASE CHOOSE A SHIPPING METHOD TO DELIVERY YOUR ORDER:</span>
 
                     <LabelRadio
+                      labelWidth='200px'
                       labelMargin='0 0 15px 0'
                       inputMargin='0 15px 0 0'
                     >
@@ -565,6 +566,7 @@ const Checkout = (): JSX.Element => {
                     </LabelRadio>
 
                     <LabelRadio
+                      labelWidth='200px'
                       labelMargin='0 0 15px 0'
                       inputMargin='0 15px 0 0'
                     >
@@ -577,6 +579,7 @@ const Checkout = (): JSX.Element => {
                     </LabelRadio>
 
                     <LabelRadio
+                      labelWidth='200px'
                       labelMargin='0 0 15px 0'
                       inputMargin='0 15px 0 0'
                     >
@@ -589,6 +592,7 @@ const Checkout = (): JSX.Element => {
                     </LabelRadio>
 
                     <LabelRadio
+                      labelWidth='200px'
                       labelMargin='0 0 15px 0'
                       inputMargin='0 15px 0 0'
                     >

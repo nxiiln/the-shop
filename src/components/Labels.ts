@@ -31,7 +31,13 @@ export const LabelText = styled(Label)<{labelMargin?: string, inputWidth?: strin
   }
 `;
 
-export const LabelCheckbox = styled(Label)<{labelMargin?: string, inputMargin?: string}>`
+interface ICheckboxRadio {
+  labelWidth?: string;
+  labelMargin?: string;
+  inputMargin?: string;
+}
+
+export const LabelCheckbox = styled(Label)<ICheckboxRadio>`
   height: 18px;
   margin: ${props => props.labelMargin};
   display: flex;
@@ -45,7 +51,8 @@ export const LabelCheckbox = styled(Label)<{labelMargin?: string, inputMargin?: 
   }
 `;
 
-export const LabelRadio = styled(Label)<{labelMargin?: string, inputMargin?: string}>`
+export const LabelRadio = styled(Label)<ICheckboxRadio>`
+  width: ${props => props.labelWidth};
   height: 14px;
   margin: ${props => props.labelMargin};
   display: flex;
