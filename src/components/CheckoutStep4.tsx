@@ -225,6 +225,7 @@ const CheckoutStep4 = (): JSX.Element => {
             }}
             onInvalid={(): void => setCvvError(true)}
           />
+          <LabelError>{cvvError && 'Enter CVV'}</LabelError>
         </LabelText>
 
         <ButtonBlack>CONTINUE</ButtonBlack>
