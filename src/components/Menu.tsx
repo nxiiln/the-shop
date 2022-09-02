@@ -1,7 +1,6 @@
-import React, {useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import styled from 'styled-components/macro';
 import {smallScreen, mediumScreen, useMediaQuery} from '../mediaQueries';
-import {useNavigate} from 'react-router-dom';
 import {HashLink} from 'react-router-hash-link';
 import imageMenuInner from '../images/imageMenuInner.png';
 import {useAppSelector} from '../redux-hooks';
@@ -157,7 +156,7 @@ const MenuInnerWrapper = styled.div`
   justify-content: space-between;
 `;
 
-const MenuInner = styled.ul`
+const MenuInner = styled.div`
   width: 110px;
   margin: 0;
   padding: 0;
@@ -165,7 +164,7 @@ const MenuInner = styled.ul`
   flex-direction: column;
   justify-content: flex-start;
 
-  > li:first-child {
+  > a:first-child {
     font-family: var(--font-second);
     font-size: 13px;
     line-height: 1.2;
@@ -174,15 +173,14 @@ const MenuInner = styled.ul`
     color: var(--color-text-main);
   }
 
-  > li {
+  > a {
     height: 30px;
-    display: inline-block;
     font-family: var(--font-second);
     font-size: 14px;
     line-height: 28px;
     font-weight: 300;
     color: var(--color-text-regular);
-    cursor: pointer;
+    text-decoration: none;
     user-select: none;
 
     &:hover {color: var(--color-text-main)}
@@ -222,19 +220,11 @@ const Menu = (): JSX.Element => {
   const [number, setNumber] = useState<number>(0);
   const [dropdownMenu, setDropdownMenu] = useState<boolean>(false);
   const screen = useMediaQuery();
-  const navigate = useNavigate();
 
   const activeAccount: boolean = useAppSelector(
     state => state.account.accounts
       .findIndex((account: TAccount): boolean => account.isActive) !== -1
   );
-
-  const goToCatalog = (e: React.MouseEvent<HTMLUListElement, MouseEvent>): void => {
-    if (e.target !== e.currentTarget) {
-      navigate('/catalog');
-      window.scroll(0, 0);
-    }
-  };
 
   useEffect(() => {
     dropdownMenu ?
@@ -285,38 +275,38 @@ const Menu = (): JSX.Element => {
             <MenuOpenWrapper>
               <MenuOpen>
                 <MenuInnerWrapper>
-                  <MenuInner onClick={goToCatalog}>
-                    <li>bottoms</li>
-                    <li>Jeans</li>
-                    <li>Pants</li>
-                    <li>Shorts</li>
-                    <li>Skirts</li>
-                    <li>Dresses</li>
+                  <MenuInner>
+                    <HashLink to='catalog'>bottoms</HashLink>
+                    <HashLink to='catalog'>Jeans</HashLink>
+                    <HashLink to='catalog'>Pants</HashLink>
+                    <HashLink to='catalog'>Shorts</HashLink>
+                    <HashLink to='catalog'>Skirts</HashLink>
+                    <HashLink to='catalog'>Dresses</HashLink>
                   </MenuInner>
 
-                  <MenuInner onClick={goToCatalog}>
-                    <li>tops</li>
-                    <li>Jackets & Coats</li>
-                    <li>Shirts</li>
-                    <li>T-shirts</li>
-                    <li>Knitwear</li>
-                    <li>Sweats</li>
+                  <MenuInner>
+                    <HashLink to='catalog'>tops</HashLink>
+                    <HashLink to='catalog'>Jackets & Coats</HashLink>
+                    <HashLink to='catalog'>Shirts</HashLink>
+                    <HashLink to='catalog'>T-shirts</HashLink>
+                    <HashLink to='catalog'>Knitwear</HashLink>
+                    <HashLink to='catalog'>Sweats</HashLink>
                   </MenuInner>
 
-                  <MenuInner onClick={goToCatalog}>
-                    <li>shoes & more</li>
-                    <li>Shoes</li>
-                    <li>Underwear</li>
-                    <li>Accessories</li>
-                    <li>Collectables</li>
-                    <li>Eyewear</li>
+                  <MenuInner>
+                    <HashLink to='catalog'>shoes & more</HashLink>
+                    <HashLink to='catalog'>Shoes</HashLink>
+                    <HashLink to='catalog'>Underwear</HashLink>
+                    <HashLink to='catalog'>Accessories</HashLink>
+                    <HashLink to='catalog'>Collectables</HashLink>
+                    <HashLink to='catalog'>Eyewear</HashLink>
                   </MenuInner>
 
-                  <MenuInner onClick={goToCatalog}>
-                    <li>collections</li>
-                    <li>New arrivals</li>
-                    <li>Urban Style</li>
-                    <li>Raw Correct</li>
+                  <MenuInner>
+                    <HashLink to='catalog'>collections</HashLink>
+                    <HashLink to='catalog'>New arrivals</HashLink>
+                    <HashLink to='catalog'>Urban Style</HashLink>
+                    <HashLink to='catalog'>Raw Correct</HashLink>
                   </MenuInner>
                 </MenuInnerWrapper>
 
