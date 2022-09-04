@@ -1,9 +1,9 @@
 import {useState, useEffect} from 'react';
-import {useAppDispatch, useAppSelector} from '../redux-hooks';
 import styled from 'styled-components';
+import {useAppDispatch, useAppSelector} from '../redux-hooks';
 import {accountChangePersonalInfo} from '../slices/account';
-import {LabelText, LabelCheckbox, LabelError} from './Labels';
 import {TAccount} from '../types/TAccount';
+import {LabelText, LabelCheckbox, LabelError} from './Labels';
 
 
 
@@ -47,8 +47,6 @@ const Required = styled.span`
 
 
 const AccountPersonalInfo = (): JSX.Element => {
-  const dispatch = useAppDispatch();
-
   const stateAccount = useAppSelector(state => state.account);
   const accountId = stateAccount.accounts
     .findIndex((account: TAccount): boolean => account.isActive);
@@ -73,6 +71,7 @@ const AccountPersonalInfo = (): JSX.Element => {
   ] = useState<boolean>(account?.newsletterSubscription);
 
   const [changesApplied, setChangesApplied] = useState<boolean>(false);
+  const dispatch = useAppDispatch();
 
   useEffect((): void => {
     if (confirmNewPassword) {
@@ -80,6 +79,14 @@ const AccountPersonalInfo = (): JSX.Element => {
         setConfirmNewPasswordError(true) : setConfirmNewPasswordError(false);
     }
   }, [newPassword, confirmNewPassword, confirmNewPasswordError]);
+
+  useEffect((): void => {
+    if (changesApplied) {
+      setTimeout((): void => {
+        setChangesApplied(false);
+      }, 2000);
+    }
+  }, [changesApplied]);
 
 
   return(
