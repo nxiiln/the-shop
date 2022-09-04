@@ -118,7 +118,7 @@ const CheckoutStep5 = (): JSX.Element => {
             if (activeAccountId === -1) {
               if (step2Complete && step4Complete) confirmPurchase();
             } else {
-              if (!step4Complete) confirmPurchase();
+              if (step4Complete) confirmPurchase();
             }
           }}
         >
