@@ -214,8 +214,7 @@ const CreateAccount = (): JSX.Element => {
   const [confirmPasswordError, setConfirmPasswordError] = useState<boolean>(false);
 
   const [newsletterSubscription, setNewsletterSubscription] = useState<boolean>(true);
-  const [address1, setAddress1] = useState<string>('');
-  const [address2, setAddress2] = useState<string>('');
+  const [address, setAddress] = useState<string>('');
   const [country, setCountry] = useState<string>('');
   const [city, setCity] = useState<string>('');
 
@@ -267,8 +266,7 @@ const CreateAccount = (): JSX.Element => {
                   email: email,
                   password: password,
                   newsletterSubscription: newsletterSubscription,
-                  address1: address1,
-                  address2: address2,
+                  address: address,
                   country: country,
                   city: city,
                   zip: zip
@@ -383,20 +381,11 @@ const CreateAccount = (): JSX.Element => {
               <AddressInformation>
                 <Description>ADDRESS INFORMATION</Description>
                 <LabelText>
-                  ADDRESS 1
+                  ADDRESS
                   <input
                     type='text'
-                    value={address1}
-                    onChange={(e: TChange): void => setAddress1(e.target.value)}
-                  />
-                </LabelText>
-
-                <LabelText>
-                  ADDRESS 2
-                  <input
-                    type='text'
-                    value={address2}
-                    onChange={(e: TChange): void => setAddress2(e.target.value)}
+                    value={address}
+                    onChange={(e: TChange): void => setAddress(e.target.value)}
                   />
                 </LabelText>
 

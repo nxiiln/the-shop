@@ -4,8 +4,10 @@ import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
 import {Link} from 'react-router-dom';
 import BreadCrumbs from './BreadCrumbs';
 import {useAppDispatch, useAppSelector} from '../redux-hooks';
-import {TAccount} from '../types/TAccount';
 import {accountChangePersonalInfo, accountChangeAddressInfo} from '../slices/account';
+import {TAccount} from '../types/TAccount';
+import {IOrder} from '../types/IOrder';
+import {IProduct} from '../types/IProduct';
 
 
 
@@ -58,6 +60,7 @@ const Tabs = styled.div`
     align-items: center;
     border-left: 1px solid var(--color-border);
     border-right: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
 
     > form {margin: 45px 0 45px}
   }
@@ -190,7 +193,7 @@ const Required = styled.span`
 // OrderHystory
 const OrderHistory = styled.div`
   width: 674px;
-  margin-top: 48px;
+  margin: 50px 0;
 
   @media ${smallScreen} {
     width: 100%;
@@ -199,11 +202,19 @@ const OrderHistory = styled.div`
   }
 `;
 
+const NoOrders = styled.span`
+  margin: 40px 0;
+  font-family: var(--font-second);
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--color-text-main);
+`;
+
 const OrderHistoryHeader = styled.div`
   width: 100%;
   height: 25px;
   display: grid;
-  grid-template-columns: 33px 205px 137px 130px 1fr;
+  grid-template-columns: 30px 205px 137px 130px 1fr;
 
   > span {
     font-family: var(--font-second);
@@ -335,7 +346,7 @@ const OrderDetailsHeader = styled.div`
 `;
 
 const OrderDetailsBody = styled.div`
-  height: 40px;
+  height: 60px;
   display: grid;
   grid-template-columns: 200px 125px 125px 1fr;
   align-items: center;
@@ -346,10 +357,11 @@ const OrderDetailsBody = styled.div`
     font-size: 10px;
     line-height: 14px;
     font-weight: 400;
+    text-transform: uppercase;
     color: var(--color-text-main);
   }
   
-  > span:last-child {justify-self: end;}
+  > span:nth-child(4n) {justify-self: end;}
   
   @media ${smallScreen} {
     grid-template-columns: 1fr 1fr;
@@ -429,112 +441,9 @@ const Error = styled.span`
 
 
 
-interface Order {
-  view: boolean;
-  number: string;
-  name: string;
-  datePurchased: string;
-  dateDespathed: string;
-  addressDelivery: string;
-  addressBilling: string;
-  status: string;
-  price: number;
-  qty: number;
-  amount(): number;
-  deliveryCosts: number;
-  giftVoucher: number;
-  total(): number;
-}
-
-const orders: Order[] = [
-  {
-    view: false,
-    number: 'FN9136137',
-    name: 'DETAILED SWING DRESS',
-    datePurchased: '02/02/2022',
-    dateDespathed: '04/02/2022',
-    addressDelivery: 'User User, Street1, City9, USA 10014',
-    addressBilling: 'User User, Street1, City9, USA 10014',
-    status: 'despatched',
-    price: 275,
-    qty: 1,
-    amount() {return this.price * this.qty},
-    deliveryCosts: 35,
-    giftVoucher: 5,
-    total() {return this.amount() + this.deliveryCosts - this.giftVoucher},
-  },
-  {
-    view: false,
-    number: 'FN9135142',
-    name: 'DETAILED SWING DRESS',
-    datePurchased: '16/01/2022',
-    dateDespathed: '18/01/2022',
-    addressDelivery: 'User User, Street1, City9, USA 10014',
-    addressBilling: 'User User, Street1, City9, USA 10014',
-    status: 'despatched',
-    price: 325,
-    qty: 1,
-    amount() {return this.price * this.qty},
-    deliveryCosts: 35,
-    giftVoucher: 5,
-    total() {return this.amount() + this.deliveryCosts - this.giftVoucher},
-  },
-  {
-    view: false,
-    number: 'FN9135132',
-    name: 'DETAILED SWING DRESS',
-    datePurchased: '08/01/2021',
-    dateDespathed: '10/01/2021',
-    addressDelivery: 'User User, Street1, City9, USA 10014',
-    addressBilling: 'User User, Street1, City9, USA 10014',
-    status: 'despatched',
-    price: 275,
-    qty: 2,
-    amount() {return this.price * this.qty},
-    deliveryCosts: 35,
-    giftVoucher: 5,
-    total() {return this.amount() + this.deliveryCosts - this.giftVoucher},
-  },
-  {
-    view: false,
-    number: 'FN9132142',
-    name: 'DETAILED SWING DRESS',
-    datePurchased: '04/01/2021',
-    dateDespathed: '06/01/2021',
-    addressDelivery: 'User User, Street1, City9, USA 10014',
-    addressBilling: 'User User, Street1, City9, USA 10014',
-    status: 'despatched',
-    price: 275,
-    qty: 3,
-    amount() {return this.price * this.qty},
-    deliveryCosts: 35,
-    giftVoucher: 5,
-    total() {return this.amount() + this.deliveryCosts - this.giftVoucher},
-  },
-  {
-    view: false,
-    number: 'FN9132138',
-    name: 'DETAILED SWING DRESS',
-    datePurchased: '02/01/2021',
-    dateDespathed: '04/01/2021',
-    addressDelivery: 'User User, Street1, City9, USA 10014',
-    addressBilling: 'User User, Street1, City9, USA 10014',
-    status: 'despatched',
-    price: 380,
-    qty: 1,
-    amount() {return this.price * this.qty},
-    deliveryCosts: 35,
-    giftVoucher: 5,
-    total() {return this.amount() + this.deliveryCosts - this.giftVoucher},
-  },
-];
-
-
-
-
 const MyAccount = (): JSX.Element => {
   const [tab, setTab] = useState<string>('myPersonalInfo');
-  const [currOrder, setCurrOrder] = useState<string>('');
+  const [currOrder, setCurrOrder] = useState<number>(0);
   const dispatch = useAppDispatch();
   const screen = useMediaQuery();
 
@@ -561,8 +470,7 @@ const MyAccount = (): JSX.Element => {
     setNewsletterSubscription
   ] = useState<boolean>(account?.newsletterSubscription);
 
-  const [address1, setAddress1] = useState<string>(account?.address1 || '');
-  const [address2, setAddress2] = useState<string>(account?.address2 || '');
+  const [address, setAddress] = useState<string>(account?.address || '');
   const [country, setCountry] = useState<string>(account?.country || '');
   const [city, setCity] = useState<string>(account?.city || '');
 
@@ -570,6 +478,8 @@ const MyAccount = (): JSX.Element => {
   const [zipError, setZipError] = useState<boolean>(false);
 
   const [changesApplied, setChangesApplied] = useState<boolean>(false);
+
+  const orders = account.orders || [];
 
   type TForm = React.FormEvent<HTMLFormElement>;
   type TChange = React.ChangeEvent<HTMLInputElement>;
@@ -717,8 +627,7 @@ const MyAccount = (): JSX.Element => {
 
         if (e.currentTarget.checkValidity()) {
           dispatch(accountChangeAddressInfo({
-            address1: address1,
-            address2: address2,
+            address: address,
             country: country,
             city: city,
             zip: zip
@@ -729,20 +638,11 @@ const MyAccount = (): JSX.Element => {
       }}
     >
       <LabelText>
-        ADDRESS 1
+        ADDRESS
         <input
           type='text'
-          value={address1}
-          onChange={(e: TChange): void => setAddress1(e.target.value)}
-        />
-      </LabelText>
-
-      <LabelText>
-        ADDRESS 2
-        <input
-          type='text'
-          value={address2}
-          onChange={(e: TChange): void => setAddress2(e.target.value)}
+          value={address}
+          onChange={(e: TChange): void => setAddress(e.target.value)}
         />
       </LabelText>
 
@@ -787,127 +687,130 @@ const MyAccount = (): JSX.Element => {
   
   
   const orderHistory: JSX.Element =
-    <OrderHistory>
-      <OrderHistoryHeader>
-        {!screen.small ?
-          <>
-            <span>ORDER NUMBER</span>
-            <span>DATE</span>
-          </>
-          :
-          <span>
-            <span>ORDER#</span>
-            <span>DATE</span>
-          </span>
-        }
-        <span>STATUS</span>
-        <span>TOTAL</span>
-      </OrderHistoryHeader>
-
-      {orders.map((order: Order): JSX.Element =>
-        <OrderWrapper key={order.number}>
-          <Order>
+    orders.length > 0 ? 
+      <>
+        <OrderHistory>
+          <OrderHistoryHeader>
             {!screen.small ?
               <>
-                <span>{order.number}</span>
-                <span>
-                  {order.status === 'despatched' ?
-                  order.dateDespathed : order.datePurchased}
-                </span>
+                <span>ORDER NUMBER</span>
+                <span>DATE</span>
               </>
               :
               <span>
-                <span>{order.number}</span>
-                <span>
-                  {order.status === 'despatched' ?
-                  order.dateDespathed : order.datePurchased}
-                </span>
+                <span>ORDER#</span>
+                <span>DATE</span>
               </span>
             }
+            <span>STATUS</span>
+            <span>TOTAL</span>
+          </OrderHistoryHeader>
 
-            <span>{order.status}</span>
-            <span>${order.total()}</span>
+          {orders.map((order: IOrder): JSX.Element => {
+            const subtotal: number = order.products
+              .map((product: IProduct): number => product.price * product.quantity)
+              .reduce((prevAmount, currAmount): number => prevAmount + currAmount);
 
-            <ButtonDetails
-              type='button'
-              status={order.number === currOrder}
-              onClick={(): void => {
-                order.number === currOrder ?
-                setCurrOrder('') : setCurrOrder(order.number);
-              }}
-            >
-              <span>{order.number === currOrder ? '+' : 'DETAILS'}</span>
-            </ButtonDetails>
-          </Order>
+            return(
+              <OrderWrapper key={order.id}>
+                <Order>
+                  {!screen.small ?
+                    <>
+                      <span>{order.id}</span>
+                      <span>paid</span>
+                    </>
+                    :
+                    <span>
+                      <span>{order.id}</span>
+                      <span>paid</span>
+                    </span>
+                  }
 
-          {order.number === currOrder && 
-            <OrderDetails>
-              <OrderDetailsHeader>
-                <span>PRODUCT</span>
-                {!screen.small &&
-                  <>
-                    <span>PRICE</span>
-                    <span>Q-TY</span>
-                  </>
+                  <span>paid</span>
+                  <span>${subtotal + 35 - 5}</span>
+
+                  <ButtonDetails
+                    type='button'
+                    status={order.id === currOrder}
+                    onClick={(): void => {
+                      order.id === currOrder ?
+                      setCurrOrder(0) : setCurrOrder(order.id);
+                    }}
+                  >
+                    <span>{order.id === currOrder ? '+' : 'DETAILS'}</span>
+                  </ButtonDetails>
+                </Order>
+
+                {order.id === currOrder && 
+                  <OrderDetails>
+                    <OrderDetailsHeader>
+                      <span>PRODUCT</span>
+                      {!screen.small &&
+                        <>
+                          <span>PRICE</span>
+                          <span>Q-TY</span>
+                        </>
+                      }
+                      <span>AMOUNT</span>
+                    </OrderDetailsHeader>
+
+                    <OrderDetailsBody>
+                      {order.products.map((product: IProduct): JSX.Element =>
+                        <>
+                          {!screen.small ?
+                            <>
+                              <span>{product.name}</span>
+                              <span>${product.price}</span>
+                              <span>{product.quantity}</span>
+                            </>
+                            :
+                            <span>
+                              <span>{product.name}</span>
+                              <span>{product.quantity} X ${product.price}</span>
+                            </span>
+                          }
+                          <span>${product.price * product.quantity}</span>
+                        </>
+                      )}
+                    </OrderDetailsBody>
+
+                    <TotalBlockWrapper>
+                      <TotalBlock>
+                        <span>SUBTOTAL</span>
+                        <span>${subtotal}</span>
+
+                        <span>DELIVERY COSTS</span>
+                        <span>$35</span>
+
+                        <span>GIFT VOUCHER</span>
+                        <span>$5</span>
+
+                        <TotalBlockLine />
+
+                        <span>TOTAL</span>
+                        <span>${subtotal + 35 - 5}</span>
+                      </TotalBlock>
+                    </TotalBlockWrapper>
+
+                    <DescriptionBlock>
+                      <span>Purchased on: </span>
+                      <span>{order.date}</span><br />
+
+                      <span>Order status: </span>
+                      <span>paid</span><br />
+
+                      <span>Delivery Address: </span>
+                      <span>{order.address || 'matches postal code'}</span><br />
+                    </DescriptionBlock>
+                  </OrderDetails>
                 }
-                <span>AMOUNT</span>
-              </OrderDetailsHeader>
-
-              <OrderDetailsBody>
-                {!screen.small ?
-                  <>
-                    <span>{order.name}</span>
-                    <span>${order.price}</span>
-                    <span>{order.qty}</span>
-                  </>
-                  :
-                  <span>
-                    <span>{order.name}</span>
-                    <span>{order.qty} X ${order.price}</span>
-                  </span>
-                }
-                <span>${order.amount()}</span>
-              </OrderDetailsBody>
-
-              <TotalBlockWrapper>
-                <TotalBlock>
-                  <span>SUBTOTAL</span>
-                  <span>${order.amount()}</span>
-
-                  <span>DELIVERY COSTS</span>
-                  <span>${order.deliveryCosts}</span>
-
-                  <span>GIFT VOUCHER</span>
-                  <span>${order.giftVoucher}</span>
-
-                  <TotalBlockLine />
-
-                  <span>TOTAL</span>
-                  <span>${order.total()}</span>
-                </TotalBlock>
-              </TotalBlockWrapper>
-
-              <DescriptionBlock>
-                <span>Purchased on: </span>
-                <span>{order.datePurchased}</span><br />
-
-                <span>Order status: </span>
-                <span>
-                  {order.status}{' '}
-                  {order.status === 'despatched' && order.dateDespathed}
-                </span><br />
-
-                <span>Delivery Address: </span>
-                <span>{order.addressDelivery}</span><br />
-
-                <span>Billing Address: </span>
-                <span>{order.addressBilling}</span>
-              </DescriptionBlock>
-            </OrderDetails>
-          }
-        </OrderWrapper>
-      )}
-    </OrderHistory>;
+              </OrderWrapper>
+            )
+          })}
+        </OrderHistory>
+      </>
+    :
+      <NoOrders>YOU DON'T HAVE ANY PAID ORDERS YET</NoOrders>;
 
 
   return(

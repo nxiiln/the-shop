@@ -10,8 +10,7 @@ import {LabelText, LabelError} from './Labels';
 
 const Step2 = styled.div`
   width: 675px;
-  height: 500px;
-  margin-bottom: 10px;
+  height: 570px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -19,34 +18,26 @@ const Step2 = styled.div`
   border-top: none;
 
   @media ${mediumScreen}, ${smallScreen} {width: 100%}
-  @media ${smallScreen} {height: 750px}
+  @media ${smallScreen} {height: 580px}
 `;
 
 const Step2Form = styled.form`
   width: 608px;
-  height: auto;
-
   > button {margin-left: calc(50% - 144px / 2)}
-
-  @media ${smallScreen} {
-    width: 290px;
-    height: auto;
-  }
+  @media ${smallScreen} {width: 290px}
 `;
 
 const Step2FormWrapper = styled.div`
   width: 605px;
-  height: 320px;
   margin-bottom: 25px;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: space-between;
+  align-items: center;
 
   @media ${smallScreen} {
     width: 290px;
-    height: 550px;
-    margin-bottom: 50px;
+    height: 450px;
     flex-wrap: nowrap;
     flex-direction: column;
   }
@@ -81,8 +72,7 @@ const CheckoutStep2 = (): JSX.Element => {
   const [lastName, setLastName] = useState<string>('');
   const [lastNameError, setLastNameError] = useState<boolean>(false);
 
-  const [address1, setAddress1] = useState<string>('');
-  const [address2, setAddress2] = useState<string>('');
+  const [address, setAddress] = useState<string>('');
   const [country, setCountry] = useState<string>('');
   const [city, setCity] = useState<string>('');
 
@@ -105,6 +95,7 @@ const CheckoutStep2 = (): JSX.Element => {
         <Step2FormWrapper>
           <LabelText
             inputWidth='290px'
+            labelMargin='0 0 20px 0'
             error={firstNameError}
           >
             FIRST NAME*
@@ -123,6 +114,7 @@ const CheckoutStep2 = (): JSX.Element => {
 
           <LabelText
             inputWidth='290px'
+            labelMargin='0 0 20px 0'
             error={lastNameError}
           >
             LAST NAME*
@@ -139,29 +131,24 @@ const CheckoutStep2 = (): JSX.Element => {
             <LabelError>{lastNameError && 'Enter last name'}</LabelError>
           </LabelText>
 
-          <LabelText inputWidth='290px' >
-            ADDRESS 1
+          <LabelText
+            inputWidth='290px'
+            labelMargin='0 0 20px 0'
+          >
+            ADDRESS
             <input
               type='text'
-              value={address1}
+              value={address}
               onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
-                setAddress1(e.target.value);
+                setAddress(e.target.value);
               }}
             />
           </LabelText>
 
-          <LabelText inputWidth='290px' >
-            ADDRESS 2
-            <input
-              type='text'
-              value={address2}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
-                setAddress2(e.target.value);
-              }}
-            />
-          </LabelText>
-
-          <LabelText inputWidth='290px' >
+          <LabelText
+            inputWidth='290px'
+            labelMargin='0 0 20px 0'
+          >
             COUNTRY
             <input
               type='text'
@@ -172,7 +159,10 @@ const CheckoutStep2 = (): JSX.Element => {
             />
           </LabelText>
 
-          <LabelText inputWidth='290px' >
+          <LabelText
+            inputWidth='290px'
+            labelMargin='0 0 20px 0'
+          >
             CITY
             <input
               type='text'
@@ -185,6 +175,7 @@ const CheckoutStep2 = (): JSX.Element => {
 
           <LabelText
             inputWidth='290px'
+            labelMargin='0 0 20px 0'
             error={zipError}
           >
             ZIP / POSTAL CODE*
@@ -203,6 +194,7 @@ const CheckoutStep2 = (): JSX.Element => {
 
           <LabelText
             inputWidth='290px'
+            labelMargin='0 0 20px 0'
             error={emailError}
           >
             E-MAIL*

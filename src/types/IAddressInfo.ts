@@ -1,6 +1,5 @@
 export interface IAddressInfo {
-  address1: string;
-  address2: string;
+  address: string;
   country: string;
   city: string;
   zip: string;

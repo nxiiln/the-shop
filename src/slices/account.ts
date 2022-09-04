@@ -2,6 +2,7 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {TAccount} from '../types/TAccount';
 import {IAccounts} from '../types/IAccounts';
 import {IPersonalInfo} from '../types/IPersonalInfo';
+import {IOrder} from '../types/IOrder';
 
 
 const initialState: IAccounts = {newEmail: '', accounts: []};
@@ -35,8 +36,7 @@ export const accountSlice = createSlice({
         (account: TAccount): boolean => account.isActive
       )];
 
-      account.address1 = action.payload.address1;
-      account.address2 = action.payload.address2;
+      account.address = action.payload.address;
       account.country = action.payload.country;
       account.city = action.payload.city;
       account.zip = action.payload.zip;
@@ -48,6 +48,15 @@ export const accountSlice = createSlice({
 
     accountLogOut: (state, action: PayloadAction<number>): void => {
       state.accounts[action.payload].isActive = false;
+    },
+
+    accountSetOrders: (state, action: PayloadAction<IOrder>): void => {
+      const account = state.accounts
+        [state.accounts.findIndex((account: TAccount): boolean => account.isActive)];
+
+      const orders = account.orders ? [...account.orders] : [];
+      orders.push(action.payload);
+      account.orders = orders;
     }
   }
 });
@@ -59,7 +68,8 @@ export const {
   accountChangePersonalInfo,
   accountChangeAddressInfo,
   accountLogIn,
-  accountLogOut
+  accountLogOut,
+  accountSetOrders
 } = accountSlice.actions;
 
 export default accountSlice.reducer;

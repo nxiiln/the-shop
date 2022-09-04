@@ -4,7 +4,9 @@ import {mediumScreen, smallScreen} from '../mediaQueries';
 import {useAppDispatch, useAppSelector} from '../redux-hooks';
 import {checkoutSetStep} from '../slices/checkout';
 import {cartReset} from '../slices/cart';
+import {accountSetOrders} from '../slices/account';
 import {TAccount} from '../types/TAccount';
+import {IOrder} from '../types/IOrder';
 
 
 
@@ -58,6 +60,7 @@ const OrderNow = styled(ButtonBlack)`
 
 
 const CheckoutStep5 = (): JSX.Element => {
+  const cart = useAppSelector(state => state.cart);
   const activeAccountId: number = useAppSelector(
     state => state.account.accounts
       .findIndex((account: TAccount): boolean => account.isActive)
@@ -66,6 +69,8 @@ const CheckoutStep5 = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const step2Complete = useAppSelector(state => state.checkout.step2Complete);
   const step4Complete = useAppSelector(state => state.checkout.step4Complete);
+  const orderId = useAppSelector(state => state.account.accounts[activeAccountId].orders?.length);
+  const address = useAppSelector(state => state.account.accounts[activeAccountId].address);
   const [orderPaid, setOrderPaid] = useState<boolean>(false);
 
   useEffect((): void => {
@@ -90,7 +95,21 @@ const CheckoutStep5 = (): JSX.Element => {
 
             const confirmPurchase = (): void => {
               setOrderPaid(true);
+              
               setTimeout((): void => {
+                const date = new Date();
+                const day: string = date.getDate() < 10 ?
+                  `0${date.getDate()}` : date.getDate() + '';
+                const month: string = date.getMonth() < 9 ?
+                  `0${date.getMonth() + 1}` : `${date.getMonth() + 1}`;
+
+                dispatch(accountSetOrders({
+                  id: orderId ? orderId + 1 : 1,
+                  date: `${day}.${month}.${date.getFullYear()}`,
+                  address: address,
+                  products: cart
+                }));
+
                 dispatch(cartReset());
                 window.scroll(0, 0);
               }, 2000);
@@ -99,7 +118,7 @@ const CheckoutStep5 = (): JSX.Element => {
             if (activeAccountId === -1) {
               if (step2Complete && step4Complete) confirmPurchase();
             } else {
-              if (step4Complete) confirmPurchase();
+              if (!step4Complete) confirmPurchase();
             }
           }}
         >
