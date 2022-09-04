@@ -120,6 +120,7 @@ const MainMenu = styled.div<{number: number}>`
     text-decoration: none;
     color: var(--color-text-main);
     cursor: pointer;
+    user-select: none;
 
     &:hover {
       border-bottom: 2px solid #000;
