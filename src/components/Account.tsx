@@ -4,10 +4,11 @@ import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
 import {Link} from 'react-router-dom';
 import BreadCrumbs from './BreadCrumbs';
 import {useAppDispatch, useAppSelector} from '../redux-hooks';
-import {accountChangePersonalInfo, accountChangeAddressInfo} from '../slices/account';
+import {accountChangeAddressInfo} from '../slices/account';
 import {TAccount} from '../types/TAccount';
 import {IOrder} from '../types/IOrder';
 import {IProduct} from '../types/IProduct';
+import AccountPersonalInfo from './AccountPersonalInfo';
 
 
 
@@ -137,20 +138,6 @@ const LabelText = styled(Label)<{error?: boolean}>`
         'var(--color-input-outline)' : 'var(--color-input-error)'
       };
     }
-  }
-`;
-
-const LabelCheckbox = styled(Label)`
-  height: 18px;
-  display: flex;
-  margin-top: 22px;
-  align-items: center;
-  font-weight: 400;
-  cursor: pointer;
-  
-  > input {
-    margin: 0 10px 0 0;
-    accent-color: var(--color-text-main);
   }
 `;
 
@@ -452,24 +439,6 @@ const MyAccount = (): JSX.Element => {
     .findIndex((account: TAccount): boolean => account.isActive);
   const account = stateAccount.accounts[accountId];
 
-  const [firstName, setFirstName] = useState<string>(account?.firstName || '');
-  const [firstNameError, setFirstNameError] = useState<boolean>(false);
-
-  const [lastName, setLastName] = useState<string>(account?.lastName || '');
-  const [lastNameError, setLastNameError] = useState<boolean>(false);
-
-  const [email, setEmail] = useState<string>(account?.email || '');
-  const [emailError, setEmailError] = useState<boolean>(false);
-
-  const [newPassword, setNewPassword] = useState<string>('');
-  const [confirmNewPassword, setConfirmNewPassword] = useState<string>('');
-  const [confirmNewPasswordError, setConfirmNewPasswordError] = useState<boolean>(false);
-
-  const [
-    newsletterSubscription,
-    setNewsletterSubscription
-  ] = useState<boolean>(account?.newsletterSubscription);
-
   const [address, setAddress] = useState<string>(account?.address || '');
   const [country, setCountry] = useState<string>(account?.country || '');
   const [city, setCity] = useState<string>(account?.city || '');
@@ -483,14 +452,6 @@ const MyAccount = (): JSX.Element => {
 
   type TForm = React.FormEvent<HTMLFormElement>;
   type TChange = React.ChangeEvent<HTMLInputElement>;
-  type TFocus = React.FocusEvent<HTMLInputElement>;
-
-  useEffect((): void => {
-    if (confirmNewPassword) {
-      newPassword !== confirmNewPassword ?
-        setConfirmNewPasswordError(true) : setConfirmNewPasswordError(false);
-    }
-  }, [newPassword, confirmNewPassword, confirmNewPasswordError]);
 
   useEffect((): void => {
     if (changesApplied) {
@@ -499,124 +460,6 @@ const MyAccount = (): JSX.Element => {
       }, 2000);
     }
   }, [changesApplied]);
-
-
-  const myPersonalInfo: JSX.Element =
-    <form
-      noValidate
-      onSubmit={(e: TForm): void => {
-        e.preventDefault();
-
-        if (accountId !== -1 && e.currentTarget.checkValidity() && !confirmNewPasswordError) {
-          dispatch(accountChangePersonalInfo({
-            firstName: firstName,
-            lastName: lastName,
-            email: email,
-            password: newPassword ? newPassword : account.password,
-            newsletterSubscription: newsletterSubscription
-          }));
-
-          setChangesApplied(true);
-        }
-      }}
-    >
-      <LabelText error={firstNameError}>
-        FIRST NAME*
-        <input
-          type='text'
-          required
-          value={firstName}
-          onChange={(e: TChange): void => {
-            setFirstName(e.target.value);
-            e.target.validity.valid && setFirstNameError(false);
-          }}
-          onInvalid={(): void => setFirstNameError(true)}
-        />
-        <Error>{firstNameError && 'Enter first name'}</Error>
-      </LabelText>
-
-      <LabelText error={lastNameError}>
-        LAST NAME*
-        <input
-          type='text'
-          required
-          value={lastName}
-          onChange={(e: TChange): void => {
-            setLastName(e.target.value);
-            e.target.validity.valid && setLastNameError(false);
-          }}
-          onInvalid={(): void => setLastNameError(true)}
-        />
-        <Error>{lastNameError && 'Enter last name'}</Error>
-      </LabelText>
-
-      <LabelText error={emailError}>
-        E-MAIL*
-        <input
-          type='email'
-          pattern='.+@.+\..+'
-          required
-          placeholder='your@email.com'
-          value={email}
-
-          onChange={(e: TChange): void => {
-            setEmail(e.target.value);
-            e.target.validity.valid && setEmailError(false);
-          }}
-
-          onBlur={(e: TFocus): void => {
-            if (email && !e.target.validity.valid) setEmailError(true);
-          }}
-
-          onInvalid={(): void => setEmailError(true)}
-        />
-        <Error>{emailError && 'Enter a valid email'}</Error>
-      </LabelText>
-
-      <LabelText>
-        NEW PASSWORD
-        <input
-          type='password'
-          value={newPassword}
-          onChange={(e: TChange): void => setNewPassword(e.target.value)}
-          onBlur={(): void => newPassword !== confirmNewPassword ?
-            setConfirmNewPasswordError(true) : setConfirmNewPasswordError(false)
-          }
-        />
-      </LabelText>
-
-      <LabelText error={confirmNewPasswordError}>
-        CONFIRM NEW PASSWORD
-        <input
-          type='password'
-          value={confirmNewPassword}
-
-          onChange={(e: TChange): void => {
-            setConfirmNewPassword(e.target.value);
-            e.target.validity.valid && setConfirmNewPasswordError(false);
-          }}
-
-          onBlur={(): void => newPassword !== confirmNewPassword ?
-            setConfirmNewPasswordError(true) : setConfirmNewPasswordError(false)
-          }
-        />
-        <Error>{confirmNewPasswordError && 'Passwords do not match'}</Error>
-      </LabelText>
-
-      <LabelCheckbox>
-        <input
-          type='checkbox'
-          checked={newsletterSubscription}
-          onChange={(e: TChange): void => setNewsletterSubscription(e.target.checked)}
-        />
-        I WANT TO SUBSCRIBE TO THE NEWSLETTER
-      </LabelCheckbox>
-
-      <ButtonUpdateWrapper>
-        <ButtonUpdate>{changesApplied ? 'UPDATE SAVED' : 'UPDATE'}</ButtonUpdate>
-        <Required>*Required</Required>
-      </ButtonUpdateWrapper>
-    </form>;
 
 
   const myAddresses: JSX.Element =
@@ -841,7 +684,7 @@ const MyAccount = (): JSX.Element => {
             >
               MY PERSONAL INFO
             </MyPersonalInfoTab>
-            {screen.small && tab === 'myPersonalInfo' && myPersonalInfo}
+            {screen.small && tab === 'myPersonalInfo' && <AccountPersonalInfo />}
 
             <MyAddressesTab
               currTab={tab}
@@ -863,7 +706,7 @@ const MyAccount = (): JSX.Element => {
 
           {!screen.small &&
             <MyAccountBody>
-              {tab === 'myPersonalInfo' && myPersonalInfo}
+              {tab === 'myPersonalInfo' && <AccountPersonalInfo />}
               {tab === 'myAddresses' && myAddresses}
               {tab === 'orderHistory' && orderHistory}
             </MyAccountBody>
