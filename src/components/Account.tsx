@@ -1,14 +1,14 @@
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import styled from 'styled-components/macro';
 import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
 import {Link} from 'react-router-dom';
 import BreadCrumbs from './BreadCrumbs';
-import {useAppDispatch, useAppSelector} from '../redux-hooks';
-import {accountChangeAddressInfo} from '../slices/account';
+import {useAppSelector} from '../redux-hooks';
 import {TAccount} from '../types/TAccount';
 import {IOrder} from '../types/IOrder';
 import {IProduct} from '../types/IProduct';
 import AccountPersonalInfo from './AccountPersonalInfo';
+import AccountAddress from './AccountAddress';
 
 
 
@@ -111,36 +111,6 @@ const MyAccountBody = styled.div`
   > form {margin: 45px 0 45px}
 `;
 
-const Label = styled.label`
-  font-family: var(--font-second);
-  font-size: 10px;
-  line-height: 1.2;
-  font-weight: 300;
-  color: var(--color-text-main);
-`;
-
-const LabelText = styled(Label)<{error?: boolean}>`
-  position: relative;
-  height: 45px;
-  margin-bottom: 17px;
-  display: grid;
-  align-content: space-between;
-
-  > input {
-    width: 254px;
-    height: 30px;
-    border: 1px solid ${props => !props.error ?
-      'var(--color-border)' : 'var(--color-input-error)'
-    };
-
-    &:focus {
-      outline: 1px solid ${props => !props.error ?
-        'var(--color-input-outline)' : 'var(--color-input-error)'
-      };
-    }
-  }
-`;
-
 const ButtonBlack = styled.button`
   width: 144px;
   height: 30px;
@@ -153,27 +123,6 @@ const ButtonBlack = styled.button`
   cursor: pointer;
 
   &:hover {background: var(--color-button-solid-hover)}
-`;
-
-const ButtonUpdateWrapper = styled.div`
-  width: 255px;
-  position: relative;
-  display: flex;
-  align-items: baseline;
-`;
-
-const ButtonUpdate = styled(ButtonBlack)`
-  width: 144px;
-  height: 30px;
-  margin-top: 30px;
-`;
-
-const Required = styled.span`
-  margin-left: 40px;
-  font-family: var(--font-regular);
-  font-size: 11px;
-  font-weight: 400;
-  color: var(--color-text-main);
 `;
 
 
@@ -416,22 +365,12 @@ const DescriptionBlock = styled.div`
   > span:nth-child(3n+1) {font-weight: 700}
 `;
 
-const Error = styled.span`
-  position: absolute;
-  top: 47px;
-  left: 0;
-  font-family: var(--font-regular);
-  font-size: 11px;
-  color: var(--color-input-error);
-`;
-
 
 
 
 const MyAccount = (): JSX.Element => {
   const [tab, setTab] = useState<string>('myPersonalInfo');
   const [currOrder, setCurrOrder] = useState<number>(0);
-  const dispatch = useAppDispatch();
   const screen = useMediaQuery();
 
   const stateAccount = useAppSelector(state => state.account);
@@ -439,95 +378,8 @@ const MyAccount = (): JSX.Element => {
     .findIndex((account: TAccount): boolean => account.isActive);
   const account = stateAccount.accounts[accountId];
 
-  const [address, setAddress] = useState<string>(account?.address || '');
-  const [country, setCountry] = useState<string>(account?.country || '');
-  const [city, setCity] = useState<string>(account?.city || '');
-
-  const [zip, setZip] = useState<string>(account?.zip || '');
-  const [zipError, setZipError] = useState<boolean>(false);
-
-  const [changesApplied, setChangesApplied] = useState<boolean>(false);
-
   const orders = account.orders || [];
 
-  type TForm = React.FormEvent<HTMLFormElement>;
-  type TChange = React.ChangeEvent<HTMLInputElement>;
-
-  useEffect((): void => {
-    if (changesApplied) {
-      setTimeout((): void => {
-        setChangesApplied(false);
-      }, 2000);
-    }
-  }, [changesApplied]);
-
-
-  const myAddresses: JSX.Element =
-    <form
-      noValidate
-      onSubmit={(e: TForm): void => {
-        e.preventDefault();
-
-        if (e.currentTarget.checkValidity()) {
-          dispatch(accountChangeAddressInfo({
-            address: address,
-            country: country,
-            city: city,
-            zip: zip
-          }));
-
-          setChangesApplied(true);
-        }
-      }}
-    >
-      <LabelText>
-        ADDRESS
-        <input
-          type='text'
-          value={address}
-          onChange={(e: TChange): void => setAddress(e.target.value)}
-        />
-      </LabelText>
-
-      <LabelText>
-        COUNTRY
-        <input
-          type='text'
-          value={country}
-          onChange={(e: TChange): void => setCountry(e.target.value)}
-        />
-      </LabelText>
-
-      <LabelText>
-        CITY
-        <input
-          type='text'
-          value={city}
-          onChange={(e: TChange): void => setCity(e.target.value)}
-        />
-      </LabelText>
-
-      <LabelText error={zipError}>
-        ZIP / POSTAL CODE*
-        <input
-          type='text'
-          required
-          value={zip}
-          onChange={(e: TChange): void => {
-            setZip(e.target.value);
-            e.target.validity.valid && setZipError(false);
-          }}
-          onInvalid={(): void => setZipError(true)}
-        />
-        <Error>{zipError && 'Enter zip / postal code'}</Error>
-      </LabelText>
-
-      <ButtonUpdateWrapper>
-        <ButtonUpdate>{changesApplied ? 'UPDATE SAVED' : 'UPDATE'}</ButtonUpdate>
-        <Required>*Required</Required>
-      </ButtonUpdateWrapper>
-    </form>;
-  
   
   const orderHistory: JSX.Element =
     orders.length > 0 ? 
@@ -692,7 +544,7 @@ const MyAccount = (): JSX.Element => {
             >
               MY ADDRESSES
             </MyAddressesTab>
-            {screen.small && tab === 'myAddresses' && myAddresses}
+            {screen.small && tab === 'myAddresses' && <AccountAddress />}
 
             <OrderHistoryTab
               currTab={tab}
@@ -707,7 +559,7 @@ const MyAccount = (): JSX.Element => {
           {!screen.small &&
             <MyAccountBody>
               {tab === 'myPersonalInfo' && <AccountPersonalInfo />}
-              {tab === 'myAddresses' && myAddresses}
+              {tab === 'myAddresses' && <AccountAddress />}
               {tab === 'orderHistory' && orderHistory}
             </MyAccountBody>
           }
