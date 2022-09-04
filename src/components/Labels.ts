@@ -10,6 +10,7 @@ const Label = styled.label`
 `;
 
 export const LabelText = styled(Label)<{labelMargin?: string, inputWidth?: string, error?: boolean}>`
+  width: ${props => props.inputWidth};
   height: 45px;
   margin: ${props => props.labelMargin};
   position: relative;
