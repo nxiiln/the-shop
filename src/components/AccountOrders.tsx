@@ -305,12 +305,12 @@ const AccountOrders = (): JSX.Element => {
                   {!screen.small ?
                     <>
                       <span>{order.id}</span>
-                      <span>paid</span>
+                      <span>{order.date}</span>
                     </>
                     :
                     <span>
                       <span>{order.id}</span>
-                      <span>paid</span>
+                      <span>{order.date}</span>
                     </span>
                   }
 
