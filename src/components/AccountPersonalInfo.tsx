@@ -108,7 +108,10 @@ const AccountPersonalInfo = (): JSX.Element => {
         }
       }}
     >
-      <LabelText error={firstNameError}>
+      <LabelText
+        labelMargin='0 0 20px 0'
+        error={firstNameError}
+      >
         FIRST NAME*
         <input
           type='text'
@@ -123,7 +126,10 @@ const AccountPersonalInfo = (): JSX.Element => {
         <LabelError>{firstNameError && 'Enter first name'}</LabelError>
       </LabelText>
 
-      <LabelText error={lastNameError}>
+      <LabelText
+        labelMargin='0 0 20px 0'
+        error={lastNameError}
+      >
         LAST NAME*
         <input
           type='text'
@@ -138,7 +144,10 @@ const AccountPersonalInfo = (): JSX.Element => {
         <LabelError>{lastNameError && 'Enter last name'}</LabelError>
       </LabelText>
 
-      <LabelText error={emailError}>
+      <LabelText
+        labelMargin='0 0 20px 0'
+        error={emailError}
+      >
         E-MAIL*
         <input
           type='email'
@@ -161,7 +170,7 @@ const AccountPersonalInfo = (): JSX.Element => {
         <LabelError>{emailError && 'Enter a valid email'}</LabelError>
       </LabelText>
 
-      <LabelText>
+      <LabelText labelMargin='0 0 20px 0'>
         NEW PASSWORD
         <input
           type='password'
@@ -173,7 +182,10 @@ const AccountPersonalInfo = (): JSX.Element => {
         />
       </LabelText>
 
-      <LabelText error={confirmNewPasswordError}>
+      <LabelText
+        labelMargin='0 0 20px 0'
+        error={confirmNewPasswordError}
+      >
         CONFIRM NEW PASSWORD
         <input
           type='password'

@@ -88,7 +88,7 @@ const AccountAddress = (): JSX.Element => {
         }
       }}
     >
-      <LabelText>
+      <LabelText labelMargin='0 0 20px 0'>
         ADDRESS
         <input
           type='text'
@@ -99,7 +99,7 @@ const AccountAddress = (): JSX.Element => {
         />
       </LabelText>
 
-      <LabelText>
+      <LabelText labelMargin='0 0 20px 0'>
         COUNTRY
         <input
           type='text'
@@ -110,7 +110,7 @@ const AccountAddress = (): JSX.Element => {
         />
       </LabelText>
 
-      <LabelText>
+      <LabelText labelMargin='0 0 20px 0'>
         CITY
         <input
           type='text'
@@ -121,7 +121,10 @@ const AccountAddress = (): JSX.Element => {
         />
       </LabelText>
 
-      <LabelText error={zipError}>
+      <LabelText
+        labelMargin='0 0 20px 0'
+        error={zipError}
+      >
         ZIP / POSTAL CODE*
         <input
           type='text'
