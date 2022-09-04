@@ -4,7 +4,7 @@ import TopBrand from './TopBrands';
 import PurchasesInfo from './PurchasesInfo';
 import Footer from './Footer';
 import Home from './Home';
-import MyAccount from './MyAccount';
+import MyAccount from './Account';
 import WishList from './WishList';
 import Checkout from './Checkout';
 import Login from './Login';
