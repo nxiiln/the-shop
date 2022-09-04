@@ -297,10 +297,10 @@ const ProductReviews = ({productId}: {productId: number}): JSX.Element => {
                 if (rating === 0) return;
                 const date: Date = new Date();
 
-                const day: string = date.getDate() <= 9 ?
+                const day: string = date.getDate() < 10 ?
                   `0${date.getDate()}` : `${date.getDate()}`;
 
-                const month: string = date.getMonth() <= 10 ?
+                const month: string = date.getMonth() < 9 ?
                   `0${date.getMonth() + 1}` : `${date.getMonth() + 1}`;
 
                 const review: IProductReview = {

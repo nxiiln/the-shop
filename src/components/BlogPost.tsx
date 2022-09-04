@@ -272,10 +272,10 @@ const BlogPost = (): JSX.Element => {
                 const newReviews: IBlogPostReview[] = JSON.parse(JSON.stringify(reviews));
                 const date: Date = new Date();
 
-                const day: string = date.getDate() <= 9 ?
+                const day: string = date.getDate() < 10 ?
                   `0${date.getDate()}` : `${date.getDate()}`;
 
-                const month: string = date.getMonth() <= 10 ?
+                const month: string = date.getMonth() < 9 ?
                   `0${date.getMonth() + 1}` : `${date.getMonth() + 1}`;
 
                 const newReview: IBlogPostReview = {
