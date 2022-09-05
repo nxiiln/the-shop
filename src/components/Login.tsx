@@ -4,6 +4,7 @@ import {smallScreen} from '../mediaQueries';
 import {Link, useNavigate} from 'react-router-dom';
 import {useAppDispatch, useAppSelector} from '../redux-hooks';
 import {accountLogIn, accountLogOut, accountSetNewEmail} from '../slices/account';
+import {checkoutSetStep} from '../slices/checkout';
 import {TAccount} from '../types/TAccount';
 import BreadCrumbs from './BreadCrumbs';
 
@@ -400,7 +401,10 @@ const Login = (): JSX.Element => {
               <ButtonLogOut
                 type='button'
                 onClick={(): void => {
-                  if (activeAccountId !== -1) dispatch(accountLogOut(activeAccountId));
+                  if (activeAccountId !== -1) {
+                    dispatch(accountLogOut(activeAccountId));
+                    dispatch(checkoutSetStep(1));
+                  }
                   window.scroll(0, 0);
                 }}
               >
