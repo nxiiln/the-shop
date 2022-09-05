@@ -1,12 +1,11 @@
-import {useState, useEffect} from 'react';
+import {useState} from 'react';
 import styled from 'styled-components';
 import {mediumScreen, smallScreen} from '../mediaQueries';
 import {useAppDispatch, useAppSelector} from '../redux-hooks';
-import {checkoutSetStep} from '../slices/checkout';
+import {checkoutSetStep, checkoutSetStep2Complete, checkoutSetStep4Complete} from '../slices/checkout';
 import {cartReset} from '../slices/cart';
 import {accountSetOrders} from '../slices/account';
 import {TAccount} from '../types/TAccount';
-import {IOrder} from '../types/IOrder';
 
 
 
@@ -69,15 +68,9 @@ const CheckoutStep5 = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const step2Complete = useAppSelector(state => state.checkout.step2Complete);
   const step4Complete = useAppSelector(state => state.checkout.step4Complete);
-  const orderId = useAppSelector(state => state.account.accounts[activeAccountId].orders?.length);
-  const address = useAppSelector(state => state.account.accounts[activeAccountId].address);
-  const [orderPaid, setOrderPaid] = useState<boolean>(false);
-
-  useEffect((): void => {
-    if (step2Complete && step4Complete) {
-      setTimeout((): void => setOrderPaid(false), 2000);
-    }
-  }, [orderPaid]);
+  const orderId = useAppSelector(state => state.account.accounts[activeAccountId]?.orders?.length);
+  const address = useAppSelector(state => state.account.accounts[activeAccountId]?.address);
+  const [orderPayment, setOrderPayment] = useState<boolean>(false);
 
 
   return(
@@ -94,9 +87,22 @@ const CheckoutStep5 = (): JSX.Element => {
             if (!step2Complete && activeAccountId === -1) dispatch(checkoutSetStep(2));
 
             const confirmPurchase = (): void => {
-              setOrderPaid(true);
-              
+              setOrderPayment(true);
+              dispatch(checkoutSetStep2Complete(false));
+              dispatch(checkoutSetStep4Complete(false));
+
               setTimeout((): void => {
+                setOrderPayment(false)
+                dispatch(cartReset());
+                dispatch(checkoutSetStep(1));
+                window.scroll(0, 0);
+              }, 2000);
+            }
+
+            if (activeAccountId === -1) {
+              if (step2Complete && step4Complete) confirmPurchase();
+            } else {
+              if (step4Complete) {
                 const date = new Date();
                 const day: string = date.getDate() < 10 ?
                   `0${date.getDate()}` : date.getDate() + '';
@@ -110,19 +116,12 @@ const CheckoutStep5 = (): JSX.Element => {
                   products: cart
                 }));
 
-                dispatch(cartReset());
-                window.scroll(0, 0);
-              }, 2000);
-            }
-
-            if (activeAccountId === -1) {
-              if (step2Complete && step4Complete) confirmPurchase();
-            } else {
-              if (step4Complete) confirmPurchase();
+                confirmPurchase();
+              }
             }
           }}
         >
-          {orderPaid ? 'ORDER HAS BEEN PAID' : 'ORDER NOW'}
+          {orderPayment ? 'ORDER PAYMENT...' : 'ORDER NOW'}
         </OrderNow>
       </div>
     </Step5>
