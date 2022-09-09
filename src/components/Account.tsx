@@ -147,7 +147,7 @@ const MyAccount = (): JSX.Element => {
               currTab={tab}
               onClick={(): void => setTab('myAddresses')}
             >
-              MY ADDRESSES
+              MY ADDRESS
             </MyAddressesTab>
             {screen.small && tab === 'myAddresses' && <AccountAddress />}
 
