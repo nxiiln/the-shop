@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 import {smallScreen, useMediaQuery} from '../mediaQueries';
 import {useAppSelector} from '../redux-hooks';
 import {IOrder} from '../types/IOrder';

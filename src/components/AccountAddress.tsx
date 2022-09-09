@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 import {useAppDispatch, useAppSelector} from '../redux-hooks';
 import {accountChangeAddressInfo} from '../slices/account';
 import {TAccount} from '../types/TAccount';

@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 import {mediumScreen, smallScreen} from '../mediaQueries';
 import {useAppDispatch} from '../redux-hooks';
 import {checkoutSetStep} from '../slices/checkout';
