@@ -49,11 +49,9 @@ const Title = styled.h2`
 
 const Tabs = styled.div`
   width: 100%;
-  height: 51px;
   display: flex;
 
   @media ${smallScreen} {
-    height: auto;
     flex-direction: column;
     align-items: center;
     border-left: 1px solid var(--color-border);

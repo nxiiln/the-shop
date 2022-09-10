@@ -146,7 +146,6 @@ const ButtonDetails = styled(ButtonBlack)<{status: boolean}>`
 // OrderDetails
 const OrderDetails = styled.div`
   width: 505px;
-  height: 320px;
   margin: 48px 0 60px;
 
   @media ${smallScreen} {
@@ -177,13 +176,13 @@ const OrderDetailsHeader = styled.div`
 `;
 
 const OrderDetailsBody = styled.div`
-  height: 60px;
   display: grid;
   grid-template-columns: 200px 125px 125px 1fr;
   align-items: center;
   border-bottom: 1px solid var(--color-border);
 
-  > span {
+  span {
+    padding: 5px 0;
     font-family: var(--font-second);
     font-size: 10px;
     line-height: 14px;
@@ -192,18 +191,21 @@ const OrderDetailsBody = styled.div`
     color: var(--color-text-main);
   }
   
-  > span:nth-child(4n) {justify-self: end;}
+  > span:nth-child(4n) {justify-self: end}
   
   @media ${smallScreen} {
     grid-template-columns: 1fr 1fr;
 
-    > span:first-child {
+    > div {
       width: max-content;
       height: 100%;
+      padding: 5px 0;
       display: flex;
       flex-direction: column;
       justify-content: space-evenly;
     }
+
+    > span:nth-child(2n) {justify-self: end}
   }
 `;
 
@@ -352,10 +354,10 @@ const AccountOrders = (): JSX.Element => {
                               <span>{product.quantity}</span>
                             </>
                             :
-                            <span>
+                            <div>
                               <span>{product.name}</span>
                               <span>{product.quantity} X ${product.price}</span>
-                            </span>
+                            </div>
                           }
                           <span>${product.price * product.quantity}</span>
                         </>
