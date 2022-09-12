@@ -227,6 +227,10 @@ const Menu = (): JSX.Element => {
       .findIndex((account: TAccount): boolean => account.isActive) !== -1
   );
 
+  const showMenu = (num: number): {(): void} => (
+    (): void => number !== num ? setNumber(num) : setNumber(0)
+  );
+
   useEffect(() => {
     dropdownMenu ?
       document.body.style.overflowY = 'hidden' :
@@ -242,11 +246,11 @@ const Menu = (): JSX.Element => {
       {screen.big ?
         <>
           <MainMenu number={number}>
-            <span onClick={(): void => setNumber(1)}>women</span>
-            <span onClick={(): void => setNumber(2)}>men</span>
-            <span onClick={(): void => setNumber(3)}>kids</span>
-            <span onClick={(): void => setNumber(4)}>accessories</span>
-            <span onClick={(): void => setNumber(5)}>sale</span>
+            <span onClick={showMenu(1)}>women</span>
+            <span onClick={showMenu(2)}>men</span>
+            <span onClick={showMenu(3)}>kids</span>
+            <span onClick={showMenu(4)}>accessories</span>
+            <span onClick={showMenu(5)}>sale</span>
 
             <HashLink
               to='/#whats-new'
