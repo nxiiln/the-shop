@@ -6,6 +6,7 @@ import {HashLink} from 'react-router-hash-link';
 import {useAppSelector, useAppDispatch} from '../redux-hooks';
 import {accountCreate} from '../slices/account';
 import BreadCrumbs from './BreadCrumbs';
+import {LabelText, InputError, LabelCheckbox} from './Form';
 
 
 
@@ -27,7 +28,6 @@ const WrapperInner = styled.div`
 
 const CreateAccountWrapper = styled.div`
   width: 675px;
-  /* height: calc( + 20px); */
   position: relative;
   align-self: center;
   display: flex;
@@ -109,49 +109,6 @@ const Description = styled.span`
   color: var(--color-text-main);
 `;
 
-const Label = styled.label`
-  font-family: var(--font-second);
-  font-size: 10px;
-  line-height: 1.2;
-  font-weight: 300;
-  color: var(--color-text-main);
-`;
-
-const LabelText = styled(Label)<{error?: boolean}>`
-  position: relative;
-  height: 45px;
-  margin-bottom: 20px;
-  display: grid;
-  align-content: space-between;
-
-  > input {
-    width: 254px;
-    height: 30px;
-    border: 1px solid ${props => !props.error ?
-      'var(--color-border)' : 'var(--color-input-error)'
-    };
-
-    &:focus {
-      outline: 1px solid ${props => !props.error ?
-        'var(--color-input-outline)' : 'var(--color-input-error)'
-      };
-    }
-  }
-`;
-
-const LabelCheckbox = styled(Label)`
-  height: 18px;
-  display: flex;
-  margin-top: 30px;
-  align-items: center;
-  cursor: pointer;
-
-  > input {
-    margin: 0 10px 0 0;
-    accent-color: var(--color-text-main);
-  }
-`;
-
 const ButtonCreateAccount = styled.button`
   width: 254px;
   height: 30px;
@@ -178,15 +135,6 @@ const BackToLogin = styled(HashLink)`
   line-height: 1.2;
   font-weight: 400;
   color: var(--color-text-main);
-`;
-
-const Error = styled.span`
-  position: absolute;
-  top: 47px;
-  left: 0;
-  font-family: var(--font-regular);
-  font-size: 11px;
-  color: var(--color-input-error);
 `;
 
 
@@ -281,7 +229,10 @@ const CreateAccount = (): JSX.Element => {
               <PersonalInformation>
                 <Description>PERSONAL INFORMATION</Description>
 
-                <LabelText error={firstNameError}>
+                <LabelText
+                  margin='0 0 20px 0'
+                  error={firstNameError}
+                >
                   FIRST NAME*
                   <input
                     type='text'
@@ -293,10 +244,13 @@ const CreateAccount = (): JSX.Element => {
                     }}
                     onInvalid={(): void => setFirstNameError(true)}
                   />
-                  <Error>{firstNameError && 'Enter first name'}</Error>
+                  <InputError>{firstNameError && 'Enter first name'}</InputError>
                 </LabelText>
 
-                <LabelText error={lastNameError}>
+                <LabelText
+                  margin='0 0 20px 0'
+                  error={lastNameError}
+                >
                   LAST NAME*
                   <input
                     type='text'
@@ -308,10 +262,13 @@ const CreateAccount = (): JSX.Element => {
                     }}
                     onInvalid={(): void => setLastNameError(true)}
                   />
-                  <Error>{lastNameError && 'Enter last name'}</Error>
+                  <InputError>{lastNameError && 'Enter last name'}</InputError>
                 </LabelText>
 
-                <LabelText error={emailError}>
+                <LabelText
+                  margin='0 0 20px 0'
+                  error={emailError}
+                >
                   E-MAIL*
                   <input
                     type='email'
@@ -331,10 +288,13 @@ const CreateAccount = (): JSX.Element => {
 
                     onInvalid={(): void => setEmailError(true)}
                   />
-                  <Error>{emailError && 'Enter a valid email'}</Error>
+                  <InputError>{emailError && 'Enter a valid email'}</InputError>
                 </LabelText>
 
-                <LabelText error={passwordError}>
+                <LabelText
+                  margin='0 0 20px 0'
+                  error={passwordError}
+                >
                   PASSWORD*
                   <input
                     type='password'
@@ -352,21 +312,24 @@ const CreateAccount = (): JSX.Element => {
 
                     onInvalid={(): void => setPasswordError(true)}
                   />
-                  <Error>{passwordError && 'Enter password'}</Error>
+                  <InputError>{passwordError && 'Enter password'}</InputError>
                 </LabelText>
 
-                <LabelText error={confirmPasswordError}>
+                <LabelText
+                  margin='0 0 20px 0'
+                  error={confirmPasswordError}
+                >
                   CONFIRM PASSWORD*
                   <input
                     type='password'
                     value={confirmPassword}
                     onChange={(e: TChange): void => setConfirmPassword(e.target.value)}
                   />
-                  <Error>{confirmPasswordError && 'Passwords do not match'}</Error>
+                  <InputError>{confirmPasswordError && 'Passwords do not match'}</InputError>
                 </LabelText>
 
                 {!screen.small &&
-                  <LabelCheckbox>
+                  <LabelCheckbox labelWidth='250px' inputMargin='0 10px 0 0'>
                     <input
                       type='checkbox'
                       checked={newsletterSubscription}
@@ -380,7 +343,7 @@ const CreateAccount = (): JSX.Element => {
 
               <AddressInformation>
                 <Description>ADDRESS INFORMATION</Description>
-                <LabelText>
+                <LabelText margin='0 0 20px 0'>
                   ADDRESS
                   <input
                     type='text'
@@ -389,7 +352,7 @@ const CreateAccount = (): JSX.Element => {
                   />
                 </LabelText>
 
-                <LabelText>
+                <LabelText margin='0 0 20px 0'>
                   COUNTRY
                   <input
                     type='text'
@@ -398,7 +361,7 @@ const CreateAccount = (): JSX.Element => {
                   />
                 </LabelText>
 
-                <LabelText>
+                <LabelText margin='0 0 20px 0'>
                   CITY
                   <input
                     type='text'
@@ -419,13 +382,13 @@ const CreateAccount = (): JSX.Element => {
                     }}
                     onInvalid={(): void => setZipError(true)}
                   />
-                  <Error>{zipError && 'Enter zip / postal code'}</Error>
+                  <InputError>{zipError && 'Enter zip / postal code'}</InputError>
                 </LabelText>
               </AddressInformation>
               
 
               {screen.small &&
-                <LabelCheckbox>
+                <LabelCheckbox labelWidth='250px' inputMargin='0 10px 0 0'>
                   <input
                     type='checkbox'
                     checked={newsletterSubscription}
