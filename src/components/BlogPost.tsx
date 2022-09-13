@@ -6,6 +6,7 @@ import BreadCrumbs from './BreadCrumbs';
 import BlogCategories from './BlogCategories';
 import BlogLabels from './BlogLabels';
 import PageNotFound from './PageNotFound';
+import {LabelText, InputError} from './Form';
 import {IBlogPostReview} from '../types/IBlogPostReview';
 import data from '../data.json';
 import {blogPostImages} from '../images/blogPostImages';
@@ -160,29 +161,6 @@ const WriteReviewHeader = styled.h2`
   color: var(--color-text-main);
 `;
 
-const Label = styled.label`
-  display: block;
-  margin-bottom: 20px;
-  font-family: var(--font-second);
-  font-size: 10px;
-  line-height: 30px;
-  font-weight: 400;
-  color: var(--color-text-main);
-`;
-
-const InputText = styled.input`
-  width: 100%;
-  height: 34px;
-  border: 1px solid var(--color-border);
-`;
-
-const InputTextArea = styled.textarea`
-  width: 100%;
-  max-width: 100%;
-  height: 76px;
-  border: 1px solid var(--color-border);
-`;
-
 const SubmitReview = styled.button`
   width: 103px;
   height: 30px;
@@ -210,12 +188,15 @@ const BlogPost = (): JSX.Element => {
   
   const blogPostId: number = findBlogPostId(useParams().id);
   const post = data.blogPosts[blogPostId - 1];
-
-  const [reviews, setReviews] = useState<IBlogPostReview[]>(post.reviews);
-  const [name, setName] = useState<string>('');
-  const [text, setText] = useState<string>('');
   const screen = useMediaQuery();
 
+  const [reviews, setReviews] = useState<IBlogPostReview[]>(post.reviews);
+
+  const [name, setName] = useState<string>('');
+  const [nameError, setNameError] = useState<boolean>(false);
+  
+  const [text, setText] = useState<string>('');
+  const [textError, setTextError] = useState<boolean>(false);
 
 
   return(
@@ -265,49 +246,72 @@ const BlogPost = (): JSX.Element => {
                 </Review>
               )}
 
-              <WriteReview onSubmit={(e: React.FormEvent<HTMLFormElement>): void => {
-                e.preventDefault();
-                if (name === '' || text === '') return;
+              <WriteReview
+                noValidate
+                onSubmit={(e: React.FormEvent<HTMLFormElement>): void => {
+                  e.preventDefault();
 
-                const newReviews: IBlogPostReview[] = JSON.parse(JSON.stringify(reviews));
-                const date: Date = new Date();
+                  if (e.currentTarget.checkValidity()) {
+                    const newReviews: IBlogPostReview[] = JSON.parse(JSON.stringify(reviews));
+                    const date: Date = new Date();
 
-                const day: string = date.getDate() < 10 ?
-                  `0${date.getDate()}` : `${date.getDate()}`;
+                    const day: string = date.getDate() < 10 ?
+                      `0${date.getDate()}` : `${date.getDate()}`;
 
-                const month: string = date.getMonth() < 9 ?
-                  `0${date.getMonth() + 1}` : `${date.getMonth() + 1}`;
+                    const month: string = date.getMonth() < 9 ?
+                      `0${date.getMonth() + 1}` : `${date.getMonth() + 1}`;
 
-                const newReview: IBlogPostReview = {
-                  id: reviews[reviews.length-1].id + 1,
-                  name: name,
-                  text: text,
-                  date: `${day}.${month}.${date.getFullYear()}`
-                };
+                    const newReview: IBlogPostReview = {
+                      id: reviews[reviews.length-1].id + 1,
+                      name: name,
+                      text: text,
+                      date: `${day}.${month}.${date.getFullYear()}`
+                    };
 
-                newReviews.push(newReview);
-                setReviews(newReviews);
-              }}>
+                    newReviews.push(newReview);
+                    setReviews(newReviews);
+                  }
+                }}
+              >
                 <WriteReviewHeader>WRITE REVIEW</WriteReviewHeader>
 
-                <Label>
+                <LabelText
+                  width='100%'
+                  margin='0 0 20px 0'
+                  error={nameError}
+                >
                   NAME
-                  <InputText
+                  <input
                     type='text'
+                    required
                     value={name}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>): void => setName(e.target.value)}
-                    required
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
+                      setName(e.target.value);
+                      e.target.validity.valid && setNameError(false);
+                    }}
+                    onInvalid={(): void => setNameError(true)}
                   />
-                </Label>
+                  <InputError>{nameError && 'Enter your name'}</InputError>
+                </LabelText>
 
-                <Label>
+                <LabelText
+                  width='100%'
+                  height='80px'
+                  margin='0 0 20px 0'
+                  error={textError}
+                >
                   REVIEW TEXT
-                  <InputTextArea
-                    value={text}
-                    onChange={(e: React.ChangeEvent<HTMLTextAreaElement>): void => setText(e.target.value)}
+                  <textarea
                     required
+                    value={text}
+                    onChange={(e: React.ChangeEvent<HTMLTextAreaElement>): void => {
+                      setText(e.target.value);
+                      e.target.validity.valid && setTextError(false);
+                    }}
+                    onInvalid={(): void => setTextError(true)}
                   />
-                </Label>
+                  <InputError>{textError && 'Enter review text'}</InputError>
+                </LabelText>
                 
                 <SubmitReview type='submit'>SUBMIT REVIEW</SubmitReview>
               </WriteReview>
