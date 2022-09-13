@@ -7,7 +7,7 @@ import BreadCrumbs from './BreadCrumbs';
 import Products from './Products';
 import ProductDescription from './ProductDescription';
 import ProductReviews from './ProductReviews';
-import PageNotFound from './404';
+import PageNotFound from './PageNotFound';
 import {IProduct} from '../types/IProduct';
 
 

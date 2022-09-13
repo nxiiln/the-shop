@@ -5,7 +5,7 @@ import {Link, useParams} from 'react-router-dom';
 import BreadCrumbs from './BreadCrumbs';
 import BlogCategories from './BlogCategories';
 import BlogLabels from './BlogLabels';
-import PageNotFound from './404';
+import PageNotFound from './PageNotFound';
 import {IBlogPostReview} from '../types/IBlogPostReview';
 import data from '../data.json';
 import {blogPostImages} from '../images/blogPostImages';

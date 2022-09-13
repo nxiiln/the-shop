@@ -14,7 +14,7 @@ import Catalog from './Catalog';
 import Product from './Product';
 import Blog from './Blog';
 import BlogPost from './BlogPost';
-import PageNotFound from './404';
+import PageNotFound from './PageNotFound';
 import {useAppSelector} from '../redux-hooks';
 import {TAccount} from '../types/TAccount';
 
