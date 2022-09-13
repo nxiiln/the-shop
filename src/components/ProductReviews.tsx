@@ -6,6 +6,8 @@ import {productRatingAdd} from '../slices/productRating';
 import {IProductReview} from '../types/IProductReview';
 import {IProductReviews} from '../types/IProductReviews';
 import data from '../data.json';
+import {LabelText} from './Form';
+
 
 
 
@@ -131,6 +133,7 @@ const Rating = styled.div`
   height: 20px;
   margin-bottom: 10px;
   align-self: start;
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -148,33 +151,15 @@ const SetStars = styled(Stars)`
   user-select: none;
 `;
 
-const Label = styled.label`
-  width: 100%;
-  margin-bottom: 15px;
-  display: flex;
-  flex-direction: column;
-  font-family: var(--font-second);
-  font-size: 10px;
+const RatingError = styled.span`
+  width: max-content;
+  position: absolute;
+  top: 1px;
+  left: 150px;
+  font-family: var(--font-regular);
+  font-size: 12px;
   font-weight: 400;
-  color: var(--color-main);
-
-  > input, > textarea {
-    width: 100%;
-    height: 34px;
-    margin-top: 4px;
-    font-family: var(--font-regular);
-    font-size: 13px;
-    font-weight: 400;
-    color: var(--color-main);
-    border: 1px solid var(--color-border);
-
-    &:focus {
-      outline: none;
-      border: 1px solid var(--color-background-second);
-    }
-  }
-
-  > textarea {height: 76px}
+  color: var(--color-text-highlight);
 `;
 
 const Buttons = styled.div`
@@ -196,6 +181,7 @@ const ProductReviews = ({productId}: {productId: number}): JSX.Element => {
   const [writeReview, setWriteReview] = useState<boolean>(false);
   const [title, setTitle] = useState<string>('');
   const [rating, setRating] = useState<number>(0);
+  const [ratingError, setRatingError] = useState<boolean>(false);
   const [text, setText] = useState<string>('');
   const [author, setAuthor] = useState<string>('');
   const dispatch = useAppDispatch();
@@ -235,7 +221,7 @@ const ProductReviews = ({productId}: {productId: number}): JSX.Element => {
               <div>
                 ★★★★★
               </div>
-              <div>
+              <div onMouseEnter={(): void => setRatingError(false)}>
                 <span onMouseEnter={(): void => setRating(1)}>☆</span>
                 <span onMouseEnter={(): void => setRating(2)}>☆</span>
                 <span onMouseEnter={(): void => setRating(3)}>☆</span>
@@ -243,9 +229,10 @@ const ProductReviews = ({productId}: {productId: number}): JSX.Element => {
                 <span onMouseEnter={(): void => setRating(5)}>☆</span>
               </div>
             </SetStars>
+            <RatingError>{ratingError && 'Please rate the product'}</RatingError>
           </Rating>
 
-          <Label>
+          <LabelText width='100%' margin='0 0 15px 0'>
             NAME
             <input
               type='text'
@@ -254,9 +241,9 @@ const ProductReviews = ({productId}: {productId: number}): JSX.Element => {
                 setAuthor(e.target.value);
               }}
             />
-          </Label>
+          </LabelText>
 
-          <Label>
+          <LabelText width='100%' margin='0 0 15px 0'>
             REVIEW TITLE
             <input
               type='text'
@@ -265,9 +252,9 @@ const ProductReviews = ({productId}: {productId: number}): JSX.Element => {
                 setTitle (e.target.value);
               }}
             />
-          </Label>
+          </LabelText>
 
-          <Label>
+          <LabelText width='100%' height='80px' margin='0 0 15px 0'>
             REVIEW TEXT
             <textarea
               value={text}
@@ -275,7 +262,7 @@ const ProductReviews = ({productId}: {productId: number}): JSX.Element => {
                 setText (e.target.value);
               }}
             />
-          </Label>
+          </LabelText>
 
           <Buttons>
             <Button
@@ -294,7 +281,11 @@ const ProductReviews = ({productId}: {productId: number}): JSX.Element => {
             <Button
               type='button'
               onClick={(): void => {
-                if (rating === 0) return;
+                if (rating === 0) {
+                  setRatingError(true);
+                  return;
+                };
+                
                 const date: Date = new Date();
 
                 const day: string = date.getDate() < 10 ?
