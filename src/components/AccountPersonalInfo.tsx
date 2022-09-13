@@ -3,7 +3,7 @@ import styled from 'styled-components/macro';
 import {useAppDispatch, useAppSelector} from '../redux-hooks';
 import {accountChangePersonalInfo} from '../slices/account';
 import {TAccount} from '../types/TAccount';
-import {LabelText, LabelCheckbox, LabelError} from './Labels';
+import {LabelText, LabelCheckbox, InputError} from './Form';
 
 
 
@@ -109,7 +109,7 @@ const AccountPersonalInfo = (): JSX.Element => {
       }}
     >
       <LabelText
-        labelMargin='0 0 20px 0'
+        margin='0 0 20px 0'
         error={firstNameError}
       >
         FIRST NAME*
@@ -123,11 +123,11 @@ const AccountPersonalInfo = (): JSX.Element => {
           }}
           onInvalid={(): void => setFirstNameError(true)}
         />
-        <LabelError>{firstNameError && 'Enter first name'}</LabelError>
+        <InputError>{firstNameError && 'Enter first name'}</InputError>
       </LabelText>
 
       <LabelText
-        labelMargin='0 0 20px 0'
+        margin='0 0 20px 0'
         error={lastNameError}
       >
         LAST NAME*
@@ -141,11 +141,11 @@ const AccountPersonalInfo = (): JSX.Element => {
           }}
           onInvalid={(): void => setLastNameError(true)}
         />
-        <LabelError>{lastNameError && 'Enter last name'}</LabelError>
+        <InputError>{lastNameError && 'Enter last name'}</InputError>
       </LabelText>
 
       <LabelText
-        labelMargin='0 0 20px 0'
+        margin='0 0 20px 0'
         error={emailError}
       >
         E-MAIL*
@@ -167,10 +167,10 @@ const AccountPersonalInfo = (): JSX.Element => {
 
           onInvalid={(): void => setEmailError(true)}
         />
-        <LabelError>{emailError && 'Enter a valid email'}</LabelError>
+        <InputError>{emailError && 'Enter a valid email'}</InputError>
       </LabelText>
 
-      <LabelText labelMargin='0 0 20px 0'>
+      <LabelText margin='0 0 20px 0'>
         NEW PASSWORD
         <input
           type='password'
@@ -183,7 +183,7 @@ const AccountPersonalInfo = (): JSX.Element => {
       </LabelText>
 
       <LabelText
-        labelMargin='0 0 20px 0'
+        margin='0 0 20px 0'
         error={confirmNewPasswordError}
       >
         CONFIRM NEW PASSWORD
@@ -200,10 +200,10 @@ const AccountPersonalInfo = (): JSX.Element => {
             setConfirmNewPasswordError(true) : setConfirmNewPasswordError(false)
           }
         />
-        <LabelError>{confirmNewPasswordError && 'Passwords do not match'}</LabelError>
+        <InputError>{confirmNewPasswordError && 'Passwords do not match'}</InputError>
       </LabelText>
 
-      <LabelCheckbox>
+      <LabelCheckbox labelWidth='245px' inputMargin='0 10px 0 0' >
         <input
           type='checkbox'
           checked={newsletterSubscription}

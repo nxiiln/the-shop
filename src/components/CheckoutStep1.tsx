@@ -5,7 +5,7 @@ import {useNavigate} from 'react-router-dom';
 import {useAppSelector, useAppDispatch} from '../redux-hooks';
 import {accountLogIn} from '../slices/account';
 import {checkoutSetStep} from '../slices/checkout';
-import {LabelText, LabelRadio, LabelError} from './Labels';
+import {LabelText, LabelRadio, InputError} from './Form';
 import {TAccount} from '../types/TAccount';
 
 
@@ -159,7 +159,7 @@ const CheckoutStep1 = (): JSX.Element => {
           }}
         >
           <LabelText
-            inputWidth='255px'
+            width='255px'
             error={emailError || existEmailError}
           >
             E-MAIL*
@@ -181,14 +181,14 @@ const CheckoutStep1 = (): JSX.Element => {
               
               onInvalid={(): void => setEmailError(true)}
             />
-            <LabelError>
+            <InputError>
               {emailError && 'Enter a valid email'}
               {existEmailError && 'Account with this email address does not exist'}
-            </LabelError>
+            </InputError>
           </LabelText>
 
           <LabelText
-            inputWidth='255px'
+            width='255px'
             error={passwordError || invalidPassword}
           >
             PASSWORD*
@@ -204,10 +204,10 @@ const CheckoutStep1 = (): JSX.Element => {
 
               onInvalid={(): void => setPasswordError(true)}
               />
-              <LabelError>
+              <InputError>
                 {passwordError && 'Enter password'}
                 {invalidPassword && 'Invalid password'}
-              </LabelError>
+              </InputError>
           </LabelText>
 
           <ButtonBlack>LOG IN & CHECKOUT</ButtonBlack>
@@ -231,7 +231,7 @@ const CheckoutStep1 = (): JSX.Element => {
             window.scroll(0, 0);
           } else dispatch(checkoutSetStep(2));
         }}>
-          <LabelRadio inputMargin='0 10px 0 0'>
+          <LabelRadio labelWidth='80px' inputMargin='0 10px 0 0'>
             <input
               type='radio'
               checked={newCustomers === 'register'}
@@ -240,7 +240,7 @@ const CheckoutStep1 = (): JSX.Element => {
             REGISTER
           </LabelRadio>
 
-          <LabelRadio inputMargin='0 10px 0 0'>
+          <LabelRadio labelWidth='140px' inputMargin='0 10px 0 0'>
             <input
               type='radio'
               checked={newCustomers === 'checkout-as-guest'}

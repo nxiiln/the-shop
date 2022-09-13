@@ -3,7 +3,7 @@ import styled from 'styled-components/macro';
 import {mediumScreen, smallScreen} from '../mediaQueries';
 import {useAppDispatch} from '../redux-hooks';
 import {checkoutSetStep, checkoutSetStep4Complete} from '../slices/checkout';
-import {LabelText, LabelError} from './Labels';
+import {LabelText, InputError} from './Form';
 import visaIcon from '../images/visaIcon.png';
 import masterCardIcon from '../images/masterCardIcon.png';
 import discoverIcon from '../images/discoverIcon.png';
@@ -115,8 +115,8 @@ const CheckoutStep4 = (): JSX.Element => {
         </Icons>
 
         <LabelText
-          labelMargin='0 0 17px 0'
-          inputWidth='270px'
+          margin='0 0 17px 0'
+          width='270px'
           error={cardHolderError}
         >
           CARD HOLDER*
@@ -133,12 +133,12 @@ const CheckoutStep4 = (): JSX.Element => {
             }}
             onInvalid={(): void => setCardHolderError(true)}
           />
-          <LabelError>{cardHolderError && 'Enter card holder'}</LabelError>
+          <InputError>{cardHolderError && 'Enter card holder'}</InputError>
         </LabelText>
 
         <LabelText
-          labelMargin='0 0 17px 0'
-          inputWidth='270px'
+          margin='0 0 17px 0'
+          width='270px'
           error={cardNumberError}
         >
           CARD NUMBER*
@@ -156,14 +156,14 @@ const CheckoutStep4 = (): JSX.Element => {
             }}
             onInvalid={(): void => setCardNumberError(true)}
           />
-          <LabelError>{cardNumberError && 'Enter card number'}</LabelError>
+          <InputError>{cardNumberError && 'Enter a valid card number'}</InputError>
         </LabelText>
 
         <ExpirationWrapper>
           <span>EXPIRATION DATE*</span>
 
           <LabelText
-            inputWidth='77px'
+            width='77px'
             error={expirationMonthError}
           >
             <input
@@ -182,7 +182,7 @@ const CheckoutStep4 = (): JSX.Element => {
           </LabelText>
 
           <LabelText
-            inputWidth='77px'
+            width='77px'
             error={expirationYearError}
           >
             <input
@@ -200,14 +200,14 @@ const CheckoutStep4 = (): JSX.Element => {
               />
           </LabelText>
 
-          <LabelError>
+          <InputError>
             {(expirationMonthError || expirationYearError) && 'Enter a valid expiration date'}
-          </LabelError>
+          </InputError>
         </ExpirationWrapper>
 
         <LabelText
-          labelMargin='0 0 0 25px'
-          inputWidth='85px'
+          margin='0 0 0 25px'
+          width='85px'
           error={cvvError}
         >
           CVV*
@@ -225,7 +225,7 @@ const CheckoutStep4 = (): JSX.Element => {
             }}
             onInvalid={(): void => setCvvError(true)}
           />
-          <LabelError>{cvvError && 'Enter CVV'}</LabelError>
+          <InputError>{cvvError && 'Enter CVV'}</InputError>
         </LabelText>
 
         <ButtonBlack>CONTINUE</ButtonBlack>

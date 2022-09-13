@@ -3,7 +3,7 @@ import styled from 'styled-components/macro';
 import {useAppDispatch, useAppSelector} from '../redux-hooks';
 import {accountChangeAddressInfo} from '../slices/account';
 import {TAccount} from '../types/TAccount';
-import {LabelText, LabelError} from './Labels';
+import {LabelText, InputError} from './Form';
 
 
 
@@ -88,7 +88,7 @@ const AccountAddress = (): JSX.Element => {
         }
       }}
     >
-      <LabelText labelMargin='0 0 20px 0'>
+      <LabelText margin='0 0 20px 0'>
         ADDRESS
         <input
           type='text'
@@ -99,7 +99,7 @@ const AccountAddress = (): JSX.Element => {
         />
       </LabelText>
 
-      <LabelText labelMargin='0 0 20px 0'>
+      <LabelText margin='0 0 20px 0'>
         COUNTRY
         <input
           type='text'
@@ -110,7 +110,7 @@ const AccountAddress = (): JSX.Element => {
         />
       </LabelText>
 
-      <LabelText labelMargin='0 0 20px 0'>
+      <LabelText margin='0 0 20px 0'>
         CITY
         <input
           type='text'
@@ -122,7 +122,7 @@ const AccountAddress = (): JSX.Element => {
       </LabelText>
 
       <LabelText
-        labelMargin='0 0 20px 0'
+        margin='0 0 20px 0'
         error={zipError}
       >
         ZIP / POSTAL CODE*
@@ -136,7 +136,7 @@ const AccountAddress = (): JSX.Element => {
           }}
           onInvalid={(): void => setZipError(true)}
         />
-        <LabelError>{zipError && 'Enter zip / postal code'}</LabelError>
+        <InputError>{zipError && 'Enter zip / postal code'}</InputError>
       </LabelText>
 
       <ButtonUpdateWrapper>

@@ -3,7 +3,7 @@ import styled from 'styled-components/macro';
 import {mediumScreen, smallScreen} from '../mediaQueries';
 import {useAppDispatch} from '../redux-hooks';
 import {checkoutSetStep, checkoutSetStep2Complete} from '../slices/checkout';
-import {LabelText, LabelError} from './Labels';
+import {LabelText, InputError} from './Form';
 
 
 
@@ -94,8 +94,8 @@ const CheckoutStep2 = (): JSX.Element => {
       >
         <Step2FormWrapper>
           <LabelText
-            inputWidth='290px'
-            labelMargin='0 0 20px 0'
+            width='290px'
+            margin='0 0 20px 0'
             error={firstNameError}
           >
             FIRST NAME*
@@ -109,12 +109,12 @@ const CheckoutStep2 = (): JSX.Element => {
               }}
               onInvalid={(): void => setFirstNameError(true)}
             />
-            <LabelError>{firstNameError && 'Enter first name'}</LabelError>
+            <InputError>{firstNameError && 'Enter first name'}</InputError>
           </LabelText>
 
           <LabelText
-            inputWidth='290px'
-            labelMargin='0 0 20px 0'
+            width='290px'
+            margin='0 0 20px 0'
             error={lastNameError}
           >
             LAST NAME*
@@ -128,12 +128,12 @@ const CheckoutStep2 = (): JSX.Element => {
               }}
               onInvalid={(): void => setLastNameError(true)}
             />
-            <LabelError>{lastNameError && 'Enter last name'}</LabelError>
+            <InputError>{lastNameError && 'Enter last name'}</InputError>
           </LabelText>
 
           <LabelText
-            inputWidth='290px'
-            labelMargin='0 0 20px 0'
+            width='290px'
+            margin='0 0 20px 0'
           >
             ADDRESS
             <input
@@ -146,8 +146,8 @@ const CheckoutStep2 = (): JSX.Element => {
           </LabelText>
 
           <LabelText
-            inputWidth='290px'
-            labelMargin='0 0 20px 0'
+            width='290px'
+            margin='0 0 20px 0'
           >
             COUNTRY
             <input
@@ -160,8 +160,8 @@ const CheckoutStep2 = (): JSX.Element => {
           </LabelText>
 
           <LabelText
-            inputWidth='290px'
-            labelMargin='0 0 20px 0'
+            width='290px'
+            margin='0 0 20px 0'
           >
             CITY
             <input
@@ -174,8 +174,8 @@ const CheckoutStep2 = (): JSX.Element => {
           </LabelText>
 
           <LabelText
-            inputWidth='290px'
-            labelMargin='0 0 20px 0'
+            width='290px'
+            margin='0 0 20px 0'
             error={zipError}
           >
             ZIP / POSTAL CODE*
@@ -189,12 +189,12 @@ const CheckoutStep2 = (): JSX.Element => {
               }}
               onInvalid={(): void => setZipError(true)}
             />
-            <LabelError>{zipError && 'Enter zip / postal code'}</LabelError>
+            <InputError>{zipError && 'Enter zip / postal code'}</InputError>
           </LabelText>
 
           <LabelText
-            inputWidth='290px'
-            labelMargin='0 0 20px 0'
+            width='290px'
+            margin='0 0 20px 0'
             error={emailError}
           >
             E-MAIL*
@@ -216,7 +216,7 @@ const CheckoutStep2 = (): JSX.Element => {
 
               onInvalid={(): void => setEmailError(true)}
             />
-            <LabelError>{emailError && 'Enter a valid email'}</LabelError>
+            <InputError>{emailError && 'Enter a valid email'}</InputError>
           </LabelText>
         </Step2FormWrapper>
         <ButtonBlack>CONTINUE</ButtonBlack>

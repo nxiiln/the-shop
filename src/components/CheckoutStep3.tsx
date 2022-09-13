@@ -3,7 +3,7 @@ import styled from 'styled-components/macro';
 import {mediumScreen, smallScreen} from '../mediaQueries';
 import {useAppDispatch} from '../redux-hooks';
 import {checkoutSetStep} from '../slices/checkout';
-import {LabelRadio} from './Labels';
+import {LabelRadio} from './Form';
 
 
 
@@ -71,7 +71,7 @@ const CheckoutStep3 = (): JSX.Element => {
         <span>PLEASE CHOOSE A SHIPPING METHOD TO DELIVERY YOUR ORDER:</span>
 
         <LabelRadio
-          labelWidth='200px'
+          labelWidth='140px'
           labelMargin='0 0 15px 0'
           inputMargin='0 15px 0 0'
         >
@@ -84,7 +84,7 @@ const CheckoutStep3 = (): JSX.Element => {
         </LabelRadio>
 
         <LabelRadio
-          labelWidth='200px'
+          labelWidth='165px'
           labelMargin='0 0 15px 0'
           inputMargin='0 15px 0 0'
         >
@@ -97,7 +97,7 @@ const CheckoutStep3 = (): JSX.Element => {
         </LabelRadio>
 
         <LabelRadio
-          labelWidth='200px'
+          labelWidth='170px'
           labelMargin='0 0 15px 0'
           inputMargin='0 15px 0 0'
         >
@@ -110,7 +110,7 @@ const CheckoutStep3 = (): JSX.Element => {
         </LabelRadio>
 
         <LabelRadio
-          labelWidth='200px'
+          labelWidth='185px'
           labelMargin='0 0 15px 0'
           inputMargin='0 15px 0 0'
         >
