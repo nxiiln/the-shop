@@ -5,10 +5,11 @@ const Label = styled.label`
   font-family: var(--font-second);
   font-size: 10px;
   font-weight: 400;
+  text-transform: uppercase;
   color: var(--color-text-main);
 `;
 
-const textMixin = css<{width?: string, height?: string}>`
+const mixinText = css<{width?: string, height?: string}>`
   width: ${props => props.width};
   height: ${props => props.height || '30px'};
   padding-left: 5px;
@@ -29,7 +30,7 @@ const textMixin = css<{width?: string, height?: string}>`
 `;
 
 
-export const Input = styled.input`${textMixin}`;
+export const Input = styled.input`${mixinText}`;
 
 interface ILabelText {
   width?: string;
@@ -47,7 +48,7 @@ export const LabelText = styled(Label)<ILabelText>`
   align-content: space-between;
 
   > input, textarea {
-    ${textMixin}
+    ${mixinText}
 
     border: 1px solid ${props => !props.error ?
       'var(--color-border)' : 'var(--color-input-error)'
@@ -69,43 +70,19 @@ export const InputError = styled.span`
 `;
 
 
-interface ICheckbox {
-  labelWidth?: string;
-  labelMargin?: string;
-  inputMargin?: string;
-}
-
-export const LabelCheckbox = styled(Label)<ICheckbox>`
-  width: ${props => props.labelWidth};
-  margin: ${props => props.labelMargin};
+const mixinCheckboxRadio = css<{width?: string, margin?: string}>`
+  width: ${props => props.width};
+  margin: ${props => props.margin};
   display: flex;
   align-items: center;
   cursor: pointer;
   
   > input {
-    margin: ${props => props.inputMargin};
+    margin-right: 10px;
     accent-color: var(--color-text-main);
     cursor: pointer;
   }
 `;
 
-
-interface IRadio {
-  labelWidth?: string;
-  labelMargin?: string;
-  inputMargin?: string;
-}
-
-export const LabelRadio = styled(Label)<IRadio>`
-  width: ${props => props.labelWidth};
-  margin: ${props => props.labelMargin};
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-
-  > input {
-    margin: ${props => props.inputMargin};
-    accent-color: var(--color-text-main);
-    cursor: pointer;
-  }
-`;
+export const LabelCheckbox = styled(Label)`${mixinCheckboxRadio}`;
+export const LabelRadio = styled(Label)`${mixinCheckboxRadio}`;

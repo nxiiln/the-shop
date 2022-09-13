@@ -329,7 +329,7 @@ const CreateAccount = (): JSX.Element => {
                 </LabelText>
 
                 {!screen.small &&
-                  <LabelCheckbox labelWidth='250px' inputMargin='0 10px 0 0'>
+                  <LabelCheckbox width='250px'>
                     <input
                       type='checkbox'
                       checked={newsletterSubscription}
@@ -388,7 +388,7 @@ const CreateAccount = (): JSX.Element => {
               
 
               {screen.small &&
-                <LabelCheckbox labelWidth='250px' inputMargin='0 10px 0 0'>
+                <LabelCheckbox width='250px'>
                   <input
                     type='checkbox'
                     checked={newsletterSubscription}

@@ -231,7 +231,7 @@ const CheckoutStep1 = (): JSX.Element => {
             window.scroll(0, 0);
           } else dispatch(checkoutSetStep(2));
         }}>
-          <LabelRadio labelWidth='80px' inputMargin='0 10px 0 0'>
+          <LabelRadio width='80px'>
             <input
               type='radio'
               checked={newCustomers === 'register'}
@@ -240,7 +240,7 @@ const CheckoutStep1 = (): JSX.Element => {
             REGISTER
           </LabelRadio>
 
-          <LabelRadio labelWidth='140px' inputMargin='0 10px 0 0'>
+          <LabelRadio width='140px'>
             <input
               type='radio'
               checked={newCustomers === 'checkout-as-guest'}

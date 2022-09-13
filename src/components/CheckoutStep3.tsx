@@ -71,9 +71,8 @@ const CheckoutStep3 = (): JSX.Element => {
         <span>PLEASE CHOOSE A SHIPPING METHOD TO DELIVERY YOUR ORDER:</span>
 
         <LabelRadio
-          labelWidth='140px'
-          labelMargin='0 0 15px 0'
-          inputMargin='0 15px 0 0'
+          width='140px'
+          margin='0 0 15px 0'
         >
           <input
             type='radio'
@@ -84,9 +83,8 @@ const CheckoutStep3 = (): JSX.Element => {
         </LabelRadio>
 
         <LabelRadio
-          labelWidth='165px'
-          labelMargin='0 0 15px 0'
-          inputMargin='0 15px 0 0'
+          width='165px'
+          margin='0 0 15px 0'
         >
           <input
             type='radio'
@@ -97,9 +95,8 @@ const CheckoutStep3 = (): JSX.Element => {
         </LabelRadio>
 
         <LabelRadio
-          labelWidth='170px'
-          labelMargin='0 0 15px 0'
-          inputMargin='0 15px 0 0'
+          width='170px'
+          margin='0 0 15px 0'
         >
           <input
             type='radio'
@@ -110,9 +107,8 @@ const CheckoutStep3 = (): JSX.Element => {
         </LabelRadio>
 
         <LabelRadio
-          labelWidth='185px'
-          labelMargin='0 0 15px 0'
-          inputMargin='0 15px 0 0'
+          width='185px'
+          margin='0 0 15px 0'
         >
           <input
             type='radio'

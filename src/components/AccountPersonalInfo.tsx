@@ -203,7 +203,7 @@ const AccountPersonalInfo = (): JSX.Element => {
         <InputError>{confirmNewPasswordError && 'Passwords do not match'}</InputError>
       </LabelText>
 
-      <LabelCheckbox labelWidth='245px' inputMargin='0 10px 0 0' >
+      <LabelCheckbox width='245px'>
         <input
           type='checkbox'
           checked={newsletterSubscription}
