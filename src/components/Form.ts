@@ -8,9 +8,9 @@ const Label = styled.label`
   color: var(--color-text-main);
 `;
 
-const inputMixin = css<{width?: string}>`
+const textMixin = css<{width?: string, height?: string}>`
   width: ${props => props.width};
-  height: 30px;
+  height: ${props => props.height || '30px'};
   padding-left: 5px;
   font-family: var(--font-regular);
   font-size: 14px;
@@ -29,24 +29,25 @@ const inputMixin = css<{width?: string}>`
 `;
 
 
-export const Input = styled.input`${inputMixin}`;
+export const Input = styled.input`${textMixin}`;
 
 interface ILabelText {
   width?: string;
+  height?: string;
   margin?: string;
   error?: boolean;
 }
 
 export const LabelText = styled(Label)<ILabelText>`
   width: ${props => props.width};
-  height: 45px;
+  height: ${props => props.height ? `calc(${props.height} + 15px)` : '45px'};
   margin: ${props => props.margin};
   position: relative;
   display: grid;
   align-content: space-between;
 
-  > input {
-    ${inputMixin}
+  > input, textarea {
+    ${textMixin}
 
     border: 1px solid ${props => !props.error ?
       'var(--color-border)' : 'var(--color-input-error)'
@@ -61,11 +62,9 @@ export const LabelText = styled(Label)<ILabelText>`
 `;
 
 export const InputError = styled.span`
-  position: absolute;
-  top: 47px;
-  left: 0;
   font-family: var(--font-regular);
   font-size: 11px;
+  font-weight: 300;
   color: var(--color-input-error);
 `;
 
