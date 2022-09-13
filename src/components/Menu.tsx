@@ -25,14 +25,19 @@ const MenuWrapper = styled.article<{number: boolean}>`
 `;
 
 const MenuSymbol = styled(HashLink)<{open: boolean}>`
+  box-sizing: content-box;
   height: 21px;
-  margin-left: 22px;
+  /* margin: 0 0 0px 15px; */
+  padding: ${props => props.open ? '10px 15px 7px 3px' : '5px 5px 0'};
   position: relative;
+  top: ${props => props.open ? '-10px' : '-5px'};
+  left: ${props => props.open ? '12px' : '15px'};
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   cursor: pointer;
   z-index: 3;
+  /* border: 1px solid pink; */
 
   > div {
     width: 20px;
@@ -44,7 +49,7 @@ const MenuSymbol = styled(HashLink)<{open: boolean}>`
     };
     opacity: 1;
     border-radius: 2px;
-    transition: all 0.2s ease-out;
+    transition: all 0.3s ease-out;
   }
 
   > div:nth-child(4) {opacity: 0}
