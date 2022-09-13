@@ -272,7 +272,6 @@ const EstimateDelivery = styled.div`
   align-content: space-between;
 
   @media ${smallScreen} {
-    /* width: 100%; */
     height: 90%;
     flex-direction: column;
     justify-content: space-around;
@@ -300,27 +299,6 @@ const EstimateDelivery = styled.div`
     width: 280px;
     display: flex;
     justify-content: space-between;
-  }
-`;
-
-const Postcode = styled.input`
-  width: 142px;
-  height: 30px;
-  font-family: var(--font-second);
-  font-size: 12px;
-  line-height: 1.2;
-  font-weight: 300;
-  color: var(--color-text-main);
-  border: 1px solid var(--color-border);
-  outline: none;
-  
-  &::placeholder {
-    padding-left: 12px;
-    font-family: var(--font-regular);
-    font-size: 11px;
-    line-height: 1.2;
-    font-weight: 400;
-    color: var(--color-text-regular);
   }
 `;
 
