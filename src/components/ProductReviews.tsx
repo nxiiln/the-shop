@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState, useRef} from 'react';
 import styled from 'styled-components/macro';
 import {smallScreen} from '../mediaQueries';
 import {useAppDispatch} from '../redux-hooks';
@@ -179,19 +179,21 @@ const ProductReviews = ({productId}: {productId: number}): JSX.Element => {
   const currReviews: IProductReview[] = reviews[reviewsKey];
 
   const [writeReview, setWriteReview] = useState<boolean>(false);
+  const refTitle = useRef<HTMLHeadingElement>(null);
+  const dispatch = useAppDispatch();
+  
   const [title, setTitle] = useState<string>('');
   const [rating, setRating] = useState<number>(0);
   const [ratingError, setRatingError] = useState<boolean>(false);
   const [text, setText] = useState<string>('');
   const [author, setAuthor] = useState<string>('');
-  const dispatch = useAppDispatch();
 
 
   return(
     <Wrapper>
       {!writeReview ?
         <>
-          <Title>{currReviews.length} REVIEWS</Title>
+          <Title ref={refTitle}>{currReviews.length} REVIEWS</Title>
           {currReviews.map((review: IProductReview): JSX.Element =>
             <Review key={review.id}>
               <span>{review.title}</span>
@@ -207,7 +209,10 @@ const ProductReviews = ({productId}: {productId: number}): JSX.Element => {
 
           <Button
             type='button'
-            onClick={(): void => setWriteReview(true)}
+            onClick={(): void => {
+              setWriteReview(true);
+              refTitle.current?.scrollIntoView({behavior: 'smooth'});
+            }}
           >
             WRITE REVIEW
           </Button>
@@ -270,6 +275,7 @@ const ProductReviews = ({productId}: {productId: number}): JSX.Element => {
               onClick={(): void => {
                 setTitle('');
                 setRating(0);
+                setRatingError(false);
                 setText('');
                 setAuthor('');
                 setWriteReview(false);
