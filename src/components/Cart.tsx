@@ -1,10 +1,10 @@
-import {useState} from 'react';
 import styled from 'styled-components/macro';
 import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
 import {HashLink} from 'react-router-hash-link';
 import {useAppSelector, useAppDispatch} from '../redux-hooks';
 import {cartRemove, quantityIncrement, quantityDecrement} from '../slices/cart';
 import BreadCrumbs from './BreadCrumbs';
+import {Input} from './Form';
 import {IProduct} from '../types/IProduct';
 import {productImages} from '../images/productImages';
 
@@ -272,8 +272,8 @@ const EstimateDelivery = styled.div`
   align-content: space-between;
 
   @media ${smallScreen} {
-    width: 100%;
-    height: 100%;
+    /* width: 100%; */
+    height: 90%;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
@@ -301,23 +301,6 @@ const EstimateDelivery = styled.div`
     display: flex;
     justify-content: space-between;
   }
-`;
-
-const Select = styled.select`
-  width: 285px;
-  height: 29px;
-  padding-left: 12px;
-  font-family: var(--font-second);
-  font-size: 10px;
-  line-height: 1.2;
-  font-weight: 300;
-  text-transform: uppercase;
-  color: var(--color-text-main);
-  background: var(--color-background-highlight);
-  border: 1px solid var(--color-border);
-  border-radius: 15px;
-
-  @media ${smallScreen} {width: 100%}
 `;
 
 const Postcode = styled.input`
@@ -374,20 +357,10 @@ const Voucher = styled.div`
   color: var(--color-text-main);
   border: 1px solid var(--color-border);
   
-  > input {
-    width: 80%;
-    height: 30px;
-    border: 1px solid var(--color-border);
-    outline: none;
-
-    @media ${mediumScreen} {width: 100%}
-    @media ${smallScreen} {max-width: 260px}
-  }
-
   @media ${mediumScreen} {
     width: 328px;
     grid-area: 6 / 1 / 8 / 2;
-    justify-content: start;
+    justify-content: center;
   }
 
   @media ${smallScreen} {
@@ -522,33 +495,9 @@ const ButtonWrapper = styled.div`
 
 
 
-interface Region {
-  country: string;
-  cities: string[];
-}
-
-const regions: Region[] = [
-  {
-    country: 'Russia',
-    cities: ['Moscow', 'Saint Petersburg', 'Voronezh']
-  },
-  {
-    country: 'UK',
-    cities: ['Birmingham', 'London', 'Manchester']
-  },
-  {
-    country: 'United States',
-    cities: ['Los Angeles', 'New York', 'San Fransisco']
-  }
-];
-
-
-
-
 const Cart = (): JSX.Element => {
   const cart = useAppSelector(state => state.cart);
   const dispatch = useAppDispatch();
-  const [country, setCountry] = useState<string>('default');
   const screen = useMediaQuery();
   
   const amount = (product: IProduct): number => product.price * product.quantity;
@@ -642,36 +591,10 @@ const Cart = (): JSX.Element => {
               <EstimateDelivery>
                 <span>ESTIMATE DELIVERY</span>
                 <span>Enter your destination to get a delivery estimate</span>
-
-                <Select
-                  defaultValue='default'
-                  onChange={(e: React.ChangeEvent<HTMLSelectElement>): void =>
-                    setCountry(e.target.value)
-                  }
-                >
-                  <option value='default' disabled>select country</option>
-                  {regions.map((region: Region): JSX.Element =>
-                    <option key={region.country} value={region.country}>
-                      {region.country}
-                    </option>
-                  )}
-                </Select>
-
-                <Select defaultValue='default'>
-                  <option value='default' disabled>select region, state or province</option>
-                  {country !== 'default' &&
-                    regions
-                      .filter((region: Region): boolean => region.country === country)
-                      [0]
-                      .cities
-                      .map((city: string): JSX.Element =>
-                        <option key={city} value={city}>{city}</option>
-                      )
-                  }
-                </Select>
-                
+                <Input type='text' width='280px' placeholder='Enter your country' />
+                <Input type='text' width='280px' placeholder='Enter your region' />
                 <div>
-                  <Postcode type='text' placeholder='Postcode/Zip'/>
+                  <Input type='text' width='140px' placeholder='Postcode/Zip' />
                   <GetAQuote type='button'>GET A QUOTE</GetAQuote>
                 </div>
               </EstimateDelivery>
@@ -680,7 +603,7 @@ const Cart = (): JSX.Element => {
 
             <Voucher>
               <span>REDEEM DISCOUNT VOUCHER</span>
-              <input type='text' />
+              <Input type='text' width='180px' />
             </Voucher>
 
 
