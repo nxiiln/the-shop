@@ -1,6 +1,7 @@
 import {useState} from 'react';
 import styled from 'styled-components/macro';
 import {mediumScreen, smallScreen} from '../mediaQueries';
+import {LabelCheckbox} from './Form';
 
 
 
@@ -96,26 +97,6 @@ const ButtonFilterSecond = styled(ButtonFilter)`
 
 
 // Checkbox
-const Checkbox = styled.label`
-  height: 18px;
-  margin-bottom: 12px;
-  display: flex;
-  align-items: center;
-  font-family: var(--font-second);
-  font-size: 10px;
-  font-weight: 400;
-  text-transform: uppercase;
-  color: var(--color-text-main);
-  cursor: pointer;
-  
-  &:hover {text-decoration: underline}
-  
-  > input {
-    margin: 0 7px 0 0;
-    accent-color: var(--color-text-main);
-  }
-`;
-
 const CheckboxWrapper = styled.div`
   height: 180px;
   margin: 10px 0 0 2px;
@@ -132,62 +113,6 @@ const CheckboxSizeWrapper = styled(CheckboxWrapper)`
 
 const CheckboxColorWrapper = styled(CheckboxWrapper)`
   width: 165px;
-`;
-
-
-// Range
-const RangeWrapper = styled.div`
-  width: 160px;
-  height: 10px;
-  margin-bottom: 80px;
-  position: relative;
-  background: #e4e2e1;
-
-  input[type='range'] {
-    &::-webkit-slider-runnable-track, 
-    &::-webkit-slider-thumb, & {
-      -webkit-appearance: none;
-    }
-
-    width: 100%;
-    margin: 0;
-    background: none;
-    pointer-events: none;
-
-    &::-webkit-slider-runnable-track {
-      width: 100%;
-      height: 100%;
-      background: none;
-      border: none;
-    }
-
-    &::-webkit-slider-thumb {
-      width: 20px;
-      height: 20px;
-      border-radius: 10px;
-      background: var(--color-background-second);
-      pointer-events: auto;
-    }
-  }
-`;
-
-const Range1 = styled.input`
-  position: absolute;
-  left: 0px;
-  top: 0px;
-`;
-
-const Range2 = styled.input`
-  position: absolute;
-  left: 0px;
-  top: 0px;
-`;
-
-const RangeValue = styled.div`
-  width: 20px;
-  height: 20px;
-  margin-top: 20px;
-  border: 1px solid #aaa;
 `;
 
 
@@ -215,9 +140,6 @@ export const colors: string[] = [
 const CatalogFilters = (): JSX.Element => {
   const [category, setCategory] = useState<boolean>(false);
   const [size, setSize] = useState<boolean>(false);
-  const [priceRange, setPriceRange] = useState<boolean>(false);
-  const [range1, setRange1] = useState<number>(30);
-  const [range2, setRange2] = useState<number>(70);
   const [color, setColor] = useState<boolean>(false);
 
 
@@ -264,57 +186,21 @@ const CatalogFilters = (): JSX.Element => {
         {size &&
           <CheckboxSizeWrapper>
             {sizes.map((size: string): JSX.Element =>
-              <Checkbox key={size}>
+              <LabelCheckbox
+                key={size}
+                margin='0 0 10px 0'
+              >
                 <input type='checkbox' name={size}/>
                 {size}
-              </Checkbox>
+              </LabelCheckbox>
             )}
           </CheckboxSizeWrapper>
         }
       </Dropdown>
 
-
-      {/* <Dropdown open={priceRange}>
-        <DropdownHeader
-          open={priceRange}
-          onClick={(): void => priceRange ? setPriceRange(false) : setPriceRange(true)}
-        >
-          <span>PRICE RANGE</span>
-          <span>❯</span>
-        </DropdownHeader>
-
-        {priceRange && 
-          <RangeWrapper>
-            <Range1
-              type='range'
-              min='0'
-              value={range1}
-              max='100'
-              onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
-                setRange1(+e.target.value);
-              }}
-            />
-        
-            <Range2
-              type='range'
-              min='0'
-              value={range2}
-              max='100'
-              onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
-                setRange2(+e.target.value);
-              }}
-            />
-
-            <RangeValue>{range1}</RangeValue>
-            <RangeValue>{range2}</RangeValue>
-          </RangeWrapper>
-        }
-      </Dropdown> */}
-
-
       <Dropdown open={color}>
         <DropdownHeader
-          open={priceRange}
+          open={color}
           onClick={(): void => color ? setColor(false) : setColor(true)}
         >
           <span>COLOR</span>
@@ -324,10 +210,13 @@ const CatalogFilters = (): JSX.Element => {
         {color &&
           <CheckboxColorWrapper>
             {colors.map((color: string): JSX.Element =>
-              <Checkbox key={color}>
+              <LabelCheckbox
+                key={color}
+                margin='0 0 10px 0'
+              >
                 <input type='checkbox' name={color}/>
                 {color}
-              </Checkbox>
+              </LabelCheckbox>
             )}
           </CheckboxColorWrapper>
         }
