@@ -7,7 +7,7 @@ import {accountLogIn, accountLogOut, accountSetNewEmail} from '../slices/account
 import {checkoutSetStep} from '../slices/checkout';
 import {TAccount} from '../types/TAccount';
 import BreadCrumbs from './BreadCrumbs';
-
+import {LabelText, InputError} from './Form';
 
 
 
@@ -104,33 +104,6 @@ const TextBold = styled.span`
   color: var(--color-text-main);
 `;
 
-const Label = styled.label<{error?: boolean}>`
-  position: relative;
-  height: 45px;
-  margin-bottom: 20px;
-  display: grid;
-  align-content: space-between;
-  font-family: var(--font-second);
-  font-size: 10px;
-  line-height: 1.2;
-  font-weight: 300;
-  color: var(--color-text-main);
-
-  > input {
-    width: 254px;
-    height: 30px;
-    border: 1px solid ${props => !props.error ?
-      'var(--color-border)' : 'var(--color-input-error)'
-    };
-
-    &:focus {
-      outline: 1px solid ${props => !props.error ?
-        'var(--color-input-outline)' : 'var(--color-input-error)'
-      };
-    }
-  }
-`;
-
 const ButtonPreset: string = `
   height: 30px;
   margin-top: 15px;
@@ -170,15 +143,6 @@ const ButtonCreateAccount = styled.button`
   cursor: pointer;
 
   &:hover {background: var(--color-button-solid-hover)}
-`;
-
-const Error = styled.span`
-  position: absolute;
-  top: 47px;
-  left: 0;
-  font-family: var(--font-regular);
-  font-size: 11px;
-  color: var(--color-input-error);
 `;
 
 const LogOutWrapper = styled.div`
@@ -287,7 +251,10 @@ const Login = (): JSX.Element => {
                     }
                   }}
                 >
-                  <Label error={emailError || existEmailError}>
+                  <LabelText
+                    margin='0 0 20px 0'
+                    error={emailError || existEmailError}
+                  >
                     E-MAIL*
                     <input
                       type='email'
@@ -307,13 +274,16 @@ const Login = (): JSX.Element => {
 
                       onInvalid={(): void => setEmailError(true)}
                     />
-                    <Error>
+                    <InputError>
                       {emailError && 'Enter a valid email'}
                       {existEmailError && 'Account with this email address does not exist'}
-                    </Error>
-                  </Label>
+                    </InputError>
+                  </LabelText>
 
-                  <Label error={passwordError || invalidPassword}>
+                  <LabelText
+                    margin='0 0 20px 0'
+                    error={passwordError || invalidPassword}
+                  >
                     PASSWORD*
                     <input
                       type='password'
@@ -331,11 +301,11 @@ const Login = (): JSX.Element => {
 
                       onInvalid={(): void => setPasswordError(true)}
                     />
-                    <Error>
+                    <InputError>
                       {passwordError && 'Enter password'}
                       {invalidPassword && 'Invalid password'}
-                    </Error>
-                  </Label>
+                    </InputError>
+                  </LabelText>
 
                   <ButtonLogin>LOGIN</ButtonLogin>
                 </form>
@@ -365,7 +335,10 @@ const Login = (): JSX.Element => {
                     }
                   }}
                 >
-                  <Label error={newEmailError || registeredEmailError}>
+                  <LabelText
+                    margin='0 0 20px 0'
+                    error={newEmailError || registeredEmailError}
+                  >
                     E-MAIL*
                     <input
                       type='email'
@@ -385,11 +358,11 @@ const Login = (): JSX.Element => {
 
                       onInvalid={(): void => setNewEmailError(true)}
                     />
-                    <Error>
+                    <InputError>
                       {newEmailError && 'Enter a valid email'}
                       {registeredEmailError && 'Account with this email address exists'}
-                    </Error>
-                  </Label>
+                    </InputError>
+                  </LabelText>
 
                   <ButtonCreateAccount type='submit'>CREATE AN ACCOUNT</ButtonCreateAccount>
                 </form>
