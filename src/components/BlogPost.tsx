@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState, useRef} from 'react';
 import styled from 'styled-components/macro';
 import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
 import {Link, useParams} from 'react-router-dom';
@@ -25,7 +25,7 @@ const WrapperInner = styled.div`
   margin: 0 1% 50px;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 40px 240px 1fr 1fr;
+  grid-template-rows: 40px 240px auto 1fr;
 
   @media ${mediumScreen}, ${smallScreen} {
     grid-template-columns: 1fr;
@@ -190,6 +190,7 @@ const BlogPost = (): JSX.Element => {
   const post = data.blogPosts[blogPostId - 1];
   const screen = useMediaQuery();
 
+  const refReviewsNumber = useRef<HTMLHeadingElement>(null);
   const [reviews, setReviews] = useState<IBlogPostReview[]>(post.reviews);
 
   const [name, setName] = useState<string>('');
@@ -236,7 +237,9 @@ const BlogPost = (): JSX.Element => {
 
 
             <ReviewsWrapper>
-              <ReviewsNumber>{reviews.length} REVIEWS</ReviewsNumber>
+              <ReviewsNumber ref={refReviewsNumber}>
+                {reviews.length} REVIEWS
+              </ReviewsNumber>
 
               {reviews.map((review: IBlogPostReview) =>
                 <Review key={review.id}>
@@ -270,6 +273,10 @@ const BlogPost = (): JSX.Element => {
 
                     newReviews.push(newReview);
                     setReviews(newReviews);
+                    setName('');
+                    setText('');
+
+                    refReviewsNumber.current?.scrollIntoView({behavior: 'smooth'});
                   }
                 }}
               >
