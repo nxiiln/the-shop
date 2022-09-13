@@ -4,7 +4,7 @@ import styled, {css} from 'styled-components/macro';
 const Label = styled.label`
   font-family: var(--font-second);
   font-size: 10px;
-  font-weight: 300;
+  font-weight: 400;
   color: var(--color-text-main);
 `;
 
@@ -13,8 +13,8 @@ const textMixin = css<{width?: string, height?: string}>`
   height: ${props => props.height || '30px'};
   padding-left: 5px;
   font-family: var(--font-regular);
-  font-size: 14px;
-  font-weight: 300;
+  font-size: 13px;
+  font-weight: 400;
   color: var(--color-text-main);
   border: 1px solid var(--color-border);
 
@@ -23,7 +23,7 @@ const textMixin = css<{width?: string, height?: string}>`
   &::placeholder {
     font-family: var(--font-regular);
     font-size: 13px;
-    font-weight: 300;
+    font-weight: 400;
     color: var(--color-text-regular);
   }
 `;
