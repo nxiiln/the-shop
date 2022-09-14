@@ -9,6 +9,7 @@ import {quickViewChange} from '../slices/quickView';
 import {IProduct} from '../types/IProduct';
 import {productImages} from '../images/productImages';
 import QuickView from './QuickView';
+import Button from './Button';
 import cartSymbol from '../images/cartSymbol.png';
 import wishListSymbol from '../images/wishList.png';
 
@@ -91,75 +92,16 @@ const ProductOpen = styled.div`
   box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.23);
 `;
 
-const QuickShop = styled.button`
-  width: 100%;
-  height: 19px;
-  margin: 0;
-  position: absolute;
-  top: 150px;
-  left: 0px;
-  font-family: var(--font-second);
-  font-size: 10px;
-  font-weight: 300;
+const QuickShop = styled(Button)`
   color: var(--color-text-main);
   background: var(--color-background-main);
   opacity: 0.8;
   border: none;
-  cursor: pointer;
 
-  &:hover {opacity: 1}
-`;
-
-const AddToCart = styled.button`
-  width: 100%;
-  height: 25px;
-  margin-top: 365px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: var(--font-second);
-  font-size: 10px;
-  line-height: 1.2;
-  font-weight: 300;
-  color: var(--color-text-second);
-  background: var(--color-background-second);
-  border: none;
-  cursor: pointer;
-
-  &:hover {background: var(--color-button-solid-hover)}
-
-  > div {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-family: var(--font-second);
-    font-size: 10px;
-    line-height: 1.2;
-    font-weight: 300;
-    color: var(--color-text-second);
-
-    > img {margin-right: 5px}
+  &:hover {
+    background: var(--color-background-main);
+    opacity: 1;
   }
-`;
-
-const WishList = styled.button`
-  height: 15px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  align-self: end;
-  font-family: var(--font-second);
-  font-size: 10px;
-  line-height: 1.2;
-  font-weight: 300;
-  color: var(--color-text-main);
-  background: transparent;
-  border: none;
-  cursor: pointer;
-
-  &:hover {text-decoration: underline}
-
-  > img {margin-right: 5px}
 `;
 
 
@@ -210,6 +152,11 @@ const Products = (props: IProps): JSX.Element => {
           {!screen.small && !screen.touch && productOpen === product.id &&
             <ProductOpen>
               <QuickShop
+                width='100%'
+                height='20px'
+                position='absolute'
+                top='150px'
+                left='0'
                 onClick={(e: Click): void => {
                   e.preventDefault();
                   setProductQuickView(product);
@@ -219,35 +166,38 @@ const Products = (props: IProps): JSX.Element => {
                 QUICK SHOP
               </QuickShop>
               
-              <AddToCart
+              <Button
                 type='button'
+                width='100%'
+                height='25px'
+                margin='365px 0 0 0'
+                icon={cartSymbol}
                 onClick={(e: Click): void => {
                   e.preventDefault();
                   !cart.some(cartProduct => cartProduct.id === product.id) ?
                     dispatch(cartAdd(product)) : dispatch(cartRemove(product));
                 }}
               >
-                <div>
-                  <img src={cartSymbol} alt='cart symbol' />
-                  {!cart.some(cartProduct => cartProduct.id === product.id) ? 
-                    'ADD TO CART' : 'PRODUCT IN CART'
-                  }
-                </div>
-              </AddToCart>
+                {!cart.some(cartProduct => cartProduct.id === product.id) ? 
+                  'ADD TO CART' : 'PRODUCT IN CART'
+                }
+              </Button>
 
-              <WishList
+              <Button
                 type='button'
+                variant='link'
+                margin='2px 0 0 0'
+                icon={wishListSymbol}
                 onClick={(e: Click): void => {
                   e.preventDefault();
                   !wishList.some(wishListProduct => wishListProduct.id === product.id) ?
                     dispatch(wishListAdd(product)) : dispatch(wishListRemove(product));
                 }}
               >
-                <img src={wishListSymbol} alt='wishlist' />
                 {!wishList.some(wishListProduct => wishListProduct.id === product.id) ?
                   'WISHLIST' : 'PRODUCT IN WISHLIST'
                 }
-              </WishList>
+              </Button>
             </ProductOpen>
           }
         </Product>
