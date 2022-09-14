@@ -6,6 +6,7 @@ import {checkoutSetStep, checkoutSetStep2Complete, checkoutSetStep4Complete} fro
 import {cartReset} from '../slices/cart';
 import {accountSetOrders} from '../slices/account';
 import {TAccount} from '../types/TAccount';
+import Button from './Button';
 
 
 
@@ -36,25 +37,6 @@ const Step5 = styled.div`
   @media ${mediumScreen}, ${smallScreen} {width: 100%}
 `;
 
-const ButtonBlack = styled.button`
-  width: 144px;
-  height: 30px;
-  font-family: var(--font-second);
-  font-size: 10px;
-  font-weight: 300;
-  color: var(--color-text-second);
-  background: var(--color-background-second);
-  border: none;
-  cursor: pointer;
-
-  &:hover {background: var(--color-button-solid-hover)}
-`;
-
-const OrderNow = styled(ButtonBlack)`
-  width: 291px;
-  @media ${smallScreen} {width: 260px}
-`;
-
 
 
 
@@ -80,8 +62,10 @@ const CheckoutStep5 = (): JSX.Element => {
           Please review all the information on this page.<br />
           Press the order now button to confirm your purchase.
         </p>
-        <OrderNow
+        <Button
           type='button'
+          width='290px'
+          smallWidth='260px'
           onClick={(): void => {
             if (!step4Complete) dispatch(checkoutSetStep(4));
             if (!step2Complete && activeAccountId === -1) dispatch(checkoutSetStep(2));
@@ -122,7 +106,7 @@ const CheckoutStep5 = (): JSX.Element => {
           }}
         >
           {orderPayment ? 'ORDER PAYMENT...' : 'ORDER NOW'}
-        </OrderNow>
+        </Button>
       </div>
     </Step5>
   )
