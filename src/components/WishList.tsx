@@ -8,7 +8,8 @@ import {cartAdd, cartRemove} from '../slices/cart';
 import {IProduct} from '../types/IProduct';
 import {productImages} from '../images/productImages';
 import BreadCrumbs from './BreadCrumbs';
-import {ContinueShopping} from './Cart';
+import Button from './Button';
+import cartSymbol from '../images/cartSymbol.png';
 
 
 
@@ -187,21 +188,6 @@ const X = styled.button`
   cursor: pointer;
 `;
 
-const AddToCart = styled.button`
-  width: 119px;
-  height: 30px;
-  font-family: var(--font-second);
-  font-size: 10px;
-  line-height: 1.2;
-  font-weight: 300;
-  color: var(--color-text-second);
-  background: var(--color-background-second);
-  border: none;
-  cursor: pointer;
-
-  &:hover {background: var(--color-button-solid-hover)}
-`;
-
 
 
 
@@ -259,8 +245,10 @@ const WishList = (): JSX.Element => {
                     <span>size: {product.size}</span>
                     <span>${product.price}</span>
                     
-                    <AddToCart
+                    <Button
                       type='button'
+                      width='140px'
+                      icon={cartSymbol}
                       onClick={(): void => {
                         !cart.some(cartProduct => cartProduct.id === product.id) ?
                           dispatch(cartAdd(product)) : dispatch(cartRemove(product));
@@ -269,7 +257,7 @@ const WishList = (): JSX.Element => {
                       {!cart.some(cartProduct => cartProduct.id === product.id) ? 
                         'ADD TO CART' : 'PRODUCT IN CART'
                       }
-                    </AddToCart>
+                    </Button>
                   </Product>
                 </ProductWrapper>
               )}
@@ -278,7 +266,16 @@ const WishList = (): JSX.Element => {
         :
           <>
             <h2>WISH LIST IS EMPTY</h2>
-            <ContinueShopping to='/catalog#top'>CONTINUE SHOPPING</ContinueShopping>
+            <Button
+              as={HashLink}
+              to='/catalog#top'
+              variant='outline'
+              width='290px'
+              smallWidth='45%'
+              maxWidth='290px'
+            >
+              CONTINUE SHOPPING
+            </Button>
           </>
         }
       </WrapperInner>
