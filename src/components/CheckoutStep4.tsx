@@ -8,6 +8,7 @@ import visaIcon from '../images/visaIcon.png';
 import masterCardIcon from '../images/masterCardIcon.png';
 import discoverIcon from '../images/discoverIcon.png';
 import americanExpressIcon from '../images/americanExpressIcon.png';
+import Button from './Button';
 
 
 
@@ -58,20 +59,6 @@ const ExpirationWrapper = styled.div`
     font-weight: 300;
     color: var(--color-text-main);
   }
-`;
-
-const ButtonBlack = styled.button`
-  width: 144px;
-  height: 30px;
-  font-family: var(--font-second);
-  font-size: 10px;
-  font-weight: 300;
-  color: var(--color-text-second);
-  background: var(--color-background-second);
-  border: none;
-  cursor: pointer;
-
-  &:hover {background: var(--color-button-solid-hover)}
 `;
 
 
@@ -228,7 +215,7 @@ const CheckoutStep4 = (): JSX.Element => {
           <InputError>{cvvError && 'Enter CVV'}</InputError>
         </LabelText>
 
-        <ButtonBlack>CONTINUE</ButtonBlack>
+        <Button type='submit' width='145px'>CONTINUE</Button>
       </form>
     </Step4>
   )
