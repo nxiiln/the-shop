@@ -4,11 +4,11 @@ import {mediumScreen, smallScreen} from '../mediaQueries';
 import {useAppDispatch} from '../redux-hooks';
 import {checkoutSetStep, checkoutSetStep4Complete} from '../slices/checkout';
 import {LabelText, InputError} from './Form';
+import Button from './Button';
 import visaIcon from '../images/visaIcon.png';
 import masterCardIcon from '../images/masterCardIcon.png';
 import discoverIcon from '../images/discoverIcon.png';
 import americanExpressIcon from '../images/americanExpressIcon.png';
-import Button from './Button';
 
 
 
@@ -45,9 +45,8 @@ const Icons = styled.div`
 
 const ExpirationWrapper = styled.div`
   width: 160px;
-  height: 60px;
   position: relative;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -59,6 +58,14 @@ const ExpirationWrapper = styled.div`
     font-weight: 300;
     color: var(--color-text-main);
   }
+
+  > span:last-child {
+    position: absolute;
+    top: 43px;
+    left: 0px;
+  }
+
+  > label {height: 35px}
 `;
 
 
