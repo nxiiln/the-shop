@@ -5,6 +5,7 @@ import {useAppDispatch, useAppSelector} from '../redux-hooks';
 import {cartAdd, cartRemove, cartProductSize, cartProductColor} from '../slices/cart';
 import {wishListAdd, wishListRemove, wishListProductSize, wishListProductColor} from '../slices/wishList';
 import {sizes, colors} from './CatalogFilters';
+import {LabelCheckbox} from './Form';
 import {IProduct} from '../types/IProduct';
 import {IProductReview} from '../types/IProductReview';
 import {IProductRating} from '../types/IProductRating';
@@ -152,27 +153,6 @@ const DropdownHeader = styled.div`
   align-items: center;
   text-transform: uppercase;
   cursor: pointer;
-`;
-
-const Checkbox = styled.label`
-  height: 18px;
-  margin-bottom: 12px;
-  display: flex;
-  align-items: center;
-  font-family: var(--font-second);
-  font-size: 10px;
-  font-weight: 400;
-  text-transform: uppercase;
-  color: var(--color-text-main);
-  cursor: pointer;
-
-  &:hover {text-decoration: underline}
-
-  > input {
-    margin: 0 7px 0 0;
-    accent-color: var(--color-text-main);
-    cursor: pointer;
-  }
 `;
 
 const CheckboxWrapper = styled.div`
@@ -346,7 +326,10 @@ const ProductDescription = (product: IProduct): JSX.Element => {
         {sizeOpen &&
           <CheckboxSizeWrapper>
             {sizes.map((currSize: string): JSX.Element =>
-              <Checkbox key={currSize}>
+              <LabelCheckbox
+                key={currSize}
+                margin='0 0 10px 0'
+              >
                 <input
                   type='checkbox'
                   checked={currSize === size}
@@ -364,7 +347,7 @@ const ProductDescription = (product: IProduct): JSX.Element => {
                   }}
                 />
                 {currSize}
-              </Checkbox>
+              </LabelCheckbox>
             )}
           </CheckboxSizeWrapper>
         }
@@ -380,7 +363,10 @@ const ProductDescription = (product: IProduct): JSX.Element => {
         {colorOpen &&
           <CheckboxColorWrapper>
             {colors.map((currColor: string): JSX.Element =>
-              <Checkbox key={currColor}>
+              <LabelCheckbox
+                key={currColor}
+                margin='0 0 10px 0'
+              >
                 <input
                   type='checkbox'
                   checked={currColor === color}
@@ -398,7 +384,7 @@ const ProductDescription = (product: IProduct): JSX.Element => {
                   }}
                 />
                 {currColor}
-              </Checkbox>
+              </LabelCheckbox>
             )}
           </CheckboxColorWrapper>
         }
