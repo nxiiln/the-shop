@@ -8,6 +8,7 @@ import {productImages} from '../images/productImages';
 import {sizes, colors} from './CatalogFilters';
 import {cartAdd, cartProductColor, cartProductSize, cartRemove} from '../slices/cart';
 import {wishListAdd, wishListProductColor, wishListProductSize, wishListRemove} from '../slices/wishList';
+import {LabelCheckbox} from './Form';
 import wishListSymbol from '../images/wishList.png';
 
 
@@ -175,27 +176,6 @@ const DropdownHeader = styled.div`
   cursor: pointer;
 `;
 
-const Checkbox = styled.label`
-  height: 18px;
-  margin-bottom: 12px;
-  display: flex;
-  align-items: center;
-  font-family: var(--font-second);
-  font-size: 10px;
-  font-weight: 400;
-  text-transform: uppercase;
-  color: var(--color-text-main);
-  cursor: pointer;
-
-  &:hover {text-decoration: underline}
-
-  > input {
-    margin: 0 7px 0 0;
-    accent-color: var(--color-text-main);
-    cursor: pointer;
-  }
-`;
-
 const CheckboxWrapper = styled.div`
   margin: 10px 0 0 2px;
   display: flex;
@@ -326,7 +306,10 @@ const QuickView = (product: IProduct): JSX.Element => {
             {sizeOpen &&
               <CheckboxSizeWrapper>
                 {sizes.map((currSize: string): JSX.Element =>
-                  <Checkbox key={currSize}>
+                  <LabelCheckbox
+                    key={currSize}
+                    margin='0 0 10px 0'
+                  >
                     <input
                       type='checkbox'
                       checked={currSize === size}
@@ -344,7 +327,7 @@ const QuickView = (product: IProduct): JSX.Element => {
                       }}
                     />
                     {currSize}
-                  </Checkbox>
+                  </LabelCheckbox>
                 )}
               </CheckboxSizeWrapper>
             }
@@ -360,7 +343,10 @@ const QuickView = (product: IProduct): JSX.Element => {
             {colorOpen &&
               <CheckboxColorWrapper>
                 {colors.map((currColor: string): JSX.Element =>
-                  <Checkbox key={currColor}>
+                  <LabelCheckbox
+                    key={currColor}
+                    margin='0 0 10px 0'
+                  >
                     <input
                       type='checkbox'
                       checked={currColor === color}
@@ -378,7 +364,7 @@ const QuickView = (product: IProduct): JSX.Element => {
                       }}
                     />
                     {currColor}
-                  </Checkbox>
+                  </LabelCheckbox>
                 )}
               </CheckboxColorWrapper>
             }
