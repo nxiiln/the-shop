@@ -4,6 +4,7 @@ import {mediumScreen, smallScreen} from '../mediaQueries';
 import {useAppDispatch} from '../redux-hooks';
 import {checkoutSetStep, checkoutSetStep2Complete} from '../slices/checkout';
 import {LabelText, InputError} from './Form';
+import Button from './Button';
 
 
 
@@ -41,20 +42,6 @@ const Step2FormWrapper = styled.div`
     flex-wrap: nowrap;
     flex-direction: column;
   }
-`;
-
-const ButtonBlack = styled.button`
-  width: 144px;
-  height: 30px;
-  font-family: var(--font-second);
-  font-size: 10px;
-  font-weight: 300;
-  color: var(--color-text-second);
-  background: var(--color-background-second);
-  border: none;
-  cursor: pointer;
-
-  &:hover {background: var(--color-button-solid-hover)}
 `;
 
 
@@ -219,7 +206,7 @@ const CheckoutStep2 = (): JSX.Element => {
             <InputError>{emailError && 'Enter a valid email'}</InputError>
           </LabelText>
         </Step2FormWrapper>
-        <ButtonBlack>CONTINUE</ButtonBlack>
+        <Button type='submit' width='145px'>CONTINUE</Button>
       </Step2Form>
     </Step2>
   )
