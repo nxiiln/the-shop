@@ -12,7 +12,8 @@ import CheckoutStep2 from './CheckoutStep2';
 import CheckoutStep3 from './CheckoutStep3';
 import CheckoutStep4 from './CheckoutStep4';
 import CheckoutStep5 from './CheckoutStep5';
-import {ContinueShopping} from './Cart';
+import Button from './Button';
+import { HashLink } from 'react-router-hash-link';
 
 
 
@@ -203,7 +204,16 @@ const Checkout = (): JSX.Element => {
           :
           <>
             <h2>NO SELECTED PRODUCTS</h2>
-            <ContinueShopping to='/catalog#top'>CONTINUE SHOPPING</ContinueShopping>
+            <Button
+              as={HashLink}
+              to='/catalog#top'
+              variant='outline'
+              width='290px'
+              smallWidth='45%'
+              maxWidth='290px'
+            >
+              CONTINUE SHOPPING
+            </Button>
           </>
         }
       </WrapperInner>
