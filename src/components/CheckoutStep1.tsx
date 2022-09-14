@@ -6,7 +6,10 @@ import {useAppSelector, useAppDispatch} from '../redux-hooks';
 import {accountLogIn} from '../slices/account';
 import {checkoutSetStep} from '../slices/checkout';
 import {LabelText, LabelRadio, InputError} from './Form';
+import Button from './Button';
 import {TAccount} from '../types/TAccount';
+
+
 
 
 const Step1 = styled.div`
@@ -81,20 +84,6 @@ const TextBold = styled.span`
   font-size: 11px;
   font-weight: 700;
   color: var(--color-text-main);
-`;
-
-const ButtonBlack = styled.button`
-  width: 144px;
-  height: 30px;
-  font-family: var(--font-second);
-  font-size: 10px;
-  font-weight: 300;
-  color: var(--color-text-second);
-  background: var(--color-background-second);
-  border: none;
-  cursor: pointer;
-
-  &:hover {background: var(--color-button-solid-hover)}
 `;
 
 
@@ -210,7 +199,9 @@ const CheckoutStep1 = (): JSX.Element => {
               </InputError>
           </LabelText>
 
-          <ButtonBlack>LOG IN & CHECKOUT</ButtonBlack>
+          <Button type='submit' width='145px'>
+            LOG IN & CHECKOUT
+          </Button>
         </form>
       </div>
       
@@ -248,12 +239,14 @@ const CheckoutStep1 = (): JSX.Element => {
             />
             CHECKOUT AS GUEST
           </LabelRadio>                  
-          <ButtonBlack>CONTINUE</ButtonBlack>
+          <Button type='submit' width='145px'>CONTINUE</Button>
         </form>
       </div>
     </Step1>
   )
 }
+
+
 
 
 export default CheckoutStep1;
