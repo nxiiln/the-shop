@@ -7,6 +7,7 @@ import {useAppSelector, useAppDispatch} from '../redux-hooks';
 import {accountCreate} from '../slices/account';
 import BreadCrumbs from './BreadCrumbs';
 import {LabelText, InputError, LabelCheckbox} from './Form';
+import Button from './Button';
 
 
 
@@ -107,22 +108,6 @@ const Description = styled.span`
   font-size: 13px;
   font-weight: 300;
   color: var(--color-text-main);
-`;
-
-const ButtonCreateAccount = styled.button`
-  width: 254px;
-  height: 30px;
-  margin-top: 20px;
-  align-self: center;
-  font-family: var(--font-second);
-  font-size: 10px;
-  font-weight: 300;
-  color: var(--color-text-second);
-  background: var(--color-background-second);
-  border: none;
-  cursor: pointer;
-
-  &:hover {background: var(--color-button-solid-hover)}
 `;
 
 const BackToLogin = styled(HashLink)`
@@ -398,7 +383,15 @@ const CreateAccount = (): JSX.Element => {
                 </LabelCheckbox>
               }
             </div>
-            <ButtonCreateAccount type='submit'>CREATE AN ACCOUNT</ButtonCreateAccount>
+
+            <Button
+              type='submit'
+              width='255px'
+              margin='20px 0 0 0' 
+              alignSelf='center' 
+            >
+              CREATE AN ACCOUNT
+            </Button>
           </Form>
           
           <BackToLogin to='/login#top'>Back to Login</BackToLogin>
