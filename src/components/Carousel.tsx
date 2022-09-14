@@ -1,7 +1,8 @@
 import {useState, useEffect, useRef} from 'react';
 import styled from 'styled-components/macro';
 import {smallScreen, useMediaQuery} from '../mediaQueries';
-import {Link} from 'react-router-dom';
+import {HashLink} from 'react-router-hash-link';
+import Button from './Button';
 import bannerA from '../images/bannerA.png';
 import bannerB from '../images/bannerB.png';
 import bannerC from '../images/bannerC.png';
@@ -91,27 +92,6 @@ const Letter = styled.span`
   font-size: 50px;
 `;
 
-const LinkBanner1 = styled(Link)`
-  width: 200px;
-  height: 30px;
-  margin: 0;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  font-family: var(--font-second);
-  font-size: 13px;
-  line-height: 1.2;
-  font-weight: 300;
-  text-transform: uppercase;
-  text-decoration: none;
-  color: var(--color-text-second);
-  border: none;
-  background: var(--color-background-second);
-
-  &:hover {background: var(--color-button-solid-hover)}
-  @media ${smallScreen} {width: 130px}
-`;
-
 const WrapperSlide2 = styled.div`
   min-width: 100vw;
   height: 496px;
@@ -187,28 +167,6 @@ const TextBlock3 = styled.div`
     font-family: var(--font-second);
     font-size: 18px;
   }
-`;
-
-const ShopNow = styled(Link)`
-  width: 96px;
-  height: 30px;
-  position: absolute;
-  top: 110px;
-  left: 85px;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  font-family: var(--font-second);
-  font-size: 10px;
-  line-height: 1.2;
-  font-weight: 300;
-  text-transform: uppercase;
-  text-decoration: none;
-  color: var(--color-text-second);
-  background: var(--color-background-second);
-  border: none;
-
-  &:hover {background: var(--color-button-solid-hover)}
 `;
 
 const UseCode = styled.div`
@@ -313,7 +271,15 @@ const Carousel = (): JSX.Element => {
               </>
             }
 
-            <LinkBanner1 to='catalog'>shop now</LinkBanner1>
+            <Button
+              as={HashLink}
+              to='catalog#top'
+              width='200px'
+              smallWidth='130px'
+              fontSize='13px'
+            >
+              shop now
+            </Button>
           </TextBlock1>
         </WrapperSlide1>
 
@@ -337,7 +303,16 @@ const Carousel = (): JSX.Element => {
                 <span>up to 70%</span>
               </TextBlock3>
 
-              <ShopNow to='catalog'>shop now</ShopNow>
+              <Button
+                as={HashLink}
+                to='catalog#top'
+                width='96px'
+                position='absolute'
+                top='110px'
+                left='85px'
+              >
+                shop now
+              </Button>
 
               <UseCode>
                 <span>use code: </span>
