@@ -7,6 +7,7 @@ import BlogCategories from './BlogCategories';
 import BlogLabels from './BlogLabels';
 import PageNotFound from './PageNotFound';
 import {LabelText, InputError} from './Form';
+import Button from './Button';
 import {IBlogPostReview} from '../types/IBlogPostReview';
 import data from '../data.json';
 import {blogPostImages} from '../images/blogPostImages';
@@ -161,20 +162,6 @@ const WriteReviewHeader = styled.h2`
   color: var(--color-text-main);
 `;
 
-const SubmitReview = styled.button`
-  width: 103px;
-  height: 30px;
-  font-family: var(--font-second);
-  font-size: 10px;
-  font-weight: 300;
-  color: var(--color-text-second);
-  background: var(--color-background-second);
-  border: none;
-  cursor: pointer;
-
-  &:hover {background: var(--color-button-solid-hover)}
-`;
-
 
 
 
@@ -320,7 +307,7 @@ const BlogPost = (): JSX.Element => {
                   <InputError>{textError && 'Enter review text'}</InputError>
                 </LabelText>
                 
-                <SubmitReview type='submit'>SUBMIT REVIEW</SubmitReview>
+                <Button type='submit' width='100px'>SUBMIT REVIEW</Button>
               </WriteReview>
             </ReviewsWrapper>
 
