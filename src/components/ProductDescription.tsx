@@ -6,10 +6,12 @@ import {cartAdd, cartRemove, cartProductSize, cartProductColor} from '../slices/
 import {wishListAdd, wishListRemove, wishListProductSize, wishListProductColor} from '../slices/wishList';
 import {sizes, colors} from './CatalogFilters';
 import {LabelCheckbox} from './Form';
+import Button from './Button';
 import {IProduct} from '../types/IProduct';
 import {IProductReview} from '../types/IProductReview';
 import {IProductRating} from '../types/IProductRating';
 import data from '../data.json';
+import cartSymbol from '../images/cartSymbol.png';
 import wishListSymbol from '../images/wishList.png';
 
 
@@ -179,35 +181,6 @@ const Buttons = styled.div`
   justify-content: space-between;
 
   @media ${smallScreen} {width: 100%}
-
-  > button {
-    width: 40%;
-    height: 30px;
-    font-family: var(--font-second);
-    font-size: 10px;
-    font-weight: 300;
-    cursor: pointer;
-  }
-
-  > button:first-child {
-    color: var(--color-text-second);
-    background: var(--color-background-second);
-    border: none;
-
-    &:hover {background: var(--color-button-solid-hover)}
-  }
-
-  > button:last-child {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: var(--color-text-main);
-    background: var(--color-background-main);
-    border: 1px solid var(--color-border);
-    img {margin-right: 7px}
-
-    &:hover {background: var(--color-button-outline-hover)}
-  }
 `;
 
 const Accordion = styled.details`
@@ -392,8 +365,10 @@ const ProductDescription = (product: IProduct): JSX.Element => {
 
 
       <Buttons>
-        <button
+        <Button
           type='button'
+          width='40%'
+          icon={cartSymbol}
           onClick={(): void => {
             !cart.some(cartProduct => cartProduct.id === product.id) ?
             dispatch(cartAdd({...product, size, color})) : dispatch(cartRemove(product));
@@ -402,20 +377,22 @@ const ProductDescription = (product: IProduct): JSX.Element => {
           {!cart.some(cartProduct => cartProduct.id === product.id) ?
             'ADD TO CART' : 'PRODUCT IN CART'
           }
-        </button>
+        </Button>
 
-        <button
+        <Button
           type='button'
+          variant='outline'
+          width='40%'
+          icon={wishListSymbol}
           onClick={(): void => {
             !wishList.some(wishListProduct => wishListProduct.id === product.id) ?
             dispatch(wishListAdd({...product, size, color})) : dispatch(wishListRemove(product));
           }}
         >
-          <img src={wishListSymbol} alt='wishList' />
           {!wishList.some(wishListProduct => wishListProduct.id === product.id) ?
             'WISHLIST' : 'PRODUCT IN WISHLIST'
           }
-        </button>
+        </Button>
       </Buttons>
 
 
