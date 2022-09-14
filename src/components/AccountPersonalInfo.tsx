@@ -4,35 +4,14 @@ import {useAppDispatch, useAppSelector} from '../redux-hooks';
 import {accountChangePersonalInfo} from '../slices/account';
 import {TAccount} from '../types/TAccount';
 import {LabelText, LabelCheckbox, InputError} from './Form';
+import Button from './Button';
 
-
-
-
-const ButtonBlack = styled.button`
-  width: 144px;
-  height: 30px;
-  font-family: var(--font-second);
-  font-size: 10px;
-  font-weight: 300;
-  color: var(--color-text-second);
-  background: var(--color-background-second);
-  border: none;
-  cursor: pointer;
-
-  &:hover {background: var(--color-button-solid-hover)}
-`;
 
 const ButtonUpdateWrapper = styled.div`
   width: 255px;
   position: relative;
   display: flex;
   align-items: baseline;
-`;
-
-const ButtonUpdate = styled(ButtonBlack)`
-  width: 144px;
-  height: 30px;
-  margin-top: 30px;
 `;
 
 const Required = styled.span`
@@ -42,8 +21,6 @@ const Required = styled.span`
   font-weight: 400;
   color: var(--color-text-main);
 `;
-
-
 
 
 const AccountPersonalInfo = (): JSX.Element => {
@@ -215,14 +192,18 @@ const AccountPersonalInfo = (): JSX.Element => {
       </LabelCheckbox>
 
       <ButtonUpdateWrapper>
-        <ButtonUpdate>{changesApplied ? 'UPDATE SAVED' : 'UPDATE'}</ButtonUpdate>
+        <Button
+          type='submit'
+          width='145px'
+          margin='30px 0 0 0'
+        >
+          {changesApplied ? 'UPDATE SAVED' : 'UPDATE'}
+        </Button>
         <Required>*Required</Required>
       </ButtonUpdateWrapper>
     </form>
   )
 }
-
-
 
 
 export default AccountPersonalInfo;
