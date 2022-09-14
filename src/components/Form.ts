@@ -5,7 +5,6 @@ const Label = styled.label`
   font-family: var(--font-second);
   font-size: 10px;
   font-weight: 400;
-  text-transform: uppercase;
   color: var(--color-text-main);
 `;
 
