@@ -7,6 +7,7 @@ import BreadCrumbs from './BreadCrumbs';
 import {Input} from './Form';
 import {IProduct} from '../types/IProduct';
 import {productImages} from '../images/productImages';
+import Button from './Button';
 
 
 
@@ -421,49 +422,6 @@ const LineTotal = styled.div`
   background: var(--color-border);
 `;
 
-const LinkNormal = styled(HashLink)`
-  width: 290px;
-  height: 30px;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  font-family: var(--font-second);
-  font-size: 10px;
-  line-height: 1.2;
-  font-weight: 400;
-  text-decoration: none;
-
-  @media ${smallScreen} {
-    width: 45%;
-    max-width: 290px;
-  }
-`;
-
-export const ContinueShopping = styled(LinkNormal)`
-  grid-area: 6 / 1 / 7 / 2;
-  color: var(--color-text-main);
-  background: var(--color-background-main);
-  border: 1px solid var(--color-border);
-
-  &:hover {background: var(--color-button-outline-hover)}
-
-  @media ${mediumScreen} {
-    grid-area: 7 / 4 / 8 / 5;
-    justify-self: end;
-    align-self: end;
-  }
-`;
-
-const Checkout = styled(LinkNormal)`
-  grid-area: 6 / 4 / 7 / 5;
-  justify-self: end;
-  color: var(--color-text-second);
-  background: var(--color-background-second);
-
-  &:hover {background: var(--color-button-solid-hover)}
-  @media ${mediumScreen} {align-self: end}
-`;
-
 const ButtonWrapper = styled.div`
   width: 100%;
   display: flex;
@@ -616,15 +574,52 @@ const Cart = (): JSX.Element => {
 
             {!screen.small &&
               <>
-                <ContinueShopping to='/catalog#top'>CONTINUE SHOPPING</ContinueShopping>
-                <Checkout to='/checkout#top'>CHECKOUT</Checkout>
+                <Button
+                  as={HashLink}
+                  to='/catalog#top'
+                  variant='outline'
+                  width='290px'
+                  gridArea='6 / 1 / 7 / 2'
+                  mediumGridArea='7 / 4 / 8 / 5'
+                  mediumJustifySelf='end'
+                  mediumAlignSelf='end'
+                >
+                  CONTINUE SHOPPING
+                </Button>
+
+                <Button
+                  as={HashLink}
+                  to='/checkout#top'
+                  width='290px'
+                  gridArea='6 / 4 / 7 / 5'
+                  justifySelf='end'
+                  mediumAlignSelf='end'
+                >
+                  CHECKOUT
+                </Button>
               </>
             }
 
             {screen.small &&
               <ButtonWrapper>
-                <ContinueShopping to='/catalog#top'>CONTINUE SHOPPING</ContinueShopping>
-                <Checkout to='/checkout#top'>CHECKOUT</Checkout>
+                <Button
+                  as={HashLink}
+                  to='/catalog#top'
+                  variant='outline'
+                  smallWidth='45%'
+                  maxWidth='290px'
+                >
+                  CONTINUE SHOPPING
+                </Button>
+
+                <Button
+                  as={HashLink}
+                  to='/checkout#top'
+                  smallWidth='45%'
+                  maxWidth='290px'
+                >
+                  CHECKOUT
+                </Button>
               </ButtonWrapper>
             }
           </>
@@ -633,7 +628,16 @@ const Cart = (): JSX.Element => {
 
           <>
             <h2>CART IS EMPTY</h2>
-            <ContinueShopping to='/catalog#top'>CONTINUE SHOPPING</ContinueShopping>
+            <Button
+              as={HashLink}
+              to='/catalog#top'
+              variant='outline'
+              width='290px'
+              smallWidth='45%'
+              maxWidth='290px'
+            >
+              CONTINUE SHOPPING
+            </Button>
           </>
         }
       </WrapperInner>
