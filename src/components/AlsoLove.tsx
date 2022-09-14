@@ -7,6 +7,7 @@ import {quickViewChange} from '../slices/quickView';
 import data from '../data.json';
 import {IProduct} from '../types/IProduct';
 import {productImages} from '../images/productImages';
+import Button from './Button';
 
 
 
@@ -100,20 +101,6 @@ const ImageLink = styled(HashLink)`
   }
 `;
 
-const ButtonQuickView = styled.button`
-  width: 107px;
-  height: 30px;
-  margin-left: 10px;
-  font-family: var(--font-second);
-  font-size: 10px;
-  color: var(--color-text-main);
-  background: var(--color-background-main);
-  border: 1px solid var(--color-border);
-  cursor: pointer;
-
-  &:hover {background: var(--color-button-outline-hover)}
-`;
-
 
 
 
@@ -153,15 +140,18 @@ const AlsoLove = (): JSX.Element => {
                 ${product.price.toString().replace(/(.+)(...)$/, '$1,$2')}
               </span>
               
-              <ButtonQuickView
+              <Button
                 type='button'
+                variant='outline'
+                width='110px'
+                margin='0 0 0 10px'
                 onClick={(): void => {
                   setProductQuickView(product);
                   dispatch(quickViewChange(true));
                 }}
               >
                 QUICKVIEW
-              </ButtonQuickView>
+              </Button>
             </ProductAlso>
         )}
       </ProductAlsoWrapper>
