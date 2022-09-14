@@ -7,6 +7,7 @@ import {IProductReview} from '../types/IProductReview';
 import {IProductReviews} from '../types/IProductReviews';
 import data from '../data.json';
 import {LabelText} from './Form';
+import Button from './Button';
 
 
 
@@ -111,23 +112,6 @@ const Stars = styled.div<{rating: number}>`
   }
 `;
 
-const Button = styled.button`
-  width: 103px;
-  height: 30px;
-  margin: 0 12px 12px 0;
-  align-self: end;
-  font-family: Nunito;
-  font-size: 10px;
-  line-height: 1.2;
-  font-weight: 300;
-  color: var(--color-text-second);
-  background: var(--color-background-second);
-  border: none;
-  cursor: pointer;
-
-  &:hover {background: var(--color-button-solid-hover)}
-`;
-
 const Rating = styled.div`
   width: 140px;
   height: 20px;
@@ -166,8 +150,6 @@ const Buttons = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
-
-  > button {margin: 0 4% 12px}
 `;
 
 
@@ -209,6 +191,9 @@ const ProductReviews = ({productId}: {productId: number}): JSX.Element => {
 
           <Button
             type='button'
+            width='105px'
+            margin='0 12px 12px 0'
+            alignSelf='end'
             onClick={(): void => {
               setWriteReview(true);
               refTitle.current?.scrollIntoView({behavior: 'smooth'});
@@ -272,6 +257,8 @@ const ProductReviews = ({productId}: {productId: number}): JSX.Element => {
           <Buttons>
             <Button
               type='button'
+              width='105px'
+              margin='0 4% 12px'
               onClick={(): void => {
                 setTitle('');
                 setRating(0);
@@ -286,6 +273,8 @@ const ProductReviews = ({productId}: {productId: number}): JSX.Element => {
 
             <Button
               type='button'
+              width='105px'
+              margin='0 4% 12px'
               onClick={(): void => {
                 if (rating === 0) {
                   setRatingError(true);
