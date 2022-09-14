@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import {mediumScreen} from '../mediaQueries';
-import {ContinueShopping} from "./Cart";
+import {HashLink} from "react-router-hash-link";
+import Button from "./Button";
 
 
 const Wrapper = styled.main`
@@ -27,12 +28,19 @@ const Title = styled.h2`
 `;
 
 
-
-
 const PageNotFound = (): JSX.Element => (
   <Wrapper>
     <Title>PAGE NOT FOUND</Title>
-    <ContinueShopping to='/catalog#top'>CONTINUE SHOPPING</ContinueShopping>
+    <Button
+      as={HashLink}
+      to='/catalog#top'
+      variant='outline'
+      width='290px'
+      smallWidth='45%'
+      maxWidth='290px'
+    >
+      CONTINUE SHOPPING
+    </Button>
   </Wrapper>
 );
 
