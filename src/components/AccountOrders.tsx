@@ -5,6 +5,8 @@ import {useAppSelector} from '../redux-hooks';
 import {IOrder} from '../types/IOrder';
 import {IProduct} from '../types/IProduct';
 import {TAccount} from '../types/TAccount';
+import Button from './Button';
+
 
 
 
@@ -109,23 +111,7 @@ const Order = styled.div`
   }
 `;
 
-const ButtonBlack = styled.button`
-  width: 144px;
-  height: 30px;
-  font-family: var(--font-second);
-  font-size: 10px;
-  font-weight: 300;
-  color: var(--color-text-second);
-  background: var(--color-background-second);
-  border: none;
-  cursor: pointer;
-
-  &:hover {background: var(--color-button-solid-hover)}
-`;
-
-const ButtonDetails = styled(ButtonBlack)<{status: boolean}>`
-  width: 66px;
-  
+const ButtonDetails = styled(Button)<{status: boolean}>`
   > span {
     font-family: var(--font-second);
     font-size: 10px;
@@ -321,6 +307,7 @@ const AccountOrders = (): JSX.Element => {
 
                   <ButtonDetails
                     type='button'
+                    width='65px'
                     status={order.id === currOrder}
                     onClick={(): void => {
                       order.id === currOrder ?
