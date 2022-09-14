@@ -1,12 +1,12 @@
 import {useState} from 'react';
 import styled from 'styled-components/macro';
 import {smallScreen, useMediaQuery} from '../mediaQueries';
-import {Link} from 'react-router-dom';
 import {HashLink} from 'react-router-hash-link';
 import {useAppSelector, useAppDispatch} from '../redux-hooks';
 import {cartRemove} from '../slices/cart'
 import {IProduct} from '../types/IProduct';
 import {productImages} from '../images/productImages';
+import Button from './Button';
 import cartSymbol from '../images/cartSymbol.png';
 
 
@@ -185,40 +185,6 @@ const TotalPrice = styled.div`
   color: var(--color-text-main);
 `;
 
-const LinkBox = styled(Link)`
-  width: 74px;
-  height: 30px;
-  position: relative;
-  top: 18px;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  font-family: var(--font-second);
-  font-size: 10px;
-  line-height: 1.2;
-  font-weight: 300;
-  text-transform: uppercase;
-  text-decoration: none;
-`;
-
-const ViewCart = styled(LinkBox)`
-  left: 10px;
-  color: var(--color-text-main);
-  background: var(--color-background-main);
-  border: 1px solid var(--color-border);
-
-  &:hover {background: var(--color-button-outline-hover)}
-`;
-
-const Checkout = styled(LinkBox)`
-  left: 16px;
-  color: var(--color-text-second);
-  background-color: var(--color-background-second);
-  border: none;
-
-  &:hover {background: var(--color-button-solid-hover)}
-`;
-
 
 
 
@@ -270,8 +236,28 @@ const CartPreview = (): JSX.Element => {
           <Result>
             <Total>TOTAL:</Total>
             <TotalPrice>${totalPrice}</TotalPrice>
-            <ViewCart to='cart'>view cart</ViewCart>
-            <Checkout to='checkout'>checkout</Checkout>
+            <Button
+              as={HashLink}
+              to='cart#top'
+              variant='outline'
+              width='75px'
+              position='relative'
+              top='18px'
+              left='10px'
+            >
+              view cart
+            </Button>
+
+            <Button
+              as={HashLink}
+              to='checkout#top'
+              width='75px'
+              position='relative'
+              top='18px'
+              left='16px'
+            >
+              checkout
+            </Button>
           </Result>
         </Dropdown>
       }
