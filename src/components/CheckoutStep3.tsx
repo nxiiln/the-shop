@@ -4,6 +4,7 @@ import {mediumScreen, smallScreen} from '../mediaQueries';
 import {useAppDispatch} from '../redux-hooks';
 import {checkoutSetStep} from '../slices/checkout';
 import {LabelRadio} from './Form';
+import Button from './Button';
 
 
 
@@ -39,20 +40,6 @@ const Step3 = styled.div`
   }
 
   @media ${mediumScreen}, ${smallScreen} {width: 100%}
-`;
-
-const ButtonBlack = styled.button`
-  width: 144px;
-  height: 30px;
-  font-family: var(--font-second);
-  font-size: 10px;
-  font-weight: 300;
-  color: var(--color-text-second);
-  background: var(--color-background-second);
-  border: none;
-  cursor: pointer;
-
-  &:hover {background: var(--color-button-solid-hover)}
 `;
 
 
@@ -118,7 +105,7 @@ const CheckoutStep3 = (): JSX.Element => {
           UPS (SECOND DAY AIR) $12.25
         </LabelRadio>
 
-        <ButtonBlack>CONTINUE</ButtonBlack>
+        <Button type='submit' width='145px'>CONTINUE</Button>
       </form>
     </Step3>
   )
