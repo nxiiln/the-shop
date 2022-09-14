@@ -8,6 +8,7 @@ import {checkoutSetStep} from '../slices/checkout';
 import {TAccount} from '../types/TAccount';
 import BreadCrumbs from './BreadCrumbs';
 import {LabelText, InputError} from './Form';
+import Button from './Button';
 
 
 
@@ -104,25 +105,6 @@ const TextBold = styled.span`
   color: var(--color-text-main);
 `;
 
-const ButtonPreset: string = `
-  height: 30px;
-  margin-top: 15px;
-  font-family: var(--font-second);
-  font-size: 10px;
-  font-weight: 300;
-  color: var(--color-text-second);
-  background: var(--color-background-second);
-`;
-
-const ButtonLogin = styled.button`
-  ${ButtonPreset}
-  width: 254px;
-  border: none;
-  cursor: pointer;
-
-  &:hover {background: var(--color-button-solid-hover)}
-`;
-
 const NewCustomers = styled.div`
   width: 255px;
   height: 175px;
@@ -133,33 +115,12 @@ const NewCustomers = styled.div`
   @media ${smallScreen} {margin: 0}
 `;
 
-const ButtonCreateAccount = styled.button`
-  ${ButtonPreset}
-  width: 254px;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  text-decoration: none;
-  cursor: pointer;
-
-  &:hover {background: var(--color-button-solid-hover)}
-`;
-
 const LogOutWrapper = styled.div`
   width: 100%;
   padding: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
-`;
-
-const ButtonLogOut = styled.button`
-  ${ButtonPreset}
-  width: 200px;
-  margin: 0;
-  cursor: pointer;
-
-  &:hover {background: var(--color-button-solid-hover)}
 `;
 
 
@@ -307,7 +268,13 @@ const Login = (): JSX.Element => {
                     </InputError>
                   </LabelText>
 
-                  <ButtonLogin>LOGIN</ButtonLogin>
+                  <Button
+                    type='submit'
+                    width='255px'
+                    margin='15px 0 0 0'
+                  >
+                    LOGIN
+                  </Button>
                 </form>
               </RegisteredCustomers>
 
@@ -364,15 +331,22 @@ const Login = (): JSX.Element => {
                     </InputError>
                   </LabelText>
 
-                  <ButtonCreateAccount type='submit'>CREATE AN ACCOUNT</ButtonCreateAccount>
+                  <Button
+                    type='submit'
+                    width='255px'
+                    margin='15px 0 0 0'
+                  >
+                    CREATE AN ACCOUNT
+                  </Button>
                 </form>
               </NewCustomers>
             </Groups>
           :
             <LogOutWrapper>
               <TextUp>ARE YOU SURE YOU WANT TO LOG OUT?</TextUp>
-              <ButtonLogOut
+              <Button
                 type='button'
+                width='200px'
                 onClick={(): void => {
                   if (activeAccountId !== -1) {
                     dispatch(accountLogOut(activeAccountId));
@@ -382,7 +356,7 @@ const Login = (): JSX.Element => {
                 }}
               >
                 LOGOUT
-              </ButtonLogOut>
+              </Button>
             </LogOutWrapper>
           }
         </UserLogin>
