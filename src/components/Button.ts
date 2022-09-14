@@ -3,24 +3,31 @@ import {mediumScreen, smallScreen} from '../mediaQueries';
 
 
 interface IButton {
-  width: string;
+  width?: string;
   smallWidth?: string;
+  maxWidth?: string;
   height?: string;
   margin?: string;
   position?: string;
   top?: string;
   left?: string;
+
   gridArea?: string;
   mediumGridArea?: string;
   mediumJustifySelf?: string;
+  justifySelf?: string;
+  alignSelf?: string;
   mediumAlignSelf?: string;
-  opacity?: string;
+
+  fontSize?: string;
   icon?: string;
   variant?: 'outline' | 'link';
 }
 
-export const Button = styled.button<IButton>`
+
+const Button = styled.button<IButton>`
   width: ${props => props.width};
+  max-width: ${props => props.maxWidth};
   height: ${props => props.height || '30px'};
   margin: ${props => props.margin};
   position: ${props => props.position};
@@ -28,26 +35,27 @@ export const Button = styled.button<IButton>`
   left: ${props => props.left};
   
   grid-area: ${props => props.gridArea};
-  display: flex;
+  display: inline-flex;
   justify-content: center;
+  justify-self: ${props => props.justifySelf};
   align-items: center;
+  align-self: ${props => props.alignSelf};
   
   font-family: var(--font-second);
-  font-size: 10px;
+  font-size: ${props => props.fontSize || '10px'};
   font-weight: 300;
   text-transform: uppercase;
   text-decoration: none;
 
   color: var(--color-text-second);
   background: var(--color-background-second);
-  opacity: ${props => props.opacity};
   border: none;
-  
+
   &:hover {background: var(--color-button-solid-hover)}
 
   &::before {
-    content: ${props => props.icon};
-    padding-right: 7px;
+    content: ${props => props.icon && `url(${props.icon})`};
+    padding: 2px 7px 0 0;
   }
   
   @media ${mediumScreen} {
@@ -70,9 +78,14 @@ export const Button = styled.button<IButton>`
     color: var(--color-text-main);
     background: transparent;
 
-    &:hover {text-decoration: underline}
+    &:hover {
+      background: transparent;
+      text-decoration: underline
+    }
   `}
 
   cursor: pointer;
-  user-select: none;
 `;
+
+
+export default Button;
