@@ -78,7 +78,7 @@ const PostDate = styled.span`
   color: var(--color-text-main);
 `;
 
-const PostDescription = styled.div`
+const PostText = styled.div`
   margin-top: 18px;
   font-family: var(--font-second);
   font-size: 14px;
@@ -218,9 +218,11 @@ const BlogPost = (): JSX.Element => {
                 alt={'blog post'}
               />
 
-              <PostDescription>
-                {post.text.map((p: string): JSX.Element => <p key={p.substring(0, 16)}>{p}</p>)}
-              </PostDescription>
+              <PostText>
+                {post.text.map((p: string, i: number): JSX.Element =>
+                  <p key={i}>{p}</p>
+                )}
+              </PostText>
             </PostWrapper>
 
 
