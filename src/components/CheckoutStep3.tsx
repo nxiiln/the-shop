@@ -9,10 +9,11 @@ import Button from './Button';
 
 
 
-const Step3 = styled.div`
+const Step3 = styled.div<{active: boolean}>`
   width: 675px;
   height: 286px;
   margin-bottom: 10px;
+  display: ${props => props.active ? 'block' : 'none'};
   border: 1px solid var(--color-border);
   border-top: none;
 
@@ -45,12 +46,12 @@ const Step3 = styled.div`
 
 
 
-const CheckoutStep3 = (): JSX.Element => {
+const CheckoutStep3 = ({active}: {active: boolean}): JSX.Element => {
   const dispatch = useAppDispatch();
   const [shippingMethod, setShippingMethod] = useState<string>('ground');
 
   return(
-    <Step3>
+    <Step3 active={active}>
       <form onSubmit={(e: React.FormEvent<HTMLFormElement>): void => {
         e.preventDefault();
         dispatch(checkoutSetStep(4));

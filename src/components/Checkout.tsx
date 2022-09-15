@@ -168,7 +168,7 @@ const Checkout = (): JSX.Element => {
                 <Title status={step === 2}>02. BILLING INFO</Title>
                 {step === 2 && <Required>*Required</Required>}
               </TitleWrapper>
-              {step === 2 && <CheckoutStep2 />}
+              <CheckoutStep2 active={step === 2} />
 
               <TitleWrapper
                 status={step === 3}
@@ -177,7 +177,7 @@ const Checkout = (): JSX.Element => {
                 <Title status={step === 3}>03. SHIPPING METHOD</Title>
                 {step === 3 && <Required>*Required</Required>}
               </TitleWrapper>
-              {step === 3 && <CheckoutStep3 />}
+              <CheckoutStep3 active={step === 3} />
 
               <TitleWrapper
                 status={step === 4}
@@ -187,7 +187,7 @@ const Checkout = (): JSX.Element => {
                 <Title status={step === 4}>04. PAYMENT</Title>
                 {step === 4 && <Required>*Required</Required>}
               </TitleWrapper>
-              {step === 4 && <CheckoutStep4 />}
+              <CheckoutStep4 active={step === 4} />
 
               <TitleWrapper
                 status={step === 5}

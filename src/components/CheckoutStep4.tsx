@@ -13,10 +13,11 @@ import americanExpressIcon from '../images/americanExpressIcon.png';
 
 
 
-const Step4 = styled.div`
+const Step4 = styled.div<{active: boolean}>`
   width: 675px;
   height: 356px;
   margin-bottom: 10px;
+  display: ${props => props.active ? 'block' : 'none'};
   border: 1px solid var(--color-border);
   border-top: none;
 
@@ -71,7 +72,7 @@ const ExpirationWrapper = styled.div`
 
 
 
-const CheckoutStep4 = (): JSX.Element => {
+const CheckoutStep4 = ({active}: {active: boolean}): JSX.Element => {
   const dispatch = useAppDispatch();
 
   const [cardHolder, setCardHolder] = useState<string>('');
@@ -91,7 +92,7 @@ const CheckoutStep4 = (): JSX.Element => {
 
 
   return(
-    <Step4>
+    <Step4 active={active}>
       <form
         noValidate
         onSubmit={(e: React.FormEvent<HTMLFormElement>): void => {

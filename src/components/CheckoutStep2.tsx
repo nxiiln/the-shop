@@ -9,10 +9,10 @@ import Button from './Button';
 
 
 
-const Step2 = styled.div`
+const Step2 = styled.div<{active: boolean}>`
   width: 675px;
   height: 570px;
-  display: flex;
+  display: ${props => props.active ? 'flex' : 'none'};
   justify-content: center;
   align-items: center;
   border: 1px solid var(--color-border);
@@ -47,7 +47,7 @@ const Step2FormWrapper = styled.div`
 
 
 
-const CheckoutStep2 = (): JSX.Element => {
+const CheckoutStep2 = ({active}: {active: boolean}): JSX.Element => {
   const dispatch = useAppDispatch();
 
   const [email, setEmail] = useState<string>('');
@@ -68,7 +68,7 @@ const CheckoutStep2 = (): JSX.Element => {
 
 
   return(
-    <Step2>
+    <Step2 active={active}>
       <Step2Form
         noValidate
         onSubmit={(e: React.FormEvent<HTMLFormElement>): void => {
