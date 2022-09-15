@@ -301,7 +301,7 @@ const ProductDescription = (product: IProduct): JSX.Element => {
             {sizes.map((currSize: string): JSX.Element =>
               <LabelCheckbox
                 key={currSize}
-                margin='0 0 10px 0'
+                margin='0 0 5px 0'
               >
                 <input
                   type='checkbox'

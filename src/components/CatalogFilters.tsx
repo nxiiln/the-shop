@@ -188,7 +188,7 @@ const CatalogFilters = (): JSX.Element => {
             {sizes.map((size: string): JSX.Element =>
               <LabelCheckbox
                 key={size}
-                margin='0 0 10px 0'
+                margin='0 0 5px 0'
               >
                 <input type='checkbox' name={size}/>
                 {size}
@@ -212,7 +212,7 @@ const CatalogFilters = (): JSX.Element => {
             {colors.map((color: string): JSX.Element =>
               <LabelCheckbox
                 key={color}
-                margin='0 0 10px 0'
+                margin='0 0 8px 0'
               >
                 <input type='checkbox' name={color}/>
                 {color}
