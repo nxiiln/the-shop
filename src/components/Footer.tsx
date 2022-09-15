@@ -1,5 +1,6 @@
 import styled from 'styled-components/macro';
 import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
+import {HashLink} from 'react-router-hash-link';
 import storeLocation from '../images/storeLocation.png';
 import twitter from '../images/twitter.png';
 import pinterest from '../images/pinterest.png';
@@ -28,7 +29,7 @@ const WrapperInner = styled.div`
 `;
 
 const MainText = styled.div`
-  margin: 0 0 10px 0;
+  margin: 0 0 15px 0;
   font-family: var(--font-main);
   font-size: 14px;
   line-height: 1.2;
@@ -36,12 +37,14 @@ const MainText = styled.div`
   color: var(--color-text-second);
 `;
 
-const Button = styled.button`
-  padding: 0;
+const Link = styled(HashLink)`
+  width: max-content;
+  margin-bottom: 8px;
+  display: block;
   font-family: var(--font-second);
   font-size: 10px;
-  line-height: 18px;
   font-weight: 300;
+  text-decoration: none;
   color: var(--color-text-regular);
   background-color: transparent;
   border: none;
@@ -53,7 +56,7 @@ const Button = styled.button`
   }
 `;
 
-const ButtonWithBorder = styled(Button)<{withoutBorder?: boolean, withoutPadding?: boolean}>`
+const LinkWithBorder = styled(Link)<{withoutBorder?: boolean, withoutPadding?: boolean}>`
   height: 10px;
   margin-top: 10px;
   padding: 0 10px 0 10px;
@@ -81,6 +84,8 @@ const Text = styled.p`
     
     &:hover {color: var(--color-text-second)}
   }
+
+  > a {display: inline}
 `;
 
 
@@ -230,21 +235,21 @@ const Footer = (): JSX.Element => {
             <>
               <ShoppingGuide>
                 <MainText>SHOPPING GUIDE</MainText>
-                <Button>ABOUT G-STAR ROW</Button>
-                <Button>CORPORATE RESPONSIBILITY</Button>
-                <Button>PRESS ROOM</Button><br />
-                <Button>CAREERS</Button><br />
-                <Button>G-START RETAILERS</Button>
-                <Button>OPEN A G-STAR STORE</Button>
+                <Link to='catalog#top'>ABOUT G-STAR ROW</Link>
+                <Link to='catalog#top'>CORPORATE RESPONSIBILITY</Link>
+                <Link to='catalog#top'>PRESS ROOM</Link>
+                <Link to='catalog#top'>CAREERS</Link>
+                <Link to='catalog#top'>G-START RETAILERS</Link>
+                <Link to='catalog#top'>OPEN A G-STAR STORE</Link>
               </ShoppingGuide>
 
               <HelpInfo>
                 <MainText>HELP & INFO</MainText>
-                <Button>FAQ</Button><br />
-                <Button>CONTACT</Button>
-                <Button>PRIVACY POLICY</Button>
-                <Button>TERMS & CONDITIONS</Button>
-                <Button>DISCLAIMER</Button>
+                <Link to='catalog#top'>FAQ</Link>
+                <Link to='catalog#top'>CONTACT</Link>
+                <Link to='catalog#top'>PRIVACY POLICY</Link>
+                <Link to='catalog#top'>TERMS & CONDITIONS</Link>
+                <Link to='catalog#top'>DISCLAIMER</Link>
               </HelpInfo>
 
               <StoreLocation id='store-location'>
@@ -266,17 +271,17 @@ const Footer = (): JSX.Element => {
                   Sed et aliquet nisl, sed scelerisque risus.
                   Phasellus vel ultricies augue.
                   Duis sem dui, pretium in convallis ut, sagittis eget nisi.
-                  Uses <span>read more</span>
+                  Uses <Link to='catalog#top'>read more</Link>
                 </Text>
               </AboutUs>
             </>
             :
             <>
-              <ButtonWithBorder type='button' withoutPadding>FAQ</ButtonWithBorder>
-              <ButtonWithBorder type='button'>CONTACT</ButtonWithBorder>
-              <ButtonWithBorder type='button'>PRIVACY POLICY</ButtonWithBorder>
-              <ButtonWithBorder type='button'>TERMS & CONDITIONS</ButtonWithBorder>
-              <ButtonWithBorder type='button' withoutBorder>DISCLAIMER</ButtonWithBorder>
+              <LinkWithBorder to='catalog#top' withoutPadding>FAQ</LinkWithBorder>
+              <LinkWithBorder to='catalog#top'>CONTACT</LinkWithBorder>
+              <LinkWithBorder to='catalog#top'>PRIVACY POLICY</LinkWithBorder>
+              <LinkWithBorder to='catalog#top'>TERMS & CONDITIONS</LinkWithBorder>
+              <LinkWithBorder to='catalog#top' withoutBorder>DISCLAIMER</LinkWithBorder>
             </>
           }
         </TopBlock>
