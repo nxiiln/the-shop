@@ -208,8 +208,8 @@ const Checkout = (): JSX.Element => {
               to='/catalog#top'
               variant='outline'
               width='290px'
-              smallWidth='45%'
-              maxWidth='290px'
+              $smallWidth='45%'
+              $maxWidth='290px'
             >
               CONTINUE SHOPPING
             </Button>

@@ -388,7 +388,7 @@ const CreateAccount = (): JSX.Element => {
               type='submit'
               width='255px'
               margin='20px 0 0 0' 
-              alignSelf='center' 
+              $alignSelf='center' 
             >
               CREATE AN ACCOUNT
             </Button>

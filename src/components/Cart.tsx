@@ -563,10 +563,10 @@ const Cart = (): JSX.Element => {
                   to='/catalog#top'
                   variant='outline'
                   width='290px'
-                  gridArea='6 / 1 / 7 / 2'
-                  mediumGridArea='7 / 4 / 8 / 5'
-                  mediumJustifySelf='end'
-                  mediumAlignSelf='end'
+                  $gridArea='6 / 1 / 7 / 2'
+                  $mediumGridArea='7 / 4 / 8 / 5'
+                  $mediumJustifySelf='end'
+                  $mediumAlignSelf='end'
                 >
                   CONTINUE SHOPPING
                 </Button>
@@ -575,9 +575,9 @@ const Cart = (): JSX.Element => {
                   as={HashLink}
                   to='/checkout#top'
                   width='290px'
-                  gridArea='6 / 4 / 7 / 5'
-                  justifySelf='end'
-                  mediumAlignSelf='end'
+                  $gridArea='6 / 4 / 7 / 5'
+                  $justifySelf='end'
+                  $mediumAlignSelf='end'
                 >
                   CHECKOUT
                 </Button>
@@ -590,8 +590,8 @@ const Cart = (): JSX.Element => {
                   as={HashLink}
                   to='/catalog#top'
                   variant='outline'
-                  smallWidth='45%'
-                  maxWidth='290px'
+                  $smallWidth='45%'
+                  $maxWidth='290px'
                 >
                   CONTINUE SHOPPING
                 </Button>
@@ -599,8 +599,8 @@ const Cart = (): JSX.Element => {
                 <Button
                   as={HashLink}
                   to='/checkout#top'
-                  smallWidth='45%'
-                  maxWidth='290px'
+                  $smallWidth='45%'
+                  $maxWidth='290px'
                 >
                   CHECKOUT
                 </Button>
@@ -617,8 +617,8 @@ const Cart = (): JSX.Element => {
               to='/catalog#top'
               variant='outline'
               width='290px'
-              smallWidth='45%'
-              maxWidth='290px'
+              $smallWidth='45%'
+              $maxWidth='290px'
             >
               CONTINUE SHOPPING
             </Button>

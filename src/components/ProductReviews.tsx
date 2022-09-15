@@ -193,7 +193,7 @@ const ProductReviews = ({productId}: {productId: number}): JSX.Element => {
             type='button'
             width='105px'
             margin='0 12px 12px 0'
-            alignSelf='end'
+            $alignSelf='end'
             onClick={(): void => {
               setWriteReview(true);
               refTitle.current?.scrollIntoView({behavior: 'smooth'});

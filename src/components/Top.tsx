@@ -97,14 +97,14 @@ const LinkMain = styled(LinkSimple)<{open: boolean}>`
   }
 `;
 
-const LinkUnderline = styled(LinkSimple)<{withoutBorder?: boolean}>`
+const LinkUnderline = styled(LinkSimple)<{$withoutBorder?: boolean}>`
   width: auto;
   margin: 0;
   padding: 0 12px 0 12px;
   
   &:hover {text-decoration: underline}
 
-  ${props => !props.withoutBorder &&
+  ${props => !props.$withoutBorder &&
     'border-right: 1px solid var(--color-text-regular);'
   }
 `;
@@ -218,7 +218,7 @@ const Top = (): JSX.Element => {
             <LinkUnderline to='my-account'>MY ACCOUNT</LinkUnderline>
             <LinkUnderline to='wish-list'>WISH LIST</LinkUnderline>
             <LinkUnderline to='checkout'>CHECKOUT</LinkUnderline>
-            <LinkUnderline to='login' withoutBorder>
+            <LinkUnderline to='login' $withoutBorder>
               {activeAccount ? 'LOG OUT' : 'LOG IN'}
             </LinkUnderline>
           </div>

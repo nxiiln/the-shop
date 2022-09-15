@@ -65,7 +65,7 @@ const CheckoutStep5 = (): JSX.Element => {
         <Button
           type='button'
           width='290px'
-          smallWidth='260px'
+          $smallWidth='260px'
           onClick={(): void => {
             if (!step4Complete) dispatch(checkoutSetStep(4));
             if (!step2Complete && activeAccountId === -1) dispatch(checkoutSetStep(2));

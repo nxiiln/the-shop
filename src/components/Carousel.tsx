@@ -275,7 +275,7 @@ const Carousel = (): JSX.Element => {
               as={HashLink}
               to='catalog#top'
               width='200px'
-              smallWidth='130px'
+              $smallWidth='130px'
               fontSize='13px'
             >
               shop now

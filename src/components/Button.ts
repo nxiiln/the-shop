@@ -4,20 +4,20 @@ import {mediumScreen, smallScreen} from '../mediaQueries';
 
 interface IButton {
   width?: string;
-  smallWidth?: string;
-  maxWidth?: string;
+  $smallWidth?: string;
+  $maxWidth?: string;
   height?: string;
   margin?: string;
   position?: string;
   top?: string;
   left?: string;
 
-  gridArea?: string;
-  mediumGridArea?: string;
-  mediumJustifySelf?: string;
-  justifySelf?: string;
-  alignSelf?: string;
-  mediumAlignSelf?: string;
+  $gridArea?: string;
+  $mediumGridArea?: string;
+  $mediumJustifySelf?: string;
+  $justifySelf?: string;
+  $alignSelf?: string;
+  $mediumAlignSelf?: string;
 
   fontSize?: string;
   icon?: string;
@@ -27,19 +27,19 @@ interface IButton {
 
 const Button = styled.button<IButton>`
   width: ${props => props.width};
-  max-width: ${props => props.maxWidth};
+  max-width: ${props => props.$maxWidth};
   height: ${props => props.height || '30px'};
   margin: ${props => props.margin};
   position: ${props => props.position};
   top: ${props => props.top};
   left: ${props => props.left};
   
-  grid-area: ${props => props.gridArea};
+  grid-area: ${props => props.$gridArea};
   display: inline-flex;
   justify-content: center;
-  justify-self: ${props => props.justifySelf};
+  justify-self: ${props => props.$justifySelf};
   align-items: center;
-  align-self: ${props => props.alignSelf};
+  align-self: ${props => props.$alignSelf};
   
   font-family: var(--font-second);
   font-size: ${props => props.fontSize || '10px'};
@@ -61,12 +61,12 @@ const Button = styled.button<IButton>`
   }
   
   @media ${mediumScreen} {
-    grid-area: ${props => props.mediumGridArea};
-    justify-self: ${props => props.mediumJustifySelf};
-    align-self: ${props => props.mediumAlignSelf};
+    grid-area: ${props => props.$mediumGridArea};
+    justify-self: ${props => props.$mediumJustifySelf};
+    align-self: ${props => props.$mediumAlignSelf};
   }
 
-  @media ${smallScreen} {width: ${props => props.smallWidth}}
+  @media ${smallScreen} {width: ${props => props.$smallWidth}}
 
   ${props => props.variant === 'outline' && `
     color: var(--color-text-main);
