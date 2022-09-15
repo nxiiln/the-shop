@@ -303,22 +303,6 @@ const EstimateDelivery = styled.div`
   }
 `;
 
-const GetAQuote = styled.button`
-  width: 119px;
-  height: 30px;
-  font-family: var(--font-second);
-  font-size: 10px;
-  line-height: 1.2;
-  font-weight: 300;
-  color: var(--color-text-second);
-  background: var(--color-background-second);
-  border: none;
-  cursor: pointer;
-
-  &:hover {background: var(--color-button-solid-hover)}
-`;
-
-
 // Voucher & Total
 const Voucher = styled.div`
   width: 231px;
@@ -531,7 +515,7 @@ const Cart = (): JSX.Element => {
                 <Input type='text' width='280px' placeholder='Enter your region' />
                 <div>
                   <Input type='text' width='140px' placeholder='Postcode/Zip' />
-                  <GetAQuote type='button'>GET A QUOTE</GetAQuote>
+                  <Button type='button' width='120px'>GET A QUOTE</Button>
                 </div>
               </EstimateDelivery>
             </EstimateDeliveryWrapper>
