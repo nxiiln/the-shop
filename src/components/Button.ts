@@ -48,7 +48,7 @@ const Button = styled.button<IButton>`
   text-decoration: none;
 
   color: var(--color-text-second);
-  background: var(--color-background-second);
+  background: var(--color-button-solid-background);
   border: none;
   transition: background 0.15s ease-out;
 
@@ -70,7 +70,7 @@ const Button = styled.button<IButton>`
 
   ${props => props.variant === 'outline' && `
     color: var(--color-text-main);
-    background: var(--color-background-main);
+    background: var(--color-button-outline-background);
     border: 1px solid var(--color-border);
 
     &:hover {background: var(--color-button-outline-hover)}

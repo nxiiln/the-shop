@@ -10,11 +10,13 @@ const colors: string = `
     --color-background-highlight: #f7f7f7;
 
     --color-border: #e4e2e1;
-
-    --color-button-solid-hover: #333;
-    --color-button-outline-hover: #f7f7f7;
-    --color-button-solid-active: #454545;
-    --color-button-outline-active: #f0f0f0;
+    
+    --color-button-solid-background: #000;
+    --color-button-solid-hover: #3d3d3d;
+    --color-button-solid-active: #6d6d6d;
+    --color-button-outline-background: #fff;
+    --color-button-outline-hover: #f2f2f2;
+    --color-button-outline-active: #e0e0e0;
 
     --color-triangle-new: #000;
     --color-triangle-sale: #c50e20;
