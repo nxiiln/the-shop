@@ -1,4 +1,5 @@
 import styled from 'styled-components/macro';
+import {HashLink} from 'react-router-hash-link';
 
 
 const Wrapper = styled.article<{gridArea: string}>`
@@ -24,11 +25,12 @@ const LabelsWrapper = styled.div`
   margin: 20px 0 0 20px;
 `;
 
-const Label = styled.span<{fontSize: string}>`
+const Label = styled(HashLink)<{fontSize: string}>`
   font-family: var(--font-regular);
   font-size: ${props => props.fontSize};
   line-height: 24px;
   font-weight: 400;
+  text-decoration: none;
   color: var(--color-text-main);
   cursor: pointer;
 
@@ -94,7 +96,13 @@ const BlogLabels = ({gridArea}: {gridArea: string}): JSX.Element => (
     <Title>LABELS</Title>
     <LabelsWrapper>
       {labels.map((label: {fontSize: string, label: string}): JSX.Element =>
-        <Label key={label.label} fontSize={label.fontSize}>{label.label}</Label>
+        <Label
+          key={label.label}
+          to='/blog#top'
+          fontSize={label.fontSize}
+        >
+          {label.label}
+        </Label>
       )}
     </LabelsWrapper>
   </Wrapper>

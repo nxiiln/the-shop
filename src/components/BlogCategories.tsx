@@ -1,5 +1,6 @@
 import {useState} from 'react';
 import styled from 'styled-components/macro';
+import {HashLink} from 'react-router-hash-link';
 import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
 
 
@@ -49,13 +50,14 @@ const Indicator = styled.span<{open: boolean}>`
   ${props => props.open && 'transform: rotate(90deg);'}
 `;
 
-const Category = styled.button`
+const Category = styled(HashLink)`
   margin: 20px 0 20px 15px;
   display: flex;
   font-family: var(--font-second);
   font-size: 11px;
   line-height: 1.2;
   font-weight: 300;
+  text-decoration: none;
   color: var(--color-text-main);
   background: transparent;
   border: none;
@@ -74,10 +76,10 @@ const BlogCategories = ({gridArea}: {gridArea: string}): JSX.Element => {
       {screen.big ?
         <>
           <Title>CATEGORIES</Title>
-          <Category>CELEBRITY STYLE (39)</Category>
-          <Category>FASHION SHOWS (15)</Category>
-          <Category>SHOPPING (27)</Category>
-          <Category>BEAUTY LOOK (119)</Category>
+          <Category to='/blog#top'>CELEBRITY STYLE (39)</Category>
+          <Category to='/blog#top'>FASHION SHOWS (15)</Category>
+          <Category to='/blog#top'>SHOPPING (27)</Category>
+          <Category to='/blog#top'>BEAUTY LOOK (119)</Category>
         </>
         :
         <>
@@ -87,10 +89,10 @@ const BlogCategories = ({gridArea}: {gridArea: string}): JSX.Element => {
           </TitleWrapper>
           {open &&
             <>
-              <Category>CELEBRITY STYLE (39)</Category>
-              <Category>FASHION SHOWS (15)</Category>
-              <Category>SHOPPING (27)</Category>
-              <Category>BEAUTY LOOK (119)</Category>
+              <Category to='/blog#top'>CELEBRITY STYLE (39)</Category>
+              <Category to='/blog#top'>FASHION SHOWS (15)</Category>
+              <Category to='/blog#top'>SHOPPING (27)</Category>
+              <Category to='/blog#top'>BEAUTY LOOK (119)</Category>
             </>
           }
         </>
