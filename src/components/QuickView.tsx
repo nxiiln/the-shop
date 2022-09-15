@@ -153,6 +153,7 @@ const Dropdown = styled.div<{open: boolean, top: string, zIndex: number}>`
   border: 1px solid var(--color-border);
   border-radius: 20px;
   z-index: ${props => props.zIndex};
+  transition: all 0.15s ease-out;
 
   > span:nth-child(2) {transform: rotate(90deg)}
 

@@ -129,9 +129,10 @@ const Dropdown = styled.div<{open: boolean}>`
   font-weight: 300;
   line-height: 1.2;
   color: var(--color-text-main);
-  background: var(--color-background-regular);
+  background: var(--color-background-highlight);
   border: 1px solid var(--color-border);
   border-radius: 20px;
+  transition: all 0.15s ease-out;
 
   > span:nth-child(2) {transform: rotate(90deg)}
 

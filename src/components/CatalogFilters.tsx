@@ -21,6 +21,7 @@ const Dropdown = styled.div<{open: boolean}>`
   background: var(--color-background-highlight);
   border: 1px solid var(--color-border);
   border-radius: 20px;
+  transition: all 0.15s ease-out;
   
   &:hover {
     background: var(--color-background-main);
