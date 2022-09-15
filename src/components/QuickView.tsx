@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useCallback} from 'react';
 import styled from 'styled-components/macro';
 import {HashLink} from 'react-router-hash-link';
 import {useAppDispatch, useAppSelector} from '../redux-hooks';
@@ -16,8 +16,8 @@ import wishListSymbol from '../images/wishList.png';
 
 
 
-const Overlay = styled.div<{display: boolean}>`
-  ${props => !props.display && 'display: none;'}
+const Overlay = styled.div<{$display: boolean}>`
+  ${props => !props.$display && 'display: none;'}
   width: 100vw;
   height: 100vw;
   position: fixed;
@@ -27,8 +27,8 @@ const Overlay = styled.div<{display: boolean}>`
   z-index: 2;
 `;
 
-const WrapperOuter = styled.div<{display: boolean}>`
-  ${props => !props.display && 'display: none;'}
+const WrapperOuter = styled.div<{$display: boolean}>`
+  ${props => !props.$display && 'display: none;'}
   width: 700px;
   height: 430px;
   position: fixed;
@@ -223,7 +223,10 @@ const QuickView = (product: IProduct): JSX.Element => {
   const quickView = useAppSelector(state => state.quickView);
   const dispatch = useAppDispatch();
 
-  const closeQuickView = (): void => {dispatch(quickViewChange(false))};
+  const closeQuickView = useCallback(
+    (): void => {
+      dispatch(quickViewChange(false))
+  }, [dispatch]);
 
   useEffect((): {(): void} => {
     quickView ?
@@ -239,14 +242,14 @@ const QuickView = (product: IProduct): JSX.Element => {
     return (): void => {
       document.body.removeEventListener('keyup', handleEscape);
     };
-  }, [quickView]);
+  }, [quickView, closeQuickView]);
 
 
   return(
     <>
-      <Overlay display={quickView} onClick={closeQuickView} />
+      <Overlay $display={quickView} onClick={closeQuickView} />
 
-      <WrapperOuter display={quickView}>
+      <WrapperOuter $display={quickView}>
         <WrapperInner>
           <TitleWrapper>
             <Title>QUICK VIEW</Title>
