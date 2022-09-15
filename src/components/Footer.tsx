@@ -1,6 +1,9 @@
+import {useState, useEffect} from 'react';
 import styled from 'styled-components/macro';
 import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
 import {HashLink} from 'react-router-hash-link';
+import Button from './Button';
+import {Input} from './Form';
 import storeLocation from '../images/storeLocation.png';
 import twitter from '../images/twitter.png';
 import pinterest from '../images/pinterest.png';
@@ -161,30 +164,19 @@ const MiddleBlock = styled.div`
   }
 `;
 
-const Newsletter = styled.div`
-  width: 380px;
-  height: 38px;
+const Newsletter = styled.form`
+  width: 50%;
+  max-width: 550px;
+  height: 40px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
 
   > div:first-child {margin: 0}
+  > input, button {margin-left: 3%}
   
   @media ${smallScreen} {
     width: 100%;
     justify-content: center;
-  }
-`;
-
-const Input = styled.input`
-  width: 280px;
-  height: 35px;
-
-  &:focus {outline: none}
-
-  @media ${smallScreen} {
-    width: 40%;
-    margin-left: 5%;
   }
 `;
 
@@ -226,6 +218,12 @@ const BottomBlock = styled.div`
 
 const Footer = (): JSX.Element => {
   const screen = useMediaQuery();
+  const [email, setEmail] = useState<string>('');
+  const [submitEmail, setSubmitEmail] = useState<boolean>(false);
+
+  useEffect((): void => {
+    setTimeout((): void => setSubmitEmail(false), 2000);
+  }, [submitEmail]);
 
   return(
     <WrapperOuter id='footer'>
@@ -288,9 +286,35 @@ const Footer = (): JSX.Element => {
 
 
         <MiddleBlock>
-          <Newsletter>
+          <Newsletter
+            noValidate
+            onSubmit={(e: React.FormEvent<HTMLFormElement>): void => {
+              e.preventDefault();
+              if (e.currentTarget.checkValidity()) {
+                setEmail('');
+                setSubmitEmail(true);
+              }
+            }}
+          >
             <MainText>NEWSLETTER</MainText>
-            <Input type='email'/>
+            <Input
+              type='email'
+              width='40%'
+              pattern='.+@.+\..+'
+              required
+              placeholder='your@email.com'
+              value={email}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
+                setEmail(e.target.value);
+              }}
+            />
+            <Button
+              type='submit'
+              variant='outline'
+              width='25%'
+            >
+              {submitEmail ? 'you are subscribed' : 'subscribe'}
+            </Button>
           </Newsletter>
 
           <ConnectUs>
