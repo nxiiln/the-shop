@@ -22,7 +22,7 @@ import {TAccount} from '../types/TAccount';
 const App = (): JSX.Element => {
   const activeAccount: boolean = useAppSelector(
     state => state.account.accounts
-      .findIndex((account: TAccount): boolean => account.isActive)!== -1
+      .findIndex((account: TAccount): boolean => account.isActive) !== -1
   );
 
   return(
@@ -34,7 +34,7 @@ const App = (): JSX.Element => {
         <Route path='wish-list' element={<WishList />} />
         <Route path='checkout' element={<Checkout />} />
         <Route path='login' element={<Login />} />
-        <Route path='create-account' element={<CreateAccount />} />
+        <Route path='create-account' element={activeAccount ? <Login /> : <CreateAccount />} />
         <Route path='cart' element={<Cart />} />
         <Route path='catalog' element={<Catalog />} />
         <Route path='catalog/:id' element={<Product />} />
