@@ -50,8 +50,10 @@ const Button = styled.button<IButton>`
   color: var(--color-text-second);
   background: var(--color-background-second);
   border: none;
+  transition: background 0.15s ease-out;
 
   &:hover {background: var(--color-button-solid-hover)}
+  &:active {background: var(--color-button-solid-active)}
 
   &::before {
     content: ${props => props.icon && `url(${props.icon})`};
@@ -72,6 +74,7 @@ const Button = styled.button<IButton>`
     border: 1px solid var(--color-border);
 
     &:hover {background: var(--color-button-outline-hover)}
+    &:active {background: var(--color-button-outline-active)}
   `}
 
   ${props => props.variant === 'link' && `

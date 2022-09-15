@@ -11,8 +11,10 @@ const colors: string = `
 
     --color-border: #e4e2e1;
 
-    --color-button-solid-hover: #333; 
-    --color-button-outline-hover: #f7f7f7; 
+    --color-button-solid-hover: #333;
+    --color-button-outline-hover: #f7f7f7;
+    --color-button-solid-active: #454545;
+    --color-button-outline-active: #f0f0f0;
 
     --color-triangle-new: #000;
     --color-triangle-sale: #c50e20;
