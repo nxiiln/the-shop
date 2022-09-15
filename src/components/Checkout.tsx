@@ -1,6 +1,6 @@
 import styled from 'styled-components/macro';
 import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
-import {Link} from 'react-router-dom';
+import {HashLink} from 'react-router-hash-link'; 
 import {useAppSelector, useAppDispatch} from '../redux-hooks';
 import {checkoutSetStep} from '../slices/checkout';
 import {TAccount} from '../types/TAccount';
@@ -13,7 +13,6 @@ import CheckoutStep3 from './CheckoutStep3';
 import CheckoutStep4 from './CheckoutStep4';
 import CheckoutStep5 from './CheckoutStep5';
 import Button from './Button';
-import { HashLink } from 'react-router-hash-link';
 
 
 
@@ -134,7 +133,7 @@ const Checkout = (): JSX.Element => {
         <BreadCrumbs
           link={
             <>
-              <Link to='/'>Home</Link>
+              <HashLink to='/#top'>Home</HashLink>
               <span>/</span>
               <span>Checkout</span>
             </>

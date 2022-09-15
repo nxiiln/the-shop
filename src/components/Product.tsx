@@ -1,6 +1,7 @@
 import styled from 'styled-components/macro';
 import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
-import {Link, useParams} from 'react-router-dom';
+import {useParams} from 'react-router-dom';
+import {HashLink} from 'react-router-hash-link';
 import data from '../data.json';
 import {productImages} from '../images/productImages';
 import BreadCrumbs from './BreadCrumbs';
@@ -164,9 +165,9 @@ const Product = (): JSX.Element => {
             <BreadCrumbs
               link={
                 <>
-                  <Link to='/'>Home</Link>
+                  <HashLink to='/#top'>Home</HashLink>
                   <span>/</span>
-                  <Link to='/catalog'>Catalog</Link>
+                  <HashLink to='/catalog#top'>Catalog</HashLink>
                   <span>/</span>
                   <span>
                     {currProduct.name[0].toUpperCase()}

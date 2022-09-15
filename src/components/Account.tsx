@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import styled from 'styled-components/macro';
 import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
-import {Link} from 'react-router-dom';
+import {HashLink} from 'react-router-hash-link';
 import BreadCrumbs from './BreadCrumbs';
 import AccountPersonalInfo from './AccountPersonalInfo';
 import AccountAddress from './AccountAddress';
@@ -119,7 +119,7 @@ const MyAccount = (): JSX.Element => {
         <BreadCrumbs
           link={
             <>
-              <Link to='/'>Home</Link>
+              <HashLink to='/#top'>Home</HashLink>
               <span>/</span>
               <span>My Account</span>
             </>

@@ -1,7 +1,8 @@
 import {useEffect, useState} from 'react';
 import styled from 'styled-components/macro';
 import {smallScreen} from '../mediaQueries';
-import {Link, useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
+import {HashLink} from 'react-router-hash-link';
 import {useAppDispatch, useAppSelector} from '../redux-hooks';
 import {accountLogIn, accountLogOut, accountSetNewEmail} from '../slices/account';
 import {checkoutSetStep} from '../slices/checkout';
@@ -168,7 +169,7 @@ const Login = (): JSX.Element => {
         <BreadCrumbs
           link={
             <>
-              <Link to='/'>Home</Link>
+              <HashLink to='/#top'>Home</HashLink>
               <span>/</span>
               <span>Login</span>
             </>

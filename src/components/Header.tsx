@@ -1,6 +1,6 @@
 import styled from 'styled-components/macro';
 import {smallScreen, mediumScreen, useMediaQuery} from '../mediaQueries';
-import {Link} from 'react-router-dom';
+import {HashLink} from 'react-router-hash-link';
 import Top from './Top';
 import CartPreview from './CartPreview';
 import Menu from './Menu';
@@ -30,7 +30,7 @@ const TitleWrapper = styled.div`
   justify-content: center;
 `;
 
-const Title = styled(Link)`
+const Title = styled(HashLink)`
   font-family: var(--font-main);
   font-size: 36px;
   font-weight: 400;
@@ -52,7 +52,7 @@ const Header = (): JSX.Element => {
       <Top />
       <CentralGroup>
         <TitleWrapper>
-          <Title to='/'>THE SHOP</Title>
+          <Title to='/#top'>THE SHOP</Title>
         </TitleWrapper>
 
         {!screen.small &&

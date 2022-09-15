@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
 import styled from 'styled-components/macro';
 import {smallScreen, useMediaQuery} from '../mediaQueries';
-import {Link, useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import {HashLink} from 'react-router-hash-link';
 import {useAppSelector, useAppDispatch} from '../redux-hooks';
 import {accountCreate} from '../slices/account';
@@ -171,7 +171,7 @@ const CreateAccount = (): JSX.Element => {
         <BreadCrumbs
           link={
             <>
-              <Link to='/'>Home</Link>
+              <HashLink to='/#top'>Home</HashLink>
               <span>/</span>
               <span>Create Account</span>
             </>

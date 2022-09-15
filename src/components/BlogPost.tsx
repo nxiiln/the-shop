@@ -1,7 +1,8 @@
 import {useState, useRef} from 'react';
 import styled from 'styled-components/macro';
 import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
-import {Link, useParams} from 'react-router-dom';
+import {useParams} from 'react-router-dom';
+import {HashLink} from 'react-router-hash-link';
 import BreadCrumbs from './BreadCrumbs';
 import BlogCategories from './BlogCategories';
 import BlogLabels from './BlogLabels';
@@ -195,9 +196,9 @@ const BlogPost = (): JSX.Element => {
             <BreadCrumbs
               link={
                 <>
-                  <Link to='/'>Home</Link>
+                  <HashLink to='/#top'>Home</HashLink>
                   <span>/</span>
-                  <Link to='/blog'>Blog</Link>
+                  <HashLink to='/blog#top'>Blog</HashLink>
                   <span>/</span>
                   <span>
                     {post.header[0].toUpperCase()}
