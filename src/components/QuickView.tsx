@@ -207,25 +207,29 @@ const Buttons = styled.div`
 
 
 const QuickView = (product: IProduct): JSX.Element => {
+  const wishList: IProduct[] = useAppSelector(state => state.wishList);
   const cart: IProduct[] = useAppSelector(state => state.cart);
   const cartProduct: IProduct | undefined = cart
     .find((cartProduct: IProduct): boolean => cartProduct.id === product.id);
-  const wishList: IProduct[] = useAppSelector(state => state.wishList);
 
   const [sizeOpen, setSizeOpen] = useState<boolean>(false);
-  const initialSize: string = typeof cartProduct === 'undefined' ? product.size : cartProduct.size;
-  const [size, setSize] = useState<string>(initialSize);
+  const [size, setSize] = useState<string>('');
+  const calculatedSize: string = cartProduct?.size || size || product.size;
   
   const [colorOpen, setColorOpen] = useState<boolean>(false);
-  const initialColor: string = typeof cartProduct === 'undefined' ? product.color : cartProduct.color;
-  const [color, setColor] = useState<string>(initialColor);
+  const [color, setColor] = useState<string>('');
+  const calculatedColor: string = cartProduct?.color || color || product.color;
 
   const quickView = useAppSelector(state => state.quickView);
   const dispatch = useAppDispatch();
 
   const closeQuickView = useCallback(
     (): void => {
-      dispatch(quickViewChange(false))
+      dispatch(quickViewChange(false));
+      setSize('');
+      setSizeOpen(false);
+      setColor('');
+      setColorOpen(false);
   }, [dispatch]);
 
   useEffect((): {(): void} => {
@@ -265,7 +269,7 @@ const QuickView = (product: IProduct): JSX.Element => {
           >
             <img
               src={productImages[`product${product.id}`]}
-              alt='woman in white dress'
+              alt={`product${product.id}`}
             />
           </ImageLink>
 
@@ -276,7 +280,7 @@ const QuickView = (product: IProduct): JSX.Element => {
 
           <Dropdown open={sizeOpen} top='110px' zIndex={3}>
             <DropdownHeader onClick={(): void => setSizeOpen(!sizeOpen)}>
-              <span>SIZE: {size}</span>
+              <span>SIZE: {calculatedSize}</span>
               <span>❯</span>
             </DropdownHeader>
 
@@ -289,7 +293,7 @@ const QuickView = (product: IProduct): JSX.Element => {
                   >
                     <input
                       type='checkbox'
-                      checked={currSize === size}
+                      checked={currSize === calculatedSize}
                       onChange={(): void => {
                         setSize(currSize);
                         const size: string = currSize;
@@ -313,7 +317,7 @@ const QuickView = (product: IProduct): JSX.Element => {
 
           <Dropdown open={colorOpen} top='155px' zIndex={2}>
             <DropdownHeader onClick={(): void => setColorOpen(!colorOpen)}>
-              <span>COLOR: {color}</span>
+              <span>COLOR: {calculatedColor}</span>
               <span>❯</span>
             </DropdownHeader>
 
@@ -326,7 +330,7 @@ const QuickView = (product: IProduct): JSX.Element => {
                   >
                     <input
                       type='checkbox'
-                      checked={currColor === color}
+                      checked={currColor === calculatedColor}
                       onChange={(): void => {
                         setColor(currColor);
                         const color: string = currColor;
