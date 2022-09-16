@@ -381,8 +381,10 @@ const ProductDescription = (product: IProduct): JSX.Element => {
           width='40%'
           icon={cartSymbol}
           onClick={(): void => {
+            const size: string = calculatedSize;
+            const color: string = calculatedColor;
             !cart.some(cartProduct => cartProduct.id === product.id) ?
-            dispatch(cartAdd({...product, size, color})) : dispatch(cartRemove(product));
+              dispatch(cartAdd({...product, size, color})) : dispatch(cartRemove(product));
           }}
         >
           {!cart.some(cartProduct => cartProduct.id === product.id) ?
@@ -396,8 +398,10 @@ const ProductDescription = (product: IProduct): JSX.Element => {
           width='40%'
           icon={wishListSymbol}
           onClick={(): void => {
+            const size: string = calculatedSize;
+            const color: string = calculatedColor;
             !wishList.some(wishListProduct => wishListProduct.id === product.id) ?
-            dispatch(wishListAdd({...product, size, color})) : dispatch(wishListRemove(product));
+              dispatch(wishListAdd({...product, size, color})) : dispatch(wishListRemove(product));
           }}
         >
           {!wishList.some(wishListProduct => wishListProduct.id === product.id) ?
