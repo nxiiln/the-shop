@@ -20,6 +20,7 @@ interface IButton {
   $mediumAlignSelf?: string;
 
   fontSize?: string;
+  fontWeight?: number;
   icon?: string;
   variant?: 'outline' | 'link';
 }
@@ -43,7 +44,7 @@ const Button = styled.button<IButton>`
   
   font-family: var(--font-second);
   font-size: ${props => props.fontSize || '10px'};
-  font-weight: 300;
+  font-weight: ${props => props.fontWeight || 300};
   text-transform: uppercase;
   text-decoration: none;
 
