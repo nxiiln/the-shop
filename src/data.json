@@ -3,6 +3,7 @@
     {
       "id": 1,
       "name": "product 1",
+      "category": "bag",
       "price": 1875,
       "color": "gold",
       "size": "xs",
@@ -16,6 +17,7 @@
     {
       "id": 2,
       "name": "product 2",
+      "category": "dress",
       "price": 1875,
       "color": "cream",
       "size": "s",
@@ -29,6 +31,7 @@
     {
       "id": 3,
       "name": "product 3",
+      "category": "dress",
       "price": 1875,
       "color": "yellow",
       "size": "m",
@@ -41,6 +44,7 @@
     {
       "id": 4,
       "name": "product 4",
+      "category": "skirt",
       "price": 1875,
       "color": "black",
       "size": "l",
@@ -53,6 +57,7 @@
     {
       "id": 5,
       "name": "product 5",
+      "category": "shoes",
       "price": 1875,
       "color": "blue",
       "size": "xl",
@@ -65,6 +70,7 @@
     {
       "id": 6,
       "name": "product 6",
+      "category": "dress",
       "price": 1875,
       "color": "blue",
       "size": "xxl",
@@ -78,6 +84,7 @@
     {
       "id": 7,
       "name": "product 7",
+      "category": "dress",
       "price": 1875,
       "color": "green",
       "size": "xs",
@@ -90,6 +97,7 @@
     {
       "id": 8,
       "name": "product 8",
+      "category": "dress",
       "price": 1875,
       "color": "white",
       "size": "s",
@@ -102,6 +110,7 @@
     {
       "id": 9,
       "name": "product 9",
+      "category": "top",
       "price": 1875,
       "color": "white",
       "size": "m",
@@ -114,6 +123,7 @@
     {
       "id": 10,
       "name": "product 10",
+      "category": "dress",
       "price": 1875,
       "color": "orange",
       "size": "l",
@@ -126,6 +136,7 @@
     {
       "id": 11,
       "name": "product 11",
+      "category": "skirt",
       "price": 1875,
       "color": "black",
       "size": "xl",
@@ -138,6 +149,7 @@
     {
       "id": 12,
       "name": "product 12",
+      "category": "dress",
       "price": 1875,
       "color": "yellow",
       "size": "xxl",
