@@ -27,7 +27,9 @@ export const catalogFiltersSlice = createSlice({
         state.colors.push(action.payload) :
         state.colors = state.colors
           .filter((color: string): boolean => color !== action.payload);
-    }
+    },
+
+    catalogFiltersReset: (state) => state = initialState, 
   }
 });
 
@@ -35,6 +37,7 @@ export const catalogFiltersSlice = createSlice({
 export const {
   catalogFiltersSetCategory,
   catalogFiltersSetSizes,
-  catalogFiltersSetColors
+  catalogFiltersSetColors,
+  catalogFiltersReset
 } = catalogFiltersSlice.actions;
 export default catalogFiltersSlice.reducer;

@@ -4,7 +4,8 @@ import {mediumScreen, smallScreen} from '../mediaQueries';
 import {useAppDispatch, useAppSelector} from '../redux-hooks';
 import {catalogFiltersSetColors,
   catalogFiltersSetSizes,
-  catalogFiltersSetCategory
+  catalogFiltersSetCategory,
+  catalogFiltersReset
 } from '../slices/catalogFilters';
 import Button from './Button';
 import {LabelCheckbox} from './Form';
@@ -131,7 +132,13 @@ const CatalogFilters = (): JSX.Element => {
 
   return(
     <>
-      <ResetFilter>Reset Filter</ResetFilter>
+      <Button
+        type='button'
+        variant='link'
+        onClick={(): void => {dispatch(catalogFiltersReset())}}
+      >
+        Reset Filter
+      </Button>
 
       <Dropdown open={categoryOpen}>
         <DropdownHeader
