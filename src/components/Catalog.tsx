@@ -2,6 +2,8 @@ import {useState} from 'react';
 import styled from 'styled-components/macro';
 import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
 import {HashLink} from 'react-router-hash-link';
+import {useAppSelector} from '../redux-hooks';
+import {IProduct} from '../types/IProduct';
 import BreadCrumbs from './BreadCrumbs';
 import CatalogFilters from './CatalogFilters';
 import Products from './Products';
@@ -239,11 +241,20 @@ const Page = styled.button<{curr: boolean}>`
 
 
 const Catalog = (): JSX.Element => {
+  const screen = useMediaQuery();
+
   const [sortOpen, setSortOpen] = useState<boolean>(false);
   const [sortMode, setSortMode] = useState<string>('Position');
   const [currPage, setCurrPage] = useState<number>(1);
-  const screen = useMediaQuery();
+  
+  const sizes = useAppSelector(state => state.catalogFIlters.sizes);
+  const colors = useAppSelector(state => state.catalogFIlters.colors);
 
+  const filteredProducts: IProduct[] = data.products
+    .filter((product: IProduct): boolean =>
+      sizes.includes(product.size) && colors.includes(product.color)
+    );
+  
 
   const renderPages = (): JSX.Element[] => {
     let pages: JSX.Element[] = [];
@@ -351,7 +362,11 @@ const Catalog = (): JSX.Element => {
             </SortWrapper>
 
 
-            <Products products={data.products} maxWidth='725px' margin='22px 0 80px 0' />
+            <Products
+              products={filteredProducts}
+              maxWidth='725px'
+              margin='22px 0 80px 0'
+            />
 
 
             <Pagination>

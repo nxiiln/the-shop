@@ -1,6 +1,8 @@
 import {useState} from 'react';
 import styled from 'styled-components/macro';
 import {mediumScreen, smallScreen} from '../mediaQueries';
+import {useAppDispatch, useAppSelector} from '../redux-hooks';
+import {catalogFiltersSetColors, catalogFiltersSetSizes} from '../slices/catalogFilters';
 import {LabelCheckbox} from './Form';
 
 
@@ -99,7 +101,6 @@ const ButtonFilterSecond = styled(ButtonFilter)`
 
 // Checkbox
 const CheckboxWrapper = styled.div`
-  height: 180px;
   margin: 10px 0 0 2px;
   display: flex;
   flex-direction: column;
@@ -114,34 +115,25 @@ const CheckboxSizeWrapper = styled(CheckboxWrapper)`
 
 const CheckboxColorWrapper = styled(CheckboxWrapper)`
   width: 165px;
+  height: 125px;
 `;
 
 
 
 
 export const sizes: string[] = ['xs', 's', 'm', 'l', 'xl', 'xxl'];
-export const colors: string[] = [
-  'beige',
-  'black',
-  'blue',
-  'brown',
-  'cream',
-  'gold',
-  'green',
-  'grey',
-  'navy',
-  'orange',
-  'pink',
-  'purple'
-];
-
-
+export const colors: string[] = ['white', 'cream', 'yellow', 'gold', 'orange', 'green', 'blue', 'black'];
 
 
 const CatalogFilters = (): JSX.Element => {
-  const [category, setCategory] = useState<boolean>(false);
-  const [size, setSize] = useState<boolean>(false);
-  const [color, setColor] = useState<boolean>(false);
+  const [categoryOpen, setCategoryOpen] = useState<boolean>(true);
+  const dispatch = useAppDispatch();
+
+  const [sizeOpen, setSizeOpen] = useState<boolean>(true);
+  const checkedSizes: string[] = useAppSelector(state => state.catalogFIlters.sizes);
+
+  const [colorOpen, setColorOpen] = useState<boolean>(true);
+  const checkedColors: string[] = useAppSelector(state => state.catalogFIlters.colors);
 
 
   return(
@@ -149,16 +141,16 @@ const CatalogFilters = (): JSX.Element => {
       <ResetFilter>Reset Filter</ResetFilter>
 
 
-      <Dropdown open={category}>
+      <Dropdown open={categoryOpen}>
         <DropdownHeader
-          open={category}
-          onClick={(): void => category ? setCategory(false) : setCategory(true)}
+          open={categoryOpen}
+          onClick={(): void => categoryOpen ? setCategoryOpen(false) : setCategoryOpen(true)}
         >
           <span>CATEGORY</span>
           <span>❯</span>
         </DropdownHeader>
 
-        {category &&
+        {categoryOpen &&
           <CategoryWrapper>
             <ButtonFilterBold>BOTTOMS</ButtonFilterBold>
             <ButtonFilterSecond>TOPS</ButtonFilterSecond>
@@ -175,48 +167,56 @@ const CatalogFilters = (): JSX.Element => {
       </Dropdown>
 
 
-      <Dropdown open={size}>
+      <Dropdown open={sizeOpen}>
         <DropdownHeader
-          open={size}
-          onClick={(): void => size ? setSize(false) : setSize(true)}
+          open={sizeOpen}
+          onClick={(): void => sizeOpen ? setSizeOpen(false) : setSizeOpen(true)}
         >
           <span>SIZE</span>
           <span>❯</span>
         </DropdownHeader>
 
-        {size &&
+        {sizeOpen &&
           <CheckboxSizeWrapper>
-            {sizes.map((size: string): JSX.Element =>
+            {sizes.map((currSize: string): JSX.Element =>
               <LabelCheckbox
-                key={size}
+                key={currSize}
                 margin='0 0 5px 0'
               >
-                <input type='checkbox' name={size}/>
-                {size}
+                <input
+                  type='checkbox'
+                  checked={checkedSizes.includes(currSize)}
+                  onChange={(): void => {dispatch(catalogFiltersSetSizes(currSize))}}
+                />
+                {currSize}
               </LabelCheckbox>
             )}
           </CheckboxSizeWrapper>
         }
       </Dropdown>
 
-      <Dropdown open={color}>
+      <Dropdown open={colorOpen}>
         <DropdownHeader
-          open={color}
-          onClick={(): void => color ? setColor(false) : setColor(true)}
+          open={colorOpen}
+          onClick={(): void => colorOpen ? setColorOpen(false) : setColorOpen(true)}
         >
           <span>COLOR</span>
           <span>❯</span>
         </DropdownHeader>
 
-        {color &&
+        {colorOpen &&
           <CheckboxColorWrapper>
-            {colors.map((color: string): JSX.Element =>
+            {colors.map((currColor: string): JSX.Element =>
               <LabelCheckbox
-                key={color}
+                key={currColor}
                 margin='0 0 8px 0'
               >
-                <input type='checkbox' name={color}/>
-                {color}
+                <input
+                  type='checkbox'
+                  checked={checkedColors.includes(currColor)}
+                  onChange={(): void => {dispatch(catalogFiltersSetColors(currColor))}}
+                />
+                {currColor}
               </LabelCheckbox>
             )}
           </CheckboxColorWrapper>

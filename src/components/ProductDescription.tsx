@@ -167,12 +167,12 @@ const CheckboxWrapper = styled.div`
 `;
 
 const CheckboxSizeWrapper = styled(CheckboxWrapper)`
-  width: 220px;
+  width: 240px;
   height: 60px;
 `;
 
 const CheckboxColorWrapper = styled(CheckboxWrapper)`
-  width: 100%;
+  width: 260px;
   height: 100px;
 `;
 
