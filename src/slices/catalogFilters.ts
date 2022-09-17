@@ -1,7 +1,8 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
 
-const initialState: {sizes: string[], colors: string[]} = {
+const initialState: {category: string, sizes: string[], colors: string[]} = {
+  category: 'all',
   sizes: ['xs', 's', 'm', 'l', 'xl', 'xxl'],
   colors: ['white', 'cream', 'yellow', 'gold', 'orange', 'green', 'blue', 'black']
 };
@@ -10,6 +11,10 @@ export const catalogFiltersSlice = createSlice({
   name: 'catalogFilters',
   initialState,
   reducers: {
+    catalogFiltersSetCategory: (state, action: PayloadAction<string>): void => {
+      state.category = action.payload;
+    },
+
     catalogFiltersSetSizes: (state, action: PayloadAction<string>): void => {
       !state.sizes.includes(action.payload) ?
         state.sizes.push(action.payload) :
@@ -27,5 +32,9 @@ export const catalogFiltersSlice = createSlice({
 });
 
 
-export const {catalogFiltersSetSizes, catalogFiltersSetColors} = catalogFiltersSlice.actions;
+export const {
+  catalogFiltersSetCategory,
+  catalogFiltersSetSizes,
+  catalogFiltersSetColors
+} = catalogFiltersSlice.actions;
 export default catalogFiltersSlice.reducer;

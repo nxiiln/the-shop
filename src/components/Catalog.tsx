@@ -247,11 +247,13 @@ const Catalog = (): JSX.Element => {
   const [sortMode, setSortMode] = useState<string>('Position');
   const [currPage, setCurrPage] = useState<number>(1);
   
+  const category = useAppSelector(state => state.catalogFIlters.category);
   const sizes = useAppSelector(state => state.catalogFIlters.sizes);
   const colors = useAppSelector(state => state.catalogFIlters.colors);
 
   const filteredProducts: IProduct[] = data.products
     .filter((product: IProduct): boolean =>
+      (category === 'all' || product.category === category) &&
       sizes.includes(product.size) && colors.includes(product.color)
     );
   

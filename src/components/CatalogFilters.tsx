@@ -2,7 +2,11 @@ import {useState} from 'react';
 import styled from 'styled-components/macro';
 import {mediumScreen, smallScreen} from '../mediaQueries';
 import {useAppDispatch, useAppSelector} from '../redux-hooks';
-import {catalogFiltersSetColors, catalogFiltersSetSizes} from '../slices/catalogFilters';
+import {catalogFiltersSetColors,
+  catalogFiltersSetSizes,
+  catalogFiltersSetCategory
+} from '../slices/catalogFilters';
+import Button from './Button';
 import {LabelCheckbox} from './Form';
 
 
@@ -85,19 +89,6 @@ const ResetFilter = styled.button`
   &:hover {text-decoration: underline}
 `;
 
-const CategoryWrapper = styled.div`
-  width: 115px;
-  margin-top: 2px;
-`;
-
-const ButtonFilterBold = styled(ButtonFilter)`
-  font-weight: 700;
-`;
-
-const ButtonFilterSecond = styled(ButtonFilter)`
-  margin-left: 12px;
-`;
-
 
 // Checkbox
 const CheckboxWrapper = styled.div`
@@ -120,14 +111,16 @@ const CheckboxColorWrapper = styled(CheckboxWrapper)`
 
 
 
-
+const categories: string[] = ['all', 'dress', 'top', 'skirt', 'shoes', 'bag'];
 export const sizes: string[] = ['xs', 's', 'm', 'l', 'xl', 'xxl'];
 export const colors: string[] = ['white', 'cream', 'yellow', 'gold', 'orange', 'green', 'blue', 'black'];
 
 
 const CatalogFilters = (): JSX.Element => {
-  const [categoryOpen, setCategoryOpen] = useState<boolean>(true);
   const dispatch = useAppDispatch();
+
+  const [categoryOpen, setCategoryOpen] = useState<boolean>(true);
+  const checkedCategory: string = useAppSelector(state => state.catalogFIlters.category);
 
   const [sizeOpen, setSizeOpen] = useState<boolean>(true);
   const checkedSizes: string[] = useAppSelector(state => state.catalogFIlters.sizes);
@@ -140,7 +133,6 @@ const CatalogFilters = (): JSX.Element => {
     <>
       <ResetFilter>Reset Filter</ResetFilter>
 
-
       <Dropdown open={categoryOpen}>
         <DropdownHeader
           open={categoryOpen}
@@ -151,18 +143,20 @@ const CatalogFilters = (): JSX.Element => {
         </DropdownHeader>
 
         {categoryOpen &&
-          <CategoryWrapper>
-            <ButtonFilterBold>BOTTOMS</ButtonFilterBold>
-            <ButtonFilterSecond>TOPS</ButtonFilterSecond>
-            <ButtonFilterSecond>SHOES & MORE</ButtonFilterSecond>
-            <ButtonFilterSecond>COLLECTION</ButtonFilterSecond>
-            <ButtonFilterBold>TOPS</ButtonFilterBold>
-            <ButtonFilterSecond>JACKETS & COATS</ButtonFilterSecond>
-            <ButtonFilterSecond>SHIRTS</ButtonFilterSecond>
-            <ButtonFilterSecond>T-SHIRTS</ButtonFilterSecond>
-            <ButtonFilterSecond>KNITWEAR</ButtonFilterSecond>
-            <ButtonFilterSecond>SWEATS</ButtonFilterSecond>
-          </CategoryWrapper>
+          <>
+            {categories.map((category: string): JSX.Element =>
+              <Button
+                key={category}
+                type='button'
+                variant='link'
+                margin={category === 'bag' ? '0 0 10px 0' : ''}
+                fontWeight={category === checkedCategory ? 600 : 300}
+                onClick={(): void => {dispatch(catalogFiltersSetCategory(category))}}
+              >
+                {category}
+              </Button>
+            )}
+          </>
         }
       </Dropdown>
 
