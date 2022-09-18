@@ -253,12 +253,13 @@ const Catalog = (): JSX.Element => {
   const products: IProduct[] = data.products
     .filter((product: IProduct): boolean =>
       (category === 'all' || product.category === category) &&
-      sizes.includes(product.size) && colors.includes(product.color)
+      (sizes.length === 0 || sizes.includes(product.size)) &&
+      (colors.length === 0 || colors.includes(product.color))
     )
-    .sort((a: IProduct, b: IProduct): number => {
-      return sortMode === 'Price decrease' ? b.price - a.price :
+    .sort((a: IProduct, b: IProduct): number => 
+      sortMode === 'Price decrease' ? b.price - a.price :
         sortMode === 'Price increase' ? a.price - b.price : a.id - b.id
-    });
+    );
 
 
   const renderPages = (): JSX.Element[] => {

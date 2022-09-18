@@ -1,10 +1,16 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
 
-const initialState: {category: string, sizes: string[], colors: string[]} = {
+interface IInitialState {
+  category: string;
+  sizes: string[];
+  colors: string[];
+}
+
+const initialState: IInitialState = {
   category: 'all',
-  sizes: ['xs', 's', 'm', 'l', 'xl', 'xxl'],
-  colors: ['white', 'cream', 'yellow', 'gold', 'orange', 'green', 'blue', 'black']
+  sizes: [],
+  colors: []
 };
 
 export const catalogFiltersSlice = createSlice({
