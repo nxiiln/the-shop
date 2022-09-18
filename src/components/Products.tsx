@@ -97,6 +97,7 @@ const QuickShop = styled(Button)`
   background: var(--color-background-main);
   opacity: 0.8;
   border: none;
+  transition: opacity 0.15s ease-out;
 
   &:hover {
     background: var(--color-background-main);
