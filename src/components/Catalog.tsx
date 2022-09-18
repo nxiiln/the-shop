@@ -134,6 +134,7 @@ const SortWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  user-select: none;
 
   @media ${mediumScreen}, ${smallScreen} {margin-left: 8px}
 
@@ -152,6 +153,8 @@ const Sort = styled.div<{open: boolean}>`
   background: var(--color-background-main);
   border: 1px solid var(--color-border);
   z-index: 2;
+  transition: height 0.15s ease-out;
+  cursor: pointer;
 `;
 
 const SortHeader = styled.div<{open: boolean}>`
@@ -165,13 +168,13 @@ const SortHeader = styled.div<{open: boolean}>`
   font-size: 11px;
   font-weight: 400;
   color: var(--color-text-regular);
-  cursor: default;
 
   > span {
     margin-right: 5px;
     font-size: 16px;
     color: var(--color-text-main);
-    ${props => props.open && 'transform: rotate(90deg);'}
+    transform: ${props => props.open ? 'rotate(90deg)' : 'rotate(0deg)'};
+    transition: transform 0.15s ease-out;
   }
 `;
 
@@ -332,8 +335,7 @@ const Catalog = (): JSX.Element => {
               <span>SORT BY</span>
               <Sort
                 open={sortOpen}
-                onMouseEnter={(): void => setSortOpen(true)}
-                onMouseLeave={(): void => setSortOpen(false)}
+                onClick={(): void => setSortOpen(!sortOpen)}
               >
                 <SortHeader open={sortOpen}>
                   {sortMode}
