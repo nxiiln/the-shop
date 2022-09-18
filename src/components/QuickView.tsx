@@ -78,6 +78,7 @@ const Close = styled.button`
   background: var(--color-background-main);
   border: 1px solid var(--color-border);
   cursor: pointer;
+  transition: background 0.15s ease-out;
   
   &:hover {background: var(--color-button-outline-hover)}
 
@@ -135,8 +136,16 @@ const Price = styled.span`
   color: var(--color-text-main);
 `;
 
-const Dropdown = styled.div<{open: boolean, top: string, zIndex: number}>`
+interface IDropdown {
+  open: boolean;
+  openHeight: string;
+  top: string;
+  zIndex: number;
+}
+
+const Dropdown = styled.div<IDropdown>`
   width: 330px;
+  height: 30px;
   margin-bottom: 15px;
   padding: 0 10px 0 10px;
   position: absolute;
@@ -153,9 +162,7 @@ const Dropdown = styled.div<{open: boolean, top: string, zIndex: number}>`
   border: 1px solid var(--color-border);
   border-radius: 20px;
   z-index: ${props => props.zIndex};
-  transition: all 0.15s ease-out;
-
-  > span:nth-child(2) {transform: rotate(90deg)}
+  transition: height 0.15s ease-out;
 
   &:hover {
     background: var(--color-background-main);
@@ -163,20 +170,25 @@ const Dropdown = styled.div<{open: boolean, top: string, zIndex: number}>`
   }
 
   ${props => props.open && `
+    height: ${props.openHeight};
     background: var(--color-background-main);
     border-radius: 0;
-    span:nth-child(2) {transform: rotate(-90deg)}
   `}
 `;
 
-const DropdownHeader = styled.div`
+const DropdownHeader = styled.div<{open: boolean}>`
   width: 310px;
-  height: 30px;
+  min-height: 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   text-transform: uppercase;
   cursor: pointer;
+
+  > span:last-child {
+    transform: ${props => props.open ? 'rotate(90deg)' : 'rotate(0deg)'};
+    transition: transform 0.15s ease-out;
+  }
 `;
 
 const CheckboxWrapper = styled.div`
@@ -278,8 +290,13 @@ const QuickView = (product: IProduct): JSX.Element => {
             <Name>{product.name}</Name>
             <Price>${product.price}</Price>
 
-          <Dropdown open={sizeOpen} top='110px' zIndex={3}>
-            <DropdownHeader onClick={(): void => setSizeOpen(!sizeOpen)}>
+          <Dropdown
+            open={sizeOpen}
+            openHeight='100px'
+            top='110px'
+            zIndex={3}
+          >
+            <DropdownHeader open={sizeOpen} onClick={(): void => setSizeOpen(!sizeOpen)}>
               <span>SIZE: {calculatedSize}</span>
               <span>❯</span>
             </DropdownHeader>
@@ -315,8 +332,13 @@ const QuickView = (product: IProduct): JSX.Element => {
           </Dropdown>
 
 
-          <Dropdown open={colorOpen} top='155px' zIndex={2}>
-            <DropdownHeader onClick={(): void => setColorOpen(!colorOpen)}>
+          <Dropdown
+            open={colorOpen}
+            openHeight='140px'
+            top='155px'
+            zIndex={2}
+          >
+            <DropdownHeader open={colorOpen} onClick={(): void => setColorOpen(!colorOpen)}>
               <span>COLOR: {calculatedColor}</span>
               <span>❯</span>
             </DropdownHeader>
