@@ -41,6 +41,7 @@ const AlsoLoveClose = styled.button`
   background: var(--color-background-main);
   border: 1px solid var(--color-border);
   cursor: pointer;
+  transition: background 0.15s ease-out;
 
   &:hover {background: var(--color-button-outline-hover)}
 
