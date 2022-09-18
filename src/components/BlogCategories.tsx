@@ -4,7 +4,7 @@ import {HashLink} from 'react-router-hash-link';
 import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
 
 
-const Wrapper = styled.article<{gridArea: string}>`
+const Wrapper = styled.article<{gridArea: string, open: boolean}>`
   width: 275px;
   height: max-content;
   margin-bottom: 20px;
@@ -15,8 +15,10 @@ const Wrapper = styled.article<{gridArea: string}>`
 
   @media ${mediumScreen}, ${smallScreen} {
     width: 100%;
+    height: ${props => props.open ? '205px' : '50px'};
     justify-self: center;
     align-self: flex-start;
+    transition: height 0.15s;
   }
 `;
 
@@ -47,7 +49,8 @@ const Indicator = styled.span<{open: boolean}>`
   margin-right: 15px;
   font-size: 16px;
   color: var(--color-text-main);
-  ${props => props.open && 'transform: rotate(90deg);'}
+  transform: ${props => props.open ? 'rotate(90deg)' : 'rotate(0deg)'};
+  transition: transform 0.15s ease-out;
 `;
 
 const Category = styled(HashLink)`
@@ -72,7 +75,7 @@ const BlogCategories = ({gridArea}: {gridArea: string}): JSX.Element => {
   const screen = useMediaQuery();
 
 	return(
-    <Wrapper gridArea={gridArea}>
+    <Wrapper gridArea={gridArea} open={open}>
       {screen.big ?
         <>
           <Title>CATEGORIES</Title>
