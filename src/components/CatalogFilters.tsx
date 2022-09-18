@@ -89,13 +89,13 @@ export const colors: string[] = ['white', 'cream', 'yellow', 'gold', 'orange', '
 const CatalogFilters = (): JSX.Element => {
   const dispatch = useAppDispatch();
 
-  const [categoryOpen, setCategoryOpen] = useState<boolean>(true);
+  const [categoryOpen, setCategoryOpen] = useState<boolean>(false);
   const checkedCategory: string = useAppSelector(state => state.catalogFIlters.category);
 
-  const [sizeOpen, setSizeOpen] = useState<boolean>(true);
+  const [sizeOpen, setSizeOpen] = useState<boolean>(false);
   const checkedSizes: string[] = useAppSelector(state => state.catalogFIlters.sizes);
 
-  const [colorOpen, setColorOpen] = useState<boolean>(true);
+  const [colorOpen, setColorOpen] = useState<boolean>(false);
   const checkedColors: string[] = useAppSelector(state => state.catalogFIlters.colors);
 
 

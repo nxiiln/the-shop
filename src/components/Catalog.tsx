@@ -145,8 +145,8 @@ const SortWrapper = styled.div`
 `;
 
 const Sort = styled.div<{open: boolean}>`
-  width: 105px;
-  height: ${props => props.open ? '106px' : '30px'};
+  width: 110px;
+  height: ${props => props.open ? '110px' : '30px'};
   align-self: start;
   border: 1px solid var(--color-border);
   z-index: 2;
@@ -154,7 +154,7 @@ const Sort = styled.div<{open: boolean}>`
 
 const SortHeader = styled.div<{open: boolean}>`
   height: 30px;
-  padding-left: 12px;
+  padding-left: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -163,6 +163,7 @@ const SortHeader = styled.div<{open: boolean}>`
   font-size: 11px;
   font-weight: 400;
   color: var(--color-text-regular);
+  cursor: default;
 
   > span {
     margin-right: 5px;
@@ -242,21 +243,22 @@ const Page = styled.button<{curr: boolean}>`
 
 const Catalog = (): JSX.Element => {
   const screen = useMediaQuery();
-
   const [sortOpen, setSortOpen] = useState<boolean>(false);
-  const [sortMode, setSortMode] = useState<string>('Position');
+  const [sortMode, setSortMode] = useState<string>('Popular');
   const [currPage, setCurrPage] = useState<number>(1);
-  
-  const category = useAppSelector(state => state.catalogFIlters.category);
-  const sizes = useAppSelector(state => state.catalogFIlters.sizes);
-  const colors = useAppSelector(state => state.catalogFIlters.colors);
+  const {category, sizes, colors} = useAppSelector(state => state.catalogFIlters);
 
-  const filteredProducts: IProduct[] = data.products
+
+  const products: IProduct[] = data.products
     .filter((product: IProduct): boolean =>
       (category === 'all' || product.category === category) &&
       sizes.includes(product.size) && colors.includes(product.color)
-    );
-  
+    )
+    .sort((a: IProduct, b: IProduct): number => {
+      return sortMode === 'Price decrease' ? b.price - a.price :
+        sortMode === 'Price increase' ? a.price - b.price : a.id - b.id
+    });
+
 
   const renderPages = (): JSX.Element[] => {
     let pages: JSX.Element[] = [];
@@ -324,13 +326,14 @@ const Catalog = (): JSX.Element => {
 
             {!screen.big && <CatalogFilters />}
             
-            <SortWrapper
-              onMouseEnter={(): void => setSortOpen(true)}
-              onMouseLeave={(): void => setSortOpen(false)}
-              onClick={(): void => setSortOpen(false)}
-            >
+            <SortWrapper>
               <span>SORT BY</span>
-              <Sort open={sortOpen}>
+              <Sort
+                open={sortOpen}
+                onMouseEnter={(): void => setSortOpen(true)}
+                onMouseLeave={(): void => setSortOpen(false)}
+                onClick={(): void => setSortOpen(false)}
+              >
                 <SortHeader open={sortOpen}>
                   {sortMode}
                   <span>▸</span>
@@ -340,23 +343,23 @@ const Catalog = (): JSX.Element => {
                   <SortBody>
                     <ButtonSortMode
                       type='button'
-                      onClick={(): void => setSortMode('Position')}
+                      onClick={(): void => setSortMode('Popular')}
                     >
-                      Position
+                      Popular
                     </ButtonSortMode>
 
                     <ButtonSortMode
                       type='button'
-                      onClick={(): void => setSortMode('Price')}
+                      onClick={(): void => setSortMode('Price decrease')}
                     >
-                      Price
+                      Price decrease
                     </ButtonSortMode>
 
                     <ButtonSortMode
                       type='button'
-                      onClick={(): void => setSortMode('Name')}
+                      onClick={(): void => setSortMode('Price increase')}
                     >
-                      Name
+                      Price increase
                     </ButtonSortMode>
                   </SortBody>
                 }
@@ -365,7 +368,7 @@ const Catalog = (): JSX.Element => {
 
 
             <Products
-              products={filteredProducts}
+              products={products}
               maxWidth='725px'
               margin='22px 0 80px 0'
             />
