@@ -14,8 +14,9 @@ import {LabelCheckbox} from './Form';
 
 
 // Dropdown
-const Dropdown = styled.div<{open: boolean}>`
+const Dropdown = styled.div<{open: boolean, openHeight: string}>`
   width: 195px;
+  height: 30px;
   margin-bottom: 7px;
   padding: 0 10px 0 10px;
   display: flex;
@@ -38,6 +39,7 @@ const Dropdown = styled.div<{open: boolean}>`
   > span:nth-child(2) {transform: rotate(90deg)}
 
   ${props => props.open && `
+    height: ${props.openHeight};
     background: var(--color-background-main);
     border-radius: 0;
 
@@ -49,14 +51,15 @@ const Dropdown = styled.div<{open: boolean}>`
 
 const DropdownHeader = styled.div<{open: boolean}>`
   width: 100%;
-  height: 29px;
+  min-height: 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
 
   > span:last-child {
-    transform: ${props => props.open && 'rotate(90deg)'};
+    transform: ${props => props.open ? 'rotate(90deg)' : 'rotate(0deg)'};
+    transition: transform 0.15s ease-out;
   }
 `;
 
@@ -109,7 +112,7 @@ const CatalogFilters = (): JSX.Element => {
         Reset Filter
       </Button>
 
-      <Dropdown open={categoryOpen}>
+      <Dropdown open={categoryOpen} openHeight='200px'>
         <DropdownHeader
           open={categoryOpen}
           onClick={(): void => categoryOpen ? setCategoryOpen(false) : setCategoryOpen(true)}
@@ -137,7 +140,7 @@ const CatalogFilters = (): JSX.Element => {
       </Dropdown>
 
 
-      <Dropdown open={sizeOpen}>
+      <Dropdown open={sizeOpen} openHeight='130px'>
         <DropdownHeader
           open={sizeOpen}
           onClick={(): void => sizeOpen ? setSizeOpen(false) : setSizeOpen(true)}
@@ -165,7 +168,7 @@ const CatalogFilters = (): JSX.Element => {
         }
       </Dropdown>
 
-      <Dropdown open={colorOpen}>
+      <Dropdown open={colorOpen} openHeight='165px'>
         <DropdownHeader
           open={colorOpen}
           onClick={(): void => colorOpen ? setColorOpen(false) : setColorOpen(true)}
