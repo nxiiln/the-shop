@@ -134,7 +134,8 @@ const SortWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  z-index: 2;
+
+  @media ${mediumScreen}, ${smallScreen} {margin-left: 8px}
 
   > span {
     font-family: var(--font-second);
@@ -148,6 +149,7 @@ const Sort = styled.div<{open: boolean}>`
   width: 110px;
   height: ${props => props.open ? '110px' : '30px'};
   align-self: start;
+  background: var(--color-background-main);
   border: 1px solid var(--color-border);
   z-index: 2;
 `;
@@ -177,7 +179,6 @@ const SortBody = styled.div`
   margin-top: 8px;
   display: flex;
   flex-direction: column;
-  background: var(--color-background-main);
 `;
 
 const ButtonSortMode = styled.button`
@@ -332,7 +333,6 @@ const Catalog = (): JSX.Element => {
                 open={sortOpen}
                 onMouseEnter={(): void => setSortOpen(true)}
                 onMouseLeave={(): void => setSortOpen(false)}
-                onClick={(): void => setSortOpen(false)}
               >
                 <SortHeader open={sortOpen}>
                   {sortMode}
@@ -370,7 +370,7 @@ const Catalog = (): JSX.Element => {
             <Products
               products={products}
               maxWidth='725px'
-              margin='22px 0 80px 0'
+              margin='40px 0 80px 0'
             />
 
 

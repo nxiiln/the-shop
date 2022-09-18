@@ -27,7 +27,6 @@ const MenuWrapper = styled.article<{number: boolean}>`
 const MenuSymbol = styled(HashLink)<{open: boolean}>`
   box-sizing: content-box;
   height: 21px;
-  /* margin: 0 0 0px 15px; */
   padding: ${props => props.open ? '10px 15px 7px 3px' : '5px 5px 0'};
   position: relative;
   top: ${props => props.open ? '-10px' : '-5px'};
@@ -36,8 +35,7 @@ const MenuSymbol = styled(HashLink)<{open: boolean}>`
   flex-direction: column;
   justify-content: space-between;
   cursor: pointer;
-  z-index: 3;
-  /* border: 1px solid pink; */
+  z-index: 4;
 
   > div {
     width: 20px;
@@ -90,7 +88,7 @@ const DropdownMenu = styled.div<{open: boolean}>`
   align-items: center;
   background: var(--color-background-second);
   opacity: 0.9;
-  z-index: 2;
+  z-index: 3;
   transition: top 0.2s ease-out;
 
   ${props => props.open && 'top: -126px;'}
