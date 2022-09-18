@@ -117,8 +117,9 @@ const Price = styled.span`
   color: var(--color-text-main);
 `;
 
-const Dropdown = styled.div<{open: boolean}>`
+const Dropdown = styled.div<{open: boolean, openHeight: string}>`
   width: 100%;
+  height: 30px;
   margin-bottom: 7px;
   padding: 0 10px 0 10px;
   display: flex;
@@ -132,9 +133,7 @@ const Dropdown = styled.div<{open: boolean}>`
   background: var(--color-background-highlight);
   border: 1px solid var(--color-border);
   border-radius: 20px;
-  transition: all 0.15s ease-out;
-
-  > span:nth-child(2) {transform: rotate(90deg)}
+  transition: height 0.15s ease-out;
 
   &:hover {
     background: var(--color-background-main);
@@ -142,20 +141,25 @@ const Dropdown = styled.div<{open: boolean}>`
   }
 
   ${props => props.open && `
+    height: ${props.openHeight};
     background: var(--color-background-main);
     border-radius: 0;
-    span:nth-child(2) {transform: rotate(-90deg)}
   `}
 `;
 
-const DropdownHeader = styled.div`
+const DropdownHeader = styled.div<{open: boolean}>`
   width: 100%;
-  height: 29px;
+  min-height: 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   text-transform: uppercase;
   cursor: pointer;
+
+  > span:last-child {
+    transform: ${props => props.open ? 'rotate(90deg)' : 'rotate(0deg)'};
+    transition: transform 0.15s ease-out;
+  }
 `;
 
 const CheckboxWrapper = styled.div`
@@ -301,8 +305,8 @@ const ProductDescription = (product: IProduct): JSX.Element => {
       <Price>${product.price}</Price>
 
 
-      <Dropdown open={sizeOpen}>
-        <DropdownHeader onClick={(): void => setSizeOpen(!sizeOpen)}>
+      <Dropdown open={sizeOpen} openHeight='100px'>
+        <DropdownHeader open={sizeOpen} onClick={(): void => setSizeOpen(!sizeOpen)}>
           <span>SIZE: {calculatedSize}</span>
           <span>❯</span>
         </DropdownHeader>
@@ -338,8 +342,8 @@ const ProductDescription = (product: IProduct): JSX.Element => {
       </Dropdown>
 
 
-      <Dropdown open={colorOpen}>
-        <DropdownHeader onClick={(): void => setColorOpen(!colorOpen)}>
+      <Dropdown open={colorOpen} openHeight='140px'>
+        <DropdownHeader open={colorOpen} onClick={(): void => setColorOpen(!colorOpen)}>
           <span>COLOR: {calculatedColor}</span>
           <span>❯</span>
         </DropdownHeader>
