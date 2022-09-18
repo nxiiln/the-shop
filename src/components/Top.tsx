@@ -2,9 +2,9 @@ import {useState} from 'react';
 import styled from 'styled-components/macro';
 import {mediumScreen, useMediaQuery} from '../mediaQueries';
 import {HashLink} from 'react-router-hash-link';
-import CartPreview from './CartPreview';
 import {useAppSelector} from '../redux-hooks';
 import {TAccount} from '../types/TAccount';
+import CartPreview from './CartPreview';
 
 
 
@@ -59,13 +59,15 @@ const Title = styled.div`
 `;
 
 const Dropdown = styled.div<{open: boolean, width: string, height: string}>`
+  height: 0px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  transition: all 0.15s ease-out;
 
   ${props => `
     width: ${props.width};
-    height: ${props.height};
+    height: ${props.open ? props.height : '0px'};
     ${props.open && 'background: #333;'}
   `}
 `;
