@@ -60,37 +60,6 @@ const DropdownHeader = styled.div<{open: boolean}>`
   }
 `;
 
-
-// Button
-const ButtonFilter = styled.button`
-  margin-left: 4px;
-  font-family: var(--font-second);
-  font-size: 10px;
-  line-height: 24px;
-  font-weight: 400;
-  color: var(--color-text-main);
-  background: var(--color-background-main);
-  border: none;
-  cursor: pointer;
-  
-  &:hover {text-decoration: underline}
-`;
-
-const ResetFilter = styled.button`
-  margin-bottom: 8px;
-  font-family: var(--font-regular);
-  font-size: 10px;
-  line-height: 1.2;
-  font-weight: 400;
-  color: var(--color-text-regular);
-  background: none;
-  border: none;
-  cursor: pointer;
-
-  &:hover {text-decoration: underline}
-`;
-
-
 // Checkbox
 const CheckboxWrapper = styled.div`
   margin: 10px 0 0 2px;
