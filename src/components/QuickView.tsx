@@ -162,7 +162,7 @@ const Dropdown = styled.div<IDropdown>`
   border: 1px solid var(--color-border);
   border-radius: 20px;
   z-index: ${props => props.zIndex};
-  transition: height 0.15s ease-out;
+  transition: all 0.15s ease-out;
 
   &:hover {
     background: var(--color-background-main);

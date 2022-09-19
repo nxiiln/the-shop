@@ -133,7 +133,7 @@ const Dropdown = styled.div<{open: boolean, openHeight: string}>`
   background: var(--color-background-highlight);
   border: 1px solid var(--color-border);
   border-radius: 20px;
-  transition: height 0.15s ease-out;
+  transition: all 0.15s ease-out;
 
   &:hover {
     background: var(--color-background-main);
