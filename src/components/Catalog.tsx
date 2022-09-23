@@ -155,6 +155,15 @@ const Sort = styled.div<{open: boolean}>`
   z-index: 2;
   transition: height 0.15s ease-out;
   cursor: pointer;
+
+  button {
+    @keyframes open {
+      0% {opacity: 0}
+      100% {opacity: 1}
+    }
+
+    animation: 0.3s open;
+  }
 `;
 
 const SortHeader = styled.div<{open: boolean}>`
