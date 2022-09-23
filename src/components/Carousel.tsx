@@ -21,6 +21,7 @@ const Slides = styled.div`
   overflow-x: auto;
   overflow-y: hidden;
   scroll-snap-type: x mandatory;
+  scrollbar-width: none;
   
   &::-webkit-scrollbar {height: 0px}
   > div {scroll-snap-align: start}
