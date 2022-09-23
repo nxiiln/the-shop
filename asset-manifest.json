@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.js": "/the-shop/static/js/main.e84eef57.chunk.js",
-    "main.js.map": "/the-shop/static/js/main.e84eef57.chunk.js.map",
+    "main.js": "/the-shop/static/js/main.6c12db9e.chunk.js",
+    "main.js.map": "/the-shop/static/js/main.6c12db9e.chunk.js.map",
     "runtime-main.js": "/the-shop/static/js/runtime-main.b132e303.js",
     "runtime-main.js.map": "/the-shop/static/js/runtime-main.b132e303.js.map",
-    "static/js/2.d73ef213.chunk.js": "/the-shop/static/js/2.d73ef213.chunk.js",
-    "static/js/2.d73ef213.chunk.js.map": "/the-shop/static/js/2.d73ef213.chunk.js.map",
+    "static/js/2.3ff7ced1.chunk.js": "/the-shop/static/js/2.3ff7ced1.chunk.js",
+    "static/js/2.3ff7ced1.chunk.js.map": "/the-shop/static/js/2.3ff7ced1.chunk.js.map",
     "index.html": "/the-shop/index.html",
-    "static/js/2.d73ef213.chunk.js.LICENSE.txt": "/the-shop/static/js/2.d73ef213.chunk.js.LICENSE.txt",
+    "static/js/2.3ff7ced1.chunk.js.LICENSE.txt": "/the-shop/static/js/2.3ff7ced1.chunk.js.LICENSE.txt",
     "static/media/Nunito-Regular.2b68f7ab.ttf": "/the-shop/static/media/Nunito-Regular.2b68f7ab.ttf",
     "static/media/PlayfairDisplay-Regular.b982583b.ttf": "/the-shop/static/media/PlayfairDisplay-Regular.b982583b.ttf",
     "static/media/banner.406af17c.png": "/the-shop/static/media/banner.406af17c.png",
@@ -38,7 +38,7 @@
   },
   "entrypoints": [
     "static/js/runtime-main.b132e303.js",
-    "static/js/2.d73ef213.chunk.js",
-    "static/js/main.e84eef57.chunk.js"
+    "static/js/2.3ff7ced1.chunk.js",
+    "static/js/main.6c12db9e.chunk.js"
   ]
 }
