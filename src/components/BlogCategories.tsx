@@ -20,6 +20,15 @@ const Wrapper = styled.article<{gridArea: string, open: boolean}>`
     align-self: flex-start;
     transition: height 0.15s;
   }
+
+  > a {
+    @keyframes open {
+      0% {opacity: 0}
+      100% {opacity: 1}
+    }
+
+    animation: 0.3s open;
+  }
 `;
 
 const TitleWrapper = styled.div<{open: boolean}>`
