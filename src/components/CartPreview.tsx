@@ -29,6 +29,7 @@ const CartPreviewSymbolWrapper = styled.div<{open: boolean}>`
   height: 25px;
   background: var(--color-background-second);
   border-radius: ${props => props.open ? '0%': '50%'};
+  transition: border-radius 0.15s ease-out;
 
   @media ${smallScreen} {background: #404040;}
 `;
@@ -59,6 +60,15 @@ const Dropdown = styled.div`
   box-sizing: content-box;
   border: 1px solid var(--color-border);
   z-index: 2;
+
+  div, a {
+    @keyframes open {
+      0% {opacity: 0}
+      100% {opacity: 1}
+    }
+
+    animation: 0.3s open;
+  }
 `;
 
 const TriangleOuter = styled.div`
