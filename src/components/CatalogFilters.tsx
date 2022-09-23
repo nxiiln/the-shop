@@ -38,6 +38,15 @@ const Dropdown = styled.div<{open: boolean, openHeight: string}>`
   
   > span:nth-child(2) {transform: rotate(90deg)}
 
+  > button, label {
+    @keyframes open {
+      0% {opacity: 0}
+      100% {opacity: 1}
+    }
+
+    animation: 0.3s open;
+  }
+
   ${props => props.open && `
     height: ${props.openHeight};
     background: var(--color-background-main);
