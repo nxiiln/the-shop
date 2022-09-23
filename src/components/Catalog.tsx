@@ -205,7 +205,7 @@ const ButtonSortMode = styled.button`
 const Pagination = styled.div`
   width: min-content;
   height: 20px;
-  margin-left: auto;
+  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -400,7 +400,7 @@ const Catalog = (): JSX.Element => {
             <Products
               products={products}
               maxWidth='725px'
-              margin='40px 0 80px 0'
+              margin='40px 0 0 0'
             />
 
 
