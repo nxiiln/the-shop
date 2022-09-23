@@ -203,7 +203,7 @@ const ButtonSortMode = styled.button`
 
 // Pagination
 const Pagination = styled.div`
-  width: 120px;
+  width: min-content;
   height: 20px;
   margin-left: auto;
   display: flex;
@@ -211,17 +211,27 @@ const Pagination = styled.div`
   align-items: center;
 `;
 
-const Navigation = styled.button`
+const Navigation = styled(HashLink)`
+  margin: 0px 5px;
   padding: 0;
   font-size: 14px;
+  text-decoration: none;
   background: var(--color-background-main);
   border: none;
   cursor: pointer;
 `;
 
-const Page = styled.button<{curr: boolean}>`
+
+interface IPage {
+  order?: number;
+  curr?: boolean;
+  numberPages?: number;
+}
+
+const Page = styled(HashLink)<IPage>`
   width: 20px;
   height: 20px;
+  margin: 0px 5px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -230,6 +240,7 @@ const Page = styled.button<{curr: boolean}>`
   line-height: 1.2;
   font-weight: 400;
   text-transform: uppercase;
+  text-decoration: none;
   background: var(--color-background-main);
   cursor: pointer;
 
@@ -253,35 +264,50 @@ const Catalog = (): JSX.Element => {
   const {category, sizes, colors} = useAppSelector(state => state.catalogFIlters);
 
 
-  const products: IProduct[] = data.products
+  const filteredProducts: IProduct[] = data.products
     .filter((product: IProduct): boolean =>
       (category === 'all' || product.category === category) &&
       (sizes.length === 0 || sizes.includes(product.size)) &&
       (colors.length === 0 || colors.includes(product.color))
-    )
+    );
+
+
+  const sortedProducts: IProduct[] = filteredProducts
     .sort((a: IProduct, b: IProduct): number => 
       sortMode === 'Price decrease' ? b.price - a.price :
         sortMode === 'Price increase' ? a.price - b.price : a.id - b.id
     );
 
+  
+  const totalProductsPerPage: number = 9;
+  const pageCount: number = Math.ceil(sortedProducts.length / totalProductsPerPage);
+  const products: IProduct[] = sortedProducts.slice(
+    (currPage - 1) * totalProductsPerPage,
+    ((currPage - 1) * totalProductsPerPage) + totalProductsPerPage
+  );
 
-  const renderPages = (): JSX.Element[] => {
-    let pages: JSX.Element[] = [];
 
-    for (let i: number = 1; i <= 4; i++) {
-      pages.push(
-        <Page
-          key={i}
-          type='button'
-          curr={i === currPage}
-          onClick={(): void => setCurrPage(i)}
-        >
-          {i}
-        </Page>
-      );
+  const pagination = (pageCount: number, currPage: number): (number | string)[] => {
+    const range = (start: number, end: number): number[] => Array.from(
+      {length: end - start + 1},
+      ((_, i: number): number => start + i)
+    );
+
+
+    if (pageCount >= 10) {
+      if (currPage >= (pageCount - 5)) {
+        return [1, '...', ...range(pageCount - 6, pageCount)];
+      }
+  
+      if (currPage >= 7) {
+        return [1, '...', ...range(currPage - 2, currPage + 2), '...', pageCount];
+      }
+  
+      return [...range(1, 7), '...', pageCount];
     }
+  
 
-    return pages;
+    return range(1, pageCount);
   }
 
 
@@ -331,7 +357,7 @@ const Catalog = (): JSX.Element => {
 
             {!screen.big && <CatalogFilters />}
             
-            <SortWrapper>
+            <SortWrapper id='sort-wrapper'>
               <span>SORT BY</span>
               <Sort
                 open={sortOpen}
@@ -379,7 +405,8 @@ const Catalog = (): JSX.Element => {
 
             <Pagination>
               <Navigation
-                type='button'
+                to='#sort-wrapper'
+                smooth
                 onClick={(): void => {
                   if (currPage === 1) return;
                   setCurrPage((currPage: number): number => currPage - 1);
@@ -387,12 +414,24 @@ const Catalog = (): JSX.Element => {
                 ❮
               </Navigation>
 
-              {renderPages()}
+              {pagination(pageCount, currPage)
+                .map((page: number | string): JSX.Element =>
+                  <Page
+                    key={page}
+                    to='#sort-wrapper'
+                    smooth
+                    curr={page === currPage}
+                    onClick={(): false | void => typeof page === 'number' && setCurrPage(page)}
+                  >
+                    {page}
+                  </Page>
+              )}
 
               <Navigation
-                type='button'
+                to='#sort-wrapper'
+                smooth
                 onClick={(): void => {
-                  if (currPage === 3) return;
+                  if (currPage === pageCount) return;
                   setCurrPage((currPage: number): number => currPage + 1);
               }}>
                 ❯
