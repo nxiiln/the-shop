@@ -140,6 +140,15 @@ const Dropdown = styled.div<{open: boolean, openHeight: string}>`
     border-radius: 0;
   }
 
+  label {
+    @keyframes open {
+      0% {opacity: 0}
+      100% {opacity: 1}
+    }
+
+    animation: 0.3s open;
+  }
+
   ${props => props.open && `
     height: ${props.openHeight};
     background: var(--color-background-main);
