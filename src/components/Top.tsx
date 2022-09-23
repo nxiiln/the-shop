@@ -70,6 +70,15 @@ const Dropdown = styled.div<{open: boolean, width: string, height: string}>`
     height: ${props.open ? props.height : '0px'};
     ${props.open && 'background: #333;'}
   `}
+
+  > a, > button:last-child {
+    @keyframes open {
+      0% {opacity: 0}
+      100% {opacity: 1}
+    }
+
+    ${props => props.open && 'animation: 0.3s open'}
+  }
 `;
 
 const LinkSimple = styled(HashLink)`
@@ -195,7 +204,7 @@ const Top = (): JSX.Element => {
             onMouseEnter={(): void | false => !screen.touch && setCurrencyOpen(true)}
             onMouseLeave={(): void | false => !screen.touch && setCurrencyOpen(false)}
             onClick={(): void | false => screen.touch && setCurrencyOpen(!currencyOpen)}
-            >
+          >
             <ButtonMain
               type='button'
               open={currencyOpen}
