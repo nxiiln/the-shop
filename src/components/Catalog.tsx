@@ -216,6 +216,7 @@ const Navigation = styled(HashLink)`
   padding: 0;
   font-size: 14px;
   text-decoration: none;
+  color: #000;
   background: var(--color-background-main);
   border: none;
   cursor: pointer;
