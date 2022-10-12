@@ -105,6 +105,7 @@ const LinkMain = styled(LinkSimple)<{open: boolean}>`
     font-size: 8px;
     color: var(--color-text-regular);
     transform: rotate(${props => props.open ? '' : '-'}45deg);
+    transition: transform 0.15s ease-out;
   }
 `;
 
@@ -145,6 +146,7 @@ const ButtonMain = styled(Button)<{open: boolean}>`
     font-size: 8px;
     color: var(--color-text-regular);
     transform: rotate(${props => props.open ? '' : '-'}45deg);
+    transition: transform 0.15s ease-out;
   }
 `;
 
