@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import styled from 'styled-components/macro';
 import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
 import {HashLink} from 'react-router-hash-link';
@@ -234,7 +234,7 @@ const Navigation = styled(HashLink)`
 
 interface IPage {
   order?: number;
-  curr?: boolean;
+  $curr?: boolean;
   numberPages?: number;
 }
 
@@ -254,7 +254,7 @@ const Page = styled(HashLink)<IPage>`
   background: var(--color-background-main);
   cursor: pointer;
 
-  ${props => props.curr ?
+  ${props => props.$curr ?
     `color: #000;
      border: 1px solid #000;`
     :
@@ -282,7 +282,7 @@ const Catalog = (): JSX.Element => {
     );
 
 
-  const sortedProducts: IProduct[] = filteredProducts
+  const sortedProducts: IProduct[] = [...filteredProducts]
     .sort((a: IProduct, b: IProduct): number => 
       sortMode === 'Price decrease' ? b.price - a.price :
         sortMode === 'Price increase' ? a.price - b.price : a.id - b.id
@@ -319,6 +319,11 @@ const Catalog = (): JSX.Element => {
 
     return range(1, pageCount);
   }
+
+
+  useEffect((): void => {
+    if (filteredProducts.length <= totalProductsPerPage) setCurrPage(1);
+  }, [filteredProducts, totalProductsPerPage]);
 
 
   return(
@@ -430,7 +435,7 @@ const Catalog = (): JSX.Element => {
                     key={page}
                     to='#sort-wrapper'
                     smooth
-                    curr={page === currPage}
+                    $curr={page === currPage}
                     onClick={(): false | void => typeof page === 'number' && setCurrPage(page)}
                   >
                     {page}
