@@ -1,4 +1,4 @@
-import {useState, useRef} from 'react';
+import {useState, useRef, useEffect} from 'react';
 import styled from 'styled-components/macro';
 import {mediumScreen, smallScreen, useMediaQuery} from '../mediaQueries';
 import {useParams} from 'react-router-dom';
@@ -186,6 +186,20 @@ const BlogPost = (): JSX.Element => {
   
   const [text, setText] = useState<string>('');
   const [textError, setTextError] = useState<boolean>(false);
+
+
+  useEffect((): void => {
+    if (reviews.length > post.reviews.length) {
+      localStorage.setItem(`blogPost${blogPostId}Reviews`, JSON.stringify(reviews));
+    }
+  }, [reviews, post.reviews, blogPostId]);
+
+  useEffect((): void => {
+    const blogPostReviews: string | null = localStorage.getItem(`blogPost${blogPostId}Reviews`);
+    if (blogPostReviews) {
+      setReviews(JSON.parse(blogPostReviews));
+    }
+  }, [blogPostId]);
 
 
   return(
