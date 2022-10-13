@@ -233,21 +233,21 @@ const Footer = (): JSX.Element => {
             <>
               <ShoppingGuide>
                 <MainText>SHOPPING GUIDE</MainText>
-                <Link to='catalog#top' smooth>ABOUT G-STAR ROW</Link>
-                <Link to='catalog#top' smooth>CORPORATE RESPONSIBILITY</Link>
-                <Link to='catalog#top' smooth>PRESS ROOM</Link>
-                <Link to='catalog#top' smooth>CAREERS</Link>
-                <Link to='catalog#top' smooth>G-START RETAILERS</Link>
-                <Link to='catalog#top' smooth>OPEN A G-STAR STORE</Link>
+                <Link to='#top' smooth>ABOUT G-STAR ROW</Link>
+                <Link to='#top' smooth>CORPORATE RESPONSIBILITY</Link>
+                <Link to='#top' smooth>PRESS ROOM</Link>
+                <Link to='#top' smooth>CAREERS</Link>
+                <Link to='#top' smooth>G-START RETAILERS</Link>
+                <Link to='#top' smooth>OPEN A G-STAR STORE</Link>
               </ShoppingGuide>
 
               <HelpInfo>
                 <MainText>HELP & INFO</MainText>
-                <Link to='catalog#top' smooth>FAQ</Link>
-                <Link to='catalog#top' smooth>CONTACT</Link>
-                <Link to='catalog#top' smooth>PRIVACY POLICY</Link>
-                <Link to='catalog#top' smooth>TERMS & CONDITIONS</Link>
-                <Link to='catalog#top' smooth>DISCLAIMER</Link>
+                <Link to='#top' smooth>FAQ</Link>
+                <Link to='#top' smooth>CONTACT</Link>
+                <Link to='#top' smooth>PRIVACY POLICY</Link>
+                <Link to='#top' smooth>TERMS & CONDITIONS</Link>
+                <Link to='#top' smooth>DISCLAIMER</Link>
               </HelpInfo>
 
               <StoreLocation id='store-location'>
@@ -269,17 +269,17 @@ const Footer = (): JSX.Element => {
                   Sed et aliquet nisl, sed scelerisque risus.
                   Phasellus vel ultricies augue.
                   Duis sem dui, pretium in convallis ut, sagittis eget nisi.
-                  Uses <Link to='catalog#top' smooth>read more</Link>
+                  Uses <Link to='#top' smooth>read more</Link>
                 </Text>
               </AboutUs>
             </>
             :
             <>
-              <LinkWithBorder to='catalog#top' smooth withoutPadding>FAQ</LinkWithBorder>
-              <LinkWithBorder to='catalog#top' smooth>CONTACT</LinkWithBorder>
-              <LinkWithBorder to='catalog#top' smooth>PRIVACY POLICY</LinkWithBorder>
-              <LinkWithBorder to='catalog#top' smooth>TERMS & CONDITIONS</LinkWithBorder>
-              <LinkWithBorder to='catalog#top' smooth withoutBorder>DISCLAIMER</LinkWithBorder>
+              <LinkWithBorder to='#top' smooth withoutPadding>FAQ</LinkWithBorder>
+              <LinkWithBorder to='#top' smooth>CONTACT</LinkWithBorder>
+              <LinkWithBorder to='#top' smooth>PRIVACY POLICY</LinkWithBorder>
+              <LinkWithBorder to='#top' smooth>TERMS & CONDITIONS</LinkWithBorder>
+              <LinkWithBorder to='#top' smooth withoutBorder>DISCLAIMER</LinkWithBorder>
             </>
           }
         </TopBlock>
