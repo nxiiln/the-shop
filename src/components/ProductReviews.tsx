@@ -1,4 +1,4 @@
-import {useState, useRef} from 'react';
+import {useState, useRef, useEffect} from 'react';
 import styled from 'styled-components/macro';
 import {smallScreen} from '../mediaQueries';
 import {useAppDispatch} from '../redux-hooks';
@@ -156,7 +156,7 @@ const Buttons = styled.div`
 
 
 const ProductReviews = ({productId}: {productId: number}): JSX.Element => {
-  const reviewsKey = `product${productId}`;
+  const reviewsKey = `product${productId}` as keyof typeof data.productReviews;
   const [reviews, setReviews] = useState<IProductReviews>(data.productReviews);
   const currReviews: IProductReview[] = reviews[reviewsKey];
 
@@ -169,6 +169,23 @@ const ProductReviews = ({productId}: {productId: number}): JSX.Element => {
   const [ratingError, setRatingError] = useState<boolean>(false);
   const [text, setText] = useState<string>('');
   const [author, setAuthor] = useState<string>('');
+
+
+  useEffect((): void => {
+    if (currReviews.length > data.productReviews[reviewsKey].length) {
+      localStorage.setItem(`product${productId}Reviews`, JSON.stringify(currReviews));
+    }
+  }, [currReviews, reviewsKey, productId]);
+
+  useEffect((): void => {
+    const productReviews: string | null = localStorage.getItem(`product${productId}Reviews`);
+    if (productReviews) {
+      const storedReviews: IProductReview[] = JSON.parse(productReviews);
+      const newReviews: IProductReviews = JSON.parse(JSON.stringify(reviews));
+      newReviews[reviewsKey] = storedReviews;
+      setReviews(newReviews);
+    }
+  }, [productId, reviewsKey]);
 
 
   return(
