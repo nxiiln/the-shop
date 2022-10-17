@@ -59,18 +59,18 @@ const Link = styled(HashLink)`
   }
 `;
 
-const LinkWithBorder = styled(Link)<{withoutBorder?: boolean, withoutPadding?: boolean}>`
+const LinkWithBorder = styled(Link)<{$withoutBorder?: boolean, $withoutPadding?: boolean}>`
   height: 10px;
   margin-top: 10px;
   padding: 0 10px 0 10px;
   display: flex;
   align-items: center;
 
-  ${props => !props.withoutBorder &&
+  ${props => !props.$withoutBorder &&
     'border-right: 1px solid var(--color-text-regular);'
   }
 
-  ${props => props.withoutPadding && 'padding-left: 0;'}
+  ${props => props.$withoutPadding && 'padding-left: 0;'}
 `;
 
 const Text = styled.p`
@@ -275,11 +275,11 @@ const Footer = (): JSX.Element => {
             </>
             :
             <>
-              <LinkWithBorder to='#top' smooth withoutPadding>FAQ</LinkWithBorder>
+              <LinkWithBorder to='#top' smooth $withoutPadding>FAQ</LinkWithBorder>
               <LinkWithBorder to='#top' smooth>CONTACT</LinkWithBorder>
               <LinkWithBorder to='#top' smooth>PRIVACY POLICY</LinkWithBorder>
               <LinkWithBorder to='#top' smooth>TERMS & CONDITIONS</LinkWithBorder>
-              <LinkWithBorder to='#top' smooth withoutBorder>DISCLAIMER</LinkWithBorder>
+              <LinkWithBorder to='#top' smooth $withoutBorder>DISCLAIMER</LinkWithBorder>
             </>
           }
         </TopBlock>
