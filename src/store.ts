@@ -1,4 +1,4 @@
-import {configureStore} from '@reduxjs/toolkit';
+import {configureStore, MiddlewareAPI, Dispatch, AnyAction} from '@reduxjs/toolkit';
 import cartReducer from './slices/cart';
 import wishListReducer from './slices/wishList';
 import productRatingReducer from './slices/productRating';
@@ -8,7 +8,23 @@ import checkoutReducer from './slices/checkout';
 import catalogFiltersReducer from './slices/catalogFilters';
 
 
+const localStorageMiddleware =
+  (store: MiddlewareAPI<Dispatch<AnyAction>>) =>
+  (next: Dispatch<AnyAction>) =>
+  (action: AnyAction): AnyAction => {
+    const result: AnyAction = next(action);
+    localStorage.setItem('reduxStore', JSON.stringify(store.getState()));
+    return result;
+  }
+
+const preloadedState = (): void | any => {
+  const reduxStore: string | null = localStorage.getItem('reduxStore');
+  if (reduxStore) return JSON.parse(reduxStore);
+}
+
+
 export const store = configureStore({
+  preloadedState: preloadedState(),
   reducer: {
     cart: cartReducer,
     wishList: wishListReducer,
@@ -17,7 +33,8 @@ export const store = configureStore({
     account: accountReducer,
     checkout: checkoutReducer,
     catalogFIlters: catalogFiltersReducer
-  }
+  },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(localStorageMiddleware)
 });
 
 
