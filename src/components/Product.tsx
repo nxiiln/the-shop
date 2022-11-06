@@ -150,7 +150,8 @@ const Product = (): JSX.Element => {
 
       <Products
         products={data.products.filter(product =>
-          product.id === 3 || product.id === 10
+          (productId === 3 ? product.id === 4 : product.id === 3) ||
+          (productId === 10 ? product.id === 6 : product.id === 10)
         )}
         margin='20px 0 0'
       />
